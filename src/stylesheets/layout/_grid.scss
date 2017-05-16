@@ -1,4 +1,4 @@
-@lost gutter 4rem;
+@lost gutter 2rem;
 @lost flexbox flex;
 @lost cycle auto;
 
@@ -8,15 +8,16 @@
   margin: 0 auto;
   padding-left: 2rem;
   padding-right: 2rem;
-  max-width: 120rem;
+  max-width: 150rem;
 
   @include for-tablet-portrait-up {
     padding-left: 4rem;
     padding-right: 4rem;
   }
 
-  @include for-big-desktop-up {
-    max-width: 148rem;
+  @include for-desktop-up {
+    padding-left: 7rem;
+    padding-right: 7rem;
   }
 }
 

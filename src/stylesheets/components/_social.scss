@@ -1,0 +1,48 @@
+.social {
+  display: inline-block;
+  user-select: none;
+
+  li {
+    display: inline-block;
+    z-index: -z(content);
+    user-select: none;
+
+    & + * {
+      margin-left: 0.8rem;
+    }
+  }
+
+  a {
+    display: block;
+    position: relative;
+    width: 1.7rem;
+    height: 1.7rem;
+
+    &:hover {
+      svg {
+        fill: -color(cerulean);
+      }
+    }
+  }
+
+  svg {
+    @extend %absolute-fill;
+
+    will-change: fill;
+    transition: fill 0.1s $ease-in-out-quart;
+    fill: -color(black);
+  }
+
+  @include for-desktop-up {
+    svg {
+      fill: -color(white);
+    }
+
+    .is-sticky &,
+    .has-no-hero & {
+      svg {
+        fill: -color(black);
+      }
+    }
+  }
+}

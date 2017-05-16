@@ -1,17 +1,45 @@
 <!-- ko component: "header" -->
 <header class="page-header" data-bind="css: {'is-sticky': isSticky, 'is-open': isOpen}">
   <div class="page-header__inner">
-    <div class="logo">
-      <a href="/">
+    <div class="page-header__section">
+      <div class="logo">
+        <a href="/">
+          <img class="logo__image" src="/assets/images/logo_color.png" alt="Logo for Away Lands" title="Away Lands" />
+          <img class="logo__image--white" src="/assets/images/logo_white.png" alt="Logo for Away Lands" title="Away Lands" />
+        </a>
+      </div>
 
-      </a>
+      <nav class="page-nav">
+        <ul class="page-nav__list">
+          <li><a href="#">Film</a></li>
+          <li><a href="#">Still</a></li>
+          <li><a href="#">Blogs</a></li>
+          <li><a href="#">Destinations</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
     </div>
 
-    <nav class="page-nav">
-      <ul class="page-nav__list">
+    <div class="page-header__section">
+      <ul class="social">
+        <li>
+          <a href="#">{% include "vectors/instagram.svg" %}</a>
+        </li>
 
+        <li>
+          <a href="#">{% include "vectors/youtube.svg" %}</a>
+        </li>
+
+        <li>
+          <a href="#">{% include "vectors/facebook.svg" %}</a>
+        </li>
+
+        <li>
+          <a href="#">{% include "vectors/pinterest.svg" %}</a>
+        </li>
       </ul>
-    </nav>
+    </div>
   </div>
 </header>
 

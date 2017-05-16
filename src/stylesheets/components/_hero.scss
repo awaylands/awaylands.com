@@ -1,0 +1,11 @@
+%hero {
+  @extend %basic-block;
+
+  background-color: -color(placeholder);
+}
+
+.hero--large {
+  @extend %hero;
+
+  height: 100vh;
+}
