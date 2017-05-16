@@ -1,0 +1,27 @@
+<!-- ko component: "header" -->
+<header class="page-header" data-bind="css: {'is-sticky': isSticky, 'is-open': isOpen}">
+  <div class="page-header__inner">
+    <div class="logo">
+      <a href="/">
+
+      </a>
+    </div>
+
+    <nav class="page-nav">
+      <ul class="page-nav__list">
+
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="mobile-nav" data-bind="css: { 'is-visible': isOpen }">
+  <div class="mobile-nav__inner">
+    <div class="mobile-nav__target" data-bind="click: close"></div>
+
+    <ul class="mobile-nav__list">
+
+    </ul>
+  </div>
+</div>
+<!-- /ko -->

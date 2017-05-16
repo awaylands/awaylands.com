@@ -1,0 +1,135 @@
+%strip-input-style {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  outline: 0 none !important;
+  appearance: none;
+}
+
+%basic-block {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+%fixed-block {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+%flex-block {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+
+%hide-text {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+%unselectable {
+  user-select: none;
+}
+
+%vertical-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+%horizontal-align {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+%vertical-horizontal-align {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+%absolute-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+%fill-background {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+%contain-background {
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+%cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  font-family: 'object-fit: cover;';
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -z(background);
+}
+
+%contain-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  font-family: 'object-fit: contain;';
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: -z(background);
+}
+
+%dark-overlay {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: -color(black);
+}
+
+%hr {
+  content: "";
+  position: absolute;
+  height: 1px;
+  background: -color(black);
+}
+
+%strip-link-style {
+  &,
+  &:visited,
+  &:hover,
+  &:active {
+    font-style: inherit;
+    color: inherit;
+    background-color: transparent;
+    font-size: inherit;
+    text-decoration: none;
+    font-variant: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    font-family: inherit;
+  }
+}

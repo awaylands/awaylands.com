@@ -1,0 +1,4 @@
+{% macro imageUrl(s3Key) %}
+  {% set base_url = "https://takeshape-dev.imgix.net/" %}
+  {{ base_url }}{{ s3Key }}
+{% endmacro %}

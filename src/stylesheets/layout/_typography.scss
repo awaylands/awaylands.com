@@ -1,0 +1,30 @@
+div,
+p,
+span,
+li,
+small,
+label,
+input,
+select,
+button,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+em,
+cite {
+  @include font-smoothing(on);
+  text-rendering: optimizeLegibility;
+
+  &::selection {
+    background-color: -color(placeholder);
+  }
+
+  &::-moz-selection {
+    background-color: -color(placeholder);
+  }
+}

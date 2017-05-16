@@ -1,0 +1,13 @@
+query {
+  settings: getSiteSettings {
+    googleAnalyticsId
+  }
+  social: getSocialSettings {
+    siteName
+    description
+    url
+    image {
+      s3Key
+    }
+  }
+}

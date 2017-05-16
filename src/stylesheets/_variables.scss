@@ -1,0 +1,47 @@
+/* stylelint-disable */
+
+// font defaults
+$font-size-base: 10px;
+$font-size: 1.6rem;
+$line-height: 1.5;
+
+// easing curves
+$ease-in-out-quart: cubic-bezier(0.86, 0, 0.07, 1);
+$ease-out-quint: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+// colors
+$colors: (
+  black: #000000,
+  tundora: #464646,
+  placeholder: #999999,
+  white: #ffffff,
+  cerulean: #0cb8cc
+);
+
+// weights
+$font-weights: (
+  thin: 100,
+  extra-light: 200,
+  light: 300,
+  regular: 400,
+  medium: 500,
+  semi-bold: 600,
+  bold: 700,
+  extra-bold: 800,
+  black: 900
+);
+
+// z-index layers
+$layers: (
+  background,
+  content,
+  dropdown,
+  subnav,
+  mobile-nav,
+  header,
+  overlay,
+  modal
+);
+
+// gradients
+$gradient-light: linear-gradient(to right, rgba(234,234,241,1) 0%, rgba(241,244,236,1) 100%);

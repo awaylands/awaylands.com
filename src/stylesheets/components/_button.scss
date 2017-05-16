@@ -1,0 +1,15 @@
+%button {
+  position: relative;
+  display: block;
+  text-align: center;
+  line-height: 1;
+  vertical-align: middle;
+  word-break: break-all;
+  word-break: break-word;
+  max-width: 100%;
+  will-change: color, background, border;
+  transition: color 0.2s $ease-in-out-quart, background 0.2s $ease-in-out-quart;
+  cursor: pointer;
+  user-select: none;
+  z-index: -z(content);
+}
