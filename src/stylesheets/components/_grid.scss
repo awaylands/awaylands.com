@@ -1,0 +1,11 @@
+%grid {
+  @extend %basic-block;
+
+  .grid__inner {
+    @extend %container;
+  }
+}
+
+.grid {
+  @extend %grid;
+}

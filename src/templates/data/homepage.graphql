@@ -1,10 +1,13 @@
 query {
   page: getHomepage {
     slider {
-      image {
-        s3Key
+      interval
+      slides {
+        image {
+          s3Key
+        }
+        caption
       }
-      caption
     }
   }
 }

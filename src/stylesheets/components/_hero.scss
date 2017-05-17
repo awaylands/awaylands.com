@@ -1,11 +1,10 @@
-%hero {
+.hero {
   @extend %basic-block;
 
   background-color: -color(placeholder);
-}
+  height: 72rem;
 
-.hero--large {
-  @extend %hero;
-
-  height: 100vh;
+  @media screen and (min-width: 900px) and (min-height: 720px) {
+    height: 100vh;
+  }
 }

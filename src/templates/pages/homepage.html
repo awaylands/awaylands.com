@@ -3,5 +3,23 @@
 {% block body_class %}body--homepage{% endblock %}
 
 {% block content %}
-<div class="hero--large"></div>
+<div class="hero">
+  <div class="slides" {% if page.slider.interval %}data-interval="{{ page.slider.interval }}"{% endif %} data-bind="slides">
+    <div class="slides__container">
+      {% for slide in page.slider.slides %}
+      <img class="slides__image" src="{{ slide.image.s3Key | image({w: 1440, auto: 'compress,format'}) }}" {% if slide.caption %}data-caption="{{ slide.caption }}"{% endif %} />
+      {% endfor %}
+    </div>
+
+    <div class="slides__inner">
+      <span class="slides__caption"></span>
+    </div>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="grid__inner">
+
+  </div>
+</div>
 {% endblock %}

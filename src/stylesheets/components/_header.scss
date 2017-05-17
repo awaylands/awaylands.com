@@ -74,18 +74,17 @@
 
 .logo {
   position: relative;
+  width: 24.9rem;
 
   [class*="logo__image"] {
-    width: 24.9rem;
+    width: 100%;
     height: auto;
     user-select: none;
     pointer-events: none;
   }
 
   @include for-desktop-up {
-    [class*="logo__image"] {
-      width: 42rem;
-    }
+    width: 42rem;
 
     .is-sticky & {
       width: 30.1rem;
@@ -95,7 +94,7 @@
 
 .page-nav {
   display: none;
-  margin-left: 8.8rem;
+  margin-left: 4rem;
 
   &__list {
     li {
@@ -107,22 +106,13 @@
     }
 
     a {
-      color: -color(white);
-      font-family: $quicksand;
-      font-size: 1.6rem;
-      font-weight: -weight(regular);
-      line-height: 1;
-      letter-spacing: 0.01em;
+      @include copy-a($color: -color(white));
+
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      will-change: color;
-      transition: color 0.1s $ease-in-out-quart;
 
       &.is-current {
         font-weight: -weight(regular);
-      }
-
-      &:hover {
-        color: -color(cerulean);
       }
     }
   }

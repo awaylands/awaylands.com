@@ -18,6 +18,7 @@ strong,
 em,
 cite {
   @include font-smoothing(on);
+
   text-rendering: optimizeLegibility;
 
   &::selection {
@@ -27,4 +28,60 @@ cite {
   &::-moz-selection {
     background-color: -color(placeholder);
   }
+}
+
+// headings
+@mixin hd-a($color: $default-type-color, $family: $quicksand, $line-height: 1.33, $weight: -weight(medium)) {
+  color: $color;
+  font-family: $family;
+  font-size: 3rem;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: 0.04em;
+}
+
+@mixin hd-b($color: $default-type-color, $family: $quicksand, $line-height: 1.24, $weight: -weight(medium)) {
+  color: $color;
+  font-family: $family;
+  font-size: 2.1rem;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: 0.04em;
+}
+
+@mixin hd-c($color: $default-type-color, $family: $quicksand, $line-height: 1.33, $weight: -weight(medium)) {
+  color: $color;
+  font-family: $family;
+  font-size: 1.8rem;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: 0.04em;
+}
+
+@mixin hd-d($color: $default-type-color, $family: $quicksand, $line-height: 1.33, $weight: -weight(medium)) {
+  color: $color;
+  font-family: $family;
+  font-size: 1.6rem;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: 0.04em;
+}
+
+@mixin hd-e($color: $default-type-color, $family: $quicksand, $line-height: 1.33, $weight: -weight(medium)) {
+  color: $color;
+  font-family: $family;
+  font-size: 1.4rem;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: 0.04em;
+}
+
+// copy
+@mixin copy-a($color: $default-type-color, $family: $quicksand, $line-height: 1.75, $weight: -weight(regular)) {
+  color: $color;
+  font-family: $family;
+  font-size: 1.6rem;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: 0.04em;
 }
