@@ -10,4 +10,18 @@ query {
       }
     }
   }
+
+  stories: getStoryList {
+    _enabledAt
+    title
+    tout {
+      image {
+        s3Key
+      }
+      dek
+    }
+    category {
+      title
+    }
+  }
 }

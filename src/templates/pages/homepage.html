@@ -18,8 +18,31 @@
 </div>
 
 <div class="grid">
-  <div class="grid__inner">
+  <h1 class="grid__heading">Recent Entries</h1>
 
+  <div class="grid__inner">
+    <ul class="grid__list">
+      {% for story in stories.slice(0, 6) %}
+      <li class="grid__item">
+        <div class="tout">
+          <div class="tout__image">
+            <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+          </div>
+
+          <div class="tout__content">
+            <div class="tout__rubric">
+              <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
+              <span>{{ story.category.title }}</span>
+            </div>
+
+            <h2 class="tout__heading">{{ story.title }}</h2>
+
+            <p class="tout__dek">{{ story.tout.dek }}</p>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
   </div>
 </div>
 {% endblock %}
