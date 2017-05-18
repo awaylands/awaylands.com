@@ -18,16 +18,26 @@ routes:
     template: pages/homepage.html
     context: data/homepage.graphql
 
+  film:
+    path: /films
+    template: pages/film.html
+    context: data/film.graphql
+
   story:
-      path: /story/:title
-      template: pages/stories/detail.html
-      context: data/story.graphql
-      paginate:
-        pageSize: 12
-        path: /blog/page-:num
-        template: pages/stories/landing.html
-        property: stories
-        itemName: page
+    path: /story/:title
+    template: pages/stories/detail.html
+    context: data/story.graphql
+    paginate:
+      pageSize: 12
+      path: /blog/page-:num
+      template: pages/stories/landing.html
+      property: stories
+      itemName: page
+
+  filmCategory:
+    path: /films/:title
+    template: pages/film-category.html
+    context: data/film-category.graphql
 
 deploy:
   - ${buildPath}/static

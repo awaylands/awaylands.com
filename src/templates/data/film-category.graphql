@@ -1,0 +1,14 @@
+query {
+  filmCategories: getFilmCategoryList {
+    title
+    filmSet(size: 100) {
+      results {
+        title
+        image {
+          s3Key
+        }
+        youtubeId
+      }
+    }
+  }
+}

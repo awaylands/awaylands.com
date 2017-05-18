@@ -1,0 +1,37 @@
+.landing {
+  @extend %basic-block;
+
+  &__inner {
+    @extend %container;
+
+    display: flex;
+  }
+
+  &__section {
+    &:first-child {
+      lost-column: 1/6;
+    }
+
+    &:last-child {
+      lost-column: 5/6;
+    }
+  }
+}
+
+.filters {
+  li {
+    & + * {
+      margin-top: 1.6rem;
+    }
+  }
+
+  a {
+    @include copy-a();
+
+    text-transform: uppercase;
+
+    &.is-current {
+      font-weight: -weight(bold);
+    }
+  }
+}

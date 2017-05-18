@@ -1,0 +1,12 @@
+query {
+  films: getFilmList {
+    title
+    image {
+      s3Key
+    }
+    youtubeId
+  }
+  filmCategories: getFilmCategoryList {
+    title
+  }
+}

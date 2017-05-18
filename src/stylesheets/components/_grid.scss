@@ -1,10 +1,6 @@
 %grid {
   @extend %basic-block;
 
-  .grid__inner {
-    @extend %container;
-  }
-
   .grid__heading {
     @include hd-a();
 
@@ -30,12 +26,7 @@
   @include for-tablet-landscape-up {
     .grid__list {
       li {
-        lost-column: 1/3;
         margin-top: 0;
-
-        &:nth-child(n+4) {
-          margin-top: 8rem;
-        }
       }
     }
   }
@@ -43,12 +34,50 @@
 
 .grid {
   @extend %grid;
+
+  > .grid__inner {
+    @extend %container;
+  }
+
+  .tout__image {
+    @include ratio-box(75%);
+  }
+
+  @include for-tablet-landscape-up {
+    .grid__list {
+      li {
+        lost-column: 1/3;
+
+        &:nth-child(n+4) {
+          margin-top: 7.2rem;
+        }
+      }
+    }
+  }
+}
+
+.grid--films {
+  @extend %grid;
+
+  .tout__image {
+    @include ratio-box(56.4%);
+  }
+
+  @include for-tablet-landscape-up {
+    .grid__list {
+      li {
+        lost-column: 1/2;
+
+        &:nth-child(n+3) {
+          margin-top: 7.2rem;
+        }
+      }
+    }
+  }
 }
 
 .tout {
   &__image {
-    @include ratio-box(75%);
-
     margin-bottom: 4rem;
   }
 
