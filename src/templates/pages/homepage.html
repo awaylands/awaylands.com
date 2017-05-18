@@ -25,20 +25,22 @@
       {% for story in stories.slice(0, 6) %}
       <li class="grid__item">
         <div class="tout">
-          <div class="tout__image">
-            <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
-          </div>
-
-          <div class="tout__content">
-            <div class="tout__rubric">
-              <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
-              <span>{{ story.category.title }}</span>
+          <a href="{{ story | route('story') }}">
+            <div class="tout__image">
+              <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
             </div>
 
-            <h2 class="tout__heading">{{ story.title }}</h2>
+            <div class="tout__content">
+              <div class="tout__rubric">
+                <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
+                <span>{{ story.category.title }}</span>
+              </div>
 
-            <p class="tout__dek">{{ story.tout.dek }}</p>
-          </div>
+              <h2 class="tout__heading">{{ story.title }}</h2>
+
+              <p class="tout__dek">{{ story.tout.dek }}</p>
+            </div>
+          </a>
         </div>
       </li>
       {% endfor %}

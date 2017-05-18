@@ -18,5 +18,16 @@ routes:
     template: pages/homepage.html
     context: data/homepage.graphql
 
+  story:
+      path: /story/:title
+      template: pages/stories/detail.html
+      context: data/story.graphql
+      paginate:
+        pageSize: 12
+        path: /blog/page-:num
+        template: pages/stories/landing.html
+        property: stories
+        itemName: page
+
 deploy:
   - ${buildPath}/static
