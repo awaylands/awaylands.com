@@ -18,10 +18,15 @@ routes:
     template: pages/homepage.html
     context: data/homepage.graphql
 
-  film:
+  films:
     path: /films
-    template: pages/film.html
-    context: data/film.graphql
+    template: pages/films.html
+    context: data/films.graphql
+
+  stills:
+    path: /stills
+    template: pages/stills.html
+    context: data/stills.graphql
 
   story:
     path: /story/:title
@@ -38,6 +43,11 @@ routes:
     path: /films/:title
     template: pages/film-category.html
     context: data/film-category.graphql
+
+  stillCategory:
+    path: /stills/:title
+    template: pages/still-category.html
+    context: data/still-category.graphql
 
 deploy:
   - ${buildPath}/static

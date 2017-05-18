@@ -1,0 +1,13 @@
+query {
+  page: getStills {
+    featuredStills {
+      title
+      image {
+        s3Key
+      }
+    }
+  }
+  stillCategories: getStillCategoryList {
+    title
+  }
+}
