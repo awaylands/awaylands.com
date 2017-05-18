@@ -178,7 +178,7 @@
   }
 
   &__image {
-    @extend %absolute-fill;
+    @extend %cover-image;
   }
 
   &__hover {
@@ -192,6 +192,7 @@
     will-change: opacity;
     transition: opacity 0.3s $ease-in-out-quart;
     background-color: rgba(255,255,255, 0.85);
+    z-index: -z(content);
   }
 
   &__icon {

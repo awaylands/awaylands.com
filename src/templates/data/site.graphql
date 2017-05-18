@@ -10,4 +10,25 @@ query {
       s3Key
     }
   }
+  navigation: getNavigation {
+    links {
+      text
+      url
+    }
+  }
+  footer: getFooter {
+    contacts {
+      label
+      email
+    }
+    visuals {
+      image {
+        s3Key
+      }
+      type
+      label
+      url
+    }
+    formEndpoint
+  }
 }

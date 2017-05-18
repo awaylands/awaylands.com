@@ -11,12 +11,9 @@
 
       <nav class="page-nav">
         <ul class="page-nav__list">
-          <li><a href="#">Film</a></li>
-          <li><a href="#">Stills</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Destinations</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          {% for link in site.navigation.links %}
+          <li><a href="{{ link.url }}">{{ link.text }}</a></li>
+          {% endfor %}
         </ul>
       </nav>
     </div>

@@ -40,7 +40,7 @@
     box-shadow: none;
 
     &.is-sticky,
-    &.has-no-hero {
+    .has-no-hero & {
       .logo__image {
         display: block;
       }

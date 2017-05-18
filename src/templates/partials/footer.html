@@ -9,20 +9,12 @@
         <h3 class="page-footer__heading">Contact Us</h3>
 
         <ul class="contact">
+          {% for contact in site.footer.contacts %}
           <li>
-            <h4 class="contact__heading">Media Inquiries</h4>
-            <a href="mailto:info@awaylands.com">info@awaylands.com</a>
+            <h4 class="contact__heading">{{ contact.label }}</h4>
+            <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
           </li>
-
-          <li>
-            <h4 class="contact__heading">Amy Seder</h4>
-            <a href="mailto:info@awaylands.com">a@awaylands.com</a>
-          </li>
-
-          <li>
-            <h4 class="contact__heading">Brandon Burkley</h4>
-            <a href="mailto:info@awaylands.com">b@awaylands.com</a>
-          </li>
+          {% endfor %}
         </ul>
       </div>
 
@@ -40,83 +32,20 @@
 
     <div class="page-footer__section">
       <ul class="social-blocks">
+        {% for visual in site.footer.visuals %}
         <li>
           <div class="social-block">
-            <a href="#">
-              <img src="http://lorempixel.com/500/300/?r=1" class="social-block__image">
+            <a href="{{ visual.url }}" target="_blank">
+              <img src="{{ visual.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" class="social-block__image">
 
               <div class="social-block__hover">
-                <span class="social-block__icon">{% include "vectors/instagram.svg" %}</span>
-                <span class="social-block__label">@amyseder</span>
+                <span class="social-block__icon">{% include "vectors/" + visual.type + ".svg" %}</span>
+                <span class="social-block__label">{{ visual.label }}</span>
               </div>
             </a>
           </div>
         </li>
-
-        <li>
-          <div class="social-block">
-            <a href="#">
-              <img src="http://lorempixel.com/500/300/?r=2" class="social-block__image">
-
-              <div class="social-block__hover">
-                <span class="social-block__icon">{% include "vectors/instagram.svg" %}</span>
-                <span class="social-block__label">@amyseder</span>
-              </div>
-            </a>
-          </div>
-        </li>
-
-        <li>
-          <div class="social-block">
-            <a href="#">
-              <img src="http://lorempixel.com/500/300/?r=3" class="social-block__image">
-
-              <div class="social-block__hover">
-                <span class="social-block__icon">{% include "vectors/instagram.svg" %}</span>
-                <span class="social-block__label">@amyseder</span>
-              </div>
-            </a>
-          </div>
-        </li>
-
-        <li>
-          <div class="social-block">
-            <a href="#">
-              <img src="http://lorempixel.com/500/300/?r=4" class="social-block__image">
-
-              <div class="social-block__hover">
-                <span class="social-block__icon">{% include "vectors/instagram.svg" %}</span>
-                <span class="social-block__label">@amyseder</span>
-              </div>
-            </a>
-          </div>
-        </li>
-
-        <li>
-          <div class="social-block">
-            <a href="#">
-              <img src="http://lorempixel.com/500/300/?r=5" class="social-block__image">
-
-              <div class="social-block__hover">
-                <span class="social-block__icon">{% include "vectors/instagram.svg" %}</span>
-                <span class="social-block__label">@amyseder</span>
-              </div>
-            </a>
-          </div>
-        </li>
-
-        <li>
-          <div class="social-block">
-            <a href="#">
-              <img src="http://lorempixel.com/500/300/?r=6" class="social-block__image">
-
-              <div class="social-block__hover">
-                <span class="social-block__icon">{% include "vectors/instagram.svg" %}</span>
-                <span class="social-block__label">@amyseder</span>
-              </div>
-            </a>
-          </div>
-        </li>
+        {% endfor %}
       </ul>
     </div>
 
