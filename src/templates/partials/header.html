@@ -1,5 +1,6 @@
 <!-- ko component: "header" -->
 <header class="page-header" data-bind="css: {'is-sticky': isSticky, 'is-open': isOpen}">
+  {{ parentTitle | dump }}
   <div class="page-header__inner">
     <div class="page-header__section">
       <div class="logo">
@@ -12,7 +13,7 @@
       <nav class="page-nav">
         <ul class="page-nav__list">
           {% for link in site.navigation.links %}
-          <li><a href="{{ link.url }}">{{ link.text }}</a></li>
+          <li><a href="{{ link.url }}" {% if link.text == page.title or link.text == parentTitle %}class="is-current"{% endif %}>{{ link.text }}</a></li>
           {% endfor %}
         </ul>
       </nav>

@@ -1,5 +1,6 @@
 query {
   page: getStills {
+    title
     featuredStills {
       title
       image {
