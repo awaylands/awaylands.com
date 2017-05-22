@@ -1,0 +1,20 @@
+query {
+  categories: getCategoryList {
+    title
+    storySet(size: 100) {
+      results {
+        _enabledAt
+        title
+        tout {
+          image {
+            s3Key
+          }
+          dek
+        }
+        category {
+          title
+        }
+      }
+    }
+  }
+}

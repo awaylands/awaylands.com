@@ -39,15 +39,47 @@ routes:
       property: stories
       itemName: page
 
+  destinations:
+    path: /destinations
+    template: pages/destinations.html
+    context: data/destinations.graphql
+
+  about:
+    path: /about
+    template: pages/about.html
+    context: data/about.graphql
+
   filmCategory:
     path: /films/:title
     template: pages/film-category.html
     context: data/film-category.graphql
+    paginate:
+      property: filmCategories
+      itemName: page
 
   stillCategory:
     path: /stills/:title
     template: pages/still-category.html
     context: data/still-category.graphql
+    paginate:
+      property: stillCategories
+      itemName: page
+
+  category:
+    path: /category/:title
+    template: pages/category.html
+    context: data/category.graphql
+    paginate:
+      property: categories
+      itemName: page
+
+  location:
+    path: /destinations/:title
+    template: pages/location.html
+    context: data/location.graphql
+    paginate:
+      property: locations
+      itemName: page
 
 deploy:
   - ${buildPath}/static

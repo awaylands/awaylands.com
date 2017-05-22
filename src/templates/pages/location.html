@@ -1,0 +1,9 @@
+{% extends "layouts/landing.html" %}
+
+{% block filters %}
+  <li><a href="/destinations">Featured</a></li>
+
+  {% for location in locations %}
+  <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
+  {% endfor %}
+{% endblock %}

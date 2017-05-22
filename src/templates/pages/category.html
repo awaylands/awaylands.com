@@ -1,7 +1,7 @@
 {% extends "layouts/landing.html" %}
 
 {% block filters %}
-  <li><a class="is-current" href="/films">Recent</a></li>
+  <li><a href="/films">Recent</a></li>
 
   {% for category in categories %}
   <li><a href="{{ category | route('category') }}">{{ category.title }}</a></li>

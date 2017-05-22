@@ -56,6 +56,13 @@
   transform: translate(-50%, -50%);
 }
 
+%absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%,-50%,0);
+}
+
 %absolute-fill {
   position: absolute;
   top: 0;

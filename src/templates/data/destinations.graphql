@@ -1,0 +1,13 @@
+query {
+  page: getDestinations {
+    featuredLocations {
+      title
+      image {
+        s3Key
+      }
+    }
+  }
+  locations: getLocationList {
+    title
+  }
+}
