@@ -5,6 +5,10 @@ html {
 
 body {
   font-size: 1rem;
+
+  &.has-no-hero {
+    padding-top: 18rem;
+  }
 }
 
 .wrapper {
@@ -21,8 +25,4 @@ body {
 
 main {
   min-height: 100vh;
-}
-
-.body--landing {
-  padding-top: 18rem;
 }

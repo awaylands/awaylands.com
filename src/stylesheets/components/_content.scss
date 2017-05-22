@@ -1,0 +1,7 @@
+%content {
+  @include copy-a();
+
+  > * + * {
+    margin-top: 2.4rem;
+  }
+}

@@ -1,5 +1,45 @@
 query {
   page: getAbout {
     title
+    photostrip {
+      image {
+        s3Key
+      }
+    }
+    about {
+      heading
+      contentHtml
+    }
+    press {
+      heading
+      items {
+        image {
+          s3Key
+        }
+        source
+        title
+        url
+      }
+    }
+    clients {
+      heading
+      logos {
+        name
+        image {
+          s3Key
+        }
+        url
+      }
+    }
+    team {
+      heading
+      members {
+        image {
+          s3Key
+        }
+        name
+        aboutHtml
+      }
+    }
   }
 }
