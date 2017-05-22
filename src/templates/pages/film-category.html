@@ -7,3 +7,25 @@
   <li><a href="{{ category | route('filmCategory') }}" {% if category.title == page.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
   {% endfor %}
 {% endblock %}
+
+{% block listings %}
+<div class="grid--films">
+  <div class="grid__inner">
+    <ul class="grid__list">
+      {% for film in page.filmSet.results %}
+      <li class="grid__item">
+        <div class="tout">
+          <div class="tout__image">
+            <img src="{{ film.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+          </div>
+
+          <div class="tout__content">
+            <h2 class="tout__heading">{{ film.title }}</h2>
+          </div>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}

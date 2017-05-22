@@ -7,3 +7,23 @@
   <li><a href="{{ location | route('location') }}" {% if location.title == page.title %}class="is-current"{% endif %}>{{ location.title }}</a></li>
   {% endfor %}
 {% endblock %}
+
+{% block listings %}
+<div class="locations">
+  <h2 class="locations__heading">{{ page.title }}</h2>
+
+  <ul class="locations__list">
+    {% for location in page.locationSet.results %}
+    <li>
+      <div class="location">
+        <a href="{{ location | route('location') }}">
+          <img class="location__image" src="{{ location.image.s3Key | image({w: 1440, auto: 'compress,format'}) }}" alt="{{ location.title }} background" />
+
+          <h3 class="location__heading">{{ location.title }}</h3>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

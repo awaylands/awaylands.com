@@ -7,3 +7,13 @@
   <li><a href="{{ category | route('stillCategory') }}" {% if category.title == page.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
   {% endfor %}
 {% endblock %}
+
+{% block listings %}
+<div class="masonry">
+  {% for still in page.stillSet.results %}
+  <div class="masonry__item">
+    <img src="{{ still.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
