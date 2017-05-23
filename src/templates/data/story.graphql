@@ -11,6 +11,10 @@ query {
     category {
       title
     }
+    location {
+      title
+    }
+    contentHtml
   }
   categories: getCategoryList {
     title

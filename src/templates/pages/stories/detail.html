@@ -3,5 +3,30 @@
 {% block body_class %}body--story has-no-hero{% endblock %}
 
 {% block content %}
+<div class="content">
+  <div class="content__inner">
+    <div class="content__section">
+      <ul class="filters">
+        <li><a href="/blog/page-1">Recent</a></li>
 
+        {% for category in categories %}
+        <li><a href="{{ category | route('category') }}" {% if category.title == page.category.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="content__section">
+      <header class="content__header">
+        <div class="content__rubric">
+          <span>{{ page._enabledAt | date("MMMM D, YYYY") }}</span>
+          <span>{{ page.category.title }}</span>
+        </div>
+
+        <h2 class="content__heading">{{ page.title }}</h2>
+      </header>
+
+      <div class="content__content">{{ page.contentHtml | safe }}</div>
+    </div>
+  </div>
+</div>
 {% endblock %}

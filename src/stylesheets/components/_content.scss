@@ -1,7 +1,204 @@
 %content {
   @include copy-a();
 
-  > * + * {
-    margin-top: 2.4rem;
+  > * {
+    display: block;
+    max-width: 90rem;
+    margin: 0 auto;
+
+    & + * {
+      margin-top: 2.4rem;
+    }
+  }
+
+  h1 {
+    @include hd-a();
+  }
+
+  h2 {
+    @include hd-b();
+  }
+
+  h3 {
+    @include hd-c();
+  }
+
+  p {
+    @include copy-a();
+  }
+
+  a {
+    color: -color(cerulean);
+    will-change: color;
+    transition: color 0.15s $ease-in-out-quart;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  strong {
+    font-weight: -weight(bold);
+  }
+
+  ul,
+  ol {
+    @include copy-a();
+
+    word-break: break-word;
+    padding-left: 0.8rem;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  figure,
+  iframe,
+  aside,
+  > blockquote {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  figure {
+    @extend %basic-block;
+
+    max-width: none;
+    margin-bottom: 6.4rem;
+  }
+
+  iframe {
+    max-width: 100%;
+  }
+
+  figcaption {
+    @include copy-a();
+
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.8rem;
+    max-width: 100%;
+    text-align: right;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  hr {
+    border: 0 none;
+    height: 0.2rem;
+    background-color: -color(athens);
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  aside {
+    position: relative;
+    padding: 3.2rem 0;
+
+    blockquote {
+      @include copy-b(-color(tundora));
+
+      display: block;
+    }
+
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 0.2rem;
+      background-color: -color(gallery);
+    }
+
+    &:before {
+      top: 0;
+    }
+
+    &:after {
+      bottom: 0;
+    }
+  }
+
+  > blockquote {
+    @include copy-b();
+
+    position: relative;
+    padding: 1.6rem 0 1.6rem 6.4rem;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background-color: -color(gallery);
+      width: 2.4rem;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.content {
+  @extend %basic-block;
+
+  &__inner {
+    @extend %container;
+
+    display: flex;
+  }
+
+  &__section {
+    &:first-child {
+      lost-column: 1/6;
+    }
+
+    &:last-child {
+      lost-column: 5/6;
+    }
+  }
+
+  &__header {
+    @extend %basic-block;
+
+    max-width: 90rem;
+    margin: 0 auto 4rem;
+  }
+
+  &__content {
+    @extend %content;
+  }
+
+  &__rubric {
+    @include hd-d($color: -color(cerulean));
+
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+
+    > * + * {
+      &:before {
+        content: "/";
+        margin: 0 0.8rem;
+      }
+    }
+  }
+
+  &__heading {
+    @include hd-b();
+
+    margin-bottom: 1.6rem;
+    text-transform: uppercase;
   }
 }

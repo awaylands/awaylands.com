@@ -22,11 +22,11 @@ cite {
   text-rendering: optimizeLegibility;
 
   &::selection {
-    background-color: -color(placeholder);
+    background-color: -color(cerulean);
   }
 
   &::-moz-selection {
-    background-color: -color(placeholder);
+    background-color: -color(cerulean);
   }
 }
 
@@ -81,6 +81,15 @@ cite {
   color: $color;
   font-family: $family;
   font-size: 1.6rem;
+  font-weight: $weight;
+  line-height: $line-height;
+  letter-spacing: 0.04em;
+}
+
+@mixin copy-b($color: $default-type-color, $family: $quicksand, $line-height: 1.44, $weight: -weight(regular)) {
+  color: $color;
+  font-family: $family;
+  font-size: 2.1rem;
   font-weight: $weight;
   line-height: $line-height;
   letter-spacing: 0.04em;
