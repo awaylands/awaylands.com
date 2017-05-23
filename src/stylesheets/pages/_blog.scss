@@ -1,0 +1,56 @@
+.listings {
+  @extend %basic-block;
+
+  &__list {
+    li {
+      @extend %basic-block;
+
+      & + * {
+        margin-top: 8.8rem;
+      }
+    }
+  }
+}
+
+.listing {
+  &__header {
+    @extend %basic-block;
+
+    max-width: 90rem;
+    margin: 0 auto 4rem;
+  }
+
+  &__rubric {
+    @include hd-d($color: -color(cerulean));
+
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+
+    > * + * {
+      &:before {
+        content: "/";
+        margin: 0 0.8rem;
+      }
+    }
+  }
+
+  &__heading {
+    @include hd-b();
+
+    margin-bottom: 1.6rem;
+    text-transform: uppercase;
+  }
+
+  &__image {
+    @extend %basic-block;
+
+    margin-bottom: 3.2rem;
+  }
+
+  &__content {
+    @extend %content;
+
+    max-width: 90rem;
+    margin: 0 auto 4rem;
+  }
+}

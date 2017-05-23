@@ -6,7 +6,7 @@ query {
       image {
         s3Key
       }
-      youtubeId
+      youTubeUrl
     }
   }
   filmCategories: getFilmCategoryList {

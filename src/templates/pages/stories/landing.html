@@ -1,7 +1,7 @@
 {% extends "layouts/landing.html" %}
 
 {% block filters %}
-  <li><a class="is-current" href="/films">Recent</a></li>
+  <li><a class="is-current" href="/blog/page-1">Recent</a></li>
 
   {% for category in categories %}
   <li><a href="{{ category | route('category') }}">{{ category.title }}</a></li>
@@ -9,32 +9,28 @@
 {% endblock %}
 
 {% block listings %}
-<div class="grid">
-  <div class="grid__inner">
-    <ul class="grid__list">
-      {% for story in stories %}
-      <li class="grid__item">
-        <div class="tout">
-          <a href="{{ story | route('story') }}">
-            <div class="tout__image">
-              <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+<div class="listings">
+  <ul class="listings__list">
+    {% for story in stories %}
+    <li>
+      <div class="listing">
+        <a href="{{ story | route('story') }}">
+          <header class="listing__header">
+            <div class="listing__rubric">
+              <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
+              <span>{{ story.category.title }}</span>
             </div>
 
-            <div class="tout__content">
-              <div class="tout__rubric">
-                <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
-                <span>{{ story.category.title }}</span>
-              </div>
+            <h2 class="listing__heading">{{ story.title }}</h2>
+          </header>
 
-              <h2 class="tout__heading">{{ story.title }}</h2>
+          <img class="listing__image" src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
 
-              <p class="tout__dek">{{ story.tout.dek }}</p>
-            </div>
-          </a>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+          <div class="listing__content">{{ story.tout.dek }}</div>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock %}

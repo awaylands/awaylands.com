@@ -7,7 +7,7 @@ query {
         image {
           s3Key
         }
-        youtubeId
+        youTubeUrl
       }
     }
   }
