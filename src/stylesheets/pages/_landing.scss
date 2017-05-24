@@ -43,6 +43,10 @@
         box-shadow: none;
         padding: 0;
         lost-column: 1/6;
+
+        &:after {
+          display: none;
+        }
       }
 
       &:last-child {

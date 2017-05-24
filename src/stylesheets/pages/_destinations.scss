@@ -31,9 +31,21 @@
     display: block;
     color: -color(white);
     font-family: $reenie-beanie;
-    font-size: 10vw;
+    font-size: 6rem;
     text-align: center;
     z-index: -z(content);
     text-shadow: 0 0 1.1rem rgba(74,74,74, 0.63);
+  }
+
+  @include for-tablet-portrait-up {
+    &__heading {
+      font-size: 10vw;
+    }
+  }
+
+  @include for-desktop-up {
+    &__heading {
+      font-size: 13rem;
+    }
   }
 }
