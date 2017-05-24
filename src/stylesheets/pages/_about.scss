@@ -10,6 +10,8 @@
 
     flex-wrap: nowrap;
     margin-bottom: 8.8rem;
+    user-select: none;
+    pointer-events: none;
 
     img {
       display: block;

@@ -110,6 +110,7 @@
     overflow: hidden;
     flex-grow: 1;
     border-bottom: 1px solid -color(white);
+    cursor: pointer;
 
     &::-webkit-input-placeholder {
       color: -color(white);
