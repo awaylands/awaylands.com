@@ -6,18 +6,16 @@
   }
 
   &__strip {
-    @extend %flex-block;
+    @extend %basic-block;
 
-    flex-wrap: nowrap;
-    margin-bottom: 8.8rem;
+    margin-bottom: 5.4rem;
     user-select: none;
     pointer-events: none;
 
     img {
       display: block;
-      width: 33.3334%;
-      height: 35.8rem;
-      flex: 1 1 33.3334%;
+      width: 100%;
+      height: 10rem;
       object-fit: cover;
       font-family: 'object-fit: cover;';
     }
@@ -35,6 +33,20 @@
     @extend %content;
 
     margin-bottom: 9.6rem;
+  }
+
+  @include for-tablet-portrait-up {
+    &__strip {
+      display: flex;
+      flex-wrap: nowrap;
+      margin-bottom: 8.8rem;
+
+      img {
+        width: 33.3334%;
+        height: 35.8rem;
+        flex: 1 1 33.3334%;
+      }
+    }
   }
 }
 
@@ -59,11 +71,15 @@
     @extend %flex-block;
 
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: center;
 
     li {
-      lost-column: 1/3;
+      margin: 0 auto;
       height: 10.4rem;
+
+      & + * {
+        margin-top: 3.2rem;
+      }
     }
 
     a {
@@ -80,6 +96,31 @@
       height: 100%;
       object-fit: contain;
       font-family: 'object-fit: contain;';
+    }
+  }
+
+  @include for-tablet-portrait-up {
+    &__list {
+      li {
+        lost-column: 1/2;
+        margin-top: 0;
+
+        &:nth-child(n+3) {
+          margin-top: 4rem;
+        }
+      }
+    }
+  }
+
+  @include for-tablet-landscape-up {
+    &__list {
+      li {
+        lost-column: 1/3;
+
+        &:nth-child(3) {
+          margin-top: 0;
+        }
+      }
     }
   }
 }
@@ -102,14 +143,27 @@
   }
 
   &__list {
-    @extend %flex-block;
+    @extend %basic-block;
 
     li {
-      lost-column: 1/2;
+      & + * {
+        margin-top: 5.4rem;
+      }
+    }
+  }
 
-      &:first-child {
-        .member__content {
-          text-align: right;
+  @include for-tablet-landscape-up {
+    &__list {
+      display: flex;
+
+      li {
+        lost-column: 1/2;
+        margin-top: 0;
+
+        &:first-child {
+          .member__content {
+            text-align: right;
+          }
         }
       }
     }

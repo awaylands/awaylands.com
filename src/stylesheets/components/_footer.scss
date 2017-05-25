@@ -28,6 +28,12 @@
     }
   }
 
+  &__block {
+    & + * {
+      margin-top: 5.4rem;
+    }
+  }
+
   &__heading {
     @include hd-b($color: -color(white));
 
@@ -49,6 +55,8 @@
     }
 
     &__block {
+      margin-top: 0;
+
       &:first-child {
         lost-column: 2/3;
       }
