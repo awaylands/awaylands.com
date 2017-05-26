@@ -84,11 +84,15 @@
   }
 
   @include for-desktop-up {
-    width: 42rem;
+    width: 22vw;
 
     .is-sticky & {
       width: 30.1rem;
     }
+  }
+
+  @include for-big-desktop-up {
+    width: 39.6rem;
   }
 }
 
@@ -101,7 +105,7 @@
       display: inline-block;
 
       & + * {
-        margin-left: 4.8rem;
+        margin-left: 1.8vw;
       }
     }
 
@@ -119,6 +123,10 @@
 
   @include for-desktop-up {
     display: block;
+  }
+
+  @include for-big-desktop-up {
+    margin-left: 4rem;
   }
 }
 

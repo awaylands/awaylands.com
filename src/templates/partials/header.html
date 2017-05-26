@@ -46,7 +46,11 @@
     <div class="mobile-nav__target" data-bind="click: close"></div>
 
     <ul class="mobile-nav__list">
-
+      {% for item in site.navigation.mobile %}
+      <li class="mobile-nav__item">
+        <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank"{% endif %}>{{ item.text }}</a>
+      </li>
+      {% endfor %}
     </ul>
   </div>
 </div>
