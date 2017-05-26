@@ -116,6 +116,10 @@
       .page-nav {
         a {
           color: -color(black);
+
+          &:after {
+            background-color: -color(black);
+          }
         }
       }
     }
@@ -143,6 +147,7 @@
 .logo {
   position: relative;
   width: 24.9rem;
+  margin-top: 1rem;
 
   [class*="logo__image"] {
     width: 100%;
@@ -180,8 +185,34 @@
     a {
       @include copy-a($color: -color(white));
 
+      position: relative;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+
+      &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: -color(white);
+        width: 100%;
+        height: 0.2rem;
+        border-radius: 0.2rem;
+        margin-top: -0.2rem;
+        opacity: 0;
+        user-select: none;
+        pointer-events: none;
+        will-change: margin, opacity;
+        transition: margin 0.2s $ease-in-out-quart, opacity 0.1s $ease-in-out-quart;
+      }
+
+      &:hover {
+        &:after {
+          opacity: 1;
+          margin-top: 0.4rem;
+        }
+      }
 
       &.is-current {
         font-weight: -weight(bold);

@@ -75,7 +75,8 @@
 
     text-transform: uppercase;
 
-    &.is-current {
+    &.is-current,
+    &:hover {
       font-weight: -weight(bold);
     }
   }
