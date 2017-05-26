@@ -37,6 +37,10 @@
           <a href="http://pinterest.com/awaylands" target="_blank">{% include "vectors/pinterest.svg" %}</a>
         </li>
       </ul>
+
+      <button class="page-header__burger" data-bind="click: toggleOpen">
+        <span></span>
+      </button>
     </div>
   </div>
 </header>
@@ -46,7 +50,7 @@
     <div class="mobile-nav__target" data-bind="click: close"></div>
 
     <ul class="mobile-nav__list">
-      {% for item in site.navigation.mobile %}
+      {% for item in site.navigation.links %}
       <li class="mobile-nav__item">
         <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank"{% endif %}>{{ item.text }}</a>
       </li>

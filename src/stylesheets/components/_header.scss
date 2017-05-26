@@ -11,6 +11,25 @@
   will-change: height, background, box-shadow;
   transition: height 0.2s $ease-in-out-quart, background 0.1s $ease-out-quint, box-shadow 0.1s $ease-in-out-quart;
 
+  &.is-open {
+    .page-header__burger {
+      span {
+        background-color: transparent;
+        transition: background-color 0.1s linear;
+
+        &:before {
+          transform: translateY(0) rotate(135deg);
+          top: 0;
+        }
+
+        &:after {
+          transform: translateY(0) rotate(-135deg);
+          top: 0;
+        }
+      }
+    }
+  }
+
   &__inner {
     @extend %container;
 
@@ -32,6 +51,51 @@
 
   .logo__image--white {
     display: none;
+  }
+
+  &__burger {
+    align-items: center;
+    appearance: none;
+    background: transparent;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    display: flex;
+    width: 3rem;
+    height: 4rem;
+    margin-left: 4rem;
+
+    span {
+      display: block;
+      width: 3rem;
+      min-width: 0;
+      height: 3px;
+      background: -color(tundora);
+      position: relative;
+      margin: auto;
+      transition: background-color 0.5s linear;
+
+      &:before,
+      &:after {
+        content: "";
+        width: 3rem;
+        height: 3px;
+        position: absolute;
+        left: 0;
+        background: -color(tundora);
+        will-change: transform, opacity;
+        transition: all 0.5s $ease-in-out-quart;
+      }
+
+      &:before {
+        transform: translateY(-0.8rem);
+      }
+
+      &:after {
+        transform: translateY(0.8rem);
+      }
+    }
   }
 
   @include for-desktop-up {
@@ -68,6 +132,10 @@
 
     .logo__image--white {
       display: block;
+    }
+
+    &__burger {
+      display: none;
     }
   }
 }
@@ -128,8 +196,4 @@
   @include for-big-desktop-up {
     margin-left: 4rem;
   }
-}
-
-.mobile-nav {
-  display: none;
 }
