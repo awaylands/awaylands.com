@@ -17,7 +17,9 @@
     <li>
       <div class="location">
         <a href="{{ location | route('location') }}">
-          <img class="location__image" src="{{ location.image.s3Key | image({w: 1440, auto: 'compress,format'}) }}" alt="{{ location.title }} background" />
+          <div class="location__image">
+            <img src="{{ location.image.s3Key | image({w: 1440, auto: 'compress,format'}) }}" alt="{{ location.title }} background" data-image data-bind="imageLoaded" />
+          </div>
 
           <h3 class="location__heading">{{ location.title }}</h3>
         </a>

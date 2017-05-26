@@ -27,7 +27,7 @@
         <div class="tout">
           <a href="{{ story | route('story') }}">
             <div class="tout__image">
-              <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+              <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
             </div>
 
             <div class="tout__content">

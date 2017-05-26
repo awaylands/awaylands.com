@@ -90,6 +90,7 @@
     "knockout-inview": "^2.5.0",
     "knockout-postbox": "^0.5.2",
     "knockout-railway": "^0.3.2",
+    "luminous-lightbox": "^1.0.1",
     "moment": "^2.17.1",
     "object-fit-images": "^2.3.1",
     "raf-ready": "^1.0.1",

@@ -24,7 +24,9 @@
             <h2 class="listing__heading">{{ story.title }}</h2>
           </header>
 
-          <img class="listing__image" src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+          <div class="listing__image">
+            <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
+          </div>
 
           <div class="listing__content">{{ story.tout.dek }}</div>
         </a>

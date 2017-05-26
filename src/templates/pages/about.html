@@ -7,7 +7,7 @@
   <div class="about__inner">
     <div class="about__strip">
       {% for photo in page.photostrip %}
-      <img src="{{ photo.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+      <img src="{{ photo.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
       {% endfor %}
     </div>
 
@@ -27,7 +27,7 @@
         <div class="tout">
           <a href="{{ item.url }}" target="_blank">
             <div class="tout__image">
-              <img src="{{ item.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+              <img src="{{ item.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
             </div>
 
             <div class="tout__content">
@@ -51,7 +51,7 @@
       {% for logo in page.clients.logos %}
       <li>
         <a href="{{ logo.url }}" target="_blank">
-          <img src="{{ logo.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" alt="{{ logo.name }}" />
+          <img src="{{ logo.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" alt="{{ logo.name }}" data-image data-bind="imageLoaded" />
         </a>
       </li>
       {% endfor %}
@@ -68,7 +68,7 @@
       <li>
         <div class="member">
           <div class="member__image">
-            <img src="{{ member.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" alt="{{ member.name }}" />
+            <img src="{{ member.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" alt="{{ member.name }}" data-image data-bind="imageLoaded" />
           </div>
 
           <div class="member__content">

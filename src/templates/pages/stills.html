@@ -9,11 +9,15 @@
 {% endblock %}
 
 {% block listings %}
+<!-- ko component: "lightbox" -->
 <div class="masonry">
   {% for still in page.featuredStills %}
   <div class="masonry__item">
-    <img src="{{ still.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+    <a class="still">
+      <img src="{{ still.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
+    </a>
   </div>
   {% endfor %}
 </div>
+<!-- /ko -->
 {% endblock %}

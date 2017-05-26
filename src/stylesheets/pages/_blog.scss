@@ -47,6 +47,7 @@
   &__image {
     @extend %basic-block;
 
+    background-color: -color(gallery);
     order: 1;
     margin-bottom: 3.2rem;
   }

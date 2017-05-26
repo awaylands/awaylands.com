@@ -21,8 +21,16 @@
 .location {
   @include ratio-box(40%);
 
+  background-color: -color(white);
+
   &__image {
-    @extend %cover-image;
+    @extend %absolute-fill;
+
+    background-color: -color(gallery);
+
+    img {
+      @extend %cover-image;
+    }
   }
 
   &__heading {
