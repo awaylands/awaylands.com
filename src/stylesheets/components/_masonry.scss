@@ -19,3 +19,63 @@
     column-count: 4;
   }
 }
+
+.lum-lightbox {
+  position: fixed;
+  display: block !important;
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity, visibility;
+  transition: opacity 0.4s $ease-in-out-quart, visibility 0s linear 0.4s;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -z(modal);
+  background-color: rgba(0,0,0, 0.4);
+
+  &.lum-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.25s $ease-in-out-quart, visibility 0s;
+  }
+}
+
+.lum-lightbox-inner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  padding: 4rem;
+}
+
+.lum-lightbox-loader {
+
+}
+
+.lum-lightbox-image-wrapper {
+
+}
+
+.lum-lightbox-position-helper {
+
+}
+
+.lum-img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.lum-gallery-button {
+
+}
+
+.lum-previous-button {
+
+}
+
+.lum-next-button {
+
+}

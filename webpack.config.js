@@ -20,6 +20,11 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
+        include: /node_modules\/luminous-lightbox/,
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.js$/,
         exclude: /node_modules|vendor/,
         loader: 'babel-loader'
       },
