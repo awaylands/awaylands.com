@@ -1,5 +1,5 @@
 .masonry {
-  column-count: 4;
+  column-count: 2;
   column-gap: 2rem;
 
   &__item {
@@ -13,5 +13,9 @@
     img {
       @extend %basic-block;
     }
+  }
+
+  @include for-tablet-portrait-up {
+    column-count: 4;
   }
 }

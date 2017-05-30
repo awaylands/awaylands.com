@@ -4,7 +4,7 @@
   <li><a href="/destinations">Featured</a></li>
 
   {% for location in locations %}
-  <li><a href="{{ location | route('location') }}" {% if location.title == page.title %}class="is-current"{% endif %}>{{ location.title }}</a></li>
+  <li><a href="{{ location | route('location') }}/#" {% if location.title == page.title %}class="is-current"{% endif %}>{{ location.title }}</a></li>
   {% endfor %}
 {% endblock %}
 

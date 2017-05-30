@@ -10,7 +10,7 @@
         <li><a href="/blog/page-1">Recent</a></li>
 
         {% for category in categories %}
-        <li><a href="{{ category | route('category') }}" {% if category.title == page.category.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
+        <li><a href="{{ category | route('category') }}/#" {% if category.title == page.category.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
         {% endfor %}
       </ul>
     </div>
