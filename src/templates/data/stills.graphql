@@ -7,6 +7,13 @@ query {
         s3Key
       }
     }
+    social {
+      title
+      description
+      image {
+        s3Key
+      }
+    }
   }
   stillCategories: getStillCategoryList {
     title

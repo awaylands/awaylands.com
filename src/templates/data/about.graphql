@@ -41,5 +41,12 @@ query {
         aboutHtml
       }
     }
+    social {
+      title
+      description
+      image {
+        s3Key
+      }
+    }
   }
 }

@@ -10,5 +10,12 @@ query {
         youTubeUrl
       }
     }
+    social {
+      title
+      description
+      image {
+        s3Key
+      }
+    }
   }
 }

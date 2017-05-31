@@ -16,5 +16,12 @@ query {
         }
       }
     }
+    social {
+      title
+      description
+      image {
+        s3Key
+      }
+    }
   }
 }

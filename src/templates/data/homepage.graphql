@@ -9,6 +9,13 @@ query {
         caption
       }
     }
+    social {
+      title
+      description
+      image {
+        s3Key
+      }
+    }
   }
 
   stories: getStoryList {

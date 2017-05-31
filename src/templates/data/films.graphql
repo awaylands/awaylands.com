@@ -8,6 +8,13 @@ query {
       }
       youTubeUrl
     }
+    social {
+      title
+      description
+      image {
+        s3Key
+      }
+    }
   }
   filmCategories: getFilmCategoryList {
     title

@@ -15,11 +15,25 @@ query {
       title
     }
     contentHtml
+    social {
+      title
+      description
+      image {
+        s3Key
+      }
+    }
   }
   categories: getCategoryList {
     title
   }
   page: getBlog {
     title
+    social {
+      title
+      description
+      image {
+        s3Key
+      }
+    }
   }
 }

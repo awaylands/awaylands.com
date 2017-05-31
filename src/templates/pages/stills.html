@@ -13,7 +13,7 @@
 <ul class="masonry">
   {% for still in page.featuredStills %}
   <li class="masonry__item">
-    <a class="still" data-source="{{ still.image.s3Key | image({w: 1400, auto: 'compress,format'}) }}">
+    <a class="still" data-source="{{ still.image.s3Key | image({auto: 'compress,format'}) }}">
       <img src="{{ still.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
     </a>
   </li>
