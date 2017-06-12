@@ -16,6 +16,8 @@
           {% for link in site.navigation.links %}
           <li><a href="{{ link.url }}" {% if link.text == page.title or link.text == parentTitle %}class="is-current"{% endif %}>{{ link.text }}</a></li>
           {% endfor %}
+
+          <li><a href="#footer" data-bind="click: contactScroll">Contact</a></li>
         </ul>
       </nav>
     </div>

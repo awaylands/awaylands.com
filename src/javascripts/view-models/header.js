@@ -1,5 +1,6 @@
 import ko from 'knockout';
 import Base from './base';
+import scrollTo from '../utils/scroll-to';
 
 const ESC_KEYCODE = 27;
 
@@ -33,6 +34,14 @@ class Header extends Base {
     } else if (this.isSticky() && window.pageYOffset < maxOffset) {
       this.isSticky(false);
     }
+  }
+
+  contactScroll() {
+    const footer = document.getElementById('footer').offsetTop;
+
+    console.log(footer);
+
+    scrollTo(footer, null, 700);
   }
 
   captureEscape(event) {
