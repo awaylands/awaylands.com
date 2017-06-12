@@ -16,6 +16,8 @@ class Header extends Base {
     window.addEventListener("scroll", this.onScroll.bind(this));
 
     this.onScroll();
+
+    console.log(window.location.pathname);
   }
 
   toggleOpen() {
@@ -27,7 +29,11 @@ class Header extends Base {
   }
 
   onScroll() {
-    const maxOffset = 20;
+    let maxOffset = 20;
+
+    if (window.location.pathname == "/") {
+       maxOffset = window.innerHeight - 183;
+    }
 
     if (!this.isSticky() && window.pageYOffset >= maxOffset) {
       this.isSticky(true);

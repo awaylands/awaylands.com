@@ -8,14 +8,13 @@
   top: 0;
   left: 0;
   z-index: -z(header);
-  will-change: height, background, box-shadow;
-  transition: height 0.2s $ease-in-out-quart, background 0.1s $ease-out-quint, box-shadow 0.1s $ease-in-out-quart;
+  will-change: background, box-shadow;
 
   &.is-open {
     .page-header__burger {
       span {
         background-color: transparent;
-        transition: background-color 0.1s linear;
+        transition: background 0.15s 0.1s $ease-out-quint, box-shadow 0.1s 0.2s $ease-in-out-quart
 
         &:before {
           transform: translateY(0) rotate(135deg);
