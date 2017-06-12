@@ -183,7 +183,7 @@
     }
 
     a {
-      @include copy-a($color: -color(white));
+      @include copy-a($family: $raleway, $color: -color(white));
 
       position: relative;
       letter-spacing: 0.1em;

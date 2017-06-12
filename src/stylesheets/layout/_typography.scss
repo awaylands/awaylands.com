@@ -31,7 +31,7 @@ cite {
 }
 
 // headings
-@mixin hd-a($color: $default-type-color, $family: $quicksand, $line-height: 1.33, $weight: -weight(medium)) {
+@mixin hd-a($color: $default-type-color, $family: $raleway, $line-height: 1.33, $weight: -weight(medium)) {
   color: $color;
   font-family: $family;
   font-size: 3rem;
@@ -40,7 +40,7 @@ cite {
   letter-spacing: 0.04em;
 }
 
-@mixin hd-b($color: $default-type-color, $family: $quicksand, $line-height: 1.24, $weight: -weight(medium)) {
+@mixin hd-b($color: $default-type-color, $family: $raleway, $line-height: 1.24, $weight: -weight(medium)) {
   color: $color;
   font-family: $family;
   font-size: 2.1rem;
@@ -49,7 +49,7 @@ cite {
   letter-spacing: 0.04em;
 }
 
-@mixin hd-c($color: $default-type-color, $family: $quicksand, $line-height: 1.33, $weight: -weight(medium)) {
+@mixin hd-c($color: $default-type-color, $family: $raleway, $line-height: 1.33, $weight: -weight(medium)) {
   color: $color;
   font-family: $family;
   font-size: 1.8rem;
@@ -58,7 +58,7 @@ cite {
   letter-spacing: 0.04em;
 }
 
-@mixin hd-d($color: $default-type-color, $family: $quicksand, $line-height: 1.33, $weight: -weight(medium)) {
+@mixin hd-d($color: $default-type-color, $family: $raleway, $line-height: 1.33, $weight: -weight(medium)) {
   color: $color;
   font-family: $family;
   font-size: 1.6rem;
@@ -67,7 +67,7 @@ cite {
   letter-spacing: 0.04em;
 }
 
-@mixin hd-e($color: $default-type-color, $family: $quicksand, $line-height: 1.33, $weight: -weight(medium)) {
+@mixin hd-e($color: $default-type-color, $family: $raleway, $line-height: 1.33, $weight: -weight(medium)) {
   color: $color;
   font-family: $family;
   font-size: 1.4rem;

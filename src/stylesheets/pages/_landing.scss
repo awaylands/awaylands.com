@@ -71,7 +71,7 @@
   }
 
   a {
-    @include copy-a();
+    @include copy-a($family: $raleway);
 
     text-transform: uppercase;
 
