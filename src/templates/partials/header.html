@@ -1,6 +1,7 @@
+{% set social = site.navigation.social %}
+
 <!-- ko component: "header" -->
 <header class="page-header" data-bind="css: {'is-sticky': isSticky, 'is-open': isOpen}">
-  {{ parentTitle | dump }}
   <div class="page-header__inner">
     <div class="page-header__section">
       <div class="logo">
@@ -22,19 +23,19 @@
     <div class="page-header__section">
       <ul class="social">
         <li>
-          <a href="https://www.instagram.com/amyseder/" target="_blank">{% include "vectors/instagram.svg" %}</a>
+          <a href="{{ social.instagramUrl }}" target="_blank">{% include "vectors/instagram.svg" %}</a>
         </li>
 
         <li>
-          <a href="https://www.youtube.com/c/awaylandsmedia" target="_blank">{% include "vectors/youtube.svg" %}</a>
+          <a href="{{ social.youtubeUrl }}" target="_blank">{% include "vectors/youtube.svg" %}</a>
         </li>
 
         <li>
-          <a href="https://www.facebook.com/awaylands" target="_blank">{% include "vectors/facebook.svg" %}</a>
+          <a href="{{ social.facebookUrl }}" target="_blank">{% include "vectors/facebook.svg" %}</a>
         </li>
 
         <li>
-          <a href="http://pinterest.com/awaylands" target="_blank">{% include "vectors/pinterest.svg" %}</a>
+          <a href="{{ social.pinterestUrl }}" target="_blank">{% include "vectors/pinterest.svg" %}</a>
         </li>
       </ul>
 
