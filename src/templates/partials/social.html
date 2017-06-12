@@ -1,11 +1,11 @@
 {% from "macros/image-url.html" import imageUrl %}
 
-{% set socialGlobal = global.site.social %}
+{% set socialGlobal = site.social %}
 
 {% if page.social.title %}
   <title>{{ page.social.title }} | {{ socialGlobal.siteName }}</title>
-{% elif page.title %}
-  <title>{{ page.title }} | {{ socialGlobal.siteName }}</title>
+{% elif page._contentTypeName %}
+  <title>{{ page._contentTypeName | capitalize }} | {{ socialGlobal.siteName }}</title>
 {% else %}
   <title>{{ socialGlobal.siteName }}</title>
 {% endif %}
@@ -28,12 +28,12 @@
 {% endif %}
 
 {% if page.social.image %}
-  <meta property="og:image" content="{{ imageUrl(page.socialImage.s3Key) }}">
+  <meta property="og:image" content="{{ page.social.image.s3Key | image({auto: 'compress,format'}) }}">
 {% elif socialGlobal.image %}
-  <meta property="og:image" content="{{ imageUrl(socialGlobal.image.s3Key) }}">
+  <meta property="og:image" content="{{ socialGlobal.image.s3Key | image({auto: 'compress,format'}) }}">
 {% endif %}
 
-{% if page %}
+{% if page._contentTypeName %}
   <meta property="og:type" content="article">
 {% endif %}
 
@@ -44,9 +44,9 @@
 {% endif %}
 
 {% if socialGlobal.twitter.creator %}
-  <meta name="twitter:site" content="{{ socialGlobal.twitter.creator }}">
+  <meta name="twitter:creator" content="{{ socialGlobal.twitter.creator }}">
 {% endif %}
 
-{% if socialGlobal.facebook.appId %}
+{% if socialGlobal.facebookAppId %}
   <meta property="fb:app_id" content="{{ socialGlobal.facebook.appId }}">
 {% endif %}
