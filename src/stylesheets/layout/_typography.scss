@@ -80,7 +80,7 @@ cite {
 @mixin copy-a($color: $default-type-color, $family: $quicksand, $line-height: 1.75, $weight: -weight(regular)) {
   color: $color;
   font-family: $family;
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: $weight;
   line-height: $line-height;
   letter-spacing: 0.04em;
