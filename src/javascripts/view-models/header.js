@@ -45,8 +45,6 @@ class Header extends Base {
   contactScroll() {
     const footer = document.getElementById('footer').offsetTop;
 
-    console.log(footer);
-
     scrollTo(footer, null, 700);
   }
 

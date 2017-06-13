@@ -6,7 +6,10 @@ query {
         image {
           s3Key
         }
-        caption
+        caption {
+          text
+          url
+        }
       }
     }
     social {

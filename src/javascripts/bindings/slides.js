@@ -17,9 +17,12 @@ const init = function(el) {
   }
 
   const nextSlide = function() {
-    slidesContainer.appendChild(slidesContainer.getElementsByTagName('img')[0]);
+    const image = slidesContainer.getElementsByTagName('img')[0];
 
-    caption.innerHTML = slidesContainer.getElementsByTagName('img')[0].dataset.caption;
+    slidesContainer.appendChild(image);
+
+    caption.innerHTML = image.dataset.caption;
+    caption.setAttribute('href', image.dataset.link);
   };
 
   setInterval(nextSlide, interval);
