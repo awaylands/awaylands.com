@@ -1,7 +1,7 @@
 <footer class="page-footer" id="footer">
   <div class="page-footer__inner">
     <a class="page-footer__logo" href="/">
-      <img src="/assets/images/logo_white.png" alt="Logo for Away Lands" title="Away Lands" />
+      <img src="/assets/images/logo_white.png" alt="Logo for Away Lands" title="Away Lands"/>
     </a>
 
     <div class="page-footer__section">
@@ -10,10 +10,10 @@
 
         <ul class="contact">
           {% for contact in site.footer.contacts %}
-          <li>
-            <h4 class="contact__heading">{{ contact.label }}</h4>
-            <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-          </li>
+            <li>
+              <h4 class="contact__heading">{{ contact.label }}</h4>
+              <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+            </li>
           {% endfor %}
         </ul>
       </div>
@@ -23,8 +23,8 @@
 
         <div class="newsletter">
           <form>
-            <input type="text" class="newsletter__input" placeholder="email address" />
-            <input type="submit" class="newsletter__submit" value="subscribe" />
+            <input type="text" class="newsletter__input" placeholder="email address"/>
+            <input type="submit" class="newsletter__submit" value="subscribe"/>
           </form>
         </div>
       </div>
@@ -33,20 +33,27 @@
     <div class="page-footer__section">
       <ul class="social-blocks">
         {% for visual in site.footer.visuals %}
-        <li>
-          <div class="social-block">
-            <a href="{{ visual.url }}" target="_blank">
-              <img src="{{ visual.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" class="social-block__image">
+          {% if visual.image %}
+            <li>
+              <div class="social-block">
+                {% if visual.url %}
+                <a href="{{ visual.url }}" target="_blank">
+                  {% endif %}
+                  <img src="{{ visual.image.s3Key | image({w: 600, auto: 'compress,format'}) }}"
+                       class="social-block__image">
 
-              {% if visual.type and visual.label %}
-              <div class="social-block__hover">
-                <span class="social-block__icon">{% include "vectors/" + visual.type + ".svg" %}</span>
-                <span class="social-block__label">{{ visual.label }}</span>
+                  {% if visual.type and visual.label %}
+                    <div class="social-block__hover">
+                      <span class="social-block__icon">{% include "vectors/" + visual.type + ".svg" %}</span>
+                      <span class="social-block__label">{{ visual.label }}</span>
+                    </div>
+                  {% endif %}
+                  {% if visual.url %}
+                </a>
+                {% endif %}
               </div>
-              {% endif %}
-            </a>
-          </div>
-        </li>
+            </li>
+          {% endif %}
         {% endfor %}
       </ul>
     </div>
