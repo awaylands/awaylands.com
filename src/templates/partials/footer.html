@@ -38,10 +38,12 @@
             <a href="{{ visual.url }}" target="_blank">
               <img src="{{ visual.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" class="social-block__image">
 
+              {% if visual.type and visual.label %}
               <div class="social-block__hover">
                 <span class="social-block__icon">{% include "vectors/" + visual.type + ".svg" %}</span>
                 <span class="social-block__label">{{ visual.label }}</span>
               </div>
+              {% endif %}
             </a>
           </div>
         </li>
