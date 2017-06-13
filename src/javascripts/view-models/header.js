@@ -16,8 +16,6 @@ class Header extends Base {
     window.addEventListener("scroll", this.onScroll.bind(this));
 
     this.onScroll();
-
-    console.log(window.location.pathname);
   }
 
   toggleOpen() {
