@@ -2,6 +2,7 @@
 
 {% block filters %}
   <li><a href="/blog/page-1">Recent</a></li>
+  <li><span class="separator"></span></li>
 
   {% for category in categories %}
   <li><a href="{{ category | route('category') }}/#" {% if category.title == page.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
@@ -9,32 +10,34 @@
 {% endblock %}
 
 {% block listings %}
-<div class="grid">
-  <div class="grid__inner">
-    <ul class="grid__list">
-      {% for story in stories %}
-      <li class="grid__item">
-        <div class="tout">
-          <a href="{{ story | route('story') }}">
-            <div class="tout__image">
-              <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
+<div class="listings">
+  <ul class="listings__list">
+    {% for story in page.storySet.results %}
+    <li>
+      <div class="listing">
+        <a href="{{ story | route('story') }}">
+          <header class="listing__header">
+            <div class="listing__rubric">
+              <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
+              <span>{{ story.category.title }}</span>
             </div>
 
-            <div class="tout__content">
-              <div class="tout__rubric">
-                <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
-                <span>{{ story.category.title }}</span>
-              </div>
+            <h2 class="listing__heading">{{ story.title }}</h2>
+          </header>
 
-              <h2 class="tout__heading">{{ story.title }}</h2>
+          <div class="listing__image">
+            <img srcset="{{ story.tout.image.s3Key | image({w: 899, auto: 'compress,format'}) | escape }} 1x, {{ story.tout.image.s3Key | image({w: 1658, auto: 'compress,format'}) | escape }} 2x"
+                 src="{{ story.tout.image.s3Key | image({w: 1798, auto: 'compress,format'}) | escape }}"
+                 data-image
+                 data-bind="imageLoaded"
+            />
+          </div>
 
-              <p class="tout__dek">{{ story.tout.dek }}</p>
-            </div>
-          </a>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+          <div class="listing__content">{{ story.tout.dek }}</div>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 </div>
 {% endblock %}
