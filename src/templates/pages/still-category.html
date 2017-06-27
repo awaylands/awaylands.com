@@ -1,7 +1,7 @@
 {% extends "layouts/landing.html" %}
 
 {% block filters %}
-  <li><a href="/stills">Featured</a></li>
+  <li><a href="/still">Featured</a></li>
 
   {% for category in stillCategories %}
   <li><a href="{{ category | route('stillCategory') }}/#" {% if category.title == page.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
@@ -9,11 +9,13 @@
 {% endblock %}
 
 {% block listings %}
-<div class="masonry">
-  {% for still in page.stillSet.results %}
-  <div class="masonry__item">
-    <img src="{{ still.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" />
-  </div>
+<!-- ko component: "lightbox" -->
+<ul class="masonry">
+  {% for still in page.stills %}
+  <li class="masonry__item">
+
+  </li>
   {% endfor %}
-</div>
+</ul>
+<!-- /ko -->
 {% endblock %}

@@ -1,11 +1,9 @@
 query {
   stillCategories: getStillCategoryList {
     title
-    stillSet(size: 100) {
-      results {
-        image {
-          s3Key
-        }
+    stills {
+      image {
+        s3Key
       }
     }
     social {

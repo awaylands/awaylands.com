@@ -1,8 +1,7 @@
 query {
-  page: getStills {
+  page: getStill {
     title
-    featuredStills {
-      title
+    stills {
       image {
         s3Key
       }

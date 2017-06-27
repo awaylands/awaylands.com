@@ -23,10 +23,10 @@ routes:
     template: pages/films.html
     context: data/films.graphql
 
-  stills:
-    path: /stills
-    template: pages/stills.html
-    context: data/stills.graphql
+  still:
+    path: /still
+    template: pages/still.html
+    context: data/still.graphql
 
   story:
     path: /story/:title
@@ -58,7 +58,7 @@ routes:
       itemName: page
 
   stillCategory:
-    path: /stills/:title
+    path: /still/:title
     template: pages/still-category.html
     context: data/still-category.graphql
     paginate:
