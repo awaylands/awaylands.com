@@ -12,6 +12,8 @@
 
     img {
       @extend %basic-block;
+
+      user-select: none;
     }
   }
 

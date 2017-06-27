@@ -99,6 +99,7 @@
   &__image {
     background-color: -color(gallery);
     margin-bottom: 2.4rem;
+    user-select: none;
   }
 
   &__rubric {

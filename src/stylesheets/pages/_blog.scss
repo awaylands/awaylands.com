@@ -50,6 +50,7 @@
     background-color: -color(gallery);
     order: 1;
     margin-bottom: 3.2rem;
+    user-select: none;
 
     img {
       @extend %basic-block;

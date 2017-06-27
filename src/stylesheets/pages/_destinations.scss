@@ -27,6 +27,7 @@
     @extend %absolute-fill;
 
     background-color: -color(gallery);
+    user-select: none;
 
     img {
       @extend %cover-image;

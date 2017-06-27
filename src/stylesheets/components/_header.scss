@@ -173,6 +173,8 @@
   margin-left: 4rem;
 
   &__list {
+    user-select: none;
+    
     li {
       display: inline-block;
 
