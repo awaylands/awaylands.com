@@ -24,30 +24,36 @@
   <h2 class="grid__heading">Recent Entries</h2>
 
   <div class="grid__inner">
-    <ul class="grid__list">
-      {% for story in stories.slice(0, 6) %}
-      <li class="grid__item">
-        <div class="tout">
-          <a href="{{ story | route('story') }}">
-            <div class="tout__image">
-              <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
-            </div>
-
-            <div class="tout__content">
-              <div class="tout__rubric">
-                <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
-                <span>{{ story.category.title }}</span>
+    <div class="grid__wrap">
+      <ul class="grid__list">
+        {% for story in stories.slice(0, 6) %}
+        <li class="grid__item">
+          <div class="tout">
+            <a href="{{ story | route('story') }}">
+              <div class="tout__image">
+                <img srcset="{{ story.tout.image.s3Key | image({w: 820, auto: 'compress,format'}) | escape }} 1x, {{ story.tout.image.s3Key | image({w: 1640, auto: 'compress,format'}) | escape }} 2x"
+                     src="{{ story.tout.image.s3Key | image({w: 1640, auto: 'compress,format'}) | escape }}"
+                     data-image
+                     data-bind="imageLoaded"
+                />
               </div>
 
-              <h2 class="tout__heading">{{ story.title }}</h2>
+              <div class="tout__content">
+                <div class="tout__rubric">
+                  <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
+                  <span>{{ story.category.title }}</span>
+                </div>
 
-              <p class="tout__dek">{{ story.tout.dek }}</p>
-            </div>
-          </a>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
+                <h2 class="tout__heading">{{ story.title }}</h2>
+
+                <p class="tout__dek">{{ story.tout.dek }}</p>
+              </div>
+            </a>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
 {% endblock %}

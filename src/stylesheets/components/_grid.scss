@@ -39,6 +39,10 @@
     @extend %container;
   }
 
+  &__wrap {
+    @extend %wrap;
+  }
+
   .tout__image {
     @include ratio-box(75%);
   }
@@ -94,7 +98,7 @@
 
   &__image {
     background-color: -color(gallery);
-    margin-bottom: 4rem;
+    margin-bottom: 2.4rem;
   }
 
   &__rubric {
@@ -104,9 +108,11 @@
     margin-bottom: 0.8rem;
 
     > * + * {
-      &:before {
-        content: "/";
-        margin: 0 0.8rem;
+      &:not(:empty) {
+        &:before {
+          content: "/";
+          margin: 0 0.8rem;
+        }
       }
     }
   }
