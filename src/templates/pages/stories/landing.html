@@ -2,6 +2,7 @@
 
 {% block filters %}
   <li><a class="is-current" href="/blog/page-1">Recent</a></li>
+  <li><span class="separator"></span></li>
 
   {% for category in categories %}
   <li><a href="{{ category | route('category') }}">{{ category.title }}</a></li>
@@ -25,7 +26,11 @@
           </header>
 
           <div class="listing__image">
-            <img src="{{ story.tout.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
+            <img srcset="{{ story.tout.image.s3Key | image({w: 899, auto: 'compress,format'}) | escape }} 1x, {{ story.tout.image.s3Key | image({w: 1658, auto: 'compress,format'}) | escape }} 2x"
+                 src="{{ story.tout.image.s3Key | image({w: 1798, auto: 'compress,format'}) | escape }}"
+                 data-image
+                 data-bind="imageLoaded"
+            />
           </div>
 
           <div class="listing__content">{{ story.tout.dek }}</div>
