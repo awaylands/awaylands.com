@@ -7,7 +7,10 @@
   <div class="slides" {% if page.slider.interval %}data-interval="{{ page.slider.interval }}"{% endif %} data-bind="slides">
     <div class="slides__container">
       {% for slide in page.slider.slides %}
-      <img class="slides__image" src="{{ slide.image.s3Key | image({w: 1440, auto: 'compress,format'}) }}" {% if slide.caption %}data-caption="{{ slide.caption.text }}" data-link="{{ slide.caption.url }}"{% endif %} />
+      <img srcset="{{ slide.image.s3Key | image({w: 1440, auto: 'compress,format'}) | escape }} 1x, {{ slide.image.s3Key | image({w: 2880, auto: 'compress,format'}) | escape }} 2x"
+           src="{{ slide.image.s3Key | image({w: 2880, auto: 'compress,format'}) | escape }}"
+           {% if slide.caption %}data-caption="{{ slide.caption.text }}" data-link="{{ slide.caption.url }}"{% endif %}
+      />
       {% endfor %}
     </div>
 

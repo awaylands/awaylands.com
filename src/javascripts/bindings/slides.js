@@ -5,9 +5,31 @@ const init = function(el) {
   const caption = el.getElementsByClassName('slides__caption')[0];
 
   caption.innerHTML = firstImage.dataset.caption;
+  caption.setAttribute('href', firstImage.dataset.link);
+
+  const nextSlide = function() {
+    const image = slidesContainer.getElementsByTagName('img')[0];
+    const newImage = slidesContainer.getElementsByTagName('img')[1];
+
+    if (newImage.dataset.caption) {
+      caption.innerHTML = newImage.dataset.caption;
+    } else {
+      caption.innerHTML = '';
+    }
+
+    if (newImage.dataset.link) {
+      caption.setAttribute('href', newImage.dataset.link);
+    } else {
+      caption.removeAttribute('href');
+    }
+
+    slidesContainer.appendChild(image);
+  };
 
   const onLoad = function() {
     el.classList.add('is-loaded');
+
+    setInterval(nextSlide, interval);
   };
 
   if (firstImage.complete) {
@@ -15,17 +37,6 @@ const init = function(el) {
   } else {
     firstImage.addEventListener('load', onLoad);
   }
-
-  const nextSlide = function() {
-    const image = slidesContainer.getElementsByTagName('img')[0];
-
-    slidesContainer.appendChild(image);
-
-    caption.innerHTML = image.dataset.caption;
-    caption.setAttribute('href', image.dataset.link);
-  };
-
-  setInterval(nextSlide, interval);
 };
 
 export default {init};
