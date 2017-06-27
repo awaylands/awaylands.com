@@ -18,10 +18,10 @@ routes:
     template: pages/homepage.html
     context: data/homepage.graphql
 
-  films:
-    path: /films
-    template: pages/films.html
-    context: data/films.graphql
+  film:
+    path: /film
+    template: pages/film.html
+    context: data/film.graphql
 
   still:
     path: /still
