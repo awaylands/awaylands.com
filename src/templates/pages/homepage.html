@@ -41,7 +41,10 @@
               <div class="tout__content">
                 <div class="tout__rubric">
                   <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
+
+                  {% for category in story.category %}
                   <span>{{ story.category.title }}</span>
+                  {% endfor %}
                 </div>
 
                 <h2 class="tout__heading">{{ story.title }}</h2>

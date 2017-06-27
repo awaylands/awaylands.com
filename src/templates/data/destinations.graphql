@@ -1,6 +1,9 @@
 query {
   page: getDestinations {
     title
+    locations {
+      title
+    }
     featuredLocations {
       title
       image {

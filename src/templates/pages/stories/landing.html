@@ -19,7 +19,10 @@
           <header class="listing__header">
             <div class="listing__rubric">
               <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
-              <span>{{ story.category.title }}</span>
+
+              {% for category in story.category %}
+              <span>{{ category.title }}</span>
+              {% endfor %}
             </div>
 
             <h2 class="listing__heading">{{ story.title }}</h2>

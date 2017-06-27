@@ -20,7 +20,10 @@
       <header class="content__header">
         <div class="content__rubric">
           <span>{{ page._enabledAt | date("MMMM D, YYYY") }}</span>
-          <span>{{ page.category.title }}</span>
+
+          {% for category in page.category %}
+          <span>{{ category.title }}</span>
+          {% endfor %}
         </div>
 
         <h2 class="content__heading">{{ page.title }}</h2>

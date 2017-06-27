@@ -24,4 +24,9 @@ query {
       }
     }
   }
+  destinations: getDestinations {
+    locations {
+      title
+    }
+  }
 }

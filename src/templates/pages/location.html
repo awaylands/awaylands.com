@@ -3,23 +3,39 @@
 {% block filters %}
   <li><a href="/destinations">Featured</a></li>
 
-  {% for location in locations %}
+  {% for location in destinations.locations %}
   <li><a href="{{ location | route('location') }}/#" {% if location.title == page.title %}class="is-current"{% endif %}>{{ location.title }}</a></li>
   {% endfor %}
 {% endblock %}
 
 {% block listings %}
-<div class="locations">
-  <h2 class="locations__heading">{{ page.title }}</h2>
-
-  <ul class="locations__list">
-    {% for location in page.locationSet.results %}
+<div class="listings">
+  <ul class="listings__list">
+    {% for story in page.storySet.results %}
     <li>
-      <div class="location">
-        <a href="{{ location | route('location') }}">
-          <img class="location__image" src="{{ location.image.s3Key | image({w: 1440, auto: 'compress,format'}) }}" alt="{{ location.title }} background" />
+      <div class="listing">
+        <a href="{{ story | route('story') }}">
+          <header class="listing__header">
+            <div class="listing__rubric">
+              <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
 
-          <h3 class="location__heading">{{ location.title }}</h3>
+              {% for category in story.category %}
+              <span>{{ category.title }}</span>
+              {% endfor %}
+            </div>
+
+            <h2 class="listing__heading">{{ story.title }}</h2>
+          </header>
+
+          <div class="listing__image">
+            <img srcset="{{ story.tout.image.s3Key | image({w: 899, auto: 'compress,format'}) | escape }} 1x, {{ story.tout.image.s3Key | image({w: 1658, auto: 'compress,format'}) | escape }} 2x"
+                 src="{{ story.tout.image.s3Key | image({w: 1798, auto: 'compress,format'}) | escape }}"
+                 data-image
+                 data-bind="imageLoaded"
+            />
+          </div>
+
+          <div class="listing__content">{{ story.tout.dek }}</div>
         </a>
       </div>
     </li>
