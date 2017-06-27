@@ -36,7 +36,7 @@ cite {
 @mixin hd-a($color: $default-type-color, $family: $raleway, $line-height: 1.33, $weight: -weight(medium)) {
   color: $color;
   font-family: $family;
-  font-size: 3rem;
+  font-size: 2.6rem;
   font-weight: $weight;
   line-height: $line-height;
   letter-spacing: 0.04em;
@@ -45,7 +45,7 @@ cite {
 @mixin hd-b($color: $default-type-color, $family: $raleway, $line-height: 1.24, $weight: -weight(medium)) {
   color: $color;
   font-family: $family;
-  font-size: 2.1rem;
+  font-size: 2rem;
   font-weight: $weight;
   line-height: $line-height;
   letter-spacing: 0.04em;
