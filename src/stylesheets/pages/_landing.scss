@@ -42,7 +42,7 @@
         background-color: transparent;
         box-shadow: none;
         padding: 0;
-        lost-column: 2/6;
+        lost-column: 1/4;
 
         &:after {
           display: none;
@@ -50,7 +50,7 @@
       }
 
       &:last-child {
-        lost-column: 4/6;
+        lost-column: 3/4;
       }
     }
   }

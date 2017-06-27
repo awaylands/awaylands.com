@@ -3,7 +3,7 @@
 
   > * {
     display: block;
-    max-width: 90rem;
+    max-width: 83.4rem;
     margin: 0 auto;
 
     & + * {
@@ -195,7 +195,7 @@
   &__header {
     @extend %basic-block;
 
-    max-width: 90rem;
+    max-width: 83.4rem;
     margin: 0 auto 4rem;
   }
 
@@ -236,7 +236,7 @@
           background-color: transparent;
           box-shadow: none;
           padding: 0;
-          lost-column: 2/6;
+          lost-column: 1/4;
 
           &:after {
             display: none;
@@ -244,7 +244,7 @@
         }
 
         &:last-child {
-          lost-column: 4/6;
+          lost-column: 3/4;
         }
       }
     }
