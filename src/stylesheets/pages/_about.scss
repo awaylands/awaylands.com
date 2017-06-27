@@ -1,25 +1,37 @@
+.photo-strip {
+  @extend %basic-block;
+
+  background-color: -color(gallery);
+  margin-bottom: 5.4rem;
+  user-select: none;
+  pointer-events: none;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 10rem;
+    object-fit: cover;
+    font-family: 'object-fit: cover;';
+  }
+
+  @include for-tablet-portrait-up {
+    display: flex;
+    flex-wrap: nowrap;
+    margin-bottom: 8.8rem;
+
+    img {
+      width: 20%;
+      height: 24vh;
+      flex: 1 1 20%;
+    }
+  }
+}
+
 .about {
   @extend %basic-block;
 
   &__inner {
     @extend %container;
-  }
-
-  &__strip {
-    @extend %basic-block;
-
-    background-color: -color(gallery);
-    margin-bottom: 5.4rem;
-    user-select: none;
-    pointer-events: none;
-
-    img {
-      display: block;
-      width: 100%;
-      height: 10rem;
-      object-fit: cover;
-      font-family: 'object-fit: cover;';
-    }
   }
 
   &__heading {
@@ -35,20 +47,6 @@
 
     margin-bottom: 9.6rem;
   }
-
-  @include for-tablet-portrait-up {
-    &__strip {
-      display: flex;
-      flex-wrap: nowrap;
-      margin-bottom: 8.8rem;
-
-      img {
-        width: 33.3334%;
-        height: 35.8rem;
-        flex: 1 1 33.3334%;
-      }
-    }
-  }
 }
 
 .clients {
@@ -58,6 +56,10 @@
 
   &__inner {
     @extend %container;
+  }
+
+  &__wrap {
+    @extend %wrap;
   }
 
   &__heading {
@@ -116,7 +118,7 @@
   @include for-tablet-landscape-up {
     &__list {
       li {
-        lost-column: 1/3;
+        lost-column: 1/4;
 
         &:nth-child(3) {
           margin-top: 0;
@@ -133,6 +135,10 @@
 
   &__inner {
     @extend %container;
+  }
+
+  &__wrap {
+    @extend %wrap;
   }
 
   &__heading {

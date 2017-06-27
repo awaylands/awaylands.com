@@ -3,14 +3,14 @@
 {% block body_class %}body--about has-no-hero{% endblock %}
 
 {% block content %}
+<div class="photo-strip">
+  {% for photo in page.photostrip %}
+  <img src="{{ photo.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
+  {% endfor %}
+</div>
+
 <div class="about">
   <div class="about__inner">
-    <div class="about__strip">
-      {% for photo in page.photostrip %}
-      <img src="{{ photo.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
-      {% endfor %}
-    </div>
-
     <h2 class="about__heading">{{ page.about.heading }}</h2>
 
     <div class="about__content">{{ page.about.contentHtml | safe }}</div>
@@ -21,65 +21,76 @@
   <h2 class="grid__heading">{{ page.press.heading }}</h2>
 
   <div class="grid__inner">
-    <ul class="grid__list">
-      {% for item in page.press.items %}
-      <li class="grid__item">
-        <div class="tout">
-          <a href="{{ item.url }}" target="_blank">
-            <div class="tout__image">
-              <img src="{{ item.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
-            </div>
+    <div class="grid__wrap">
+      <ul class="grid__list">
+        {% for item in page.press.items %}
+        <li class="grid__item">
+          <div class="tout">
+            <a href="{{ item.url }}" target="_blank">
+              <div class="tout__image">
+                <img src="{{ item.image.s3Key | image({w: 800, auto: 'compress,format'}) }}" data-image data-bind="imageLoaded" />
+              </div>
 
-            <div class="tout__content">
-              <div class="tout__rubric">{{ item.source }}</div>
+              <div class="tout__content">
+                <div class="tout__rubric">{{ item.source }}</div>
 
-              <h3 class="tout__heading">{{ item.title }}</h3>
-            </div>
-          </a>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
+                <h3 class="tout__heading">{{ item.title }}</h3>
+              </div>
+            </a>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
 
 <div class="clients">
   <div class="clients__inner">
-    <h2 class="clients__heading">{{ page.clients.heading }}</h2>
+    <div class="clients__wrap">
+      <h2 class="clients__heading">{{ page.clients.heading }}</h2>
 
-    <ul class="clients__list">
-      {% for logo in page.clients.logos %}
-      <li>
-        <a href="{{ logo.url }}" target="_blank">
-          <img src="{{ logo.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" alt="{{ logo.name }}" data-image data-bind="imageLoaded" />
-        </a>
-      </li>
-      {% endfor %}
-    </ul>
+      <ul class="clients__list">
+        {% for logo in page.clients.logos %}
+        <li>
+          <a href="{{ logo.url }}" target="_blank">
+            <img src="{{ logo.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" alt="{{ logo.name }}" data-image data-bind="imageLoaded" />
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
 
 <div class="team">
   <div class="team__inner">
-    <h2 class="team__heading">{{ page.team.heading }}</h2>
+    <div class="team__wrap">
+      <h2 class="team__heading">{{ page.team.heading }}</h2>
 
-    <ul class="team__list">
-      {% for member in page.team.members %}
-      <li>
-        <div class="member">
-          <div class="member__image">
-            <img src="{{ member.image.s3Key | image({w: 600, auto: 'compress,format'}) }}" alt="{{ member.name }}" data-image data-bind="imageLoaded" />
+      <ul class="team__list">
+        {% for member in page.team.members %}
+        <li>
+          <div class="member">
+            <div class="member__image">
+              <img srcset="{{ member.image.s3Key | image({w: 900, auto: 'compress,format'}) | escape }} 1x, {{ member.image.s3Key | image({w: 1800, auto: 'compress,format'}) | escape }} 2x"
+                   src="{{ member.image.s3Key | image({w: 1800, auto: 'compress,format'}) | escape }}"
+                   alt="{{ member.name }}"
+                   data-image
+                   data-bind="imageLoaded"
+              />
+            </div>
+
+            <div class="member__content">
+              <h3 class="member__heading">{{ member.name }}</h3>
+
+              <div class="member__about">{{ member.aboutHtml | safe }}</div>
+            </div>
           </div>
-
-          <div class="member__content">
-            <h3 class="member__heading">{{ member.name }}</h3>
-
-            <div class="member__about">{{ member.aboutHtml | safe }}</div>
-          </div>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 </div>
 
