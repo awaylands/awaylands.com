@@ -2,6 +2,7 @@
 
 {% block filters %}
   <li><a class="is-current" href="/destinations">Featured</a></li>
+  <li><span class="separator"></span></li>
 
   {% for location in locations %}
   <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
