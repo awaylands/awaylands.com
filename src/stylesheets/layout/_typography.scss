@@ -23,10 +23,12 @@ cite {
 
   &::selection {
     background-color: -color(cerulean);
+    color: -color(white);
   }
 
   &::-moz-selection {
     background-color: -color(cerulean);
+    color: -color(white);
   }
 }
 
