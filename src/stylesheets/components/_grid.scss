@@ -76,7 +76,7 @@
   @extend %grid;
 
   .tout__image {
-    @include ratio-box(56.4%);
+    @include ratio-box(42.55%);
   }
 
   @include for-tablet-landscape-up {
