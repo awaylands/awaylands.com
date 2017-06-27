@@ -13,7 +13,13 @@
 <ul class="masonry">
   {% for still in page.stills %}
   <li class="masonry__item">
-
+    <a class="still" data-source="{{ still.image.s3Key | image({auto: 'compress,format'}) | escape }}">
+      <img srcset="{{ still.image.s3Key | image({w: 270, auto: 'compress,format'}) | escape }} 1x, {{ still.image.s3Key | image({w: 540, auto: 'compress,format'}) | escape }} 2x"
+           src="{{ still.image.s3Key | image({w: 540, auto: 'compress,format'}) | escape }}"
+           data-image
+           data-bind="imageLoaded"
+      />
+    </a>
   </li>
   {% endfor %}
 </ul>
