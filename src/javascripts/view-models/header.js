@@ -30,7 +30,7 @@ class Header extends Base {
     let maxOffset = 20;
 
     if (window.location.pathname == "/") {
-       maxOffset = window.innerHeight - 183;
+       maxOffset = window.innerHeight - 20;
     }
 
     if (!this.isSticky() && window.pageYOffset >= maxOffset) {
