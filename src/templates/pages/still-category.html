@@ -2,6 +2,7 @@
 
 {% block filters %}
   <li><a href="/still">Featured</a></li>
+  <li><span class="separator"></span></li>
 
   {% for category in stillCategories %}
   <li><a href="{{ category | route('stillCategory') }}/#" {% if category.title == page.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>

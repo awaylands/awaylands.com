@@ -2,6 +2,7 @@
 
 {% block filters %}
   <li><a href="/films">Featured</a></li>
+  <li><span class="separator"></span></li>
 
   {% for category in filmCategories %}
   <li><a href="{{ category | route('filmCategory') }}/#" {% if category.title == page.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
@@ -12,7 +13,7 @@
 <div class="grid--films">
   <div class="grid__inner">
     <ul class="grid__list">
-      {% for film in page.filmSet.results %}
+      {% for film in page.filmSet.results | sort(true, true, "_enabledAt") %}
       <li class="grid__item">
         <div class="tout">
           <a href="{{ film.youTubeUrl }}" target="_blank">

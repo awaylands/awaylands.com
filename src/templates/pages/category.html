@@ -12,7 +12,7 @@
 {% block listings %}
 <div class="listings">
   <ul class="listings__list">
-    {% for story in page.storySet.results %}
+    {% for story in page.storySet.results | sort(true, true, "_enabledAt") %}
     <li>
       <div class="listing">
         <a href="{{ story | route('story') }}">

@@ -8,10 +8,10 @@ class Lightbox extends Base {
 
     var opts = {
       sourceAttribute: 'data-source'
-    }
+    };
 
     var galleryOpts = {
-      arrowNavigation: true,
+      arrowNavigation: true
     };
 
     window.addEventListener("load", function(e) {

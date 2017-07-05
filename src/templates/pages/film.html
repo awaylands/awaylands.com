@@ -2,6 +2,7 @@
 
 {% block filters %}
   <li><a class="is-current" href="/film">Featured</a></li>
+  <li><span class="separator"></span></li>
 
   {% for category in filmCategories %}
   <li><a href="{{ category | route('filmCategory') }}">{{ category.title }}</a></li>
