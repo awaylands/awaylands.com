@@ -14,7 +14,7 @@
       <nav class="page-nav">
         <ul class="page-nav__list">
           {% for link in site.navigation.links %}
-          <li><a href="{{ link.url }}" {% if link.text == page.title or link.text == parentTitle %}class="is-current"{% endif %}>{{ link.text }}</a></li>
+            <li><a href="{{ link.url }}" {% if link.text == page.title or (link.children[0].contentTypeName and (link.children[0].contentTypeName == page._contentTypeName or link.children[1].contentTypeName == page._contentTypeName)) %}class="is-current"{% endif %}>{{ link.text }}</a></li>
           {% endfor %}
 
           <li><a href="#footer" data-bind="click: contactScroll">Contact</a></li>

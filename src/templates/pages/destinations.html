@@ -4,7 +4,7 @@
   <li><a class="is-current" href="/destinations">Featured</a></li>
   <li><span class="separator"></span></li>
 
-  {% for location in locations %}
+  {% for location in page.locations %}
   <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
   {% endfor %}
 {% endblock %}
