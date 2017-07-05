@@ -1,5 +1,6 @@
 query {
   page: getStill {
+    _contentTypeName
     title
     stills {
       image {

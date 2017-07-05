@@ -1,5 +1,6 @@
 query {
   categories: getCategoryList {
+    _contentTypeName
     title
     storySet(size: 100) {
       results {

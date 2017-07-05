@@ -1,5 +1,6 @@
 query {
   stillCategories: getStillCategoryList {
+    _contentTypeName
     title
     stills {
       image {

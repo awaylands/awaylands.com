@@ -1,5 +1,6 @@
 query {
   page: getFilms {
+    _contentTypeName
     title
     featuredFilms {
       title

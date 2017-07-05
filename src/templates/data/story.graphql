@@ -1,5 +1,6 @@
 query {
   stories: getStoryList {
+    _contentTypeName
     _enabledAt
     title
     tout {
@@ -24,9 +25,11 @@ query {
     }
   }
   categories: getCategoryList {
+    _contentTypeName
     title
   }
   page: getBlog {
+    _contentTypeName
     title
     social {
       title

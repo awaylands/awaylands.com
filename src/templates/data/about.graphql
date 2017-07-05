@@ -1,5 +1,6 @@
 query {
   page: getAbout {
+    _contentTypeName
     title
     photostrip {
       image {

@@ -1,5 +1,6 @@
 query {
   page: getDestinations {
+    _contentTypeName
     title
     locations {
       title
@@ -17,8 +18,5 @@ query {
         s3Key
       }
     }
-  }
-  locations: getLocationList {
-    title
   }
 }
