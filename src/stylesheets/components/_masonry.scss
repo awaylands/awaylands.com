@@ -1,14 +1,19 @@
 .masonry {
-  column-count: 2;
-  column-gap: 2rem;
+  @extend %basic-block;
+  @extend %cf;
+
+  margin-top: -0.8rem;
+
+  &__item,
+  &__sizer {
+    width: calc(50%);
+  }
 
   &__item {
-    display: inline-block;
-    width: 100%;
     position: relative;
+    float: left;
     cursor: pointer;
-    margin-bottom: 1.6rem;
-    background-color: -color(gallery);
+    padding: 0.8rem;
 
     img {
       @extend %basic-block;
@@ -18,7 +23,10 @@
   }
 
   @include for-tablet-portrait-up {
-    column-count: 4;
+    &__item,
+    &__sizer {
+      width: calc(25%);
+    }
   }
 }
 

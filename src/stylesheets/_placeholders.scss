@@ -140,3 +140,11 @@
     font-family: inherit;
   }
 }
+
+%cf {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
