@@ -158,6 +158,13 @@
       margin-bottom: 0;
     }
   }
+
+  @include for-desktop-up {
+    iframe {
+      width: 83.4rem;
+      height: 46.925rem;
+    }
+  }
 }
 
 .content {
