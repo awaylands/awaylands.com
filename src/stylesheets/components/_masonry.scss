@@ -88,15 +88,27 @@
 }
 
 .lum-gallery-button {
+  @extend %strip-input-style;
 
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rem;
+  height: 3.4rem;
+  background-size: contain;
+  background-position: center;
+  text-indent: -999em;
+  cursor: pointer;
 }
 
 .lum-previous-button {
-
+  background-image: url(/assets/images/arrow-left.png);
+  left: 2vw;
 }
 
 .lum-next-button {
-
+  background-image: url(/assets/images/arrow-right.png);
+  right: 2vw;
 }
 
 @media screen and (orientation: portrait) {
