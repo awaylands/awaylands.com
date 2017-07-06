@@ -10,8 +10,7 @@
 {% endblock %}
 
 {% block listings %}
-<!-- ko component: "lightbox" -->
-<ul class="masonry" id="masonry">
+<ul class="masonry" data-bind="gallery">
   <li class="masonry__sizer"></li>
 
   {% for still in page.stills %}
@@ -26,5 +25,4 @@
   </li>
   {% endfor %}
 </ul>
-<!-- /ko -->
 {% endblock %}

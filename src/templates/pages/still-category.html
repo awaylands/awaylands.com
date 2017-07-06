@@ -10,8 +10,7 @@
 {% endblock %}
 
 {% block listings %}
-<!-- ko component: "lightbox" -->
-<ul class="masonry">
+<ul class="masonry" data-bind="gallery">
   {% for still in page.stills %}
   <li class="masonry__item">
     <a class="still" data-source="{{ still.image.s3Key | image({auto: 'compress,format'}) | escape }}">
@@ -24,5 +23,4 @@
   </li>
   {% endfor %}
 </ul>
-<!-- /ko -->
 {% endblock %}

@@ -62,15 +62,30 @@
 }
 
 .lum-lightbox-loader {
+  display: block;
+  position: absolute;
+  top: calc(50% - 3.2rem);
+  left: calc(50% - 3.2rem);
+  width: 6.4rem;
+  height: 6.4rem;
+  background-image: url('/assets/images/loader.png');
+  background-size: contain;
+  background-position: center;
+  -webkit-animation: load 1s infinite linear;
+  animation: load 1s infinite linear;
+  z-index: -z(overlay);
+  user-select: none;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity, visibility;
+  transition: opacity 0.08s $ease-in-out-quart, visibility 0 0.08s;
 
-}
-
-.lum-lightbox-image-wrapper {
-
-}
-
-.lum-lightbox-position-helper {
-
+  .lum-loading & {
+    opacity: 1;
+    visibility: visible;
+    transition: 0.03s opacity $ease-out-quint, visibility 0 0;
+  }
 }
 
 .lum-img {
