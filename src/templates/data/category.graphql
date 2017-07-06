@@ -25,4 +25,9 @@ query {
       }
     }
   }
+  blog: getBlog {
+    categories {
+      title
+    }
+  }
 }

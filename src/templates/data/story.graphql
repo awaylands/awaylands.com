@@ -24,13 +24,17 @@ query {
       }
     }
   }
-  categories: getCategoryList {
-    _contentTypeName
-    title
+  categories: getBlog {
+    categories {
+      title
+    }
   }
   page: getBlog {
     _contentTypeName
     title
+    categories {
+      title
+    }
     social {
       title
       description
@@ -39,4 +43,5 @@ query {
       }
     }
   }
+
 }

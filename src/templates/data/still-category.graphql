@@ -15,4 +15,9 @@ query {
       }
     }
   }
+  still: getStill {
+    stillCategories {
+      title
+    }
+  }
 }

@@ -19,4 +19,9 @@ query {
       }
     }
   }
+  films: getFilms {
+    filmCategories {
+      title
+    }
+  }
 }

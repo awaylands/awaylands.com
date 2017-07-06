@@ -4,7 +4,7 @@
   <li><a class="is-current" href="/blog/page-1">Recent</a></li>
   <li><span class="separator"></span></li>
 
-  {% for category in categories %}
+  {% for category in blog.categories %}
   <li><a href="{{ category | route('category') }}">{{ category.title }}</a></li>
   {% endfor %}
 {% endblock %}

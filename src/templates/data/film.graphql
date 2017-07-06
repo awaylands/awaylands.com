@@ -2,6 +2,9 @@ query {
   page: getFilms {
     _contentTypeName
     title
+    filmCategories {
+      title
+    }
     featuredFilms {
       title
       image {
@@ -16,8 +19,5 @@ query {
         s3Key
       }
     }
-  }
-  filmCategories: getFilmCategoryList {
-    title
   }
 }

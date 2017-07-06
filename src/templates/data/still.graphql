@@ -2,6 +2,9 @@ query {
   page: getStill {
     _contentTypeName
     title
+    stillCategories {
+      title
+    }
     stills {
       image {
         s3Key
@@ -14,8 +17,5 @@ query {
         s3Key
       }
     }
-  }
-  stillCategories: getStillCategoryList {
-    title
   }
 }
