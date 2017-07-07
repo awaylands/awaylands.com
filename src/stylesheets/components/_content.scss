@@ -61,6 +61,10 @@
     list-style: decimal;
   }
 
+  br {
+    user-select: none;
+  }
+
   iframe,
   aside,
   > blockquote {
