@@ -34,6 +34,7 @@ routes:
     context: data/story.graphql
     paginate:
       pageSize: 12
+      firstPage: /blog/
       path: /blog/page-:num
       template: pages/stories/landing.html
       property: stories

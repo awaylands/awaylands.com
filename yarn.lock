@@ -3254,7 +3254,7 @@ glob@^6.0.4:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@~7.1.1:
+glob@^7.0.0, glob@^7.0.3, glob@^7.0.5, glob@^7.1.2, glob@~7.1.1:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.2.tgz#c19c9df9a028702d678612384a6552404c636d15"
   dependencies:
@@ -7123,9 +7123,9 @@ table@^4.0.1:
     slice-ansi "0.0.4"
     string-width "^2.0.0"
 
-takeshape-cli@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/takeshape-cli/-/takeshape-cli-3.0.0.tgz#0e953bf6c3b6f53cbd777186734af278fcc67315"
+takeshape-cli@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/takeshape-cli/-/takeshape-cli-3.3.0.tgz#3118a721ee35ff3ec6dca2f32aae8318717908be"
   dependencies:
     archiver "^1.3.0"
     bluebird "^3.4.6"
@@ -7134,6 +7134,7 @@ takeshape-cli@^3.0.0:
     commander "^2.9.0"
     email-validator "^1.0.7"
     fs-extra "^1.0.0"
+    glob "^7.1.2"
     inquirer "^2.0.0"
     lodash "^4.17.2"
     lokka "^1.7.0"
@@ -7142,11 +7143,11 @@ takeshape-cli@^3.0.0:
     node-fetch "^1.6.3"
     request "^2.79.0"
     stream-to-promise "^2.2.0"
-    takeshape-ssg "3.0.0"
+    takeshape-ssg "^3.3.0"
 
-takeshape-ssg@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/takeshape-ssg/-/takeshape-ssg-3.0.0.tgz#bde0ea731077299dc08c7121a188dbb6345d2d35"
+takeshape-ssg@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/takeshape-ssg/-/takeshape-ssg-3.3.0.tgz#1375119ee8ab2c950712116a0e6c012e53884975"
   dependencies:
     bluebird "^3.4.6"
     commonmark "^0.27.0"
