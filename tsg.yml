@@ -51,7 +51,7 @@ routes:
     context: data/about.graphql
 
   filmCategory:
-    path: /films/:title
+    path: /film/:title
     template: pages/film-category.html
     context: data/film-category.graphql
     paginate:
