@@ -26,7 +26,9 @@
   <div class="grid__inner">
     <div class="grid__wrap">
       <ul class="grid__list">
-        {% for story in stories.slice(0, 6) | sort(true, true, "_enabledAt") %}
+        {% set sortedStories = stories | sort(true, true, "_enabledAt") %}
+
+        {% for story in sortedStories.slice(0, 6) %}
         <li class="grid__item">
           <div class="tout">
             <a href="{{ story | route('story') }}">
