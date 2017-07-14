@@ -213,6 +213,10 @@
 
   &__content {
     @extend %content;
+
+    > figure img {
+      cursor: pointer;
+    }
   }
 
   &__rubric {
