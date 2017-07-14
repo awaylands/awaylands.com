@@ -66,6 +66,7 @@
     @include hd-c(-color(white));
 
     font-weight: -weight(bold);
+    text-transform: uppercase;
     display: flex;
     flex: 1 1 auto;
     justify-content: flex-start;

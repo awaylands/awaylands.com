@@ -29,7 +29,7 @@
         <h2 class="content__heading">{{ page.title }}</h2>
       </header>
 
-      <div class="content__content">{{ page.contentHtml | safe }}</div>
+      <div class="content__content" data-bind="story">{{ page.contentHtml | safe }}</div>
     </div>
   </div>
 </div>
