@@ -18,11 +18,15 @@
         <div class="tout">
           <a href="{{ film.youTubeUrl }}" target="_blank">
             <div class="tout__image">
-              <img srcset="{{ film.image.s3Key | image({w: 900, auto: 'compress,format'}) | escape }} 1x, {{ film.image.s3Key | image({w: 1800, auto: 'compress,format'}) | escape }} 2x"
-                   src="{{ film.image.s3Key | image({w: 1800, auto: 'compress,format'}) | escape }}"
+              <img srcset="{{ film.image.s3Key | urlencode | image({w: 2880, auto: 'compress,format'}) }} 2880w,
+                {{ film.image.s3Key | urlencode | image({w: 2028, auto: 'compress,format'}) }} 2028w,
+                {{ film.image.s3Key | urlencode | image({w: 1440, auto: 'compress,format'}) }} 1440w,
+                {{ film.image.s3Key | urlencode | image({w: 1200, auto: 'compress,format'}) }} 1200w,
+                {{ film.image.s3Key | urlencode | image({w: 1014, auto: 'compress,format'}) }} 1014w"
+                   sizes="(min-width: 1500px) 496px,(min-width: 900px) calc(75vw/2), (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
+                   src="{{ film.image.s3Key | urlencode | image({w: 1200, auto: 'compress,format'}) }}"
                    data-image
-                   data-bind="imageLoaded"
-              />
+                   data-bind="imageLoaded" />
             </div>
 
             <div class="tout__content">

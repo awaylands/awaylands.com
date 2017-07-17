@@ -16,11 +16,12 @@
   {% for still in page.stills %}
   <li class="masonry__item">
     <a class="still" data-source="{{ still.image.s3Key | image({auto: 'compress,format'}) | escape }}">
-      <img srcset="{{ still.image.s3Key | image({w: 270, auto: 'compress,format'}) | escape }} 1x, {{ still.image.s3Key | image({w: 540, auto: 'compress,format'}) | escape }} 2x"
-           src="{{ still.image.s3Key | image({w: 540, auto: 'compress,format'}) | escape }}"
+      <img srcset="{{ still.image.s3Key | urlencode | image({w: 1200, auto: 'compress,format'}) }} 600w,
+        {{ still.image.s3Key | urlencode | image({w: 1014, auto: 'compress,format'}) }} 264w"
+           sizes="(min-width: 1500px) 238px,(min-width: 900px) calc(75vw/4), (min-width: 600px) calc(25vw), calc(50vw - 30px)"
+           src="{{ story.tout.image.s3Key | urlencode | image({w: 600, auto: 'compress,format'}) }}"
            data-image
-           data-bind="imageLoaded"
-      />
+           data-bind="imageLoaded" />
     </a>
   </li>
   {% endfor %}
