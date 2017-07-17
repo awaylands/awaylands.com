@@ -14,7 +14,7 @@
     .page-header__burger {
       span {
         background-color: transparent;
-        transition: background 0.15s 0.1s $ease-out-quint, box-shadow 0.1s 0.2s $ease-in-out-quart
+        transition: background 0.15s 0.1s $ease-out-quint, box-shadow 0.1s 0.2s $ease-in-out-quart;
 
         &:before {
           transform: translateY(0) rotate(135deg);
@@ -174,7 +174,7 @@
 
   &__list {
     user-select: none;
-    
+
     li {
       display: inline-block;
 
