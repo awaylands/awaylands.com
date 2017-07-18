@@ -13,7 +13,8 @@
               {{ slide.image.s3Key | urlencode | image({w: 1200, auto: 'compress,format'}) }} 1200w,
               {{ slide.image.s3Key | urlencode | image({w: 900, auto: 'compress,format'}) }} 900w"
            sizes="100vw"
-           src="{{ slide.image.s3Key | urlencode | image({w: 1200, auto: 'compress,format'}) }}" />
+           src="{{ slide.image.s3Key | urlencode | image({w: 1200, auto: 'compress,format'}) }}"
+           {% if slide.caption %}data-caption="{{ slide.caption.text }}" data-link="{{ slide.caption.url }}"{% endif %} />
       {% endfor %}
     </div>
 
