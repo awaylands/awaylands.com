@@ -5,25 +5,29 @@
   <li><span class="separator"></span></li>
 
   {% for category in page.stillCategories %}
-  <li><a href="{{ category | route('stillCategory') }}/#">{{ category.title }}</a></li>
+    <li><a href="{{ category | route('stillCategory') }}/#">{{ category.title }}</a></li>
   {% endfor %}
 {% endblock %}
 
 {% block listings %}
-<ul class="masonry" data-bind="gallery">
-  <li class="masonry__sizer"></li>
+  <ul class="masonry" data-bind="gallery">
+    <li class="masonry__sizer"></li>
 
-  {% for still in page.stills %}
-  <li class="masonry__item">
-    <a class="still" data-source="{{ still.image.s3Key | image({auto: 'compress,format'}) | escape }}">
-      <img srcset="{{ still.image.s3Key | urlencode | image({w: 1200, auto: 'compress,format'}) }} 600w,
-        {{ still.image.s3Key | urlencode | image({w: 1014, auto: 'compress,format'}) }} 264w"
-           sizes="(min-width: 1500px) 238px,(min-width: 900px) calc(75vw/4), (min-width: 600px) calc(25vw), calc(50vw - 30px)"
-           src="{{ story.tout.image.s3Key | urlencode | image({w: 600, auto: 'compress,format'}) }}"
-           data-image
-           data-bind="imageLoaded" />
-    </a>
-  </li>
-  {% endfor %}
-</ul>
+    {% for still in page.stills %}
+
+      {% set imagePath = still.image.s3Key | urlencode %}
+      {% if imagePath %}
+        <li class="masonry__item">
+          <a class="still" data-source="{{ imagePath | image({auto: 'compress,format'}) }}">
+            <img srcset="{{ imagePath | image({w: 1200, auto: 'compress,format'}) }} 600w,
+        {{ imagePath | image({w: 1014, auto: 'compress,format'}) }} 264w"
+                 sizes="(min-width: 1500px) 238px,(min-width: 900px) calc(75vw/4), (min-width: 600px) calc(25vw), calc(50vw - 30px)"
+                 src="{{ imagePath | image({w: 600, auto: 'compress,format'}) }}"
+                 data-image
+                 data-bind="imageLoaded"/>
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
 {% endblock %}
