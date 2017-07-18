@@ -66,7 +66,7 @@ module.exports = {
     new FaviconsWebpackPlugin({
       logo: './src/images/default-favicon.png',
       emitStats: true,
-      prefix: '/favicon-[hash:base64:5]/',
+      prefix: '/shortcut-[hash:base64:5]/',
       statsFilename: 'favicon-mainfest.json',
       persistentCache: true,
       icons: {

@@ -5,7 +5,7 @@
 
     {# Favicons from Webpack favicon generator #}
     {% for element in global.favicon.html %}
-      {{ element | replace('/favicon-', '/assets/favicon-') | safe }}
+      {{ element | replace('/shortcut-', '/assets/shortcut-') | safe }}
     {% endfor %}
 
   </head>
