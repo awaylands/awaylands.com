@@ -18,7 +18,7 @@
       {% set imagePath = still.image.s3Key | urlencode %}
       {% if imagePath %}
         <li class="masonry__item">
-          <a class="still" data-source="{{ imagePath | image({auto: 'compress,format'}) | urlencode }}">
+          <a class="still" data-source="{{ imagePath | image({auto: 'compress,format'}) }}">
             <img srcset="{{ imagePath | image({w: 1200, auto: 'compress,format'}) }} 600w,
         {{ imagePath | image({w: 1014, auto: 'compress,format'}) }} 264w"
                  sizes="(min-width: 1500px) 238px,(min-width: 900px) calc(75vw/4), (min-width: 600px) calc(25vw), calc(50vw - 30px)"
