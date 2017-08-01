@@ -1,0 +1,25 @@
+query {
+  getFilmCategoryList {
+    items {
+      _contentTypeName
+      title
+      filmSet(size: 100) {
+        results {
+          title
+          image {
+            s3Key
+          }
+          youTubeUrl
+        }
+      }
+      social {
+        title
+        description
+        image {
+          s3Key
+        }
+      }
+    }
+    total
+  }
+}

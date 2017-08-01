@@ -1,0 +1,31 @@
+query {
+  getLocationList {
+    items {
+      _contentTypeName
+      title
+      storySet(size: 100) {
+        results {
+          _enabledAt
+          title
+          tout {
+            image {
+              s3Key
+            }
+            dek
+          }
+          category {
+            title
+          }
+        }
+      }
+      social {
+        title
+        description
+        image {
+          s3Key
+        }
+      }
+    }
+    total
+  }
+}

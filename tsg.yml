@@ -37,7 +37,7 @@ routes:
       firstPage: /blog/
       path: /blog/page-:num
       template: pages/stories/landing.html
-      property: stories
+      data: data/stories.graphql
       itemName: page
 
   destinations:
@@ -55,7 +55,7 @@ routes:
     template: pages/film-category.html
     context: data/film-category.graphql
     paginate:
-      property: filmCategories
+      data: data/film-categories.graphql
       itemName: page
 
   stillCategory:
@@ -63,7 +63,7 @@ routes:
     template: pages/still-category.html
     context: data/still-category.graphql
     paginate:
-      property: stillCategories
+      data: data/still-categories.graphql
       itemName: page
 
   category:
@@ -71,7 +71,7 @@ routes:
     template: pages/category.html
     context: data/category.graphql
     paginate:
-      property: categories
+      data: data/categories.graphql
       itemName: page
 
   location:
@@ -79,7 +79,7 @@ routes:
     template: pages/location.html
     context: data/location.graphql
     paginate:
-      property: locations
+      data: data/locations.graphql
       itemName: page
 
 deploy:

@@ -1,29 +1,4 @@
 query {
-  stories: getStoryList {
-    _contentTypeName
-    _enabledAt
-    title
-    tout {
-      image {
-        s3Key
-      }
-      dek
-    }
-    category {
-      title
-    }
-    location {
-      title
-    }
-    contentHtml
-    social {
-      title
-      description
-      image {
-        s3Key
-      }
-    }
-  }
   categories: getBlog {
     categories {
       title

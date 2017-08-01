@@ -1,20 +1,4 @@
 query {
-  stillCategories: getStillCategoryList {
-    _contentTypeName
-    title
-    stills {
-      image {
-        s3Key
-      }
-    }
-    social {
-      title
-      description
-      image {
-        s3Key
-      }
-    }
-  }
   still: getStill {
     stillCategories {
       title

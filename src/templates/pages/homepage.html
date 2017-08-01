@@ -30,7 +30,7 @@
   <div class="grid__inner">
     <div class="grid__wrap">
       <ul class="grid__list">
-        {% set sortedStories = stories | sort(true, true, "_enabledAt") %}
+        {% set sortedStories = stories.items | sort(true, true, "_enabledAt") %}
 
         {% for story in sortedStories.slice(0, 6) %}
         <li class="grid__item">
