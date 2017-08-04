@@ -13,14 +13,12 @@
 {% if page.social.description %}
   <meta name="description" content="{{ page.social.description }}">
   <meta property="og:description" content="{{ page.social.description }}">
+{% elif page.tout.dek %}
+  <meta name="description" content="{{ page.tout.dek }}">
+  <meta property="og:description" content="{{ page.tout.dek }}">
 {% elif socialGlobal.description %}
   <meta name="description" content="{{ socialGlobal.description }}">
   <meta property="og:description" content="{{ socialGlobal.description }}">
-{% endif %}
-
-{% if socialGlobal.url %}
-  <link rel="canonical" href="{{ socialGlobal.url }}">
-  <meta property="og:url" content="{{ socialGlobal.url }}">
 {% endif %}
 
 {% if socialGlobal.siteName %}
@@ -29,6 +27,8 @@
 
 {% if page.social.image %}
   <meta property="og:image" content="{{ page.social.image.s3Key | image({auto: 'compress,format'}) }}">
+{% elif page.tout.image %}
+  <meta property="og:image" content="{{ page.tout.image.s3Key | image({auto: 'compress,format'}) }}">
 {% elif socialGlobal.image %}
   <meta property="og:image" content="{{ socialGlobal.image.s3Key | image({auto: 'compress,format'}) }}">
 {% endif %}
