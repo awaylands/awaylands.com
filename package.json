@@ -75,7 +75,7 @@
     "stylelint": "^7.2.0",
     "stylelint-config-standard": "^13.0.0",
     "svg-sprite-generator": "^0.0.7",
-    "takeshape-cli": "^4.0.3",
+    "takeshape-cli": "^4.10.0",
     "webpack": "^2.2.1",
     "webpack-manifest-plugin": "^1.1.0"
   },
@@ -89,7 +89,6 @@
     "knockout-inview": "^2.5.0",
     "knockout-postbox": "^0.5.2",
     "knockout-railway": "^0.3.2",
-    "luminous-lightbox": "^1.0.1",
     "moment": "^2.17.1",
     "object-fit-images": "^2.3.1",
     "raf-ready": "^1.0.1",

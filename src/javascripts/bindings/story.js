@@ -1,4 +1,4 @@
-import { LuminousGallery }  from 'luminous-lightbox';
+import {LuminousGallery} from '../luminous';
 
 const ImagesLoaded = require('imagesloaded');
 
@@ -11,10 +11,9 @@ const galleryOpts = {
 };
 
 const init = function (el) {
-  new ImagesLoaded(el, function() {
-    new LuminousGallery(el.querySelectorAll("figure img"), galleryOpts, opts);
+  new ImagesLoaded(el, () => {
+    new LuminousGallery(el.querySelectorAll('figure img'), galleryOpts, opts);
   });
 };
-
 
 export default {init};

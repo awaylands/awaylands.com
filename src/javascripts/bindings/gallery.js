@@ -1,4 +1,4 @@
-import { LuminousGallery }  from 'luminous-lightbox';
+import {LuminousGallery} from '../luminous';
 
 const Shuffle = require('shufflejs');
 const ImagesLoaded = require('imagesloaded');
@@ -12,13 +12,13 @@ const galleryOpts = {
 };
 
 const init = function (el) {
-  new ImagesLoaded(el, function() {
+  new ImagesLoaded(el, () => {
     new Shuffle(el, {
       itemSelector: '.masonry__item',
       sizer: '.masonry__sizer'
     });
 
-    new LuminousGallery(el.querySelectorAll(".still"), galleryOpts, opts);
+    new LuminousGallery(el.querySelectorAll('.still'), galleryOpts, opts);
   });
 };
 
