@@ -84,7 +84,7 @@
   .lum-loading & {
     opacity: 1;
     visibility: visible;
-    transition: 0.03s opacity $ease-out-quint, visibility 0 0;
+    transition: opacity 0.12s 0.5s $ease-in-out-quart, visibility 0s 0.08s;
   }
 }
 

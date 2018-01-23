@@ -1,0 +1,66 @@
+{% if pagination.totalPages > 1 %}
+  {% set firstPage = 1 %}
+  {% set farPreviousPage = pagination.currentPage - 2 %}
+  {% set previousPage = pagination.currentPage - 1 %}
+
+  {% set nextPage = pagination.currentPage + 1 %}
+  {% set farNextPage = pagination.currentPage + 2 %}
+
+  {% set fourthLast = pagination.totalPages - 3 %}
+  {% set thirdLast = pagination.totalPages - 2 %}
+  {% set secondLast = pagination.totalPages - 1 %}
+
+  {% set paginationRoute = items[0]._contentTypeName + '.paginate' %}
+
+  <ul class="pagination">
+    <li><a {% if pagination.currentPage == 1 %}class="is-disabled" {% else %}href="/blog" {% endif %}>{% include
+      "vectors/first.svg" %}</a></li>
+
+    <li><a {% if pagination.currentPage == 1 %}class="is-disabled"
+           {% else %}href="{% if previousPage == 1 %}/blog{% else %}{{ previousPage | route(paginationRoute) }}{% endif %}"
+           {% endif %}>{% include "vectors/previous.svg" %}</a></li>
+
+    <li><a {% if pagination.currentPage == firstPage %}class="is-current" {% else %}href="/blog" {% endif %}>1</a>
+    </li>
+
+    {% if pagination.currentPage > 4 %}
+    <li>&hellip;</li>
+    {% endif %}
+
+    {% if pagination.currentPage > 3 %}
+    <li><a href="{{ farPreviousPage | route(paginationRoute) }}">{{ farPreviousPage }}</a></li>
+    {% endif %}
+
+    {% if pagination.currentPage > 2 %}
+    <li><a href="{{ previousPage | route(paginationRoute) }}">{{ previousPage }}</a></li>
+    {% endif %}
+
+    {% if pagination.currentPage == firstPage or pagination.currentPage == pagination.totalPages %}{% else %}
+    <li><a class="is-current">{{ pagination.currentPage }}</a></li>
+    {% endif %}
+
+    {% if pagination.currentPage < secondLast %}
+    <li><a href="{{ nextPage | route(paginationRoute) }}">{{ nextPage }}</a></li>
+    {% endif %}
+
+    {% if pagination.currentPage < thirdLast %}
+    <li><a href="{{ farNextPage | route(paginationRoute) }}">{{ farNextPage }}</a></li>
+    {% endif %}
+
+    {% if pagination.currentPage < fourthLast %}
+    <li>&hellip;</li>
+    {% endif %}
+
+    <li><a {% if pagination.currentPage == pagination.totalPages %}class="is-current"
+           {% else %}href="{{ pagination.totalPages | route(paginationRoute) }}"{% endif %}>{{ pagination.totalPages }}</a>
+    </li>
+
+    <li><a {% if pagination.currentPage == pagination.totalPages %}class="is-disabled"
+           {% else %}href="{{ nextPage | route(paginationRoute) }}"{% endif %}>{% include "vectors/next.svg" %}</a>
+    </li>
+
+    <li><a {% if pagination.currentPage == pagination.totalPages %}class="is-disabled"
+           {% else %}href="{{ pagination.totalPages | route(paginationRoute) }}"{% endif %}>{% include "vectors/last.svg" %}</a>
+    </li>
+  </ul>
+{% endif %}
