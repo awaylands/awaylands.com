@@ -18,6 +18,29 @@
 
       <main class="main">
         {% block content %}{% endblock %}
+        <h1>disqus main</h1>
+
+        <!-- disqus -->
+        <div id="disqus_thread"></div>
+    <script>
+
+        var disqus_config = function () {
+            this.page.url = '{{ currentPath }}';
+            this.page.identifier = '{{ currentPath }}';
+        };
+
+        (function() {  // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = 'https://awaylands.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    <!-- end of disqus -->
+
       </main>
 
       {% include "partials/footer.html" %}
@@ -25,5 +48,6 @@
     </div>
 
     {% include "partials/scripts.html" %}
+
   </body>
 </html>
