@@ -7,11 +7,28 @@ context:
   assets: ../../static/assets/manifest.json
   favicon: ../../static/assets/favicon-mainfest.json
 
+images: &images
+  default:
+    w: 500
+    h: 500
+  small:
+    w: 250
+    h: 250
+  medium:
+    w: 500
+    h: 500
+  large:
+    w: 1000
+    h: 1000
+
 routes:
   sitemap:
     path: /sitemap.xml
     template: feeds/sitemap.xml
     context: data/sitemap.graphql
+    variables:
+        images:
+          <<: *images
 
   homepage:
     path: /
@@ -22,11 +39,17 @@ routes:
     path: /film
     template: pages/film.html
     context: data/film.graphql
+    variables:
+        images:
+          <<: *images
 
   still:
     path: /still
     template: pages/still.html
     context: data/still.graphql
+    variables:
+        images:
+          <<: *images
 
   story:
     path: /story/:title
@@ -39,16 +62,25 @@ routes:
       template: pages/stories/landing.html
       data: data/stories.graphql
       itemName: page
+      variables:
+        images:
+          <<: *images
 
   destinations:
     path: /destinations
     template: pages/destinations.html
     context: data/destinations.graphql
+    variables:
+        images:
+          <<: *images
 
   about:
     path: /about
     template: pages/about.html
     context: data/about.graphql
+    variables:
+        images:
+          <<: *images
 
   filmCategory:
     path: /film/:title
@@ -57,6 +89,9 @@ routes:
     paginate:
       data: data/film-categories.graphql
       itemName: page
+    variables:
+        images:
+          <<: *images
 
   stillCategory:
     path: /still/:title
@@ -65,6 +100,9 @@ routes:
     paginate:
       data: data/still-categories.graphql
       itemName: page
+    variables:
+        images:
+          <<: *images
 
   category:
     path: /category/:title
@@ -73,6 +111,9 @@ routes:
     paginate:
       data: data/categories.graphql
       itemName: page
+    variables:
+        images:
+          <<: *images
 
   location:
     path: /destinations/:title
@@ -81,6 +122,9 @@ routes:
     paginate:
       data: data/locations.graphql
       itemName: page
+    variables:
+        images:
+          <<: *images
 
 deploy:
   - ${buildPath}/static
