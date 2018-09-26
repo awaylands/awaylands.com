@@ -51,11 +51,12 @@ routes:
       firstPage: /blog/
       path: /blog/page-:num
       template: pages/stories/landing.html
-      data: data/stories.graphql
+      data:
+        query: data/stories.graphql
+        variables:
+           images:
+             <<: *images
       itemName: page
-      variables:
-        images:
-          <<: *images
 
   destinations:
     path: /destinations
