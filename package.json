@@ -22,7 +22,7 @@
     "lint": "npm-run-all -p lint:*",
     "imagemin": "imagemin src/images/* -o static/assets/images",
     "images:dev": "cp -R src/images static/assets/images",
-    "serve": "node -e 'setTimeout(function() {}, 2000)' && browser-sync start --https --server build --port 5000 --files 'build/**/*, !build/sitemap.xml, !build/feed.xml' --reload-debounce",
+    "serve": "node -e 'setTimeout(function() {}, 2000)' && browser-sync start --server build --port 5000 --files 'build/**/*, !build/sitemap.xml, !build/feed.xml' --reload-debounce",
     "tsg:build": "tsg build",
     "build:images": "npm run imagemin",
     "build:images:dev": "npm run images:dev",
