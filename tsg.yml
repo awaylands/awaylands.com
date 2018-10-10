@@ -9,8 +9,8 @@ context:
 
 images: &images
   default:
-    w: 500
-    h: 500
+    # w: 500
+    # h: 500
   small:
     w: 250
     h: 250
