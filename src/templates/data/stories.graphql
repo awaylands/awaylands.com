@@ -4,6 +4,7 @@ query($images:  TSImagesConfig) {
             _contentTypeName
             _enabledAt
             title
+            shopStyleHtml
             tout {
                 image {
                     s3Key
