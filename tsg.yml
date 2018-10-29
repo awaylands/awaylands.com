@@ -12,14 +12,14 @@ images: &images
     # w: 500
     # h: 500
   small:
-    w: 250
-    h: 250
+    w: 333
+    h: 333
   medium:
-    w: 500
-    h: 500
+    w: 666
+    h: 666
   large:
-    w: 1000
-    h: 1000
+    w: 999
+    h: 999
 
 routes:
   sitemap:

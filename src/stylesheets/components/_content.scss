@@ -178,6 +178,7 @@
         &.small {
           max-width: 24rem;
           width: 50%;
+          text-align: justify;
 
           &.left {
             margin: 3.2rem 4rem 3.2rem 0;
@@ -218,15 +219,25 @@
         }
 
         &.center {
-          margin-left: auto;
-          margin-right: auto;
+          display: inline-block;
+
+          padding: 15px;
         }
+        &.center > img {
+          flex: 33.33%;
+          padding: 5px;
+        }
+
 
         &.right {
           float: right;
         }
       }
     }
+  }
+
+  .content__section .center {
+    text-align: center;
   }
 }
 
