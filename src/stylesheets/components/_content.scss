@@ -170,74 +170,50 @@
     figure {
       &.small,
       &.medium {
+        margin: 3.2rem 4.8rem;
+
         &.left,
         &.right {
-          margin-top: 3.2rem;
-        }
-
-        &.small {
-          max-width: 24rem;
-          width: 50%;
-          text-align: justify;
-
-          &.left {
-            margin: 3.2rem 4rem 3.2rem 0;
-          }
-
-          &.right {
-            margin: 3.2rem 3.2rem 0 4rem;
-          }
-        }
-
-        &.medium {
-          max-width: 40rem;
-          width: 70%;
-
-          &.left {
-            margin: 3.2rem 4.8rem 3.2rem 0;
-          }
-
-          &.right {
-            margin: 3.2rem 0 3.2rem 4.8rem;
-          }
-        }
-
-        &.large {
-            width: 100%;
-
-          &.left {
-            margin: 3.2rem 4.8rem 3.2rem 3.2rem;
-          }
-
-          &.right {
-            margin: 3.2rem 0 3.2rem 4.8rem;
-          }
+          @extend %cf;
         }
 
         &.left {
           float: left;
+          margin-left: 0;
         }
 
         &.center {
           display: inline-block;
-
-          padding: 15px;
+          margin-left: auto;
+          margin-right: auto;
         }
-        &.center > img {
-          flex: 33.33%;
-          padding: 5px;
-        }
-
 
         &.right {
           float: right;
+          margin-right: 0;
+        }
+      }
+
+      &.small {
+        max-width: 24rem;
+        width: 50%;
+      }
+
+      &.medium {
+        max-width: 40rem;
+        width: 70%;
+      }
+
+      &.large {
+        width: 100%;
+      }
+
+      &.center {
+        figcaption {
+          text-align: center;
         }
       }
     }
-  }
-
-  .content__section .center {
-    text-align: center;
   }
 }
 
@@ -285,10 +261,6 @@
 
   &__content {
     @extend %content;
-
-    > figure img {
-      cursor: pointer;
-    }
   }
 
   &__rubric {
@@ -315,25 +287,23 @@
   }
 
   @include for-tablet-landscape-up {
-    @include for-tablet-landscape-up {
-      &__section {
-        &:first-child {
-          position: relative;
-          top: auto;
-          left: auto;
-          background-color: transparent;
-          box-shadow: none;
-          padding: 0;
-          lost-column: 1/4;
+    &__section {
+      &:first-child {
+        position: relative;
+        top: auto;
+        left: auto;
+        background-color: transparent;
+        box-shadow: none;
+        padding: 0;
+        lost-column: 1/4;
 
-          &:after {
-            display: none;
-          }
+        &:after {
+          display: none;
         }
+      }
 
-        &:last-child {
-          lost-column: 3/4;
-        }
+      &:last-child {
+        lost-column: 3/4;
       }
     }
   }
