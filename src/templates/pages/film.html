@@ -26,7 +26,9 @@
                    sizes="(min-width: 1500px) 496px,(min-width: 900px) calc(75vw/2), (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                    src="{{ film.image.s3Key | image({w: 1200, auto: 'compress,format'}) }}"
                    data-image
-                   data-bind="imageLoaded" />
+                   data-image
+                   v-imageloaded
+              />
             </div>
 
             <div class="tout__content">

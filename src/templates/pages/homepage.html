@@ -45,7 +45,9 @@
                      sizes="(min-width: 364px), (min-width: 1200px) calc(75vw/3),(min-width: 900px) calc(50w - 50px), (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                      src="{{ story.tout.image.s3Key | image({w: 1200, auto: 'compress,format'}) }}"
                      data-image
-                     data-bind="imageLoaded" />
+                     data-image
+                     v-imageloaded
+                />
               </div>
 
               <div class="tout__content">

@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const vue = require('vue-loader');
 const Extract = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const isProd = process.env.NODE_ENV === 'production';
@@ -39,6 +40,10 @@ module.exports = {
         loader: 'json'
       },
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.html$/,
         loader: 'html'
       },
@@ -49,6 +54,9 @@ module.exports = {
     ]
   },
   resolve: {
+    alias: {
+      vue$: 'vue/dist/vue.esm.js'
+    },
     modules: ['node_modules', 'src'],
     extensions: ['.js', '.json']
   },

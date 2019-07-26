@@ -47,7 +47,8 @@
                   <img src="{{ visual.image.s3Key | image({w: 800, auto: 'compress,format'}) }}"
                        class="social-block__image"
                        data-image
-                       data-bind="imageLoaded">
+                       v-imageloaded
+                  >
 
                   {% if visual.type and visual.label %}
                     <div class="social-block__hover">

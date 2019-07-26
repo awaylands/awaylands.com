@@ -1,15 +1,24 @@
-import 'core-js/es6';
-import svg4everybody from 'svg4everybody';
-import 'knockout-postbox';
 import objectFitImages from 'object-fit-images';
-import ready from 'raf-ready';
 
-import App from './app';
+import Vue from 'vue';
 
-window.app = new App();
+import PageHeader from './components/header';
+import Imageloaded from './directives/imageloaded';
 
-ready(() => {
-  objectFitImages();
-  svg4everybody();
-  window.app.start();
+Vue.config.productionTip = false;
+
+export const eventBus = new Vue();
+
+export default new Vue({
+  el: '#app',
+  mounted() {
+    objectFitImages();
+  },
+  methods: {},
+  components: {
+    pageheader: PageHeader
+  },
+  directives: {
+    Imageloaded
+  }
 });
