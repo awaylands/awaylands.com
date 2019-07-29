@@ -37,35 +37,37 @@
 
     <div class="page-footer__section">
       <instagram inline-template>
-        <ul class="social-blocks">
-          {% for visual in site.footer.visuals %}
-            {% if visual.image %}
-              <li>
-                <div class="social-block">
-                  {% if visual.url %}
-                  <a href="{{ visual.url }}" target="_blank">
-                    {% endif %}
-                    <img src="{{ visual.image.s3Key | image({w: 800, auto: 'compress,format'}) }}"
-                         class="social-block__image"
-                         data-image
-                         v-imageloaded
-                    >
-
-                    {% if visual.type and visual.label %}
-                      <div class="social-block__hover">
-                        <span class="social-block__icon">{% include "vectors/" + visual.type + ".svg" %}</span>
-                        <span class="social-block__label">{{ visual.label }}</span>
-                      </div>
-                    {% endif %}
-                    {% if visual.url %}
-                  </a>
-                  {% endif %}
-                </div>
-              </li>
-            {% endif %}
-          {% endfor %}
-        </ul>
+        <div class="instafeed-row"></div>
       </instagram>
+
+      <ul class="social-blocks">
+        {% for visual in site.footer.visuals %}
+          {% if visual.image %}
+            <li>
+              <div class="social-block">
+                {% if visual.url %}
+                <a href="{{ visual.url }}" target="_blank">
+                  {% endif %}
+                  <img src="{{ visual.image.s3Key | image({w: 800, auto: 'compress,format'}) }}"
+                       class="social-block__image"
+                       data-image
+                       v-imageloaded
+                  >
+
+                  {% if visual.type and visual.label %}
+                    <div class="social-block__hover">
+                      <span class="social-block__icon">{% include "vectors/" + visual.type + ".svg" %}</span>
+                      <span class="social-block__label">{{ visual.label }}</span>
+                    </div>
+                  {% endif %}
+                  {% if visual.url %}
+                </a>
+                {% endif %}
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
     </div>
 
     <span class="page-footer__colophon">© Copyright Away Lands</span>
