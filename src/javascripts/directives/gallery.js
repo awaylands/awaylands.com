@@ -1,7 +1,7 @@
-import {luminousGallery} from '../luminous';
+import {LuminousGallery} from '../luminous';
 
-const shuffle = require('shufflejs');
-const imagesLoaded = require('imagesloaded');
+const Shuffle = require('shufflejs');
+const ImagesLoaded = require('imagesloaded');
 
 const opts = {
   sourceAttribute: 'data-source'
@@ -14,13 +14,13 @@ const galleryOpts = {
 export default {
   name: 'gallery',
   bind(el) {
-    imagesLoaded(el, () => {
-      shuffle(el, {
+    new ImagesLoaded(el, () => {
+      new Shuffle(el, {
         itemSelector: '.masonry__item',
         sizer: '.masonry__sizer'
       });
 
-      luminousGallery(el.querySelectorAll('.still'), galleryOpts, opts);
+      new LuminousGallery(el.querySelectorAll('.still'), galleryOpts, opts);
     });
   }
 };

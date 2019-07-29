@@ -32,7 +32,7 @@ export default {
       scrollTo(footer, null, 700);
     },
     captureEscape(event) {
-      if (this.isOpen()) {
+      if (this.isOpen) {
         if (event.key === ESC_KEYCODE) {
           this.close();
         } else if (event.keyIdentifier === ESC_KEYCODE) {

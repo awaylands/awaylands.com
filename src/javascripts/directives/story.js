@@ -1,6 +1,6 @@
-import {luminousGallery} from '../luminous';
+import {LuminousGallery} from '../luminous';
 
-const imagesLoaded = require('imagesloaded');
+const ImagesLoaded = require('imagesloaded');
 
 const opts = {
   sourceAttribute: 'src'
@@ -13,8 +13,8 @@ const galleryOpts = {
 export default {
   name: 'story',
   bind(el) {
-    imagesLoaded(el, () => {
-      luminousGallery(el.querySelectorAll('figure img'), galleryOpts, opts);
+    new ImagesLoaded(el, () => {
+      new LuminousGallery(el.querySelectorAll('figure img'), galleryOpts, opts);
     });
   }
 };

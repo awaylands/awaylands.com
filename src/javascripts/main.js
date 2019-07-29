@@ -3,7 +3,11 @@ import objectFitImages from 'object-fit-images';
 import Vue from 'vue';
 
 import PageHeader from './components/header';
+
 import Imageloaded from './directives/imageloaded';
+import Slides from './directives/slides';
+import Gallery from './directives/gallery';
+import Story from './directives/story';
 
 Vue.config.productionTip = false;
 
@@ -19,6 +23,9 @@ export default new Vue({
     pageheader: PageHeader
   },
   directives: {
-    Imageloaded
+    Imageloaded,
+    Slides,
+    Gallery,
+    Story
   }
 });

@@ -1,16 +1,9 @@
-query($images:  TSImagesConfig) {
+query($images: TSImagesConfig) {
     getStoryList {
         items {
             _contentTypeName
             _enabledAt
             title
-            shopStyleHtml
-            tout {
-                image {
-                    s3Key
-                }
-                dek
-            }
             category {
                 title
             }
@@ -18,6 +11,13 @@ query($images:  TSImagesConfig) {
                 title
             }
             contentHtml(images: $images)
+            shopStyleContent
+            tout {
+                image {
+                    s3Key
+                }
+                dek
+            }
             social {
                 title
                 description

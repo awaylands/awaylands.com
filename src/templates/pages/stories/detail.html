@@ -29,32 +29,47 @@
         <h2 class="content__heading">{{ page.title }}</h2>
       </header>
 
-      <div class="content__content" data-bind="story">{{ page.contentHtml | safe }}
+      <div class="content__content" v-story>{{ page.contentHtml | safe }}
+        {% if page.shopStyleContent %}
+        <div class=“shop-style”>{{ page.shopStyleContent | safe }}</div>
+        {% endif %}
 
-        <div class=“shop-style”>{{ item.shopStyleHtml | safe }}</div>
         <!-- vuukle -->
         <div id='vuukle-comments'></div>
         <!-- end vuukle -->
-
       </div>
     </div>
   </div>
 </div>
 
-<!-- vuukle script -->
-<script>
-  var VUUKLE_CONFIG = {
-    apiKey: "e264ea9e-ea8b-473c-b1ae-1618d35fa09a",
-    articleId: "awaylands.com/" + "{{currentPath}}",
-  };
-  // DON'T EDIT BELOW THIS LINE
-  (function() {
-   var d = document,
-      s = d.createElement('script');
-   s.src = 'https://cdn.vuukle.com/platform.js';
-  (d.head || d.body).appendChild(s);
-  })();
- </script>
- <!-- end vuukle script -->
+{% endblock %}
 
+{% block extra_scripts %}
+  <!-- vuukle script -->
+  <script>
+    var VUUKLE_CONFIG = {
+      apiKey: "e264ea9e-ea8b-473c-b1ae-1618d35fa09a",
+      articleId: "awaylands.com/" + "{{currentPath}}",
+    };
+    // DON'T EDIT BELOW THIS LINE
+    (function() {
+      var d = document,
+        s = d.createElement('script');
+      s.src = 'https://cdn.vuukle.com/platform.js';
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <!-- end vuukle script -->
+
+  {% if page.shopStyleContent %}
+  <script type="text/javascript">
+    (function(d, sc, u) {
+      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = u + '?v=' + (+new Date());
+      p.parentNode.insertBefore(s,p);
+    })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
+  </script>
+  {% endif %}
 {% endblock %}

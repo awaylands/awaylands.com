@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block listings %}
-  <ul class="masonry" data-bind="gallery">
+  <ul class="masonry" v-gallery>
     {% for still in page.stills %}
       {% set imagePath = still.image.s3Key %}
       {% if imagePath %}
