@@ -12,6 +12,7 @@
        src="{{ photo.image.s3Key | image({w: 600, auto: 'compress,format'}) }}"
        data-image
        v-imageloaded
+  />
   {% endfor %}
 </div>
 
