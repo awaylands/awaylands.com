@@ -15,6 +15,8 @@ export default {
     window.addEventListener('scroll', this.onScroll.bind(this));
     window.addEventListener('resize', this.checkWindowSize.bind(this));
 
+    document.onkeydown = this.captureEscape.bind(this);
+
     this.onScroll();
   },
   methods: {
@@ -41,9 +43,15 @@ export default {
       }
     },
     onScroll() {
-      if (!this.isSticky && window.pageYOffset >= this.maxOffset) {
+      let maxOffset = this.maxOffset;
+
+      if (window.location.pathname === '/') {
+        maxOffset = window.innerHeight - 20;
+      }
+
+      if (!this.isSticky && window.pageYOffset >= maxOffset) {
         this.isSticky = true;
-      } else if (this.isSticky && window.pageYOffset < this.maxOffset) {
+      } else if (this.isSticky && window.pageYOffset < maxOffset) {
         this.isSticky = false;
       }
     },
