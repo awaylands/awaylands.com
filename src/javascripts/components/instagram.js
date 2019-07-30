@@ -1,5 +1,6 @@
 import Imageloaded from '../directives/imageloaded';
-import {Instafeed} from 'instafeed';
+
+const Instafeed = require('instafeed.js');
 
 export default {
   name: 'instagram',
@@ -7,12 +8,24 @@ export default {
     return {};
   },
   mounted() {
+    let amyItems;
+
     const amyFeed = new Instafeed({
       get: 'user',
       userId: '1050599',
       accessToken: '1050599.1677ed0.1704518e6a6047718b118a2d6d7fd08c',
-      target: '.instafeed-row'
+      limit: 6,
+      resolution: 'standard_resolution',
+      sortBy: 'most-recent',
+      success(items) {
+        amyItems = items;
+
+        return items;
+      }
     });
+
+    console.log(amyItems, 'amyitems');
+    console.log(amyFeed, 'amyfeed');
 
     amyFeed.run();
   },
