@@ -3,7 +3,7 @@ import objectFitImages from 'object-fit-images';
 import Vue from 'vue';
 
 import PageHeader from './components/header';
-import Instagram from './components/instagram';
+import InstaFeed from './components/insta-feed.vue';
 
 import Imageloaded from './directives/imageloaded';
 import Slides from './directives/slides';
@@ -22,7 +22,7 @@ export default new Vue({
   methods: {},
   components: {
     pageheader: PageHeader,
-    instagram: Instagram
+    instafeed: InstaFeed
   },
   directives: {
     Imageloaded,

@@ -213,10 +213,10 @@
   }
 }
 
-#instafeed {
+.insta-feed {
   @extend %basic-block;
 
-  > a {
+  > * {
     & + * {
       margin-top: 2.4rem;
     }
@@ -233,7 +233,7 @@
     display: flex;
     flex-wrap: wrap;
 
-    > a {
+    > * {
       lost-column: 1/3;
 
       & + * {
@@ -247,7 +247,7 @@
   }
 
   @include for-tablet-landscape-up {
-    > a {
+    > * {
       lost-column: 1/6;
 
       &:nth-child(n+4) {
