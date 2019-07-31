@@ -1,0 +1,14 @@
+{% macro image(src, srcset, sizes, class, alt) %}
+{% set comma = joiner() %}
+{% set keySafe = src %}
+
+<img src="{{ keySafe | image }}"
+     {% if srcset %}srcset="{% for src in srcset %}{{ comma() }} {{ keySafe | image({w: src}) }} {{ src }}w{% endfor %}"{% endif %}
+     {% if sizes %}sizes="{% for size in sizes %}{{ comma() }} {{ size }}{% endfor %}"{% endif %}
+     {% if class %}class="{{ class }}"{% endif %}
+     {% if alt %}alt="{{ alt }}"{% endif %}
+     data-image
+     v-imageloaded
+/>
+
+{% endmacro %}

@@ -11,6 +11,14 @@ query($images: TSImagesConfig) {
                 title
             }
             contentHtml(images: $images)
+            relatedStories {
+              title
+              tout {
+                image {
+                  s3Key
+                }
+              }
+            }
             shopStyleContent
             tout {
                 image {
