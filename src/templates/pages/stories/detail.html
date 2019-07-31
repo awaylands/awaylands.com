@@ -32,8 +32,8 @@
       </header>
 
       <div class="content__content" v-story>{{ page.contentHtml | safe }}
-        {% if page.shopStyleContent %}
-        <div class=“shop-style”>{{ page.shopStyleContent | safe }}</div>
+        {% if page.shopStyleHtml %}
+          {{ page.shopStyleHtml | safe }}
         {% endif %}
 
         <!-- vuukle -->
@@ -43,10 +43,10 @@
 
       {% if page.relatedStories.length %}
       <div class="related-stories">
-        <h2 class="related-stories__heading">You'll also love</h2>
+        <h2 class="related-stories__heading">Explore further</h2>
 
         <ul class="related-stories__list">
-          {% for story in page.relatedStories.slice(0,3) %}
+          {% for story in page.relatedStories %}
           <li>
             <a href="{{ story | route('story') }}">
               <div class="related-stories__image">
@@ -82,16 +82,4 @@
     })();
   </script>
   <!-- end vuukle script -->
-
-  {% if page.shopStyleContent %}
-  <script type="text/javascript">
-    (function(d, sc, u) {
-      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = u + '?v=' + (+new Date());
-      p.parentNode.insertBefore(s,p);
-    })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
-  </script>
-  {% endif %}
 {% endblock %}

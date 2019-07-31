@@ -19,7 +19,7 @@ query($images: TSImagesConfig) {
                 }
               }
             }
-            shopStyleContent
+            shopStyleHtml
             tout {
                 image {
                     s3Key
