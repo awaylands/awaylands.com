@@ -250,7 +250,7 @@
     a {
       &:hover {
         transform: scale(1.1);
-        z-index: -z(overlay);
+        z-index: -z(content);
         transition: transform 0.2s $ease-out-quint;
       }
     }

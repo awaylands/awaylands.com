@@ -113,13 +113,13 @@
       @extend %basic-block;
 
       & + * {
-        margin-top: 1.6rem;
+        margin-top: 4rem;
       }
     }
 
     a {
       display: block;
-      max-width: 32rem;
+      max-width: 48rem;
       margin: 0 auto;
     }
   }
@@ -149,7 +149,40 @@
         & + * {
           margin-top: 0;
         }
+
+        &:nth-child(n+4) {
+          margin-top: 3.2rem;
+        }
       }
+
+      a {
+        &:hover {
+          .related-stories__image {
+            transform: scale(1.1) translateY(-0.6rem);
+            z-index: -z(content);
+            transition: transform 0.2s $ease-out-quint;
+          }
+
+          .related-stories__title {
+            transform: scale(1.05);
+            transition: transform 0.2s $ease-out-quint;
+          }
+        }
+      }
+    }
+
+    &__image {
+      will-change: transform;
+      transform-origin: center center;
+      transform: scale(1) translateY(0);
+      transition: transform 0.5s $ease-out-quint;
+    }
+
+    &__title {
+      will-change: transform;
+      transform-origin: center center;
+      transform: scale(1) translateY(0);
+      transition: transform 0.5s $ease-out-quint;
     }
   }
 }

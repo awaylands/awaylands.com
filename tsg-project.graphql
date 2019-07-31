@@ -556,6 +556,7 @@ input CreateStoryInput {
   title: String!
   tout: StoryToutInput!
   category: [TSRelationshipInput]
+  relatedStories: [TSRelationshipInput]
   content: JSON!
   shopStyleHtml: String
   _id: ID
@@ -2052,6 +2053,7 @@ type Story implements TSSearchable {
   title: String!
   tout: StoryTout!
   category(locale: String, enableLocaleFallback: Boolean = true): [Category]
+  relatedStories(locale: String, enableLocaleFallback: Boolean = true): [Story]
   content: JSON!
   contentHtml(
     imageConfig: JSON
@@ -2071,6 +2073,7 @@ type Story implements TSSearchable {
   _enabledAt: String
   _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
   homepageSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): HomepagePaginatedList
+  storySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StoryPaginatedList
   searchSummary: String
 }
 
@@ -2888,6 +2891,7 @@ input UpdateStoryInput {
   title: String
   tout: StoryToutInput
   category: [TSRelationshipInput]
+  relatedStories: [TSRelationshipInput]
   content: JSON
   shopStyleHtml: String
   _id: ID!
