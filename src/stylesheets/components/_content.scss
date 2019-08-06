@@ -2,6 +2,8 @@
   @include copy-a();
 
   > * {
+    @extend %cf;
+
     display: block;
     max-width: 83.4rem;
     margin: 0 auto;
@@ -77,10 +79,6 @@
     @extend %cf;
 
     max-width: none;
-
-    & + figure {
-      margin-top: 1.6rem;
-    }
   }
 
   iframe {
@@ -90,11 +88,13 @@
   figcaption {
     display: flex;
     width: 100%;
-    margin: 0.4rem auto 0;
+    margin: 0.8rem auto 0;
     max-width: 83.4rem;
 
     & > * {
-      @include copy-c();
+      p {
+        @include copy-c($line-height: 1.4);
+      }
 
       font-style: italic;
     }
@@ -181,55 +181,49 @@
     }
 
     figure {
-      margin-top: 3.2rem;
+      margin-top: 4.8rem;
+      cursor: pointer;
 
       &:first-child {
         margin-top: 0;
       }
 
-      & + * {
-        margin-top: 3.2rem;
+      & + *:not(figure) {
+        clear: left;
+        // margin is swallowed by float
+        margin-top: 0;
+        padding-top: 4.8rem;
       }
 
       &.small,
       &.medium {
-        &.left {
-          float: left;
-          margin-right: 4.8rem;
-
-          & + .right {
-            margin-left: 0;
-          }
-        }
+        float: left;
+        width: 49.99997%;
+        // undo first image left padding
+        left: -0.8rem;
+        padding: 0 0.8rem;
 
         &.center {
           margin-left: auto;
           margin-right: auto;
         }
-
-        &.right {
-          float: right;
-          margin-left: 4.8rem;
-        }
       }
 
+      &.large {
+        width: 100%;
+      }
+    }
+  }
+
+  @include for-desktop-up {
+    figure {
       &.small {
-        max-width: 32em;
-        width: calc(50% - 2.4rem);
+        width: 24.99997%;
 
         figcaption,
         figcaption > * {
           display: block;
         }
-      }
-
-      &.medium {
-        max-width: 60rem;
-        width: 72%;
-      }
-
-      &.large {
-        width: 100%;
       }
     }
   }
