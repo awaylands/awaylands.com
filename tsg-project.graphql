@@ -550,7 +550,6 @@ type CreateStillCategoryResult {
 
 """create Story input"""
 input CreateStoryInput {
-  shopStyleContent: String
   social: StorySocialInput
   location: [TSRelationshipInput]
   title: String!
@@ -2047,7 +2046,6 @@ input StillStillsInput {
 }
 
 type Story implements TSSearchable {
-  shopStyleContent: String
   social: StorySocial
   location(locale: String, enableLocaleFallback: Boolean = true): [Location]
   title: String!
@@ -2090,7 +2088,6 @@ type StorySearchResult {
   _createdAt: String
   _enabledAt: String
   _enabled: Boolean
-  shopStyleContent: String
   title: String
   shopStyleHtml: String
   _id: String
@@ -2885,7 +2882,6 @@ type UpdateStillResult {
 
 """update Story input"""
 input UpdateStoryInput {
-  shopStyleContent: String
   social: StorySocialInput
   location: [TSRelationshipInput]
   title: String

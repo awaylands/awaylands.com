@@ -74,15 +74,20 @@
     margin-bottom: 4rem;
   }
 
+  iframe {
+    max-width: 100%;
+  }
+
   figure {
     @extend %basic-block;
     @extend %cf;
 
     max-width: none;
-  }
 
-  iframe {
-    max-width: 100%;
+    // necessary work-around for empty p tags between images in TS block canvas
+    & + p {
+      display: none;
+    }
   }
 
   figcaption {
@@ -188,7 +193,8 @@
         margin-top: 0;
       }
 
-      & + *:not(figure) {
+      & + *:not(figure),
+      & + p + *:not(figure) {
         clear: left;
         // margin is swallowed by float
         margin-top: 0;
