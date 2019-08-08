@@ -31,35 +31,39 @@
         <h2 class="content__heading">{{ page.title }}</h2>
       </header>
 
-      <div class="content__content" v-story>{{ page.contentHtml | safe }}
+      <div class="content__content" v-story>
+        {{ page.contentHtml | safe }}
+      </div>
+
+      <div class="content__modules">
         {% if page.shopStyleHtml %}
           {{ page.shopStyleHtml | safe }}
+        {% endif %}
+
+        {% if page.relatedStories.length %}
+        <div class="related-stories">
+          <h2 class="related-stories__heading">Explore further</h2>
+
+          <ul class="related-stories__list">
+            {% for story in page.relatedStories %}
+            <li>
+              <a href="{{ story | route('story') }}">
+                <div class="related-stories__image">
+                  {{ image(story.tout.image.s3Key) }}
+                </div>
+
+                <h3 class="related-stories__title">{{ story.title }}</h3>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
         {% endif %}
 
         <!-- vuukle -->
         <div id='vuukle-comments'></div>
         <!-- end vuukle -->
       </div>
-
-      {% if page.relatedStories.length %}
-      <div class="related-stories">
-        <h2 class="related-stories__heading">Explore further</h2>
-
-        <ul class="related-stories__list">
-          {% for story in page.relatedStories %}
-          <li>
-            <a href="{{ story | route('story') }}">
-              <div class="related-stories__image">
-                {{ image(story.tout.image.s3Key) }}
-              </div>
-
-              <h3 class="related-stories__title">{{ story.title }}</h3>
-            </a>
-          </li>
-          {% endfor %}
-        </ul>
-      </div>
-      {% endif %}
     </div>
   </div>
 </div>
@@ -82,4 +86,18 @@
     })();
   </script>
   <!-- end vuukle script -->
+
+  {% if page.shopStyleContent %}
+  <script type="text/javascript">
+    (function(d, sc, u) {
+      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = u + '?v=' + (+new Date());
+      p.parentNode.insertBefore(s,p);
+    })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
+  </script>
+
+  <script id='shopsensewidget-script' src="//shopsensewidget.shopstyle.com/widget-script.js?cb=1565301036792"></script>
+  {% endif %}
 {% endblock %}
