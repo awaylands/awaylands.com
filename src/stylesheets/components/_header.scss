@@ -266,7 +266,7 @@ $dropdownBorder: 1px solid -color(gallery);
     border: $dropdownBorder;
     width: 100%;
     overflow-y: auto;
-    max-height: calc(100vh - 10rem);
+    max-height: calc(100vh - 16rem);
 
     li {
       @extend %basic-block;
@@ -281,7 +281,8 @@ $dropdownBorder: 1px solid -color(gallery);
     a {
       @include copy-c(-color(tundora));
 
-      padding: 0.4rem 1.6rem;
+      text-transform: uppercase;
+      padding: 0.8rem 1.6rem;
       display: block;
       will-change: color, background;
       transition: color 0.12s $ease-in-out-quart, background 0.12s $ease-in-out-quart;

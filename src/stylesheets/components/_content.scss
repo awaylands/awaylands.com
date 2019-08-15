@@ -83,11 +83,6 @@
     @extend %cf;
 
     max-width: none;
-
-    // necessary work-around for empty p tags between images in TS block canvas
-    & + p {
-      display: none;
-    }
   }
 
   figcaption {
@@ -308,7 +303,7 @@
   }
 
   &__modules {
-    margin-top: 2.4rem;
+    margin-top: 4.8rem;
 
     > * {
       & + * {
