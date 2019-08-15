@@ -22,15 +22,15 @@
                   {{ link.text }}
                 </a>
 
+                {% if link.children.length %}
                 <div class="dropdown">
                   <ul class="dropdown__list">
-                    <li><a href="/">The United Kingdom</a></li>
-                    <li><a href="/">The United Kingdom</a></li>
-                    <li><a href="/">The United Kingdom</a></li>
-                    <li><a href="/">The United Kingdom</a></li>
-                    <li><a href="/">The United Kingdom</a></li>
+                    {% for child in link.children %}
+                      <li><a href="{{ child | route(child._contentTypeName) }}">{{ child.title }}</a></li>
+                    {% endfor %}
                   </ul>
                 </div>
+                {% endif %}
               </li>
               {% endfor %}
 
