@@ -32,14 +32,6 @@
     },
     mounted() {
       this.getPosts();
-      this.getPostInterval = setInterval(() => {
-        this.getPosts();
-      }, 5000);
-    },
-    beforeDestroy() {
-      if (this.getPostInterval) {
-        clearInterval(this.getPostInterval);
-      }
     },
     methods: {
       getPosts() {
@@ -61,16 +53,34 @@
         return secondsBetweenDates >= UPDATE_INSTA_SECOND_TIME;
       },
       getPostsFromLocalStorage() {
-        this.posts = JSON.parse(localStorage.getItem(INSTA_POSTS)) || [];
+        const rawPosts = JSON.parse(localStorage.getItem(INSTA_POSTS)) || [];
+
+        for (var post of rawPosts) {
+          if (post.type !== "video") {
+            this.posts.push(post);
+          }
+        }
       },
       getPostsFromApi() {
         axios.get(`https://api.instagram.com/v1/users/${BRANDON_USER_ID}/media/recent?access_token=${BRANDON_ACCESS_TOKEN}&count=3`)
           .then((res) => {
-            this.brandonPosts = res.data.data;
+            const rawBrandonPosts = res.data.data;
+
+            for (var post of rawBrandonPosts) {
+              if (post.type !== "video") {
+                this.brandonPosts.push(post);
+              }
+            }
 
             axios.get(`https://api.instagram.com/v1/users/${AMY_USER_ID}/media/recent?access_token=${AMY_ACCESS_TOKEN}&count=3`)
               .then((res) => {
-                this.amyPosts = res.data.data;
+                const rawAmyPosts = res.data.data;
+
+                for (var post of rawAmyPosts) {
+                  if (post.type !== "video") {
+                    this.amyPosts.push(post);
+                  }
+                }
 
                 this.posts = this.brandonPosts.concat(this.amyPosts);
                 this.posts.sort((a,b) => (a.created_time > b.created_time) ? -1 : 1);

@@ -307,6 +307,7 @@ type Category implements TSSearchable {
   _enabled: Boolean
   _enabledAt: String
   _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
   blogSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): BlogPaginatedList
   storySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StoryPaginatedList
   searchSummary: String
@@ -374,6 +375,8 @@ type Continent implements TSSearchable {
   _updatedAt: String
   _enabled: Boolean
   _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
   searchSummary: String
 }
 
@@ -761,6 +764,7 @@ type FilmCategory implements TSSearchable {
   _enabledAt: String
   _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
   filmsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmsPaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
   filmSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmPaginatedList
   searchSummary: String
 }
@@ -1006,6 +1010,7 @@ type Location implements TSSearchable {
   _enabled: Boolean
   _enabledAt: String
   _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
   storySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StoryPaginatedList
   destinationsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): DestinationsPaginatedList
   continentSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): ContinentPaginatedList
@@ -1293,25 +1298,23 @@ type Navigation implements TSSearchable {
 }
 
 type NavigationLinks {
-  children: [NavigationLinksChildren]
+  children(locale: String, enableLocaleFallback: Boolean = true): [NavigationLinksChildren]
   url: String
   text: String
 }
 
-type NavigationLinksChildren {
-  """Optionally specify a child content type of the link destination"""
-  contentTypeName: String
-}
-
-input NavigationLinksChildrenInput {
-  """Optionally specify a child content type of the link destination"""
-  contentTypeName: String
-}
+union NavigationLinksChildren = Location | FilmCategory | StillCategory | Continent | Category
 
 input NavigationLinksInput {
-  children: [NavigationLinksChildrenInput]
+  children: [TSRelationshipInput]
   url: String
   text: String
+}
+
+type NavigationPaginatedList {
+  results: [Navigation] @deprecated(reason: "Use items instead")
+  items: [Navigation]
+  total: Int
 }
 
 type NavigationSocial {
@@ -1969,6 +1972,7 @@ type StillCategory implements TSSearchable {
   _enabled: Boolean
   _enabledAt: String
   _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
   stillSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StillPaginatedList
   searchSummary: String
 }
