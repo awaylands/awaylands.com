@@ -10,43 +10,5 @@
 {% endblock %}
 
 {% block listings %}
-<div class="listings">
-  <ul class="listings__list">
-    {% for story in page.storySet.results | sort(true, true, "_enabledAt") %}
-    <li>
-      <div class="listing">
-        <a href="{{ story | route('story') }}">
-          <header class="listing__header">
-            <div class="listing__rubric">
-              <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
-
-              {% for category in story.category %}
-              <span>{{ category.title }}</span>
-              {% endfor %}
-            </div>
-
-            <h2 class="listing__heading">{{ story.title }}</h2>
-          </header>
-
-          <div class="listing__image">
-            <img srcset="{{ story.tout.image.s3Key | image({w: 2880, auto: 'compress,format'}) }} 2880w,
-              {{ story.tout.image.s3Key | image({w: 2028, auto: 'compress,format'}) }} 2028w,
-              {{ story.tout.image.s3Key | image({w: 1440, auto: 'compress,format'}) }} 1440w,
-              {{ story.tout.image.s3Key | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-              {{ story.tout.image.s3Key | image({w: 1014, auto: 'compress,format'}) }} 1014w"
-                 sizes="(min-width: 1500px) 1014px,(min-width: 900px) 75vw, (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
-                 src="{{ story.tout.image.s3Key | image({w: 1200, auto: 'compress,format'}) }}"
-                 data-image
-                 data-image
-                 v-imageloaded
-            />
-          </div>
-
-          <div class="listing__content">{{ story.tout.dek }}</div>
-        </a>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
-</div>
+<listings pagination-length="8" id="{{ page._id }}" type="location"></listings>
 {% endblock %}

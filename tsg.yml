@@ -99,6 +99,7 @@ routes:
   continent:
     path: /continent/:name
     template: pages/continent.html
+    context: data/continent.graphql
     paginate:
       data: data/continents.graphql
       itemName: page

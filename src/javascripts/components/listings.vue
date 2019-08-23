@@ -91,7 +91,6 @@
         await this.fetchItems();
       },
       fetchItems() {
-        console.log('fetching!');
         this.isLoaded = false;
 
         let query;

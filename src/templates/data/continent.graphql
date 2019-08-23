@@ -1,0 +1,8 @@
+query {
+  continents: getContinentList {
+    items {
+      name
+    }
+    total
+  }
+}
