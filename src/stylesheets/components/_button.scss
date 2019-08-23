@@ -13,3 +13,13 @@
   user-select: none;
   z-index: -z(content);
 }
+
+.button {
+  @include hd-b(-color(cerulean));
+
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 1.2rem 3.2rem;
+  border: 0.2rem solid -color(cerulean);
+  min-width: 19.6rem;
+}

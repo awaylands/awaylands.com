@@ -6,7 +6,7 @@
           <a :href="story.path" class="listing">
             <header class="listing__header">
               <div class="listing__rubric">
-                <span>November 3, 2019</span>
+                <span v-if="story.date" v-text="story.date"></span>
                 <span v-for="category in story.category" v-text="category.title"></span>
               </div>
 
@@ -24,7 +24,7 @@
     </ul>
 
     <div v-if="hasAvailableItems" class="listings__load-more">
-      <button class="button button--blue" @click="fetchItems">Load more</button>
+      <button class="button button--blue" @click="fetchItems" v-text="loadText"></button>
     </div>
   </div>
 </template>
@@ -34,6 +34,8 @@
   import Imageloaded from '../directives/imageloaded';
   import {apiEndpoint, bearerToken} from '../utils/config';
   import {buildSrcset} from '../utils/format';
+
+  var moment = require('moment');
 
   import {getImageUrl, route as createRoute} from 'takeshape-routing';
   import config from '../../../tsg.yml';
@@ -60,7 +62,7 @@
         return (this.stories.length === 0 && this.isLoaded);
       },
       hasAvailableItems() {
-        return this.stories.length < this.total && this.total > 0;
+        return this.variables.from < this.total && this.total > 0;
       },
       loadText() {
         return this.isLoaded ? 'Load more' : 'Loading…';
@@ -89,6 +91,7 @@
         await this.fetchItems();
       },
       fetchItems() {
+        console.log('fetching!');
         this.isLoaded = false;
 
         let query;
@@ -181,7 +184,11 @@
                 let locations = res.data.getLocationList.items;
 
                 for (const location of locations) {
-                  stories.items.push(...location.storySet.items)
+                  stories.items.push(...location.storySet.items);
+
+                  if (location.storySet.total > stories.total) {
+                    stories.total = location.storySet.total;
+                  }
                 }
 
                 // Removes duplicate story elements
@@ -191,19 +198,22 @@
                   ))
                 );
 
-                stories.total = stories.items.length;
+                if (!this.total) {
+                  this.total = stories.total;
+                }
 
                 break;
               default:
                 stories = res.data.getLocation.storySet;
-            }
 
-            if (!this.total) {
-              this.total = stories.total;
+                if (!this.total) {
+                  this.total = stories.total;
+                }
             }
 
             for (const story of stories.items) {
               story.path = route(story._contentTypeName, story);
+              story.date = moment(story._enabledAt).format('MMMM Do, YYYY');
 
               if (story.tout && story.tout.image) {
                 story.image = getImageUrl(story.tout.image.s3Key);
@@ -214,7 +224,8 @@
             }
 
             this.stories.push(...stories.items);
-            this.variables.from = this.stories.length;
+            this.stories.sort((a, b) => (a._enabledAt < b._enabledAt) ? 1 : -1);
+            this.variables.from += Number(this.paginationLength);
             this.isLoaded = true;
           })
           .catch(error => {
