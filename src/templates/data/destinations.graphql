@@ -2,9 +2,6 @@ query {
   page: getDestinations {
     _contentTypeName
     title
-    locations {
-      title
-    }
     featuredLocations {
       title
       image {
@@ -18,5 +15,14 @@ query {
         s3Key
       }
     }
+  }
+  continents: getContinentList {
+    items {
+      name
+      locations {
+        title
+      }
+    }
+    total
   }
 }

@@ -5,10 +5,22 @@
   <li><span class="separator"></span></li>
 
   {% for continent in continents.items %}
-  <li><a href="{{ continent | route('continent') }}/#" {% if continent.name == page.name %}class="is-current"{% endif %}>{{ continent.name }}</a></li>
+  <li>
+    <a href="{{ continent | route('continent') }}/#" {% if continent.name == page.name %}class="is-current"{% endif %}>{{ continent.name }}</a>
+
+    {% if continent.locations.length %}
+    <div class="dropdown dropdown--features">
+      <ul class="dropdown__list">
+        {% for location in continent.locations %}
+        <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </li>
   {% endfor %}
 {% endblock %}
 
 {% block listings %}
-<listings pagination-length="10" id="{{ page._id }}" sub-categories="{{ page.locations | dump }}" type="continent"></listings>
+<listings pagination-length="3" id="{{ page._id }}" sub-categories="{{ page.locations | dump }}" type="continent"></listings>
 {% endblock %}

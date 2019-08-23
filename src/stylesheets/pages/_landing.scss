@@ -62,11 +62,23 @@
   -webkit-overflow-scrolling: touch;
   padding-right: 4rem;
 
-  li {
+  > li {
     display: inline-block;
+    position: relative;
 
     & + * {
       margin-left: 2.4rem;
+    }
+
+    > a {
+      @include copy-a($family: $raleway);
+
+      text-transform: uppercase;
+
+      &.is-current,
+      &:hover {
+        font-weight: -weight(bold);
+      }
     }
   }
 
@@ -78,28 +90,32 @@
     background-color: -color(gallery);
   }
 
-  a {
-    @include copy-a($family: $raleway);
-
-    text-transform: uppercase;
-
-    &.is-current,
-    &:hover {
-      font-weight: -weight(bold);
-    }
-  }
-
   @include for-tablet-landscape-up {
     white-space: normal;
-    overflow: auto;
+    overflow: initial;
     padding-right: 0;
 
-    li {
+    > li {
       display: block;
 
       & + * {
         margin-left: 0;
         margin-top: 1.6rem;
+      }
+
+      > a {
+        display: block;
+      }
+
+      &:hover {
+        z-index: -z(overlay);
+
+        .dropdown {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(0);
+          transition: opacity 0.06s $ease-in-out-quart, visibility 0s 0s, transform 0.12s $ease-in-out-quart;
+        }
       }
     }
   }

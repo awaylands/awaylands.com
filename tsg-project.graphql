@@ -189,6 +189,7 @@ type Asset implements TSSearchable {
   destinationsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): DestinationsPaginatedList
   filmCategorySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmCategoryPaginatedList
   categorySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): CategoryPaginatedList
+  continentSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): ContinentPaginatedList
   searchSummary: String
 }
 
@@ -366,6 +367,7 @@ input ContentStructureInput {
 
 type Continent implements TSSearchable {
   name: String!
+  social: ContinentSocial
   locations(locale: String, enableLocaleFallback: Boolean = true): [Location]
   _id: ID
   _version: Int
@@ -404,6 +406,18 @@ type ContinentSearchResult {
 type ContinentSearchResults {
   results: [ContinentSearchResult]
   total: Int
+}
+
+type ContinentSocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input ContinentSocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
 }
 
 """create Asset input"""
@@ -455,6 +469,7 @@ type CreateCategoryResult {
 """create Continent input"""
 input CreateContinentInput {
   name: String!
+  social: ContinentSocialInput
   locations: [TSRelationshipInput]
   _id: ID
   _version: Int
@@ -2526,7 +2541,7 @@ input TSWebhooksInput {
   webhooks: [TSWebhookInput]
 }
 
-union UndefinedReference = Films | Homepage | Footer | SocialSettings | StillCategory | Still | Location | About | Film | Blog | Story | Destinations | FilmCategory | Category
+union UndefinedReference = Films | Homepage | Footer | SocialSettings | StillCategory | Still | Location | About | Film | Blog | Story | Destinations | FilmCategory | Category | Continent
 
 type UndefinedReferencePaginatedList {
   results: [UndefinedReference] @deprecated(reason: "Use items instead")
@@ -2627,6 +2642,7 @@ type UpdateCategoryResult {
 """update Continent input"""
 input UpdateContinentInput {
   name: String
+  social: ContinentSocialInput
   locations: [TSRelationshipInput]
   _id: ID!
   _version: Int
