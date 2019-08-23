@@ -1,0 +1,21 @@
+query {
+  getContinentList {
+    items {
+      _id
+      _contentTypeName
+      name
+      locations {
+        _id
+        title
+      }
+      social {
+        title
+        description
+        image {
+          s3Key
+        }
+      }
+    }
+    total
+  }
+}

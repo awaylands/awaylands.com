@@ -4,6 +4,7 @@ import Vue from 'vue';
 
 import PageHeader from './components/header';
 import InstaFeed from './components/insta-feed.vue';
+import Listings from './components/listings.vue';
 
 import Imageloaded from './directives/imageloaded';
 import Slides from './directives/slides';
@@ -22,7 +23,8 @@ export default new Vue({
   methods: {},
   components: {
     pageheader: PageHeader,
-    instafeed: InstaFeed
+    instafeed: InstaFeed,
+    listings: Listings
   },
   directives: {
     Imageloaded,

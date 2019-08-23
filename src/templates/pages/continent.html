@@ -1,0 +1,9 @@
+{% extends "layouts/landing.html" %}
+
+{% block filters %}
+BAH
+{% endblock %}
+
+{% block listings %}
+<listings pagination-length="10" id="{{ page._id }}" sub-categories="{{ page.locations | dump }}" type="continent"></listings>
+{% endblock %}

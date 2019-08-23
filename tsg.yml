@@ -96,5 +96,12 @@ routes:
       data: data/locations.graphql
       itemName: page
 
+  continent:
+    path: /continent/:name
+    template: pages/continent.html
+    paginate:
+      data: data/continents.graphql
+      itemName: page
+
 deploy:
   - ${buildPath}/static

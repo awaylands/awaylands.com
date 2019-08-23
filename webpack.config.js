@@ -50,6 +50,12 @@ module.exports = {
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
         loader: "file-loader?name=[path][name].[hash:base64:5].[ext]"
+      },
+      {
+        test: /\.ya?ml$/,
+        use: {
+          loader: 'yaml-import-loader'
+        }
       }
     ]
   },
