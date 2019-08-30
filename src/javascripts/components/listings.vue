@@ -4,19 +4,13 @@
       <li v-for="story in stories">
         <div class="listing">
           <a :href="story.path" class="listing">
-            <header class="listing__header">
-              <div class="listing__rubric">
-                <span v-if="story.date" v-text="story.date"></span>
-                <span v-for="category in story.category" v-text="category.title"></span>
-              </div>
-
-              <h2 class="listing__heading" v-text="story.title"></h2>
-            </header>
-
             <div class="listing__image">
-              <img :src="story.image" :srcet="story.srcset" data-image v-imageloaded>
+              <img :src="story.image" data-image v-imageloaded>
+
+              <img :src="story.secondaryImage" v-if="story.secondaryImage" data-image v-imageloaded>
             </div>
 
+            <h2 class="listing__heading" v-text="story.title"></h2>
             <div class="listing__content" v-if="story.tout.dek" v-text="story.tout.dek"></div>
           </a>
         </div>
@@ -118,6 +112,9 @@
                           image {
                             s3Key
                           }
+                          secondaryImage {
+                            s3Key
+                          }
                           dek
                         }
                         category {
@@ -149,6 +146,9 @@
                       title
                       tout {
                         image {
+                          s3Key
+                        }
+                        secondaryImage {
                           s3Key
                         }
                         dek
@@ -219,6 +219,13 @@
                 story.srcset = buildSrcset(story.tout.image, ['600','900','1200','1600'])
               } else {
                 story.image = null;
+              }
+
+              if (story.tout && story.tout.secondaryImage) {
+                story.secondaryImage = getImageUrl(story.tout.secondaryImage.s3Key);
+                story.srcset = buildSrcset(story.tout.secondaryImage, ['600','900','1200','1600'])
+              } else {
+                story.secondaryImage = null;
               }
             }
 

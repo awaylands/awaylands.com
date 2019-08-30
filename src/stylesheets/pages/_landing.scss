@@ -54,6 +54,18 @@
       }
     }
   }
+
+  @include for-desktop-up {
+    &__section {
+      &:first-child {
+        lost-column: 1/6;
+      }
+
+      &:last-child {
+        lost-column: 5/6;
+      }
+    }
+  }
 }
 
 .filters {

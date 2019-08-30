@@ -11,6 +11,9 @@ query {
             image {
               s3Key
             }
+            secondaryImage {
+              s3Key
+            }
             dek
           }
           category {

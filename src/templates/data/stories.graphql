@@ -1,39 +1,42 @@
 query($images: TSImagesConfig) {
-    getStoryList {
-        items {
-            _contentTypeName
-            _enabledAt
-            title
-            category {
-                title
-            }
-            location {
-                title
-            }
-            contentHtml(images: $images)
-            relatedStories {
-              title
-              tout {
-                image {
-                  s3Key
-                }
-              }
-            }
-            shopStyleHtml
-            tout {
-                image {
-                    s3Key
-                }
-                dek
-            }
-            social {
-                title
-                description
-                image {
-                    s3Key
-                }
-            }
+  getStoryList {
+    items {
+      _contentTypeName
+      _enabledAt
+      title
+      category {
+        title
+      }
+      location {
+        title
+      }
+      contentHtml(images: $images)
+      relatedStories {
+        title
+        tout {
+          image {
+            s3Key
+          }
         }
-        total
+      }
+      shopStyleHtml
+      tout {
+        image {
+          s3Key
+        }
+        secondaryImage {
+          s3Key
+        }
+        dek
+      }
+      social {
+        title
+        description
+        image {
+          s3Key
+        }
+      }
     }
+    total
+  }
 }

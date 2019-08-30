@@ -2135,11 +2135,13 @@ input StorySocialInput {
 
 type StoryTout {
   image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  secondaryImage(locale: String, enableLocaleFallback: Boolean = true): Asset
   dek: String
 }
 
 input StoryToutInput {
   image: TSRelationshipInput
+  secondaryImage: TSRelationshipInput
   dek: String
 }
 
