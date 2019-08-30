@@ -19,6 +19,7 @@ query {
         ...FilmCategoryLinks
         ...StillCategoryLinks
         ...CategoryLinks
+        ...ContinentLinks
       }
     }
     social {
@@ -46,21 +47,26 @@ query {
 }
 
 fragment LocationLinks on Location {
-    title
-    _contentTypeName
+  title
+  _contentTypeName
 }
 
 fragment FilmCategoryLinks on FilmCategory {
-    title
-    _contentTypeName
+  title
+  _contentTypeName
 }
 
 fragment StillCategoryLinks on StillCategory {
-    title
-    _contentTypeName
+  title
+  _contentTypeName
 }
 
 fragment CategoryLinks on Category {
-    title
-    _contentTypeName
+  title
+  _contentTypeName
+}
+
+fragment ContinentLinks on Continent {
+  name
+  _contentTypeName
 }

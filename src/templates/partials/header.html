@@ -26,7 +26,15 @@
                 <div class="dropdown">
                   <ul class="dropdown__list">
                     {% for child in link.children %}
-                      <li><a href="{{ child | route(child._contentTypeName) }}">{{ child.title }}</a></li>
+                      <li>
+                        <a href="{{ child | route(child._contentTypeName) }}">
+                          {% if child.title %}
+                            {{ child.title }}
+                          {% elif child.name %}
+                            {{ child.name }}
+                          {% endif %}
+                        </a>
+                      </li>
                     {% endfor %}
                   </ul>
                 </div>
