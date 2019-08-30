@@ -54,7 +54,7 @@ $dropdownBorder: 1px solid -color(gallery);
     transition: opacity 0.15s $ease-in-out-quart, visibility 0s 0.15s, transform 0.15s $ease-in-out-quart;
 
     .dropdown__list {
-      max-height: 24.6rem;
+      max-height: none;
     }
   }
 }

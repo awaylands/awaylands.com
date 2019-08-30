@@ -4,7 +4,7 @@
   <li><a href="/destinations">Featured</a></li>
   <li><span class="separator"></span></li>
 
-  {% for continent in continents.items %}
+  {% for continent in continents.items | reverse %}
   <li>
     <a href="{{ continent | route('continent') }}/#" {% if continent.name == page.name %}class="is-current"{% endif %}>{{ continent.name }}</a>
 
