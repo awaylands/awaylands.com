@@ -1,5 +1,7 @@
 <template>
   <div class="listings" v-if="stories.length">
+    <h1 class="listings__heading" v-text="heading"></h1>
+
     <ul class="listings__list">
       <li v-for="story in stories">
         <div class="listing">

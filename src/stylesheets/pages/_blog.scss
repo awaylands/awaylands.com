@@ -1,6 +1,15 @@
 .listings {
   @extend %basic-block;
 
+  &__heading {
+    @include hd-b($family: $raleway);
+
+    display: block;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 4.8rem;
+  }
+
   &__list {
     li {
       @extend %basic-block;

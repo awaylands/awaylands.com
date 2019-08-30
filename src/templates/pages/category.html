@@ -11,6 +11,8 @@
 
 {% block listings %}
 <div class="listings">
+  <h1 class="listings__heading">{{ page.title }}</h1>
+
   <ul class="listings__list">
     {% for story in page.storySet.results | sort(true, true, "_enabledAt") %}
     <li>
