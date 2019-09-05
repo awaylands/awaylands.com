@@ -188,8 +188,8 @@
         margin-top: 0;
       }
 
-      & + *:not(.medium):not(.small),
-      & + p + *:not(.medium):not(.small) {
+      & + *:not(.medium):not(.small):not(hr),
+      & + p + *:not(.medium):not(.small):not(hr) {
         clear: left;
         // margin is swallowed by float
         margin-top: 0;

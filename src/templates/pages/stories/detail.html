@@ -36,8 +36,21 @@
       </div>
 
       <div class="content__modules">
-        {% if page.shopStyleHtml %}
-          {{ page.shopStyleHtml | safe }}
+        {% if page.shopSense.options and page.shopSense.options %}
+        <div class="shopsense-widget" style="text-align:center" data-options="{{ page.shopSense.options }}"></div>
+        {% endif %}
+
+        {% if page.bookingContent %}
+          {{ page.bookingContent | safe }}
+        {% endif %}
+
+        {% if page.rewardStyleId %}
+        <div class="shopthepost-widget" data-widget-id="{{ page.rewardStyleId }}">
+          <div class="rs-adblock">
+            <img src="//assets.rewardstyle.com/production/7fd785e8dc0a3fd0d540859a5c988fe405a6f6c7/images/search/350.gif" onerror="this.parentNode.innerHTML='Disable your ad blocking software to view this content.'" style="width: 15px; height: 15px;" />
+            <noscript>JavaScript is currently disabled in this browser. Reactivate it to view this content.</noscript>
+          </div>
+        </div>
         {% endif %}
 
         {% if page.relatedStories.length %}
@@ -87,7 +100,11 @@
   </script>
   <!-- end vuukle script -->
 
-  {% if page.shopStyleContent %}
+  {% if page.shopSense.options and page.shopSense.scriptId %}
+  <script id="shopsensewidget-script" src="//shopsensewidget.shopstyle.com/widget-script.js?cb={{ page.shopSense.scriptId }}"></script>
+  {% endif %}
+
+  {% if page.bookingContent %}
   <script type="text/javascript">
     (function(d, sc, u) {
       var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
@@ -97,7 +114,9 @@
       p.parentNode.insertBefore(s,p);
     })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
   </script>
+  {% endif %}
 
-  <script id='shopsensewidget-script' src="//shopsensewidget.shopstyle.com/widget-script.js?cb=1565301036792"></script>
+  {% if page.rewardStyleId %}
+  <script type="text/javascript">!function(d,s,id){var e, p = /^http:/.test(d.location) ? 'http' : 'https';if(!d.getElementById(id)) {e = d.createElement(s);e.id = id;e.src = p + '://' + 'widgets.rewardstyle.com' + '/js/shopthepost.js';d.body.appendChild(e);}if(typeof window.__stp === 'object') if(d.readyState === 'complete') {window.__stp.init();}}(document, 'script', 'shopthepost-script');</script>
   {% endif %}
 {% endblock %}

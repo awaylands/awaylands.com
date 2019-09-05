@@ -20,6 +20,12 @@ query($images: TSImagesConfig) {
         }
       }
       shopStyleHtml
+      shopStyle {
+        options
+        scriptId
+      }
+      bookingContent
+      rewardStyleId
       tout {
         image {
           s3Key
