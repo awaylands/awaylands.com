@@ -59,8 +59,6 @@
 }
 
 .listing {
-  text-align: center;
-
   &__image {
     @include ratio-box(144%);
 
