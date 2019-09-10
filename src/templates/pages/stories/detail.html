@@ -36,8 +36,12 @@
       </div>
 
       <div class="content__modules">
-        {% if page.shopSense.options and page.shopSense.options %}
-        <div class="shopsense-widget" style="text-align:center" data-options="{{ page.shopSense.options }}"></div>
+        {% if page.shopStyleHtml %}
+          {{ page.shopStyleHtml | safe }}
+        {% endif %}
+
+        {% if page.shopStyle.options and page.shopStyle.options %}
+        <div class="shopsense-widget" style="text-align:center" data-options="{{ page.shopStyle.options }}"></div>
         {% endif %}
 
         {% if page.bookingContent %}
@@ -100,7 +104,7 @@
   </script>
   <!-- end vuukle script -->
 
-  {% if page.shopSense.options and page.shopSense.scriptId %}
+  {% if page.shopStyle.options and page.shopStyle.scriptId %}
   <script id="shopsensewidget-script" src="//shopsensewidget.shopstyle.com/widget-script.js?cb={{ page.shopSense.scriptId }}"></script>
   {% endif %}
 

@@ -568,7 +568,13 @@ type CreateStillCategoryResult {
 
 """create Story input"""
 input CreateStoryInput {
+  """The initial <div>, omit the <script>"""
+  bookingContent: String
   social: StorySocialInput
+  shopStyle: StoryShopStyleInput
+
+  """The numeric sequence within data-widget-id"""
+  rewardStyleId: String
   location: [TSRelationshipInput]
   title: String!
   tout: StoryToutInput!
@@ -2065,7 +2071,13 @@ input StillStillsInput {
 }
 
 type Story implements TSSearchable {
+  """The initial <div>, omit the <script>"""
+  bookingContent: String
   social: StorySocial
+  shopStyle: StoryShopStyle
+
+  """The numeric sequence within data-widget-id"""
+  rewardStyleId: String
   location(locale: String, enableLocaleFallback: Boolean = true): [Location]
   title: String!
   tout: StoryTout!
@@ -2107,6 +2119,8 @@ type StorySearchResult {
   _createdAt: String
   _enabledAt: String
   _enabled: Boolean
+  bookingContent: String
+  rewardStyleId: String
   title: String
   shopStyleHtml: String
   _id: String
@@ -2119,6 +2133,22 @@ type StorySearchResult {
 type StorySearchResults {
   results: [StorySearchResult]
   total: Int
+}
+
+type StoryShopStyle {
+  """All text within data-options"""
+  options: String
+
+  """The numeric sequence at the end of the script src"""
+  scriptId: String
+}
+
+input StoryShopStyleInput {
+  """All text within data-options"""
+  options: String
+
+  """The numeric sequence at the end of the script src"""
+  scriptId: String
 }
 
 type StorySocial {
@@ -2904,7 +2934,13 @@ type UpdateStillResult {
 
 """update Story input"""
 input UpdateStoryInput {
+  """The initial <div>, omit the <script>"""
+  bookingContent: String
   social: StorySocialInput
+  shopStyle: StoryShopStyleInput
+
+  """The numeric sequence within data-widget-id"""
+  rewardStyleId: String
   location: [TSRelationshipInput]
   title: String
   tout: StoryToutInput
