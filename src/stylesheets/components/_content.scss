@@ -86,7 +86,7 @@
   }
 
   figcaption {
-    display: flex;
+    display: block;
     width: 100%;
     margin: 0.8rem auto 0;
     max-width: 83.4rem;
@@ -94,17 +94,12 @@
     & > * {
       p {
         @include copy-c($line-height: 1.4);
+
+        display: block;
       }
 
+      text-align: right;
       font-style: italic;
-    }
-
-    .caption {
-      flex: 2 1 60%;
-    }
-
-    .credit {
-      flex: 1 1 40%;
     }
   }
 
