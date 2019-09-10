@@ -16,8 +16,6 @@ $dropdownBorder: 1px solid -color(gallery);
     background-color: -color(white);
     border: $dropdownBorder;
     width: 100%;
-    overflow-y: auto;
-    max-height: calc(100vh - 16rem);
 
     li {
       @extend %basic-block;
@@ -30,7 +28,64 @@ $dropdownBorder: 1px solid -color(gallery);
     }
 
     a {
-      @include copy-c(-color(tundora));
+      @include copy-d(-color(tundora));
+
+      text-transform: uppercase;
+      padding: 0.8rem 1.6rem;
+      display: block;
+      will-change: color, background;
+      transition: color 0.12s $ease-in-out-quart, background 0.12s $ease-in-out-quart;
+
+      &:hover {
+        color: -color(cerulean);
+        background-color: -color(athens);
+
+        & + .subdropdown {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  }
+
+  &--features {
+    top: 0;
+    left: 12rem;
+    padding-top: 0;
+    transform: translateX(-2.4rem);
+    will-change: opacity, visibility, transform;
+    transition: opacity 0.15s $ease-in-out-quart, visibility 0s 0.15s, transform 0.15s $ease-in-out-quart;
+  }
+}
+
+.subdropdown {
+  display: block;
+  position: absolute;
+  top: -1px;
+  left: 100%;
+  width: 20rem;
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity, visibility;
+  transition: opacity 0.15s $ease-in-out-quart, visibility 0s 0.15s;
+
+  &__list {
+    background-color: -color(white);
+    border: $dropdownBorder;
+    width: 100%;
+
+    li {
+      @extend %basic-block;
+
+      border-bottom: $dropdownBorder;
+
+      &:last-child {
+        border-bottom: 0 none;
+      }
+    }
+
+    a {
+      @include copy-d(-color(tundora));
 
       text-transform: uppercase;
       padding: 0.8rem 1.6rem;
@@ -45,16 +100,8 @@ $dropdownBorder: 1px solid -color(gallery);
     }
   }
 
-  &--features {
-    top: 0;
-    left: 12rem;
-    padding-top: 0;
-    transform: translateX(-2.4rem);
-    will-change: opacity, visibility, transform;
-    transition: opacity 0.15s $ease-in-out-quart, visibility 0s 0.15s, transform 0.15s $ease-in-out-quart;
-
-    .dropdown__list {
-      max-height: none;
-    }
+  &:hover {
+    opacity: 1;
+    visibility: visible;
   }
 }

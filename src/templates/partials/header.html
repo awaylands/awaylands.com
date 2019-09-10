@@ -34,6 +34,18 @@
                             {{ child.name }}
                           {% endif %}
                         </a>
+
+                        {% if child._contentTypeName === "continent" and child.locations.length %}
+                        <div class="subdropdown">
+                          <ul class="subdropdown__list">
+                            {% for location in child.locations %}
+                            <li>
+                              <a href="{{ location | route('location') }}">{{ location.title }}</a>
+                            </li>
+                            {% endfor %}
+                          </ul>
+                        </div>
+                        {% endif %}
                       </li>
                     {% endfor %}
                   </ul>

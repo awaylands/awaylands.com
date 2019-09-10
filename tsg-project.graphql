@@ -568,7 +568,7 @@ type CreateStillCategoryResult {
 
 """create Story input"""
 input CreateStoryInput {
-  """The initial <div>, omit the <script>"""
+  """The initial <ins></ins>, omit the <script></script>"""
   bookingContent: String
   social: StorySocialInput
   shopStyle: StoryShopStyleInput
@@ -2071,7 +2071,7 @@ input StillStillsInput {
 }
 
 type Story implements TSSearchable {
-  """The initial <div>, omit the <script>"""
+  """The initial <ins></ins>, omit the <script></script>"""
   bookingContent: String
   social: StorySocial
   shopStyle: StoryShopStyle
@@ -2934,7 +2934,7 @@ type UpdateStillResult {
 
 """update Story input"""
 input UpdateStoryInput {
-  """The initial <div>, omit the <script>"""
+  """The initial <ins></ins>, omit the <script></script>"""
   bookingContent: String
   social: StorySocialInput
   shopStyle: StoryShopStyleInput

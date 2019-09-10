@@ -69,4 +69,7 @@ fragment CategoryLinks on Category {
 fragment ContinentLinks on Continent {
   name
   _contentTypeName
+  locations {
+    title
+  }
 }
