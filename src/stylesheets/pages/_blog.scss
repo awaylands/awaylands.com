@@ -78,6 +78,7 @@
   &__heading {
     @include hd-c();
 
+    text-align: center;
     margin-top: 2.4rem;
     text-transform: uppercase;
     will-change: color;
