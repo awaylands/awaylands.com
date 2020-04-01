@@ -83,7 +83,7 @@
     "core-js": "^2.4.1",
     "favicons-webpack-plugin": "^0.0.7",
     "imagesloaded": "^4.1.3",
-    "knockout": "^3.3.0",
+    "knockout": "^3.5.0",
     "knockout-inview": "^2.5.0",
     "knockout-postbox": "^0.5.2",
     "knockout-railway": "^0.3.2",
