@@ -51,7 +51,7 @@
     "css-loader": "^0.26.1",
     "cssnano": "^3.7.4",
     "drive-in": "^1.5.2",
-    "eslint": "^3.4.0",
+    "eslint": "^4.18.2",
     "eslint-config-xo-space": "^0.14.0",
     "eslint-plugin-babel": "^3.3.0",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
