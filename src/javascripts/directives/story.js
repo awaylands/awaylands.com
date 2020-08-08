@@ -10,10 +10,11 @@ const galleryOpts = {
   arrowNavigation: true
 };
 
-const init = function (el) {
-  new ImagesLoaded(el, () => {
-    new LuminousGallery(el.querySelectorAll('figure img'), galleryOpts, opts);
-  });
+export default {
+  name: 'story',
+  bind(el) {
+    new ImagesLoaded(el, () => {
+      new LuminousGallery(el.querySelectorAll('figure img'), galleryOpts, opts);
+    });
+  }
 };
-
-export default {init};

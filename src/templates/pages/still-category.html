@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block listings %}
-  <ul class="masonry" data-bind="gallery">
+  <ul class="masonry" v-gallery>
     {% for still in page.stills %}
       {% set imagePath = still.image.s3Key %}
       {% if imagePath %}
@@ -22,7 +22,8 @@
                  sizes="(min-width: 1500px) 238px,(min-width: 900px) calc(75vw/4), (min-width: 600px) calc(25vw), calc(50vw - 30px)"
                  src="{{ imagePath | image({w: 600, auto: 'compress,format'}) }}"
                  data-image
-                 data-bind="imageLoaded"/>
+                 v-imageloaded
+            />
           </a>
         </li>
       {% endif %}

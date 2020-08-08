@@ -11,7 +11,8 @@
        sizes="(min-width: 600px) 20vw, 100vw"
        src="{{ photo.image.s3Key | image({w: 600, auto: 'compress,format'}) }}"
        data-image
-       data-bind="imageLoaded" />
+       v-imageloaded
+  />
   {% endfor %}
 </div>
 
@@ -40,7 +41,8 @@
                      sizes="(min-width: 1200px) 362px, (min-width: 900px) calc(50vw - 50px), calc(100vw - 80px)"
                      src="{{ item.image.s3Key | image({w: 600, auto: 'compress,format'}) }}"
                      data-image
-                     data-bind="imageLoaded" />
+                     v-imageloaded
+                />
               </div>
 
               <div class="tout__content">
@@ -70,7 +72,8 @@
               {{ logo.image.s3Key | image({w: 320, auto: 'compress,format'}) | escape }} 2x"
                  src="{{ logo.image.s3Key | image({w: 320, auto: 'compress,format'}) | escape }}"
                  data-image
-                 data-bind="imageLoaded" />
+                 v-imageloaded
+            />
           </a>
         </li>
         {% endfor %}
@@ -96,7 +99,8 @@
                    sizes="(min-width: 1200px) 554px, (min-width: 900px) calc(50vw - 50px), calc(100vw - 80px)"
                    src="{{ member.image.s3Key | image({w: 800, auto: 'compress,format'}) }}"
                    data-image
-                   data-bind="imageLoaded" />
+                   v-imageloaded
+              />
             </div>
 
             <div class="member__content">

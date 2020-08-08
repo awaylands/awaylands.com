@@ -4,6 +4,10 @@
 
 {% if page.social.title %}
   <title>{{ page.social.title }} | {{ socialGlobal.siteName }}</title>
+{% elif page.title %}
+  <title>{{ page.title }} | {{ socialGlobal.siteName }}</title>
+{% elif page.name %}
+  <title>{{ page.name }} | {{ socialGlobal.siteName }}</title>
 {% elif page._contentTypeName %}
   <title>{{ page._contentTypeName | capitalize }} | {{ socialGlobal.siteName }}</title>
 {% else %}

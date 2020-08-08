@@ -1,0 +1,5972 @@
+schema {
+  query: Root
+  mutation: Mutations
+}
+
+type About implements TSSearchable {
+  clients: AboutClients
+  social: AboutSocial
+  about: AboutAbout
+  team: AboutTeam
+  press: AboutPress
+  title: String!
+  photostrip: [AboutPhotostrip]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type AboutAbout {
+  heading: String
+  content: JSON
+  contentHtml(
+    imageConfig: JSON
+    images: TSImagesConfig
+
+    """A prefix to be all CSS classes in the generated HTML"""
+    classPrefix: String = ""
+  ): String
+}
+
+input AboutAboutInput {
+  heading: String
+  content: JSON
+}
+
+type AboutClients {
+  heading: String
+  logos: [AboutClientsLogos]
+}
+
+input AboutClientsInput {
+  heading: String
+  logos: [AboutClientsLogosInput]
+}
+
+type AboutClientsLogos {
+  name: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  url: String
+}
+
+input AboutClientsLogosInput {
+  name: String
+  image: TSRelationshipInput
+  url: String
+}
+
+type AboutPaginatedList {
+  results: [About] @deprecated(reason: "Use items instead")
+  items: [About]
+  total: Int
+}
+
+type AboutPhotostrip {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input AboutPhotostripInput {
+  image: TSRelationshipInput
+}
+
+type AboutPress {
+  heading: String
+  items: [AboutPressItems]
+}
+
+input AboutPressInput {
+  heading: String
+  items: [AboutPressItemsInput]
+}
+
+type AboutPressItems {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  source: String
+  title: String
+  url: String
+}
+
+input AboutPressItemsInput {
+  image: TSRelationshipInput
+  source: String
+  title: String
+  url: String
+}
+
+type AboutSocial {
+  title: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  description: String
+}
+
+input AboutSocialInput {
+  title: String
+  image: TSRelationshipInput
+  description: String
+}
+
+type AboutTeam {
+  heading: String
+  members: [AboutTeamMembers]
+}
+
+input AboutTeamInput {
+  heading: String
+  members: [AboutTeamMembersInput]
+}
+
+type AboutTeamMembers {
+  about: JSON
+  aboutHtml(
+    imageConfig: JSON
+    images: TSImagesConfig
+
+    """A prefix to be all CSS classes in the generated HTML"""
+    classPrefix: String = ""
+  ): String
+  name: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input AboutTeamMembersInput {
+  about: JSON
+  name: String
+  image: TSRelationshipInput
+}
+
+"""The built-in TakeShape asset model"""
+type Asset implements TSSearchable {
+  sourceUrl: String
+  path: String!
+  filename: String!
+  description: String
+  caption: JSON
+  captionHtml(
+    imageConfig: JSON
+    images: TSImagesConfig
+
+    """A prefix to be all CSS classes in the generated HTML"""
+    classPrefix: String = ""
+  ): String
+  uploadStatus: String
+  mimeType: String
+  title: String
+  credit: JSON
+  creditHtml(
+    imageConfig: JSON
+    images: TSImagesConfig
+
+    """A prefix to be all CSS classes in the generated HTML"""
+    classPrefix: String = ""
+  ): String
+  s3Key: String @deprecated(reason: "Use path instead")
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  filmsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmsPaginatedList
+  homepageSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): HomepagePaginatedList
+  footerSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FooterPaginatedList
+  socialSettingsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): SocialSettingsPaginatedList
+  stillCategorySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StillCategoryPaginatedList
+  stillSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StillPaginatedList
+  locationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): LocationPaginatedList
+  aboutSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): AboutPaginatedList
+  filmSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmPaginatedList
+  blogSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): BlogPaginatedList
+  storySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StoryPaginatedList
+  destinationsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): DestinationsPaginatedList
+  filmCategorySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmCategoryPaginatedList
+  categorySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): CategoryPaginatedList
+  continentSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): ContinentPaginatedList
+  searchSummary: String
+}
+
+type AssetPaginatedList {
+  results: [Asset] @deprecated(reason: "Use items instead")
+  items: [Asset]
+  total: Int
+}
+
+"""A Asset search result"""
+type AssetSearchResult {
+  searchSummary: String
+  sourceUrl: String
+  path: String
+  filename: String
+  description: String
+  uploadStatus: String
+  mimeType: String
+  title: String
+  s3Key: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""Asset search results"""
+type AssetSearchResults {
+  results: [AssetSearchResult]
+  total: Int
+}
+
+"""The built-in TakeShape asset model"""
+type BaseAsset implements TSSearchable {
+  title: String
+  description: String
+  filename: String!
+  caption: JSON
+  captionHtml(
+    imageConfig: JSON
+    images: TSImagesConfig
+
+    """A prefix to be all CSS classes in the generated HTML"""
+    classPrefix: String = ""
+  ): String
+  credit: JSON
+  creditHtml(
+    imageConfig: JSON
+    images: TSImagesConfig
+
+    """A prefix to be all CSS classes in the generated HTML"""
+    classPrefix: String = ""
+  ): String
+  path: String!
+  mimeType: String
+  sourceUrl: String
+  uploadStatus: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean @deprecated(reason: "Use _status instead")
+  _enabledAt: String @deprecated(reason: "Use a custom date field instead")
+  _status: DefaultWorkflow
+  searchSummary: String
+}
+
+type Blog implements TSSearchable {
+  title: String!
+  social: BlogSocial
+  categories(locale: String, enableLocaleFallback: Boolean = true): [Category]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type BlogPaginatedList {
+  results: [Blog] @deprecated(reason: "Use items instead")
+  items: [Blog]
+  total: Int
+}
+
+type BlogSocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input BlogSocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+type Category implements TSSearchable {
+  title: String!
+  social: CategorySocial
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
+  blogSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): BlogPaginatedList
+  storySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StoryPaginatedList
+  searchSummary: String
+}
+
+type CategoryPaginatedList {
+  results: [Category] @deprecated(reason: "Use items instead")
+  items: [Category]
+  total: Int
+}
+
+"""A Category search result"""
+type CategorySearchResult {
+  searchSummary: String
+  title: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""Category search results"""
+type CategorySearchResults {
+  results: [CategorySearchResult]
+  total: Int
+}
+
+type CategorySocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input CategorySocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+"""Describes a structural update to an array of data."""
+input ContentStructureInput {
+  """A deep path to the array being updated (e.g. a.b[1].c)."""
+  path: String!
+
+  """
+  An array where the indices represent the to index, and the values represent
+  the from index.For example to transform ["a","b","c","d"] into ["c","a"], this
+  value would be [2,0].
+  """
+  structure: [Int]
+}
+
+type Continent implements TSSearchable {
+  name: String!
+  social: ContinentSocial
+  locations(locale: String, enableLocaleFallback: Boolean = true): [Location]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
+  searchSummary: String
+}
+
+type ContinentPaginatedList {
+  results: [Continent] @deprecated(reason: "Use items instead")
+  items: [Continent]
+  total: Int
+}
+
+"""A Continent search result"""
+type ContinentSearchResult {
+  searchSummary: String
+  name: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""Continent search results"""
+type ContinentSearchResults {
+  results: [ContinentSearchResult]
+  total: Int
+}
+
+type ContinentSocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input ContinentSocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+"""create Asset input"""
+input CreateAssetInput {
+  sourceUrl: String
+  path: String!
+  filename: String!
+  description: String
+  caption: JSON
+  uploadStatus: String
+  mimeType: String
+  title: String
+  credit: JSON
+  s3Key: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateAssetResult {
+  clientMutationId: String
+  result: Asset
+}
+
+"""create Category input"""
+input CreateCategoryInput {
+  title: String!
+  social: CategorySocialInput
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateCategoryResult {
+  clientMutationId: String
+  result: Category
+}
+
+"""create Continent input"""
+input CreateContinentInput {
+  name: String!
+  social: ContinentSocialInput
+  locations: [TSRelationshipInput]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateContinentResult {
+  clientMutationId: String
+  result: Continent
+}
+
+"""create FilmCategory input"""
+input CreateFilmCategoryInput {
+  title: String!
+  social: FilmCategorySocialInput
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateFilmCategoryResult {
+  clientMutationId: String
+  result: FilmCategory
+}
+
+"""create Film input"""
+input CreateFilmInput {
+  image: TSRelationshipInput
+  filmCategory: TSRelationshipInput
+  title: String!
+  youTubeUrl: String!
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateFilmResult {
+  clientMutationId: String
+  result: Film
+}
+
+"""create Location input"""
+input CreateLocationInput {
+  title: String!
+  image: TSRelationshipInput
+  social: LocationSocialInput
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateLocationResult {
+  clientMutationId: String
+  result: Location
+}
+
+"""create StillCategory input"""
+input CreateStillCategoryInput {
+  title: String!
+  social: StillCategorySocialInput
+  stills: [StillCategoryStillsInput]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateStillCategoryResult {
+  clientMutationId: String
+  result: StillCategory
+}
+
+"""create Story input"""
+input CreateStoryInput {
+  """The initial <ins></ins>, omit the <script></script>"""
+  bookingContent: String
+  social: StorySocialInput
+  blockCanvas: JSON
+  shopStyle: StoryShopStyleInput
+
+  """The numeric sequence within data-widget-id"""
+  rewardStyleId: String
+  location: [TSRelationshipInput]
+  title: String!
+  tout: StoryToutInput!
+  category: [TSRelationshipInput]
+  relatedStories: [TSRelationshipInput]
+  content: JSON!
+  shopStyleHtml: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateStoryResult {
+  clientMutationId: String
+  result: Story
+}
+
+"""create TsStaticSite input"""
+input CreateTsStaticSiteInput {
+  title: String!
+  baseUrl: String
+  provider: String!
+  idKey: String
+  secretKey: String
+  destination: String!
+  privateAcl: Boolean
+  environmentVariables: [TsStaticSiteEnvironmentVariablesInput]
+  triggers: [TsStaticSiteTriggersInput]
+  templateHash: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type CreateTsStaticSiteResult {
+  clientMutationId: String
+  result: TsStaticSite
+}
+
+enum DefaultWorkflow {
+  disabled
+  enabled
+}
+
+"""delete Asset input"""
+input DeleteAssetInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteAssetResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+"""delete Category input"""
+input DeleteCategoryInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteCategoryResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+"""delete Continent input"""
+input DeleteContinentInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteContinentResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+"""delete FilmCategory input"""
+input DeleteFilmCategoryInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteFilmCategoryResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+"""delete Film input"""
+input DeleteFilmInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteFilmResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+"""delete Location input"""
+input DeleteLocationInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteLocationResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+"""delete StillCategory input"""
+input DeleteStillCategoryInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteStillCategoryResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+"""delete Story input"""
+input DeleteStoryInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteStoryResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+"""delete TsStaticSite input"""
+input DeleteTsStaticSiteInput {
+  clientMutationId: String
+  _id: ID!
+}
+
+type DeleteTsStaticSiteResult {
+  clientMutationId: String
+  result: Boolean
+}
+
+type Destinations implements TSSearchable {
+  locations(locale: String, enableLocaleFallback: Boolean = true): [Location]
+  title: String!
+  featuredLocations(locale: String, enableLocaleFallback: Boolean = true): [Location]
+  social: DestinationsSocial
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type DestinationsPaginatedList {
+  results: [Destinations] @deprecated(reason: "Use items instead")
+  items: [Destinations]
+  total: Int
+}
+
+type DestinationsSocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input DestinationsSocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+"""duplicate Asset input"""
+input DuplicateAssetInput {
+  sourceUrl: String
+  path: String
+  filename: String
+  description: String
+  caption: JSON
+  uploadStatus: String
+  mimeType: String
+  title: String
+  credit: JSON
+  s3Key: String
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateAssetResult {
+  clientMutationId: String
+  result: Asset
+}
+
+"""duplicate Category input"""
+input DuplicateCategoryInput {
+  title: String
+  social: CategorySocialInput
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateCategoryResult {
+  clientMutationId: String
+  result: Category
+}
+
+"""duplicate Continent input"""
+input DuplicateContinentInput {
+  name: String
+  social: ContinentSocialInput
+  locations: [TSRelationshipInput]
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateContinentResult {
+  clientMutationId: String
+  result: Continent
+}
+
+"""duplicate FilmCategory input"""
+input DuplicateFilmCategoryInput {
+  title: String
+  social: FilmCategorySocialInput
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateFilmCategoryResult {
+  clientMutationId: String
+  result: FilmCategory
+}
+
+"""duplicate Film input"""
+input DuplicateFilmInput {
+  image: TSRelationshipInput
+  filmCategory: TSRelationshipInput
+  title: String
+  youTubeUrl: String
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateFilmResult {
+  clientMutationId: String
+  result: Film
+}
+
+"""duplicate Location input"""
+input DuplicateLocationInput {
+  title: String
+  image: TSRelationshipInput
+  social: LocationSocialInput
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateLocationResult {
+  clientMutationId: String
+  result: Location
+}
+
+"""duplicate StillCategory input"""
+input DuplicateStillCategoryInput {
+  title: String
+  social: StillCategorySocialInput
+  stills: [StillCategoryStillsInput]
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateStillCategoryResult {
+  clientMutationId: String
+  result: StillCategory
+}
+
+"""duplicate Story input"""
+input DuplicateStoryInput {
+  """The initial <ins></ins>, omit the <script></script>"""
+  bookingContent: String
+  social: StorySocialInput
+  blockCanvas: JSON
+  shopStyle: StoryShopStyleInput
+
+  """The numeric sequence within data-widget-id"""
+  rewardStyleId: String
+  location: [TSRelationshipInput]
+  title: String
+  tout: StoryToutInput
+  category: [TSRelationshipInput]
+  relatedStories: [TSRelationshipInput]
+  content: JSON
+  shopStyleHtml: String
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateStoryResult {
+  clientMutationId: String
+  result: Story
+}
+
+"""duplicate TsStaticSite input"""
+input DuplicateTsStaticSiteInput {
+  title: String
+  baseUrl: String
+  provider: String
+  idKey: String
+  secretKey: String
+  destination: String
+  privateAcl: Boolean
+  environmentVariables: [TsStaticSiteEnvironmentVariablesInput]
+  triggers: [TsStaticSiteTriggersInput]
+  templateHash: String
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type DuplicateTsStaticSiteResult {
+  clientMutationId: String
+  result: TsStaticSite
+}
+
+type Film implements TSSearchable {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  filmCategory(locale: String, enableLocaleFallback: Boolean = true): FilmCategory
+  title: String!
+  youTubeUrl: String!
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  filmsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmsPaginatedList
+  searchSummary: String
+}
+
+type FilmCategory implements TSSearchable {
+  title: String!
+  social: FilmCategorySocial
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  filmsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmsPaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
+  filmSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): FilmPaginatedList
+  searchSummary: String
+}
+
+type FilmCategoryPaginatedList {
+  results: [FilmCategory] @deprecated(reason: "Use items instead")
+  items: [FilmCategory]
+  total: Int
+}
+
+"""A FilmCategory search result"""
+type FilmCategorySearchResult {
+  searchSummary: String
+  title: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""FilmCategory search results"""
+type FilmCategorySearchResults {
+  results: [FilmCategorySearchResult]
+  total: Int
+}
+
+type FilmCategorySocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input FilmCategorySocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+type FilmPaginatedList {
+  results: [Film] @deprecated(reason: "Use items instead")
+  items: [Film]
+  total: Int
+}
+
+type Films implements TSSearchable {
+  title: String!
+  featuredFilms(locale: String, enableLocaleFallback: Boolean = true): [Film]
+  social: FilmsSocial
+  filmCategories(locale: String, enableLocaleFallback: Boolean = true): [FilmCategory]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+"""A Film search result"""
+type FilmSearchResult {
+  searchSummary: String
+  title: String
+  youTubeUrl: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""Film search results"""
+type FilmSearchResults {
+  results: [FilmSearchResult]
+  total: Int
+}
+
+type FilmsPaginatedList {
+  results: [Films] @deprecated(reason: "Use items instead")
+  items: [Films]
+  total: Int
+}
+
+type FilmsSocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input FilmsSocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+type Footer implements TSSearchable {
+  visuals: [FooterVisuals]
+  contacts: [FooterContacts]
+  formEndpoint: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type FooterContacts {
+  email: String
+  label: String
+}
+
+input FooterContactsInput {
+  email: String
+  label: String
+}
+
+type FooterPaginatedList {
+  results: [Footer] @deprecated(reason: "Use items instead")
+  items: [Footer]
+  total: Int
+}
+
+type FooterVisuals {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  label: String
+  type: String
+  url: String
+}
+
+input FooterVisualsInput {
+  image: TSRelationshipInput
+  label: String
+  type: String
+  url: String
+}
+
+type Homepage implements TSSearchable {
+  recentEntries(locale: String, enableLocaleFallback: Boolean = true): [Story]
+  slider: HomepageSlider
+  social: HomepageSocial
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type HomepagePaginatedList {
+  results: [Homepage] @deprecated(reason: "Use items instead")
+  items: [Homepage]
+  total: Int
+}
+
+type HomepageSlider {
+  slides: [HomepageSliderSlides]
+  interval: Int
+}
+
+input HomepageSliderInput {
+  slides: [HomepageSliderSlidesInput]
+  interval: Int
+}
+
+type HomepageSliderSlides {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  caption: HomepageSliderSlidesCaption
+}
+
+type HomepageSliderSlidesCaption {
+  url: String
+  text: String
+}
+
+input HomepageSliderSlidesCaptionInput {
+  url: String
+  text: String
+}
+
+input HomepageSliderSlidesInput {
+  image: TSRelationshipInput
+  caption: HomepageSliderSlidesCaptionInput
+}
+
+type HomepageSocial {
+  title: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  description: String
+}
+
+input HomepageSocialInput {
+  title: String
+  image: TSRelationshipInput
+  description: String
+}
+
+type HttpHeader {
+  key: String
+  value: String
+}
+
+input HttpHeaderInput {
+  key: String
+  value: String
+}
+
+type ImportResultType {
+  countImported: Int
+  ids: [ID]
+  rejectedItems: [RejectedImportItem]
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+type Location implements TSSearchable {
+  title: String!
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  social: LocationSocial
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
+  storySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StoryPaginatedList
+  destinationsSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): DestinationsPaginatedList
+  continentSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): ContinentPaginatedList
+  searchSummary: String
+}
+
+type LocationPaginatedList {
+  results: [Location] @deprecated(reason: "Use items instead")
+  items: [Location]
+  total: Int
+}
+
+"""A Location search result"""
+type LocationSearchResult {
+  searchSummary: String
+  title: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""Location search results"""
+type LocationSearchResults {
+  results: [LocationSearchResult]
+  total: Int
+}
+
+type LocationSocial {
+  title: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  description: String
+}
+
+input LocationSocialInput {
+  title: String
+  image: TSRelationshipInput
+  description: String
+}
+
+type Mutations {
+  """Create Project"""
+  tsCreateProject(name: String!, template: String, type: String, defaultTimezone: String!): TSProjectListItem
+
+  """Create a Lock"""
+  tsCreateLock(contentTypeId: ID, id: ID): TSLock
+
+  """Extend a lock Project"""
+  tsExtendLock(contentTypeId: ID, id: ID): TSLock
+
+  """Remove a Lock"""
+  tsRemoveLock(contentTypeId: ID, id: ID): Boolean
+
+  """Remove a Lock"""
+  tsBreakLock(contentTypeId: ID, id: ID): Boolean
+
+  """Create an API Key"""
+  tsCreateApiKey(name: String, role: String): TSApiKey
+
+  """Delete an API Key"""
+  tsDeleteApiKey(id: ID): Boolean
+
+  """Create role"""
+  tsCreateRole(input: TSRoleInput!): TSRole
+
+  """Update role"""
+  tsUpdateRole(input: TSRoleInput!): TSRole
+
+  """Delete role"""
+  tsDeleteRole(name: String!): Boolean
+
+  """Update webhooks"""
+  tsUpdateWebhooks(input: TSWebhooksInput!): TSWebhooks
+
+  """Update Default Locale for Project"""
+  tsUpdateDefaultLocale(defaultLocale: String!, version: Int!): JSON
+
+  """Add Locale to Project"""
+  tsAddLocale(locale: String!, version: Int!): JSON
+
+  """Remove Locale from Project"""
+  tsRemoveLocale(locale: String!, version: Int!): JSON
+
+  """Add a ContentType to the project Schema"""
+  tsAddContentType(projectId: ID, version: Int!, contentType: JSON!): JSON
+
+  """Remove a ContentType from the project Schema"""
+  tsRemoveContentType(projectId: ID, version: Int!, contentTypeId: ID!): JSON
+
+  """Update a ContentType in the project Schema"""
+  tsUpdateContentType(projectId: ID, version: Int!, contentTypeId: ID!, contentType: JSON!): JSON
+
+  """Create Workflow"""
+  tsAddWorkflow(input: TSSaveWorkflowInput!): TSSaveWorkflowResponse
+
+  """Update Workflow"""
+  tsUpdateWorkflow(input: TSUpdateWorkflowInput!): TSSaveWorkflowResponse
+
+  """Delete Workflow"""
+  tsDeleteWorkflow(input: TSDeleteWorkflowInput): TSRemoveWorkflowResponse
+
+  """Schedule content status update"""
+  tsScheduleStatusUpdate(input: TSScheduleStatusUpdateInput!): TSStatusUpdate
+
+  """Cancel scheduled content status update"""
+  tsCancelStatusUpdate(input: TSCancelStatusUpdateInput!): Boolean
+
+  """Exports your project to a ZIP file, which you can then download"""
+  tsExportProject(empty: Boolean, origin: String): String
+
+  """Imports a project from a specified project pattern URI."""
+  tsImportProject(uri: String!, name: String, origin: String): String
+
+  """Update Project"""
+  tsUpdateProject(id: ID, name: String, avatarId: ID, defaultTimezone: String): TSProject
+
+  """Update Project Billing"""
+  tsUpdateProjectBilling(id: ID, token: String, planId: String, coupon: String, email: String): TSBilling
+
+  """Update Project Permissions"""
+  tsUpdateProjectPermissions(userId: ID, role: String!): TSPermissions
+
+  """Update Invite Role"""
+  tsUpdateInviteRole(email: String!, role: String!): TSInvite
+
+  """Cancel Project Invite"""
+  tsCancelProjectInvite(email: String!): TSInvite
+
+  """Remove Project Member"""
+  tsRemoveProjectMember(userId: ID): TSPermissions
+
+  """Deactivate project"""
+  tsDeleteProject(id: ID!): Boolean
+
+  """Register a setup step as completed"""
+  tsCompleteSetupStep(stepKey: String!): Boolean
+
+  """Update a token for a integration provider"""
+  tsUpdateIntegrationToken(provider: String!, token: String): TSIntegrationToken
+
+  """Initiate upload process for asset(s)"""
+  uploadAssets(projectId: ID, files: [TSFile]!): [Upload]
+
+  """Replace an asset file"""
+  replaceAsset(projectId: ID, _id: ID!, _version: Int!, file: TSFile!): Upload
+
+  """Create Asset"""
+  createAsset(input: CreateAssetInput!): CreateAssetResult
+
+  """Update Asset"""
+  updateAsset(input: UpdateAssetInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateAssetResult
+
+  """Delete Asset"""
+  deleteAsset(input: DeleteAssetInput!): DeleteAssetResult
+
+  """
+  Duplicate Asset including locales. Additional properties will override field values.
+  """
+  duplicateAsset(input: DuplicateAssetInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateAssetResult
+
+  """
+  Create Asset items from Asset csv, only single layer string fields are supported.
+  """
+  importAssetListFromCSV(assetId: ID!, importColumns: [String]): ImportResultType
+
+  """Create TsStaticSite"""
+  createTsStaticSite(input: CreateTsStaticSiteInput!): CreateTsStaticSiteResult
+
+  """Update TsStaticSite"""
+  updateTsStaticSite(input: UpdateTsStaticSiteInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateTsStaticSiteResult
+
+  """Delete TsStaticSite"""
+  deleteTsStaticSite(input: DeleteTsStaticSiteInput!): DeleteTsStaticSiteResult
+
+  """
+  Duplicate TsStaticSite including locales. Additional properties will override field values.
+  """
+  duplicateTsStaticSite(input: DuplicateTsStaticSiteInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateTsStaticSiteResult
+
+  """Update Films"""
+  updateFilms(input: UpdateFilmsInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateFilmsResult
+
+  """Update Navigation"""
+  updateNavigation(input: UpdateNavigationInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateNavigationResult
+
+  """Update SiteSettings"""
+  updateSiteSettings(input: UpdateSiteSettingsInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateSiteSettingsResult
+
+  """Update Homepage"""
+  updateHomepage(input: UpdateHomepageInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateHomepageResult
+
+  """Update Footer"""
+  updateFooter(input: UpdateFooterInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateFooterResult
+
+  """Update SocialSettings"""
+  updateSocialSettings(input: UpdateSocialSettingsInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateSocialSettingsResult
+
+  """Create StillCategory"""
+  createStillCategory(input: CreateStillCategoryInput!): CreateStillCategoryResult
+
+  """Update StillCategory"""
+  updateStillCategory(input: UpdateStillCategoryInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateStillCategoryResult
+
+  """Delete StillCategory"""
+  deleteStillCategory(input: DeleteStillCategoryInput!): DeleteStillCategoryResult
+
+  """
+  Duplicate StillCategory including locales. Additional properties will override field values.
+  """
+  duplicateStillCategory(input: DuplicateStillCategoryInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateStillCategoryResult
+
+  """
+  Create StillCategory items from Asset csv, only single layer string fields are supported.
+  """
+  importStillCategoryListFromCSV(assetId: ID!, importColumns: [String]): ImportResultType
+
+  """Update Still"""
+  updateStill(input: UpdateStillInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateStillResult
+
+  """Create Location"""
+  createLocation(input: CreateLocationInput!): CreateLocationResult
+
+  """Update Location"""
+  updateLocation(input: UpdateLocationInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateLocationResult
+
+  """Delete Location"""
+  deleteLocation(input: DeleteLocationInput!): DeleteLocationResult
+
+  """
+  Duplicate Location including locales. Additional properties will override field values.
+  """
+  duplicateLocation(input: DuplicateLocationInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateLocationResult
+
+  """
+  Create Location items from Asset csv, only single layer string fields are supported.
+  """
+  importLocationListFromCSV(assetId: ID!, importColumns: [String]): ImportResultType
+
+  """Update About"""
+  updateAbout(input: UpdateAboutInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateAboutResult
+
+  """Create Film"""
+  createFilm(input: CreateFilmInput!): CreateFilmResult
+
+  """Update Film"""
+  updateFilm(input: UpdateFilmInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateFilmResult
+
+  """Delete Film"""
+  deleteFilm(input: DeleteFilmInput!): DeleteFilmResult
+
+  """
+  Duplicate Film including locales. Additional properties will override field values.
+  """
+  duplicateFilm(input: DuplicateFilmInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateFilmResult
+
+  """
+  Create Film items from Asset csv, only single layer string fields are supported.
+  """
+  importFilmListFromCSV(assetId: ID!, importColumns: [String]): ImportResultType
+
+  """Update Blog"""
+  updateBlog(input: UpdateBlogInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateBlogResult
+
+  """Create Story"""
+  createStory(input: CreateStoryInput!): CreateStoryResult
+
+  """Update Story"""
+  updateStory(input: UpdateStoryInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateStoryResult
+
+  """Delete Story"""
+  deleteStory(input: DeleteStoryInput!): DeleteStoryResult
+
+  """
+  Duplicate Story including locales. Additional properties will override field values.
+  """
+  duplicateStory(input: DuplicateStoryInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateStoryResult
+
+  """
+  Create Story items from Asset csv, only single layer string fields are supported.
+  """
+  importStoryListFromCSV(assetId: ID!, importColumns: [String]): ImportResultType
+
+  """Update Destinations"""
+  updateDestinations(input: UpdateDestinationsInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateDestinationsResult
+
+  """Create FilmCategory"""
+  createFilmCategory(input: CreateFilmCategoryInput!): CreateFilmCategoryResult
+
+  """Update FilmCategory"""
+  updateFilmCategory(input: UpdateFilmCategoryInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateFilmCategoryResult
+
+  """Delete FilmCategory"""
+  deleteFilmCategory(input: DeleteFilmCategoryInput!): DeleteFilmCategoryResult
+
+  """
+  Duplicate FilmCategory including locales. Additional properties will override field values.
+  """
+  duplicateFilmCategory(input: DuplicateFilmCategoryInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateFilmCategoryResult
+
+  """
+  Create FilmCategory items from Asset csv, only single layer string fields are supported.
+  """
+  importFilmCategoryListFromCSV(assetId: ID!, importColumns: [String]): ImportResultType
+
+  """Create Category"""
+  createCategory(input: CreateCategoryInput!): CreateCategoryResult
+
+  """Update Category"""
+  updateCategory(input: UpdateCategoryInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateCategoryResult
+
+  """Delete Category"""
+  deleteCategory(input: DeleteCategoryInput!): DeleteCategoryResult
+
+  """
+  Duplicate Category including locales. Additional properties will override field values.
+  """
+  duplicateCategory(input: DuplicateCategoryInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateCategoryResult
+
+  """
+  Create Category items from Asset csv, only single layer string fields are supported.
+  """
+  importCategoryListFromCSV(assetId: ID!, importColumns: [String]): ImportResultType
+
+  """Create Continent"""
+  createContinent(input: CreateContinentInput!): CreateContinentResult
+
+  """Update Continent"""
+  updateContinent(input: UpdateContinentInput!, structure: [ContentStructureInput], locale: String, enableLocaleFallback: Boolean = true): UpdateContinentResult
+
+  """Delete Continent"""
+  deleteContinent(input: DeleteContinentInput!): DeleteContinentResult
+
+  """
+  Duplicate Continent including locales. Additional properties will override field values.
+  """
+  duplicateContinent(input: DuplicateContinentInput!, locale: String, enableLocaleFallback: Boolean = true): DuplicateContinentResult
+
+  """
+  Create Continent items from Asset csv, only single layer string fields are supported.
+  """
+  importContinentListFromCSV(assetId: ID!, importColumns: [String]): ImportResultType
+}
+
+type Navigation implements TSSearchable {
+  social: NavigationSocial
+  links: [NavigationLinks]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type NavigationLinks {
+  children(locale: String, enableLocaleFallback: Boolean = true): [NavigationLinksChildren]
+  url: String
+  text: String
+}
+
+union NavigationLinksChildren = Location | FilmCategory | StillCategory | Continent | Category
+
+input NavigationLinksInput {
+  children: [TSRelationshipInput]
+  url: String
+  text: String
+}
+
+type NavigationPaginatedList {
+  results: [Navigation] @deprecated(reason: "Use items instead")
+  items: [Navigation]
+  total: Int
+}
+
+type NavigationSocial {
+  instagramUrl: String
+  facebookUrl: String
+  pinterestUrl: String
+  youTubeUrl: String
+}
+
+input NavigationSocialInput {
+  instagramUrl: String
+  facebookUrl: String
+  pinterestUrl: String
+  youTubeUrl: String
+}
+
+"""Object representing a rejected item processed during the import."""
+type RejectedImportItem {
+  """Index of the rejected item in the import."""
+  itemNumber: Int!
+
+  """Beautified error messages interpreted from the raw error objects."""
+  errors: [String]
+
+  """Raw error objects from the validator."""
+  rawErrors: [JSON]
+}
+
+"""Root of the Schema"""
+type Root {
+  """Activity Log"""
+  tsGetActivityLog(filters: JSON): [TSActivityLogItem]
+
+  """Most Recent Static Site Deploys"""
+  tsGetLatestSiteDeploys: [TSActivityLogItem]
+
+  """List of Projects"""
+  tsGetProjectList: [TSProjectListItem]
+
+  """List of active Project Members and the content they have open"""
+  tsGetProjectMembersLocationList: [TSMemberLocation]
+
+  """List of project templates available for import."""
+  tsGetProjectTemplateList: [TSProjectTemplate]
+
+  """Get the status of a site deploy"""
+  tsSiteDeployStatus(siteId: ID): TSSite
+
+  """Get the status of a site deploy"""
+  tsGetContentUsage(id: ID!): [TSContentUsage]
+
+  """List potential preview paths"""
+  tsGetPreviewPathList: [TSContentTypePreviewPaths]
+
+  """Get static site preview token"""
+  tsGetSitePreviewToken(siteId: String!): String
+
+  """Get a Lock by id"""
+  tsIsLocked(contentTypeId: ID, id: ID): TSLock
+
+  """Get an API key by key and project"""
+  tsGetApiKey(id: ID): TSApiKey
+
+  """Get all API Keys for a Project"""
+  tsGetApiKeysByProject: [TSApiKey]
+
+  """Get user/API role"""
+  tsGetRole(name: String!): TSRole
+
+  """List user/API roles for the current project"""
+  tsGetRoleList: TSRolePaginatedList
+
+  """Get all webhooks"""
+  tsGetWebhooks: TSWebhooks
+
+  """Get specific webhook history item by webhookUrl and invocationTime."""
+  tsGetWebhookHistoryItem(webhookUrl: String!, invocationTime: String): TSWebhookHistory
+
+  """
+  Get webhook history items for a webhookUrl. Filter for a window of invocationTime with the from and to arguments.
+  """
+  tsGetWebhookHistory(
+    webhookUrl: String!
+
+    """Filter start time, inclusive, as an ISO8601 date string."""
+    from: String
+
+    """Filter end time, inclusive, as an ISO8601 date string."""
+    to: String
+  ): [TSWebhookHistory]
+
+  """Get Locales for Project"""
+  tsGetLocales: TSLocales
+
+  """Get upcoming scheduled content status updates"""
+  tsGetStatusUpdateList(contentId: String!, contentTypeName: String!): TSStatusUpdateList
+  tsGetUsage: TSUsageType
+
+  """
+  Retrieve a project export. If the export is completed, you'll be provided with a path to it.
+  """
+  tsGetProjectExport(id: String!): TSProjectExport
+
+  """Retrieve a project import."""
+  tsGetProjectImport(id: String!): TSProjectImport
+
+  """Get a Project by id"""
+  tsGetProject(id: ID): TSProject
+
+  """List of Project Members"""
+  tsGetProjectMembers(id: ID): [TSUser]
+
+  """List of Project Members"""
+  tsGetProjectAdmins: [TSUser]
+
+  """List of Project Plans"""
+  tsGetPlanList: [TSBillingPlan]
+
+  """List all payments for a project"""
+  tsGetPaymentList(cursor: ID): TSBillingPaymentCursorPaginatedList
+  search(
+    terms: String
+    contentTypeNames: [String]
+    contentTypeIds: [String]
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereInput
+  ): TSSearchResults
+  taxonomySuggest(
+    terms: String
+    contentTypeNames: [String]
+    contentTypeIds: [String]
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+  ): TSSuggestionPaginatedList
+
+  """List Versions for a piece of content"""
+  getContentVersion(id: ID!, version: Int!, locale: String, enableLocaleFallback: Boolean = true): TSVersionResponse
+
+  """List Versions for a piece of content"""
+  getContentVersionList(id: ID!, from: Int, size: Int): TSVersionsPaginatedList
+
+  """Returns a list asset in natural order."""
+  getAssetList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereAssetInput
+  ): AssetPaginatedList
+
+  """Get a asset by ID"""
+  getAsset(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Asset
+
+  """Search the asset index by keyword"""
+  searchAssetIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereAssetInput
+  ): AssetSearchResults
+
+  """Returns a list tsStaticSite in natural order."""
+  getTsStaticSiteList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereTsStaticSiteInput
+  ): TsStaticSitePaginatedList
+
+  """Get a tsStaticSite by ID"""
+  getTsStaticSite(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): TsStaticSite
+
+  """Search the tsStaticSite index by keyword"""
+  searchTsStaticSiteIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereTsStaticSiteInput
+  ): TsStaticSiteSearchResults
+
+  """Get the films"""
+  films(locale: String, enableLocaleFallback: Boolean = true): Films @deprecated(reason: "Use getFilms instead")
+
+  """Get the films"""
+  getFilms(locale: String, enableLocaleFallback: Boolean = true): Films
+
+  """Get the navigation"""
+  navigation(locale: String, enableLocaleFallback: Boolean = true): Navigation @deprecated(reason: "Use getNavigation instead")
+
+  """Get the navigation"""
+  getNavigation(locale: String, enableLocaleFallback: Boolean = true): Navigation
+
+  """Get the siteSettings"""
+  siteSettings(locale: String, enableLocaleFallback: Boolean = true): SiteSettings @deprecated(reason: "Use getSiteSettings instead")
+
+  """Get the siteSettings"""
+  getSiteSettings(locale: String, enableLocaleFallback: Boolean = true): SiteSettings
+
+  """Get the homepage"""
+  homepage(locale: String, enableLocaleFallback: Boolean = true): Homepage @deprecated(reason: "Use getHomepage instead")
+
+  """Get the homepage"""
+  getHomepage(locale: String, enableLocaleFallback: Boolean = true): Homepage
+
+  """Get the footer"""
+  footer(locale: String, enableLocaleFallback: Boolean = true): Footer @deprecated(reason: "Use getFooter instead")
+
+  """Get the footer"""
+  getFooter(locale: String, enableLocaleFallback: Boolean = true): Footer
+
+  """Get the socialSettings"""
+  socialSettings(locale: String, enableLocaleFallback: Boolean = true): SocialSettings @deprecated(reason: "Use getSocialSettings instead")
+
+  """Get the socialSettings"""
+  getSocialSettings(locale: String, enableLocaleFallback: Boolean = true): SocialSettings
+
+  """Returns a list stillCategory in natural order."""
+  getStillCategoryList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereStillCategoryInput
+  ): StillCategoryPaginatedList
+
+  """Get a stillCategory by ID"""
+  getStillCategory(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): StillCategory
+
+  """Search the stillCategory index by keyword"""
+  searchStillCategoryIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereStillCategoryInput
+  ): StillCategorySearchResults
+
+  """Get the still"""
+  still(locale: String, enableLocaleFallback: Boolean = true): Still @deprecated(reason: "Use getStill instead")
+
+  """Get the still"""
+  getStill(locale: String, enableLocaleFallback: Boolean = true): Still
+
+  """Returns a list location in natural order."""
+  getLocationList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereLocationInput
+  ): LocationPaginatedList
+
+  """Get a location by ID"""
+  getLocation(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Location
+
+  """Search the location index by keyword"""
+  searchLocationIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereLocationInput
+  ): LocationSearchResults
+
+  """Get the about"""
+  about(locale: String, enableLocaleFallback: Boolean = true): About @deprecated(reason: "Use getAbout instead")
+
+  """Get the about"""
+  getAbout(locale: String, enableLocaleFallback: Boolean = true): About
+
+  """Returns a list film in natural order."""
+  getFilmList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereFilmInput
+  ): FilmPaginatedList
+
+  """Get a film by ID"""
+  getFilm(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Film
+
+  """Search the film index by keyword"""
+  searchFilmIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereFilmInput
+  ): FilmSearchResults
+
+  """Get the blog"""
+  blog(locale: String, enableLocaleFallback: Boolean = true): Blog @deprecated(reason: "Use getBlog instead")
+
+  """Get the blog"""
+  getBlog(locale: String, enableLocaleFallback: Boolean = true): Blog
+
+  """Returns a list story in natural order."""
+  getStoryList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereStoryInput
+  ): StoryPaginatedList
+
+  """Get a story by ID"""
+  getStory(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Story
+
+  """Search the story index by keyword"""
+  searchStoryIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereStoryInput
+  ): StorySearchResults
+
+  """Get the destinations"""
+  destinations(locale: String, enableLocaleFallback: Boolean = true): Destinations @deprecated(reason: "Use getDestinations instead")
+
+  """Get the destinations"""
+  getDestinations(locale: String, enableLocaleFallback: Boolean = true): Destinations
+
+  """Returns a list filmCategory in natural order."""
+  getFilmCategoryList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereFilmCategoryInput
+  ): FilmCategoryPaginatedList
+
+  """Get a filmCategory by ID"""
+  getFilmCategory(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): FilmCategory
+
+  """Search the filmCategory index by keyword"""
+  searchFilmCategoryIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereFilmCategoryInput
+  ): FilmCategorySearchResults
+
+  """Returns a list category in natural order."""
+  getCategoryList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereCategoryInput
+  ): CategoryPaginatedList
+
+  """Get a category by ID"""
+  getCategory(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Category
+
+  """Search the category index by keyword"""
+  searchCategoryIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereCategoryInput
+  ): CategorySearchResults
+
+  """Returns a list continent in natural order."""
+  getContinentList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereContinentInput
+  ): ContinentPaginatedList
+
+  """Get a continent by ID"""
+  getContinent(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Continent
+
+  """Search the continent index by keyword"""
+  searchContinentIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereContinentInput
+  ): ContinentSearchResults
+  withContext(locale: String, enableLocaleFallback: Boolean): WithContext
+}
+
+type SiteSettings implements TSSearchable {
+  googleAnalyticsId: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type SocialSettings implements TSSearchable {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  description: String
+  siteName: String
+  url: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type SocialSettingsPaginatedList {
+  results: [SocialSettings] @deprecated(reason: "Use items instead")
+  items: [SocialSettings]
+  total: Int
+}
+
+type Still implements TSSearchable {
+  stillCategories(locale: String, enableLocaleFallback: Boolean = true): [StillCategory]
+  stills: [StillStills]
+  title: String!
+  social: StillSocial
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type StillCategory implements TSSearchable {
+  title: String!
+  social: StillCategorySocial
+  stills: [StillCategoryStills]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  navigationSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): NavigationPaginatedList
+  stillSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StillPaginatedList
+  searchSummary: String
+}
+
+type StillCategoryPaginatedList {
+  results: [StillCategory] @deprecated(reason: "Use items instead")
+  items: [StillCategory]
+  total: Int
+}
+
+"""A StillCategory search result"""
+type StillCategorySearchResult {
+  searchSummary: String
+  title: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""StillCategory search results"""
+type StillCategorySearchResults {
+  results: [StillCategorySearchResult]
+  total: Int
+}
+
+type StillCategorySocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input StillCategorySocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+type StillCategoryStills {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input StillCategoryStillsInput {
+  image: TSRelationshipInput
+}
+
+type StillPaginatedList {
+  results: [Still] @deprecated(reason: "Use items instead")
+  items: [Still]
+  total: Int
+}
+
+type StillSocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input StillSocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+type StillStills {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input StillStillsInput {
+  image: TSRelationshipInput
+}
+
+type Story implements TSSearchable {
+  """The initial <ins></ins>, omit the <script></script>"""
+  bookingContent: String
+  social: StorySocial
+  blockCanvas: JSON
+  blockCanvasHtml(
+    imageConfig: JSON
+    images: TSImagesConfig
+
+    """A prefix to be all CSS classes in the generated HTML"""
+    classPrefix: String = ""
+  ): String
+  shopStyle: StoryShopStyle
+
+  """The numeric sequence within data-widget-id"""
+  rewardStyleId: String
+  location(locale: String, enableLocaleFallback: Boolean = true): [Location]
+  title: String!
+  tout: StoryTout!
+  category(locale: String, enableLocaleFallback: Boolean = true): [Category]
+  relatedStories(locale: String, enableLocaleFallback: Boolean = true): [Story]
+  content: JSON!
+  contentHtml(
+    imageConfig: JSON
+    images: TSImagesConfig
+
+    """A prefix to be all CSS classes in the generated HTML"""
+    classPrefix: String = ""
+  ): String
+  shopStyleHtml: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  _references(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): UndefinedReferencePaginatedList
+  homepageSet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): HomepagePaginatedList
+  storySet(filter: JSON, sort: [TSSearchSort], from: Int, size: Int, locale: String, enableLocaleFallback: Boolean = true): StoryPaginatedList
+  searchSummary: String
+}
+
+type StoryPaginatedList {
+  results: [Story] @deprecated(reason: "Use items instead")
+  items: [Story]
+  total: Int
+}
+
+"""A Story search result"""
+type StorySearchResult {
+  searchSummary: String
+  bookingContent: String
+  rewardStyleId: String
+  title: String
+  shopStyleHtml: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""Story search results"""
+type StorySearchResults {
+  results: [StorySearchResult]
+  total: Int
+}
+
+type StoryShopStyle {
+  """All text within data-options"""
+  options: String
+
+  """The numeric sequence at the end of the script src"""
+  scriptId: String
+}
+
+input StoryShopStyleInput {
+  """All text within data-options"""
+  options: String
+
+  """The numeric sequence at the end of the script src"""
+  scriptId: String
+}
+
+type StorySocial {
+  title: String
+  description: String
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+}
+
+input StorySocialInput {
+  title: String
+  description: String
+  image: TSRelationshipInput
+}
+
+type StoryTout {
+  image(locale: String, enableLocaleFallback: Boolean = true): Asset
+  secondaryImage(locale: String, enableLocaleFallback: Boolean = true): Asset
+  dek: String
+}
+
+input StoryToutInput {
+  image: TSRelationshipInput
+  secondaryImage: TSRelationshipInput
+  dek: String
+}
+
+type TSActivityLogItem {
+  activityType: String
+  userId: ID
+  username: String
+  projectId: ID
+  siteId: ID
+  stage: String
+  description: String
+  timestamp: String
+  metadata: JSON
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSAndOperator {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSAndOperator]
+  OR: [TSOrOperator]
+  NOT: TSNotOperator
+  baseUrl: TSWhereString
+  provider: TSWhereString
+  idKey: TSWhereString
+  destination: TSWhereString
+  privateAcl: TSWhereBoolean
+  environmentVariables: TSWhereEnvironmentVariables
+  triggers: TSWhereTriggers
+  templateHash: TSWhereString
+  featuredFilms: TSWhereFilmRelationship
+  social: TSWhereSocial
+  filmCategories: TSWhereFilmCategoryRelationship
+  links: TSWhereLinks
+  googleAnalyticsId: TSWhereString
+  recentEntries: TSWhereStoryRelationship
+  slider: TSWhereSlider
+  visuals: TSWhereVisuals
+  contacts: TSWhereContacts
+  formEndpoint: TSWhereString
+  image: TSWhereAssetRelationship
+  siteName: TSWhereString
+  url: TSWhereString
+  stills: TSWhereStills
+  stillCategories: TSWhereStillCategoryRelationship
+  clients: TSWhereClients
+  about: TSWhereAbout
+  team: TSWhereTeam
+  press: TSWherePress
+  photostrip: TSWherePhotostrip
+  filmCategory: TSWhereFilmCategoryRelationship
+  youTubeUrl: TSWhereString
+  categories: TSWhereCategoryRelationship
+  bookingContent: TSWhereString
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  location: TSWhereLocationRelationship
+  tout: TSWhereTout
+  category: TSWhereCategoryRelationship
+  relatedStories: TSWhereStoryRelationship
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  locations: TSWhereLocationRelationship
+  featuredLocations: TSWhereLocationRelationship
+  name: TSWhereString
+}
+
+type TSApiKey {
+  projectId: ID
+  name: String
+  role: String
+  permissions: JSON
+  lastUsed: String
+  apiKey: String
+  id: ID
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSAssetAndOperator {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSAssetAndOperator]
+  OR: [TSAssetOrOperator]
+  NOT: TSAssetNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSAssetNotOperator {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSAssetOrOperator {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSAssetAndOperator]
+  OR: [TSAssetOrOperator]
+  NOT: TSAssetNotOperator
+}
+
+type TSBilling {
+  enterprise: Boolean
+  cardDetails: TSBillingCardDetails
+  plan: TSBillingPlan
+  discount: TSBillingDiscount
+  trialEnd: String
+  email: String
+}
+
+type TSBillingAmount {
+  total: Int
+  subtotal: Int
+  refund: Int
+  discount: TSBillingDiscount
+}
+
+type TSBillingCardDetails {
+  brand: String
+  cvcCheck: String
+  expMonth: Int
+  expYear: Int
+  last4: String
+}
+
+type TSBillingDiscount {
+  percentOff: Int
+  amountOff: Int
+  duration: String
+  code: String
+}
+
+type TSBillingEntitlements {
+  users: Int
+  apiRequests: Int
+  apiRateLimit: Int
+  contentEntries: Int
+  bandwidth: Int
+  deployTargets: Int
+  webhooks: Boolean
+  locales: Int
+  roles: Int
+  workflows: Int
+}
+
+type TSBillingPayment {
+  date: String
+  plan: String
+  status: String
+  amount: TSBillingAmount
+  method: String
+}
+
+type TSBillingPaymentCursorPaginatedList {
+  items: [TSBillingPayment]
+  cursor: ID
+  hasMore: Boolean
+}
+
+type TSBillingPlan {
+  id: String
+  name: String
+  amount: Int
+  created: String
+  currency: String
+  interval: String
+  intervalCount: Int
+  entitlements: TSBillingEntitlements
+  trialPeriodDays: String
+}
+
+input TSCancelStatusUpdateInput {
+  contentId: String!
+  contentTypeName: String!
+  timestamp: String!
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSCategoryAndOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSCategoryAndOperator]
+  OR: [TSCategoryOrOperator]
+  NOT: TSCategoryNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSCategoryNotOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSCategoryOrOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSCategoryAndOperator]
+  OR: [TSCategoryOrOperator]
+  NOT: TSCategoryNotOperator
+}
+
+type TSContentLocation {
+  contentId: String
+  contentTypeId: String
+  hasLock: Boolean
+}
+
+type TSContentTypePreviewPaths {
+  contentTypeId: String!
+  contentTypeName: String!
+  sites: [TSSitePreviewPaths]!
+}
+
+type TSContentUsage {
+  siteId: ID
+  siteTitle: String
+  deployedAt: String
+  baseUrl: String
+  usages: [TSPathUsage]
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSContinentAndOperator {
+  name: TSWhereString
+  social: TSWhereSocial
+  locations: TSWhereLocationRelationship
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSContinentAndOperator]
+  OR: [TSContinentOrOperator]
+  NOT: TSContinentNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSContinentNotOperator {
+  name: TSWhereString
+  social: TSWhereSocial
+  locations: TSWhereLocationRelationship
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSContinentOrOperator {
+  name: TSWhereString
+  social: TSWhereSocial
+  locations: TSWhereLocationRelationship
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSContinentAndOperator]
+  OR: [TSContinentOrOperator]
+  NOT: TSContinentNotOperator
+}
+
+input TSDeleteWorkflowInput {
+  version: Int!
+  name: String!
+}
+
+input TSFile {
+  name: String!
+  type: String!
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSFilmAndOperator {
+  image: TSWhereAssetRelationship
+  filmCategory: TSWhereFilmCategoryRelationship
+  title: TSWhereString
+  youTubeUrl: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSFilmAndOperator]
+  OR: [TSFilmOrOperator]
+  NOT: TSFilmNotOperator
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSFilmCategoryAndOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSFilmCategoryAndOperator]
+  OR: [TSFilmCategoryOrOperator]
+  NOT: TSFilmCategoryNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSFilmCategoryNotOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSFilmCategoryOrOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSFilmCategoryAndOperator]
+  OR: [TSFilmCategoryOrOperator]
+  NOT: TSFilmCategoryNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSFilmNotOperator {
+  image: TSWhereAssetRelationship
+  filmCategory: TSWhereFilmCategoryRelationship
+  title: TSWhereString
+  youTubeUrl: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSFilmOrOperator {
+  image: TSWhereAssetRelationship
+  filmCategory: TSWhereFilmCategoryRelationship
+  title: TSWhereString
+  youTubeUrl: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSFilmAndOperator]
+  OR: [TSFilmOrOperator]
+  NOT: TSFilmNotOperator
+}
+
+input TSImagesConfig {
+  """Default image parameters. See https://docs.imgix.com/apis/url """
+  default: JSON
+
+  """Small image parameters. See https://docs.imgix.com/apis/url """
+  small: JSON
+
+  """Medium image parameters. See https://docs.imgix.com/apis/url """
+  medium: JSON
+
+  """Large image parameters. See https://docs.imgix.com/apis/url """
+  large: JSON
+}
+
+type TSIntegrationToken {
+  provider: String!
+  token: String
+}
+
+type TSInvite {
+  inviteCode: ID
+  email: ID
+  role: String
+  projectId: ID
+  inviterUserId: ID
+  status: String
+}
+
+type TSLocales {
+  defaultLocale: String!
+  locales: [String]
+  version: Int!
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSLocationAndOperator {
+  title: TSWhereString
+  image: TSWhereAssetRelationship
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSLocationAndOperator]
+  OR: [TSLocationOrOperator]
+  NOT: TSLocationNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSLocationNotOperator {
+  title: TSWhereString
+  image: TSWhereAssetRelationship
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSLocationOrOperator {
+  title: TSWhereString
+  image: TSWhereAssetRelationship
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSLocationAndOperator]
+  OR: [TSLocationOrOperator]
+  NOT: TSLocationNotOperator
+}
+
+type TSLock {
+  user: TSUser
+  expires: String
+}
+
+type TSMemberLocation {
+  userId: String!
+  contentList: [TSContentLocation]
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSNotOperator {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSContinentAndOperator]
+  OR: [TSContinentOrOperator]
+  NOT: TSContinentNotOperator
+  baseUrl: TSWhereString
+  provider: TSWhereString
+  idKey: TSWhereString
+  destination: TSWhereString
+  privateAcl: TSWhereBoolean
+  environmentVariables: TSWhereEnvironmentVariables
+  triggers: TSWhereTriggers
+  templateHash: TSWhereString
+  featuredFilms: TSWhereFilmRelationship
+  social: TSWhereSocial
+  filmCategories: TSWhereFilmCategoryRelationship
+  links: TSWhereLinks
+  googleAnalyticsId: TSWhereString
+  recentEntries: TSWhereStoryRelationship
+  slider: TSWhereSlider
+  visuals: TSWhereVisuals
+  contacts: TSWhereContacts
+  formEndpoint: TSWhereString
+  image: TSWhereAssetRelationship
+  siteName: TSWhereString
+  url: TSWhereString
+  stills: TSWhereStills
+  stillCategories: TSWhereStillCategoryRelationship
+  clients: TSWhereClients
+  about: TSWhereAbout
+  team: TSWhereTeam
+  press: TSWherePress
+  photostrip: TSWherePhotostrip
+  filmCategory: TSWhereFilmCategoryRelationship
+  youTubeUrl: TSWhereString
+  categories: TSWhereCategoryRelationship
+  bookingContent: TSWhereString
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  location: TSWhereLocationRelationship
+  tout: TSWhereTout
+  category: TSWhereCategoryRelationship
+  relatedStories: TSWhereStoryRelationship
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  locations: TSWhereLocationRelationship
+  featuredLocations: TSWhereLocationRelationship
+  name: TSWhereString
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSOrOperator {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSAndOperator]
+  OR: [TSOrOperator]
+  NOT: TSNotOperator
+  baseUrl: TSWhereString
+  provider: TSWhereString
+  idKey: TSWhereString
+  destination: TSWhereString
+  privateAcl: TSWhereBoolean
+  environmentVariables: TSWhereEnvironmentVariables
+  triggers: TSWhereTriggers
+  templateHash: TSWhereString
+  featuredFilms: TSWhereFilmRelationship
+  social: TSWhereSocial
+  filmCategories: TSWhereFilmCategoryRelationship
+  links: TSWhereLinks
+  googleAnalyticsId: TSWhereString
+  recentEntries: TSWhereStoryRelationship
+  slider: TSWhereSlider
+  visuals: TSWhereVisuals
+  contacts: TSWhereContacts
+  formEndpoint: TSWhereString
+  image: TSWhereAssetRelationship
+  siteName: TSWhereString
+  url: TSWhereString
+  stills: TSWhereStills
+  stillCategories: TSWhereStillCategoryRelationship
+  clients: TSWhereClients
+  about: TSWhereAbout
+  team: TSWhereTeam
+  press: TSWherePress
+  photostrip: TSWherePhotostrip
+  filmCategory: TSWhereFilmCategoryRelationship
+  youTubeUrl: TSWhereString
+  categories: TSWhereCategoryRelationship
+  bookingContent: TSWhereString
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  location: TSWhereLocationRelationship
+  tout: TSWhereTout
+  category: TSWhereCategoryRelationship
+  relatedStories: TSWhereStoryRelationship
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  locations: TSWhereLocationRelationship
+  featuredLocations: TSWhereLocationRelationship
+  name: TSWhereString
+}
+
+type TSPathUsage {
+  path: String
+  depth: Int
+}
+
+type TSPermissions {
+  userId: ID
+  projectId: ID
+  role: String
+}
+
+type TSPreviewRoute {
+  routeName: String!
+  isPaginated: Boolean
+  path: String!
+}
+
+"""
+A Project is you main workspace it stores the content that powers your API
+"""
+type TSProject {
+  id: ID
+  name: String
+  template: TSProjectTemplate
+  invite: String
+  users: [TSUser]
+
+  """Takeshape project schema"""
+  schema: JSON
+
+  """Takeshape project schema"""
+  billing: TSBilling
+
+  """Project status object"""
+  status: JSON
+
+  """Project avatar"""
+  avatar: BaseAsset
+
+  """Default project timezone"""
+  defaultTimezone: String!
+  integrationTokens: [TSIntegrationToken]
+}
+
+"""Projects are exported to downloadable ZIP files."""
+type TSProjectExport {
+  id: String
+  status: String
+  file: String
+}
+
+type TSProjectImport {
+  id: String
+  status: String
+  message: String
+  projectId: String
+}
+
+"""
+A Project is you main workspace it stores the content that powers your API
+"""
+type TSProjectListItem {
+  id: ID
+  name: String
+  invite: String
+  type: String
+
+  """Project status object"""
+  status: JSON
+
+  """Project avatar"""
+  avatar: BaseAsset
+
+  """Default project timezone"""
+  defaultTimezone: String!
+}
+
+"""A project template available for import."""
+type TSProjectTemplate {
+  id: String!
+  name: String!
+  description: String
+  avatarPath: String
+  glitchProjectName: String
+  sourcePath: String!
+}
+
+input TSRelationshipInput {
+  contentTypeId: String!
+  id: String!
+}
+
+type TSRemoveWorkflowResponse {
+  name: String
+  schemaVersion: Int
+  removed: Boolean
+}
+
+type TSResourceActions {
+  resource: String!
+  actions: [String]
+}
+
+input TSResourceActionsInput {
+  resource: String!
+  actions: [String]
+}
+
+type TSRole {
+  name: String!
+  permissions: JSONObject!
+  created: String
+  updated: String
+  builtIn: Boolean
+}
+
+input TSRoleInput {
+  name: String!
+  permissions: JSONObject!
+  created: String
+  updated: String
+}
+
+type TSRolePaginatedList {
+  items: [TSRole]
+  total: Int
+  from: Int
+  size: Int
+}
+
+input TSSaveWorkflowInput {
+  version: Int!
+  workflow: TSWorkflowInput!
+}
+
+type TSSaveWorkflowResponse {
+  projectId: String
+  schemaVersion: Int
+  workflow: TSWorkflow
+}
+
+input TSScheduleStatusUpdateInput {
+  timestamp: String!
+  contentId: String!
+  status: String!
+  contentTypeName: String!
+}
+
+interface TSSearchable {
+  _id: ID
+  _contentTypeId: String
+  searchSummary: String
+}
+
+"""TS search results"""
+type TSSearchResults {
+  results: [TSSearchable]
+  total: Int
+}
+
+input TSSearchSort {
+  field: String!
+
+  """"asc" for ascending or "desc" for descending"""
+  order: String!
+}
+
+type TSSite {
+  siteId: ID
+  status: String
+  message: String
+}
+
+type TSSitePreviewPaths {
+  siteTitle: String!
+  siteId: String!
+  token: String
+  routes: [TSPreviewRoute]!
+}
+
+"""The built-in TakeShape static site model"""
+type TsStaticSite implements TSSearchable {
+  title: String!
+  baseUrl: String
+  provider: String!
+  idKey: String
+  secretKey: String
+  destination: String!
+  privateAcl: Boolean
+  environmentVariables: [TsStaticSiteEnvironmentVariables]
+  triggers: [TsStaticSiteTriggers]
+  templateHash: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: TSUser
+  _updatedAt: String
+  _updatedBy: TSUser
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  searchSummary: String
+}
+
+type TsStaticSiteEnvironmentVariables {
+  name: String
+  value: String
+}
+
+input TsStaticSiteEnvironmentVariablesInput {
+  name: String
+  value: String
+}
+
+type TsStaticSitePaginatedList {
+  results: [TsStaticSite] @deprecated(reason: "Use items instead")
+  items: [TsStaticSite]
+  total: Int
+}
+
+"""A TsStaticSite search result"""
+type TsStaticSiteSearchResult {
+  searchSummary: String
+  title: String
+  baseUrl: String
+  provider: String
+  idKey: String
+  destination: String
+  privateAcl: Boolean
+  templateHash: String
+  _id: String
+  _version: Int
+  _contentTypeId: String
+  _contentTypeName: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+}
+
+"""TsStaticSite search results"""
+type TsStaticSiteSearchResults {
+  results: [TsStaticSiteSearchResult]
+  total: Int
+}
+
+type TsStaticSiteTriggers {
+  contentTypeId: String
+  status: String
+}
+
+input TsStaticSiteTriggersInput {
+  contentTypeId: String
+  status: String
+}
+
+type TSStatusUpdate {
+  id: String!
+  timestamp: String!
+  type: String!
+  payload: JSONObject
+}
+
+type TSStatusUpdateList {
+  items: [TSStatusUpdate]
+  total: Int
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSStillCategoryAndOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  stills: TSWhereStills
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSStillCategoryAndOperator]
+  OR: [TSStillCategoryOrOperator]
+  NOT: TSStillCategoryNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSStillCategoryNotOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  stills: TSWhereStills
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSStillCategoryOrOperator {
+  title: TSWhereString
+  social: TSWhereSocial
+  stills: TSWhereStills
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSStillCategoryAndOperator]
+  OR: [TSStillCategoryOrOperator]
+  NOT: TSStillCategoryNotOperator
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSStoryAndOperator {
+  bookingContent: TSWhereString
+  social: TSWhereSocial
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  location: TSWhereLocationRelationship
+  title: TSWhereString
+  tout: TSWhereTout
+  category: TSWhereCategoryRelationship
+  relatedStories: TSWhereStoryRelationship
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSStoryAndOperator]
+  OR: [TSStoryOrOperator]
+  NOT: TSStoryNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSStoryNotOperator {
+  bookingContent: TSWhereString
+  social: TSWhereSocial
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  location: TSWhereLocationRelationship
+  title: TSWhereString
+  tout: TSWhereTout
+  category: TSWhereCategoryRelationship
+  relatedStories: TSWhereStoryRelationship
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSStoryOrOperator {
+  bookingContent: TSWhereString
+  social: TSWhereSocial
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  location: TSWhereLocationRelationship
+  title: TSWhereString
+  tout: TSWhereTout
+  category: TSWhereCategoryRelationship
+  relatedStories: TSWhereStoryRelationship
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSStoryAndOperator]
+  OR: [TSStoryOrOperator]
+  NOT: TSStoryNotOperator
+}
+
+type TSSuggestion {
+  _id: ID
+  _contentTypeId: ID
+  _contentTypeName: String
+  text: String
+  summary: String
+}
+
+type TSSuggestionPaginatedList {
+  results: [TSSuggestion] @deprecated(reason: "Use items instead")
+  items: [TSSuggestion]
+  total: Int
+}
+
+"""
+AND takes an array of conditions that must appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSTsStaticSiteAndOperator {
+  title: TSWhereString
+  baseUrl: TSWhereString
+  provider: TSWhereString
+  idKey: TSWhereString
+  destination: TSWhereString
+  privateAcl: TSWhereBoolean
+  environmentVariables: TSWhereEnvironmentVariables
+  triggers: TSWhereTriggers
+  templateHash: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSTsStaticSiteAndOperator]
+  OR: [TSTsStaticSiteOrOperator]
+  NOT: TSTsStaticSiteNotOperator
+}
+
+"""
+NOT takes a single condition that must not appear in the matching results.
+"""
+input TSTsStaticSiteNotOperator {
+  title: TSWhereString
+  baseUrl: TSWhereString
+  provider: TSWhereString
+  idKey: TSWhereString
+  destination: TSWhereString
+  privateAcl: TSWhereBoolean
+  environmentVariables: TSWhereEnvironmentVariables
+  triggers: TSWhereTriggers
+  templateHash: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+"""
+OR takes an array of conditions that should appear in the matching results.
+Nested boolean operators can be used to create complex filters.
+"""
+input TSTsStaticSiteOrOperator {
+  title: TSWhereString
+  baseUrl: TSWhereString
+  provider: TSWhereString
+  idKey: TSWhereString
+  destination: TSWhereString
+  privateAcl: TSWhereBoolean
+  environmentVariables: TSWhereEnvironmentVariables
+  triggers: TSWhereTriggers
+  templateHash: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSTsStaticSiteAndOperator]
+  OR: [TSTsStaticSiteOrOperator]
+  NOT: TSTsStaticSiteNotOperator
+}
+
+input TSUpdateWorkflowInput {
+  version: Int!
+  name: String!
+  workflow: TSWorkflowInput!
+}
+
+type TSUsageType {
+  """The usage period start time"""
+  startTime: String
+
+  """The usage period end time"""
+  endTime: String
+
+  """Get members for project"""
+  users: Int
+
+  """Get user bandwidth"""
+  bandwidth: Int
+
+  """Get user roles"""
+  roles: Int
+
+  """Get user workflows"""
+  workflows: Int
+
+  """Get user sites"""
+  deployTargets: Int
+
+  """Get user locales"""
+  locales: Int
+
+  """Get user api calls"""
+  apiRequests: Int
+
+  """Get user content entries"""
+  contentEntries: Int
+}
+
+type TSUser {
+  id: ID
+  email: String
+  fullName: String
+  role: String
+  avatarPath: String
+}
+
+type TSVersion {
+  id: String
+  version: Int
+  status: String
+  enabled: Boolean
+  color: String
+  updatedAt: String
+  updatedBy: TSUser
+  item(locale: String, enableLocaleFallback: Boolean = true): TSVersionResponse
+}
+
+type TSVersionResponse {
+  content: JSONObject
+  schema: JSONObject
+}
+
+type TSVersionsPaginatedList {
+  items: [TSVersion]
+  total: Int
+  from: Int
+  size: Int
+}
+
+type TSWebhook {
+  webhookUrl: String!
+  headers: [HttpHeader]
+  resourceActions: [TSResourceActions]
+}
+
+type TSWebhookHistory {
+  _invocationTime: String!
+  projectId: ID!
+  webhookUrl: String!
+  stats: TSWebhookHistoryStats!
+}
+
+type TSWebhookHistoryError {
+  name: String
+  message: String
+}
+
+type TSWebhookHistoryRequest {
+  url: String!
+  headers: JSON
+  body: JSON
+}
+
+type TSWebhookHistoryResponse {
+  status: String!
+  statusText: String
+  url: String!
+  headers: JSON
+  body: JSON
+}
+
+type TSWebhookHistoryStats {
+  succeeded: Boolean!
+  retrying: Boolean!
+  invocationStartTime: String!
+  invocationDuration: Int!
+  request: TSWebhookHistoryRequest!
+  response: TSWebhookHistoryResponse
+  error: TSWebhookHistoryError
+}
+
+input TSWebhookInput {
+  webhookUrl: String!
+  headers: [HttpHeaderInput]
+  resourceActions: [TSResourceActionsInput]
+}
+
+type TSWebhooks {
+  secret: String
+  webhooks: [TSWebhook]
+}
+
+input TSWebhooksInput {
+  resetSecret: Boolean
+  webhooks: [TSWebhookInput]
+}
+
+input TSWhereAbout {
+  heading: TSWhereString
+  content: TSWhereDraftjs
+}
+
+input TSWhereAssetInput {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSAssetAndOperator]
+  OR: [TSAssetOrOperator]
+  NOT: TSAssetNotOperator
+}
+
+input TSWhereAssetRelationship {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereString
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereString
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+input TSWhereBoolean {
+  """Exact match"""
+  eq: Boolean
+}
+
+input TSWhereCategoryContinentFilmCategoryLocationStillCategoryRelationship {
+  title: TSWhereString
+  social: TSWhereLinksChildren
+  _id: TSWhereString
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereString
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  stills: TSWhereLinksChildren
+  name: TSWhereString
+}
+
+input TSWhereCategoryInput {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSCategoryAndOperator]
+  OR: [TSCategoryOrOperator]
+  NOT: TSCategoryNotOperator
+}
+
+input TSWhereCategoryRelationship {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+input TSWhereClients {
+  heading: TSWhereString
+  logos: TSWhereClientsLogos
+}
+
+input TSWhereClientsLogos {
+  name: TSWhereString
+  image: TSWhereAssetRelationship
+  url: TSWhereString
+}
+
+input TSWhereContacts {
+  email: TSWhereString
+  label: TSWhereString
+}
+
+input TSWhereContinentInput {
+  name: TSWhereString
+  social: TSWhereSocial
+  locations: TSWhereLocationRelationship
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSContinentAndOperator]
+  OR: [TSContinentOrOperator]
+  NOT: TSContinentNotOperator
+}
+
+input TSWhereDate {
+  """Exact match"""
+  eq: String
+
+  """Less than"""
+  lt: String
+
+  """Less than or equal"""
+  lte: String
+
+  """Greater than"""
+  gt: String
+
+  """Greater than or equal"""
+  gte: String
+}
+
+input TSWhereDraftjs {
+  """Full text searching with fuzzy matching."""
+  match: String
+}
+
+input TSWhereEnvironmentVariables {
+  name: TSWhereString
+  value: TSWhereString
+}
+
+input TSWhereFilmCategoryInput {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSFilmCategoryAndOperator]
+  OR: [TSFilmCategoryOrOperator]
+  NOT: TSFilmCategoryNotOperator
+}
+
+input TSWhereFilmCategoryRelationship {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+input TSWhereFilmInput {
+  image: TSWhereAssetRelationship
+  filmCategory: TSWhereFilmCategoryRelationship
+  title: TSWhereString
+  youTubeUrl: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSFilmAndOperator]
+  OR: [TSFilmOrOperator]
+  NOT: TSFilmNotOperator
+}
+
+input TSWhereFilmRelationship {
+  title: TSWhereString
+  youTubeUrl: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+input TSWhereID {
+  """Exact match"""
+  eq: ID
+
+  """Array of possible exact match values."""
+  in: [ID]
+}
+
+input TSWhereInput {
+  sourceUrl: TSWhereString
+  path: TSWhereString
+  filename: TSWhereString
+  description: TSWhereString
+  caption: TSWhereDraftjs
+  uploadStatus: TSWhereString
+  mimeType: TSWhereString
+  title: TSWhereString
+  credit: TSWhereDraftjs
+  s3Key: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSAndOperator]
+  OR: [TSOrOperator]
+  NOT: TSNotOperator
+  baseUrl: TSWhereString
+  provider: TSWhereString
+  idKey: TSWhereString
+  destination: TSWhereString
+  privateAcl: TSWhereBoolean
+  environmentVariables: TSWhereEnvironmentVariables
+  triggers: TSWhereTriggers
+  templateHash: TSWhereString
+  featuredFilms: TSWhereFilmRelationship
+  social: TSWhereSocial
+  filmCategories: TSWhereFilmCategoryRelationship
+  links: TSWhereLinks
+  googleAnalyticsId: TSWhereString
+  recentEntries: TSWhereStoryRelationship
+  slider: TSWhereSlider
+  visuals: TSWhereVisuals
+  contacts: TSWhereContacts
+  formEndpoint: TSWhereString
+  image: TSWhereAssetRelationship
+  siteName: TSWhereString
+  url: TSWhereString
+  stills: TSWhereStills
+  stillCategories: TSWhereStillCategoryRelationship
+  clients: TSWhereClients
+  about: TSWhereAbout
+  team: TSWhereTeam
+  press: TSWherePress
+  photostrip: TSWherePhotostrip
+  filmCategory: TSWhereFilmCategoryRelationship
+  youTubeUrl: TSWhereString
+  categories: TSWhereCategoryRelationship
+  bookingContent: TSWhereString
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  location: TSWhereLocationRelationship
+  tout: TSWhereTout
+  category: TSWhereCategoryRelationship
+  relatedStories: TSWhereStoryRelationship
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  locations: TSWhereLocationRelationship
+  featuredLocations: TSWhereLocationRelationship
+  name: TSWhereString
+}
+
+input TSWhereInteger {
+  """Exact match"""
+  eq: Int
+
+  """Less than"""
+  lt: Int
+
+  """Less than or equal"""
+  lte: Int
+
+  """Greater than"""
+  gt: Int
+
+  """Greater than or equal"""
+  gte: Int
+
+  """Array of possible exact match values."""
+  in: [Int]
+}
+
+input TSWhereLinks {
+  children: TSWhereCategoryContinentFilmCategoryLocationStillCategoryRelationship
+  url: TSWhereString
+  text: TSWhereString
+}
+
+input TSWhereLinksChildren {
+  title: TSWhereString
+  description: TSWhereString
+}
+
+input TSWhereLocationInput {
+  title: TSWhereString
+  image: TSWhereAssetRelationship
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSLocationAndOperator]
+  OR: [TSLocationOrOperator]
+  NOT: TSLocationNotOperator
+}
+
+input TSWhereLocationRelationship {
+  title: TSWhereString
+  social: TSWhereSocial
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+input TSWhereNumber {
+  """Exact match"""
+  eq: Float
+
+  """Less than"""
+  lt: Float
+
+  """Less than or equal"""
+  lte: Float
+
+  """Greater than"""
+  gt: Float
+
+  """Greater than or equal"""
+  gte: Float
+
+  """Array of possible exact match values."""
+  in: [Float]
+}
+
+input TSWherePhotostrip {
+  image: TSWhereAssetRelationship
+}
+
+input TSWherePress {
+  heading: TSWhereString
+  items: TSWherePressItems
+}
+
+input TSWherePressItems {
+  image: TSWhereAssetRelationship
+  source: TSWhereString
+  title: TSWhereString
+  url: TSWhereString
+}
+
+input TSWhereShopStyle {
+  options: TSWhereString
+  scriptId: TSWhereString
+}
+
+input TSWhereSlider {
+  slides: TSWhereSliderSlides
+  interval: TSWhereInteger
+}
+
+input TSWhereSliderSlides {
+  image: TSWhereAssetRelationship
+  caption: TSWhereSliderSlidesCaption
+}
+
+input TSWhereSliderSlidesCaption {
+  url: TSWhereString
+  text: TSWhereString
+}
+
+input TSWhereSocial {
+  title: TSWhereString
+  description: TSWhereString
+  image: TSWhereAssetRelationship
+}
+
+input TSWhereStillCategoryInput {
+  title: TSWhereString
+  social: TSWhereSocial
+  stills: TSWhereStills
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSStillCategoryAndOperator]
+  OR: [TSStillCategoryOrOperator]
+  NOT: TSStillCategoryNotOperator
+}
+
+input TSWhereStillCategoryRelationship {
+  title: TSWhereString
+  social: TSWhereSocial
+  stills: TSWhereStills
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+input TSWhereStills {
+  image: TSWhereAssetRelationship
+}
+
+input TSWhereStoryInput {
+  bookingContent: TSWhereString
+  social: TSWhereSocial
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  location: TSWhereLocationRelationship
+  title: TSWhereString
+  tout: TSWhereTout
+  category: TSWhereCategoryRelationship
+  relatedStories: TSWhereStoryRelationship
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSStoryAndOperator]
+  OR: [TSStoryOrOperator]
+  NOT: TSStoryNotOperator
+}
+
+input TSWhereStoryRelationship {
+  bookingContent: TSWhereString
+  social: TSWhereSocial
+  blockCanvas: TSWhereDraftjs
+  shopStyle: TSWhereShopStyle
+  rewardStyleId: TSWhereString
+  title: TSWhereString
+  tout: TSWhereTout
+  content: TSWhereDraftjs
+  shopStyleHtml: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+}
+
+input TSWhereString {
+  """Exact match"""
+  eq: String
+
+  """Array of possible exact match values."""
+  in: [String]
+
+  """Full text searching with fuzzy matching."""
+  match: String
+
+  """
+  Regular expression string matching. Use of * wildcards could degrade performance.
+  """
+  regexp: String
+}
+
+input TSWhereTeam {
+  heading: TSWhereString
+  members: TSWhereTeamMembers
+}
+
+input TSWhereTeamMembers {
+  about: TSWhereDraftjs
+  name: TSWhereString
+  image: TSWhereAssetRelationship
+}
+
+input TSWhereTout {
+  dek: TSWhereString
+}
+
+input TSWhereTriggers {
+  contentTypeId: TSWhereString
+  status: TSWhereString
+}
+
+input TSWhereTsStaticSiteInput {
+  title: TSWhereString
+  baseUrl: TSWhereString
+  provider: TSWhereString
+  idKey: TSWhereString
+  destination: TSWhereString
+  privateAcl: TSWhereBoolean
+  environmentVariables: TSWhereEnvironmentVariables
+  triggers: TSWhereTriggers
+  templateHash: TSWhereString
+  _id: TSWhereID
+  _version: TSWhereInteger
+  _contentTypeId: TSWhereID
+  _contentTypeName: TSWhereString
+  _createdAt: TSWhereDate
+  _updatedAt: TSWhereDate
+  _schemaVersion: TSWhereNumber
+  _enabled: TSWhereBoolean
+  _enabledAt: TSWhereDate
+  AND: [TSTsStaticSiteAndOperator]
+  OR: [TSTsStaticSiteOrOperator]
+  NOT: TSTsStaticSiteNotOperator
+}
+
+input TSWhereVisuals {
+  image: TSWhereAssetRelationship
+  label: TSWhereString
+  type: TSWhereString
+  url: TSWhereString
+}
+
+type TSWorkflow {
+  name: String!
+  title: String!
+  steps: [TSWorkflowStep]
+}
+
+input TSWorkflowInput {
+  name: String!
+  title: String!
+  steps: [TSWorkflowStepInput]
+}
+
+type TSWorkflowStep {
+  name: String!
+  title: String!
+  description: String
+  color: String!
+  live: Boolean!
+  key: String!
+  canEdit: [String]
+}
+
+input TSWorkflowStepInput {
+  name: String!
+  title: String!
+  description: String
+  color: String!
+  live: Boolean!
+  key: String!
+  canEdit: [String]
+}
+
+union UndefinedReference = Films | Homepage | Footer | SocialSettings | StillCategory | Still | Location | About | Film | Blog | Story | Destinations | FilmCategory | Category | Continent
+
+type UndefinedReferencePaginatedList {
+  results: [UndefinedReference] @deprecated(reason: "Use items instead")
+  items: [UndefinedReference]
+  total: Int
+}
+
+"""update About input"""
+input UpdateAboutInput {
+  clients: AboutClientsInput
+  social: AboutSocialInput
+  about: AboutAboutInput
+  team: AboutTeamInput
+  press: AboutPressInput
+  title: String
+  photostrip: [AboutPhotostripInput]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateAboutResult {
+  clientMutationId: String
+  result: About
+}
+
+"""update Asset input"""
+input UpdateAssetInput {
+  sourceUrl: String
+  path: String
+  filename: String
+  description: String
+  caption: JSON
+  uploadStatus: String
+  mimeType: String
+  title: String
+  credit: JSON
+  s3Key: String
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateAssetResult {
+  clientMutationId: String
+  result: Asset
+}
+
+"""update Blog input"""
+input UpdateBlogInput {
+  title: String
+  social: BlogSocialInput
+  categories: [TSRelationshipInput]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateBlogResult {
+  clientMutationId: String
+  result: Blog
+}
+
+"""update Category input"""
+input UpdateCategoryInput {
+  title: String
+  social: CategorySocialInput
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateCategoryResult {
+  clientMutationId: String
+  result: Category
+}
+
+"""update Continent input"""
+input UpdateContinentInput {
+  name: String
+  social: ContinentSocialInput
+  locations: [TSRelationshipInput]
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateContinentResult {
+  clientMutationId: String
+  result: Continent
+}
+
+"""update Destinations input"""
+input UpdateDestinationsInput {
+  locations: [TSRelationshipInput]
+  title: String
+  featuredLocations: [TSRelationshipInput]
+  social: DestinationsSocialInput
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateDestinationsResult {
+  clientMutationId: String
+  result: Destinations
+}
+
+"""update FilmCategory input"""
+input UpdateFilmCategoryInput {
+  title: String
+  social: FilmCategorySocialInput
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateFilmCategoryResult {
+  clientMutationId: String
+  result: FilmCategory
+}
+
+"""update Film input"""
+input UpdateFilmInput {
+  image: TSRelationshipInput
+  filmCategory: TSRelationshipInput
+  title: String
+  youTubeUrl: String
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateFilmResult {
+  clientMutationId: String
+  result: Film
+}
+
+"""update Films input"""
+input UpdateFilmsInput {
+  title: String
+  featuredFilms: [TSRelationshipInput]
+  social: FilmsSocialInput
+  filmCategories: [TSRelationshipInput]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateFilmsResult {
+  clientMutationId: String
+  result: Films
+}
+
+"""update Footer input"""
+input UpdateFooterInput {
+  visuals: [FooterVisualsInput]
+  contacts: [FooterContactsInput]
+  formEndpoint: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateFooterResult {
+  clientMutationId: String
+  result: Footer
+}
+
+"""update Homepage input"""
+input UpdateHomepageInput {
+  recentEntries: [TSRelationshipInput]
+  slider: HomepageSliderInput
+  social: HomepageSocialInput
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateHomepageResult {
+  clientMutationId: String
+  result: Homepage
+}
+
+"""update Location input"""
+input UpdateLocationInput {
+  title: String
+  image: TSRelationshipInput
+  social: LocationSocialInput
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateLocationResult {
+  clientMutationId: String
+  result: Location
+}
+
+"""update Navigation input"""
+input UpdateNavigationInput {
+  social: NavigationSocialInput
+  links: [NavigationLinksInput]
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateNavigationResult {
+  clientMutationId: String
+  result: Navigation
+}
+
+"""update SiteSettings input"""
+input UpdateSiteSettingsInput {
+  googleAnalyticsId: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateSiteSettingsResult {
+  clientMutationId: String
+  result: SiteSettings
+}
+
+"""update SocialSettings input"""
+input UpdateSocialSettingsInput {
+  image: TSRelationshipInput
+  description: String
+  siteName: String
+  url: String
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateSocialSettingsResult {
+  clientMutationId: String
+  result: SocialSettings
+}
+
+"""update StillCategory input"""
+input UpdateStillCategoryInput {
+  title: String
+  social: StillCategorySocialInput
+  stills: [StillCategoryStillsInput]
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateStillCategoryResult {
+  clientMutationId: String
+  result: StillCategory
+}
+
+"""update Still input"""
+input UpdateStillInput {
+  stillCategories: [TSRelationshipInput]
+  stills: [StillStillsInput]
+  title: String
+  social: StillSocialInput
+  _id: ID
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateStillResult {
+  clientMutationId: String
+  result: Still
+}
+
+"""update Story input"""
+input UpdateStoryInput {
+  """The initial <ins></ins>, omit the <script></script>"""
+  bookingContent: String
+  social: StorySocialInput
+  blockCanvas: JSON
+  shopStyle: StoryShopStyleInput
+
+  """The numeric sequence within data-widget-id"""
+  rewardStyleId: String
+  location: [TSRelationshipInput]
+  title: String
+  tout: StoryToutInput
+  category: [TSRelationshipInput]
+  relatedStories: [TSRelationshipInput]
+  content: JSON
+  shopStyleHtml: String
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateStoryResult {
+  clientMutationId: String
+  result: Story
+}
+
+"""update TsStaticSite input"""
+input UpdateTsStaticSiteInput {
+  title: String
+  baseUrl: String
+  provider: String
+  idKey: String
+  secretKey: String
+  destination: String
+  privateAcl: Boolean
+  environmentVariables: [TsStaticSiteEnvironmentVariablesInput]
+  triggers: [TsStaticSiteTriggersInput]
+  templateHash: String
+  _id: ID!
+  _version: Int
+  _contentTypeId: String
+  _createdAt: String
+  _createdBy: String
+  _updatedAt: String
+  _updatedBy: String
+  _schemaVersion: Float
+  _enabled: Boolean
+  _enabledAt: String
+  clientMutationId: String
+}
+
+type UpdateTsStaticSiteResult {
+  clientMutationId: String
+  result: TsStaticSite
+}
+
+"""A project file stored on s3"""
+type Upload {
+  uploadUrl: ID
+  asset: Asset
+}
+
+"""This query allow you to pass context to your queries"""
+type WithContext {
+  search(
+    terms: String
+    contentTypeNames: [String]
+    contentTypeIds: [String]
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereInput
+  ): TSSearchResults
+  taxonomySuggest(
+    terms: String
+    contentTypeNames: [String]
+    contentTypeIds: [String]
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+  ): TSSuggestionPaginatedList
+
+  """List Versions for a piece of content"""
+  getContentVersion(id: ID!, version: Int!, locale: String, enableLocaleFallback: Boolean = true): TSVersionResponse
+
+  """List Versions for a piece of content"""
+  getContentVersionList(id: ID!, from: Int, size: Int): TSVersionsPaginatedList
+
+  """Returns a list asset in natural order."""
+  getAssetList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereAssetInput
+  ): AssetPaginatedList
+
+  """Get a asset by ID"""
+  getAsset(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Asset
+
+  """Search the asset index by keyword"""
+  searchAssetIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereAssetInput
+  ): AssetSearchResults
+
+  """Returns a list tsStaticSite in natural order."""
+  getTsStaticSiteList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereTsStaticSiteInput
+  ): TsStaticSitePaginatedList
+
+  """Get a tsStaticSite by ID"""
+  getTsStaticSite(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): TsStaticSite
+
+  """Search the tsStaticSite index by keyword"""
+  searchTsStaticSiteIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereTsStaticSiteInput
+  ): TsStaticSiteSearchResults
+
+  """Get the films"""
+  films(locale: String, enableLocaleFallback: Boolean = true): Films @deprecated(reason: "Use getFilms instead")
+
+  """Get the films"""
+  getFilms(locale: String, enableLocaleFallback: Boolean = true): Films
+
+  """Get the navigation"""
+  navigation(locale: String, enableLocaleFallback: Boolean = true): Navigation @deprecated(reason: "Use getNavigation instead")
+
+  """Get the navigation"""
+  getNavigation(locale: String, enableLocaleFallback: Boolean = true): Navigation
+
+  """Get the siteSettings"""
+  siteSettings(locale: String, enableLocaleFallback: Boolean = true): SiteSettings @deprecated(reason: "Use getSiteSettings instead")
+
+  """Get the siteSettings"""
+  getSiteSettings(locale: String, enableLocaleFallback: Boolean = true): SiteSettings
+
+  """Get the homepage"""
+  homepage(locale: String, enableLocaleFallback: Boolean = true): Homepage @deprecated(reason: "Use getHomepage instead")
+
+  """Get the homepage"""
+  getHomepage(locale: String, enableLocaleFallback: Boolean = true): Homepage
+
+  """Get the footer"""
+  footer(locale: String, enableLocaleFallback: Boolean = true): Footer @deprecated(reason: "Use getFooter instead")
+
+  """Get the footer"""
+  getFooter(locale: String, enableLocaleFallback: Boolean = true): Footer
+
+  """Get the socialSettings"""
+  socialSettings(locale: String, enableLocaleFallback: Boolean = true): SocialSettings @deprecated(reason: "Use getSocialSettings instead")
+
+  """Get the socialSettings"""
+  getSocialSettings(locale: String, enableLocaleFallback: Boolean = true): SocialSettings
+
+  """Returns a list stillCategory in natural order."""
+  getStillCategoryList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereStillCategoryInput
+  ): StillCategoryPaginatedList
+
+  """Get a stillCategory by ID"""
+  getStillCategory(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): StillCategory
+
+  """Search the stillCategory index by keyword"""
+  searchStillCategoryIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereStillCategoryInput
+  ): StillCategorySearchResults
+
+  """Get the still"""
+  still(locale: String, enableLocaleFallback: Boolean = true): Still @deprecated(reason: "Use getStill instead")
+
+  """Get the still"""
+  getStill(locale: String, enableLocaleFallback: Boolean = true): Still
+
+  """Returns a list location in natural order."""
+  getLocationList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereLocationInput
+  ): LocationPaginatedList
+
+  """Get a location by ID"""
+  getLocation(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Location
+
+  """Search the location index by keyword"""
+  searchLocationIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereLocationInput
+  ): LocationSearchResults
+
+  """Get the about"""
+  about(locale: String, enableLocaleFallback: Boolean = true): About @deprecated(reason: "Use getAbout instead")
+
+  """Get the about"""
+  getAbout(locale: String, enableLocaleFallback: Boolean = true): About
+
+  """Returns a list film in natural order."""
+  getFilmList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereFilmInput
+  ): FilmPaginatedList
+
+  """Get a film by ID"""
+  getFilm(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Film
+
+  """Search the film index by keyword"""
+  searchFilmIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereFilmInput
+  ): FilmSearchResults
+
+  """Get the blog"""
+  blog(locale: String, enableLocaleFallback: Boolean = true): Blog @deprecated(reason: "Use getBlog instead")
+
+  """Get the blog"""
+  getBlog(locale: String, enableLocaleFallback: Boolean = true): Blog
+
+  """Returns a list story in natural order."""
+  getStoryList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereStoryInput
+  ): StoryPaginatedList
+
+  """Get a story by ID"""
+  getStory(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Story
+
+  """Search the story index by keyword"""
+  searchStoryIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereStoryInput
+  ): StorySearchResults
+
+  """Get the destinations"""
+  destinations(locale: String, enableLocaleFallback: Boolean = true): Destinations @deprecated(reason: "Use getDestinations instead")
+
+  """Get the destinations"""
+  getDestinations(locale: String, enableLocaleFallback: Boolean = true): Destinations
+
+  """Returns a list filmCategory in natural order."""
+  getFilmCategoryList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereFilmCategoryInput
+  ): FilmCategoryPaginatedList
+
+  """Get a filmCategory by ID"""
+  getFilmCategory(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): FilmCategory
+
+  """Search the filmCategory index by keyword"""
+  searchFilmCategoryIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereFilmCategoryInput
+  ): FilmCategorySearchResults
+
+  """Returns a list category in natural order."""
+  getCategoryList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereCategoryInput
+  ): CategoryPaginatedList
+
+  """Get a category by ID"""
+  getCategory(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Category
+
+  """Search the category index by keyword"""
+  searchCategoryIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereCategoryInput
+  ): CategorySearchResults
+
+  """Returns a list continent in natural order."""
+  getContinentList(
+    locale: String
+    enableLocaleFallback: Boolean = true
+
+    """Filter out content that is not enabled. Defaults to true."""
+    onlyEnabled: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereContinentInput
+  ): ContinentPaginatedList
+
+  """Get a continent by ID"""
+  getContinent(_id: ID!, locale: String, enableLocaleFallback: Boolean = true): Continent
+
+  """Search the continent index by keyword"""
+  searchContinentIndex(
+    locale: String
+    enableLocaleFallback: Boolean = true
+    terms: String
+
+    """The offset from the first result you want to fetch."""
+    from: Int
+
+    """The maximum number of items to return."""
+    size: Int
+
+    """An elasticsearch style filter. Overrides onlyEnabled."""
+    filter: JSON
+
+    """An list of fields to sort by."""
+    sort: [TSSearchSort]
+
+    """
+    The where clause uses the boolean AND, OR, and NOT parameters to construct
+    complex filters based on the values of your fields. It applies an implicit
+    AND to all the top-level keys. To avoid this, use a single OR or NOT key as
+    the only top-level key.
+    """
+    where: TSWhereContinentInput
+  ): ContinentSearchResults
+}

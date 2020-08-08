@@ -15,7 +15,11 @@ query {
       text
       url
       children {
-        contentTypeName
+        ...LocationLinks
+        ...FilmCategoryLinks
+        ...StillCategoryLinks
+        ...CategoryLinks
+        ...ContinentLinks
       }
     }
     social {
@@ -39,5 +43,33 @@ query {
       url
     }
     formEndpoint
+  }
+}
+
+fragment LocationLinks on Location {
+  title
+  _contentTypeName
+}
+
+fragment FilmCategoryLinks on FilmCategory {
+  title
+  _contentTypeName
+}
+
+fragment StillCategoryLinks on StillCategory {
+  title
+  _contentTypeName
+}
+
+fragment CategoryLinks on Category {
+  title
+  _contentTypeName
+}
+
+fragment ContinentLinks on Continent {
+  name
+  _contentTypeName
+  locations {
+    title
   }
 }

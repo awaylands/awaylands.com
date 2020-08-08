@@ -1,5 +1,7 @@
 {% extends "layouts/default.html" %}
 
+{% from "macros/image.html" import image %}
+
 {% block body_class %}body--story has-no-hero{% endblock %}
 
 {% block content %}
@@ -29,32 +31,96 @@
         <h2 class="content__heading">{{ page.title }}</h2>
       </header>
 
-      <div class="content__content" data-bind="story">{{ page.contentHtml | safe }}
+      <div class="content__content" v-story>
+        {{ page.contentHtml | safe }}
+      </div>
 
-        <div class=“shop-style”>{{ item.shopStyleHtml | safe }}</div>
+      <div class="content__modules">
+        {% if page.shopStyleHtml %}
+          {{ page.shopStyleHtml | safe }}
+        {% endif %}
+
+        {% if page.shopStyle.options and page.shopStyle.options %}
+        <div class="shopsense-widget" style="text-align:center" data-options="{{ page.shopStyle.options }}"></div>
+        {% endif %}
+
+        {% if page.bookingContent %}
+          {{ page.bookingContent | safe }}
+        {% endif %}
+
+        {% if page.rewardStyleId %}
+        <div class="shopthepost-widget" data-widget-id="{{ page.rewardStyleId }}">
+          <div class="rs-adblock">
+            <img src="//assets.rewardstyle.com/production/7fd785e8dc0a3fd0d540859a5c988fe405a6f6c7/images/search/350.gif" onerror="this.parentNode.innerHTML='Disable your ad blocking software to view this content.'" style="width: 15px; height: 15px;" />
+            <noscript>JavaScript is currently disabled in this browser. Reactivate it to view this content.</noscript>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if page.relatedStories.length %}
+        <div class="related-stories">
+          <h2 class="related-stories__heading">Explore further</h2>
+
+          <ul class="related-stories__list">
+            {% for story in page.relatedStories %}
+            <li>
+              <a href="{{ story | route('story') }}">
+                <div class="related-stories__image">
+                  {{ image(story.tout.image.s3Key) }}
+                </div>
+
+                <h3 class="related-stories__title">{{ story.title }}</h3>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
         <!-- vuukle -->
         <div id='vuukle-comments'></div>
         <!-- end vuukle -->
-
       </div>
     </div>
   </div>
 </div>
 
-<!-- vuukle script -->
-<script>
-  var VUUKLE_CONFIG = {
-    apiKey: "e264ea9e-ea8b-473c-b1ae-1618d35fa09a",
-    articleId: "awaylands.com/" + "{{currentPath}}",
-  };
-  // DON'T EDIT BELOW THIS LINE
-  (function() {
-   var d = document,
-      s = d.createElement('script');
-   s.src = 'https://cdn.vuukle.com/platform.js';
-  (d.head || d.body).appendChild(s);
-  })();
- </script>
- <!-- end vuukle script -->
+{% endblock %}
 
+{% block extra_scripts %}
+  <!-- vuukle script -->
+  <script>
+    var VUUKLE_CONFIG = {
+      apiKey: "e264ea9e-ea8b-473c-b1ae-1618d35fa09a",
+      articleId: "awaylands.com/" + "{{currentPath}}",
+    };
+    // DON'T EDIT BELOW THIS LINE
+    (function() {
+      var d = document,
+        s = d.createElement('script');
+      s.src = 'https://cdn.vuukle.com/platform.js';
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+  <!-- end vuukle script -->
+
+  {% if page.shopStyle.options and page.shopStyle.scriptId %}
+  <script id="shopsensewidget-script" src="//shopsensewidget.shopstyle.com/widget-script.js?cb={{ page.shopSense.scriptId }}"></script>
+  {% endif %}
+
+  {% if page.bookingContent %}
+  <script type="text/javascript">
+    (function(d, sc, u) {
+      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
+      s.type = 'text/javascript';
+      s.async = true;
+      s.src = u + '?v=' + (+new Date());
+      p.parentNode.insertBefore(s,p);
+    })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
+  </script>
+  {% endif %}
+
+  {% if page.rewardStyleId %}
+  <script type="text/javascript">!function(d,s,id){var e, p = /^http:/.test(d.location) ? 'http' : 'https';if(!d.getElementById(id)) {e = d.createElement(s);e.id = id;e.src = p + '://' + 'widgets.rewardstyle.com' + '/js/shopthepost.js';d.body.appendChild(e);}if(typeof window.__stp === 'object') if(d.readyState === 'complete') {window.__stp.init();}}(document, 'script', 'shopthepost-script');</script>
+  {% endif %}
 {% endblock %}

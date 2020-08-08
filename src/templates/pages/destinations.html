@@ -4,8 +4,20 @@
   <li><a class="is-current" href="/destinations">Featured</a></li>
   <li><span class="separator"></span></li>
 
-  {% for location in page.locations %}
-  <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
+  {% for continent in continents.items | reverse %}
+  <li>
+    <a href="{{ continent | route('continent') }}/#" {% if continent.name == page.name %}class="is-current"{% endif %}>{{ continent.name }}</a>
+
+    {% if continent.locations.length %}
+    <div class="dropdown dropdown--features">
+      <ul class="dropdown__list">
+        {% for location in continent.locations %}
+        <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </li>
   {% endfor %}
 {% endblock %}
 
@@ -27,7 +39,9 @@
                  sizes="(min-width: 1500px) 1014px,(min-width: 900px) 75vw, (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                  src="{{ location.image.s3Key | image({w: 1200, auto: 'compress,format'}) }}"
                  data-image
-                 data-bind="imageLoaded" />
+                 data-image
+                 v-imageloaded
+            />
           </div>
         </a>
       </div>

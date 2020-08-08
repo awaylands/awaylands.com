@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="hero">
-  <div class="slides" {% if page.slider.interval %}data-interval="{{ page.slider.interval }}"{% endif %} data-bind="slides">
+  <div class="slides" {% if page.slider.interval %}data-interval="{{ page.slider.interval }}"{% endif %} v-slides>
     <div class="slides__container">
       {% for slide in page.slider.slides %}
       <img srcset="{{ slide.image.s3Key | image({w: 2880, auto: 'compress,format'}) }} 2880w,
@@ -45,7 +45,9 @@
                      sizes="(min-width: 364px), (min-width: 1200px) calc(75vw/3),(min-width: 900px) calc(50w - 50px), (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                      src="{{ story.tout.image.s3Key | image({w: 1200, auto: 'compress,format'}) }}"
                      data-image
-                     data-bind="imageLoaded" />
+                     data-image
+                     v-imageloaded
+                />
               </div>
 
               <div class="tout__content">

@@ -2,6 +2,8 @@
   @include copy-a();
 
   > * {
+    @extend %cf;
+
     display: block;
     max-width: 83.4rem;
     margin: 0 auto;
@@ -72,39 +74,32 @@
     margin-bottom: 4rem;
   }
 
+  iframe {
+    max-width: 100%;
+  }
+
   figure {
     @extend %basic-block;
     @extend %cf;
 
     max-width: none;
-
-    & + figure {
-      margin-top: 1.6rem;
-    }
-  }
-
-  iframe {
-    max-width: 100%;
   }
 
   figcaption {
-    display: flex;
+    display: block;
     width: 100%;
-    margin: 0.4rem auto 0;
+    margin: 0.8rem auto 0;
     max-width: 83.4rem;
 
     & > * {
-      @include copy-c();
+      p {
+        @include copy-c($line-height: 1.4);
 
+        display: block;
+      }
+
+      text-align: right;
       font-style: italic;
-    }
-
-    .caption {
-      flex: 2 1 60%;
-    }
-
-    .credit {
-      flex: 1 1 40%;
     }
   }
 
@@ -181,55 +176,50 @@
     }
 
     figure {
-      margin-top: 3.2rem;
+      margin-top: 4.8rem;
+      cursor: pointer;
 
       &:first-child {
         margin-top: 0;
       }
 
-      & + * {
-        margin-top: 3.2rem;
+      & + *:not(.medium):not(.small):not(hr),
+      & + p + *:not(.medium):not(.small):not(hr) {
+        clear: left;
+        // margin is swallowed by float
+        margin-top: 0;
+        padding-top: 4.8rem;
       }
 
       &.small,
       &.medium {
-        &.left {
-          float: left;
-          margin-right: 4.8rem;
-
-          & + .right {
-            margin-left: 0;
-          }
-        }
+        float: left;
+        width: 49.99997%;
+        // undo first image left padding
+        left: -0.4rem;
+        padding: 0 0.4rem;
 
         &.center {
           margin-left: auto;
           margin-right: auto;
         }
-
-        &.right {
-          float: right;
-          margin-left: 4.8rem;
-        }
       }
 
+      &.large {
+        width: 100%;
+      }
+    }
+  }
+
+  @include for-desktop-up {
+    figure {
       &.small {
-        max-width: 32em;
-        width: calc(50% - 2.4rem);
+        width: 24.99997%;
 
         figcaption,
         figcaption > * {
           display: block;
         }
-      }
-
-      &.medium {
-        max-width: 60rem;
-        width: 72%;
-      }
-
-      &.large {
-        width: 100%;
       }
     }
   }
@@ -279,6 +269,9 @@
 
   &__content {
     @extend %content;
+
+    max-width: 83.4rem;
+    margin: 0 auto;
   }
 
   &__rubric {
@@ -302,6 +295,16 @@
 
     margin-bottom: 1.6rem;
     text-transform: uppercase;
+  }
+
+  &__modules {
+    margin-top: 4.8rem;
+
+    > * {
+      & + * {
+        margin-top: 2.4rem;
+      }
+    }
   }
 
   @include for-tablet-landscape-up {

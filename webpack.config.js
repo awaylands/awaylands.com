@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const vue = require('vue-loader');
 const Extract = require('extract-text-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const isProd = process.env.NODE_ENV === 'production';
@@ -39,16 +40,29 @@ module.exports = {
         loader: 'json'
       },
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.html$/,
         loader: 'html'
       },
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
         loader: "file-loader?name=[path][name].[hash:base64:5].[ext]"
+      },
+      {
+        test: /\.ya?ml$/,
+        use: {
+          loader: 'yaml-import-loader'
+        }
       }
     ]
   },
   resolve: {
+    alias: {
+      vue$: 'vue/dist/vue.esm.js'
+    },
     modules: ['node_modules', 'src'],
     extensions: ['.js', '.json']
   },

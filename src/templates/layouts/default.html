@@ -13,7 +13,7 @@
   <body class="{% block body_class %}body{% endblock %}">
     {% include "partials/scripts-body.html" %}
 
-    <div class="wrapper">
+    <div class="wrapper" id="app">
       {% include "partials/header.html" %}
 
       <main class="main">
@@ -24,6 +24,8 @@
       {% include "partials/footer.html" %}
 
     </div>
+
+    {% block extra_scripts %}{% endblock %}
 
     {% include "partials/scripts.html" %}
 

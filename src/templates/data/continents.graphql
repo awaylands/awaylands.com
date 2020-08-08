@@ -1,9 +1,13 @@
 query {
-  getLocationList {
+  getContinentList {
     items {
-      _contentTypeName
       _id
-      title
+      _contentTypeName
+      name
+      locations {
+        _id
+        title
+      }
       social {
         title
         description
