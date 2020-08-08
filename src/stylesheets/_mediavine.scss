@@ -1,0 +1,17 @@
+/*mediavine sidebar fix*/
+@media only screen and (min-width: 900px) {
+    .content__section:nth-child(2) {
+        max-width: calc(100% - 300px) !important;
+    }
+    .content__section:nth-child(1) {
+        min-width: 300px !important;
+    }
+}
+
+@media only screen and (max-width: 359px) {
+    .content__inner {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+/*end mediavine sidebar fix*/

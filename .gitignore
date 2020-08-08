@@ -26,3 +26,5 @@ graphql.config.json
 
 /vendor
 /build
+tsg-project.graphql
+.graphqlconfig
