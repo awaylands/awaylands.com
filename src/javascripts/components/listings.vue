@@ -95,10 +95,10 @@
                 title
                 tout {
                   image {
-                    s3Key
+                    path
                   }
                   secondaryImage {
-                    s3Key
+                    path
                   }
                   dek
                 }
@@ -134,14 +134,14 @@
               story.date = moment(story._enabledAt).format('MMMM Do, YYYY');
 
               if (story.tout && story.tout.image) {
-                story.image = getImageUrl(story.tout.image.s3Key);
+                story.image = getImageUrl(story.tout.image.path);
                 story.srcset = buildSrcset(story.tout.image, ['600','900','1200','1600'])
               } else {
                 story.image = null;
               }
 
               if (story.tout && story.tout.secondaryImage) {
-                story.secondaryImage = getImageUrl(story.tout.secondaryImage.s3Key);
+                story.secondaryImage = getImageUrl(story.tout.secondaryImage.path);
                 story.srcset = buildSrcset(story.tout.secondaryImage, ['600','900','1200','1600'])
               } else {
                 story.secondaryImage = null;

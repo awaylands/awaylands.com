@@ -13,7 +13,7 @@
 {% block listings %}
   <ul class="masonry" v-gallery>
     {% for still in page.stills %}
-      {% set imagePath = still.image.s3Key %}
+      {% set imagePath = still.image.path %}
       {% if imagePath %}
         <li class="masonry__item">
           <a class="still" data-source="{{ imagePath | image({auto: 'compress,format'}) }}">

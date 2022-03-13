@@ -30,11 +30,11 @@
 {% endif %}
 
 {% if page.social.image %}
-  <meta property="og:image" content="{{ page.social.image.s3Key | image({auto: 'compress,format'}) }}">
+  <meta property="og:image" content="{{ page.social.image.path | image({auto: 'compress,format'}) }}">
 {% elif page.tout.image %}
-  <meta property="og:image" content="{{ page.tout.image.s3Key | image({auto: 'compress,format'}) }}">
+  <meta property="og:image" content="{{ page.tout.image.path | image({auto: 'compress,format'}) }}">
 {% elif socialGlobal.image %}
-  <meta property="og:image" content="{{ socialGlobal.image.s3Key | image({auto: 'compress,format'}) }}">
+  <meta property="og:image" content="{{ socialGlobal.image.path | image({auto: 'compress,format'}) }}">
 {% endif %}
 
 {% if page._contentTypeName %}

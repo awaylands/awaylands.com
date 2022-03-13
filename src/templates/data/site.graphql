@@ -7,7 +7,7 @@ query {
     description
     url
     image {
-      s3Key
+      path
     }
   }
   navigation: getNavigation {
@@ -36,7 +36,7 @@ query {
     }
     visuals {
       image {
-        s3Key
+        path
       }
       type
       label

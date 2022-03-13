@@ -5,7 +5,7 @@ query {
       interval
       slides {
         image {
-          s3Key
+          path
         }
         caption {
           text
@@ -17,7 +17,7 @@ query {
       title
       description
       image {
-        s3Key
+        path
       }
     }
   }
@@ -28,7 +28,7 @@ query {
       title
       tout {
         image {
-          s3Key
+          path
         }
         dek
       }

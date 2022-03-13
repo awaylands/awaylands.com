@@ -66,7 +66,7 @@
             <li>
               <a href="{{ story | route('story') }}">
                 <div class="related-stories__image">
-                  {{ image(story.tout.image.s3Key) }}
+                  {{ image(story.tout.image.path) }}
                 </div>
 
                 <h3 class="related-stories__title">{{ story.title }}</h3>

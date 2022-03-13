@@ -16,7 +16,7 @@ query($images: TSImagesConfig) {
         title
         tout {
           image {
-            s3Key
+            path
           }
         }
       }
@@ -24,10 +24,10 @@ query($images: TSImagesConfig) {
       rewardStyleId
       tout {
         image {
-          s3Key
+          path
         }
         secondaryImage {
-          s3Key
+          path
         }
         dek
       }
@@ -35,7 +35,7 @@ query($images: TSImagesConfig) {
         title
         description
         image {
-          s3Key
+          path
         }
       }
     }

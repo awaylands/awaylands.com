@@ -14,7 +14,7 @@
     <li class="masonry__sizer"></li>
 
     {% for still in page.stills %}
-      {% set imagePath = still.image.s3Key %}
+      {% set imagePath = still.image.path %}
 
       {% if imagePath %}
         <li class="masonry__item">

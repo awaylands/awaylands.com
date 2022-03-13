@@ -5,14 +5,14 @@ query {
     featuredLocations {
       title
       image {
-        s3Key
+        path
       }
     }
     social {
       title
       description
       image {
-        s3Key
+        path
       }
     }
   }
