@@ -13,7 +13,7 @@
 <div class="grid--films">
   <div class="grid__inner">
     <ul class="grid__list">
-      {% for film in page.filmSet.results | sort(true, true, "_enabledAt") %}
+      {% for film in page.filmSet.items | sort(true, true, "_enabledAt") %}
       <li class="grid__item">
         <div class="tout">
           <a href="{{ film.youTubeUrl }}" target="_blank">

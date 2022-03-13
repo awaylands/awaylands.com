@@ -4,6 +4,7 @@ query($images: TSImagesConfig) {
       _contentTypeName
       _enabledAt
       title
+      slug
       category {
         title
       }
@@ -18,11 +19,6 @@ query($images: TSImagesConfig) {
             s3Key
           }
         }
-      }
-      shopStyleHtml
-      shopStyle {
-        options
-        scriptId
       }
       bookingContent
       rewardStyleId

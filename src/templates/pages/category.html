@@ -14,7 +14,7 @@
   <h1 class="listings__heading">{{ page.title }}</h1>
 
   <ul class="listings__list">
-    {% for story in page.storySet.results | sort(true, true, "_enabledAt") %}
+    {% for story in page.storySet.items | sort(true, true, "_enabledAt") %}
     <li>
       <div class="listing">
         <a href="{{ story | route('story') }}">

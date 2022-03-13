@@ -4,7 +4,7 @@ query {
       _contentTypeName
       title
       filmSet(size: 100) {
-        results {
+        items {
           title
           image {
             s3Key
