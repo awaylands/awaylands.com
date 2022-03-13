@@ -71,17 +71,7 @@
       async fetchInitial() {
         this.variables = {
           size: Number(this.paginationLength),
-          from: 0,
-          filter: {
-            bool: {
-              must: {
-                match: {
-                  _enabled: true
-                }
-              },
-              should: []
-            }
-          }
+          from: 0
         };
 
         await this.fetchItems();
@@ -89,80 +79,42 @@
       fetchItems() {
         this.isLoaded = false;
 
-        let query;
-
-        if (this.id) {
-          this.variables.id = this.id;
-        }
-
-        switch (this.type) {
-          case 'continent':
-            query = `
-              query($size: Int, $from: Int, $filter: JSON) {
-                getLocationList(filter: $filter) {
-                  total
-                  items {
-                    _id
-                    storySet(sort: [{field: "_enabledAt", order: "desc"}], from: $from, size: $size) {
-                      total
-                      items {
-                        _id
-                        _enabledAt
-                        _contentTypeName
-                        title
-                        tout {
-                          image {
-                            s3Key
-                          }
-                          secondaryImage {
-                            s3Key
-                          }
-                          dek
-                        }
-                        category {
-                          title
-                        }
-                      }
-                    }
+        const query = `
+          query ($size: Int, $from: Int, $where: TSWhereStoryInput) {
+            getStoryList(
+              sort: [{field: "_enabledAt", order: "desc"}]
+              from: $from
+              size: $size
+              where: $where
+            ) {
+              total
+              items {
+                _id
+                _enabledAt
+                _contentTypeName
+                title
+                tout {
+                  image {
+                    s3Key
                   }
+                  secondaryImage {
+                    s3Key
+                  }
+                  dek
+                }
+                category {
+                  title
                 }
               }
-            `;
-
-            for (const subCat of JSON.parse(this.subCategories)) {
-              const rule = { match: {_id: subCat._id}};
-              this.variables.filter.bool.should.push(rule);
             }
+          }
+        `;
 
-            break;
-          default:
-            query = `
-              query($id: ID!, $size: Int, $from: Int, $filter: JSON) {
-                getLocation(_id: $id) {
-                  storySet(sort: [{field: "_enabledAt", order: "desc"}], from: $from, size: $size, filter: $filter) {
-                    total
-                    items {
-                      _enabledAt
-                      _id
-                      _contentTypeName
-                      title
-                      tout {
-                        image {
-                          s3Key
-                        }
-                        secondaryImage {
-                          s3Key
-                        }
-                        dek
-                      }
-                      category {
-                        title
-                      }
-                    }
-                  }
-                }
-              }
-            `;
+
+        const ids = this.type === 'continent' ? JSON.parse(this.subCategories).map(subCat => subCat._id) : [this.id];
+        this.variables.where =  {
+          location: {_id: {in:  ids}},
+          _enabled: {eq: true}
         }
 
         fetch(apiEndpoint, {
@@ -175,42 +127,7 @@
         })
           .then(res => res.json())
           .then(res => {
-            let stories = [];
-
-            switch (this.type) {
-              case 'continent':
-                stories.total = 0;
-                stories.items = [];
-
-                let locations = res.data.getLocationList.items;
-
-                for (const location of locations) {
-                  stories.items.push(...location.storySet.items);
-
-                  if (location.storySet.total > stories.total) {
-                    stories.total = location.storySet.total;
-                  }
-                }
-
-                // Removes duplicate story elements
-                stories.items = stories.items.filter((story, index, self) =>
-                  index === self.findIndex((i) => (
-                    i._id === story._id
-                  ))
-                );
-
-                if (!this.total) {
-                  this.total = stories.total;
-                }
-
-                break;
-              default:
-                stories = res.data.getLocation.storySet;
-
-                if (!this.total) {
-                  this.total = stories.total;
-                }
-            }
+            const stories = res.data.getStoryList;
 
             for (const story of stories.items) {
               story.path = route(story._contentTypeName, story);
