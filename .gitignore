@@ -26,5 +26,6 @@ graphql.config.json
 
 /vendor
 /build
-tsg-project.graphql
+takeshape-project.graphql
 .graphqlconfig
+.takeshaperc
