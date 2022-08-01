@@ -12,6 +12,15 @@ query($images: TSImagesConfig) {
         title
       }
       contentHtml(images: $images)
+      contentBlocks {
+        __typename
+        ... on ContentBlock {
+          content(format: html images: $images)
+        }
+        ... on HtmlBlock {
+          html
+        }
+      }
       relatedStories {
         title
         tout {
