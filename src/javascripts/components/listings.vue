@@ -114,7 +114,7 @@
         const ids = this.type === 'continent' ? JSON.parse(this.subCategories).map(subCat => subCat._id) : [this.id];
         this.variables.where =  {
           location: {_id: {in:  ids}},
-          _enabled: {eq: true}
+          _status: {eq: 'enabled'}
         }
 
         fetch(apiEndpoint, {
