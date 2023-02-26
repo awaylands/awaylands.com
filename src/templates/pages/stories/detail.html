@@ -35,7 +35,7 @@
         {{ page.contentHtml | safe }}
         {% for block in page.contentBlocks %}
           {% if block.__typename == "ContentBlock" %}
-            {{ block.content | safe }}
+            {{ block.contentHtml | safe }}
           {% elif block.__typename == "HtmlBlock" %}
             {{ block.html | safe }}
           {% endif %}

@@ -15,7 +15,7 @@ query($images: TSImagesConfig) {
       contentBlocks {
         __typename
         ... on ContentBlock {
-          content(format: html images: $images)
+          contentHtml(images: $images)
         }
         ... on HtmlBlock {
           html
