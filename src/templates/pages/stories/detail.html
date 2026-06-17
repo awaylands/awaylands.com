@@ -83,10 +83,6 @@
           </ul>
         </div>
         {% endif %}
-
-        <!-- vuukle -->
-        <div id='vuukle-comments'></div>
-        <!-- end vuukle -->
       </div>
     </div>
   </div>
@@ -95,22 +91,6 @@
 {% endblock %}
 
 {% block extra_scripts %}
-  <!-- vuukle script -->
-  <script>
-    var VUUKLE_CONFIG = {
-      apiKey: "e264ea9e-ea8b-473c-b1ae-1618d35fa09a",
-      articleId: "awaylands.com/" + "{{currentPath}}",
-    };
-    // DON'T EDIT BELOW THIS LINE
-    (function() {
-      var d = document,
-        s = d.createElement('script');
-      s.src = 'https://cdn.vuukle.com/platform.js';
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-  <!-- end vuukle script -->
-
   {% if page.shopStyle.options and page.shopStyle.scriptId %}
   <script id="shopsensewidget-script" src="//shopsensewidget.shopstyle.com/widget-script.js?cb={{ page.shopSense.scriptId }}"></script>
   {% endif %}
