@@ -83,6 +83,7 @@
           </ul>
         </div>
         {% endif %}
+
       </div>
     </div>
   </div>
@@ -91,6 +92,7 @@
 {% endblock %}
 
 {% block extra_scripts %}
+
   {% if page.shopStyle.options and page.shopStyle.scriptId %}
   <script id="shopsensewidget-script" src="//shopsensewidget.shopstyle.com/widget-script.js?cb={{ page.shopSense.scriptId }}"></script>
   {% endif %}
