@@ -22,7 +22,6 @@ graphql.config.json
 .githubtoken
 .jekyll-metadata
 .idea
-.yarnclean
 
 /vendor
 /build
