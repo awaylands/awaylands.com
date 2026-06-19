@@ -1,6 +1,6 @@
 <template>
-  <div class="insta-feed">
-    <insta-post v-for="(post, index) of posts" :key="index" :post="post"/>
+ <div class="footer-insta-grid">
+   <insta-post v-for="(post, index) of posts" :key="index" :post="post"></insta-post>
   </div>
 </template>
 
@@ -11,13 +11,9 @@
   const INSTA_POSTS = 'INSTA_POSTS';
   const INSTA_LAST_UPDATE_TIME = 'INSTA_LAST_UPDATE_TIME';
 
-  const AMY_USER_ID = '1050599';
-  const AMY_ACCESS_TOKEN = '1050599.1677ed0.1704518e6a6047718b118a2d6d7fd08c';
+  const AMY_ACCESS_TOKEN = 'IGAGI5QHmV6vZABZAFlTdmNLV2NqQzR0c0hQNnExVFQyRktERWlHbDdnTzZA4aWxkc3Nxb0dTRWVlZA25DU20xOTdaSklSQmEwUm05TG91MUdiSDExS1RwcjJRTjNFSlE0S1dTVkhHclpTc2FkZAzNuUDc3QlVEdnplM2dpYTEyX2pCSQZDZD';
 
-  const BRANDON_USER_ID = '55533805';
-  const BRANDON_ACCESS_TOKEN = '55533805.1677ed0.fe23c854742a4085b3377669fc5ce87e';
-
-  const UPDATE_INSTA_SECOND_TIME = 120; // Every 2 minutes
+  const UPDATE_INSTA_SECOND_TIME = 3600; // Every 1 hour
 
   export default {
     name: 'InstaFeed',
@@ -25,9 +21,6 @@
     data() {
       return {
         posts: [],
-        amyPosts: {},
-        brandonPosts: {},
-        getPostInterval: null,
       };
     },
     mounted() {
@@ -38,10 +31,8 @@
         const lastUpdateTime = localStorage.getItem(INSTA_LAST_UPDATE_TIME) || null;
 
         if (lastUpdateTime === null || this.canRequest(lastUpdateTime)) {
-          // Get from API
           this.getPostsFromApi();
         } else {
-          // Get from LocalStorage
           this.getPostsFromLocalStorage();
         }
       },
@@ -50,60 +41,29 @@
         const storageDate = new Date(lastUpdateTime);
         const dif = now.getTime() - storageDate.getTime();
         const secondsBetweenDates = Math.trunc(dif / 1000);
+
         return secondsBetweenDates >= UPDATE_INSTA_SECOND_TIME;
       },
       getPostsFromLocalStorage() {
-        const rawPosts = JSON.parse(localStorage.getItem(INSTA_POSTS)) || [];
-
-        for (var post of rawPosts) {
-          if (post.type !== "video") {
-            this.posts.push(post);
-          }
-        }
+        this.posts = JSON.parse(localStorage.getItem(INSTA_POSTS)) || [];
       },
       getPostsFromApi() {
-        axios.get(`https://api.instagram.com/v1/users/${BRANDON_USER_ID}/media/recent?access_token=${BRANDON_ACCESS_TOKEN}&count=3`)
+        axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,timestamp,media_type&access_token=${AMY_ACCESS_TOKEN}`)
           .then((res) => {
-            const rawBrandonPosts = res.data.data;
+            this.posts = res.data.data
+              .filter(post => post.media_type !== 'VIDEO')
+              .slice(0, 6);
 
-            for (var post of rawBrandonPosts) {
-              if (post.type !== "video") {
-                this.brandonPosts.push(post);
-              }
-            }
-
-            axios.get(`https://api.instagram.com/v1/users/${AMY_USER_ID}/media/recent?access_token=${AMY_ACCESS_TOKEN}&count=3`)
-              .then((res) => {
-                const rawAmyPosts = res.data.data;
-
-                for (var post of rawAmyPosts) {
-                  if (post.type !== "video") {
-                    this.amyPosts.push(post);
-                  }
-                }
-
-                this.posts = this.brandonPosts.concat(this.amyPosts);
-                this.posts.sort((a,b) => (a.created_time > b.created_time) ? -1 : 1);
-
-                localStorage.setItem(INSTA_POSTS, JSON.stringify(this.posts));
-              }).catch((err) => {
-                console.error(err);
-
-                if (this.posts.length === 0) {
-                  this.getPostsFromLocalStorage();
-                }
-              }
-            );
-          }).catch((err) => {
+            localStorage.setItem(INSTA_POSTS, JSON.stringify(this.posts));
+            localStorage.setItem(INSTA_LAST_UPDATE_TIME, new Date());
+          })
+          .catch((err) => {
             console.error(err);
 
             if (this.posts.length === 0) {
               this.getPostsFromLocalStorage();
             }
-          }
-        );
-
-        localStorage.setItem(INSTA_LAST_UPDATE_TIME, new Date());
+          });
       },
     },
   };

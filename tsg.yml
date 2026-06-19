@@ -69,6 +69,10 @@ routes:
     template: pages/ads.txt
     context: data/ads.graphql
 
+  privacy:
+    path: /privacy/
+    template: pages/privacy.html
+
   filmCategory:
     path: /film/:title
     template: pages/film-category.html

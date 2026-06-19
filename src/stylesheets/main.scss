@@ -14,3 +14,69 @@
 @import "pages";
 @import "mediavine";
 @import "tooltip";
+
+.page-footer .instagram-footer {
+  width: 100%;
+  margin: 40px 0 0;
+  text-align: center;
+}
+
+.page-footer .instagram-footer .page-footer__heading {
+  margin-bottom: 24px;
+}
+
+.page-footer .instagram-footer .page-footer__heading a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.page-footer .instagram-footer .page-footer__heading a:hover {
+  opacity: 0.8;
+}
+
+.page-footer .footer-insta-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+    width: 100%;
+    margin: 0;
+    padding: 0 16px;
+    box-sizing: border-box;
+  }
+
+.page-footer .footer-insta-grid .insta-feed__post {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.page-footer .footer-insta-grid .insta-feed__post a,
+.page-footer .footer-insta-grid .insta-feed__post img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.page-footer .footer-insta-grid .insta-feed__post img {
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.page-footer .footer-insta-grid .insta-feed__post:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 767px) {
+    .page-footer .footer-insta-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 0 10px;
+    }
+  }
+
+@media (max-width: 767px) {
+  .page-footer .footer-insta-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
