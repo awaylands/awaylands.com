@@ -20,8 +20,6 @@ query($images: TSImagesConfig) {
           }
         }
       }
-      bookingContent
-      rewardStyleId
       tout {
         image {
           path
