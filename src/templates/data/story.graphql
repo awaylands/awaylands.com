@@ -29,6 +29,21 @@ query {
   page: getBlog {
     _contentTypeName
     title
+    featuredStory {
+      _contentTypeName
+      _enabledAt
+      title
+      slug
+      category {
+        title
+      }
+      tout {
+        image {
+          path
+        }
+        dek
+      }
+    }
     categories {
       title
     }

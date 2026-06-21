@@ -61,6 +61,11 @@
       <h1 class="blog-featured__heading">Featured</h1>
     </div>
 
+    {% if page.featuredStory %}
+      <div class="blog-featured__pin">
+        {{ blogCard(page.featuredStory, "pinned", "(min-width: 1200px) 40vw, (min-width: 900px) 42vw, 100vw", true) }}
+      </div>
+    {% else %}
     {% for category in featuredCategories.items %}
     {% if category.title == "* Most Popular Posts *" %}
     {% for story in category.storySet.items %}
@@ -72,6 +77,7 @@
     {% endfor %}
     {% endif %}
     {% endfor %}
+    {% endif %}
   </section>
 
   <section class="blog-category-strips" aria-label="Featured blog categories">
