@@ -34,14 +34,6 @@ query {
       label
       email
     }
-    visuals {
-      image {
-        path
-      }
-      type
-      label
-      url
-    }
     formEndpoint
   }
 }
