@@ -40,10 +40,9 @@
           <div class="tout">
             <a href="{{ story | route('story') }}">
               <div class="tout__image">
-                <img srcset="{{ story.tout.image.path | image({w: 2880, auto: 'compress,format'}) }} 2880w,
-                  {{ story.tout.image.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
-                  {{ story.tout.image.path | image({w: 1640, auto: 'compress,format'}) }} 1640w,
+                <img srcset="{{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
                   {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
+                  {{ story.tout.image.path | image({w: 900, auto: 'compress,format'}) }} 900w,
                   {{ story.tout.image.path | image({w: 820, auto: 'compress,format'}) }} 820w"
                      sizes="(min-width: 364px), (min-width: 1200px) calc(75vw/3),(min-width: 900px) calc(50w - 50px), (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                      src="{{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }}"

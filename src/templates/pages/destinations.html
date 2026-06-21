@@ -31,8 +31,8 @@
       <div class="location">
         <a href="{{ location | route('location') }}">
           <div class="location__image">
-            <img srcset="{{ location.image.path | image({w: 2880, auto: 'compress,format'}) }} 2880w,
-              {{ location.image.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
+            <img srcset="{{ location.image.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
+              {{ location.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
               {{ location.image.path | image({w: 1440, auto: 'compress,format'}) }} 1440w,
               {{ location.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
               {{ location.image.path | image({w: 1014, auto: 'compress,format'}) }} 1014w"

@@ -9,6 +9,8 @@
             <div class="listing__image">
               <img
                 :src="story.image"
+                :srcset="story.imageSrcset"
+                sizes="(min-width: 1500px) 1014px,(min-width: 900px) 75vw, (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                 :loading="index === 0 ? 'eager' : 'lazy'"
                 decoding="async"
                 data-image
@@ -17,6 +19,8 @@
 
               <img
                 :src="story.secondaryImage"
+                :srcset="story.secondaryImageSrcset"
+                sizes="(min-width: 1500px) 1014px,(min-width: 900px) 75vw, (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                 v-if="story.secondaryImage"
                 loading="lazy"
                 decoding="async"
@@ -148,16 +152,18 @@
 
               if (story.tout && story.tout.image) {
                 story.image = getImageUrl(story.tout.image.path);
-                story.srcset = buildSrcset(story.tout.image, ['600','900','1200','1600'])
+                story.imageSrcset = buildSrcset(story.tout.image, ['600','900','1200','1600'])
               } else {
                 story.image = null;
+                story.imageSrcset = null;
               }
 
               if (story.tout && story.tout.secondaryImage) {
                 story.secondaryImage = getImageUrl(story.tout.secondaryImage.path);
-                story.srcset = buildSrcset(story.tout.secondaryImage, ['600','900','1200','1600'])
+                story.secondaryImageSrcset = buildSrcset(story.tout.secondaryImage, ['600','900','1200','1600'])
               } else {
                 story.secondaryImage = null;
+                story.secondaryImageSrcset = null;
               }
             }
 

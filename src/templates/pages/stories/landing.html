@@ -25,8 +25,8 @@
         <div class="listing">
           <a href="{{ story | route('story') }}">
             <div class="listing__image">
-              <img srcset="{{ story.tout.image.path | image({w: 2880, auto: 'compress,format'}) }} 2880w,
-                {{ story.tout.image.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
+              <img srcset="{{ story.tout.image.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
+                {{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
                 {{ story.tout.image.path | image({w: 1440, auto: 'compress,format'}) }} 1440w,
                 {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
                 {{ story.tout.image.path | image({w: 1014, auto: 'compress,format'}) }} 1014w"
@@ -40,8 +40,8 @@
               />
 
               {% if story.tout.secondaryImage %}
-              <img srcset="{{ story.tout.secondaryImage.path | image({w: 2880, auto: 'compress,format'}) }} 2880w,
-                {{ story.tout.secondaryImage.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
+              <img srcset="{{ story.tout.secondaryImage.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
+                {{ story.tout.secondaryImage.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
                 {{ story.tout.secondaryImage.path | image({w: 1440, auto: 'compress,format'}) }} 1440w,
                 {{ story.tout.secondaryImage.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
                 {{ story.tout.secondaryImage.path | image({w: 1014, auto: 'compress,format'}) }} 1014w"

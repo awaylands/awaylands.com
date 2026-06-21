@@ -3,7 +3,7 @@ import {LuminousGallery} from '../luminous';
 const ImagesLoaded = require('imagesloaded');
 
 const opts = {
-  sourceAttribute: 'src'
+  sourceAttribute: 'data-full-src'
 };
 
 const galleryOpts = {
@@ -11,6 +11,42 @@ const galleryOpts = {
 };
 
 const TEXT_NODE = 3;
+const TAKE_SHAPE_IMAGE_HOST = 'images.takeshape.io';
+
+function storyImageWidth(image) {
+  const figure = image.closest('figure');
+
+  if (!figure) {
+    return 1200;
+  }
+
+  if (figure.classList.contains('small')) {
+    return 600;
+  }
+
+  if (figure.classList.contains('medium')) {
+    return 900;
+  }
+
+  return 1600;
+}
+
+function optimizedTakeShapeImageUrl(src, width) {
+  try {
+    const url = new URL(src);
+
+    if (url.hostname !== TAKE_SHAPE_IMAGE_HOST || url.searchParams.has('w')) {
+      return src;
+    }
+
+    url.searchParams.set('auto', 'compress,format');
+    url.searchParams.set('w', width);
+
+    return url.toString();
+  } catch (error) {
+    return src;
+  }
+}
 
 function normalizeInlineLinkSpaces(el) {
   const links = el.querySelectorAll('a');
@@ -39,6 +75,20 @@ function optimizeStoryImages(el) {
   const images = el.querySelectorAll('img');
 
   Array.prototype.forEach.call(images, (image, index) => {
+    const originalSrc = image.getAttribute('src');
+
+    if (originalSrc && !image.hasAttribute('data-full-src')) {
+      image.setAttribute('data-full-src', originalSrc);
+    }
+
+    if (originalSrc) {
+      const optimizedSrc = optimizedTakeShapeImageUrl(originalSrc, storyImageWidth(image));
+
+      if (optimizedSrc !== originalSrc) {
+        image.setAttribute('src', optimizedSrc);
+      }
+    }
+
     if (!image.hasAttribute('decoding')) {
       image.setAttribute('decoding', 'async');
     }
