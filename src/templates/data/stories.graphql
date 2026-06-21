@@ -7,9 +7,33 @@ query($images: TSImagesConfig) {
       slug
       category {
         title
+        storySet(size: 6, sort: [{field: "_enabledAt", order: "desc"}]) {
+          items {
+            _contentTypeName
+            title
+            slug
+            tout {
+              image {
+                path
+              }
+            }
+          }
+        }
       }
       location {
         title
+        storySet(size: 6, sort: [{field: "_enabledAt", order: "desc"}]) {
+          items {
+            _contentTypeName
+            title
+            slug
+            tout {
+              image {
+                path
+              }
+            }
+          }
+        }
       }
       contentHtml(images: $images)
       mainHtmlBlock1

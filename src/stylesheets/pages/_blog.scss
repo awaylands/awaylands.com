@@ -637,6 +637,14 @@
     text-align: center;
   }
 
+  &--auto {
+    .related-stories__list {
+      li:nth-child(n+4) {
+        display: none;
+      }
+    }
+  }
+
   @include for-tablet-landscape-up {
     &__list {
       display: flex;
