@@ -14,6 +14,9 @@
               {{ slide.image.path | image({w: 900, auto: 'compress,format'}) }} 900w"
            sizes="100vw"
            src="{{ slide.image.path | image({w: 1200, auto: 'compress,format'}) }}"
+           loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
+           decoding="async"
+           {% if loop.first %}fetchpriority="high"{% endif %}
            {% if slide.caption %}data-caption="{{ slide.caption.text }}" data-link="{{ slide.caption.url }}"{% endif %} />
       {% endfor %}
     </div>
@@ -45,7 +48,8 @@
                      sizes="(min-width: 364px), (min-width: 1200px) calc(75vw/3),(min-width: 900px) calc(50w - 50px), (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                      src="{{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }}"
                      data-image
-                     data-image
+                     loading="lazy"
+                     decoding="async"
                      v-imageloaded
                 />
               </div>

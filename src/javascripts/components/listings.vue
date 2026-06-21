@@ -3,13 +3,26 @@
     <h1 class="listings__heading" v-text="heading"></h1>
 
     <ul class="listings__list">
-      <li v-for="story in stories">
+      <li v-for="(story, index) in stories">
         <div class="listing">
           <a :href="story.path" class="listing">
             <div class="listing__image">
-              <img :src="story.image" data-image v-imageloaded>
+              <img
+                :src="story.image"
+                :loading="index === 0 ? 'eager' : 'lazy'"
+                decoding="async"
+                data-image
+                v-imageloaded
+              >
 
-              <img :src="story.secondaryImage" v-if="story.secondaryImage" data-image v-imageloaded>
+              <img
+                :src="story.secondaryImage"
+                v-if="story.secondaryImage"
+                loading="lazy"
+                decoding="async"
+                data-image
+                v-imageloaded
+              >
             </div>
 
             <h2 class="listing__heading" v-text="story.title"></h2>

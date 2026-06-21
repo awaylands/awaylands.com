@@ -39,7 +39,9 @@
                  sizes="(min-width: 1500px) 1014px,(min-width: 900px) 75vw, (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
                  src="{{ location.image.path | image({w: 1200, auto: 'compress,format'}) }}"
                  data-image
-                 data-image
+                 loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
+                 decoding="async"
+                 {% if loop.first %}fetchpriority="high"{% endif %}
                  v-imageloaded
             />
           </div>

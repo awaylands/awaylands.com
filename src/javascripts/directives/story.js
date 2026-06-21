@@ -35,6 +35,20 @@ function normalizeInlineLinkSpaces(el) {
   });
 }
 
+function optimizeStoryImages(el) {
+  const images = el.querySelectorAll('img');
+
+  Array.prototype.forEach.call(images, (image, index) => {
+    if (!image.hasAttribute('decoding')) {
+      image.setAttribute('decoding', 'async');
+    }
+
+    if (!image.hasAttribute('loading')) {
+      image.setAttribute('loading', index === 0 ? 'eager' : 'lazy');
+    }
+  });
+}
+
 function imageAspectRatio(figure) {
   const image = figure.querySelector('img');
 
@@ -87,6 +101,7 @@ export default {
   name: 'story',
   bind(el) {
     normalizeInlineLinkSpaces(el);
+    optimizeStoryImages(el);
 
     new ImagesLoaded(el, () => {
       alignPairedMediumFigures(el);
@@ -95,6 +110,7 @@ export default {
   },
   inserted(el) {
     normalizeInlineLinkSpaces(el);
+    optimizeStoryImages(el);
     alignPairedMediumFigures(el);
 
     window.setTimeout(() => normalizeInlineLinkSpaces(el), 0);

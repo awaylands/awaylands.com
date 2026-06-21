@@ -11,6 +11,8 @@
        sizes="(min-width: 600px) 20vw, 100vw"
        src="{{ photo.image.path | image({w: 600, auto: 'compress,format'}) }}"
        data-image
+       loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
+       decoding="async"
        v-imageloaded
   />
   {% endfor %}
@@ -41,6 +43,8 @@
                      sizes="(min-width: 1200px) 362px, (min-width: 900px) calc(50vw - 50px), calc(100vw - 80px)"
                      src="{{ item.image.path | image({w: 600, auto: 'compress,format'}) }}"
                      data-image
+                     loading="lazy"
+                     decoding="async"
                      v-imageloaded
                 />
               </div>
@@ -72,6 +76,8 @@
               {{ logo.image.path | image({w: 320, auto: 'compress,format'}) | escape }} 2x"
                  src="{{ logo.image.path | image({w: 320, auto: 'compress,format'}) | escape }}"
                  data-image
+                 loading="lazy"
+                 decoding="async"
                  v-imageloaded
             />
           </a>
@@ -99,6 +105,8 @@
                    sizes="(min-width: 1200px) 554px, (min-width: 900px) calc(50vw - 50px), calc(100vw - 80px)"
                    src="{{ member.image.path | image({w: 800, auto: 'compress,format'}) }}"
                    data-image
+                   loading="lazy"
+                   decoding="async"
                    v-imageloaded
               />
             </div>
