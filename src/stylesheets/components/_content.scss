@@ -121,6 +121,70 @@
     margin-bottom: 4rem;
   }
 
+  .story-table {
+    max-width: 83.4rem;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+    &__header {
+      margin-bottom: 1.6rem;
+    }
+
+    &__title {
+      margin: 0;
+      text-transform: none;
+    }
+
+    &__dek {
+      margin-top: 0.8rem;
+    }
+
+    &__scroller {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 0.1rem solid -color(gallery);
+    }
+
+    &__table {
+      width: 100%;
+      min-width: 56rem;
+      border-collapse: collapse;
+      background-color: -color(white);
+    }
+
+    th,
+    td {
+      @include copy-c($line-height: 1.45);
+
+      padding: 1.4rem 1.6rem;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 0.1rem solid -color(gallery);
+    }
+
+    th {
+      font-weight: -weight(bold);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background-color: -color(athens);
+    }
+
+    tr:last-child {
+      td {
+        border-bottom: 0;
+      }
+    }
+
+    &__footnote {
+      @include copy-c($line-height: 1.45);
+
+      margin-top: 1.2rem;
+      color: -color(dust);
+      font-style: italic;
+    }
+  }
+
   aside {
     position: relative;
     padding: 3.2rem 0;

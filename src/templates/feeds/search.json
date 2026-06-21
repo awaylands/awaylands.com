@@ -39,6 +39,8 @@
           {{ block.contentHtml | dump | safe }}
         {% elif block.__typename == "HtmlBlock" %}
           {{ block.html | dump | safe }}
+        {% elif block.__typename == "TableBlock" %}
+          {{ ((block.title or "") ~ " " ~ (block.dek or "") ~ " " ~ (block.headersText or "") ~ " " ~ (block.rowsText or "") ~ " " ~ (block.footnote or "")) | dump | safe }}
         {% else %}
           ""
         {% endif %}{% if not loop.last %},{% endif %}

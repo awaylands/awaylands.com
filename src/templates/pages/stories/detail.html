@@ -2,6 +2,47 @@
 
 {% from "macros/image.html" import image %}
 
+{% macro renderTableBlock(block) %}
+  {% if block.rowsText %}
+    <div class="story-table">
+      {% if block.title or block.dek %}
+      <div class="story-table__header">
+        {% if block.title %}<h3 class="story-table__title">{{ block.title }}</h3>{% endif %}
+        {% if block.dek %}<p class="story-table__dek">{{ block.dek }}</p>{% endif %}
+      </div>
+      {% endif %}
+
+      <div class="story-table__scroller">
+        <table class="story-table__table">
+          {% if block.headersText %}
+          <thead>
+            <tr>
+              {% for heading in block.headersText.split('\n') %}
+                {% if heading | trim %}<th>{{ heading | trim }}</th>{% endif %}
+              {% endfor %}
+            </tr>
+          </thead>
+          {% endif %}
+
+          <tbody>
+            {% for row in block.rowsText.split('\n') %}
+              {% if row | trim %}
+              <tr>
+                {% for cell in row.split('|') %}
+                  <td>{{ cell | trim }}</td>
+                {% endfor %}
+              </tr>
+              {% endif %}
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% if block.footnote %}<p class="story-table__footnote">{{ block.footnote }}</p>{% endif %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
 {% block body_class %}body--story has-no-hero{% endblock %}
 
 {% block content %}
@@ -64,6 +105,8 @@
             {{ block.contentHtml | safe }}
           {% elif block.__typename == "HtmlBlock" %}
             {{ block.html | safe }}
+          {% elif block.__typename == "TableBlock" %}
+            {{ renderTableBlock(block) }}
           {% endif %}
         {% endfor %}
       </div>
