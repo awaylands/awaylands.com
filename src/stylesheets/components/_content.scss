@@ -35,6 +35,7 @@
 
   a {
     color: -color(cerulean);
+    font-weight: -weight(bold);
     text-decoration: none;
     will-change: color;
     transition: color 0.15s $ease-in-out-quart;
