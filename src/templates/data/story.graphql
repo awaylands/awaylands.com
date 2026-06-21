@@ -4,6 +4,28 @@ query {
       title
     }
   }
+  featuredCategories: getCategoryList {
+    items {
+      title
+      storySet(size: 6) {
+        items {
+          _contentTypeName
+          _enabledAt
+          title
+          slug
+          category {
+            title
+          }
+          tout {
+            image {
+              path
+            }
+            dek
+          }
+        }
+      }
+    }
+  }
   page: getBlog {
     _contentTypeName
     title

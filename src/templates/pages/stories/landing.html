@@ -12,15 +12,144 @@
 {% endblock %}
 
 {% block listings %}
+  {% macro blogCard(story, modifier, imageSizes, isPriority) %}
+  <div class="blog-card{% if modifier %} blog-card--{{ modifier }}{% endif %}">
+    <a href="{{ story | route('story') }}">
+      {% if story.tout and story.tout.image %}
+      <div class="blog-card__image">
+        <img srcset="{{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+          {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
+          {{ story.tout.image.path | image({w: 900, auto: 'compress,format'}) }} 900w,
+          {{ story.tout.image.path | image({w: 600, auto: 'compress,format'}) }} 600w"
+             sizes="{{ imageSizes }}"
+             src="{{ story.tout.image.path | image({w: 900, auto: 'compress,format'}) }}"
+             data-image
+             loading="{% if isPriority %}eager{% else %}lazy{% endif %}"
+             decoding="async"
+             {% if isPriority %}fetchpriority="high"{% endif %}
+             v-imageloaded
+        />
+      </div>
+      {% endif %}
+
+      <div class="blog-card__content">
+        {% if story.category.length %}
+        <div class="blog-card__eyebrow">{{ story.category[0].title }}</div>
+        {% endif %}
+
+        <h2 class="blog-card__heading">{{ story.title }}</h2>
+
+        {% if story.tout.dek %}
+        <p class="blog-card__dek">{{ story.tout.dek }}</p>
+        {% endif %}
+      </div>
+    </a>
+  </div>
+  {% endmacro %}
+
+  {% set sortedStories = items | sort(true, true, "_enabledAt") %}
+
   <form class="blog-search" action="/search/" method="get">
     <label class="blog-search__label" for="blog-search">Search Away Lands</label>
     <input class="blog-search__input" id="blog-search" name="q" type="search" placeholder="Search destinations, packing guides, hotels, beaches..." />
     <button class="blog-search__button" type="submit">Search</button>
   </form>
 
+  {% if pagination.currentPage == 1 %}
+  <section class="blog-featured" aria-label="Pinned post">
+    <div class="blog-featured__header">
+      <h1 class="blog-featured__heading">Featured</h1>
+    </div>
+
+    {% for category in featuredCategories.items %}
+    {% if category.title == "* Most Popular Posts *" %}
+    {% for story in category.storySet.items %}
+    {% if story.title == "Best Travel Photography Cameras and Gear (From a Professional Photographer)" %}
+      <div class="blog-featured__pin">
+        {{ blogCard(story, "pinned", "(min-width: 1200px) 40vw, (min-width: 900px) 42vw, 100vw", true) }}
+      </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endfor %}
+  </section>
+
+  <section class="blog-category-strips" aria-label="Featured blog categories">
+    <div class="blog-category-strip">
+      <div class="blog-category-strip__header">
+        <h2 class="blog-category-strip__heading">Most Popular Posts</h2>
+        <a class="blog-category-strip__link" href="/category/most-popular-posts">View All</a>
+      </div>
+
+      <ul class="blog-category-strip__list">
+        {% for category in featuredCategories.items %}
+        {% if category.title == "* Most Popular Posts *" %}
+        {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+        <li>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="blog-category-strip">
+      <div class="blog-category-strip__header">
+        <h2 class="blog-category-strip__heading">Best Beaches</h2>
+        <a class="blog-category-strip__link" href="/category/best-beaches">View All</a>
+      </div>
+
+      <ul class="blog-category-strip__list">
+        {% for category in featuredCategories.items %}
+        {% if category.title == "Best Beaches" %}
+        {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+        <li>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="blog-category-strip">
+      <div class="blog-category-strip__header">
+        <h2 class="blog-category-strip__heading">Packing Guides</h2>
+        <a class="blog-category-strip__link" href="/category/packing-guides">View All</a>
+      </div>
+
+      <ul class="blog-category-strip__list">
+        {% for category in featuredCategories.items %}
+        {% if category.title == "Packing Guides" %}
+        {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+        <li>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="blog-category-strip">
+      <div class="blog-category-strip__header">
+        <h2 class="blog-category-strip__heading">Travel Guides</h2>
+        <a class="blog-category-strip__link" href="/category/travel-guides">View All</a>
+      </div>
+
+      <ul class="blog-category-strip__list">
+        {% for category in featuredCategories.items %}
+        {% if category.title == "Travel Guides" %}
+        {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+        <li>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  {% endif %}
+
   <div class="listings">
+    <h2 class="listings__heading">{% if pagination.currentPage == 1 %}Recent Posts{% else %}Blog Archive{% endif %}</h2>
+
     <ul class="listings__list">
-      {% for story in items | sort(true, true, "_enabledAt") %}
+      {% for story in sortedStories %}
       <li>
         <div class="listing">
           <a href="{{ story | route('story') }}">
