@@ -9,6 +9,9 @@
       </header>
 
       <div class="content__content">
+        {% if page and page.contentHtml %}
+          {{ page.contentHtml | safe }}
+        {% else %}
         <p>
             Away Lands respects your privacy and is committed to protecting your personal information. This Privacy Policy explains what information may be collected when you visit this website, how that information is used, and the choices available to you regarding your data.
             </p>
@@ -62,6 +65,7 @@
             <p>
             This website may use third-party services including analytics providers, advertising partners, affiliate networks, social media platforms, and email marketing providers. These services may collect information in accordance with their own privacy policies.
             </p>
+        {% endif %}
       </div>
     </div>
   </div>

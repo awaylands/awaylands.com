@@ -3,7 +3,7 @@ query {
     items {
       _contentTypeName
       title
-      storySet(size: 100) {
+      storySet(size: 250) {
         items {
           _enabledAt
           title

@@ -81,6 +81,7 @@ routes:
   privacy:
     path: /privacy/
     template: pages/privacy.html
+    context: data/privacy.graphql
 
   filmCategory:
     path: /film/:title

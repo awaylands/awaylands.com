@@ -1,11 +1,21 @@
 import 'whatwg-fetch';
 
 const MAX_RESULTS = 24;
+const SNIPPET_RADIUS = 90;
 
 function normalize(value) {
   return (value || '')
     .toString()
     .toLowerCase()
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&[^;\s]+;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function plainText(value) {
+  return (value || '')
+    .toString()
     .replace(/<[^>]*>/g, ' ')
     .replace(/&[^;\s]+;/g, ' ')
     .replace(/\s+/g, ' ')
@@ -22,6 +32,46 @@ function textFromStory(story) {
     (story.mainBlocks || []).join(' '),
     (story.blocks || []).join(' ')
   ].join(' '));
+}
+
+function createSearchFields(story) {
+  return [
+    { label: 'title', text: story.title || '' },
+    { label: 'description', text: story.dek || '' },
+    { label: 'location', text: story.location || '' },
+    { label: 'category', text: story.category || '' },
+    { label: 'post', text: plainText(story.content) },
+    { label: 'post', text: plainText((story.mainBlocks || []).join(' ')) },
+    { label: 'post', text: plainText((story.blocks || []).join(' ')) }
+  ];
+}
+
+function createSnippet(story, terms) {
+  const fields = story.searchFields || createSearchFields(story);
+
+  for (let i = 0; i < fields.length; i += 1) {
+    const field = fields[i];
+    const normalizedField = normalize(field.text);
+
+    for (let j = 0; j < terms.length; j += 1) {
+      const term = terms[j];
+
+      if (normalizedField.indexOf(term) !== -1) {
+        const originalText = field.text.replace(/\s+/g, ' ').trim();
+        const originalIndex = originalText.toLowerCase().indexOf(term);
+        const start = Math.max(0, originalIndex - SNIPPET_RADIUS);
+        const end = Math.min(originalText.length, originalIndex + term.length + SNIPPET_RADIUS);
+
+        return {
+          label: field.label,
+          text: `${start > 0 ? '...' : ''}${originalText.slice(start, end)}${end < originalText.length ? '...' : ''}`,
+          term
+        };
+      }
+    }
+  }
+
+  return null;
 }
 
 function scoreStory(story, terms) {
@@ -79,7 +129,25 @@ function addScore(story, score) {
   return scoredStory;
 }
 
-function renderResults(elements, results) {
+function appendHighlightedText(element, text, term) {
+  const lowerText = text.toLowerCase();
+  const index = lowerText.indexOf(term);
+
+  if (index === -1) {
+    element.textContent = text;
+    return;
+  }
+
+  element.appendChild(document.createTextNode(text.slice(0, index)));
+
+  const mark = document.createElement('mark');
+  mark.textContent = text.slice(index, index + term.length);
+  element.appendChild(mark);
+
+  element.appendChild(document.createTextNode(text.slice(index + term.length)));
+}
+
+function renderResults(elements, results, terms) {
   elements.results.innerHTML = '';
 
   results.forEach(story => {
@@ -89,6 +157,7 @@ function renderResults(elements, results) {
     const rubric = document.createElement('div');
     const title = document.createElement('h2');
     const dek = document.createElement('p');
+    const snippet = createSnippet(story, terms);
 
     item.className = 'search-results__item';
     link.className = 'search-result';
@@ -117,6 +186,19 @@ function renderResults(elements, results) {
     content.appendChild(rubric);
     content.appendChild(title);
     content.appendChild(dek);
+
+    if (snippet && snippet.text) {
+      const reason = document.createElement('p');
+      const label = document.createElement('span');
+
+      reason.className = 'search-result__reason';
+      label.className = 'search-result__reason-label';
+      label.textContent = `Matched in ${snippet.label}: `;
+      reason.appendChild(label);
+      appendHighlightedText(reason, snippet.text, snippet.term);
+      content.appendChild(reason);
+    }
+
     link.appendChild(content);
     item.appendChild(link);
     elements.results.appendChild(item);
@@ -143,7 +225,7 @@ function updateSearch(elements, stories) {
     ? `${results.length} result${results.length === 1 ? '' : 's'} for "${elements.input.value}"`
     : `No results for "${elements.input.value}"`;
 
-  renderResults(elements, results);
+  renderResults(elements, results, terms);
 }
 
 export default function initSearch() {
@@ -170,6 +252,7 @@ export default function initSearch() {
     .then(stories => {
       const searchableStories = stories.map(story => {
         story.searchText = textFromStory(story);
+        story.searchFields = createSearchFields(story);
 
         return story;
       });

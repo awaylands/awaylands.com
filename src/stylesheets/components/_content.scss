@@ -35,8 +35,13 @@
 
   a {
     color: -color(cerulean);
+    text-decoration: none;
     will-change: color;
     transition: color 0.15s $ease-in-out-quart;
+
+    strong {
+      font-weight: inherit;
+    }
   }
 
   em {
@@ -199,15 +204,30 @@
         left: -0.4rem;
         padding: 0 0.4rem;
 
+        img {
+          aspect-ratio: 1 / 1;
+          object-fit: cover;
+        }
+
         &.center {
           margin-left: auto;
           margin-right: auto;
         }
       }
 
+      &.medium + .medium {
+        margin-top: 0.8rem;
+      }
+
       &.large {
         width: 100%;
       }
+    }
+
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
     }
   }
 

@@ -327,6 +327,25 @@
     @include copy-a();
   }
 
+  &__reason {
+    @include copy-c($line-height: 1.45);
+
+    color: -color(dust);
+    margin-top: 1.6rem;
+
+    mark {
+      background-color: rgba(-color(cerulean), 0.18);
+      color: -color(tundora);
+      padding: 0 0.2rem;
+    }
+  }
+
+  &__reason-label {
+    color: -color(cerulean);
+    font-weight: -weight(bold);
+    text-transform: uppercase;
+  }
+
   &:hover {
     border-color: -color(cerulean);
     transform: translateY(-0.2rem);
