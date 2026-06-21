@@ -27,6 +27,15 @@ routes:
     template: feeds/sitemap.xml
     context: data/sitemap.graphql
 
+  searchData:
+    path: /search.json
+    template: feeds/search.json
+    context: data/search.graphql
+
+  search:
+    path: /search/
+    template: pages/search.html
+
   homepage:
     path: /
     template: pages/homepage.html

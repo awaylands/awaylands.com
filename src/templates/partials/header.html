@@ -55,6 +55,21 @@
               {% endfor %}
 
               <li><a href="#footer" @click="contactScroll">Contact</a></li>
+              <li class="page-nav__search">
+                <a href="/search/" class="page-nav__search-link">Search</a>
+                <form class="page-nav__search-form" action="/search/" method="get">
+                  <label class="page-nav__search-label" for="header-search">Search Away Lands</label>
+                  <input
+                    class="page-nav__search-input"
+                    id="header-search"
+                    name="q"
+                    type="search"
+                    placeholder="Search packing, Greece, hotels..."
+                    autocomplete="off"
+                  >
+                  <button class="page-nav__search-button" type="submit">Go</button>
+                </form>
+              </li>
             </ul>
           </nav>
         </div>
@@ -95,6 +110,9 @@
             <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank"{% endif %}>{{ item.text }}</a>
           </li>
           {% endfor %}
+          <li class="mobile-nav__item">
+            <a href="/search/" class="mobile-nav__link">Search</a>
+          </li>
         </ul>
       </div>
     </div>

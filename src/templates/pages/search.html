@@ -1,0 +1,33 @@
+{% extends "layouts/default.html" %}
+
+{% block body_class %}body--landing body--search has-no-hero{% endblock %}
+
+{% block content %}
+<div class="search-page" data-search-page>
+  <div class="search-page__inner">
+    <header class="search-page__header">
+      <p class="search-page__eyebrow">Away Lands Search</p>
+      <h1 class="search-page__heading">Find travel guides, packing lists, hotels, beaches, and outfit ideas.</h1>
+      <form class="search-page__form" action="/search/" method="get" data-search-form>
+        <label class="search-page__label" for="site-search">Search Away Lands</label>
+        <input
+          class="search-page__input"
+          id="site-search"
+          name="q"
+          type="search"
+          placeholder="Try Greece packing, Albania road trip, best beaches..."
+          autocomplete="off"
+          data-search-input
+        >
+        <button class="search-page__button" type="submit">Search</button>
+      </form>
+      <p class="search-page__hint">Popular searches: packing guides, outfit ideas, Greece, Albania, hotels, beaches.</p>
+    </header>
+
+    <div class="search-page__status" data-search-status>Start typing to search Away Lands.</div>
+
+    <ul class="search-results" data-search-results></ul>
+
+  </div>
+</div>
+{% endblock %}

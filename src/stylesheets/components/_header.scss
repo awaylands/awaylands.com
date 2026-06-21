@@ -238,6 +238,102 @@
     }
   }
 
+  &__search {
+    &:after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 33rem;
+      height: 1.8rem;
+      display: block;
+    }
+
+    &:hover,
+    &:focus-within {
+      .page-nav__search-form {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        transition: opacity 0.12s $ease-in-out-quart, transform 0.16s $ease-in-out-quart, visibility 0s 0s;
+      }
+    }
+  }
+
+  &__search-link {
+    display: inline-block;
+  }
+
+  &__search-form {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 33rem;
+    margin-top: 1.8rem;
+    padding: 1.2rem;
+    display: flex;
+    align-items: center;
+    background-color: -color(white);
+    box-shadow: 0 1.2rem 3rem rgba(0,0,0,0.14);
+    opacity: 0;
+    transform: translateY(-0.6rem);
+    visibility: hidden;
+    transition: opacity 0.12s $ease-in-out-quart, transform 0.16s $ease-in-out-quart, visibility 0s 0.16s;
+    z-index: -z(dropdown);
+
+    &:before {
+      content: "";
+      position: absolute;
+      right: 1.4rem;
+      bottom: 100%;
+      border-right: 0.7rem solid transparent;
+      border-bottom: 0.7rem solid -color(white);
+      border-left: 0.7rem solid transparent;
+    }
+  }
+
+  &__search-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  &__search-input {
+    @include copy-a($family: $raleway, $color: -color(black));
+
+    width: 100%;
+    min-width: 0;
+    height: 4rem;
+    padding: 0 1.2rem;
+    border: 1px solid rgba(0,0,0,0.18);
+    border-right: 0;
+    border-radius: 0;
+    outline: 0;
+    appearance: none;
+
+    &:focus {
+      border-color: -color(black);
+    }
+  }
+
+  &__search-button {
+    @include copy-a($family: $raleway, $color: -color(white));
+
+    height: 4rem;
+    padding: 0 1.4rem;
+    border: 1px solid -color(black);
+    background-color: -color(black);
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
   @include for-desktop-up {
     display: block;
   }

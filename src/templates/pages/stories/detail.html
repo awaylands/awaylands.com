@@ -11,6 +11,8 @@
       <ul class="filters">
         <li><a href="/blog/">Recent</a></li>
         <li><span class="separator"></span></li>
+        <li><a href="/search/">Search</a></li>
+        <li><span class="separator"></span></li>
 
         {% for category in categories.categories %}
         <li><a href="{{ category | route('category') }}/#" {% if category.title == page.category[0].title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
@@ -33,6 +35,30 @@
 
       <div class="content__content" v-story>
         {{ page.contentHtml | safe }}
+        {% if page.mainHtmlBlock1 %}{{ page.mainHtmlBlock1 | safe }}{% endif %}
+        {% if page.mainContentBlock1Html %}{{ page.mainContentBlock1Html | safe }}{% endif %}
+        {% if page.additionalMainBlocks %}
+          {% if page.additionalMainBlocks.mainHtmlBlock2 %}{{ page.additionalMainBlocks.mainHtmlBlock2 | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainContentBlock2Html %}{{ page.additionalMainBlocks.mainContentBlock2Html | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainHtmlBlock3 %}{{ page.additionalMainBlocks.mainHtmlBlock3 | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainContentBlock3Html %}{{ page.additionalMainBlocks.mainContentBlock3Html | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainHtmlBlock4 %}{{ page.additionalMainBlocks.mainHtmlBlock4 | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainContentBlock4Html %}{{ page.additionalMainBlocks.mainContentBlock4Html | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainHtmlBlock5 %}{{ page.additionalMainBlocks.mainHtmlBlock5 | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainContentBlock5Html %}{{ page.additionalMainBlocks.mainContentBlock5Html | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainHtmlBlock6 %}{{ page.additionalMainBlocks.mainHtmlBlock6 | safe }}{% endif %}
+          {% if page.additionalMainBlocks.mainContentBlock6Html %}{{ page.additionalMainBlocks.mainContentBlock6Html | safe }}{% endif %}
+        {% endif %}
+        {% if page.mainHtmlBlock2 %}{{ page.mainHtmlBlock2 | safe }}{% endif %}
+        {% if page.mainContentBlock2Html %}{{ page.mainContentBlock2Html | safe }}{% endif %}
+        {% if page.mainHtmlBlock3 %}{{ page.mainHtmlBlock3 | safe }}{% endif %}
+        {% if page.mainContentBlock3Html %}{{ page.mainContentBlock3Html | safe }}{% endif %}
+        {% if page.mainHtmlBlock4 %}{{ page.mainHtmlBlock4 | safe }}{% endif %}
+        {% if page.mainContentBlock4Html %}{{ page.mainContentBlock4Html | safe }}{% endif %}
+        {% if page.mainHtmlBlock5 %}{{ page.mainHtmlBlock5 | safe }}{% endif %}
+        {% if page.mainContentBlock5Html %}{{ page.mainContentBlock5Html | safe }}{% endif %}
+        {% if page.mainHtmlBlock6 %}{{ page.mainHtmlBlock6 | safe }}{% endif %}
+        {% if page.mainContentBlock6Html %}{{ page.mainContentBlock6Html | safe }}{% endif %}
         {% for block in page.contentBlocks %}
           {% if block.__typename == "ContentBlock" %}
             {{ block.contentHtml | safe }}
@@ -43,27 +69,6 @@
       </div>
 
       <div class="content__modules">
-        {% if page.shopStyleHtml %}
-          {{ page.shopStyleHtml | safe }}
-        {% endif %}
-
-        {% if page.shopStyle.options and page.shopStyle.options %}
-        <div class="shopsense-widget" style="text-align:center" data-options="{{ page.shopStyle.options }}"></div>
-        {% endif %}
-
-        {% if page.bookingContent %}
-          {{ page.bookingContent | safe }}
-        {% endif %}
-
-        {% if page.rewardStyleId %}
-        <div class="shopthepost-widget" data-widget-id="{{ page.rewardStyleId }}">
-          <div class="rs-adblock">
-            <img src="//assets.rewardstyle.com/production/7fd785e8dc0a3fd0d540859a5c988fe405a6f6c7/images/search/350.gif" onerror="this.parentNode.innerHTML='Disable your ad blocking software to view this content.'" style="width: 15px; height: 15px;" />
-            <noscript>JavaScript is currently disabled in this browser. Reactivate it to view this content.</noscript>
-          </div>
-        </div>
-        {% endif %}
-
         {% if page.relatedStories.length %}
         <div class="related-stories">
           <h2 class="related-stories__heading">Explore further</h2>
@@ -89,27 +94,4 @@
   </div>
 </div>
 
-{% endblock %}
-
-{% block extra_scripts %}
-
-  {% if page.shopStyle.options and page.shopStyle.scriptId %}
-  <script id="shopsensewidget-script" src="//shopsensewidget.shopstyle.com/widget-script.js?cb={{ page.shopSense.scriptId }}"></script>
-  {% endif %}
-
-  {% if page.bookingContent %}
-  <script type="text/javascript">
-    (function(d, sc, u) {
-      var s = d.createElement(sc), p = d.getElementsByTagName(sc)[0];
-      s.type = 'text/javascript';
-      s.async = true;
-      s.src = u + '?v=' + (+new Date());
-      p.parentNode.insertBefore(s,p);
-    })(document, 'script', '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js');
-  </script>
-  {% endif %}
-
-  {% if page.rewardStyleId %}
-  <script type="text/javascript">!function(d,s,id){var e, p = /^http:/.test(d.location) ? 'http' : 'https';if(!d.getElementById(id)) {e = d.createElement(s);e.id = id;e.src = p + '://' + 'widgets.rewardstyle.com' + '/js/shopthepost.js';d.body.appendChild(e);}if(typeof window.__stp === 'object') if(d.readyState === 'complete') {window.__stp.init();}}(document, 'script', 'shopthepost-script');</script>
-  {% endif %}
 {% endblock %}

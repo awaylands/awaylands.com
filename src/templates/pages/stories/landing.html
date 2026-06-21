@@ -3,6 +3,8 @@
 {% block filters %}
   <li><a class="is-current" href="/blog/">Recent</a></li>
   <li><span class="separator"></span></li>
+  <li><a href="/search/">Search</a></li>
+  <li><span class="separator"></span></li>
 
   {% for category in categories.categories %}
   <li><a href="{{ category | route('category') }}">{{ category.title }}</a></li>
@@ -10,6 +12,12 @@
 {% endblock %}
 
 {% block listings %}
+  <form class="blog-search" action="/search/" method="get">
+    <label class="blog-search__label" for="blog-search">Search Away Lands</label>
+    <input class="blog-search__input" id="blog-search" name="q" type="search" placeholder="Search destinations, packing guides, hotels, beaches..." />
+    <button class="blog-search__button" type="submit">Search</button>
+  </form>
+
   <div class="listings">
     <ul class="listings__list">
       {% for story in items | sort(true, true, "_enabledAt") %}

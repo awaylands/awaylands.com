@@ -5,6 +5,7 @@ import Vue from 'vue';
 import PageHeader from './components/header';
 import InstaFeed from './components/insta-feed.vue';
 import Listings from './components/listings.vue';
+import initSearch from './components/search';
 
 import Imageloaded from './directives/imageloaded';
 import Slides from './directives/slides';
@@ -19,6 +20,7 @@ export default new Vue({
   el: '#app',
   mounted() {
     objectFitImages();
+    initSearch();
   },
   methods: {},
   components: {

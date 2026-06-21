@@ -1,5 +1,5 @@
 query($images: TSImagesConfig) {
-  getStoryList {
+  getStoryList(size: 250, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
       _enabledAt
@@ -45,19 +45,8 @@ query($images: TSImagesConfig) {
           html
         }
       }
-      relatedStories {
-        title
-        tout {
-          image {
-            path
-          }
-        }
-      }
       tout {
         image {
-          path
-        }
-        secondaryImage {
           path
         }
         dek
@@ -65,9 +54,6 @@ query($images: TSImagesConfig) {
       social {
         title
         description
-        image {
-          path
-        }
       }
     }
     total
