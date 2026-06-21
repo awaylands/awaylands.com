@@ -24,8 +24,6 @@ query($images: TSImagesConfig) {
         options
         scriptId
       }
-      bookingContent
-      rewardStyleId
       tout {
         image {
           s3Key
