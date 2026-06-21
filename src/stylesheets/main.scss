@@ -15,6 +15,10 @@
 @import "mediavine";
 @import "tooltip";
 
+#consumer-privacy-footer-wrapper {
+  display: none !important;
+}
+
 .page-footer .instagram-footer {
   width: 100%;
   margin: 40px 0 0;
