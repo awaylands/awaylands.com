@@ -110,6 +110,7 @@
                 _enabledAt
                 _contentTypeName
                 title
+                slug
                 tout {
                   image {
                     path
@@ -147,7 +148,7 @@
             const stories = res.data.getStoryList;
 
             for (const story of stories.items) {
-              story.path = route(story._contentTypeName, story);
+              story.path = story.slug ? route('storySlug', story) : route(story._contentTypeName, story);
               story.date = moment(story._enabledAt).format('MMMM Do, YYYY');
 
               if (story.tout && story.tout.image) {

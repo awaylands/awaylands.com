@@ -26,6 +26,7 @@ query {
     items {
       _enabledAt
       title
+      slug
       tout {
         image {
           path

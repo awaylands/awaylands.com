@@ -17,7 +17,7 @@
     {% for story in page.storySet.items | sort(true, true, "_enabledAt") %}
     <li>
       <div class="listing">
-        <a href="{{ story | route('story') }}">
+        <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
           <div class="listing__image">
             <img srcset="{{ story.tout.image.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
                 {{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,

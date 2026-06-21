@@ -1,5 +1,5 @@
 query($images: TSImagesConfig) {
-  getStoryList {
+  getStoryList(where: {slug: {regexp: ".+"}}) {
     items {
       _contentTypeName
       _enabledAt

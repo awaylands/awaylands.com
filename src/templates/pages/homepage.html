@@ -38,7 +38,7 @@
         {% for story in sortedStories.slice(0, 6) %}
         <li class="grid__item">
           <div class="tout">
-            <a href="{{ story | route('story') }}">
+            <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
               <div class="tout__image">
                 <img srcset="{{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
                   {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,

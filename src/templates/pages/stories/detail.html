@@ -76,7 +76,7 @@
           <ul class="related-stories__list">
             {% for story in page.relatedStories %}
             <li>
-              <a href="{{ story | route('story') }}">
+              <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
                 <div class="related-stories__image">
                   {{ image(story.tout.image.path) }}
                 </div>

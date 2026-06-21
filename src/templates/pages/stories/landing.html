@@ -14,7 +14,7 @@
 {% block listings %}
   {% macro blogCard(story, modifier, imageSizes, isPriority) %}
   <div class="blog-card{% if modifier %} blog-card--{{ modifier }}{% endif %}">
-    <a href="{{ story | route('story') }}">
+    <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
       {% if story.tout and story.tout.image %}
       <div class="blog-card__image">
         <img srcset="{{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
@@ -152,7 +152,7 @@
       {% for story in sortedStories %}
       <li>
         <div class="listing">
-          <a href="{{ story | route('story') }}">
+          <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
             <div class="listing__image">
               <img srcset="{{ story.tout.image.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
                 {{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,

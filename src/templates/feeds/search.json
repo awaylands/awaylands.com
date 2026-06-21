@@ -2,7 +2,7 @@
 {% for story in getStoryList.items | sort(true, true, "_enabledAt") %}
   {
     "title": {{ story.title | dump | safe }},
-    "url": {{ (story | route('story')) | dump | safe }},
+    "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %},
     "date": {{ (story._enabledAt | date("MMMM D, YYYY")) | dump | safe }},
     "category": {% if story.category.length %}{{ story.category[0].title | dump | safe }}{% else %}""{% endif %},
     "location": {% if story.location.length %}{{ story.location[0].title | dump | safe }}{% else %}""{% endif %},

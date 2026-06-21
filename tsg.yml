@@ -63,6 +63,14 @@ routes:
       data: data/stories.graphql
       itemName: page
 
+  storySlug:
+    path: /story/:slug
+    template: pages/stories/detail.html
+    context: data/story.graphql
+    paginate:
+      data: data/story-slugs.graphql
+      itemName: page
+
   destinations:
     path: /destinations
     template: pages/destinations.html
