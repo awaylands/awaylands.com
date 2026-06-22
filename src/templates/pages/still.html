@@ -3,12 +3,26 @@
 {% block body_class %}body body--still{% endblock %}
 
 {% block content %}
-  {% set heroImage = null %}
-  {% for still in page.stills %}
-    {% if not heroImage and still.image.path %}
-      {% set heroImage = still.image.path %}
-    {% endif %}
-  {% endfor %}
+  {% set heroImage = page.social.image.path %}
+  {% if not heroImage %}
+    {% for still in page.stills %}
+      {% if not heroImage and still.image.path %}
+        {% set heroImage = still.image.path %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% set heroTitle = page.social.title or page.title or 'Photography Portfolios' %}
+  {% if heroTitle == 'Away Lands Portfolio - Photography Overview' %}
+    {% set heroTitle = 'Photography Portfolios' %}
+  {% endif %}
+
+  {% set heroKicker = page.social.description or 'Away Lands Photography' %}
+  {% if heroKicker | length > 90 %}
+    {% set heroKicker = 'Away Lands Photography' %}
+  {% endif %}
+
+  {% set fontOptions = ['serif', 'condensed', 'sans', 'script'] %}
 
   <section class="still-index">
     <div class="still-index__hero">
@@ -25,33 +39,40 @@
       {% endif %}
 
       <div class="still-index__hero-copy">
-        <p class="still-index__kicker">Away Lands Photography</p>
-        <h1 class="still-index__title">Still</h1>
-        <p class="still-index__intro">Editorial travel, lifestyle, hospitality, aerial, portrait, and underwater photography by Amy Seder.</p>
+        <p class="still-index__kicker">{{ heroKicker }}</p>
+        <h1 class="still-index__title">{{ heroTitle }}</h1>
       </div>
     </div>
 
     <div class="still-index__inner">
-      <div class="still-index__section-heading">
-        <p>Explore The Galleries</p>
-        <h2>Image collections from around the world.</h2>
-      </div>
-
       <div class="still-index__grid">
         {% for category in page.stillCategories %}
-          {% set categoryImage = null %}
-          {% for still in category.stills %}
-            {% if not categoryImage and still.image.path %}
-              {% set categoryImage = still.image.path %}
-            {% endif %}
-          {% endfor %}
+          {% set categoryImage = category.social.image.path %}
+          {% if not categoryImage %}
+            {% for still in category.stills %}
+              {% if not categoryImage and still.image.path %}
+                {% set categoryImage = still.image.path %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
 
-          <a class="still-index-card still-index-card--{{ loop.index }}" href="{{ category | route('stillCategory') }}/#">
+          {% if not categoryImage %}
+            {% set categoryImage = heroImage %}
+          {% endif %}
+
+          {% set categoryTitle = category.title %}
+          {% if category.social.title and category.social.title | length < 32 %}
+            {% set categoryTitle = category.social.title %}
+          {% endif %}
+          {% set categoryDescription = category.social.description %}
+          {% set fontOption = fontOptions[loop.index0 % 4] %}
+
+          <a class="still-index-card still-index-card--{{ loop.index }} still-index-card--{{ fontOption }}" href="{{ category | route('stillCategory') }}/#">
             {% if categoryImage %}
               <img srcset="{{ categoryImage | image({w: 1000, auto: 'compress,format'}) }} 1000w,
                            {{ categoryImage | image({w: 700, auto: 'compress,format'}) }} 700w,
                            {{ categoryImage | image({w: 500, auto: 'compress,format'}) }} 500w"
-                   sizes="(min-width: 1100px) 24vw, (min-width: 700px) 45vw, 92vw"
+                   sizes="(min-width: 1100px) 25vw, (min-width: 700px) 33vw, 50vw"
                    src="{{ categoryImage | image({w: 700, auto: 'compress,format'}) }}"
                    alt=""
                    loading="lazy"
@@ -60,8 +81,10 @@
             {% endif %}
 
             <span class="still-index-card__number">0{{ loop.index }}</span>
-            <span class="still-index-card__title">{{ category.title }}</span>
-            <span class="still-index-card__cta">View Gallery</span>
+            <span class="still-index-card__title">{{ categoryTitle }}</span>
+            {% if categoryDescription and categoryDescription | length < 55 %}
+              <span class="still-index-card__note">{{ categoryDescription }}</span>
+            {% endif %}
           </a>
         {% endfor %}
       </div>

@@ -5,6 +5,13 @@ query {
     stillCategories {
       _contentTypeName
       title
+      social {
+        title
+        description
+        image {
+          path
+        }
+      }
       stills {
         image {
           path
