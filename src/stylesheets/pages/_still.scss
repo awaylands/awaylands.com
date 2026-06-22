@@ -61,10 +61,10 @@
   max-width: 100rem;
   margin: 0;
   color: #fffbd8;
-  font-family: "Bodoni 72", Didot, "Baskerville", "Libre Baskerville", Georgia, "Times New Roman", serif;
-  font-size: 5.8rem;
+  font-family: "Still EB Garamond", Georgia, "Times New Roman", serif;
+  font-size: 6.4rem;
   font-weight: -weight(regular);
-  line-height: 0.86;
+  line-height: 0.9;
   letter-spacing: -0.045em;
   text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
 }
@@ -188,8 +188,10 @@
   top: 2.1rem;
   left: 2.1rem;
   color: rgba(255, 251, 216, 0.78);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.6rem;
+  font-family: "Still EB Garamond", Georgia, "Times New Roman", serif;
+  font-size: 1.7rem;
+  font-weight: -weight(regular);
+  letter-spacing: 0.02em;
   line-height: 1;
 }
 
@@ -198,12 +200,11 @@
   bottom: 2.4rem;
   left: 2.1rem;
   color: rgba(255, 251, 216, 0.84);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: "Still Voyage", Georgia, "Times New Roman", serif;
   font-size: 3rem;
-  font-weight: -weight(bold);
-  line-height: 0.82;
-  letter-spacing: -0.045em;
-  text-transform: lowercase;
+  font-weight: -weight(regular);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
 }
 
 .still-index-card__note {
@@ -219,47 +220,53 @@
   text-transform: uppercase;
 }
 
-.still-index-card--voyage .still-index-card__title {
-  color: rgba(255, 251, 216, 0.92);
-  font-size: 3.6rem;
-  letter-spacing: -0.07em;
+.still-index-card--1 .still-index-card__title {
+  font-family: "Still Voyage", Georgia, "Times New Roman", serif;
 }
 
-.still-index-card--stencil .still-index-card__title {
-  color: rgba(255, 251, 216, 0.86);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 3.4rem;
-  font-weight: -weight(bold);
-  letter-spacing: 0.03em;
-  text-transform: uppercase;
-  -webkit-text-stroke: 0.06rem rgba(255, 248, 229, 0.58);
-}
-
-.still-index-card--modern .still-index-card__title {
-  color: rgba(255, 251, 216, 0.88);
-  font-family: "Times New Roman", Georgia, serif;
+.still-index-card--2 .still-index-card__title {
+  font-family: "Still Dahlia", Georgia, "Times New Roman", serif;
   font-size: 3.2rem;
-  font-style: italic;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.05em;
 }
 
-.still-index-card--script .still-index-card__title {
-  color: rgba(255, 251, 216, 0.88);
-  font-family: $reenie-beanie;
-  font-size: 5.4rem;
-  font-weight: -weight(regular);
-  line-height: 0.62;
-  text-transform: none;
+.still-index-card--3 .still-index-card__title {
+  font-family: "Still Galisteo", Georgia, "Times New Roman", serif;
+  font-size: 3.4rem;
+  letter-spacing: -0.03em;
 }
 
-.still-index-card--optima .still-index-card__title {
-  color: rgba(255, 251, 216, 0.86);
-  font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1.8rem;
-  font-weight: -weight(bold);
-  line-height: 1.02;
-  letter-spacing: 0.14em;
+.still-index-card--4 .still-index-card__title {
+  font-family: "Still Cote Lumiere", cursive;
+  font-size: 4.1rem;
+  line-height: 0.74;
+  letter-spacing: 0;
+}
+
+.still-index-card--5 .still-index-card__title {
+  font-family: "Still Country Club", Georgia, "Times New Roman", serif;
+  font-size: 3.2rem;
+  line-height: 0.82;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
+}
+
+.still-index-card--6 .still-index-card__title {
+  font-family: "Still Old Money", Georgia, "Times New Roman", serif;
+  font-size: 3rem;
+  letter-spacing: -0.02em;
+}
+
+.still-index-card--7 .still-index-card__title {
+  font-family: "Still Vigro", Georgia, "Times New Roman", serif;
+  font-size: 3.2rem;
+  letter-spacing: -0.02em;
+}
+
+.still-index-card--8 .still-index-card__title {
+  font-family: "Still Fitzgerald", Georgia, "Times New Roman", serif;
+  font-size: 3.2rem;
+  letter-spacing: -0.04em;
 }
 
 @media (min-width: 700px) {
@@ -288,27 +295,19 @@
   }
 
   .still-index-card__title {
-    font-size: 4.4rem;
+    font-size: 3.4rem;
   }
 
-  .still-index-card--voyage .still-index-card__title {
+  .still-index-card--2 .still-index-card__title,
+  .still-index-card--3 .still-index-card__title,
+  .still-index-card--5 .still-index-card__title,
+  .still-index-card--7 .still-index-card__title,
+  .still-index-card--8 .still-index-card__title {
+    font-size: 3.8rem;
+  }
+
+  .still-index-card--4 .still-index-card__title {
     font-size: 5.2rem;
-  }
-
-  .still-index-card--stencil .still-index-card__title {
-    font-size: 4.4rem;
-  }
-
-  .still-index-card--modern .still-index-card__title {
-    font-size: 4.8rem;
-  }
-
-  .still-index-card--script .still-index-card__title {
-    font-size: 7rem;
-  }
-
-  .still-index-card--optima .still-index-card__title {
-    font-size: 2.5rem;
   }
 }
 
