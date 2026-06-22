@@ -1,6 +1,10 @@
 .still-index {
   @extend %basic-block;
 
+  --still-title-blue: #166e78;
+  --still-title-orange: #dd682d;
+  --still-title-yellow: #fffbd8;
+
   background:
     radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.18), rgba(237, 161, 128, 0) 34rem),
     linear-gradient(180deg, #fffaf0 0%, #f8f2ea 100%);
@@ -60,12 +64,12 @@
 .still-index__title {
   max-width: 100rem;
   margin: 0;
-  color: #fffbd8;
-  font-family: "Still EB Garamond", Georgia, "Times New Roman", serif;
-  font-size: 6.4rem;
+  color: var(--still-title-yellow);
+  font-family: "Still Voyage", "Still Dahlia", Georgia, "Times New Roman", serif;
+  font-size: 6.2rem;
   font-weight: -weight(regular);
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+  line-height: 0.78;
+  letter-spacing: -0.06em;
   text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
 }
 
@@ -196,28 +200,22 @@
 }
 
 .still-index-card__title {
-  right: 2.1rem;
-  bottom: 2.4rem;
-  left: 2.1rem;
-  color: rgba(255, 251, 216, 0.84);
+  top: 50%;
+  right: 0.8rem;
+  left: 0.8rem;
+  transform: translateY(-50%);
+  color: rgba(255, 251, 216, 0.9);
   font-family: "Still Voyage", Georgia, "Times New Roman", serif;
-  font-size: 3rem;
+  font-size: 4.4rem;
   font-weight: -weight(regular);
-  line-height: 0.86;
-  letter-spacing: -0.04em;
+  line-height: 0.78;
+  letter-spacing: -0.055em;
+  text-align: center;
+  text-shadow: 0 0.9rem 2.8rem rgba(0, 0, 0, 0.38);
 }
 
 .still-index-card__note {
-  top: 3.2rem;
-  right: 2.1rem;
-  left: 2.1rem;
-  color: rgba(255, 251, 216, 0.78);
-  font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 0.9rem;
-  font-weight: -weight(bold);
-  line-height: 1.25;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  display: none;
 }
 
 .still-index-card--1 .still-index-card__title {
@@ -226,47 +224,53 @@
 
 .still-index-card--2 .still-index-card__title {
   font-family: "Still Dahlia", Georgia, "Times New Roman", serif;
-  font-size: 3.2rem;
+  font-size: 4.7rem;
   letter-spacing: -0.05em;
 }
 
 .still-index-card--3 .still-index-card__title {
   font-family: "Still Galisteo", Georgia, "Times New Roman", serif;
-  font-size: 3.4rem;
+  font-size: 5rem;
   letter-spacing: -0.03em;
 }
 
 .still-index-card--4 .still-index-card__title {
   font-family: "Still Cote Lumiere", cursive;
-  font-size: 4.1rem;
+  font-size: 6rem;
   line-height: 0.74;
   letter-spacing: 0;
 }
 
 .still-index-card--5 .still-index-card__title {
   font-family: "Still Country Club", Georgia, "Times New Roman", serif;
-  font-size: 3.2rem;
+  font-size: 4.7rem;
   line-height: 0.82;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .still-index-card--6 .still-index-card__title {
   font-family: "Still Old Money", Georgia, "Times New Roman", serif;
-  font-size: 3rem;
-  letter-spacing: -0.02em;
+  font-size: 4.4rem;
+  letter-spacing: 0.03em;
 }
 
 .still-index-card--7 .still-index-card__title {
   font-family: "Still Vigro", Georgia, "Times New Roman", serif;
-  font-size: 3.2rem;
-  letter-spacing: -0.02em;
+  font-size: 3.8rem;
+  letter-spacing: 0.02em;
 }
 
 .still-index-card--8 .still-index-card__title {
   font-family: "Still Fitzgerald", Georgia, "Times New Roman", serif;
-  font-size: 3.2rem;
-  letter-spacing: -0.04em;
+  font-size: 4.7rem;
+  letter-spacing: 0.01em;
+}
+
+.still-index-card--5 .still-index-card__title,
+.still-index-card--6 .still-index-card__title,
+.still-index-card--7 .still-index-card__title,
+.still-index-card--8 .still-index-card__title {
+  text-transform: uppercase;
 }
 
 @media (min-width: 700px) {
@@ -282,7 +286,7 @@
   }
 
   .still-index__title {
-    font-size: 9rem;
+    font-size: 10.2rem;
   }
 
   .still-index__grid {
@@ -295,7 +299,7 @@
   }
 
   .still-index-card__title {
-    font-size: 3.4rem;
+    font-size: 5.1rem;
   }
 
   .still-index-card--2 .still-index-card__title,
@@ -303,11 +307,19 @@
   .still-index-card--5 .still-index-card__title,
   .still-index-card--7 .still-index-card__title,
   .still-index-card--8 .still-index-card__title {
-    font-size: 3.8rem;
+    font-size: 5.7rem;
   }
 
   .still-index-card--4 .still-index-card__title {
+    font-size: 6.8rem;
+  }
+
+  .still-index-card--6 .still-index-card__title {
     font-size: 5.2rem;
+  }
+
+  .still-index-card--7 .still-index-card__title {
+    font-size: 5.7rem;
   }
 }
 
@@ -325,7 +337,7 @@
 
   .still-index__title {
     max-width: 116rem;
-    font-size: 12.4rem;
+    font-size: 13.8rem;
   }
 
   .still-index__inner {
