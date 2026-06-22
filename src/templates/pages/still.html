@@ -1,70 +1,36 @@
-{% extends "layouts/default.html" %}
+{% extends "layouts/landing.html" %}
 
-{% block body_class %}body body--still{% endblock %}
+{% block filters %}
+  <li><a class="is-current" href="/still">Featured</a></li>
+  <li><span class="separator"></span></li>
 
-{% block content %}
-  {% set heroImage = null %}
-  {% for still in page.stills %}
-    {% if not heroImage and still.image.path %}
-      {% set heroImage = still.image.path %}
-    {% endif %}
+  {% for category in page.stillCategories %}
+    <li><a href="{{ category | route('stillCategory') }}/#">{{ category.title }}</a></li>
   {% endfor %}
+{% endblock %}
 
-  <section class="still-index">
-    <div class="still-index__hero">
-      {% if heroImage %}
-        <img class="still-index__hero-image"
-             srcset="{{ heroImage | image({w: 2400, auto: 'compress,format'}) }} 2400w,
-                     {{ heroImage | image({w: 1600, auto: 'compress,format'}) }} 1600w,
-                     {{ heroImage | image({w: 1000, auto: 'compress,format'}) }} 1000w"
-             sizes="100vw"
-             src="{{ heroImage | image({w: 1600, auto: 'compress,format'}) }}"
-             alt=""
-             decoding="async"
-        />
-      {% endif %}
+{% block listings %}
+  <ul class="masonry" v-gallery>
+    <li class="masonry__sizer"></li>
 
-      <div class="still-index__hero-copy">
-        <p class="still-index__kicker">Away Lands Photography</p>
-        <h1 class="still-index__title">Still</h1>
-        <p class="still-index__intro">Editorial travel, lifestyle, hospitality, aerial, portrait, and underwater photography by Amy Seder.</p>
-      </div>
-    </div>
+    {% for still in page.stills %}
+      {% set imagePath = still.image.path %}
 
-    <div class="still-index__inner">
-      <div class="still-index__section-heading">
-        <p>Explore The Galleries</p>
-        <h2>Image collections from around the world.</h2>
-      </div>
-
-      <div class="still-index__grid">
-        {% for category in page.stillCategories %}
-          {% set categoryImage = null %}
-          {% for still in category.stills %}
-            {% if not categoryImage and still.image.path %}
-              {% set categoryImage = still.image.path %}
-            {% endif %}
-          {% endfor %}
-
-          <a class="still-index-card still-index-card--{{ loop.index }}" href="{{ category | route('stillCategory') }}/#">
-            {% if categoryImage %}
-              <img srcset="{{ categoryImage | image({w: 1000, auto: 'compress,format'}) }} 1000w,
-                           {{ categoryImage | image({w: 700, auto: 'compress,format'}) }} 700w,
-                           {{ categoryImage | image({w: 500, auto: 'compress,format'}) }} 500w"
-                   sizes="(min-width: 1100px) 24vw, (min-width: 700px) 45vw, 92vw"
-                   src="{{ categoryImage | image({w: 700, auto: 'compress,format'}) }}"
-                   alt=""
-                   loading="lazy"
-                   decoding="async"
-              />
-            {% endif %}
-
-            <span class="still-index-card__number">0{{ loop.index }}</span>
-            <span class="still-index-card__title">{{ category.title }}</span>
-            <span class="still-index-card__cta">View Gallery</span>
+      {% if imagePath %}
+        <li class="masonry__item">
+          <a class="still" data-source="{{ imagePath | image({auto: 'compress,format', q: 25}) }}">
+            <img srcset="{{ imagePath | image({w: 1200, auto: 'compress,format'}) }} 600w,
+        {{ imagePath | image({w: 1014, auto: 'compress,format'}) }} 264w"
+                 sizes="(min-width: 1500px) 238px,(min-width: 900px) calc(75vw/4), (min-width: 600px) calc(25vw), calc(50vw - 30px)"
+                 src="{{ imagePath | image({w: 600, auto: 'compress,format'}) }}"
+                 data-image
+                 loading="lazy"
+                 decoding="async"
+                 v-imageloaded
+            />
           </a>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
 {% endblock %}

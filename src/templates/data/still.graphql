@@ -3,13 +3,7 @@ query {
     _contentTypeName
     title
     stillCategories {
-      _contentTypeName
       title
-      stills {
-        image {
-          path
-        }
-      }
     }
     stills {
       image {
