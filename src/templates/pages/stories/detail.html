@@ -43,6 +43,18 @@
   {% endif %}
 {% endmacro %}
 
+{% macro renderRelatedStory(story) %}
+  <li>
+    <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
+      <div class="related-stories__image">
+        {{ image(story.tout.image.path) }}
+      </div>
+
+      <h3 class="related-stories__title">{{ story.title }}</h3>
+    </a>
+  </li>
+{% endmacro %}
+
 {% block body_class %}body--story has-no-hero{% endblock %}
 
 {% block content %}
@@ -112,35 +124,57 @@
       </div>
 
       <div class="content__modules">
-        {% set relatedStories = page.relatedStories %}
-        {% set hasAutoRelatedStories = false %}
-        {% if not relatedStories.length and page.location.length and page.location[0].storySet.items.length %}
-          {% set relatedStories = page.location[0].storySet.items %}
-          {% set hasAutoRelatedStories = true %}
-        {% endif %}
-        {% if not relatedStories.length and page.category.length and page.category[0].storySet.items.length %}
-          {% set relatedStories = page.category[0].storySet.items %}
-          {% set hasAutoRelatedStories = true %}
-        {% endif %}
+        {% set hasManualRelatedStories = page.relatedStories.length %}
+        {% set shouldAutofillRelatedStories = page.relatedStories.length < 3 %}
+        {% set hasAutoRelatedStories = shouldAutofillRelatedStories %}
 
-        {% if relatedStories.length %}
+        {% if hasManualRelatedStories or shouldAutofillRelatedStories %}
         <div class="related-stories{% if hasAutoRelatedStories %} related-stories--auto{% endif %}">
           <h2 class="related-stories__heading">Explore further</h2>
 
           <ul class="related-stories__list">
-            {% for story in relatedStories %}
+            {% for story in page.relatedStories %}
             {% if story.title != page.title %}
-            <li>
-              <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
-                <div class="related-stories__image">
-                  {{ image(story.tout.image.path) }}
-                </div>
-
-                <h3 class="related-stories__title">{{ story.title }}</h3>
-              </a>
-            </li>
+              {{ renderRelatedStory(story) }}
             {% endif %}
             {% endfor %}
+
+            {% if shouldAutofillRelatedStories and page.location.length %}
+              {% for story in page.location[0].storySet.items %}
+              {% if story.title != page.title
+                and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
+                and (page.relatedStories.length < 2 or story.title != page.relatedStories[1].title)
+                and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
+                {{ renderRelatedStory(story) }}
+              {% endif %}
+              {% endfor %}
+            {% endif %}
+
+            {% if shouldAutofillRelatedStories and page.category.length %}
+              {% for story in page.category[0].storySet.items %}
+              {% if story.title != page.title
+                and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
+                and (page.relatedStories.length < 2 or story.title != page.relatedStories[1].title)
+                and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
+                {{ renderRelatedStory(story) }}
+              {% endif %}
+              {% endfor %}
+            {% endif %}
+
+            {% if shouldAutofillRelatedStories %}
+              {% for category in featuredCategories.items %}
+              {% if category.title == "* Most Popular Posts *" %}
+                {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+                {% if story.title != page.title
+                  and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
+                  and (page.relatedStories.length < 2 or story.title != page.relatedStories[1].title)
+                  and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
+                  {{ renderRelatedStory(story) }}
+                {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% endfor %}
+            {% endif %}
           </ul>
         </div>
         {% endif %}
