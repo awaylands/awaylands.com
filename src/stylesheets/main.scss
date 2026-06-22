@@ -21,12 +21,12 @@
 
 .page-footer .instagram-footer {
   width: 100%;
-  margin: 40px 0 0;
+  margin: 24px 0 0;
   text-align: center;
 }
 
 .page-footer .instagram-footer .page-footer__heading {
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .page-footer .instagram-footer .page-footer__heading a {
@@ -72,15 +72,8 @@
 
 @media (max-width: 767px) {
     .page-footer .footer-insta-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 0 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 0 8px;
     }
   }
-
-@media (max-width: 767px) {
-  .page-footer .footer-insta-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-}

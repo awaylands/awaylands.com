@@ -1,8 +1,8 @@
 .page-footer {
   @extend %basic-block;
 
-  margin-top: 10.4rem;
-  padding: 6.4rem 0 2.4rem;
+  margin-top: 6.4rem;
+  padding: 3.8rem 0 1.8rem;
   background-color: -color(cerulean);
 
   &__inner {
@@ -13,7 +13,7 @@
     display: block;
     position: relative;
     width: 32.8rem;
-    margin-bottom: 4rem;
+    margin-bottom: 2.8rem;
     user-select: none;
 
     img {
@@ -25,13 +25,13 @@
     @extend %basic-block;
 
     & + * {
-      margin-top: 9.6rem;
+      margin-top: 4.8rem;
     }
   }
 
   &__block {
     & + * {
-      margin-top: 5.4rem;
+      margin-top: 3.2rem;
     }
   }
 
@@ -39,14 +39,14 @@
     @include hd-b($color: -color(white));
 
     text-transform: uppercase;
-    margin-bottom: 4.2rem;
+    margin-bottom: 2.4rem;
   }
 
   &__colophon {
     @include copy-a($color: -color(white));
 
     display: block;
-    margin-top: 3.2rem;
+    margin-top: 2rem;
   }
 
   @include for-desktop-up {
@@ -76,7 +76,7 @@
     display: block;
 
     & + * {
-      margin-top: 3.2rem;
+      margin-top: 2rem;
     }
   }
 
@@ -266,4 +266,3 @@
     }
   }
 }
-
