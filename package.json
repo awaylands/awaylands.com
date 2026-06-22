@@ -29,6 +29,7 @@
     "build:webpack": "NODE_ENV=production webpack --display-error-details",
     "build:webpack:dev": "webpack --display-error-details -d",
     "build": "npm-run-all --serial clean build:images build:webpack",
+    "still:grid": "node scripts/still-grid-organizer.js",
     "deploy": "npm run build && takeshape deploy",
     "watch:js": "webpack --watch",
     "watch:images": "chokidar 'src/images/**/*' -d -c 'npm run build:images'",
