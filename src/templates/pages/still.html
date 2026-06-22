@@ -22,7 +22,7 @@
     {% set heroKicker = 'Away Lands Photography' %}
   {% endif %}
 
-  {% set fontOptions = ['serif', 'condensed', 'sans', 'script'] %}
+  {% set fontOptions = ['voyage', 'stencil', 'modern', 'script', 'optima'] %}
 
   <section class="still-index">
     <div class="still-index__hero">
@@ -41,10 +41,17 @@
       <div class="still-index__hero-copy">
         <p class="still-index__kicker">{{ heroKicker }}</p>
         <h1 class="still-index__title">{{ heroTitle }}</h1>
+        <div class="still-index__hero-rule"></div>
       </div>
     </div>
 
     <div class="still-index__inner">
+      <div class="still-index__marquee" aria-hidden="true">
+        {% for category in page.stillCategories %}
+          <span>{{ category.title }}</span>
+        {% endfor %}
+      </div>
+
       <div class="still-index__grid">
         {% for category in page.stillCategories %}
           {% set categoryImage = category.social.image.path %}

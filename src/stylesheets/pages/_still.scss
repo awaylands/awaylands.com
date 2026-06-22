@@ -1,71 +1,125 @@
 .still-index {
   @extend %basic-block;
 
-  background: #f3eee5;
-  color: #151515;
+  background:
+    radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.34), rgba(237, 161, 128, 0) 34rem),
+    linear-gradient(180deg, #f7f0df 0%, #ebe1d9 100%);
+  color: #16120e;
 }
 
 .still-index__hero {
   position: relative;
-  height: 58rem;
+  min-height: 62rem;
   overflow: hidden;
-  background: #151515;
+  background: #166e78;
 
+  &:before,
   &:after {
     content: "";
     position: absolute;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &:before {
+    top: 1.2rem;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    left: 1.2rem;
+    border: 1px solid rgba(255, 248, 229, 0.72);
+  }
+
+  &:after {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     background:
-      linear-gradient(90deg, rgba(12, 19, 24, 0.72) 0%, rgba(12, 19, 24, 0.35) 42%, rgba(12, 19, 24, 0.1) 100%),
-      linear-gradient(180deg, rgba(12, 19, 24, 0.18) 0%, rgba(12, 19, 24, 0.55) 100%);
-    pointer-events: none;
+      linear-gradient(90deg, rgba(22, 110, 120, 0.72) 0%, rgba(22, 110, 120, 0.25) 44%, rgba(22, 110, 120, 0.06) 100%),
+      linear-gradient(180deg, rgba(16, 14, 10, 0.02) 0%, rgba(16, 14, 10, 0.48) 100%);
   }
 }
 
 .still-index__hero-image {
   display: block;
   width: 100%;
-  height: 100%;
+  height: 62rem;
   object-fit: cover;
+  filter: saturate(1.08) contrast(0.94);
 }
 
 .still-index__hero-copy {
   position: absolute;
-  z-index: 1;
-  top: 8.8rem;
+  z-index: 2;
+  top: 8rem;
   right: 2rem;
   left: 2rem;
-  max-width: 84rem;
-  color: -color(white);
+  color: #fff8e5;
 }
 
 .still-index__kicker {
-  @include copy-d($weight: bold, $color: -color(white), $line-height: 1.2);
-
-  max-width: 38rem;
+  max-width: 34rem;
   margin: 0 0 1.4rem;
+  color: #fff8e5;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  font-weight: -weight(bold);
+  line-height: 1.35;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .still-index__title {
+  max-width: 100rem;
   margin: 0;
-  color: -color(white);
+  color: #fff06a;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 5.8rem;
-  font-weight: -weight(regular);
-  line-height: 0.88;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+  font-size: 6.4rem;
+  font-weight: -weight(bold);
+  line-height: 0.76;
+  letter-spacing: -0.065em;
+  text-transform: lowercase;
+  text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
+}
+
+.still-index__hero-rule {
+  width: 16rem;
+  height: 0.2rem;
+  margin-top: 2.2rem;
+  background: #dd682d;
 }
 
 .still-index__inner {
   @extend %container;
 
-  padding-top: 0.8rem;
+  padding-top: 1rem;
   padding-bottom: 0;
+}
+
+.still-index__marquee {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  padding: 0.8rem 0;
+  border-top: 1px solid rgba(22, 110, 120, 0.3);
+  border-bottom: 1px solid rgba(22, 110, 120, 0.3);
+  color: #166e78;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: -weight(bold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  span {
+    &:after {
+      content: "/";
+      margin-left: 1rem;
+      color: #dd682d;
+    }
+  }
 }
 
 .still-index__grid {
@@ -77,21 +131,38 @@
 .still-index-card {
   position: relative;
   display: block;
-  height: 28rem;
+  min-height: 30rem;
   overflow: hidden;
-  background: #d8d1c7;
+  background: #ebe1d9;
+  color: #fff8e5;
   text-decoration: none;
 
-  &:before {
+  &:before,
+  &:after {
     content: "";
     position: absolute;
+    pointer-events: none;
+  }
+
+  &:before {
     z-index: 1;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: linear-gradient(180deg, rgba(13, 17, 18, 0.06) 0%, rgba(13, 17, 18, 0.54) 100%);
+    background:
+      linear-gradient(180deg, rgba(10, 12, 12, 0.02) 0%, rgba(10, 12, 12, 0.55) 100%),
+      linear-gradient(90deg, rgba(22, 110, 120, 0.32) 0%, rgba(22, 110, 120, 0) 54%);
     transition: background 0.25s $ease-in-out-quart;
+  }
+
+  &:after {
+    z-index: 2;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    height: 1px;
+    background: rgba(255, 248, 229, 0.58);
   }
 
   &:hover,
@@ -101,15 +172,18 @@
     }
 
     &:before {
-      background: linear-gradient(180deg, rgba(13, 17, 18, 0.02) 0%, rgba(13, 17, 18, 0.62) 100%);
+      background:
+        linear-gradient(180deg, rgba(10, 12, 12, 0.02) 0%, rgba(10, 12, 12, 0.66) 100%),
+        linear-gradient(90deg, rgba(221, 104, 45, 0.28) 0%, rgba(221, 104, 45, 0) 58%);
     }
   }
 
   img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: 30rem;
     object-fit: cover;
+    filter: saturate(1.08) contrast(0.92);
     transition: transform 0.45s $ease-in-out-quart;
   }
 }
@@ -118,143 +192,228 @@
 .still-index-card__title,
 .still-index-card__note {
   position: absolute;
-  z-index: 2;
-  color: -color(white);
+  z-index: 3;
 }
 
 .still-index-card__number {
-  top: 1.1rem;
-  left: 1.1rem;
+  top: 1rem;
+  left: 1rem;
+  color: rgba(255, 248, 229, 0.76);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.6rem;
   line-height: 1;
-  opacity: 0.72;
 }
 
 .still-index-card__title {
-  right: 1.1rem;
-  bottom: 1.4rem;
-  left: 1.1rem;
+  right: 1rem;
+  bottom: 2.2rem;
+  left: 1rem;
+  color: rgba(255, 248, 229, 0.84);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 2.8rem;
-  font-weight: -weight(regular);
-  line-height: 0.9;
-  letter-spacing: 0;
-  text-transform: uppercase;
-  opacity: 0.76;
+  font-size: 3rem;
+  font-weight: -weight(bold);
+  line-height: 0.82;
+  letter-spacing: -0.045em;
+  text-transform: lowercase;
 }
 
 .still-index-card__note {
-  @include copy-d($color: -color(white), $line-height: 1.2);
-
-  right: 1.1rem;
-  top: 3.4rem;
-  left: 1.1rem;
-  opacity: 0.78;
+  top: 3.2rem;
+  right: 1rem;
+  left: 1rem;
+  color: rgba(255, 248, 229, 0.78);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: -weight(bold);
+  line-height: 1.25;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.still-index-card--condensed .still-index-card__title {
-  font-family: "Times New Roman", Georgia, serif;
-  font-size: 3.2rem;
-  letter-spacing: -0.03em;
+.still-index-card--voyage .still-index-card__title {
+  color: rgba(255, 240, 106, 0.9);
+  font-size: 3.6rem;
+  letter-spacing: -0.07em;
 }
 
-.still-index-card--sans .still-index-card__title {
-  font-family: $quicksand;
-  font-size: 1.8rem;
+.still-index-card--stencil .still-index-card__title {
+  color: rgba(235, 225, 224, 0.9);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 3.4rem;
   font-weight: -weight(bold);
-  line-height: 1.04;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 0.06rem rgba(255, 248, 229, 0.58);
+}
+
+.still-index-card--modern .still-index-card__title {
+  color: rgba(255, 248, 229, 0.88);
+  font-family: "Times New Roman", Georgia, serif;
+  font-size: 3.2rem;
+  font-style: italic;
+  letter-spacing: -0.055em;
 }
 
 .still-index-card--script .still-index-card__title {
+  color: rgba(255, 248, 229, 0.88);
   font-family: $reenie-beanie;
-  font-size: 4.4rem;
-  line-height: 0.78;
+  font-size: 5.4rem;
+  font-weight: -weight(regular);
+  line-height: 0.62;
   text-transform: none;
 }
 
+.still-index-card--optima .still-index-card__title {
+  color: rgba(255, 248, 229, 0.86);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.8rem;
+  font-weight: -weight(bold);
+  line-height: 1.02;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 @media (min-width: 700px) {
-  .still-index__hero {
-    height: 62rem;
+  .still-index__hero,
+  .still-index__hero-image {
+    height: 66rem;
   }
 
   .still-index__hero-copy {
-    top: 11rem;
+    top: 10rem;
     right: 4rem;
     left: 4rem;
   }
 
   .still-index__title {
-    font-size: 8rem;
-  }
-
-  .still-index__inner {
-    padding-top: 1rem;
+    font-size: 9.8rem;
   }
 
   .still-index__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 1rem;
   }
 
   .still-index-card {
-    height: 38rem;
+    grid-column: span 2;
+    min-height: 40rem;
+
+    img {
+      height: 40rem;
+    }
   }
 
   .still-index-card--1,
+  .still-index-card--6 {
+    grid-column: span 3;
+  }
+
+  .still-index-card--2,
   .still-index-card--5 {
-    grid-column: span 2;
+    grid-column: span 3;
   }
 
   .still-index-card__title {
-    font-size: 4.2rem;
+    font-size: 4.4rem;
   }
 
-  .still-index-card--condensed .still-index-card__title {
+  .still-index-card--voyage .still-index-card__title {
+    font-size: 5.2rem;
+  }
+
+  .still-index-card--stencil .still-index-card__title {
+    font-size: 4.4rem;
+  }
+
+  .still-index-card--modern .still-index-card__title {
     font-size: 4.8rem;
   }
 
-  .still-index-card--sans .still-index-card__title {
-    font-size: 2.4rem;
+  .still-index-card--script .still-index-card__title {
+    font-size: 7rem;
   }
 
-  .still-index-card--script .still-index-card__title {
-    font-size: 6rem;
+  .still-index-card--optima .still-index-card__title {
+    font-size: 2.5rem;
   }
 }
 
 @include for-desktop-up {
-  .still-index__hero {
-    height: 68rem;
+  .still-index__hero,
+  .still-index__hero-image {
+    height: 72rem;
   }
 
   .still-index__hero-copy {
-    top: 12rem;
+    top: 10.5rem;
     right: 7rem;
     left: 7rem;
   }
 
   .still-index__title {
-    font-size: 10.8rem;
+    max-width: 116rem;
+    font-size: 13.4rem;
+  }
+
+  .still-index__inner {
+    padding-top: 1.2rem;
   }
 
   .still-index__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     gap: 1.2rem;
   }
 
   .still-index-card {
-    height: 44rem;
+    grid-column: span 3;
+    min-height: 48rem;
+
+    img {
+      height: 48rem;
+    }
   }
 
-  .still-index-card--1,
-  .still-index-card--6 {
-    grid-column: span 2;
+  .still-index-card--1 {
+    grid-column: span 5;
+  }
+
+  .still-index-card--2 {
+    grid-column: span 4;
+  }
+
+  .still-index-card--3 {
+    grid-column: span 3;
   }
 
   .still-index-card--4 {
-    height: 36rem;
+    grid-column: span 4;
+    min-height: 42rem;
+
+    img {
+      height: 42rem;
+    }
+  }
+
+  .still-index-card--5 {
+    grid-column: span 5;
+    min-height: 42rem;
+
+    img {
+      height: 42rem;
+    }
+  }
+
+  .still-index-card--6 {
+    grid-column: span 3;
+    min-height: 42rem;
+
+    img {
+      height: 42rem;
+    }
+  }
+
+  .still-index-card--7,
+  .still-index-card--8 {
+    grid-column: span 6;
   }
 }
