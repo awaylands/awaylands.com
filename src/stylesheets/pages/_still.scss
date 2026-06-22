@@ -2,8 +2,8 @@
   @extend %basic-block;
 
   background:
-    radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.34), rgba(237, 161, 128, 0) 34rem),
-    linear-gradient(180deg, #f7f0df 0%, #ebe1d9 100%);
+    radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.18), rgba(237, 161, 128, 0) 34rem),
+    linear-gradient(180deg, #fffaf0 0%, #f8f2ea 100%);
   color: #16120e;
 }
 
@@ -51,34 +51,21 @@
 .still-index__hero-copy {
   position: absolute;
   z-index: 2;
-  top: 8rem;
   right: 2rem;
+  bottom: 5rem;
   left: 2rem;
-  color: #fff8e5;
-}
-
-.still-index__kicker {
-  max-width: 34rem;
-  margin: 0 0 1.4rem;
-  color: #fff8e5;
-  font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1.1rem;
-  font-weight: -weight(bold);
-  line-height: 1.35;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  color: #fffbd8;
 }
 
 .still-index__title {
   max-width: 100rem;
   margin: 0;
-  color: #fff06a;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 6.4rem;
-  font-weight: -weight(bold);
-  line-height: 0.76;
-  letter-spacing: -0.065em;
-  text-transform: lowercase;
+  color: #fffbd8;
+  font-family: "Bodoni 72", Didot, "Baskerville", "Libre Baskerville", Georgia, "Times New Roman", serif;
+  font-size: 5.8rem;
+  font-weight: -weight(regular);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
   text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
 }
 
@@ -92,8 +79,8 @@
 .still-index__inner {
   @extend %container;
 
-  padding-top: 1rem;
-  padding-bottom: 0;
+  padding-top: 3rem;
+  padding-bottom: 3.8rem;
 }
 
 .still-index__marquee {
@@ -101,8 +88,8 @@
   flex-wrap: nowrap;
   gap: 1rem;
   overflow: hidden;
-  margin-bottom: 1rem;
-  padding: 0.8rem 0;
+  margin-bottom: 2.4rem;
+  padding: 1.2rem 0;
   border-top: 1px solid rgba(22, 110, 120, 0.3);
   border-bottom: 1px solid rgba(22, 110, 120, 0.3);
   color: #166e78;
@@ -125,15 +112,16 @@
 .still-index__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.8rem;
+  gap: 1.2rem;
 }
 
 .still-index-card {
   position: relative;
   display: block;
-  min-height: 30rem;
+  aspect-ratio: 3 / 4;
   overflow: hidden;
   background: #ebe1d9;
+  border-radius: 1.4rem;
   color: #fff8e5;
   text-decoration: none;
 
@@ -158,11 +146,12 @@
 
   &:after {
     z-index: 2;
+    top: 1rem;
     right: 1rem;
     bottom: 1rem;
     left: 1rem;
-    height: 1px;
-    background: rgba(255, 248, 229, 0.58);
+    border: 2px solid rgba(255, 248, 229, 0.68);
+    border-radius: 1rem;
   }
 
   &:hover,
@@ -181,7 +170,7 @@
   img {
     display: block;
     width: 100%;
-    height: 30rem;
+    height: 100%;
     object-fit: cover;
     filter: saturate(1.08) contrast(0.92);
     transition: transform 0.45s $ease-in-out-quart;
@@ -196,19 +185,19 @@
 }
 
 .still-index-card__number {
-  top: 1rem;
-  left: 1rem;
-  color: rgba(255, 248, 229, 0.76);
+  top: 2.1rem;
+  left: 2.1rem;
+  color: rgba(255, 251, 216, 0.78);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 1.6rem;
   line-height: 1;
 }
 
 .still-index-card__title {
-  right: 1rem;
-  bottom: 2.2rem;
-  left: 1rem;
-  color: rgba(255, 248, 229, 0.84);
+  right: 2.1rem;
+  bottom: 2.4rem;
+  left: 2.1rem;
+  color: rgba(255, 251, 216, 0.84);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 3rem;
   font-weight: -weight(bold);
@@ -219,9 +208,9 @@
 
 .still-index-card__note {
   top: 3.2rem;
-  right: 1rem;
-  left: 1rem;
-  color: rgba(255, 248, 229, 0.78);
+  right: 2.1rem;
+  left: 2.1rem;
+  color: rgba(255, 251, 216, 0.78);
   font-family: Montserrat, Helvetica, sans-serif;
   font-size: 0.9rem;
   font-weight: -weight(bold);
@@ -231,13 +220,13 @@
 }
 
 .still-index-card--voyage .still-index-card__title {
-  color: rgba(255, 240, 106, 0.9);
+  color: rgba(255, 251, 216, 0.92);
   font-size: 3.6rem;
   letter-spacing: -0.07em;
 }
 
 .still-index-card--stencil .still-index-card__title {
-  color: rgba(235, 225, 224, 0.9);
+  color: rgba(255, 251, 216, 0.86);
   font-family: Georgia, "Times New Roman", serif;
   font-size: 3.4rem;
   font-weight: -weight(bold);
@@ -247,7 +236,7 @@
 }
 
 .still-index-card--modern .still-index-card__title {
-  color: rgba(255, 248, 229, 0.88);
+  color: rgba(255, 251, 216, 0.88);
   font-family: "Times New Roman", Georgia, serif;
   font-size: 3.2rem;
   font-style: italic;
@@ -255,7 +244,7 @@
 }
 
 .still-index-card--script .still-index-card__title {
-  color: rgba(255, 248, 229, 0.88);
+  color: rgba(255, 251, 216, 0.88);
   font-family: $reenie-beanie;
   font-size: 5.4rem;
   font-weight: -weight(regular);
@@ -264,7 +253,7 @@
 }
 
 .still-index-card--optima .still-index-card__title {
-  color: rgba(255, 248, 229, 0.86);
+  color: rgba(255, 251, 216, 0.86);
   font-family: Montserrat, Helvetica, sans-serif;
   font-size: 1.8rem;
   font-weight: -weight(bold);
@@ -280,37 +269,22 @@
   }
 
   .still-index__hero-copy {
-    top: 10rem;
     right: 4rem;
+    bottom: 6.2rem;
     left: 4rem;
   }
 
   .still-index__title {
-    font-size: 9.8rem;
+    font-size: 9rem;
   }
 
   .still-index__grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.6rem;
   }
 
   .still-index-card {
-    grid-column: span 2;
-    min-height: 40rem;
-
-    img {
-      height: 40rem;
-    }
-  }
-
-  .still-index-card--1,
-  .still-index-card--6 {
-    grid-column: span 3;
-  }
-
-  .still-index-card--2,
-  .still-index-card--5 {
-    grid-column: span 3;
+    grid-column: auto;
   }
 
   .still-index-card__title {
@@ -345,75 +319,43 @@
   }
 
   .still-index__hero-copy {
-    top: 10.5rem;
     right: 7rem;
+    bottom: 8rem;
     left: 7rem;
   }
 
   .still-index__title {
     max-width: 116rem;
-    font-size: 13.4rem;
+    font-size: 12.4rem;
   }
 
   .still-index__inner {
-    padding-top: 1.2rem;
+    padding-top: 4.2rem;
+    padding-bottom: 5.2rem;
   }
 
   .still-index__grid {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    gap: 1.2rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2rem;
   }
 
   .still-index-card {
-    grid-column: span 3;
-    min-height: 48rem;
+    grid-column: auto;
+  }
+}
 
-    img {
-      height: 48rem;
-    }
+.body--still {
+  background:
+    radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.18), rgba(237, 161, 128, 0) 34rem),
+    linear-gradient(180deg, #fffaf0 0%, #f8f2ea 100%);
+
+  .main {
+    background:
+      radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.18), rgba(237, 161, 128, 0) 34rem),
+      linear-gradient(180deg, #fffaf0 0%, #f8f2ea 100%);
   }
 
-  .still-index-card--1 {
-    grid-column: span 5;
-  }
-
-  .still-index-card--2 {
-    grid-column: span 4;
-  }
-
-  .still-index-card--3 {
-    grid-column: span 3;
-  }
-
-  .still-index-card--4 {
-    grid-column: span 4;
-    min-height: 42rem;
-
-    img {
-      height: 42rem;
-    }
-  }
-
-  .still-index-card--5 {
-    grid-column: span 5;
-    min-height: 42rem;
-
-    img {
-      height: 42rem;
-    }
-  }
-
-  .still-index-card--6 {
-    grid-column: span 3;
-    min-height: 42rem;
-
-    img {
-      height: 42rem;
-    }
-  }
-
-  .still-index-card--7,
-  .still-index-card--8 {
-    grid-column: span 6;
+  .page-footer {
+    margin-top: 0;
   }
 }

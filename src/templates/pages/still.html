@@ -17,11 +17,6 @@
     {% set heroTitle = 'Photography Portfolios' %}
   {% endif %}
 
-  {% set heroKicker = page.social.description or 'Away Lands Photography' %}
-  {% if heroKicker | length > 90 %}
-    {% set heroKicker = 'Away Lands Photography' %}
-  {% endif %}
-
   {% set fontOptions = ['voyage', 'stencil', 'modern', 'script', 'optima'] %}
 
   <section class="still-index">
@@ -39,7 +34,6 @@
       {% endif %}
 
       <div class="still-index__hero-copy">
-        <p class="still-index__kicker">{{ heroKicker }}</p>
         <h1 class="still-index__title">{{ heroTitle }}</h1>
         <div class="still-index__hero-rule"></div>
       </div>
