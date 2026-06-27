@@ -90,6 +90,20 @@
 }
 
 @font-face {
+  font-family: 'Still Old Money';
+  src: url('/assets/fonts/still-preview/oldmoney-italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Still Refined Society';
+  src: url('/assets/fonts/still-preview/refined-society.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
   font-family: 'Still Vigro';
   src: url('/assets/fonts/still-preview/vigro.otf') format('opentype');
   font-weight: 400;

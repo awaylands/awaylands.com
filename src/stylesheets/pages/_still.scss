@@ -65,12 +65,22 @@
   max-width: 100rem;
   margin: 0;
   color: var(--still-title-yellow);
-  font-family: "Still Voyage", "Still Dahlia", Georgia, "Times New Roman", serif;
+  font-family: "Still Old Money", Georgia, "Times New Roman", serif;
   font-size: 6.2rem;
   font-weight: -weight(regular);
-  line-height: 0.78;
-  letter-spacing: -0.06em;
+  line-height: 0.82;
+  letter-spacing: 0.045em;
   text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
+}
+
+.still-index__title-word {
+  display: block;
+  transform: scaleX(1.06);
+  transform-origin: left center;
+}
+
+.still-index__title-word--italic {
+  font-style: italic;
 }
 
 .still-index__hero-rule {
@@ -200,16 +210,16 @@
 }
 
 .still-index-card__title {
-  top: 50%;
+  top: 68%;
   right: 0.8rem;
   left: 0.8rem;
   transform: translateY(-50%);
   color: rgba(255, 251, 216, 0.9);
-  font-family: "Still Voyage", Georgia, "Times New Roman", serif;
-  font-size: 4.4rem;
+  font-family: "Still Refined Society", "Still Old Money", Georgia, "Times New Roman", serif;
+  font-size: 4.8rem;
   font-weight: -weight(regular);
-  line-height: 0.78;
-  letter-spacing: -0.055em;
+  line-height: 0.82;
+  letter-spacing: 0.02em;
   text-align: center;
   text-shadow: 0 0.9rem 2.8rem rgba(0, 0, 0, 0.38);
 }
@@ -218,52 +228,22 @@
   display: none;
 }
 
-.still-index-card--1 .still-index-card__title {
-  font-family: "Still Voyage", Georgia, "Times New Roman", serif;
-}
-
-.still-index-card--2 .still-index-card__title {
-  font-family: "Still Dahlia", Georgia, "Times New Roman", serif;
-  font-size: 4.7rem;
-  letter-spacing: -0.05em;
-}
-
-.still-index-card--3 .still-index-card__title {
-  font-family: "Still Galisteo", Georgia, "Times New Roman", serif;
-  font-size: 5rem;
-  letter-spacing: -0.03em;
-}
-
-.still-index-card--4 .still-index-card__title {
-  font-family: "Still Cote Lumiere", cursive;
-  font-size: 6rem;
-  line-height: 0.74;
-  letter-spacing: 0;
-}
-
-.still-index-card--5 .still-index-card__title {
-  font-family: "Still Country Club", Georgia, "Times New Roman", serif;
-  font-size: 4.7rem;
+.still-index-card--1 .still-index-card__title,
+.still-index-card--2 .still-index-card__title,
+.still-index-card--3 .still-index-card__title,
+.still-index-card--4 .still-index-card__title,
+.still-index-card--5 .still-index-card__title,
+.still-index-card--6 .still-index-card__title,
+.still-index-card--7 .still-index-card__title,
+.still-index-card--8 .still-index-card__title {
+  font-family: "Still Refined Society", "Still Old Money", Georgia, "Times New Roman", serif;
+  font-size: 4.8rem;
   line-height: 0.82;
   letter-spacing: 0.02em;
 }
 
-.still-index-card--6 .still-index-card__title {
-  font-family: "Still Old Money", Georgia, "Times New Roman", serif;
-  font-size: 4.4rem;
-  letter-spacing: 0.03em;
-}
-
 .still-index-card--7 .still-index-card__title {
-  font-family: "Still Vigro", Georgia, "Times New Roman", serif;
-  font-size: 3.8rem;
-  letter-spacing: 0.02em;
-}
-
-.still-index-card--8 .still-index-card__title {
-  font-family: "Still Fitzgerald", Georgia, "Times New Roman", serif;
-  font-size: 4.7rem;
-  letter-spacing: 0.01em;
+  font-size: 3.9rem;
 }
 
 .still-index-card--5 .still-index-card__title,
@@ -299,27 +279,11 @@
   }
 
   .still-index-card__title {
-    font-size: 5.1rem;
-  }
-
-  .still-index-card--2 .still-index-card__title,
-  .still-index-card--3 .still-index-card__title,
-  .still-index-card--5 .still-index-card__title,
-  .still-index-card--7 .still-index-card__title,
-  .still-index-card--8 .still-index-card__title {
-    font-size: 5.7rem;
-  }
-
-  .still-index-card--4 .still-index-card__title {
-    font-size: 6.8rem;
-  }
-
-  .still-index-card--6 .still-index-card__title {
-    font-size: 5.2rem;
+    font-size: 5.6rem;
   }
 
   .still-index-card--7 .still-index-card__title {
-    font-size: 5.7rem;
+    font-size: 4.8rem;
   }
 }
 
