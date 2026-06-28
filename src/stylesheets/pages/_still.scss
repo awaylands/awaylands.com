@@ -62,26 +62,18 @@
 }
 
 .still-index__title {
-  max-width: 100rem;
+  max-width: 108rem;
   margin: 0;
   color: var(--still-title-yellow);
-  font-family: "Still Old Money", Georgia, "Times New Roman", serif;
-  font-size: 6.2rem;
-  font-weight: -weight(regular);
-  line-height: 0.82;
-  letter-spacing: 0.045em;
+  font-family: "Still ITC Garamond Light Condensed", "Still Old Money", Georgia, "Times New Roman", serif;
+  font-size: 7.8rem;
+  font-weight: 300;
+  line-height: 0.78;
+  letter-spacing: 0.035em;
+  text-transform: lowercase;
   text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
 }
 
-.still-index__title-word {
-  display: block;
-  transform: scaleX(1.06);
-  transform-origin: left center;
-}
-
-.still-index__title-word--italic {
-  font-style: italic;
-}
 
 .still-index__hero-rule {
   width: 16rem;
@@ -266,7 +258,7 @@
   }
 
   .still-index__title {
-    font-size: 10.2rem;
+    font-size: 12rem;
   }
 
   .still-index__grid {
@@ -300,8 +292,8 @@
   }
 
   .still-index__title {
-    max-width: 116rem;
-    font-size: 13.8rem;
+    max-width: 128rem;
+    font-size: 16rem;
   }
 
   .still-index__inner {
