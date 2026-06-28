@@ -2,6 +2,33 @@ query {
   page: getStill {
     _contentTypeName
     title
+    headerPhoto {
+      path
+    }
+    gallery1Photo {
+      path
+    }
+    gallery2Photo {
+      path
+    }
+    gallery3Photo {
+      path
+    }
+    gallery4Photo {
+      path
+    }
+    gallery5Photo {
+      path
+    }
+    gallery6Photo {
+      path
+    }
+    gallery7Photo {
+      path
+    }
+    gallery8Photo {
+      path
+    }
     stillCategories {
       _contentTypeName
       title
@@ -16,11 +43,6 @@ query {
         image {
           path
         }
-      }
-    }
-    stills {
-      image {
-        path
       }
     }
     social {

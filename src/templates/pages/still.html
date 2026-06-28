@@ -3,14 +3,7 @@
 {% block body_class %}body body--still{% endblock %}
 
 {% block content %}
-  {% set heroImage = page.social.image.path %}
-  {% if not heroImage %}
-    {% for still in page.stills %}
-      {% if not heroImage and still.image.path %}
-        {% set heroImage = still.image.path %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
+  {% set heroImage = page.headerPhoto.path or page.social.image.path %}
 
   {% set heroTitle = page.social.title or page.title or 'Photography Portfolios' %}
   {% if heroTitle == 'Away Lands Portfolio - Photography Overview' %}
@@ -48,7 +41,27 @@
 
       <div class="still-index__grid">
         {% for category in page.stillCategories %}
-          {% set categoryImage = category.social.image.path %}
+          {% set categoryImage = "" %}
+          {% if loop.index == 1 %}
+            {% set categoryImage = page.gallery1Photo.path %}
+          {% elif loop.index == 2 %}
+            {% set categoryImage = page.gallery2Photo.path %}
+          {% elif loop.index == 3 %}
+            {% set categoryImage = page.gallery3Photo.path %}
+          {% elif loop.index == 4 %}
+            {% set categoryImage = page.gallery4Photo.path %}
+          {% elif loop.index == 5 %}
+            {% set categoryImage = page.gallery5Photo.path %}
+          {% elif loop.index == 6 %}
+            {% set categoryImage = page.gallery6Photo.path %}
+          {% elif loop.index == 7 %}
+            {% set categoryImage = page.gallery7Photo.path %}
+          {% elif loop.index == 8 %}
+            {% set categoryImage = page.gallery8Photo.path %}
+          {% endif %}
+          {% if not categoryImage %}
+            {% set categoryImage = category.social.image.path %}
+          {% endif %}
           {% if not categoryImage %}
             {% for still in category.stills %}
               {% if not categoryImage and still.image.path %}
