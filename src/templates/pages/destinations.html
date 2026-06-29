@@ -3,7 +3,7 @@
 {% block body_class %}body--landing body--destinations has-no-hero{% endblock %}
 
 {% block filters %}
-  <li><a class="is-current" href="/destinations">Destinations</a></li>
+  <li><a class="is-current" href="/destinations">Atlas</a></li>
   <li><span class="separator"></span></li>
 
   {% for continent in continents.items | reverse %}
@@ -29,115 +29,137 @@
   {% set heroImage = page.featuredLocations[0].image.path %}
 {% endif %}
 
-<section class="destinations-page" aria-label="Away Lands destinations">
-  <header class="destinations-hero">
-    {% if heroImage %}
-    <img class="destinations-hero__image"
-         srcset="{{ heroImage | image({w: 2400, auto: 'compress,format'}) }} 2400w,
-                 {{ heroImage | image({w: 1600, auto: 'compress,format'}) }} 1600w,
-                 {{ heroImage | image({w: 1000, auto: 'compress,format'}) }} 1000w"
-         sizes="100vw"
-         src="{{ heroImage | image({w: 1600, auto: 'compress,format'}) }}"
-         alt=""
-         decoding="async"
-         fetchpriority="high"
-    />
-    {% endif %}
+<section class="destinations-atlas" aria-label="Away Lands destination atlas">
+  <header class="atlas-cover">
+    <div class="atlas-cover__copy">
+      <p class="atlas-label">Away Lands field atlas</p>
+      <h1 class="atlas-cover__title">
+        <span>The world</span><span>edited</span>
+      </h1>
+      <p class="atlas-cover__dek">A visual travel index for beach towns, city breaks, islands, hotels, road trips, packing guides, and the kinds of places worth building a whole mood board around.</p>
+      <a class="atlas-cover__cta" href="#destination-regions">Browse the regions</a>
+    </div>
 
-    <div class="destinations-hero__copy">
-      <p class="destinations-hero__eyebrow">Away Lands travel guides</p>
-      <h1 class="destinations-hero__title"><span>Beautiful</span> places.</h1>
-      <p class="destinations-hero__dek">Practical destination guides, beach notes, packing ideas, hotels, road trips, and honest advice for planning the trips you actually want to take.</p>
-      <a class="destinations-hero__link" href="#destination-map">Explore the map</a>
+    <div class="atlas-map atlas-map--cover" id="destination-map" aria-label="World map with region links">
+      <svg class="atlas-map__svg" viewBox="0 0 1200 650" role="img" aria-labelledby="atlas-map-svg-title" focusable="false">
+        <title id="atlas-map-svg-title">World map</title>
+        <g class="atlas-map__graticule" aria-hidden="true">
+          <path d="M90 115 C330 70 720 70 1110 115" />
+          <path d="M75 230 C360 190 810 190 1130 230" />
+          <path d="M65 335 C355 315 850 315 1140 335" />
+          <path d="M75 455 C365 500 805 500 1125 455" />
+          <path d="M210 60 C150 230 150 420 210 592" />
+          <path d="M430 38 C390 210 390 440 430 610" />
+          <path d="M600 26 C600 220 600 430 600 625" />
+          <path d="M780 38 C820 210 820 440 780 610" />
+          <path d="M1000 60 C1060 230 1060 420 1000 592" />
+        </g>
+        <g class="atlas-map__land" aria-hidden="true">
+          <path d="M148 188 L197 154 L280 163 L342 202 L358 258 L334 296 L281 287 L244 323 L203 302 L167 335 L128 305 L113 247 Z" />
+          <path d="M300 317 L350 350 L370 412 L344 482 L371 557 L342 604 L295 552 L270 480 L236 431 L251 366 Z" />
+          <path d="M514 181 L568 144 L630 166 L674 211 L635 248 L578 235 L542 260 L492 239 Z" />
+          <path d="M575 263 L648 252 L704 306 L698 397 L660 484 L606 508 L574 446 L530 400 L546 321 Z" />
+          <path d="M687 164 L802 135 L953 156 L1087 214 L1111 286 L1030 306 L946 281 L876 319 L786 298 L730 246 Z" />
+          <path d="M925 394 L1014 390 L1083 436 L1056 492 L973 512 L913 466 Z" />
+          <path d="M800 487 L837 517 L823 551 L774 536 Z" />
+          <path d="M462 132 L500 111 L534 130 L513 155 L474 154 Z" />
+          <path d="M1070 331 L1112 349 L1102 383 L1061 370 Z" />
+        </g>
+      </svg>
+
+      {% for continent in continents.items %}
+        {% if continent.name == "North America" %}
+        <a class="atlas-map__hotspot atlas-map__hotspot--north-america" href="{{ continent | route('continent') }}/#"><span>North America</span></a>
+        {% elif continent.name == "South America" %}
+        <a class="atlas-map__hotspot atlas-map__hotspot--south-america" href="{{ continent | route('continent') }}/#"><span>South America</span></a>
+        {% elif continent.name == "Europe" %}
+        <a class="atlas-map__hotspot atlas-map__hotspot--europe" href="{{ continent | route('continent') }}/#"><span>Europe</span></a>
+        {% elif continent.name == "Africa" %}
+        <a class="atlas-map__hotspot atlas-map__hotspot--africa" href="{{ continent | route('continent') }}/#"><span>Africa</span></a>
+        {% elif continent.name == "Asia" %}
+        <a class="atlas-map__hotspot atlas-map__hotspot--asia" href="{{ continent | route('continent') }}/#"><span>Asia</span></a>
+        {% elif continent.name == "Middle East" %}
+        <a class="atlas-map__hotspot atlas-map__hotspot--middle-east" href="{{ continent | route('continent') }}/#"><span>Middle East</span></a>
+        {% elif continent.name == "Oceania" %}
+        <a class="atlas-map__hotspot atlas-map__hotspot--oceania" href="{{ continent | route('continent') }}/#"><span>Oceania</span></a>
+        {% endif %}
+      {% endfor %}
+
+      {% if heroImage %}
+      <figure class="atlas-map__postcard">
+        <img srcset="{{ heroImage | image({w: 700, auto: 'compress,format'}) }} 700w,
+                     {{ heroImage | image({w: 500, auto: 'compress,format'}) }} 500w"
+             sizes="22rem"
+             src="{{ heroImage | image({w: 500, auto: 'compress,format'}) }}"
+             alt=""
+             decoding="async"
+             fetchpriority="high"
+        />
+        <figcaption>Coordinates for places worth planning around.</figcaption>
+      </figure>
+      {% endif %}
     </div>
   </header>
 
-  <div class="destinations-intro">
-    <div class="destinations-intro__label">Plan by feeling</div>
-    <div class="destinations-intro__copy">
-      <h2>Where to next?</h2>
-      <p>Start with a place, then follow the useful threads: what to pack, where to stay, what to skip, and which corners are worth the extra ferry, train, or winding road.</p>
-    </div>
-  </div>
-
-  <section class="destination-map" id="destination-map" aria-label="Browse destinations by region">
-    <div class="destination-map__content">
-      <p class="destination-map__kicker">Interactive travel map</p>
-      <h2>Choose a region, then narrow the dream.</h2>
-      <p>Use the region links to jump into country and city guides. This keeps the page useful for readers coming from Google, Pinterest, or a specific trip-planning rabbit hole.</p>
-    </div>
-
-    <div class="destination-map__graphic" aria-hidden="true">
-      <span class="destination-map__line destination-map__line--one"></span>
-      <span class="destination-map__line destination-map__line--two"></span>
-      <span class="destination-map__pin destination-map__pin--europe">Europe</span>
-      <span class="destination-map__pin destination-map__pin--asia">Asia</span>
-      <span class="destination-map__pin destination-map__pin--americas">Americas</span>
-      <span class="destination-map__pin destination-map__pin--africa">Africa</span>
-      <span class="destination-map__pin destination-map__pin--oceania">Oceania</span>
-    </div>
-
-    <div class="destination-map__regions">
-      {% for continent in continents.items | reverse %}
-      <article class="destination-region">
-        <a class="destination-region__name" href="{{ continent | route('continent') }}/#">{{ continent.name }}</a>
-        {% if continent.locations.length %}
-        <ul>
-          {% for location in continent.locations %}
-            {% if loop.index <= 6 %}
-            <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
-            {% endif %}
-          {% endfor %}
-        </ul>
-        {% endif %}
-      </article>
-      {% endfor %}
-    </div>
+  <section class="atlas-region-board" id="destination-regions" aria-label="Destinations by region">
+    {% for continent in continents.items | reverse %}
+    <article class="atlas-region-card">
+      <div>
+        <p class="atlas-region-card__count">{{ continent.locations.length }} places</p>
+        <h3><a href="{{ continent | route('continent') }}/#">{{ continent.name }}</a></h3>
+      </div>
+      {% if continent.locations.length %}
+      <ul>
+        {% for location in continent.locations %}
+          {% if loop.index <= 5 %}
+          <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </article>
+    {% endfor %}
   </section>
 
-  <section class="destination-featured" aria-label="Featured destinations">
-    <div class="destination-section-heading">
-      <p>Featured destinations</p>
-      <h2>Guides with a point of view.</h2>
-      <a href="/story/">View all travel guides</a>
+  <section class="atlas-destination-edit" aria-label="Featured destination guides">
+    <div class="atlas-destination-edit__heading">
+      <p class="atlas-label">Featured coordinates</p>
+      <h2>Places with enough pull to plan around.</h2>
     </div>
 
-    <ul class="destination-grid">
+    <div class="atlas-destination-list">
       {% for location in page.featuredLocations %}
-      {% if loop.index <= 12 %}
-      <li class="destination-card destination-card--{{ loop.index }}">
-        <a href="{{ location | route('location') }}">
-          <span class="destination-card__number">0{{ loop.index }}</span>
-          <span class="destination-card__image">
-            <img srcset="{{ location.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-                         {{ location.image.path | image({w: 900, auto: 'compress,format'}) }} 900w,
-                         {{ location.image.path | image({w: 600, auto: 'compress,format'}) }} 600w"
-                 sizes="(min-width: 1100px) 32vw, (min-width: 700px) 50vw, 100vw"
-                 src="{{ location.image.path | image({w: 900, auto: 'compress,format'}) }}"
-                 alt=""
-                 loading="{% if loop.index <= 2 %}eager{% else %}lazy{% endif %}"
-                 decoding="async"
-                 {% if loop.index <= 2 %}fetchpriority="high"{% endif %}
-            />
-          </span>
-          <span class="destination-card__title">{{ location.title }}</span>
-          <span class="destination-card__meta">Travel guides / hotels / packing notes</span>
-        </a>
-      </li>
+      {% if loop.index <= 10 %}
+      <a class="atlas-destination-row atlas-destination-row--{{ loop.index }}" href="{{ location | route('location') }}">
+        <span class="atlas-destination-row__number">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
+        <span class="atlas-destination-row__image">
+          <img srcset="{{ location.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
+                       {{ location.image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
+                       {{ location.image.path | image({w: 500, auto: 'compress,format'}) }} 500w"
+               sizes="(min-width: 1000px) 26rem, 42vw"
+               src="{{ location.image.path | image({w: 800, auto: 'compress,format'}) }}"
+               alt=""
+               loading="{% if loop.index <= 3 %}eager{% else %}lazy{% endif %}"
+               decoding="async"
+          />
+        </span>
+        <span class="atlas-destination-row__title">{{ location.title }}</span>
+        <span class="atlas-destination-row__meta">Open guide</span>
+      </a>
       {% endif %}
       {% endfor %}
-    </ul>
+    </div>
   </section>
 
-  <section class="destination-planning" aria-label="Plan by trip style">
-    <div class="destination-planning__panel destination-planning__panel--blue">
-      <p>Most useful first</p>
-      <h2>Packing guides, beach guides, hotels, and routes.</h2>
+  <section class="atlas-trip-styles" aria-label="Plan by travel style">
+    <div class="atlas-trip-styles__copy">
+      <p class="atlas-label">Plan smarter</p>
+      <h2>Useful pages for turning inspiration into a booked trip.</h2>
     </div>
-    <a href="/category/packing-guides" class="destination-planning__link">Packing Guides</a>
-    <a href="/category/best-beaches" class="destination-planning__link">Best Beaches</a>
-    <a href="/category/travel-guides" class="destination-planning__link">Travel Guides</a>
-    <a href="/category/hotels" class="destination-planning__link">Hotels</a>
+    <a href="/category/packing-guides">Packing guides</a>
+    <a href="/category/best-beaches">Best beaches</a>
+    <a href="/category/travel-guides">Travel guides</a>
+    <a href="/category/hotels">Hotels</a>
   </section>
 </section>
 {% endblock %}

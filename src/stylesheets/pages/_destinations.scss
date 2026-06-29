@@ -1,7 +1,12 @@
 .body--destinations {
   background:
-    radial-gradient(circle at 8% 7%, rgba(221, 104, 45, 0.12), rgba(221, 104, 45, 0) 32rem),
-    linear-gradient(180deg, #fffaf0 0%, #f7efe5 100%);
+    radial-gradient(circle at 12% 9%, rgba(221, 104, 45, 0.09), rgba(221, 104, 45, 0) 28rem),
+    radial-gradient(circle at 86% 18%, rgba(22, 110, 120, 0.1), rgba(22, 110, 120, 0) 32rem),
+    #fffdf7;
+
+  .main {
+    background: transparent;
+  }
 
   .landing__inner {
     max-width: none;
@@ -9,76 +14,196 @@
   }
 
   .landing__section:first-child {
-    max-width: 150rem;
+    max-width: 168rem;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1.8rem 2rem 0;
   }
 
   .landing__section + .landing__section {
     margin-top: 0;
   }
 
-  .main {
-    background: transparent;
+  .filters {
+    align-items: center;
+    border-bottom: 1px solid rgba(22, 110, 120, 0.18);
+    font-family: Montserrat, Helvetica, sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .filters a {
+    color: rgba(25, 34, 33, 0.74);
+  }
+
+  .filters a:hover,
+  .filters .is-current {
+    color: #dd682d;
   }
 }
 
-.destinations-page {
-  --dest-blue: #166e78;
-  --dest-orange: #dd682d;
-  --dest-yellow: #fffbd8;
-  --dest-cream: #fffaf0;
-  --dest-ink: #1f2725;
+.destinations-atlas {
+  --atlas-blue: #166e78;
+  --atlas-deep-blue: #0e4855;
+  --atlas-orange: #dd682d;
+  --atlas-yellow: #fffbd8;
+  --atlas-paper: #fffdf7;
+  --atlas-cream: #f7efe2;
+  --atlas-ink: #18201f;
 
   overflow: hidden;
-  color: var(--dest-ink);
+  color: var(--atlas-ink);
   font-family: Georgia, 'Times New Roman', serif;
 }
 
-.destinations-hero {
-  position: relative;
-  min-height: 62rem;
-  overflow: hidden;
-  background: #166e78;
-}
-
-.destinations-hero__image {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: saturate(1.04) contrast(0.94);
-}
-
-.destinations-hero:after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(22, 110, 120, 0.68), rgba(22, 110, 120, 0.1) 58%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.36));
-}
-
-.destinations-hero__copy {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  min-height: 62rem;
-  flex-direction: column;
-  justify-content: flex-end;
-  max-width: 98rem;
-  padding: 8rem 2rem 6rem;
-  color: var(--dest-yellow);
-}
-
-.destinations-hero__eyebrow,
-.destination-map__kicker,
-.destination-section-heading p,
-.destination-planning__panel p,
-.destinations-intro__label {
+.atlas-label {
   margin: 0 0 1.4rem;
-  color: var(--dest-orange);
+  color: var(--atlas-orange);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: -weight(bold);
+  letter-spacing: 0.18em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.atlas-cover,
+.atlas-map-section,
+.atlas-region-board,
+.atlas-destination-edit,
+.atlas-trip-styles {
+  max-width: 168rem;
+  margin: 0 auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+.atlas-cover {
+  display: grid;
+  grid-template-columns: minmax(34rem, 0.78fr) minmax(48rem, 1.22fr);
+  gap: 4rem;
+  align-items: stretch;
+  min-height: 66rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.atlas-cover__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 52rem;
+  border-top: 2px solid rgba(22, 110, 120, 0.25);
+  border-bottom: 2px solid rgba(22, 110, 120, 0.25);
+}
+
+.atlas-cover__title {
+  max-width: 78rem;
+  margin: 0;
+  font-family: 'Still ITC Garamond Light Condensed', Georgia, 'Times New Roman', serif;
+  font-size: clamp(7.2rem, 8.4vw, 14.6rem);
+  font-weight: 200;
+  letter-spacing: 0.015em;
+  line-height: 0.82;
+  text-transform: uppercase;
+}
+
+.atlas-cover__title span:first-child {
+  display: block;
+  color: var(--atlas-blue);
+}
+
+.atlas-cover__title span:last-child {
+  display: block;
+  color: var(--atlas-orange);
+  font-style: italic;
+  text-indent: 0.22em;
+  text-transform: lowercase;
+}
+
+.atlas-cover__dek {
+  max-width: 58rem;
+  margin: 3rem 0 0;
+  color: rgba(24, 32, 31, 0.78);
+  font-size: 2rem;
+  line-height: 1.65;
+}
+
+.atlas-cover__cta {
+  display: inline-flex;
+  width: max-content;
+  margin-top: 3rem;
+  color: var(--atlas-blue);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: -weight(bold);
+  letter-spacing: 0.18em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.atlas-cover__cta:after {
+  content: '→';
+  margin-left: 1rem;
+  color: var(--atlas-orange);
+}
+
+.atlas-map--cover {
+  min-height: 58rem;
+  box-shadow: 0 2rem 7rem rgba(22, 72, 74, 0.18);
+}
+
+.atlas-map__postcard {
+  position: absolute;
+  z-index: 2;
+  right: 2rem;
+  bottom: 2rem;
+  width: min(20rem, 28vw);
+  margin: 0;
+  transform: rotate(3deg);
+}
+
+.atlas-map__postcard img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1rem solid var(--atlas-paper);
+  border-bottom-width: 4rem;
+  border-radius: 0.8rem;
+  object-fit: cover;
+  box-shadow: 0 1.4rem 3.2rem rgba(14, 72, 85, 0.22);
+}
+
+.atlas-map__postcard figcaption {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  left: 1.2rem;
+  color: var(--atlas-blue);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.atlas-map {
+  position: relative;
+  overflow: hidden;
+  min-height: 48rem;
+  border: 2px solid rgba(22, 110, 120, 0.48);
+  border-radius: 2.6rem;
+  background:
+    linear-gradient(145deg, rgba(255, 251, 216, 0.94), rgba(178, 195, 211, 0.86) 46%, rgba(22, 110, 120, 0.92)),
+    var(--atlas-blue);
+}
+
+.atlas-map:before {
+  content: 'World index';
+  position: absolute;
+  z-index: 1;
+  left: 2.4rem;
+  bottom: 2.2rem;
+  color: rgba(255, 251, 216, 0.72);
   font-family: Montserrat, Helvetica, sans-serif;
   font-size: 1rem;
   font-weight: -weight(bold);
@@ -86,455 +211,393 @@
   text-transform: uppercase;
 }
 
-.destinations-hero__title {
-  max-width: 92rem;
-  margin: 0;
-  color: var(--dest-yellow);
-  font-family: 'Still ITC Garamond Light Condensed', Georgia, 'Times New Roman', serif;
-  font-size: 8.2rem;
-  font-weight: 200;
-  line-height: 0.82;
-  letter-spacing: 0.02em;
-  text-shadow: 0 1.1rem 3rem rgba(0, 0, 0, 0.28);
-}
-
-.destinations-hero__title span {
-  color: var(--dest-orange);
-}
-
-.destinations-hero__dek {
-  max-width: 48rem;
-  margin: 2.2rem 0 0;
-  color: rgba(255, 251, 216, 0.92);
-  font-size: 1.8rem;
-  line-height: 1.58;
-}
-
-.destinations-hero__link,
-.destination-section-heading a,
-.destination-planning__link {
-  display: inline-flex;
-  align-items: center;
-  width: max-content;
-  margin-top: 2.8rem;
-  color: inherit;
-  font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1rem;
-  font-weight: -weight(bold);
-  letter-spacing: 0.16em;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-.destinations-hero__link:after,
-.destination-section-heading a:after,
-.destination-planning__link:after {
-  content: '→';
-  margin-left: 1rem;
-}
-
-.destinations-intro,
-.destination-map,
-.destination-featured,
-.destination-planning {
-  max-width: 150rem;
-  margin: 0 auto;
-  padding-right: 2rem;
-  padding-left: 2rem;
-}
-
-.destinations-intro {
-  display: grid;
-  gap: 2rem;
-  padding-top: 4.6rem;
-  padding-bottom: 3rem;
-}
-
-.destinations-intro__copy h2,
-.destination-map__content h2,
-.destination-section-heading h2,
-.destination-planning__panel h2 {
-  margin: 0;
-  color: var(--dest-blue);
-  font-family: 'Still ITC Garamond Light Condensed', Georgia, 'Times New Roman', serif;
-  font-size: 4.6rem;
-  font-weight: 200;
-  line-height: 0.92;
-  letter-spacing: 0.015em;
-}
-
-.destinations-intro__copy p,
-.destination-map__content p {
-  max-width: 72rem;
-  margin: 1.4rem 0 0;
-  color: rgba(31, 39, 37, 0.78);
-  font-size: 1.8rem;
-  line-height: 1.66;
-}
-
-.destination-map {
-  display: grid;
-  gap: 2rem;
-  padding-top: 2rem;
-  padding-bottom: 5rem;
-}
-
-.destination-map__graphic {
-  position: relative;
-  min-height: 34rem;
-  overflow: hidden;
-  border: 2px solid rgba(22, 110, 120, 0.45);
-  border-radius: 1.6rem;
-  background:
-    radial-gradient(circle at 48% 45%, rgba(255, 251, 216, 0.96), rgba(255, 251, 216, 0) 10rem),
-    linear-gradient(145deg, rgba(22, 110, 120, 0.9), rgba(104, 156, 174, 0.48)),
-    #166e78;
-}
-
-.destination-map__graphic:before {
-  content: '';
+.atlas-map__svg {
   position: absolute;
   inset: 3rem;
-  border: 1px solid rgba(255, 251, 216, 0.38);
-  border-radius: 50%;
-  transform: rotate(-12deg) scaleX(1.34);
+  width: calc(100% - 6rem);
+  height: calc(100% - 6rem);
 }
 
-.destination-map__line {
+.atlas-map__graticule path {
+  fill: none;
+  stroke: rgba(255, 251, 216, 0.28);
+  stroke-width: 1.1;
+}
+
+.atlas-map__land path {
+  fill: rgba(255, 253, 247, 0.78);
+  stroke: rgba(14, 72, 85, 0.42);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.atlas-map__hotspot {
   position: absolute;
-  height: 0.2rem;
-  width: 70%;
-  background: rgba(255, 251, 216, 0.38);
-  transform-origin: left center;
-}
-
-.destination-map__line--one {
-  top: 42%;
-  left: 14%;
-  transform: rotate(-18deg);
-}
-
-.destination-map__line--two {
-  top: 59%;
-  left: 18%;
-  transform: rotate(17deg);
-}
-
-.destination-map__pin {
-  position: absolute;
+  z-index: 4;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 7.8rem;
-  padding: 0.9rem 1.1rem;
-  border: 1px solid rgba(255, 251, 216, 0.78);
+  padding: 0.72rem 1rem;
+  border: 1px solid rgba(24, 32, 31, 0.3);
   border-radius: 999px;
-  background: rgba(255, 250, 240, 0.1);
-  color: var(--dest-yellow);
+  background: rgba(255, 253, 247, 0.72);
+  color: var(--atlas-deep-blue);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  font-weight: -weight(bold);
+  letter-spacing: 0.13em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+  transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.atlas-map__hotspot:before {
+  content: '';
+  width: 0.8rem;
+  height: 0.8rem;
+  margin-right: 0.65rem;
+  border-radius: 50%;
+  background: var(--atlas-orange);
+}
+
+.atlas-map__hotspot:hover {
+  background: var(--atlas-orange);
+  color: var(--atlas-yellow);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.atlas-map__hotspot:hover:before {
+  background: var(--atlas-yellow);
+}
+
+.atlas-map__hotspot--north-america { left: 22%; top: 37%; }
+.atlas-map__hotspot--south-america { left: 30%; top: 70%; }
+.atlas-map__hotspot--europe { left: 50%; top: 32%; }
+.atlas-map__hotspot--africa { left: 54%; top: 58%; }
+.atlas-map__hotspot--middle-east { left: 62%; top: 47%; }
+.atlas-map__hotspot--asia { left: 76%; top: 39%; }
+.atlas-map__hotspot--oceania { left: 82%; top: 73%; }
+
+.atlas-region-board {
+  scroll-margin-top: 9rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.4rem;
+  padding-top: 2rem;
+  padding-bottom: 6rem;
+}
+
+.atlas-region-card {
+  display: flex;
+  min-height: 25rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  border: 2px solid rgba(22, 110, 120, 0.28);
+  border-radius: 1.8rem;
+  background: rgba(255, 253, 247, 0.72);
+}
+
+.atlas-region-card__count {
+  margin: 0 0 0.8rem;
+  color: var(--atlas-orange);
   font-family: Montserrat, Helvetica, sans-serif;
   font-size: 0.95rem;
   font-weight: -weight(bold);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.destination-map__pin:before {
-  content: '';
-  width: 0.9rem;
-  height: 0.9rem;
-  margin-right: 0.7rem;
-  border-radius: 50%;
-  background: var(--dest-orange);
-}
-
-.destination-map__pin--europe { top: 26%; left: 46%; }
-.destination-map__pin--asia { top: 37%; right: 12%; }
-.destination-map__pin--americas { top: 48%; left: 10%; }
-.destination-map__pin--africa { top: 58%; left: 46%; }
-.destination-map__pin--oceania { right: 9%; bottom: 17%; }
-
-.destination-map__regions {
-  display: grid;
-  gap: 1rem;
-}
-
-.destination-region {
-  padding: 1.6rem;
-  border: 1px solid rgba(22, 110, 120, 0.25);
-  border-radius: 1.2rem;
-  background: rgba(255, 250, 240, 0.74);
-}
-
-.destination-region__name {
-  display: inline-block;
-  margin-bottom: 1rem;
-  color: var(--dest-orange);
-  font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1.05rem;
-  font-weight: -weight(bold);
   letter-spacing: 0.16em;
-  text-decoration: none;
   text-transform: uppercase;
 }
 
-.destination-region ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem 1.1rem;
+.atlas-region-card h3 {
   margin: 0;
+  font-family: 'Still ITC Garamond Light Condensed', Georgia, 'Times New Roman', serif;
+  font-size: 4.2rem;
+  font-weight: 200;
+  line-height: 0.92;
+}
+
+.atlas-region-card h3 a {
+  color: var(--atlas-blue);
+  text-decoration: none;
+}
+
+.atlas-region-card ul {
+  display: grid;
+  gap: 0.8rem;
+  margin: 2rem 0 0;
   padding: 0;
   list-style: none;
 }
 
-.destination-region li a {
-  color: rgba(31, 39, 37, 0.8);
+.atlas-region-card li {
+  margin: 0;
+}
+
+.atlas-region-card li a {
+  color: rgba(24, 32, 31, 0.72);
+  font-family: Georgia, 'Times New Roman', serif;
   font-size: 1.45rem;
   line-height: 1.35;
   text-decoration: none;
 }
 
-.destination-featured {
-  padding-top: 2rem;
-  padding-bottom: 5rem;
+.atlas-region-card li a:hover {
+  color: var(--atlas-orange);
 }
 
-.destination-section-heading {
+.atlas-destination-edit {
+  padding-top: 1rem;
+  padding-bottom: 7rem;
+}
+
+.atlas-destination-edit__heading {
   display: grid;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 2.4rem;
 }
 
-.destination-section-heading a {
-  margin-top: 0;
-  color: var(--dest-blue);
+.atlas-destination-list {
+  border-top: 2px solid rgba(22, 110, 120, 0.3);
 }
 
-.destination-grid {
+.atlas-destination-row {
   display: grid;
-  gap: 1.4rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.destination-card a {
-  position: relative;
-  display: block;
-  min-height: 36rem;
-  overflow: hidden;
-  border-radius: 1.4rem;
-  color: var(--dest-yellow);
+  grid-template-columns: 8rem 25rem minmax(0, 1fr) max-content;
+  gap: 2rem;
+  align-items: center;
+  min-height: 18rem;
+  padding: 1.7rem 0;
+  border-bottom: 2px solid rgba(22, 110, 120, 0.3);
+  color: var(--atlas-ink);
   text-decoration: none;
 }
 
-.destination-card a:after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.64)),
-    linear-gradient(90deg, rgba(22, 110, 120, 0.38), rgba(22, 110, 120, 0));
-}
-
-.destination-card__image,
-.destination-card__image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.destination-card__image {
-  position: absolute;
-  inset: 0;
-}
-
-.destination-card__image img {
-  object-fit: cover;
-  filter: saturate(1.05) contrast(0.94);
-  transition: transform 0.45s $ease-in-out-quart;
-}
-
-.destination-card a:hover img,
-.destination-card a:focus img {
-  transform: scale(1.035);
-}
-
-.destination-card__number,
-.destination-card__title,
-.destination-card__meta {
-  position: absolute;
-  z-index: 1;
-}
-
-.destination-card__number {
-  top: 1.6rem;
-  left: 1.6rem;
-  color: rgba(255, 251, 216, 0.74);
-  font-size: 1.6rem;
-}
-
-.destination-card__title {
-  right: 1.6rem;
-  bottom: 5.8rem;
-  left: 1.6rem;
-  color: var(--dest-yellow);
+.atlas-destination-row__number {
+  color: var(--atlas-orange);
   font-family: 'Still ITC Garamond Light Condensed', Georgia, 'Times New Roman', serif;
   font-size: 5rem;
   font-weight: 200;
-  line-height: 0.85;
-  letter-spacing: 0.02em;
-  text-shadow: 0 1rem 2.6rem rgba(0, 0, 0, 0.4);
+  line-height: 1;
 }
 
-.destination-card__meta {
-  right: 1.6rem;
-  bottom: 2rem;
-  left: 1.6rem;
-  color: rgba(255, 251, 216, 0.82);
+.atlas-destination-row:nth-child(even) .atlas-destination-row__number {
+  color: var(--atlas-blue);
+}
+
+.atlas-destination-row__image {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 1.4rem;
+  background: var(--atlas-cream);
+}
+
+.atlas-destination-row__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 320ms ease;
+}
+
+.atlas-destination-row:hover .atlas-destination-row__image img {
+  transform: scale(1.04);
+}
+
+.atlas-destination-row__title {
+  color: var(--atlas-blue);
+  font-family: 'Still ITC Garamond Light Condensed', Georgia, 'Times New Roman', serif;
+  font-size: clamp(3.8rem, 5vw, 8.2rem);
+  font-weight: 200;
+  letter-spacing: 0.01em;
+  line-height: 0.88;
+}
+
+.atlas-destination-row:nth-child(even) .atlas-destination-row__title {
+  color: var(--atlas-orange);
+}
+
+.atlas-destination-row__meta {
+  align-self: end;
+  margin-bottom: 1.4rem;
+  color: rgba(24, 32, 31, 0.62);
   font-family: Montserrat, Helvetica, sans-serif;
   font-size: 0.95rem;
   font-weight: -weight(bold);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
-.destination-planning {
+.atlas-trip-styles {
   display: grid;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1.2fr) repeat(4, minmax(14rem, 0.5fr));
+  gap: 1.2rem;
+  align-items: stretch;
+  padding-top: 1rem;
   padding-bottom: 6rem;
 }
 
-.destination-planning__panel {
-  padding: 3rem 2rem;
-  border-radius: 1.6rem;
+.atlas-trip-styles__copy {
+  min-height: 24rem;
+  padding: 2.4rem;
+  border-radius: 1.8rem;
+  background: var(--atlas-blue);
+  color: var(--atlas-yellow);
 }
 
-.destination-planning__panel--blue {
-  background: var(--dest-blue);
-  color: var(--dest-yellow);
+.atlas-trip-styles__copy h2 {
+  color: var(--atlas-yellow);
+  font-size: clamp(4rem, 4.6vw, 7rem);
 }
 
-.destination-planning__panel h2 {
-  color: var(--dest-yellow);
+.atlas-trip-styles > a {
+  display: flex;
+  align-items: end;
+  min-height: 24rem;
+  padding: 2rem;
+  border: 2px solid rgba(22, 110, 120, 0.35);
+  border-radius: 1.8rem;
+  background: rgba(255, 253, 247, 0.74);
+  color: var(--atlas-blue);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  font-weight: -weight(bold);
+  letter-spacing: 0.16em;
+  line-height: 1.35;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
-.destination-planning__link {
-  width: 100%;
-  margin: 0;
-  padding: 1.7rem 0;
-  border-top: 1px solid rgba(22, 110, 120, 0.26);
-  color: var(--dest-blue);
-  justify-content: space-between;
+.atlas-trip-styles > a:hover {
+  border-color: var(--atlas-orange);
+  color: var(--atlas-orange);
 }
 
-.locations {
-  @extend %basic-block;
+@media (max-width: 1100px) {
+  .atlas-cover,
+  .atlas-map-section,
+  .atlas-destination-edit__heading,
+  .atlas-trip-styles {
+    grid-template-columns: 1fr;
+  }
+
+  .atlas-cover {
+    gap: 2rem;
+    min-height: 0;
+  }
+
+  .atlas-cover__copy,
+  .atlas-map--cover {
+    min-height: 48rem;
+  }
+
+  .atlas-region-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .atlas-destination-row {
+    grid-template-columns: 5.5rem minmax(14rem, 24rem) minmax(0, 1fr);
+  }
+
+  .atlas-destination-row__meta {
+    display: none;
+  }
 }
 
-@media (min-width: 700px) {
-  .body--destinations .landing__section:first-child,
-  .destinations-intro,
-  .destination-map,
-  .destination-featured,
-  .destination-planning {
-    padding-right: 4rem;
-    padding-left: 4rem;
+@media (max-width: 760px) {
+  .body--destinations .landing__section:first-child {
+    padding-top: 1rem;
   }
 
-  .destinations-hero,
-  .destinations-hero__copy {
-    min-height: 72rem;
+  .atlas-cover,
+  .atlas-map-section,
+  .atlas-region-board,
+  .atlas-destination-edit,
+  .atlas-trip-styles {
+    padding-right: 1.4rem;
+    padding-left: 1.4rem;
   }
 
-  .destinations-hero__copy {
-    padding-right: 4rem;
-    padding-bottom: 7rem;
-    padding-left: 4rem;
+  .atlas-cover {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
-  .destinations-hero__title {
-    font-size: 13rem;
+  .atlas-cover__copy {
+    min-height: 0;
+    padding: 2.4rem 0;
   }
 
-  .destinations-intro {
-    grid-template-columns: 22rem 1fr;
-    padding-top: 6rem;
-    padding-bottom: 5rem;
-  }
-
-  .destination-map {
-    grid-template-columns: 0.85fr 1.15fr;
-    align-items: start;
-  }
-
-  .destination-map__content {
-    position: sticky;
-    top: 10rem;
-  }
-
-  .destination-map__graphic {
+  .atlas-map--cover {
     min-height: 42rem;
   }
 
-  .destination-map__regions {
+  .atlas-map__postcard {
+    right: 1.4rem;
+    bottom: 1.4rem;
+    width: 16rem;
+  }
+
+  .atlas-cover__dek,
+  .atlas-map-section__intro p:not(.atlas-label) {
+    font-size: 1.65rem;
+  }
+
+  .atlas-map {
+    min-height: 40rem;
+    border-radius: 1.8rem;
+  }
+
+  .atlas-map__svg {
+    inset: 1.2rem;
+    width: calc(100% - 2.4rem);
+    height: calc(100% - 2.4rem);
+  }
+
+  .atlas-map__hotspot {
+    padding: 0.6rem 0.78rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .atlas-map__hotspot:before {
+    display: none;
+  }
+
+  .atlas-region-board {
+    grid-template-columns: 1fr;
+    padding-bottom: 4rem;
+  }
+
+  .atlas-region-card {
+    min-height: 20rem;
+  }
+
+  .atlas-destination-row {
+    grid-template-columns: 4.8rem minmax(0, 1fr);
+    gap: 1.2rem;
+    min-height: 0;
+    padding: 1.4rem 0;
+  }
+
+  .atlas-destination-row__image {
+    grid-column: 2;
+    width: 100%;
+  }
+
+  .atlas-destination-row__title {
     grid-column: 1 / -1;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding-left: 6rem;
   }
 
-  .destination-section-heading {
-    grid-template-columns: 1fr auto;
-    align-items: end;
+  .atlas-destination-row__number {
+    font-size: 4.2rem;
   }
 
-  .destination-section-heading p {
-    grid-column: 1 / -1;
-  }
-
-  .destination-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .destination-card--1,
-  .destination-card--4,
-  .destination-card--7 {
-    transform: translateY(2.8rem);
-  }
-
-  .destination-planning {
-    grid-template-columns: 1.3fr repeat(2, 1fr);
-    align-items: stretch;
-  }
-
-  .destination-planning__panel {
-    grid-row: span 2;
-    padding: 4rem;
-  }
-}
-
-@include for-desktop-up {
-  .body--destinations .landing__section:first-child,
-  .destinations-intro,
-  .destination-map,
-  .destination-featured,
-  .destination-planning {
-    padding-right: 7rem;
-    padding-left: 7rem;
-  }
-
-  .destinations-hero__copy {
-    padding-right: 7rem;
-    padding-left: 7rem;
-  }
-
-  .destinations-hero__title {
-    font-size: 17rem;
-  }
-
-  .destination-card a {
-    min-height: 44rem;
-  }
-
-  .destination-card__title {
-    font-size: 6.8rem;
+  .atlas-trip-styles > a,
+  .atlas-trip-styles__copy {
+    min-height: 16rem;
   }
 }
