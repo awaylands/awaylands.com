@@ -30,6 +30,25 @@
 {% endif %}
 
 <section class="destinations-atlas" aria-label="Away Lands destination atlas">
+  <div class="atlas-masthead-photos" aria-label="Destination photo preview">
+    {% for location in page.featuredLocations %}
+    {% if loop.index <= 3 %}
+    <a href="{{ location | route('location') }}" class="atlas-masthead-photo atlas-masthead-photo--{{ loop.index }}">
+      <img srcset="{{ location.image.path | image({w: 1400, auto: 'compress,format'}) }} 1400w,
+                   {{ location.image.path | image({w: 900, auto: 'compress,format'}) }} 900w,
+                   {{ location.image.path | image({w: 600, auto: 'compress,format'}) }} 600w"
+           sizes="(min-width: 900px) 33vw, 100vw"
+           src="{{ location.image.path | image({w: 900, auto: 'compress,format'}) }}"
+           alt=""
+           loading="{% if loop.index == 1 %}eager{% else %}lazy{% endif %}"
+           decoding="async"
+      />
+      <span>{% if loop.index == 1 %}the edit{% elif loop.index == 2 %}places to stay{% else %}routes worth taking{% endif %}</span>
+    </a>
+    {% endif %}
+    {% endfor %}
+  </div>
+
   <header class="atlas-cover">
     <div class="atlas-cover__copy">
       <p class="atlas-label">Away Lands field atlas</p>
@@ -38,6 +57,17 @@
       </h1>
       <p class="atlas-cover__dek">A visual travel index for beach towns, city breaks, islands, hotels, road trips, packing guides, and the kinds of places worth building a whole mood board around.</p>
       <a class="atlas-cover__cta" href="#destination-regions">Browse the regions</a>
+
+      <div class="atlas-cover__mini-photos" aria-label="Featured destination previews">
+        {% for location in page.featuredLocations %}
+        {% if loop.index <= 3 %}
+        <a href="{{ location | route('location') }}" class="atlas-mini-photo atlas-mini-photo--{{ loop.index }}">
+          <img src="{{ location.image.path | image({w: 520, auto: 'compress,format'}) }}" alt="" loading="{% if loop.index == 1 %}eager{% else %}lazy{% endif %}" decoding="async" />
+          <span>{{ location.title }}</span>
+        </a>
+        {% endif %}
+        {% endfor %}
+      </div>
     </div>
 
     <div class="atlas-map atlas-map--cover" id="destination-map" aria-label="World map with region links">
@@ -55,15 +85,20 @@
           <path d="M1000 60 C1060 230 1060 420 1000 592" />
         </g>
         <g class="atlas-map__land" aria-hidden="true">
-          <path d="M148 188 L197 154 L280 163 L342 202 L358 258 L334 296 L281 287 L244 323 L203 302 L167 335 L128 305 L113 247 Z" />
-          <path d="M300 317 L350 350 L370 412 L344 482 L371 557 L342 604 L295 552 L270 480 L236 431 L251 366 Z" />
-          <path d="M514 181 L568 144 L630 166 L674 211 L635 248 L578 235 L542 260 L492 239 Z" />
-          <path d="M575 263 L648 252 L704 306 L698 397 L660 484 L606 508 L574 446 L530 400 L546 321 Z" />
-          <path d="M687 164 L802 135 L953 156 L1087 214 L1111 286 L1030 306 L946 281 L876 319 L786 298 L730 246 Z" />
-          <path d="M925 394 L1014 390 L1083 436 L1056 492 L973 512 L913 466 Z" />
-          <path d="M800 487 L837 517 L823 551 L774 536 Z" />
-          <path d="M462 132 L500 111 L534 130 L513 155 L474 154 Z" />
-          <path d="M1070 331 L1112 349 L1102 383 L1061 370 Z" />
+          <path d="M128 178 L169 142 L226 126 L292 139 L334 171 L385 184 L421 220 L403 267 L352 283 L318 314 L273 305 L240 333 L198 317 L165 344 L118 319 L104 270 L75 242 L94 203 Z" />
+          <path d="M247 88 L305 70 L356 82 L381 111 L353 141 L290 137 L238 120 Z" />
+          <path d="M325 328 L369 355 L398 410 L385 478 L416 548 L386 610 L341 579 L306 510 L273 458 L244 410 L265 358 Z" />
+          <path d="M424 205 L459 180 L507 174 L545 197 L531 231 L476 239 L438 228 Z" />
+          <path d="M474 261 L535 245 L596 277 L619 336 L603 410 L568 492 L518 520 L479 462 L443 402 L451 323 Z" />
+          <path d="M555 178 L640 136 L752 129 L876 151 L985 176 L1109 236 L1132 294 L1071 315 L997 291 L933 318 L850 301 L782 331 L706 302 L663 257 L597 245 Z" />
+          <path d="M802 349 L861 365 L909 415 L886 464 L827 455 L787 406 Z" />
+          <path d="M918 416 L1015 401 L1086 448 L1060 509 L972 526 L905 478 Z" />
+          <path d="M1100 334 L1132 348 L1124 376 L1089 369 Z" />
+          <path d="M1053 548 L1090 563 L1115 589 L1075 606 L1038 583 Z" />
+          <path d="M445 132 L496 106 L552 129 L526 160 L469 159 Z" />
+          <path d="M640 112 L675 94 L708 112 L690 135 L651 134 Z" />
+          <path d="M140 365 L170 370 L185 393 L160 409 L132 395 Z" />
+          <path d="M1016 341 L1049 354 L1041 384 L1008 373 Z" />
         </g>
       </svg>
 
@@ -85,21 +120,41 @@
         {% endif %}
       {% endfor %}
 
-      {% if heroImage %}
-      <figure class="atlas-map__postcard">
-        <img srcset="{{ heroImage | image({w: 700, auto: 'compress,format'}) }} 700w,
-                     {{ heroImage | image({w: 500, auto: 'compress,format'}) }} 500w"
-             sizes="22rem"
-             src="{{ heroImage | image({w: 500, auto: 'compress,format'}) }}"
-             alt=""
-             decoding="async"
-             fetchpriority="high"
-        />
-        <figcaption>Coordinates for places worth planning around.</figcaption>
+      {% for location in page.featuredLocations %}
+      {% if loop.index <= 2 %}
+      <figure class="atlas-map__postcard atlas-map__postcard--{{ loop.index }}">
+        <img src="{{ location.image.path | image({w: 560, auto: 'compress,format'}) }}" alt="" decoding="async" loading="{% if loop.index == 1 %}eager{% else %}lazy{% endif %}" />
+        <figcaption>{{ location.title }}</figcaption>
       </figure>
       {% endif %}
+      {% endfor %}
     </div>
   </header>
+
+  <section class="atlas-photo-feature" aria-label="Featured travel edits">
+    <div class="atlas-photo-feature__headline">
+      <p class="atlas-label">Featured itineraries</p>
+      <h2><span>places that</span><em>stay with you</em></h2>
+    </div>
+    <div class="atlas-photo-feature__grid">
+      {% for location in page.featuredLocations %}
+      {% if loop.index <= 5 %}
+      <a href="{{ location | route('location') }}" class="atlas-feature-card atlas-feature-card--{{ loop.index }}">
+        <img srcset="{{ location.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
+                     {{ location.image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
+                     {{ location.image.path | image({w: 520, auto: 'compress,format'}) }} 520w"
+             sizes="(min-width: 1000px) 24vw, 50vw"
+             src="{{ location.image.path | image({w: 800, auto: 'compress,format'}) }}"
+             alt=""
+             loading="{% if loop.index <= 2 %}eager{% else %}lazy{% endif %}"
+             decoding="async"
+        />
+        <span>{{ location.title }}</span>
+      </a>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
 
   <section class="atlas-region-board" id="destination-regions" aria-label="Destinations by region">
     {% for continent in continents.items | reverse %}
