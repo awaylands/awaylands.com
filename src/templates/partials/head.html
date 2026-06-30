@@ -3,6 +3,18 @@
 
 {% include "partials/social.html" %}
 
+{% set canonicalUrl = "" %}
+{% if page._contentTypeName == "story" %}
+  {% if page.slug %}
+    {% set canonicalUrl = "https://www.awaylands.com" + (page | route('storySlug')) + "/" %}
+  {% else %}
+    {% set canonicalUrl = "https://www.awaylands.com" + (page | route('story')) + "/" %}
+  {% endif %}
+{% endif %}
+{% if canonicalUrl %}
+<link rel="canonical" href="{{ canonicalUrl }}" />
+{% endif %}
+
 <meta name="viewport" content="width=device-width">
 <meta width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no name="viewport">
 
