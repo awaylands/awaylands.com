@@ -4,6 +4,8 @@
       <img
         :src="post.media_url"
         :alt="caption"
+        loading="lazy"
+        decoding="async"
         @load="imgLoaded = true">
     </a>
   </div>

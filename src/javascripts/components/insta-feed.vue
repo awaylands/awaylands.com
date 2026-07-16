@@ -14,6 +14,7 @@
   const AMY_ACCESS_TOKEN = 'IGAGI5QHmV6vZABZAFlTdmNLV2NqQzR0c0hQNnExVFQyRktERWlHbDdnTzZA4aWxkc3Nxb0dTRWVlZA25DU20xOTdaSklSQmEwUm05TG91MUdiSDExS1RwcjJRTjNFSlE0S1dTVkhHclpTc2FkZAzNuUDc3QlVEdnplM2dpYTEyX2pCSQZDZD';
 
   const UPDATE_INSTA_SECOND_TIME = 3600; // Every 1 hour
+  const INSTA_POST_LIMIT = 6;
 
   export default {
     name: 'InstaFeed',
@@ -29,11 +30,12 @@
     methods: {
       getPosts() {
         const lastUpdateTime = localStorage.getItem(INSTA_LAST_UPDATE_TIME) || null;
+        const cachedPosts = JSON.parse(localStorage.getItem(INSTA_POSTS)) || [];
 
-        if (lastUpdateTime === null || this.canRequest(lastUpdateTime)) {
+        if (lastUpdateTime === null || this.canRequest(lastUpdateTime) || cachedPosts.length < INSTA_POST_LIMIT) {
           this.getPostsFromApi();
         } else {
-          this.getPostsFromLocalStorage();
+          this.posts = cachedPosts.slice(0, INSTA_POST_LIMIT);
         }
       },
       canRequest(lastUpdateTime) {
@@ -45,14 +47,14 @@
         return secondsBetweenDates >= UPDATE_INSTA_SECOND_TIME;
       },
       getPostsFromLocalStorage() {
-        this.posts = JSON.parse(localStorage.getItem(INSTA_POSTS)) || [];
+        this.posts = (JSON.parse(localStorage.getItem(INSTA_POSTS)) || []).slice(0, INSTA_POST_LIMIT);
       },
       getPostsFromApi() {
         axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,timestamp,media_type&access_token=${AMY_ACCESS_TOKEN}`)
           .then((res) => {
             this.posts = res.data.data
               .filter(post => post.media_type !== 'VIDEO')
-              .slice(0, 6);
+              .slice(0, INSTA_POST_LIMIT);
 
             localStorage.setItem(INSTA_POSTS, JSON.stringify(this.posts));
             localStorage.setItem(INSTA_LAST_UPDATE_TIME, new Date());

@@ -1,44 +1,65 @@
 <footer class="page-footer" id="footer">
   <div class="page-footer__inner">
-    <div class="page-footer__section">
-      <div class="page-footer__block">
-        <h3 class="page-footer__heading">Contact Us</h3>
+    <div class="page-footer__main">
+      <div class="page-footer__brand">
+        <a class="page-footer__logo" href="/">
+          <img src="/assets/images/logo_white.png" alt="Away Lands" loading="lazy" decoding="async" />
+        </a>
+        <p>Travel guides, packing edits, photography, and practical recommendations by Amy Seder.</p>
+      </div>
 
+      <nav class="page-footer__navigation" aria-label="Footer navigation">
+        <div class="page-footer__nav-column">
+          <h3 class="page-footer__nav-heading">Explore</h3>
+          <ul>
+            <li><a href="/category/most-popular-posts">Most Popular</a></li>
+            <li><a href="/destinations">Destinations</a></li>
+            <li><a href="/blog/">Latest Stories</a></li>
+            <li><a href="/search/">Search</a></li>
+          </ul>
+        </div>
+
+        <div class="page-footer__nav-column">
+          <h3 class="page-footer__nav-heading">Away Lands</h3>
+          <ul>
+            <li><a href="/about">About</a></li>
+            <li><a href="/film">Film</a></li>
+            <li><a href="/still">Still</a></li>
+            <li><a href="https://www.amazon.com/shop/amyseder" target="_blank" rel="noopener">Shop</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="page-footer__contact">
+        <h3 class="page-footer__nav-heading">Contact</h3>
         <ul class="contact">
           {% for contact in site.footer.contacts %}
-            <li>
-              <h4 class="contact__heading">{{ contact.label }}</h4>
-              <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
-            </li>
+          <li>
+            <span class="contact__heading">{{ contact.label }}</span>
+            <a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+          </li>
           {% endfor %}
         </ul>
       </div>
+    </div>
 
-      <div class="page-footer__block">
-        
+  </div>
 
-        
-        </div>
+  <div class="instagram-footer">
+    <div class="instagram-footer__heading">
+      <p class="page-footer__eyebrow">Recent photographs</p>
+      <h2><a href="https://www.instagram.com/amyseder/" target="_blank" rel="noopener noreferrer">@AMYSEDER</a></h2>
+    </div>
+    <instafeed></instafeed>
+  </div>
+
+  <div class="page-footer__inner page-footer__inner--legal">
+    <div class="page-footer__legal">
+      <span>© Away Lands</span>
+      <div>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="/privacy/#affiliate-disclosure">Affiliate Disclosure</a>
       </div>
     </div>
-
-    <div class="instagram-footer">
-      <h3 class="page-footer__heading">
-        <a href="https://www.instagram.com/amyseder/" target="_blank" rel="noopener noreferrer">
-          @AMYSEDER
-        </a>
-      </h3>
-    
-      <instafeed></instafeed>
-    </div>
-
-    <div style="text-align:center;">
-      <span class="page-footer__colophon">
-        © Copyright Away Lands |
-        <a href="/privacy/" style="color:#ffffff;">Privacy Policy</a>
-      </span>
-    </div>
   </div>
-  
 </footer>
- 

@@ -2,267 +2,410 @@
   @extend %basic-block;
 
   margin-top: 6.4rem;
-  padding: 3.8rem 0 1.8rem;
-  background-color: -color(cerulean);
+  padding: 0;
+  background: #055967;
+  color: #f5ece5;
+  font-family: 'Still EB Garamond', Georgia, serif;
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
   &__inner {
-    @extend %container;
+    width: calc(100% - 3.2rem);
+    max-width: 148rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &__eyebrow,
+  &__nav-heading {
+    color: #f5ece5;
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  &__popular-heading {
+    margin: 0.7rem 0 0;
+    font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0.005em;
+  }
+
+  &__inner {
+    padding: 4rem 0 0;
+  }
+
+  &__inner--legal {
+    padding-top: 0;
+    padding-bottom: 1.6rem;
+  }
+
+  &__main {
+    display: grid;
+    gap: 2.4rem;
+  }
+
+  &__brand {
+    max-width: 40rem;
+
+    p {
+      max-width: 35rem;
+      margin-top: 1rem;
+      color: rgba(245, 236, 229, 0.82);
+      font-size: 1.4rem;
+      line-height: 1.4;
+    }
   }
 
   &__logo {
     display: block;
-    position: relative;
-    width: 32.8rem;
-    margin-bottom: 2.8rem;
-    user-select: none;
+    width: min(20rem, 62vw);
+    background: #f5ece5;
+    -webkit-mask: url('/assets/images/logo_white.png') center / contain no-repeat;
+    mask: url('/assets/images/logo_white.png') center / contain no-repeat;
 
     img {
-      @extend %basic-block;
+      display: block;
+      width: 100%;
+      height: auto;
+      opacity: 0;
     }
   }
 
-  &__section {
-    @extend %basic-block;
+  &__navigation {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem;
+  }
 
-    & + * {
-      margin-top: 4.8rem;
+  &__nav-heading {
+    margin-bottom: 0.8rem;
+    color: #f5ece5;
+  }
+
+  &__nav-column,
+  &__contact {
+    li + li {
+      margin-top: 0.4rem;
+    }
+
+    a {
+      font-size: 1.4rem;
+      line-height: 1.35;
+      transition: color 0.15s ease;
+
+      &:hover,
+      &:focus {
+        color: #fce8bf;
+      }
     }
   }
 
-  &__block {
-    & + * {
-      margin-top: 3.2rem;
-    }
+  &__popular {
+    margin-top: 2.8rem;
+    padding: 2.2rem 0;
+    border-top: 1px solid rgba(245, 236, 229, 0.26);
+    border-bottom: 1px solid rgba(245, 236, 229, 0.26);
   }
 
-  &__heading {
-    @include hd-b($color: -color(white));
+  &__popular-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    align-items: flex-end;
+  }
 
+  &__popular-heading {
+    color: #f5ece5;
+    font-size: 3.6rem;
+    line-height: 0.95;
+  }
+
+  &__popular-all {
+    flex: 0 0 auto;
+    color: #f5ece5;
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin-bottom: 2.4rem;
+
+    &:hover,
+    &:focus {
+      color: #fce8bf;
+    }
   }
 
-  &__colophon {
-    @include copy-a($color: -color(white));
+  &__popular-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
 
-    display: block;
-    margin-top: 2rem;
-  }
-
-  @include for-desktop-up {
-    &__section {
-      display: flex;
-      justify-content: space-between;
+    li + li {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+      border-left: 1px solid rgba(245, 236, 229, 0.2);
+      padding-left: 1.2rem;
     }
 
-    &__block {
-      margin-top: 0;
+    a {
+      display: block;
 
-      &:first-child {
-        lost-column: 2/3;
+      &:hover,
+      &:focus {
+        .page-footer__popular-title {
+          color: #fce8bf;
+        }
+      }
+    }
+  }
+
+  &__popular-number {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #f5ece5;
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    line-height: 1.7;
+  }
+
+  &__popular-title {
+    display: -webkit-box;
+    max-height: 3em;
+    overflow: hidden;
+    color: #f5ece5;
+    font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 1;
+    transition: color 0.15s ease;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  &__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1.2rem 2.4rem;
+    padding-top: 1.6rem;
+    color: rgba(245, 236, 229, 0.76);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.45;
+    text-transform: uppercase;
+
+    div {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem 2rem;
+    }
+
+    a:hover,
+    a:focus {
+      color: #fce8bf;
+    }
+  }
+
+  @include for-tablet-landscape-up {
+    &__inner {
+      width: calc(100% - 6.4rem);
+    }
+
+    &__main {
+      grid-template-columns: minmax(28rem, 1.25fr) minmax(28rem, 1fr) minmax(26rem, 0.9fr);
+      gap: 5vw;
+      align-items: start;
+    }
+
+    &__brand {
+      p {
+        margin-top: 1.6rem;
+        font-size: 1.55rem;
+        line-height: 1.5;
+      }
+    }
+
+    &__logo {
+      width: 25rem;
+    }
+
+    &__nav-column,
+    &__contact {
+      li + li {
+        margin-top: 0.7rem;
       }
 
-      &:last-child {
-        lost-column: 1/3;
+      a {
+        font-size: 1.6rem;
       }
+    }
+
+    &__popular-list {
+      gap: 3.2rem;
+
+      li + li {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+        border-left: 1px solid rgba(245, 236, 229, 0.22);
+        padding-left: 3.2rem;
+      }
+
+      a {
+        display: grid;
+        grid-template-columns: 2.8rem minmax(0, 1fr);
+        gap: 1.2rem;
+        align-items: start;
+      }
+    }
+
+    &__popular-number {
+      margin-bottom: 0;
+    }
+
+    &__popular-title {
+      max-height: 2em;
+      font-size: 3rem;
+      -webkit-line-clamp: 2;
     }
   }
 }
 
 .contact {
-  user-select: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.6rem;
 
-  li {
-    display: block;
+  li:first-child {
+    grid-column: 1 / -1;
+  }
 
-    & + * {
-      margin-top: 2rem;
-    }
+  li + li {
+    margin-top: 0;
   }
 
   &__heading {
-    @include hd-d($color: -color(white));
-
+    display: block;
+    margin-bottom: 0.2rem;
+    color: rgba(245, 236, 229, 0.72);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
     text-transform: uppercase;
   }
 
   a {
-    @include copy-a($color: -color(white));
+    color: #f5ece5;
+    font-family: 'Still EB Garamond', Georgia, serif;
+    font-size: 1.4rem;
+    line-height: 1.35;
+    text-decoration: none;
 
-    position: relative;
-
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: -color(white);
-      width: 100%;
-      height: 1px;
-      margin-top: -0.3rem;
-      opacity: 0;
-      user-select: none;
-      pointer-events: none;
-      will-change: margin, opacity;
-      transition: margin 0.2s $ease-in-out-quart, opacity 0.1s $ease-in-out-quart;
-    }
-
-    &:hover {
-      &:after {
-        opacity: 1;
-        margin-top: 0.2rem;
-      }
+    &:hover,
+    &:focus {
+      color: #fce8bf;
     }
   }
 
   @include for-tablet-landscape-up {
-    li {
-      display: inline-block;
+    display: block;
 
-      & + * {
-        margin-top: 0;
-        margin-left: 6.4rem;
-      }
-    }
-  }
-}
-
-.newsletter {
-  @extend %basic-block;
-
-  form {
-    @extend %flex-block;
-  }
-
-  &__input {
-    @extend %strip-input-style;
-    @include copy-a($color: -color(white));
-
-    height: 4rem;
-    line-height: 4rem;
-    vertical-align: middle;
-    white-space: nowrap;
-    padding: 0 0.8rem;
-    overflow: hidden;
-    flex-grow: 1;
-    border-bottom: 1px solid -color(white);
-
-    &::-webkit-input-placeholder {
-      color: -color(white);
-    }
-
-    &:-ms-input-placeholder {
-      color: -color(white);
-    }
-
-    &::-moz-placeholder {
-      color: -color(white);
-      opacity: 1;
-    }
-  }
-
-  &__submit {
-    @extend %strip-input-style;
-    @include hd-e($color: -color(cerulean));
-
-    text-transform: uppercase;
-    height: 4rem;
-    background-color: -color(white);
-    flex-shrink: 0;
-    flex-grow: 0;
-    padding: 0 2.4rem;
-    margin-left: 1.6rem;
-    cursor: pointer;
-  }
-}
-
-.social-blocks {
-  @extend %flex-block;
-
-  flex-wrap: wrap;
-
-  li {
-    @include ratio-box(100%);
-
-    lost-column: 1/2;
-
-    &:nth-child(n+3) {
-      margin-top: 2rem;
-    }
-  }
-
-  @include for-tablet-portrait-up {
-    li {
-      lost-column: 1/3;
-
-      &:nth-child(3) {
-        margin-top: 0;
-      }
-    }
-  }
-
-  @include for-tablet-landscape-up {
-    li {
-      lost-column: 1/6;
-
-      &:nth-child(n+3) {
-        margin-top: 0;
-      }
-    }
-  }
-}
-
-.insta-feed {
-  @extend %basic-block;
-
-  > * {
-    & + * {
-      margin-top: 2.4rem;
-    }
-  }
-
-  a {
-    @include ratio-box(100%);
-
-    will-change: transform;
-    transform-origin: center center;
-    transform: scale(1);
-    transition: transform 0.5s $ease-out-quint;
-  }
-
-  @include for-tablet-portrait-up {
-    display: flex;
-    flex-wrap: wrap;
-
-    > * {
-      lost-column: 1/3;
-
-      & + * {
-        margin-top: 0;
-      }
-
-      &:nth-child(n+4) {
-        margin-top: 2.4rem;
-      }
+    li + li {
+      margin-top: 1.4rem;
     }
 
     a {
-      &:hover {
-        transform: scale(1.1);
-        z-index: -z(content);
-        transition: transform 0.2s $ease-out-quint;
-      }
+      font-size: 1.55rem;
+    }
+  }
+}
+
+.instagram-footer {
+  margin-top: 3rem;
+
+  &__heading {
+    display: flex;
+    gap: 1.2rem;
+    align-items: baseline;
+    width: calc(100% - 3.2rem);
+    max-width: 148rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 1.2rem;
+
+    h2 {
+      margin-top: 0;
+      color: #f5ece5;
+      font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+      font-size: 3rem;
+      font-weight: 500;
+      line-height: 0.95;
+    }
+
+    a:hover,
+    a:focus {
+      color: #fce8bf;
     }
   }
 
   @include for-tablet-landscape-up {
-    > * {
-      lost-column: 1/6;
+    &__heading {
+      width: calc(100% - 6.4rem);
+      padding-bottom: 1.4rem;
 
-      &:nth-child(n+4) {
-        margin-top: 0;
+      h2 {
+        font-size: 3.7rem;
       }
     }
+  }
+}
+
+.footer-insta-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  width: 100%;
+
+  .insta-feed__post {
+    min-width: 0;
+  }
+
+  a {
+    display: block;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: rgba(245, 236, 229, 0.12);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  a:hover img,
+  a:focus img {
+    transform: scale(1.025);
+  }
+
+  @include for-tablet-landscape-up {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 }
