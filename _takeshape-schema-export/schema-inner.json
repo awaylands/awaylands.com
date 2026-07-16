@@ -849,11 +849,11 @@
           },
           "content": {
             "widget": "wysiwygText",
-            "instructions": "Paste or write the main text here. Use Story Blocks below for images, galleries, tables, and precise layout control."
+            "instructions": "Existing posts only. This preserves the original article body during testing. Leave it blank on new posts and build the article in Story Body above."
           },
           "contentBlocks": {
             "widget": "shapeArray",
-            "instructions": "Drag blocks to reorder. Image and Gallery blocks expose size, alignment, caption, alt text, and link controls in one place."
+            "instructions": "Use this for every new post. Add Text, Image, Gallery, Table, or Embed blocks and drag them into the exact published order."
           },
           "relatedStories": {
             "widget": "relationship"
@@ -4056,32 +4056,33 @@
           "content": {
             "type": "object",
             "@tag": "draftjs",
-            "title": "Content",
+            "title": "Legacy Article Body — Existing Posts Only",
+            "description": "Existing posts retain their original body here during testing. Leave this blank on new posts and use Story Body instead.",
             "@mapping": "shapedb:Story.rkzHXy9e-"
           },
           "contentBlocks": {
             "type": "array",
-            "description": "",
+            "description": "The complete ordered article body for new posts. Add and drag Text, Image, Gallery, Table, and Embed blocks.",
             "items": {
               "oneOf": [
                 {
                   "@ref": "local:ContentBlock"
                 },
                 {
-                  "@ref": "local:HtmlBlock"
+                  "@ref": "local:StoryImageBlock"
+                },
+                {
+                  "@ref": "local:StoryGalleryBlock"
                 },
                 {
                   "@ref": "local:TableBlock"
                 },
                 {
-                  "@ref": "local:StoryImageBlock"
-                },
-                {
-                  "@ref": "local:StoryGalleryBlock"
+                  "@ref": "local:HtmlBlock"
                 }
               ]
             },
-            "title": "Content Blocks",
+            "title": "Story Body — New Posts",
             "@mapping": "shapedb:Story.Z1b3FgKbp"
           },
           "relatedStories": {
@@ -4177,8 +4178,7 @@
         },
         "required": [
           "title",
-          "tout",
-          "content"
+          "tout"
         ]
       }
     },
@@ -4807,7 +4807,7 @@
     "ContentBlock": {
       "id": "uxhJqMxSq",
       "name": "ContentBlock",
-      "title": "Content Block",
+      "title": "Text Section",
       "schema": {
         "type": "object",
         "properties": {
@@ -4823,7 +4823,7 @@
     "HtmlBlock": {
       "id": "DLA36KeM7",
       "name": "HtmlBlock",
-      "title": "HTML Block",
+      "title": "Embed / Custom Code",
       "schema": {
         "type": "object",
         "properties": {
@@ -4846,7 +4846,7 @@
     "TableBlock": {
       "id": "TableBlock",
       "name": "TableBlock",
-      "title": "Table Block",
+      "title": "Table",
       "schema": {
         "type": "object",
         "properties": {
@@ -5197,7 +5197,7 @@
     "StoryImageBlock": {
       "id": "StoryImageBlockV2",
       "name": "StoryImageBlock",
-      "title": "Image — fast controls",
+      "title": "Image",
       "schema": {
         "type": "object",
         "properties": {
@@ -5396,7 +5396,7 @@
     "StoryGalleryBlock": {
       "id": "StoryGalleryBlockV2",
       "name": "StoryGalleryBlock",
-      "title": "Gallery — drag to reorder",
+      "title": "Gallery",
       "schema": {
         "type": "object",
         "properties": {

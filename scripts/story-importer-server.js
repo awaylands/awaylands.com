@@ -164,8 +164,7 @@ async function createStory(input) {
   const storyInput = {
     title: String(input.title || '').trim(),
     slug: String(input.slug || '').trim(),
-    content: input.content,
-    contentBlocks: [],
+    contentBlocks: Array.isArray(input.contentBlocks) ? input.contentBlocks : [],
     tout: input.heroAssetId ? {image: {id: input.heroAssetId}} : {},
     social: {},
     _status: 'enabled'
