@@ -40,11 +40,20 @@
         {% elif block.__typename == "HtmlBlock" %}
           {{ block.html | dump | safe }}
         {% elif block.__typename == "TableBlock" %}
-          {{ ((block.title or "") ~ " " ~ (block.dek or "") ~ " " ~ (block.headersText or "") ~ " " ~ (block.rowsText or "") ~ " " ~ (block.footnote or "")) | dump | safe }}
+          {{ (block.pastedText or "") | dump | safe }}
         {% else %}
           ""
         {% endif %}{% if not loop.last %},{% endif %}
       {% endfor %}
+    ],
+    "extraContentBlocks": [
+      {% for block in story.extraContentBlocks %}{{ block.contentHtml | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
+    ],
+    "extraHtmlBlocks": [
+      {% for block in story.extraHtmlBlocks %}{{ block.html | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
+    ],
+    "extraTableBlocks": [
+      {% for block in story.extraTableBlocks %}{{ block.pastedText | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
     ]
   }{% if not loop.last %},{% endif %}
 {% endfor %}

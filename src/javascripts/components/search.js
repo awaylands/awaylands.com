@@ -30,7 +30,10 @@ function textFromStory(story) {
     story.dek,
     story.content,
     (story.mainBlocks || []).join(' '),
-    (story.blocks || []).join(' ')
+    (story.blocks || []).join(' '),
+    (story.extraContentBlocks || []).join(' '),
+    (story.extraHtmlBlocks || []).join(' '),
+    (story.extraTableBlocks || []).join(' ')
   ].join(' '));
 }
 
@@ -42,7 +45,10 @@ function createSearchFields(story) {
     { label: 'category', text: story.category || '' },
     { label: 'post', text: plainText(story.content) },
     { label: 'post', text: plainText((story.mainBlocks || []).join(' ')) },
-    { label: 'post', text: plainText((story.blocks || []).join(' ')) }
+    { label: 'post', text: plainText((story.blocks || []).join(' ')) },
+    {label: 'post', text: plainText((story.extraContentBlocks || []).join(' '))},
+    {label: 'post', text: plainText((story.extraHtmlBlocks || []).join(' '))},
+    {label: 'post', text: plainText((story.extraTableBlocks || []).join(' '))}
   ];
 }
 

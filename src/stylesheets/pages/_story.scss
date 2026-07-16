@@ -4,6 +4,7 @@
   --story-ink: #18201f;
   --story-muted: #66706e;
   --story-blue: #166e78;
+  --story-link: #147f8d;
   --story-deep-blue: #0e4855;
   --story-orange: #dd682d;
   --story-yellow: #fffbd8;
@@ -315,7 +316,7 @@ body.body--story {
 .story-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  max-width: 150rem;
+  max-width: 158rem;
   margin: 0 auto;
   padding: 4rem 2rem 9rem;
 }
@@ -339,7 +340,7 @@ body.body--story {
   padding: 1.4rem 0;
   color: var(--story-blue);
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1.15rem;
+  font-size: 1.3rem;
   font-weight: 500;
   letter-spacing: 0.15em;
   line-height: 1.4;
@@ -366,9 +367,9 @@ body.body--story {
   display: grid;
   grid-template-columns: 2.7rem minmax(0, 1fr);
   gap: 0.8rem;
-  color: var(--story-blue);
+  color: var(--story-link);
   font-family: 'Still EB Garamond', Georgia, serif;
-  font-size: 1.75rem;
+  font-size: 1.9rem;
   letter-spacing: 0;
   line-height: 1.28;
   text-decoration: none;
@@ -378,7 +379,7 @@ body.body--story {
   content: counter(story-toc, decimal-leading-zero);
   color: var(--story-orange);
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1.9;
@@ -428,7 +429,7 @@ body.body--story {
   margin: 0 0 0.6rem;
   color: var(--story-orange);
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.14em;
   line-height: 1.4;
@@ -471,7 +472,7 @@ body.body--story {
   min-width: 0;
   border: 1px solid rgba(22, 110, 120, 0.22);
   background: rgba(255, 255, 255, 0.28);
-  color: var(--story-blue);
+  color: var(--story-link);
   text-decoration: none;
   scroll-snap-align: start;
 }
@@ -500,7 +501,7 @@ body.body--story {
   padding: 1.1rem 0 1.2rem 1rem;
   color: var(--story-orange);
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 0.92rem;
+  font-size: 1.07rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   line-height: 1.6;
@@ -539,7 +540,7 @@ body.body--story {
 
 .story-rail__related-link {
   display: block;
-  color: var(--story-blue);
+  color: var(--story-link);
   text-decoration: none;
   scroll-snap-align: start;
 }
@@ -577,7 +578,7 @@ body.body--story {
 }
 
 .story-quick-answer {
-  max-width: 78rem;
+  max-width: 84rem;
   margin: 0 auto 5rem;
   border-top: 2px solid var(--story-blue);
   border-bottom: 1px solid rgba(22, 110, 120, 0.25);
@@ -612,7 +613,7 @@ body.body--story {
   margin: 0 0 0.7rem;
   color: var(--story-orange);
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   line-height: 1.4;
@@ -652,9 +653,9 @@ body.body--story {
   gap: 0.7rem;
   border-top: 1px solid rgba(22, 110, 120, 0.24);
   padding-top: 1rem;
-  color: var(--story-blue);
+  color: var(--story-link);
   font-family: 'Still EB Garamond', Georgia, serif;
-  font-size: 1.55rem;
+  font-size: 1.7rem;
   font-weight: 600;
   line-height: 1.25;
   text-decoration: none;
@@ -667,14 +668,14 @@ body.body--story {
 .story-overview__links span {
   color: var(--story-orange);
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   letter-spacing: 0.07em;
   line-height: 1.9;
 }
 
 .story-article__body {
-  max-width: 116rem;
+  max-width: 124rem;
   margin: 0 auto;
   color: var(--story-ink);
   font-family: 'Still EB Garamond', Georgia, serif;
@@ -700,7 +701,7 @@ body.body--story {
 .story-article__body > blockquote,
 .story-article__body > hr,
 .story-article__body > .story-table {
-  max-width: 78rem;
+  max-width: 84rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -790,7 +791,7 @@ body.body--story {
 }
 
 .story-article__body a {
-  color: var(--story-blue);
+  color: var(--story-link);
   font-weight: 700;
   text-decoration: none;
 }
@@ -811,7 +812,7 @@ body.body--story {
 .story-article__body h2 a,
 .story-article__body h3 a,
 .story-article__body h4 a {
-  color: var(--story-blue);
+  color: var(--story-link);
   font-family: inherit;
   font-size: inherit;
   letter-spacing: inherit;
@@ -857,14 +858,14 @@ body.body--story {
   position: relative;
   float: none;
   width: auto;
-  max-width: 78rem;
+  max-width: 84rem;
   margin: 4.8rem auto;
   padding: 0;
   cursor: zoom-in;
 }
 
 .story-article__body figure.text {
-  max-width: 78rem;
+  max-width: 84rem;
 }
 
 .story-article__body figure.small {
@@ -876,11 +877,11 @@ body.body--story {
 }
 
 .story-article__body figure.large {
-  max-width: 78rem;
+  max-width: 84rem;
 }
 
 .story-article__body figure.wide {
-  max-width: 78rem;
+  max-width: 84rem;
 }
 
 .story-article__body figure.tiny,
@@ -890,7 +891,7 @@ body.body--story {
 
 .story-article__body figure.full,
 .story-article__body figure.full-width {
-  max-width: 116rem;
+  max-width: 124rem;
 }
 
 .story-article__body > figure.align-left,
@@ -907,6 +908,24 @@ body.body--story {
 .story-article__body > figure.center {
   margin-right: auto;
   margin-left: auto;
+}
+
+@media (min-width: 900px) {
+  .story-article__body > figure.align-left:not(.large):not(.wide):not(.full):not(.full-width),
+  .story-article__body > figure.left:not(.large):not(.wide):not(.full):not(.full-width) {
+    float: left;
+    width: 36rem;
+    max-width: 42%;
+    margin: 0.8rem 3rem 2rem 0;
+  }
+
+  .story-article__body > figure.align-right:not(.large):not(.wide):not(.full):not(.full-width),
+  .story-article__body > figure.right:not(.large):not(.wide):not(.full):not(.full-width) {
+    float: right;
+    width: 36rem;
+    max-width: 42%;
+    margin: 0.8rem 0 2rem 3rem;
+  }
 }
 
 .story-article__body figure img {
@@ -952,21 +971,21 @@ body.body--story {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  max-width: 78rem;
+  max-width: 84rem;
   margin: 5.4rem auto;
   clear: both;
 }
 
 .story-gallery--size-text {
-  max-width: 78rem;
+  max-width: 84rem;
 }
 
 .story-gallery--size-wide {
-  max-width: 78rem;
+  max-width: 84rem;
 }
 
 .story-gallery--size-full {
-  max-width: 116rem;
+  max-width: 124rem;
 }
 
 .story-gallery--pair,
@@ -1243,7 +1262,7 @@ body.body--story {
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 78rem;
+  max-width: 84rem;
   min-height: 14rem;
   margin: 6.8rem auto;
   border-top: 1px solid rgba(22, 110, 120, 0.16);
@@ -1325,7 +1344,7 @@ body.body--story {
 .story-article__footer {
   display: grid;
   grid-template-columns: 1fr;
-  max-width: 78rem;
+  max-width: 84rem;
   margin: 8rem auto 0;
   border-top: 1px solid rgba(22, 110, 120, 0.25);
   border-bottom: 1px solid rgba(22, 110, 120, 0.25);
@@ -1339,7 +1358,7 @@ body.body--story {
 }
 
 .story-commission-note {
-  max-width: 78rem;
+  max-width: 84rem;
   margin: 6rem auto -5.5rem;
   color: rgba(24, 32, 31, 0.5);
   font-family: Montserrat, Helvetica, sans-serif;
@@ -1371,7 +1390,7 @@ body.body--story {
 }
 
 .story-article__modules {
-  max-width: 116rem;
+  max-width: 124rem;
   margin: 8rem auto 0;
 }
 
@@ -1495,7 +1514,7 @@ body.body--story {
     grid-row: 1;
     grid-column: 2;
     padding: 0.6rem 0.6rem 0;
-    font-size: 0.82rem;
+    font-size: 1.05rem;
     line-height: 1.2;
   }
 
@@ -1508,7 +1527,7 @@ body.body--story {
   }
 
   .story-rail__trust--inline {
-    max-width: 78rem;
+    max-width: 84rem;
     margin: 6rem auto;
     border-top-color: var(--story-orange);
   }
@@ -1572,14 +1591,14 @@ body.body--story {
   .story-page--standard .story-article,
   .story-page--quick-answer .story-article {
     width: 100%;
-    max-width: 116rem;
+    max-width: 124rem;
     margin: 0 auto;
   }
 
   .story-page--advanced .story-layout {
     grid-template-columns: minmax(0, 1fr) 29rem;
     gap: clamp(5rem, 5vw, 8rem);
-    max-width: 168rem;
+    max-width: 176rem;
   }
 
   .story-page--advanced .story-article {
@@ -1724,6 +1743,7 @@ body.body--story {
   .story-article__body figure.small,
   .story-article__body figure.medium,
   .story-article__body figure.large {
+    float: none;
     width: auto !important;
     max-width: 100%;
     margin: 3.6rem auto;

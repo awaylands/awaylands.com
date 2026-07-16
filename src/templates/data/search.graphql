@@ -12,6 +12,16 @@ query($images: TSImagesConfig) {
         title
       }
       contentHtml(images: $images)
+      extraContentBlocks {
+        contentHtml(images: $images)
+      }
+      extraHtmlBlocks {
+        html
+      }
+      extraTableBlocks {
+        pastedText
+        columnCount
+      }
       mainHtmlBlock1
       mainContentBlock1Html(images: $images)
       additionalMainBlocks {

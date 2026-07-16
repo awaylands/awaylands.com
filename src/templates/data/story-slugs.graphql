@@ -8,6 +8,17 @@ query($images: TSImagesConfig) {
       slug
       postType
       pageLayout
+      atAGlance {
+        kicker
+        title
+        summary
+        item1Title
+        item1Link
+        item2Title
+        item2Link
+        item3Title
+        item3Link
+      }
       shopEditTitle
       shopEditItems {
         image {
@@ -60,6 +71,16 @@ query($images: TSImagesConfig) {
         }
       }
       contentHtml(images: $images)
+      extraContentBlocks {
+        contentHtml(images: $images)
+      }
+      extraHtmlBlocks {
+        html
+      }
+      extraTableBlocks {
+        pastedText
+        columnCount
+      }
       mainHtmlBlock1
       mainContentBlock1Html(images: $images)
       additionalMainBlocks {

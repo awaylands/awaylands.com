@@ -854,16 +854,19 @@
               "instructions": "Auto adds a sidebar to longer guides, reviews, and shopping posts. Simple and Sidebar are manual overrides."
             },
             "shopEditTitle": {
-              "widget": "singleLineText",
-              "instructions": "Optional. Defaults to Shop The Edit; enter a custom title for this post's editor shortlist."
+              "widget": "singleLineText"
             },
             "shopEditItems": {
               "widget": "shapeArray",
-              "instructions": "Optional manual shortlist. Add an image, display title, and product link. When left empty, the site automatically builds the shortlist from product links in the article."
+              "instructions": "Add manual products here. When empty, the shortlist is built from product links in the article."
+            },
+            "atAGlance": {
+              "widget": "shapeObject",
+              "instructions": "Everything fills automatically when blank. Open only when you want to override the text or links."
             },
             "firstHandExpertise": {
               "widget": "shapeObject",
-              "instructions": "Optional overrides for the First-hand expertise sidebar section."
+              "instructions": "About the Author text. Defaults are used when blank."
             },
             "keepReadingKicker": {
               "widget": "singleLineText"
@@ -875,9 +878,14 @@
               "widget": "wysiwygText",
               "instructions": "Primary article editor. Write or paste the full post here, including headings, links, lists, and images."
             },
-            "contentBlocks": {
-              "widget": "shapeArray",
-              "instructions": "Optional additional blocks. Use only when you need structured image, gallery, table, or embed controls outside the main Content editor."
+            "extraContentBlocks": {
+              "widget": "shapeArray"
+            },
+            "extraHtmlBlocks": {
+              "widget": "shapeArray"
+            },
+            "extraTableBlocks": {
+              "widget": "shapeArray"
             },
             "relatedStories": {
               "widget": "relationship"
@@ -885,17 +893,9 @@
             "social": {
               "widget": "shapeObject"
             },
-            "mainHtmlBlock1": {
-              "widget": "paragraphText",
-              "instructions": "Optional raw HTML or embed code that should appear after the main Content field."
-            },
-            "mainContentBlock1": {
-              "widget": "wysiwygText",
-              "instructions": "Optional continuation of the article after the first HTML block."
-            },
-            "additionalMainBlocks": {
-              "widget": "shapeObject"
-            }
+            "mainHtmlBlock1": {"widget": "paragraphText"},
+            "mainContentBlock1": {"widget": "wysiwygText"},
+            "additionalMainBlocks": {"widget": "shapeObject"}
           },
           "order": [
             "title",
@@ -906,12 +906,12 @@
             "location",
             "social",
             "content",
-            "mainHtmlBlock1",
-            "mainContentBlock1",
-            "additionalMainBlocks",
-            "contentBlocks",
+            "extraContentBlocks",
+            "extraHtmlBlocks",
+            "extraTableBlocks",
             "postType",
             "pageLayout",
+            "atAGlance",
             "shopEditTitle",
             "shopEditItems",
             "firstHandExpertise",
@@ -926,8 +926,7 @@
           "widget": "repeater",
           "properties": {
             "image": {
-              "widget": "image",
-              "instructions": "Optional product image. Drag from the asset gallery or choose an image."
+              "widget": "image"
             },
             "title": {
               "widget": "singleLineText"
@@ -941,6 +940,33 @@
             "image",
             "title",
             "productUrl"
+          ]
+        }
+      },
+      "StoryAtAGlance": {
+        "default": {
+          "widget": "object",
+          "properties": {
+            "kicker": {"widget": "singleLineText"},
+            "title": {"widget": "singleLineText"},
+            "summary": {"widget": "paragraphText"},
+            "item1Title": {"widget": "singleLineText"},
+            "item1Link": {"widget": "singleLineText"},
+            "item2Title": {"widget": "singleLineText"},
+            "item2Link": {"widget": "singleLineText"},
+            "item3Title": {"widget": "singleLineText"},
+            "item3Link": {"widget": "singleLineText"}
+          },
+          "order": [
+            "kicker",
+            "title",
+            "summary",
+            "item1Title",
+            "item1Link",
+            "item2Title",
+            "item2Link",
+            "item3Title",
+            "item3Link"
           ]
         }
       },
@@ -1220,7 +1246,6 @@
             }
           },
           "order": [
-            "label",
             "html"
           ]
         }
@@ -4111,27 +4136,31 @@
                   ]
                 }
               ],
-              "@mapping": "shapedb:Story.PageLayoutV2"
-            },
-            "shopEditTitle": {
-              "type": "string",
-              "title": "Shop The Edit Title",
-              "description": "Optional post-level override for the Shop The Edit shortlist heading.",
-              "default": "Shop The Edit",
+            "@mapping": "shapedb:Story.PageLayoutV2"
+          },
+          "atAGlance": {
+            "$ref": "#/shapes/StoryAtAGlance/schema",
+            "title": "At a Glance",
+            "@mapping": "shapedb:Story.AtAGlanceV1"
+          },
+          "shopEditTitle": {
+            "type": "string",
+            "title": "Shop The Edit Title",
+            "default": "Shop The Edit",
               "@mapping": "shapedb:Story.ShopEditTitleV1"
             },
             "shopEditItems": {
-              "type": "array",
-              "title": "Shop The Edit — Manual Items",
-              "description": "Optional manual product shortlist. When empty, the site automatically selects product links from the article.",
+            "type": "array",
+            "title": "Shop The Edit — Manual Items",
+            "description": "When empty, products are selected from article links.",
               "items": {
                 "$ref": "#/shapes/StoryShopEditItem/schema"
               },
               "@mapping": "shapedb:Story.ShopEditItemsV1"
             },
-            "firstHandExpertise": {
-              "$ref": "#/shapes/StoryExpertise/schema",
-              "title": "First-hand Expertise",
+          "firstHandExpertise": {
+            "$ref": "#/shapes/StoryExpertise/schema",
+            "title": "About the Author",
               "@mapping": "shapedb:Story.FirstHandExpertiseV1"
             },
             "keepReadingKicker": {
@@ -4146,13 +4175,36 @@
               "default": "More from Away Lands",
               "@mapping": "shapedb:Story.KeepReadingTitleV1"
             },
-            "content": {
-              "type": "object",
-              "@tag": "draftjs",
-              "title": "CONTENT — Article Body",
-              "description": "Primary article editor for text, headings, links, lists, and inline images.",
-              "@mapping": "shapedb:Story.rkzHXy9e-"
+          "content": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block",
+            "@mapping": "shapedb:Story.rkzHXy9e-"
+          },
+          "extraContentBlocks": {
+            "type": "array",
+            "title": "Add Content Block",
+            "items": {
+              "$ref": "#/shapes/ContentBlock/schema"
             },
+            "@mapping": "shapedb:Story.ExtraContentBlocksV1"
+          },
+          "extraHtmlBlocks": {
+            "type": "array",
+            "title": "Add HTML Block",
+            "items": {
+              "$ref": "#/shapes/HtmlBlock/schema"
+            },
+            "@mapping": "shapedb:Story.ExtraHtmlBlocksV1"
+          },
+          "extraTableBlocks": {
+            "type": "array",
+            "title": "Add Table Block",
+            "items": {
+              "$ref": "#/shapes/TableBlock/schema"
+            },
+            "@mapping": "shapedb:Story.ExtraTableBlocksV1"
+          },
             "contentBlocks": {
               "type": "array",
               "description": "Optional structured blocks for layouts that cannot be handled in the main Content editor.",
@@ -5306,17 +5358,84 @@
           }
         }
       },
-      "StoryExpertise": {
-        "id": "StoryExpertiseV1",
-        "name": "StoryExpertise",
-        "title": "First-hand Expertise",
+      "StoryAtAGlance": {
+        "id": "StoryAtAGlanceV1",
+        "name": "StoryAtAGlance",
+        "title": "At a Glance",
         "schema": {
           "type": "object",
           "properties": {
             "kicker": {
               "type": "string",
               "title": "Small Label",
-              "default": "First-hand expertise",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Kicker"
+            },
+            "title": {
+              "type": "string",
+              "title": "Title",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Title"
+            },
+            "summary": {
+              "type": "string",
+              "title": "Summary",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Summary"
+            },
+            "item1Title": {
+              "type": "string",
+              "title": "Section 1 Title",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Item1Title"
+            },
+            "item1Link": {
+              "type": "string",
+              "title": "Section 1 Link",
+              "description": "Blank links to the first detected heading.",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Item1Link"
+            },
+            "item2Title": {
+              "type": "string",
+              "title": "Section 2 Title",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Item2Title"
+            },
+            "item2Link": {
+              "type": "string",
+              "title": "Section 2 Link",
+              "description": "Blank links to the second detected heading.",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Item2Link"
+            },
+            "item3Title": {
+              "type": "string",
+              "title": "Section 3 Title",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Item3Title"
+            },
+            "item3Link": {
+              "type": "string",
+              "title": "Section 3 Link",
+              "description": "Blank links to the third detected heading.",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryAtAGlance.Item3Link"
+            }
+          }
+        }
+      },
+      "StoryExpertise": {
+        "id": "StoryExpertiseV1",
+        "name": "StoryExpertise",
+        "title": "About the Author",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "kicker": {
+              "type": "string",
+              "title": "Small Label",
+              "default": "About the Author",
               "minLength": 0,
               "@mapping": "shapedb:StoryExpertise.Kicker"
             },

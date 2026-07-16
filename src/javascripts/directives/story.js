@@ -195,25 +195,64 @@ function prepareStoryImage(image, index, hasStoryHero) {
   }
 }
 
+function edgeTextNode(element, fromEnd) {
+  const children = element.childNodes;
+  const start = fromEnd ? children.length - 1 : 0;
+  const finish = fromEnd ? -1 : children.length;
+  const step = fromEnd ? -1 : 1;
+
+  for (let index = start; index !== finish; index += step) {
+    const child = children[index];
+
+    if (child.nodeType === TEXT_NODE) {
+      return child;
+    }
+
+    if (child.childNodes && child.childNodes.length) {
+      const nested = edgeTextNode(child, fromEnd);
+
+      if (nested) {
+        return nested;
+      }
+    }
+  }
+
+  return null;
+}
+
+function ensureSpaceBesideLink(link, before) {
+  const sibling = before ? link.previousSibling : link.nextSibling;
+
+  if (sibling && sibling.nodeType === TEXT_NODE) {
+    if (before && !/\s$/.test(sibling.nodeValue || '')) {
+      sibling.nodeValue += ' ';
+    } else if (!before && !/^\s/.test(sibling.nodeValue || '')) {
+      sibling.nodeValue = ` ${sibling.nodeValue || ''}`;
+    }
+
+    return;
+  }
+
+  link.parentNode.insertBefore(document.createTextNode(' '), before ? link : link.nextSibling);
+}
+
 function normalizeInlineLinkSpaces(el) {
   const links = el.querySelectorAll('a');
 
   Array.prototype.forEach.call(links, link => {
-    const firstNode = link.firstChild;
-    const previousNode = link.previousSibling;
-    const hasLeadingSpace = firstNode && firstNode.nodeType === TEXT_NODE && /^\s+/.test(firstNode.nodeValue);
-    const needsSpace = previousNode &&
-      previousNode.nodeType === TEXT_NODE &&
-      previousNode.nodeValue &&
-      !/\s$/.test(previousNode.nodeValue) &&
-      /^[A-Za-z0-9]/.test(link.textContent || '');
+    const firstNode = edgeTextNode(link, false);
+    const lastNode = edgeTextNode(link, true);
+    const hasLeadingSpace = firstNode && /^\s+/.test(firstNode.nodeValue || '');
+    const hasTrailingSpace = lastNode && /\s+$/.test(lastNode.nodeValue || '');
 
     if (hasLeadingSpace) {
       firstNode.nodeValue = firstNode.nodeValue.replace(/^\s+/, '');
+      ensureSpaceBesideLink(link, true);
     }
 
-    if (needsSpace) {
-      previousNode.nodeValue += ' ';
+    if (hasTrailingSpace) {
+      lastNode.nodeValue = lastNode.nodeValue.replace(/\s+$/, '');
+      ensureSpaceBesideLink(link, false);
     }
   });
 }
@@ -230,7 +269,9 @@ function normalizeStoryLinks(el) {
 
     link.setAttribute('href', href);
 
-    if (link.querySelector('img') && !link.hasAttribute('target')) {
+    const isExternal = /^https?:\/\//i.test(href) && link.hostname !== window.location.hostname;
+
+    if ((isExternal || link.querySelector('img')) && !link.hasAttribute('target')) {
       link.setAttribute('target', '_blank');
       link.setAttribute('rel', 'noopener');
     }
@@ -1035,7 +1076,9 @@ function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
     }
   }
 
-  if (!article || !source || overviewHeadings.length < 3) {
+  const manualSummary = (storyPage.getAttribute('data-at-a-glance-summary') || '').trim();
+
+  if (!article || (!source && !manualSummary)) {
     return;
   }
 
@@ -1048,31 +1091,44 @@ function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
   overview.className = 'story-overview';
   overview.setAttribute('aria-labelledby', 'story-overview-title');
   kicker.className = 'story-overview__kicker';
-  kicker.textContent = isStyleEdit ? 'The edit, quickly' : 'The guide, quickly';
+  kicker.textContent = (storyPage.getAttribute('data-at-a-glance-kicker') || '').trim() ||
+    (isStyleEdit ? 'The edit, quickly' : 'The guide, quickly');
   title.id = 'story-overview-title';
   title.className = 'story-overview__title';
-  title.textContent = 'At a glance';
+  title.textContent = (storyPage.getAttribute('data-at-a-glance-title') || '').trim() || 'At a glance';
   summary.className = 'story-overview__summary';
-  summary.textContent = conciseStoryExcerpt(source.textContent);
+  summary.textContent = manualSummary || conciseStoryExcerpt(source.textContent);
   links.className = 'story-overview__links';
 
-  overviewHeadings.slice(0, 3).forEach((heading, index) => {
+  for (let index = 0; index < 3; index += 1) {
+    const heading = overviewHeadings[index];
+    const manualTitle = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-title`) || '').trim();
+    const manualLink = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-link`) || '').trim();
+    const itemTitle = manualTitle || (heading ? storyTocTitle(heading.textContent) : '');
+    const itemLink = manualLink || (heading ? `#${heading.id}` : '');
+
+    if (!itemTitle || !itemLink) {
+      continue;
+    }
+
     const item = document.createElement('li');
     const link = document.createElement('a');
     const number = document.createElement('span');
 
     number.textContent = `0${index + 1}`;
-    link.href = `#${heading.id}`;
+    link.href = itemLink;
     link.appendChild(number);
-    link.appendChild(document.createTextNode(storyTocTitle(heading.textContent)));
+    link.appendChild(document.createTextNode(itemTitle));
     item.appendChild(link);
     links.appendChild(item);
-  });
+  }
 
   overview.appendChild(kicker);
   overview.appendChild(title);
   overview.appendChild(summary);
-  overview.appendChild(links);
+  if (links.children.length) {
+    overview.appendChild(links);
+  }
   article.insertBefore(overview, el);
 }
 
@@ -1243,7 +1299,7 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
 
   trustSection.className = 'story-rail__section story-rail__trust';
   trustKicker.className = 'story-rail__kicker';
-  trustKicker.textContent = (storyPage.getAttribute('data-expertise-kicker') || '').trim() || 'First-hand expertise';
+  trustKicker.textContent = (storyPage.getAttribute('data-expertise-kicker') || '').trim() || 'About the Author';
   trustTitle.className = 'story-rail__title';
   trustTitle.textContent = (storyPage.getAttribute('data-expertise-title') || '').trim() || 'Why trust this guide';
   trustText.className = 'story-rail__trust-text';
