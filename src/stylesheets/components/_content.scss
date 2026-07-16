@@ -126,19 +126,6 @@
     margin-top: 4rem;
     margin-bottom: 4rem;
 
-    &__header {
-      margin-bottom: 1.6rem;
-    }
-
-    &__title {
-      margin: 0;
-      text-transform: none;
-    }
-
-    &__dek {
-      margin-top: 0.8rem;
-    }
-
     &__scroller {
       width: 100%;
       overflow-x: auto;
@@ -176,13 +163,6 @@
       }
     }
 
-    &__footnote {
-      @include copy-c($line-height: 1.45);
-
-      margin-top: 1.2rem;
-      color: -color(dust);
-      font-style: italic;
-    }
   }
 
   aside {

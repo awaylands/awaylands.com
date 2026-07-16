@@ -45,11 +45,8 @@ query($images: TSImagesConfig) {
           html
         }
         ... on TableBlock {
-          title
-          dek
-          headersText
-          rowsText
-          footnote
+          pastedText
+          columnCount
         }
       }
       tout {

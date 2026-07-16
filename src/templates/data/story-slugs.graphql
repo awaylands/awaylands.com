@@ -93,13 +93,8 @@ query($images: TSImagesConfig) {
           html
         }
         ... on TableBlock {
-          title
-          dek
           pastedText
           columnCount
-          headersText
-          rowsText
-          footnote
         }
         ... on StoryImageBlock {
           label

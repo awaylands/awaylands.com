@@ -1228,10 +1228,6 @@
       "TableBlock": {
         "default": {
           "properties": {
-            "label": {
-              "widget": "singleLineText",
-              "instructions": "Internal note only. This will not appear on the website."
-            },
             "pastedText": {
               "widget": "paragraphText",
               "instructions": "Paste the copied table here exactly as it appears. The first set of values becomes the bold header row; the rest automatically fills the table from left to right. Tabs and line breaks both work."
@@ -1239,36 +1235,11 @@
             "columnCount": {
               "widget": "number",
               "instructions": "How many columns are in the table? Defaults to 3. Change this only when your table has a different number."
-            },
-            "title": {
-              "widget": "singleLineText"
-            },
-            "dek": {
-              "widget": "paragraphText",
-              "instructions": "Optional short intro shown above the table."
-            },
-            "headersText": {
-              "widget": "paragraphText",
-              "instructions": "Advanced fallback for older tables only. Leave blank when using Paste Table Data."
-            },
-            "rowsText": {
-              "widget": "paragraphText",
-              "instructions": "Advanced fallback for older tables only. Leave blank when using Paste Table Data."
-            },
-            "footnote": {
-              "widget": "paragraphText",
-              "instructions": "Optional note shown below the table."
             }
           },
           "order": [
-            "label",
             "pastedText",
-            "columnCount",
-            "title",
-            "dek",
-            "headersText",
-            "rowsText",
-            "footnote"
+            "columnCount"
           ]
         }
       },
@@ -4973,16 +4944,9 @@
         "schema": {
           "type": "object",
           "properties": {
-            "label": {
-              "type": "string",
-              "description": "Internal note only. This will not appear on the website.",
-              "title": "Internal Label / Notes",
-              "minLength": 0,
-              "@mapping": "shapedb:TableBlock.InternalLabel"
-            },
             "pastedText": {
               "type": "string",
-              "title": "Paste Table Data",
+              "title": "Table Data",
               "description": "Paste copied table text exactly as it appears. The first values become the bold column headers and the remaining values automatically fill the rows.",
               "minLength": 0,
               "@mapping": "shapedb:TableBlock.PastedTableText"
@@ -4995,38 +4959,6 @@
               "maximum": 12,
               "default": 3,
               "@mapping": "shapedb:TableBlock.ColumnCount"
-            },
-            "title": {
-              "type": "string",
-              "title": "Table Title",
-              "minLength": 0,
-              "@mapping": "shapedb:TableBlock.Title"
-            },
-            "dek": {
-              "type": "string",
-              "title": "Intro Text",
-              "minLength": 0,
-              "@mapping": "shapedb:TableBlock.Dek"
-            },
-            "headersText": {
-              "type": "string",
-              "title": "Column Headers",
-              "description": "Optional. Put one column header per line.",
-              "minLength": 0,
-              "@mapping": "shapedb:TableBlock.HeadersText"
-            },
-            "rowsText": {
-              "type": "string",
-              "title": "Rows",
-              "description": "Put one row per line. Separate cells with a vertical bar, like: Item | Best For | Price",
-              "minLength": 0,
-              "@mapping": "shapedb:TableBlock.RowsText"
-            },
-            "footnote": {
-              "type": "string",
-              "title": "Footnote",
-              "minLength": 0,
-              "@mapping": "shapedb:TableBlock.Footnote"
             }
           }
         }
