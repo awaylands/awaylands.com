@@ -1311,11 +1311,12 @@ body.body--story {
   background: var(--story-cream);
   color: var(--story-blue);
   font-family: Montserrat, Helvetica, sans-serif;
+  font-weight: 700;
 }
 
 .story-article__body .story-table th,
 .story-article__body .story-table td {
-  border-color: rgba(22, 110, 120, 0.16);
+  border: 1px solid rgba(22, 110, 120, 0.16);
   font-family: 'Still EB Garamond', Georgia, serif;
   font-size: 1.6rem;
   letter-spacing: 0;

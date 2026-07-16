@@ -1372,7 +1372,58 @@ function prepareAdvancedStoryPreview(el) {
   positionAdvancedMobileRail(storyPage);
 }
 
+function buildPastedStoryTables(el) {
+  const sources = el.querySelectorAll('[data-story-table-paste]');
+
+  Array.prototype.forEach.call(sources, source => {
+    const table = source.parentNode.querySelector('[data-story-table-target]');
+    const requestedColumns = parseInt(source.getAttribute('data-columns'), 10);
+    const columnCount = Math.max(1, requestedColumns || 3);
+    const values = (source.textContent || '')
+      .split(/\r?\n|\t/)
+      .map(value => value.replace(/\s+/g, ' ').trim())
+      .filter(Boolean);
+
+    if (!table || values.length < columnCount) {
+      return;
+    }
+
+    const head = document.createElement('thead');
+    const headingRow = document.createElement('tr');
+
+    values.slice(0, columnCount).forEach(value => {
+      const heading = document.createElement('th');
+      heading.setAttribute('scope', 'col');
+      heading.textContent = value;
+      headingRow.appendChild(heading);
+    });
+
+    head.appendChild(headingRow);
+
+    const body = document.createElement('tbody');
+    const cells = values.slice(columnCount);
+
+    for (let index = 0; index < cells.length; index += columnCount) {
+      const row = document.createElement('tr');
+
+      for (let column = 0; column < columnCount; column += 1) {
+        const cell = document.createElement('td');
+        cell.textContent = cells[index + column] || '';
+        row.appendChild(cell);
+      }
+
+      body.appendChild(row);
+    }
+
+    table.innerHTML = '';
+    table.appendChild(head);
+    table.appendChild(body);
+    source.parentNode.removeChild(source);
+  });
+}
+
 function prepareStory(el) {
+  buildPastedStoryTables(el);
   normalizeInlineLinkSpaces(el);
   normalizeStoryLinks(el);
   normalizeStoryHeadings(el);

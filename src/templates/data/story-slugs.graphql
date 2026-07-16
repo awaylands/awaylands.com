@@ -95,6 +95,8 @@ query($images: TSImagesConfig) {
         ... on TableBlock {
           title
           dek
+          pastedText
+          columnCount
           headersText
           rowsText
           footnote
