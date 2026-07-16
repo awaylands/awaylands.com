@@ -1,0 +1,5494 @@
+{
+  "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
+  "defaultLocale": "en",
+  "locales": [
+    "en"
+  ],
+  "workflows": {},
+  "apiVersion": "2",
+  "forms": {
+    "FilmsSocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "Films": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "featuredFilms": {
+            "widget": "relationship"
+          },
+          "social": {
+            "widget": "shapeObject"
+          },
+          "filmCategories": {
+            "widget": "relationship"
+          }
+        },
+        "order": [
+          "title",
+          "filmCategories",
+          "featuredFilms",
+          "social"
+        ]
+      }
+    },
+    "NavigationSocial": {
+      "default": {
+        "properties": {
+          "instagramUrl": {
+            "widget": "singleLineText"
+          },
+          "facebookUrl": {
+            "widget": "singleLineText"
+          },
+          "pinterestUrl": {
+            "widget": "singleLineText"
+          },
+          "youTubeUrl": {
+            "widget": "singleLineText"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "instagramUrl",
+          "youTubeUrl",
+          "facebookUrl",
+          "pinterestUrl"
+        ]
+      }
+    },
+    "Navigation": {
+      "default": {
+        "properties": {
+          "social": {
+            "widget": "shapeObject"
+          },
+          "links": {
+            "widget": "shapeArray"
+          }
+        },
+        "order": [
+          "links",
+          "social"
+        ]
+      }
+    },
+    "NavigationLinks": {
+      "default": {
+        "properties": {
+          "children": {
+            "instructions": "Optionally specify sublinks to one or more category pages",
+            "widget": "relationship"
+          },
+          "url": {
+            "widget": "singleLineText"
+          },
+          "text": {
+            "widget": "singleLineText"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "text",
+          "url",
+          "children"
+        ]
+      }
+    },
+    "SiteSettings": {
+      "default": {
+        "properties": {
+          "googleAnalyticsId": {
+            "widget": "singleLineText"
+          }
+        },
+        "order": [
+          "googleAnalyticsId"
+        ]
+      }
+    },
+    "HomepageSlider": {
+      "default": {
+        "properties": {
+          "slides": {
+            "widget": "shapeArray"
+          },
+          "interval": {
+            "instructions": "Time between slide transitions (in milliseconds, default 5000)",
+            "widget": "number"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "interval",
+          "slides"
+        ]
+      }
+    },
+    "Homepage": {
+      "default": {
+        "properties": {
+          "recentEntries": {
+            "widget": "relationship"
+          },
+          "slider": {
+            "widget": "shapeObject"
+          },
+          "social": {
+            "widget": "shapeObject"
+          }
+        },
+        "order": [
+          "slider",
+          "recentEntries",
+          "social"
+        ]
+      }
+    },
+    "HomepageSliderSlides": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image"
+          },
+          "caption": {
+            "widget": "shapeObject"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "image",
+          "caption"
+        ]
+      }
+    },
+    "HomepageSliderSlidesCaption": {
+      "default": {
+        "properties": {
+          "url": {
+            "widget": "singleLineText"
+          },
+          "text": {
+            "widget": "singleLineText"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "text",
+          "url"
+        ]
+      }
+    },
+    "HomepageSocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "image": {
+            "widget": "image"
+          },
+          "description": {
+            "widget": "paragraphText"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "FooterVisuals": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image"
+          },
+          "label": {
+            "widget": "singleLineText"
+          },
+          "type": {
+            "widget": "dropdown"
+          },
+          "url": {
+            "widget": "singleLineText"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "image",
+          "type",
+          "label",
+          "url"
+        ]
+      }
+    },
+    "Footer": {
+      "default": {
+        "properties": {
+          "contacts": {
+            "widget": "shapeArray"
+          },
+          "formEndpoint": {
+            "widget": "singleLineText"
+          }
+        },
+        "order": [
+          "contacts",
+          "formEndpoint"
+        ]
+      }
+    },
+    "FooterContacts": {
+      "default": {
+        "properties": {
+          "email": {
+            "widget": "singleLineText"
+          },
+          "label": {
+            "widget": "singleLineText"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "label",
+          "email"
+        ]
+      }
+    },
+    "SocialSettings": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "siteName": {
+            "widget": "singleLineText"
+          },
+          "url": {
+            "widget": "singleLineText"
+          }
+        },
+        "order": [
+          "siteName",
+          "description",
+          "url",
+          "image"
+        ]
+      }
+    },
+    "Asset": {
+      "default": {
+        "properties": {
+          "sourceUrl": {
+            "disabled": true,
+            "widget": "singleLineText"
+          },
+          "path": {
+            "disabled": true,
+            "widget": "singleLineText"
+          },
+          "filename": {
+            "disabled": true,
+            "widget": "singleLineText"
+          },
+          "description": {
+            "disabled": true,
+            "widget": "paragraphText"
+          },
+          "caption": {
+            "disabled": true,
+            "widget": "wysiwygSingleLineText"
+          },
+          "uploadStatus": {
+            "disabled": true,
+            "widget": "singleLineText"
+          },
+          "mimeType": {
+            "disabled": true,
+            "widget": "singleLineText"
+          },
+          "title": {
+            "disabled": true,
+            "widget": "singleLineText"
+          },
+          "credit": {
+            "disabled": true,
+            "widget": "wysiwygSingleLineText"
+          }
+        },
+        "order": [
+          "title",
+          "description",
+          "caption",
+          "credit",
+          "filename",
+          "path",
+          "mimeType",
+          "uploadStatus",
+          "sourceUrl"
+        ]
+      }
+    },
+    "StillCategorySocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "StillCategory": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "social": {
+            "widget": "shapeObject"
+          },
+          "stills": {
+            "widget": "shapeArray"
+          }
+        },
+        "order": [
+          "title",
+          "stills",
+          "social"
+        ]
+      }
+    },
+    "StillCategoryStills": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "image"
+        ]
+      }
+    },
+    "StillStills": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "image"
+        ]
+      }
+    },
+    "Still": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "headerPhoto": {
+            "widget": "image"
+          },
+          "gallery1Photo": {
+            "widget": "image"
+          },
+          "gallery2Photo": {
+            "widget": "image"
+          },
+          "gallery3Photo": {
+            "widget": "image"
+          },
+          "gallery4Photo": {
+            "widget": "image"
+          },
+          "gallery5Photo": {
+            "widget": "image"
+          },
+          "gallery6Photo": {
+            "widget": "image"
+          },
+          "gallery7Photo": {
+            "widget": "image"
+          },
+          "gallery8Photo": {
+            "widget": "image"
+          },
+          "stillCategories": {
+            "widget": "relationship"
+          },
+          "social": {
+            "widget": "shapeObject"
+          }
+        },
+        "order": [
+          "title",
+          "headerPhoto",
+          "gallery1Photo",
+          "gallery2Photo",
+          "gallery3Photo",
+          "gallery4Photo",
+          "gallery5Photo",
+          "gallery6Photo",
+          "gallery7Photo",
+          "gallery8Photo",
+          "stillCategories",
+          "social"
+        ]
+      }
+    },
+    "StillSocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "LocationSocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "image": {
+            "widget": "image"
+          },
+          "description": {
+            "widget": "paragraphText"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "Location": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "image": {
+            "widget": "image"
+          },
+          "social": {
+            "widget": "shapeObject"
+          }
+        },
+        "order": [
+          "title",
+          "image",
+          "social"
+        ]
+      }
+    },
+    "AboutClients": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "logos": {
+            "widget": "shapeArray"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "heading",
+          "logos"
+        ]
+      }
+    },
+    "About": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "photostrip": {
+            "widget": "shapeArray"
+          },
+          "about": {
+            "widget": "shapeObject"
+          },
+          "press": {
+            "widget": "shapeObject"
+          },
+          "clients": {
+            "widget": "shapeObject"
+          },
+          "team": {
+            "widget": "shapeObject"
+          },
+          "social": {
+            "widget": "shapeObject"
+          }
+        },
+        "order": [
+          "title",
+          "photostrip",
+          "about",
+          "press",
+          "clients",
+          "team",
+          "social"
+        ]
+      }
+    },
+    "AboutClientsLogos": {
+      "default": {
+        "properties": {
+          "name": {
+            "widget": "singleLineText"
+          },
+          "image": {
+            "widget": "image"
+          },
+          "url": {
+            "widget": "singleLineText"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "name",
+          "image",
+          "url"
+        ]
+      }
+    },
+    "AboutSocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "image": {
+            "widget": "image"
+          },
+          "description": {
+            "widget": "paragraphText"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "AboutAbout": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "content": {
+            "widget": "wysiwygText"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "heading",
+          "content"
+        ]
+      }
+    },
+    "AboutTeam": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "members": {
+            "widget": "shapeArray"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "heading",
+          "members"
+        ]
+      }
+    },
+    "AboutTeamMembers": {
+      "default": {
+        "properties": {
+          "about": {
+            "widget": "wysiwygText"
+          },
+          "name": {
+            "widget": "singleLineText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "image",
+          "name",
+          "about"
+        ]
+      }
+    },
+    "AboutPress": {
+      "default": {
+        "properties": {
+          "heading": {
+            "widget": "singleLineText"
+          },
+          "items": {
+            "widget": "shapeArray"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "heading",
+          "items"
+        ]
+      }
+    },
+    "AboutPressItems": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image"
+          },
+          "source": {
+            "widget": "singleLineText"
+          },
+          "title": {
+            "widget": "singleLineText"
+          },
+          "url": {
+            "widget": "singleLineText"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "image",
+          "source",
+          "title",
+          "url"
+        ]
+      }
+    },
+    "AboutPhotostrip": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "image"
+        ]
+      }
+    },
+    "Film": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image"
+          },
+          "filmCategory": {
+            "widget": "relationship"
+          },
+          "title": {
+            "widget": "singleLineText"
+          },
+          "youTubeUrl": {
+            "widget": "singleLineText"
+          }
+        },
+        "order": [
+          "title",
+          "filmCategory",
+          "image",
+          "youTubeUrl"
+        ]
+      }
+    },
+    "BlogSocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "Blog": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "social": {
+            "widget": "shapeObject"
+          },
+          "featuredStory": {
+            "widget": "relationship"
+          },
+          "categories": {
+            "widget": "relationship"
+          }
+        },
+        "order": [
+          "title",
+          "featuredStory",
+          "categories",
+          "social"
+        ]
+      }
+    },
+    "Story": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "publishedDate": {
+            "widget": "datetime"
+          },
+          "slug": {
+            "widget": "singleLineText"
+          },
+          "tout": {
+            "widget": "shapeObject"
+          },
+          "category": {
+            "widget": "relationship"
+          },
+          "location": {
+            "widget": "relationship"
+          },
+          "postType": {
+            "widget": "dropdown",
+            "instructions": "Auto is recommended. It detects quick answers, guides, reviews, and shopping posts; choose a type to override it."
+          },
+          "pageLayout": {
+            "widget": "dropdown",
+            "instructions": "Auto adds a sidebar to longer guides, reviews, and shopping posts. Simple and Sidebar are manual overrides."
+          },
+          "shopEditTitle": {
+            "widget": "singleLineText",
+            "instructions": "Optional. Defaults to Shop The Edit; enter a custom title for this post's editor shortlist."
+          },
+          "content": {
+            "widget": "wysiwygText",
+            "instructions": "Paste or write the main text here. Use Story Blocks below for images, galleries, tables, and precise layout control."
+          },
+          "contentBlocks": {
+            "widget": "shapeArray",
+            "instructions": "Drag blocks to reorder. Image and Gallery blocks expose size, alignment, caption, alt text, and link controls in one place."
+          },
+          "relatedStories": {
+            "widget": "relationship"
+          },
+          "social": {
+            "widget": "shapeObject"
+          },
+          "mainHtmlBlock1": {
+            "widget": "paragraphText"
+          },
+          "mainContentBlock1": {
+            "widget": "wysiwygText"
+          },
+          "additionalMainBlocks": {
+            "widget": "shapeObject"
+          }
+        },
+        "order": [
+          "title",
+          "publishedDate",
+          "slug",
+          "tout",
+          "category",
+          "location",
+          "postType",
+          "pageLayout",
+          "shopEditTitle",
+          "content",
+          "mainHtmlBlock1",
+          "mainContentBlock1",
+          "additionalMainBlocks",
+          "contentBlocks",
+          "relatedStories",
+          "social"
+        ]
+      }
+    },
+    "DestinationsSocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "Destinations": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "pageTitle": {
+            "widget": "singleLineText"
+          },
+          "heroIntervalSeconds": {
+            "widget": "number"
+          },
+          "heroPrevArrowIcon": {
+            "widget": "image"
+          },
+          "heroNextArrowIcon": {
+            "widget": "image"
+          },
+          "heroPostcards": {
+            "widget": "shapeArray"
+          },
+          "searchHeading": {
+            "widget": "singleLineText"
+          },
+          "searchPlaceholder": {
+            "widget": "singleLineText"
+          },
+          "mapHeading": {
+            "widget": "singleLineText"
+          },
+          "featuredDestinationLabel": {
+            "widget": "singleLineText"
+          },
+          "featuredDestinationTitle": {
+            "widget": "singleLineText"
+          },
+          "featuredDestinationImage": {
+            "widget": "image"
+          },
+          "featuredDestinationStampGraphic": {
+            "widget": "image"
+          },
+          "featuredDestinationLemonGraphic": {
+            "widget": "image"
+          },
+          "featuredDestinationCards": {
+            "widget": "shapeArray"
+          },
+          "cardsHeading": {
+            "widget": "singleLineText"
+          },
+          "destinationCards": {
+            "widget": "shapeArray"
+          },
+          "endingKicker": {
+            "widget": "singleLineText"
+          },
+          "endingTitle": {
+            "widget": "singleLineText"
+          },
+          "endingImage": {
+            "widget": "image"
+          },
+          "endingLinks": {
+            "widget": "shapeArray"
+          },
+          "social": {
+            "widget": "shapeObject"
+          }
+        },
+        "order": [
+          "title",
+          "pageTitle",
+          "heroIntervalSeconds",
+          "heroPrevArrowIcon",
+          "heroNextArrowIcon",
+          "heroPostcards",
+          "searchHeading",
+          "searchPlaceholder",
+          "mapHeading",
+          "featuredDestinationLabel",
+          "featuredDestinationTitle",
+          "featuredDestinationImage",
+          "featuredDestinationStampGraphic",
+          "featuredDestinationLemonGraphic",
+          "featuredDestinationCards",
+          "cardsHeading",
+          "destinationCards",
+          "endingKicker",
+          "endingTitle",
+          "endingImage",
+          "endingLinks",
+          "social"
+        ]
+      }
+    },
+    "FilmCategorySocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "FilmCategory": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "social": {
+            "widget": "shapeObject"
+          }
+        },
+        "order": [
+          "title",
+          "social"
+        ]
+      }
+    },
+    "CategorySocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "Category": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "social": {
+            "widget": "shapeObject"
+          }
+        },
+        "order": [
+          "title",
+          "social"
+        ]
+      }
+    },
+    "ContinentSocial": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "widget": "object",
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "Continent": {
+      "default": {
+        "properties": {
+          "name": {
+            "widget": "singleLineText"
+          },
+          "social": {
+            "widget": "shapeObject"
+          },
+          "locations": {
+            "widget": "relationship"
+          }
+        },
+        "order": [
+          "name",
+          "social"
+        ]
+      }
+    },
+    "ContentBlock": {
+      "default": {
+        "properties": {
+          "content": {
+            "widget": "wysiwygText"
+          }
+        },
+        "order": [
+          "content"
+        ]
+      }
+    },
+    "HtmlBlock": {
+      "default": {
+        "properties": {
+          "label": {
+            "widget": "singleLineText",
+            "instructions": "Internal note only. This will not appear on the website."
+          },
+          "html": {
+            "widget": "paragraphText"
+          }
+        },
+        "order": [
+          "label",
+          "html"
+        ]
+      }
+    },
+    "TableBlock": {
+      "default": {
+        "properties": {
+          "label": {
+            "widget": "singleLineText",
+            "instructions": "Internal note only. This will not appear on the website."
+          },
+          "title": {
+            "widget": "singleLineText"
+          },
+          "dek": {
+            "widget": "paragraphText",
+            "instructions": "Optional short intro shown above the table."
+          },
+          "headersText": {
+            "widget": "paragraphText",
+            "instructions": "Optional. Put one column header per line."
+          },
+          "rowsText": {
+            "widget": "paragraphText",
+            "instructions": "Put one row per line. Separate cells with a vertical bar, like: Item | Best For | Price"
+          },
+          "footnote": {
+            "widget": "paragraphText",
+            "instructions": "Optional note shown below the table."
+          }
+        },
+        "order": [
+          "label",
+          "title",
+          "dek",
+          "headersText",
+          "rowsText",
+          "footnote"
+        ]
+      }
+    },
+    "StoryTout": {
+      "default": {
+        "widget": "shapeObject",
+        "properties": {
+          "image": {
+            "widget": "image"
+          },
+          "secondaryImage": {
+            "widget": "image"
+          },
+          "dek": {
+            "widget": "paragraphText"
+          }
+        },
+        "order": [
+          "image",
+          "secondaryImage",
+          "dek"
+        ]
+      }
+    },
+    "StorySocial": {
+      "default": {
+        "widget": "shapeObject",
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "description": {
+            "widget": "paragraphText"
+          },
+          "image": {
+            "widget": "image"
+          }
+        },
+        "order": [
+          "title",
+          "description",
+          "image"
+        ]
+      }
+    },
+    "Ads": {
+      "default": {
+        "properties": {
+          "ads": {
+            "widget": "paragraphText"
+          }
+        },
+        "order": [
+          "ads"
+        ]
+      }
+    },
+    "StoryAdditionalBlocks": {
+      "default": {
+        "properties": {
+          "mainHtmlBlock2": {
+            "widget": "paragraphText"
+          },
+          "mainContentBlock2": {
+            "widget": "wysiwygText"
+          },
+          "mainHtmlBlock3": {
+            "widget": "paragraphText"
+          },
+          "mainContentBlock3": {
+            "widget": "wysiwygText"
+          },
+          "mainHtmlBlock4": {
+            "widget": "paragraphText"
+          },
+          "mainContentBlock4": {
+            "widget": "wysiwygText"
+          },
+          "mainHtmlBlock5": {
+            "widget": "paragraphText"
+          },
+          "mainContentBlock5": {
+            "widget": "wysiwygText"
+          },
+          "mainHtmlBlock6": {
+            "widget": "paragraphText"
+          },
+          "mainContentBlock6": {
+            "widget": "wysiwygText"
+          }
+        },
+        "order": [
+          "mainHtmlBlock2",
+          "mainContentBlock2",
+          "mainHtmlBlock3",
+          "mainContentBlock3",
+          "mainHtmlBlock4",
+          "mainContentBlock4",
+          "mainHtmlBlock5",
+          "mainContentBlock5",
+          "mainHtmlBlock6",
+          "mainContentBlock6"
+        ]
+      }
+    },
+    "Privacy": {
+      "default": {
+        "properties": {
+          "content": {
+            "widget": "wysiwygText"
+          }
+        },
+        "order": [
+          "content"
+        ]
+      }
+    },
+    "DestinationsPostcard": {
+      "default": {
+        "widget": "repeater",
+        "properties": {
+          "linkUrl": {
+            "widget": "singleLineText"
+          },
+          "heroImage": {
+            "widget": "image"
+          },
+          "photoPostcardImage": {
+            "widget": "image"
+          },
+          "paperPostcardImage": {
+            "widget": "image"
+          },
+          "location": {
+            "widget": "singleLineText"
+          },
+          "dateText": {
+            "widget": "singleLineText"
+          },
+          "noteText": {
+            "widget": "textArea"
+          }
+        },
+        "order": [
+          "linkUrl",
+          "heroImage",
+          "photoPostcardImage",
+          "paperPostcardImage",
+          "location",
+          "dateText",
+          "noteText"
+        ]
+      }
+    },
+    "DestinationsPhotoCard": {
+      "default": {
+        "widget": "repeater",
+        "properties": {
+          "title": {
+            "widget": "singleLineText"
+          },
+          "url": {
+            "widget": "singleLineText"
+          },
+          "image": {
+            "widget": "image"
+          },
+          "graphicImage": {
+            "widget": "image"
+          }
+        },
+        "order": [
+          "title",
+          "url",
+          "image",
+          "graphicImage"
+        ]
+      }
+    },
+    "DestinationsEndingLink": {
+      "default": {
+        "widget": "repeater",
+        "properties": {
+          "label": {
+            "widget": "singleLineText"
+          },
+          "url": {
+            "widget": "singleLineText"
+          }
+        },
+        "order": [
+          "label",
+          "url"
+        ]
+      }
+    },
+    "StoryImageBlock": {
+      "default": {
+        "properties": {
+          "label": {
+            "widget": "singleLineText",
+            "instructions": "Optional internal note. This is only for finding the block quickly in the editor."
+          },
+          "image": {
+            "widget": "image",
+            "instructions": "Drag an image here from the asset panel, or choose/replace it."
+          },
+          "size": {
+            "widget": "dropdown",
+            "instructions": "Auto is recommended. Use a manual size only when the image needs deliberate emphasis."
+          },
+          "alignment": {
+            "widget": "dropdown",
+            "instructions": "Auto centers images. Left and right are most useful for Small and Medium images."
+          },
+          "caption": {
+            "widget": "paragraphText"
+          },
+          "altText": {
+            "widget": "singleLineText",
+            "instructions": "Optional. When blank, the site creates alt text from the caption or filename."
+          },
+          "linkUrl": {
+            "widget": "singleLineText",
+            "instructions": "Optional. Paste the complete destination URL; surrounding spaces are removed automatically."
+          },
+          "linkTarget": {
+            "widget": "dropdown",
+            "instructions": "External/new tab is the default when left blank."
+          }
+        },
+        "order": [
+          "label",
+          "image",
+          "size",
+          "alignment",
+          "caption",
+          "altText",
+          "linkUrl",
+          "linkTarget"
+        ]
+      }
+    },
+    "StoryGalleryItem": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image",
+            "instructions": "Drag an image here from the asset panel."
+          },
+          "caption": {
+            "widget": "paragraphText"
+          },
+          "altText": {
+            "widget": "singleLineText"
+          },
+          "linkUrl": {
+            "widget": "singleLineText",
+            "instructions": "Optional. Image links open externally by default."
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "image",
+          "caption",
+          "altText",
+          "linkUrl"
+        ]
+      }
+    },
+    "StoryGalleryBlock": {
+      "default": {
+        "properties": {
+          "label": {
+            "widget": "singleLineText",
+            "instructions": "Optional internal note."
+          },
+          "layout": {
+            "widget": "dropdown",
+            "instructions": "Auto uses the number and orientation of the photos."
+          },
+          "size": {
+            "widget": "dropdown",
+            "instructions": "Wide is the default for galleries."
+          },
+          "images": {
+            "widget": "shapeArray",
+            "instructions": "Drag to reorder images."
+          }
+        },
+        "order": [
+          "label",
+          "layout",
+          "size",
+          "images"
+        ]
+      }
+    }
+  },
+  "queries": {
+    "getFilms": {
+      "args": "TSGetSingletonArgs<Films>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Films"
+      },
+      "shape": "Films",
+      "description": "Get a Films by ID"
+    },
+    "getNavigation": {
+      "args": "TSGetSingletonArgs<Navigation>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Navigation"
+      },
+      "shape": "Navigation",
+      "description": "Get a Navigation by ID"
+    },
+    "getSiteSettings": {
+      "args": "TSGetSingletonArgs<SiteSettings>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "SiteSettings"
+      },
+      "shape": "SiteSettings",
+      "description": "Get a SiteSettings by ID"
+    },
+    "getHomepage": {
+      "args": "TSGetSingletonArgs<Homepage>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Homepage"
+      },
+      "shape": "Homepage",
+      "description": "Get a Homepage by ID"
+    },
+    "getFooter": {
+      "args": "TSGetSingletonArgs<Footer>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Footer"
+      },
+      "shape": "Footer",
+      "description": "Get a Footer by ID"
+    },
+    "getSocialSettings": {
+      "args": "TSGetSingletonArgs<SocialSettings>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "SocialSettings"
+      },
+      "shape": "SocialSettings",
+      "description": "Get a SocialSettings by ID"
+    },
+    "getAsset": {
+      "args": "TSGetArgs<Asset>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Asset"
+      },
+      "shape": "Asset",
+      "description": "Get a Asset by ID"
+    },
+    "getAssetList": {
+      "args": "TSListArgs<Asset>",
+      "resolver": {
+        "name": "shapedb:list",
+        "service": "shapedb",
+        "shapeName": "Asset"
+      },
+      "shape": "PaginatedList<Asset>",
+      "description": "Returns a list Asset in natural order."
+    },
+    "getStillCategory": {
+      "args": "TSGetArgs<StillCategory>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "StillCategory"
+      },
+      "shape": "StillCategory",
+      "description": "Get a StillCategory by ID"
+    },
+    "getStillCategoryList": {
+      "args": "TSListArgs<StillCategory>",
+      "resolver": {
+        "name": "shapedb:list",
+        "service": "shapedb",
+        "shapeName": "StillCategory"
+      },
+      "shape": "PaginatedList<StillCategory>",
+      "description": "Returns a list StillCategory in natural order."
+    },
+    "getStill": {
+      "args": "TSGetSingletonArgs<Still>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Still"
+      },
+      "shape": "Still",
+      "description": "Get a Still by ID"
+    },
+    "getLocation": {
+      "args": "TSGetArgs<Location>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Location"
+      },
+      "shape": "Location",
+      "description": "Get a Location by ID"
+    },
+    "getLocationList": {
+      "args": "TSListArgs<Location>",
+      "resolver": {
+        "name": "shapedb:list",
+        "service": "shapedb",
+        "shapeName": "Location"
+      },
+      "shape": "PaginatedList<Location>",
+      "description": "Returns a list Location in natural order."
+    },
+    "getAbout": {
+      "args": "TSGetSingletonArgs<About>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "About"
+      },
+      "shape": "About",
+      "description": "Get a About by ID"
+    },
+    "getFilm": {
+      "args": "TSGetArgs<Film>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Film"
+      },
+      "shape": "Film",
+      "description": "Get a Film by ID"
+    },
+    "getFilmList": {
+      "args": "TSListArgs<Film>",
+      "resolver": {
+        "name": "shapedb:list",
+        "service": "shapedb",
+        "shapeName": "Film"
+      },
+      "shape": "PaginatedList<Film>",
+      "description": "Returns a list Film in natural order."
+    },
+    "getBlog": {
+      "args": "TSGetSingletonArgs<Blog>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Blog"
+      },
+      "shape": "Blog",
+      "description": "Get a Blog by ID"
+    },
+    "getStory": {
+      "shape": "Story",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Story"
+      },
+      "description": "Get a Story by ID",
+      "args": "TSGetArgs<Story>"
+    },
+    "getStoryList": {
+      "shape": "PaginatedList<Story>",
+      "resolver": {
+        "name": "shapedb:list",
+        "service": "shapedb",
+        "shapeName": "Story"
+      },
+      "description": "Returns a list Story in natural order.",
+      "args": "TSListArgs<Story>"
+    },
+    "getDestinations": {
+      "args": "TSGetSingletonArgs<Destinations>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Destinations"
+      },
+      "shape": "Destinations",
+      "description": "Get a Destinations by ID"
+    },
+    "getFilmCategory": {
+      "args": "TSGetArgs<FilmCategory>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "FilmCategory"
+      },
+      "shape": "FilmCategory",
+      "description": "Get a FilmCategory by ID"
+    },
+    "getFilmCategoryList": {
+      "args": "TSListArgs<FilmCategory>",
+      "resolver": {
+        "name": "shapedb:list",
+        "service": "shapedb",
+        "shapeName": "FilmCategory"
+      },
+      "shape": "PaginatedList<FilmCategory>",
+      "description": "Returns a list FilmCategory in natural order."
+    },
+    "getCategory": {
+      "args": "TSGetArgs<Category>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Category"
+      },
+      "shape": "Category",
+      "description": "Get a Category by ID"
+    },
+    "getCategoryList": {
+      "args": "TSListArgs<Category>",
+      "resolver": {
+        "name": "shapedb:list",
+        "service": "shapedb",
+        "shapeName": "Category"
+      },
+      "shape": "PaginatedList<Category>",
+      "description": "Returns a list Category in natural order."
+    },
+    "getContinent": {
+      "args": "TSGetArgs<Continent>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Continent"
+      },
+      "shape": "Continent",
+      "description": "Get a Continent by ID"
+    },
+    "getContinentList": {
+      "args": "TSListArgs<Continent>",
+      "resolver": {
+        "name": "shapedb:list",
+        "service": "shapedb",
+        "shapeName": "Continent"
+      },
+      "shape": "PaginatedList<Continent>",
+      "description": "Returns a list Continent in natural order."
+    },
+    "getAds": {
+      "shape": "Ads",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Ads"
+      },
+      "description": "Get a Ads by ID",
+      "args": "TSGetArgs<Ads>"
+    },
+    "getPrivacy": {
+      "shape": "Privacy",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "Privacy"
+      },
+      "description": "Get a Privacy by ID",
+      "args": "TSGetArgs<Privacy>"
+    }
+  },
+  "mutations": {
+    "updateFilms": {
+      "args": "UpdateArgs<Films>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Films"
+      },
+      "shape": "UpdateResult<Films>",
+      "description": "Update Films"
+    },
+    "updateNavigation": {
+      "args": "UpdateArgs<Navigation>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Navigation"
+      },
+      "shape": "UpdateResult<Navigation>",
+      "description": "Update Navigation"
+    },
+    "updateSiteSettings": {
+      "args": "UpdateArgs<SiteSettings>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "SiteSettings"
+      },
+      "shape": "UpdateResult<SiteSettings>",
+      "description": "Update SiteSettings"
+    },
+    "updateHomepage": {
+      "args": "UpdateArgs<Homepage>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Homepage"
+      },
+      "shape": "UpdateResult<Homepage>",
+      "description": "Update Homepage"
+    },
+    "updateFooter": {
+      "args": "UpdateArgs<Footer>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Footer"
+      },
+      "shape": "UpdateResult<Footer>",
+      "description": "Update Footer"
+    },
+    "updateSocialSettings": {
+      "args": "UpdateArgs<SocialSettings>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "SocialSettings"
+      },
+      "shape": "UpdateResult<SocialSettings>",
+      "description": "Update SocialSettings"
+    },
+    "updateAsset": {
+      "args": "UpdateArgs<Asset>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Asset"
+      },
+      "shape": "UpdateResult<Asset>",
+      "description": "Update Asset"
+    },
+    "createAsset": {
+      "args": "CreateArgs<Asset>",
+      "resolver": {
+        "name": "shapedb:create",
+        "service": "shapedb",
+        "shapeName": "Asset"
+      },
+      "shape": "CreateResult<Asset>",
+      "description": "Create Asset"
+    },
+    "duplicateAsset": {
+      "args": "DuplicateArgs<Asset>",
+      "resolver": {
+        "name": "shapedb:duplicate",
+        "service": "shapedb",
+        "shapeName": "Asset"
+      },
+      "shape": "DuplicateResult<Asset>",
+      "description": "Duplicate Asset"
+    },
+    "deleteAsset": {
+      "args": "DeleteArgs<Asset>",
+      "resolver": {
+        "name": "shapedb:delete",
+        "service": "shapedb",
+        "shapeName": "Asset"
+      },
+      "shape": "DeleteResult<Asset>",
+      "description": "Delete Asset"
+    },
+    "updateStillCategory": {
+      "args": "UpdateArgs<StillCategory>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "StillCategory"
+      },
+      "shape": "UpdateResult<StillCategory>",
+      "description": "Update StillCategory"
+    },
+    "createStillCategory": {
+      "args": "CreateArgs<StillCategory>",
+      "resolver": {
+        "name": "shapedb:create",
+        "service": "shapedb",
+        "shapeName": "StillCategory"
+      },
+      "shape": "CreateResult<StillCategory>",
+      "description": "Create StillCategory"
+    },
+    "duplicateStillCategory": {
+      "args": "DuplicateArgs<StillCategory>",
+      "resolver": {
+        "name": "shapedb:duplicate",
+        "service": "shapedb",
+        "shapeName": "StillCategory"
+      },
+      "shape": "DuplicateResult<StillCategory>",
+      "description": "Duplicate StillCategory"
+    },
+    "deleteStillCategory": {
+      "args": "DeleteArgs<StillCategory>",
+      "resolver": {
+        "name": "shapedb:delete",
+        "service": "shapedb",
+        "shapeName": "StillCategory"
+      },
+      "shape": "DeleteResult<StillCategory>",
+      "description": "Delete StillCategory"
+    },
+    "updateStill": {
+      "args": "UpdateArgs<Still>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Still"
+      },
+      "shape": "UpdateResult<Still>",
+      "description": "Update Still"
+    },
+    "updateLocation": {
+      "args": "UpdateArgs<Location>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Location"
+      },
+      "shape": "UpdateResult<Location>",
+      "description": "Update Location"
+    },
+    "createLocation": {
+      "args": "CreateArgs<Location>",
+      "resolver": {
+        "name": "shapedb:create",
+        "service": "shapedb",
+        "shapeName": "Location"
+      },
+      "shape": "CreateResult<Location>",
+      "description": "Create Location"
+    },
+    "duplicateLocation": {
+      "args": "DuplicateArgs<Location>",
+      "resolver": {
+        "name": "shapedb:duplicate",
+        "service": "shapedb",
+        "shapeName": "Location"
+      },
+      "shape": "DuplicateResult<Location>",
+      "description": "Duplicate Location"
+    },
+    "deleteLocation": {
+      "args": "DeleteArgs<Location>",
+      "resolver": {
+        "name": "shapedb:delete",
+        "service": "shapedb",
+        "shapeName": "Location"
+      },
+      "shape": "DeleteResult<Location>",
+      "description": "Delete Location"
+    },
+    "updateAbout": {
+      "args": "UpdateArgs<About>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "About"
+      },
+      "shape": "UpdateResult<About>",
+      "description": "Update About"
+    },
+    "updateFilm": {
+      "args": "UpdateArgs<Film>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Film"
+      },
+      "shape": "UpdateResult<Film>",
+      "description": "Update Film"
+    },
+    "createFilm": {
+      "args": "CreateArgs<Film>",
+      "resolver": {
+        "name": "shapedb:create",
+        "service": "shapedb",
+        "shapeName": "Film"
+      },
+      "shape": "CreateResult<Film>",
+      "description": "Create Film"
+    },
+    "duplicateFilm": {
+      "args": "DuplicateArgs<Film>",
+      "resolver": {
+        "name": "shapedb:duplicate",
+        "service": "shapedb",
+        "shapeName": "Film"
+      },
+      "shape": "DuplicateResult<Film>",
+      "description": "Duplicate Film"
+    },
+    "deleteFilm": {
+      "args": "DeleteArgs<Film>",
+      "resolver": {
+        "name": "shapedb:delete",
+        "service": "shapedb",
+        "shapeName": "Film"
+      },
+      "shape": "DeleteResult<Film>",
+      "description": "Delete Film"
+    },
+    "updateBlog": {
+      "args": "UpdateArgs<Blog>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Blog"
+      },
+      "shape": "UpdateResult<Blog>",
+      "description": "Update Blog"
+    },
+    "updateStory": {
+      "shape": "UpdateResult<Story>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Story"
+      },
+      "description": "Update Story",
+      "args": "UpdateArgs<Story>"
+    },
+    "createStory": {
+      "shape": "CreateResult<Story>",
+      "resolver": {
+        "name": "shapedb:create",
+        "service": "shapedb",
+        "shapeName": "Story"
+      },
+      "description": "Create Story",
+      "args": "CreateArgs<Story>"
+    },
+    "duplicateStory": {
+      "shape": "DuplicateResult<Story>",
+      "resolver": {
+        "name": "shapedb:duplicate",
+        "service": "shapedb",
+        "shapeName": "Story"
+      },
+      "description": "Duplicate Story",
+      "args": "DuplicateArgs<Story>"
+    },
+    "deleteStory": {
+      "shape": "DeleteResult<Story>",
+      "resolver": {
+        "name": "shapedb:delete",
+        "service": "shapedb",
+        "shapeName": "Story"
+      },
+      "description": "Delete Story",
+      "args": "DeleteArgs<Story>"
+    },
+    "updateDestinations": {
+      "args": "UpdateArgs<Destinations>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Destinations"
+      },
+      "shape": "UpdateResult<Destinations>",
+      "description": "Update Destinations"
+    },
+    "updateFilmCategory": {
+      "args": "UpdateArgs<FilmCategory>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "FilmCategory"
+      },
+      "shape": "UpdateResult<FilmCategory>",
+      "description": "Update FilmCategory"
+    },
+    "createFilmCategory": {
+      "args": "CreateArgs<FilmCategory>",
+      "resolver": {
+        "name": "shapedb:create",
+        "service": "shapedb",
+        "shapeName": "FilmCategory"
+      },
+      "shape": "CreateResult<FilmCategory>",
+      "description": "Create FilmCategory"
+    },
+    "duplicateFilmCategory": {
+      "args": "DuplicateArgs<FilmCategory>",
+      "resolver": {
+        "name": "shapedb:duplicate",
+        "service": "shapedb",
+        "shapeName": "FilmCategory"
+      },
+      "shape": "DuplicateResult<FilmCategory>",
+      "description": "Duplicate FilmCategory"
+    },
+    "deleteFilmCategory": {
+      "args": "DeleteArgs<FilmCategory>",
+      "resolver": {
+        "name": "shapedb:delete",
+        "service": "shapedb",
+        "shapeName": "FilmCategory"
+      },
+      "shape": "DeleteResult<FilmCategory>",
+      "description": "Delete FilmCategory"
+    },
+    "updateCategory": {
+      "args": "UpdateArgs<Category>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Category"
+      },
+      "shape": "UpdateResult<Category>",
+      "description": "Update Category"
+    },
+    "createCategory": {
+      "args": "CreateArgs<Category>",
+      "resolver": {
+        "name": "shapedb:create",
+        "service": "shapedb",
+        "shapeName": "Category"
+      },
+      "shape": "CreateResult<Category>",
+      "description": "Create Category"
+    },
+    "duplicateCategory": {
+      "args": "DuplicateArgs<Category>",
+      "resolver": {
+        "name": "shapedb:duplicate",
+        "service": "shapedb",
+        "shapeName": "Category"
+      },
+      "shape": "DuplicateResult<Category>",
+      "description": "Duplicate Category"
+    },
+    "deleteCategory": {
+      "args": "DeleteArgs<Category>",
+      "resolver": {
+        "name": "shapedb:delete",
+        "service": "shapedb",
+        "shapeName": "Category"
+      },
+      "shape": "DeleteResult<Category>",
+      "description": "Delete Category"
+    },
+    "updateContinent": {
+      "args": "UpdateArgs<Continent>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Continent"
+      },
+      "shape": "UpdateResult<Continent>",
+      "description": "Update Continent"
+    },
+    "createContinent": {
+      "args": "CreateArgs<Continent>",
+      "resolver": {
+        "name": "shapedb:create",
+        "service": "shapedb",
+        "shapeName": "Continent"
+      },
+      "shape": "CreateResult<Continent>",
+      "description": "Create Continent"
+    },
+    "duplicateContinent": {
+      "args": "DuplicateArgs<Continent>",
+      "resolver": {
+        "name": "shapedb:duplicate",
+        "service": "shapedb",
+        "shapeName": "Continent"
+      },
+      "shape": "DuplicateResult<Continent>",
+      "description": "Duplicate Continent"
+    },
+    "deleteContinent": {
+      "args": "DeleteArgs<Continent>",
+      "resolver": {
+        "name": "shapedb:delete",
+        "service": "shapedb",
+        "shapeName": "Continent"
+      },
+      "shape": "DeleteResult<Continent>",
+      "description": "Delete Continent"
+    },
+    "updateAds": {
+      "shape": "UpdateResult<Ads>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Ads"
+      },
+      "description": "Update Ads",
+      "args": "UpdateArgs<Ads>"
+    },
+    "updatePrivacy": {
+      "shape": "UpdateResult<Privacy>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "Privacy"
+      },
+      "description": "Update Privacy",
+      "args": "UpdateArgs<Privacy>"
+    }
+  },
+  "shapes": {
+    "Films": {
+      "id": "B1yt8LeNb",
+      "name": "Films",
+      "title": "Films",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:Films.HyMIIIeNW"
+          },
+          "featuredFilms": {
+            "title": "Featured Films",
+            "@mapping": "shapedb:Films.SJkwUUe4-",
+            "items": {
+              "@ref": "local:Film"
+            },
+            "@backreference": {
+              "enabled": true
+            },
+            "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:Films.BJUvU8lEZ",
+            "$ref": "#/shapes/FilmsSocial/schema"
+          },
+          "filmCategories": {
+            "title": "Film Categories",
+            "@mapping": "shapedb:Films.Synq_X2Vb",
+            "items": {
+              "@ref": "local:FilmCategory"
+            },
+            "@backreference": {
+              "enabled": true
+            },
+            "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "FilmsSocial": {
+      "id": "BJUvU8lEZ",
+      "name": "FilmsSocial",
+      "title": "Films Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:FilmsSocial.SyqPLUlN-"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:FilmsSocial.Bk1uILl4b"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:FilmsSocial.SJFd8UxN-",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "Navigation": {
+      "id": "HkIUhQoeZ",
+      "name": "Navigation",
+      "title": "Navigation",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:Navigation.BkPFJY3fW",
+            "$ref": "#/shapes/NavigationSocial/schema"
+          },
+          "links": {
+            "type": "array",
+            "title": "Links",
+            "items": {
+              "$ref": "#/shapes/NavigationLinks/schema"
+            },
+            "@mapping": "shapedb:Navigation.HynX2XseW"
+          }
+        }
+      }
+    },
+    "NavigationSocial": {
+      "id": "BkPFJY3fW",
+      "name": "NavigationSocial",
+      "title": "Navigation Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "instagramUrl": {
+            "type": "string",
+            "title": "Instagram Url",
+            "minLength": 0,
+            "@mapping": "shapedb:NavigationSocial.Bks5JKnMW"
+          },
+          "facebookUrl": {
+            "type": "string",
+            "title": "Facebook URL",
+            "minLength": 0,
+            "@mapping": "shapedb:NavigationSocial.BkH21F3GW"
+          },
+          "pinterestUrl": {
+            "type": "string",
+            "title": "Pinterest URL",
+            "minLength": 0,
+            "@mapping": "shapedb:NavigationSocial.rJ63JKnG-"
+          },
+          "youTubeUrl": {
+            "type": "string",
+            "title": "YouTube Url",
+            "minLength": 0,
+            "@mapping": "shapedb:NavigationSocial.H17okK3zZ"
+          }
+        }
+      }
+    },
+    "NavigationLinks": {
+      "id": "HynX2XseW",
+      "name": "NavigationLinks",
+      "title": "Navigation Links",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "children": {
+            "title": "Children",
+            "@mapping": "shapedb:NavigationLinks.7wgfGMfBr",
+            "items": {
+              "oneOf": [
+                {
+                  "@ref": "local:Location"
+                },
+                {
+                  "@ref": "local:FilmCategory"
+                },
+                {
+                  "@ref": "local:StillCategory"
+                },
+                {
+                  "@ref": "local:Continent"
+                },
+                {
+                  "@ref": "local:Category"
+                }
+              ]
+            },
+            "@backreference": {
+              "enabled": true
+            },
+            "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "url": {
+            "type": "string",
+            "title": "URL",
+            "minLength": 0,
+            "@mapping": "shapedb:NavigationLinks.HyLSh7ox-"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text",
+            "minLength": 0,
+            "@mapping": "shapedb:NavigationLinks.SJMBhmieW"
+          }
+        }
+      }
+    },
+    "SiteSettings": {
+      "id": "ryYVzAdeZ",
+      "name": "SiteSettings",
+      "title": "Site Settings",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "googleAnalyticsId": {
+            "type": "string",
+            "title": "Google Analytics ID",
+            "minLength": 0,
+            "@mapping": "shapedb:SiteSettings.BkoXM0_e-"
+          }
+        }
+      }
+    },
+    "Homepage": {
+      "id": "Bk9_tIDjx",
+      "name": "Homepage",
+      "title": "Homepage",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "recentEntries": {
+            "title": "Recent Entries",
+            "@mapping": "shapedb:Homepage.SkL-ORKxb",
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@backreference": {
+              "enabled": true
+            },
+            "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "slider": {
+            "title": "Slider",
+            "@mapping": "shapedb:Homepage.SkgHMlqe-",
+            "$ref": "#/shapes/HomepageSlider/schema"
+          },
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:Homepage.SyVdyPn-Z",
+            "$ref": "#/shapes/HomepageSocial/schema"
+          }
+        }
+      }
+    },
+    "HomepageSliderSlidesCaption": {
+      "id": "rkjsI92fW",
+      "name": "HomepageSliderSlidesCaption",
+      "title": "Homepage Slider Slides Caption",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "title": "URL",
+            "minLength": 0,
+            "@mapping": "shapedb:HomepageSliderSlidesCaption.rJQhLqnG-"
+          },
+          "text": {
+            "type": "string",
+            "title": "Text",
+            "minLength": 0,
+            "@mapping": "shapedb:HomepageSliderSlidesCaption.SkLiFLwjl"
+          }
+        }
+      }
+    },
+    "HomepageSliderSlides": {
+      "id": "ByJ5tIwol",
+      "name": "HomepageSliderSlides",
+      "title": "Homepage Slider Slides",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:HomepageSliderSlides.S1zqtUDsl",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "caption": {
+            "title": "Caption",
+            "@mapping": "shapedb:HomepageSliderSlides.rkjsI92fW",
+            "$ref": "#/shapes/HomepageSliderSlidesCaption/schema"
+          }
+        }
+      }
+    },
+    "HomepageSlider": {
+      "id": "SkgHMlqe-",
+      "name": "HomepageSlider",
+      "title": "Homepage Slider",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "slides": {
+            "type": "array",
+            "title": "Slides",
+            "items": {
+              "$ref": "#/shapes/HomepageSliderSlides/schema"
+            },
+            "minItems": 1,
+            "@mapping": "shapedb:HomepageSlider.ByJ5tIwol"
+          },
+          "interval": {
+            "type": "integer",
+            "title": "Interval",
+            "minimum": 0,
+            "@mapping": "shapedb:HomepageSlider.HyjBMxqeZ"
+          }
+        }
+      }
+    },
+    "HomepageSocial": {
+      "id": "SyVdyPn-Z",
+      "name": "HomepageSocial",
+      "title": "Homepage Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:HomepageSocial.ry2d1v2-Z"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:HomepageSocial.Skx9yPhbW",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:HomepageSocial.HJ_Fyv3bZ"
+          }
+        }
+      }
+    },
+    "Footer": {
+      "id": "rJVJw4jgb",
+      "name": "Footer",
+      "title": "Footer",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "contacts": {
+            "type": "array",
+            "title": "Contacts",
+            "items": {
+              "$ref": "#/shapes/FooterContacts/schema"
+            },
+            "@mapping": "shapedb:Footer.SyHMWVoxZ"
+          },
+          "formEndpoint": {
+            "type": "string",
+            "title": "Form Endpoint",
+            "minLength": 0,
+            "@mapping": "shapedb:Footer.H1S_2Nilb"
+          }
+        }
+      }
+    },
+    "FooterVisuals": {
+      "id": "HJaIXVse-",
+      "name": "FooterVisuals",
+      "title": "Footer Visuals",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:FooterVisuals.HyID7Nog-",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "minLength": 0,
+            "@mapping": "shapedb:FooterVisuals.HyD_X4olW"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type",
+            "oneOf": [
+              {
+                "title": "Instagram",
+                "enum": [
+                  "instagram"
+                ]
+              },
+              {
+                "title": "Youtube",
+                "enum": [
+                  "youtube"
+                ]
+              },
+              {
+                "title": "Facebook",
+                "enum": [
+                  "facebook"
+                ]
+              },
+              {
+                "title": "Pinterest",
+                "enum": [
+                  "pinterest"
+                ]
+              }
+            ],
+            "@mapping": "shapedb:FooterVisuals.HJhDXEolZ"
+          },
+          "url": {
+            "type": "string",
+            "title": "URL",
+            "minLength": 0,
+            "@mapping": "shapedb:FooterVisuals.r12O7NieZ"
+          }
+        }
+      }
+    },
+    "FooterContacts": {
+      "id": "SyHMWVoxZ",
+      "name": "FooterContacts",
+      "title": "Footer Contacts",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "title": "Email",
+            "minLength": 0,
+            "@mapping": "shapedb:FooterContacts.B1q7WVoeb"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label",
+            "minLength": 0,
+            "@mapping": "shapedb:FooterContacts.HJ-X-NieW"
+          }
+        }
+      }
+    },
+    "SocialSettings": {
+      "id": "ry6MSRdeZ",
+      "name": "SocialSettings",
+      "title": "Social Settings",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:SocialSettings.BJYfHAuxZ",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:SocialSettings.rJrp4CdgZ"
+          },
+          "siteName": {
+            "type": "string",
+            "title": "Site Name",
+            "minLength": 0,
+            "@mapping": "shapedb:SocialSettings.HJ83NAueb"
+          },
+          "url": {
+            "type": "string",
+            "title": "URL",
+            "minLength": 0,
+            "@mapping": "shapedb:SocialSettings.HJfGrROxZ"
+          }
+        }
+      }
+    },
+    "Asset": {
+      "id": "ASSET",
+      "name": "Asset",
+      "title": "Asset",
+      "model": {
+        "type": "multiple"
+      },
+      "workflow": "default",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "sourceUrl": {
+            "type": "string",
+            "title": "Source URL",
+            "@l10n": false,
+            "@mapping": "shapedb:Asset.SJXSidnXE"
+          },
+          "path": {
+            "type": "string",
+            "title": "Path",
+            "@l10n": false,
+            "minLength": 1,
+            "@mapping": "shapedb:Asset.Hk6FQuz5"
+          },
+          "filename": {
+            "type": "string",
+            "title": "Filename",
+            "@l10n": false,
+            "minLength": 1,
+            "@mapping": "shapedb:Asset.H1oYQOM9"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "@mapping": "shapedb:Asset.B1Zsra3fx"
+          },
+          "caption": {
+            "type": "object",
+            "title": "Caption",
+            "@mapping": "shapedb:Asset.SyWVsd98x",
+            "@tag": "draftjs"
+          },
+          "uploadStatus": {
+            "type": "string",
+            "title": "Upload status",
+            "@l10n": false,
+            "@mapping": "shapedb:Asset.ByeAYXdG9"
+          },
+          "mimeType": {
+            "type": "string",
+            "title": "MIME type",
+            "@l10n": false,
+            "@mapping": "shapedb:Asset.SyCYX_Gq"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "@mapping": "shapedb:Asset.By5tQOMc"
+          },
+          "credit": {
+            "type": "object",
+            "title": "Credit",
+            "@mapping": "shapedb:Asset.Skn_i_5Ll",
+            "@tag": "draftjs"
+          }
+        },
+        "required": [
+          "filename",
+          "path"
+        ]
+      }
+    },
+    "StillCategory": {
+      "id": "Bk8-pHigZ",
+      "name": "StillCategory",
+      "title": "Individual Gallery",
+      "model": {
+        "type": "taxonomy"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:StillCategory.H1ngpSjl-"
+          },
+          "social": {
+            "title": "Gallery Card Photo + SEO",
+            "@mapping": "shapedb:StillCategory.r1Y8ZDh-b",
+            "$ref": "#/shapes/StillCategorySocial/schema"
+          },
+          "stills": {
+            "type": "array",
+            "title": "Individual Gallery Photos",
+            "items": {
+              "$ref": "#/shapes/StillCategoryStills/schema"
+            },
+            "@mapping": "shapedb:StillCategory.BkinAxeVW"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "StillCategorySocial": {
+      "id": "r1Y8ZDh-b",
+      "name": "StillCategorySocial",
+      "title": "Gallery Card Photo + SEO",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Gallery Card Title / SEO Title",
+            "minLength": 0,
+            "@mapping": "shapedb:StillCategorySocial.B1Jv-wn-W"
+          },
+          "description": {
+            "type": "string",
+            "title": "Gallery Card SEO Description",
+            "minLength": 0,
+            "@mapping": "shapedb:StillCategorySocial.B1rvZw2bW"
+          },
+          "image": {
+            "title": "Gallery Card Photo",
+            "@mapping": "shapedb:StillCategorySocial.Sy3PWPhWW",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "StillCategoryStills": {
+      "id": "BkinAxeVW",
+      "name": "StillCategoryStills",
+      "title": "Individual Gallery Photos",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Gallery Photo",
+            "@mapping": "shapedb:StillCategoryStills.HkbA0eeN-",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "Still": {
+      "id": "ByQUCgeVW",
+      "name": "Still",
+      "title": "Still Page Editor",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "stillCategories": {
+            "title": "Gallery Cards / Portfolio Links",
+            "@mapping": "shapedb:Still.r17HYX3VW",
+            "items": {
+              "@ref": "local:StillCategory"
+            },
+            "@backreference": {
+              "enabled": true
+            },
+            "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "stills": {
+            "type": "array",
+            "title": "Fallback Header Photos",
+            "items": {
+              "$ref": "#/shapes/StillStills/schema"
+            },
+            "@mapping": "shapedb:Still.rk97AlxEW"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:Still.HJb7CelEZ"
+          },
+          "social": {
+            "title": "Still Page Header Photo + SEO",
+            "@mapping": "shapedb:Still.HJv40lgEb",
+            "$ref": "#/shapes/StillSocial/schema"
+          },
+          "headerPhoto": {
+            "title": "Header photo",
+            "@mapping": "shapedb:Still.headerPhoto01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "gallery1Photo": {
+            "title": "Gallery 1 photo",
+            "@mapping": "shapedb:Still.gallery1Photo01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "gallery2Photo": {
+            "title": "Gallery 2 photo",
+            "@mapping": "shapedb:Still.gallery2Photo01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "gallery3Photo": {
+            "title": "Gallery 3 photo",
+            "@mapping": "shapedb:Still.gallery3Photo01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "gallery4Photo": {
+            "title": "Gallery 4 photo",
+            "@mapping": "shapedb:Still.gallery4Photo01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "gallery5Photo": {
+            "title": "Gallery 5 photo",
+            "@mapping": "shapedb:Still.gallery5Photo01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "gallery6Photo": {
+            "title": "Gallery 6 photo",
+            "@mapping": "shapedb:Still.gallery6Photo01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "gallery7Photo": {
+            "title": "Gallery 7 photo",
+            "@mapping": "shapedb:Still.gallery7Photo01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "gallery8Photo": {
+            "title": "Gallery 8 photo",
+            "@mapping": "shapedb:Still.gallery8Photo01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "StillStills": {
+      "id": "rk97AlxEW",
+      "name": "StillStills",
+      "title": "Fallback Header Photos",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Fallback Header Photo",
+            "@mapping": "shapedb:StillStills.BJyVCexNZ",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "StillSocial": {
+      "id": "HJv40lgEb",
+      "name": "StillSocial",
+      "title": "Still Page Header Photo + SEO",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Header Title / SEO Title",
+            "minLength": 0,
+            "@mapping": "shapedb:StillSocial.SJXS0xgEb"
+          },
+          "description": {
+            "type": "string",
+            "title": "Header SEO Description",
+            "minLength": 0,
+            "@mapping": "shapedb:StillSocial.ByFBRle4W"
+          },
+          "image": {
+            "title": "Header Photo",
+            "@mapping": "shapedb:StillSocial.rylLCleNW",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "Location": {
+      "id": "S1dpwkceb",
+      "name": "Location",
+      "title": "Location",
+      "model": {
+        "type": "multiple"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:Location.HJvnPk9xZ"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:Location.r1m6wJ5l-",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:Location.rkcGZw3ZZ",
+            "$ref": "#/shapes/LocationSocial/schema"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "LocationSocial": {
+      "id": "rkcGZw3ZZ",
+      "name": "LocationSocial",
+      "title": "Location Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:LocationSocial.SJZ7Zvh-b"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:LocationSocial.H1zE-P2b-",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:LocationSocial.B1qXZw2-b"
+          }
+        }
+      }
+    },
+    "About": {
+      "id": "BkNoQ9ixW",
+      "name": "About",
+      "title": "About",
+      "description": "!",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "@mapping": "shapedb:About.ry95mcoeW",
+            "title": "Title"
+          },
+          "photostrip": {
+            "type": "array",
+            "@mapping": "shapedb:About.BJiLk3eWW",
+            "title": "Photostrip",
+            "items": {
+              "@ref": "AboutPhotostrip"
+            }
+          },
+          "about": {
+            "@mapping": "shapedb:About.BJSKJ2gZZ",
+            "title": "About",
+            "@ref": "AboutAbout"
+          },
+          "press": {
+            "@mapping": "shapedb:About.B133JnlWZ",
+            "title": "Press",
+            "@ref": "AboutPress"
+          },
+          "clients": {
+            "@mapping": "shapedb:About.rkaa-2eZZ",
+            "title": "Clients",
+            "@ref": "AboutClients"
+          },
+          "team": {
+            "@mapping": "shapedb:About.Skp6Vng--",
+            "title": "Team",
+            "@ref": "AboutTeam"
+          },
+          "social": {
+            "@mapping": "shapedb:About.H18QAI2WW",
+            "title": "Social",
+            "@ref": "AboutSocial"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "AboutClientsLogos": {
+      "id": "Hkh0-nx-Z",
+      "name": "AboutClientsLogos",
+      "title": "About Clients Logos",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutClientsLogos.B1baVheWb"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:AboutClientsLogos.BJJWMhgWW",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "url": {
+            "type": "string",
+            "title": "URL",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutClientsLogos.rkj-fngW-"
+          }
+        }
+      }
+    },
+    "AboutClients": {
+      "id": "rkaa-2eZZ",
+      "name": "AboutClients",
+      "title": "About Clients",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "type": "string",
+            "title": "Heading",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutClients.By7Cb3xb-"
+          },
+          "logos": {
+            "type": "array",
+            "title": "Logos",
+            "items": {
+              "$ref": "#/shapes/AboutClientsLogos/schema"
+            },
+            "@mapping": "shapedb:AboutClients.Hkh0-nx-Z"
+          }
+        }
+      }
+    },
+    "AboutSocial": {
+      "id": "H18QAI2WW",
+      "name": "AboutSocial",
+      "title": "About Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutSocial.Sy78CUn--"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:AboutSocial.BkZDCIn-b",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutSocial.ByYLCI3ZZ"
+          }
+        }
+      }
+    },
+    "AboutAbout": {
+      "id": "BJSKJ2gZZ",
+      "name": "AboutAbout",
+      "title": "About About",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "type": "string",
+            "title": "Heading",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutAbout.rkPIghxb-"
+          },
+          "content": {
+            "type": "object",
+            "title": "Content",
+            "@mapping": "shapedb:AboutAbout.S1pLenlWW",
+            "@tag": "draftjs"
+          }
+        }
+      }
+    },
+    "AboutTeamMembers": {
+      "id": "rkpANnlbb",
+      "name": "AboutTeamMembers",
+      "title": "About Team Members",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "about": {
+            "type": "object",
+            "title": "About",
+            "@mapping": "shapedb:AboutTeamMembers.Hygw_agZZ",
+            "@tag": "draftjs"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutTeamMembers.r19kr2lbW"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:AboutTeamMembers.rkrJB2g-Z",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "AboutTeam": {
+      "id": "Skp6Vng--",
+      "name": "AboutTeam",
+      "title": "About Team",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "type": "string",
+            "title": "Heading",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutTeam.HJwCE3eWb"
+          },
+          "members": {
+            "type": "array",
+            "title": "Members",
+            "items": {
+              "$ref": "#/shapes/AboutTeamMembers/schema"
+            },
+            "@mapping": "shapedb:AboutTeam.rkpANnlbb"
+          }
+        }
+      }
+    },
+    "AboutPressItems": {
+      "id": "B17vxheW-",
+      "name": "AboutPressItems",
+      "title": "About Press Items",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:AboutPressItems.HJCvghgW-",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "source": {
+            "type": "string",
+            "title": "Source",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutPressItems.S1hdlnlbZ"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutPressItems.S1Ntx3lZ-"
+          },
+          "url": {
+            "type": "string",
+            "title": "URL",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutPressItems.BJttx2lbb"
+          }
+        }
+      }
+    },
+    "AboutPress": {
+      "id": "B133JnlWZ",
+      "name": "AboutPress",
+      "title": "About Press",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heading": {
+            "type": "string",
+            "title": "Heading",
+            "minLength": 0,
+            "@mapping": "shapedb:AboutPress.HydBx3xZZ"
+          },
+          "items": {
+            "type": "array",
+            "title": "Items",
+            "items": {
+              "$ref": "#/shapes/AboutPressItems/schema"
+            },
+            "@mapping": "shapedb:AboutPress.B17vxheW-"
+          }
+        }
+      }
+    },
+    "AboutPhotostrip": {
+      "id": "BJiLk3eWW",
+      "name": "AboutPhotostrip",
+      "title": "About Photostrip",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:AboutPhotostrip.SJzPy2lWW",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "Film": {
+      "id": "ry5nxHslZ",
+      "name": "Film",
+      "title": "Film",
+      "model": {
+        "type": "multiple"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:Film.ByYKlrjxb",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "filmCategory": {
+            "title": "Film Category",
+            "@mapping": "shapedb:Film.SJ2SM8je-",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:FilmCategory",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:Film.HJZFgHjxb"
+          },
+          "youTubeUrl": {
+            "type": "string",
+            "title": "YouTube URL",
+            "minLength": 1,
+            "@mapping": "shapedb:Film.B192tBieW"
+          }
+        },
+        "required": [
+          "title",
+          "image",
+          "youTubeUrl"
+        ]
+      }
+    },
+    "Blog": {
+      "id": "rylymie-Z",
+      "name": "Blog",
+      "title": "Blog",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:Blog.ryoAMsgbb"
+          },
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:Blog.B1xsR83W-",
+            "$ref": "#/shapes/BlogSocial/schema"
+          },
+          "featuredStory": {
+            "title": "Featured Blog Post",
+            "@mapping": "shapedb:Blog.FeaturedStory",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Story",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "categories": {
+            "title": "Categories",
+            "@mapping": "shapedb:Blog.Hyf1iX3VZ",
+            "items": {
+              "@ref": "local:Category"
+            },
+            "@backreference": {
+              "enabled": true
+            },
+            "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "BlogSocial": {
+      "id": "B1xsR83W-",
+      "name": "BlogSocial",
+      "title": "Blog Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BlogSocial.BJ_oRU2Z-"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BlogSocial.HypjA8nWW"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:BlogSocial.S1U6CL2-b",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "Story": {
+      "id": "HJpRfJclZ",
+      "name": "Story",
+      "title": "Story",
+      "workflow": "default",
+      "model": {
+        "type": "multiple"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "title": "Title",
+            "@mapping": "shapedb:Story.H1EAf19e-"
+          },
+          "publishedDate": {
+            "type": "string",
+            "title": "Published Date",
+            "@mapping": "shapedb:Story._enabledAt"
+          },
+          "slug": {
+            "type": "string",
+            "description": "blog URL title",
+            "minLength": 1,
+            "title": "Slug",
+            "@mapping": "shapedb:Story.L7Y2Q_ECf"
+          },
+          "tout": {
+            "@ref": "local:StoryTout",
+            "title": "Tout",
+            "@mapping": "shapedb:Story.Sk9bQkqlb"
+          },
+          "category": {
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            },
+            "type": "array",
+            "items": {
+              "@ref": "local:Category"
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "title": "Category",
+            "@backreference": {
+              "enabled": true
+            },
+            "@mapping": "shapedb:Story.rJ57d19gZ"
+          },
+          "location": {
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            },
+            "type": "array",
+            "items": {
+              "@ref": "local:Location"
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "title": "Location",
+            "@backreference": {
+              "enabled": true
+            },
+            "@mapping": "shapedb:Story.rydHOJqgb"
+          },
+          "postType": {
+            "type": "string",
+            "title": "Post Type",
+            "description": "Controls automatic modules and labels. Auto is recommended; a selected value is a manual override.",
+            "oneOf": [
+              {
+                "title": "Auto — recommended",
+                "enum": [
+                  "auto"
+                ]
+              },
+              {
+                "title": "Standard story",
+                "enum": [
+                  "standard"
+                ]
+              },
+              {
+                "title": "Quick answer",
+                "enum": [
+                  "quick-answer"
+                ]
+              },
+              {
+                "title": "Destination guide",
+                "enum": [
+                  "guide"
+                ]
+              },
+              {
+                "title": "Product review / ranking",
+                "enum": [
+                  "review"
+                ]
+              },
+              {
+                "title": "Style / shopping edit",
+                "enum": [
+                  "style-shopping"
+                ]
+              }
+            ],
+            "@mapping": "shapedb:Story.PostTypeV2"
+          },
+          "pageLayout": {
+            "type": "string",
+            "title": "Page Layout",
+            "description": "Auto uses a sidebar for substantial guides, reviews, and shopping posts. Simple and Sidebar override the automation.",
+            "oneOf": [
+              {
+                "title": "Auto — recommended",
+                "enum": [
+                  "auto"
+                ]
+              },
+              {
+                "title": "Simple / no sidebar",
+                "enum": [
+                  "simple"
+                ]
+              },
+              {
+                "title": "Sidebar",
+                "enum": [
+                  "sidebar"
+                ]
+              }
+            ],
+            "@mapping": "shapedb:Story.PageLayoutV2"
+          },
+          "shopEditTitle": {
+            "type": "string",
+            "title": "Shop The Edit Title",
+            "description": "Optional post-level override for the Shop The Edit shortlist heading.",
+            "default": "Shop The Edit",
+            "@mapping": "shapedb:Story.ShopEditTitleV1"
+          },
+          "content": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content",
+            "@mapping": "shapedb:Story.rkzHXy9e-"
+          },
+          "contentBlocks": {
+            "type": "array",
+            "description": "",
+            "items": {
+              "oneOf": [
+                {
+                  "@ref": "local:ContentBlock"
+                },
+                {
+                  "@ref": "local:HtmlBlock"
+                },
+                {
+                  "@ref": "local:TableBlock"
+                },
+                {
+                  "@ref": "local:StoryImageBlock"
+                },
+                {
+                  "@ref": "local:StoryGalleryBlock"
+                }
+              ]
+            },
+            "title": "Content Blocks",
+            "@mapping": "shapedb:Story.Z1b3FgKbp"
+          },
+          "relatedStories": {
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            },
+            "type": "array",
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "title": "Related Stories",
+            "@backreference": {
+              "enabled": true
+            },
+            "@mapping": "shapedb:Story.zzULrrp8Y"
+          },
+          "social": {
+            "@ref": "local:StorySocial",
+            "title": "Social",
+            "@mapping": "shapedb:Story.HJzpbP3WW"
+          },
+          "mainHtmlBlock1": {
+            "type": "string",
+            "description": "Optional raw HTML shown in the main story flow. Leave blank if unused.",
+            "title": "HTML Block 1"
+          },
+          "mainContentBlock1": {
+            "type": "object",
+            "@tag": "draftjs",
+            "description": "Optional rich text shown in the main story flow. Leave blank if unused.",
+            "title": "Content Block 1"
+          },
+          "mainHtmlBlock2": {
+            "type": "string",
+            "title": "HTML Block 2"
+          },
+          "mainContentBlock2": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 2"
+          },
+          "mainHtmlBlock3": {
+            "type": "string",
+            "title": "HTML Block 3"
+          },
+          "mainContentBlock3": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 3"
+          },
+          "mainHtmlBlock4": {
+            "type": "string",
+            "title": "HTML Block 4"
+          },
+          "mainContentBlock4": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 4"
+          },
+          "mainHtmlBlock5": {
+            "type": "string",
+            "title": "HTML Block 5"
+          },
+          "mainContentBlock5": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 5"
+          },
+          "mainHtmlBlock6": {
+            "type": "string",
+            "title": "HTML Block 6"
+          },
+          "mainContentBlock6": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 6"
+          },
+          "additionalMainBlocks": {
+            "@ref": "local:StoryAdditionalBlocks",
+            "title": "Additional Content / HTML Blocks"
+          }
+        },
+        "required": [
+          "title",
+          "tout",
+          "content"
+        ]
+      }
+    },
+    "StorySocial": {
+      "id": "HJzpbP3WW",
+      "name": "StorySocial",
+      "title": "Story Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 0,
+            "type": "string",
+            "title": "Title",
+            "@mapping": "shapedb:StorySocial.BJYTWvhZW"
+          },
+          "description": {
+            "minLength": 0,
+            "type": "string",
+            "title": "Description",
+            "@mapping": "shapedb:StorySocial.SJC6WD2-b"
+          },
+          "image": {
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Image",
+            "@backreference": {
+              "enabled": true
+            },
+            "@mapping": "shapedb:StorySocial.HkrCZv2W-"
+          }
+        }
+      }
+    },
+    "StoryTout": {
+      "id": "Sk9bQkqlb",
+      "name": "StoryTout",
+      "title": "Story Tout",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Image",
+            "@backreference": {
+              "enabled": true
+            },
+            "@mapping": "shapedb:StoryTout.rksJXJcxZ"
+          },
+          "secondaryImage": {
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "title": "Secondary Image",
+            "@backreference": {
+              "enabled": true
+            },
+            "@mapping": "shapedb:StoryTout.mYaTZCER0"
+          },
+          "dek": {
+            "minLength": 1,
+            "type": "string",
+            "title": "Dek",
+            "@mapping": "shapedb:StoryTout.SkRMXJ9gb"
+          }
+        }
+      }
+    },
+    "Destinations": {
+      "id": "Skvr4iolZ",
+      "name": "Destinations",
+      "title": "Destinations",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:Destinations.B1RIfjxb-"
+          },
+          "featuredLocations": {
+            "title": "Featured Locations",
+            "@mapping": "shapedb:Destinations.H1n4VsjgZ",
+            "items": {
+              "@ref": "local:Location"
+            },
+            "@backreference": {
+              "enabled": true
+            },
+            "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:Destinations.HyB0082--",
+            "$ref": "#/shapes/DestinationsSocial/schema"
+          },
+          "pageTitle": {
+            "type": "string",
+            "title": "Destinations page title",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.pageTitleD301"
+          },
+          "heroIntervalSeconds": {
+            "type": "integer",
+            "title": "Seconds before header postcard switches",
+            "@mapping": "shapedb:Destinations.heroIntervalD301"
+          },
+          "heroPrevArrowIcon": {
+            "title": "Header previous arrow icon",
+            "@mapping": "shapedb:Destinations.heroPrevArrowIconD301",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "heroNextArrowIcon": {
+            "title": "Header next arrow icon",
+            "@mapping": "shapedb:Destinations.heroNextArrowIconD301",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "heroPostcards": {
+            "type": "array",
+            "title": "Header postcards",
+            "items": {
+              "$ref": "#/shapes/DestinationsPostcard/schema"
+            },
+            "@mapping": "shapedb:Destinations.heroPostcardsD301"
+          },
+          "searchHeading": {
+            "type": "string",
+            "title": "Search section heading",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.searchHeadingD301"
+          },
+          "searchPlaceholder": {
+            "type": "string",
+            "title": "Search box placeholder text",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.searchPlaceholderD301"
+          },
+          "mapHeading": {
+            "type": "string",
+            "title": "Map section heading",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.mapHeadingD301"
+          },
+          "featuredDestinationLabel": {
+            "type": "string",
+            "title": "Featured destination label",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.featuredLabelD301"
+          },
+          "featuredDestinationTitle": {
+            "type": "string",
+            "title": "Featured destination title",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.featuredTitleD301"
+          },
+          "featuredDestinationImage": {
+            "title": "Featured destination image",
+            "@mapping": "shapedb:Destinations.featuredImageD301",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "featuredDestinationStampGraphic": {
+            "title": "Featured destination stamp graphic",
+            "@mapping": "shapedb:Destinations.featuredStampGraphicD301",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "featuredDestinationLemonGraphic": {
+            "title": "Featured destination lemon graphic",
+            "@mapping": "shapedb:Destinations.featuredLemonGraphicD301",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "featuredDestinationCards": {
+            "type": "array",
+            "title": "Featured destination overlay cards",
+            "items": {
+              "$ref": "#/shapes/DestinationsPhotoCard/schema"
+            },
+            "@mapping": "shapedb:Destinations.featuredCardsD301"
+          },
+          "cardsHeading": {
+            "type": "string",
+            "title": "Destination cards section heading",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.cardsHeadingD301"
+          },
+          "destinationCards": {
+            "type": "array",
+            "title": "Destination photo cards",
+            "items": {
+              "$ref": "#/shapes/DestinationsPhotoCard/schema"
+            },
+            "@mapping": "shapedb:Destinations.destinationCardsD301"
+          },
+          "endingKicker": {
+            "type": "string",
+            "title": "Bottom section small heading",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.endingKickerD301"
+          },
+          "endingTitle": {
+            "type": "string",
+            "title": "Bottom section title",
+            "minLength": 0,
+            "@mapping": "shapedb:Destinations.endingTitleD301"
+          },
+          "endingImage": {
+            "title": "Bottom section background image",
+            "@mapping": "shapedb:Destinations.endingImageD301",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "endingLinks": {
+            "type": "array",
+            "title": "Bottom section links",
+            "items": {
+              "$ref": "#/shapes/DestinationsEndingLink/schema"
+            },
+            "@mapping": "shapedb:Destinations.endingLinksD301"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "DestinationsSocial": {
+      "id": "HyB0082--",
+      "name": "DestinationsSocial",
+      "title": "Destinations Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsSocial.rkT0A8hWb"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsSocial.H1GkJv3bW"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:DestinationsSocial.HkpJ1Dhbb",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "FilmCategory": {
+      "id": "H1HfTril-",
+      "name": "FilmCategory",
+      "title": "Film Category",
+      "model": {
+        "type": "taxonomy"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:FilmCategory.ryZz6BslW"
+          },
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:FilmCategory.BJYagvhWZ",
+            "$ref": "#/shapes/FilmCategorySocial/schema"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "FilmCategorySocial": {
+      "id": "BJYagvhWZ",
+      "name": "FilmCategorySocial",
+      "title": "Film Category Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:FilmCategorySocial.BkCaxw2bZ"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:FilmCategorySocial.B1GAeDhbW"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:FilmCategorySocial.SyO0lvhWb",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "Category": {
+      "id": "SyRoPJ5eW",
+      "name": "Category",
+      "title": "Category",
+      "model": {
+        "type": "taxonomy"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 1,
+            "@mapping": "shapedb:Category.r1qtmkcxZ"
+          },
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:Category.B1wXxP2Z-",
+            "$ref": "#/shapes/CategorySocial/schema"
+          }
+        },
+        "required": [
+          "title"
+        ]
+      }
+    },
+    "CategorySocial": {
+      "id": "B1wXxP2Z-",
+      "name": "CategorySocial",
+      "title": "Category Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:CategorySocial.HyeVgP3ZZ"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:CategorySocial.HyIVewnZW"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:CategorySocial.rJ2VgwhZ-",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "Continent": {
+      "id": "HJu5vyLfH",
+      "name": "Continent",
+      "title": "Continent",
+      "model": {
+        "type": "multiple"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "minLength": 1,
+            "@mapping": "shapedb:Continent.DMj1Ihd6l"
+          },
+          "social": {
+            "title": "Social",
+            "@mapping": "shapedb:Continent.pAjF2K_ks",
+            "$ref": "#/shapes/ContinentSocial/schema"
+          },
+          "locations": {
+            "title": "Locations",
+            "@mapping": "shapedb:Continent.uA9eKJi_c",
+            "items": {
+              "@ref": "local:Location"
+            },
+            "@backreference": {
+              "enabled": true
+            },
+            "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        },
+        "required": [
+          "name"
+        ]
+      }
+    },
+    "ContinentSocial": {
+      "id": "pAjF2K_ks",
+      "name": "ContinentSocial",
+      "title": "Continent Social",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:ContinentSocial.E6hy-GDOP"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:ContinentSocial.7iPj0G7Bm"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:ContinentSocial.bAunO6xfW",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "ContentBlock": {
+      "id": "uxhJqMxSq",
+      "name": "ContentBlock",
+      "title": "Content Block",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "title": "Content",
+            "type": "object",
+            "@tag": "draftjs",
+            "@mapping": "shapedb:ContentBlock.NjEbhDWRD"
+          }
+        }
+      }
+    },
+    "HtmlBlock": {
+      "id": "DLA36KeM7",
+      "name": "HtmlBlock",
+      "title": "HTML Block",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Internal note only. This will not appear on the website.",
+            "title": "Internal Label / Notes",
+            "minLength": 0,
+            "@mapping": "shapedb:HtmlBlock.InternalLabel"
+          },
+          "html": {
+            "type": "string",
+            "description": "",
+            "title": "HTML",
+            "@mapping": "shapedb:HtmlBlock.R3qtDBH0F"
+          }
+        }
+      }
+    },
+    "TableBlock": {
+      "id": "TableBlock",
+      "name": "TableBlock",
+      "title": "Table Block",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "Internal note only. This will not appear on the website.",
+            "title": "Internal Label / Notes",
+            "minLength": 0,
+            "@mapping": "shapedb:TableBlock.InternalLabel"
+          },
+          "title": {
+            "type": "string",
+            "title": "Table Title",
+            "minLength": 0,
+            "@mapping": "shapedb:TableBlock.Title"
+          },
+          "dek": {
+            "type": "string",
+            "title": "Intro Text",
+            "minLength": 0,
+            "@mapping": "shapedb:TableBlock.Dek"
+          },
+          "headersText": {
+            "type": "string",
+            "title": "Column Headers",
+            "description": "Optional. Put one column header per line.",
+            "minLength": 0,
+            "@mapping": "shapedb:TableBlock.HeadersText"
+          },
+          "rowsText": {
+            "type": "string",
+            "title": "Rows",
+            "description": "Put one row per line. Separate cells with a vertical bar, like: Item | Best For | Price",
+            "minLength": 0,
+            "@mapping": "shapedb:TableBlock.RowsText"
+          },
+          "footnote": {
+            "type": "string",
+            "title": "Footnote",
+            "minLength": 0,
+            "@mapping": "shapedb:TableBlock.Footnote"
+          }
+        }
+      }
+    },
+    "Ads": {
+      "id": "uKFXYLDV6",
+      "name": "Ads",
+      "title": "Ads",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "ads": {
+            "@mapping": "shapedb:Ads.3B6Rj2nF-",
+            "type": "string",
+            "title": "ads.txt"
+          }
+        }
+      }
+    },
+    "StoryAdditionalBlocks": {
+      "id": "story-additional-blocks",
+      "name": "StoryAdditionalBlocks",
+      "title": "Additional Content / HTML Blocks",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "mainHtmlBlock2": {
+            "type": "string",
+            "title": "HTML Block 2"
+          },
+          "mainContentBlock2": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 2"
+          },
+          "mainHtmlBlock3": {
+            "type": "string",
+            "title": "HTML Block 3"
+          },
+          "mainContentBlock3": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 3"
+          },
+          "mainHtmlBlock4": {
+            "type": "string",
+            "title": "HTML Block 4"
+          },
+          "mainContentBlock4": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 4"
+          },
+          "mainHtmlBlock5": {
+            "type": "string",
+            "title": "HTML Block 5"
+          },
+          "mainContentBlock5": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 5"
+          },
+          "mainHtmlBlock6": {
+            "type": "string",
+            "title": "HTML Block 6"
+          },
+          "mainContentBlock6": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content Block 6"
+          }
+        }
+      }
+    },
+    "Privacy": {
+      "id": "Privacy",
+      "name": "Privacy",
+      "title": "Privacy",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "content": {
+            "type": "object",
+            "@tag": "draftjs",
+            "title": "Content"
+          }
+        }
+      }
+    },
+    "DestinationsPostcard": {
+      "id": "D3Postcard01",
+      "name": "DestinationsPostcard",
+      "title": "Header Postcard Slide",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "linkUrl": {
+            "type": "string",
+            "title": "Click-through story URL",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsPostcard.linkUrl01"
+          },
+          "heroImage": {
+            "title": "Full-screen header background image",
+            "@mapping": "shapedb:DestinationsPostcard.heroImage01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "photoPostcardImage": {
+            "title": "Top photo postcard image",
+            "@mapping": "shapedb:DestinationsPostcard.photoImage01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "paperPostcardImage": {
+            "title": "Bottom postcard square image",
+            "@mapping": "shapedb:DestinationsPostcard.paperImage01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "location": {
+            "type": "string",
+            "title": "Location text",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsPostcard.location01"
+          },
+          "dateText": {
+            "type": "string",
+            "title": "Date / stamp text",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsPostcard.dateText01"
+          },
+          "noteText": {
+            "type": "string",
+            "title": "Handwritten note text",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsPostcard.noteText01"
+          },
+          "stampGraphicImage": {
+            "title": "Stamp graphic image",
+            "@mapping": "shapedb:DestinationsPostcard.stampGraphicImage01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "postmarkGraphicImage": {
+            "title": "Postmark / wave graphic image",
+            "@mapping": "shapedb:DestinationsPostcard.postmarkGraphicImage01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "DestinationsPhotoCard": {
+      "id": "D3PhotoCard01",
+      "name": "DestinationsPhotoCard",
+      "title": "Destination Photo Card",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "title": "Card title",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsPhotoCard.title01"
+          },
+          "url": {
+            "type": "string",
+            "title": "Card URL",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsPhotoCard.url01"
+          },
+          "image": {
+            "title": "Card image",
+            "@mapping": "shapedb:DestinationsPhotoCard.image01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "graphicImage": {
+            "title": "Card graphic overlay",
+            "@mapping": "shapedb:DestinationsPhotoCard.graphicImage01",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "DestinationsEndingLink": {
+      "id": "D3EndingLink01",
+      "name": "DestinationsEndingLink",
+      "title": "Ending Link",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Link label",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsEndingLink.label01"
+          },
+          "url": {
+            "type": "string",
+            "title": "Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:DestinationsEndingLink.url01"
+          }
+        }
+      }
+    },
+    "StoryImageBlock": {
+      "id": "StoryImageBlockV2",
+      "name": "StoryImageBlock",
+      "title": "Image — fast controls",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Internal Label / Notes",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryImageBlock.Label"
+          },
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:StoryImageBlock.Image",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "size": {
+            "type": "string",
+            "title": "Image Size",
+            "oneOf": [
+              {
+                "title": "Auto — recommended",
+                "enum": [
+                  "auto"
+                ]
+              },
+              {
+                "title": "Text width",
+                "enum": [
+                  "text"
+                ]
+              },
+              {
+                "title": "Small",
+                "enum": [
+                  "small"
+                ]
+              },
+              {
+                "title": "Medium",
+                "enum": [
+                  "medium"
+                ]
+              },
+              {
+                "title": "Wide",
+                "enum": [
+                  "wide"
+                ]
+              },
+              {
+                "title": "Full width",
+                "enum": [
+                  "full"
+                ]
+              }
+            ],
+            "@mapping": "shapedb:StoryImageBlock.Size"
+          },
+          "alignment": {
+            "type": "string",
+            "title": "Alignment",
+            "oneOf": [
+              {
+                "title": "Auto / centered",
+                "enum": [
+                  "auto"
+                ]
+              },
+              {
+                "title": "Left",
+                "enum": [
+                  "left"
+                ]
+              },
+              {
+                "title": "Center",
+                "enum": [
+                  "center"
+                ]
+              },
+              {
+                "title": "Right",
+                "enum": [
+                  "right"
+                ]
+              }
+            ],
+            "@mapping": "shapedb:StoryImageBlock.Alignment"
+          },
+          "caption": {
+            "type": "string",
+            "title": "Caption",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryImageBlock.Caption"
+          },
+          "altText": {
+            "type": "string",
+            "title": "Alt Text",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryImageBlock.AltText"
+          },
+          "linkUrl": {
+            "type": "string",
+            "title": "Image Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryImageBlock.LinkUrl"
+          },
+          "linkTarget": {
+            "type": "string",
+            "title": "Link Behavior",
+            "oneOf": [
+              {
+                "title": "External / new tab — default",
+                "enum": [
+                  "external"
+                ]
+              },
+              {
+                "title": "Same tab",
+                "enum": [
+                  "same-tab"
+                ]
+              }
+            ],
+            "@mapping": "shapedb:StoryImageBlock.LinkTarget"
+          }
+        },
+        "required": [
+          "image"
+        ]
+      }
+    },
+    "StoryGalleryItem": {
+      "id": "StoryGalleryItemV2",
+      "name": "StoryGalleryItem",
+      "title": "Gallery Image",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Image",
+            "@mapping": "shapedb:StoryGalleryItem.Image",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "caption": {
+            "type": "string",
+            "title": "Caption",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryGalleryItem.Caption"
+          },
+          "altText": {
+            "type": "string",
+            "title": "Alt Text",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryGalleryItem.AltText"
+          },
+          "linkUrl": {
+            "type": "string",
+            "title": "Image Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryGalleryItem.LinkUrl"
+          }
+        },
+        "required": [
+          "image"
+        ]
+      }
+    },
+    "StoryGalleryBlock": {
+      "id": "StoryGalleryBlockV2",
+      "name": "StoryGalleryBlock",
+      "title": "Gallery — drag to reorder",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "title": "Internal Label / Notes",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryGalleryBlock.Label"
+          },
+          "layout": {
+            "type": "string",
+            "title": "Gallery Layout",
+            "oneOf": [
+              {
+                "title": "Auto — recommended",
+                "enum": [
+                  "auto"
+                ]
+              },
+              {
+                "title": "Two-up pair",
+                "enum": [
+                  "pair"
+                ]
+              },
+              {
+                "title": "Editorial lead + two",
+                "enum": [
+                  "editorial"
+                ]
+              },
+              {
+                "title": "Even grid",
+                "enum": [
+                  "grid"
+                ]
+              }
+            ],
+            "@mapping": "shapedb:StoryGalleryBlock.Layout"
+          },
+          "size": {
+            "type": "string",
+            "title": "Gallery Width",
+            "oneOf": [
+              {
+                "title": "Wide — default",
+                "enum": [
+                  "wide"
+                ]
+              },
+              {
+                "title": "Text width",
+                "enum": [
+                  "text"
+                ]
+              },
+              {
+                "title": "Full width",
+                "enum": [
+                  "full"
+                ]
+              }
+            ],
+            "@mapping": "shapedb:StoryGalleryBlock.Size"
+          },
+          "images": {
+            "type": "array",
+            "title": "Images",
+            "items": {
+              "$ref": "#/shapes/StoryGalleryItem/schema"
+            },
+            "@mapping": "shapedb:StoryGalleryBlock.Images"
+          }
+        },
+        "required": [
+          "images"
+        ]
+      }
+    }
+  },
+  "schemaVersion": "3.67.0",
+  "services": {}
+}

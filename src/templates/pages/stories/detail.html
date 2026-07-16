@@ -2,6 +2,29 @@
 
 {% from "macros/image.html" import image %}
 
+{% set storyType = page.postType %}
+{% if not storyType or storyType == "auto" %}
+  {% set storyType = "standard" %}
+  {% if page.title == "When Should Your Child Get Their First Phone?" %}
+    {% set storyType = "quick-answer" %}
+  {% elif page.title == "What to Wear in the South of France - 30+ Outfit Ideas for Provence and French Riviera Summer Style" %}
+    {% set storyType = "style-shopping" %}
+  {% endif %}
+{% endif %}
+
+{% set pageLayout = page.pageLayout %}
+{% if not pageLayout %}{% set pageLayout = "auto" %}{% endif %}
+
+{% set storyLabel = "Journal" %}
+{% if storyType == "style-shopping" %}
+  {% set storyLabel = "The Edit" %}
+{% elif storyType == "quick-answer" %}
+  {% set storyLabel = "Quick Guide" %}
+{% endif %}
+
+{% set storyDisplayDate = page._enabledAt %}
+{% if page._updatedAt %}{% set storyDisplayDate = page._updatedAt %}{% endif %}
+
 {% macro renderTableBlock(block) %}
   {% if block.rowsText %}
     <div class="story-table">
@@ -43,50 +66,220 @@
   {% endif %}
 {% endmacro %}
 
+{% macro renderStoryImageBlock(block) %}
+  {% if block.image %}
+    {% set imageSize = block.size %}
+    {% if not imageSize %}{% set imageSize = "auto" %}{% endif %}
+    {% set imageAlignment = block.alignment %}
+    {% if not imageAlignment or imageAlignment == "auto" %}{% set imageAlignment = "center" %}{% endif %}
+    {% set imageAlt = block.altText %}
+    {% if not imageAlt %}{% set imageAlt = block.caption %}{% endif %}
+
+    <figure class="story-image-block {{ imageSize }} align-{{ imageAlignment }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
+      {% if block.linkUrl %}
+      <a href="{{ block.linkUrl | trim }}"{% if block.linkTarget != "same-tab" %} target="_blank" rel="noopener"{% endif %}>
+      {% endif %}
+        {{ image(block.image.path, [480, 800, 1200, 1600, 2000], ["(min-width: 1200px) 1160px", "(min-width: 700px) 88vw", "100vw"], "", imageAlt) }}
+      {% if block.linkUrl %}
+      </a>
+      {% endif %}
+      {% if block.caption %}<figcaption>{{ block.caption }}</figcaption>{% endif %}
+    </figure>
+  {% endif %}
+{% endmacro %}
+
+{% macro renderStoryGalleryBlock(block) %}
+  {% if block.images.length %}
+    {% set galleryLayout = block.layout %}
+    {% if not galleryLayout %}{% set galleryLayout = "auto" %}{% endif %}
+    {% set gallerySize = block.size %}
+    {% if not gallerySize %}{% set gallerySize = "wide" %}{% endif %}
+
+    <div class="story-gallery story-gallery--structured story-gallery--{{ galleryLayout }} story-gallery--size-{{ gallerySize }}" data-count="{{ block.images.length }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
+      {% for galleryImage in block.images %}
+        {% if galleryImage.image %}
+        <figure class="story-gallery__item">
+          {% if galleryImage.linkUrl %}<a href="{{ galleryImage.linkUrl | trim }}" target="_blank" rel="noopener">{% endif %}
+            {{ image(galleryImage.image.path, [480, 800, 1200], ["(min-width: 900px) 50vw", "100vw"], "", galleryImage.altText or galleryImage.caption) }}
+          {% if galleryImage.linkUrl %}</a>{% endif %}
+          {% if galleryImage.caption %}<figcaption>{{ galleryImage.caption }}</figcaption>{% endif %}
+        </figure>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endmacro %}
+
 {% macro renderRelatedStory(story) %}
   <li>
     <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
       <div class="related-stories__image">
-        {{ image(story.tout.image.path) }}
+        {{ image(story.tout.image.path, [480, 720, 960], ["(min-width: 900px) 30vw", "100vw"], "", story.title) }}
       </div>
 
-      <h3 class="related-stories__title">{{ story.title }}</h3>
+      <h3 class="related-stories__title"{% if story.social.title %} data-sidebar-title="{{ story.social.title }}"{% endif %}>{{ story.title }}</h3>
     </a>
   </li>
 {% endmacro %}
 
-{% block body_class %}body--story has-no-hero{% endblock %}
+{% block body_class %}body--story has-no-hero has-editorial-menu story-type--{{ storyType }}{% endblock %}
+
+{% block extra_head %}
+  {% set storyCanonical = currentPath %}
+  {% set storyDescription = page.tout.dek %}
+  {% if page.social.description %}{% set storyDescription = page.social.description %}{% endif %}
+  {% set storyModified = page._enabledAt %}
+  {% if page._updatedAt %}{% set storyModified = page._updatedAt %}{% endif %}
+
+  <link rel="canonical" href="https://www.awaylands.com{{ storyCanonical }}">
+  <meta property="og:url" content="https://www.awaylands.com{{ storyCanonical }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://www.awaylands.com{{ storyCanonical }}"
+        },
+        "headline": {{ page.title | dump | safe }},
+        {% if storyDescription %}"description": {{ storyDescription | dump | safe }},{% endif %}
+        {% if page.tout.image %}
+        "image": [
+          "{{ page.tout.image.path | image({auto: 'compress,format', fit: 'crop', w: 1200, h: 1200}) | safe }}",
+          "{{ page.tout.image.path | image({auto: 'compress,format', fit: 'crop', w: 1200, h: 900}) | safe }}",
+          "{{ page.tout.image.path | image({auto: 'compress,format', fit: 'crop', w: 1200, h: 675}) | safe }}"
+        ],
+        {% endif %}
+        "datePublished": {{ page._enabledAt | dump | safe }},
+        "dateModified": {{ storyModified | dump | safe }},
+        "author": {
+          "@type": "Person",
+          "name": "Amy Seder",
+          "url": "https://www.awaylands.com/about"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Away Lands",
+          "url": "https://www.awaylands.com/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.awaylands.com/assets/images/logo_color.png"
+          }
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.awaylands.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Journal",
+            "item": "https://www.awaylands.com/blog/"
+          }{% if page.category.length %},
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ page.category[0].title | dump | safe }},
+            "item": "https://www.awaylands.com{{ page.category[0] | route('category') }}"
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": {{ page.title | dump | safe }},
+            "item": "https://www.awaylands.com{{ storyCanonical }}"
+          }{% else %},
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ page.title | dump | safe }},
+            "item": "https://www.awaylands.com{{ storyCanonical }}"
+          }{% endif %}
+        ]
+      }
+    ]
+  }
+  </script>
+{% endblock %}
 
 {% block content %}
-<div class="content">
-  <div class="content__inner">
-    <div class="content__section">
-      <ul class="filters">
-        <li><a href="/blog/">Recent</a></li>
-        <li><span class="separator"></span></li>
-        <li><a href="/search/">Search</a></li>
-        <li><span class="separator"></span></li>
+<article class="story-page story-page--{{ storyType }}" data-story-page data-story-type="{{ storyType }}" data-page-layout="{{ pageLayout }}"{% if page.shopEditTitle %} data-shop-edit-title="{{ page.shopEditTitle | escape }}"{% endif %}>
+  <header class="story-cover{% if not page.tout.image %} story-cover--no-image{% endif %}">
+    <div class="story-cover__copy">
+      <div class="story-cover__eyebrow">
+        <span>Away Lands Journal</span>
+        {% if page.category.length %}<span>{{ page.category[0].title }}</span>{% endif %}
+      </div>
 
-        {% for category in categories.categories %}
-        <li><a href="{{ category | route('category') }}/#" {% if category.title == page.category[0].title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
-        {% endfor %}
-      </ul>
+      <h1 class="story-cover__title">{{ page.title }}</h1>
+
+      {% if page.tout.dek %}
+      <p class="story-cover__dek">{{ page.tout.dek }}</p>
+      {% endif %}
+
+      <div class="story-cover__meta">
+        <span>By <a href="/about">Amy Seder</a></span>
+        <time datetime="{{ storyDisplayDate }}">Updated {{ storyDisplayDate | date("MMMM D, YYYY") }}</time>
+      </div>
+
     </div>
 
-    <div class="content__section">
-      <header class="content__header">
-        <div class="content__rubric">
-          <span>{{ page._enabledAt | date("MMMM D, YYYY") }}</span>
+    {% if page.tout.image %}
+    <figure class="story-cover__media">
+      <picture>
+        <source
+          media="(max-width: 599px)"
+          srcset="{{ page.tout.image.path | image({auto: 'compress,format', w: 720}) }}"
+        >
+        <source
+          media="(max-width: 1199px)"
+          srcset="{{ page.tout.image.path | image({auto: 'compress,format', w: 1200}) }}"
+        >
+        <img
+          src="{{ page.tout.image.path | image({auto: 'compress,format', w: 1800}) }}"
+          alt="{{ page.title }}"
+          fetchpriority="high"
+          decoding="async"
+          data-story-hero
+        >
+      </picture>
+      {% if page.location.length %}
+      <figcaption><span>{{ page.location[0].title }}</span></figcaption>
+      {% endif %}
+    </figure>
+    {% endif %}
+  </header>
 
-          {% for category in page.category %}
-          <span>{{ category.title }}</span>
-          {% endfor %}
-        </div>
+  <div class="story-rule" aria-hidden="true">
+    <span>{{ storyDisplayDate | date("YYYY") }}</span>
+    <span>{{ storyLabel }}</span>
+    <span>Away Lands</span>
+  </div>
 
-        <h2 class="content__heading">{{ page.title }}</h2>
-      </header>
+  <div class="story-layout">
+    <aside class="story-toc" data-story-toc hidden>
+      <details class="story-toc__panel" open>
+        <summary>In this story</summary>
+        <ol data-story-toc-list></ol>
+      </details>
+    </aside>
 
-      <div class="content__content" v-story>
+    <div class="story-article">
+      {% if storyType == "quick-answer" %}
+      <section class="story-quick-answer" data-quick-answer hidden>
+        <p class="story-kicker">The short answer</p>
+        <p class="story-quick-answer__text" data-quick-answer-text></p>
+      </section>
+      {% endif %}
+
+      <div class="story-article__body" data-story-body v-story>
         {{ page.contentHtml | safe }}
         {% if page.mainHtmlBlock1 %}{{ page.mainHtmlBlock1 | safe }}{% endif %}
         {% if page.mainContentBlock1Html %}{{ page.mainContentBlock1Html | safe }}{% endif %}
@@ -119,17 +312,27 @@
             {{ block.html | safe }}
           {% elif block.__typename == "TableBlock" %}
             {{ renderTableBlock(block) }}
+          {% elif block.__typename == "StoryImageBlock" %}
+            {{ renderStoryImageBlock(block) }}
+          {% elif block.__typename == "StoryGalleryBlock" %}
+            {{ renderStoryGalleryBlock(block) }}
           {% endif %}
         {% endfor %}
       </div>
 
-      <div class="content__modules">
+      <footer class="story-article__footer">
+        <span>Written by</span>
+        <strong><a href="/about">Amy Seder</a></strong>
+      </footer>
+
+      <div class="story-article__modules">
         {% set hasManualRelatedStories = page.relatedStories.length %}
         {% set shouldAutofillRelatedStories = page.relatedStories.length < 3 %}
         {% set hasAutoRelatedStories = shouldAutofillRelatedStories %}
 
         {% if hasManualRelatedStories or shouldAutofillRelatedStories %}
-        <div class="related-stories{% if hasAutoRelatedStories %} related-stories--auto{% endif %}">
+        <section class="related-stories{% if hasAutoRelatedStories %} related-stories--auto{% endif %}">
+          <p class="story-kicker">Continue reading</p>
           <h2 class="related-stories__heading">Explore further</h2>
 
           <ul class="related-stories__list">
@@ -138,6 +341,20 @@
               {{ renderRelatedStory(story) }}
             {% endif %}
             {% endfor %}
+
+            {% if shouldAutofillRelatedStories %}
+              {% for category in featuredCategories.items %}
+              {% if category.title == "* Most Popular Posts *" %}
+                {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+                {% set matchesCategory = page.category.length and story.category.length and story.category[0].title == page.category[0].title %}
+                {% set matchesLocation = page.location.length and story.location.length and story.location[0].title == page.location[0].title %}
+                {% if story.title != page.title and (matchesCategory or matchesLocation) %}
+                  {{ renderRelatedStory(story) }}
+                {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% endfor %}
+            {% endif %}
 
             {% if shouldAutofillRelatedStories and page.location.length %}
               {% for story in page.location[0].storySet.items %}
@@ -161,27 +378,11 @@
               {% endfor %}
             {% endif %}
 
-            {% if shouldAutofillRelatedStories %}
-              {% for category in featuredCategories.items %}
-              {% if category.title == "* Most Popular Posts *" %}
-                {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
-                {% if story.title != page.title
-                  and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
-                  and (page.relatedStories.length < 2 or story.title != page.relatedStories[1].title)
-                  and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
-                  {{ renderRelatedStory(story) }}
-                {% endif %}
-                {% endfor %}
-              {% endif %}
-              {% endfor %}
-            {% endif %}
           </ul>
-        </div>
+        </section>
         {% endif %}
-
       </div>
     </div>
   </div>
-</div>
-
+</article>
 {% endblock %}

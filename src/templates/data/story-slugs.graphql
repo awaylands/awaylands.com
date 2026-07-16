@@ -3,8 +3,12 @@ query($images: TSImagesConfig) {
     items {
       _contentTypeName
       _enabledAt
+      _updatedAt
       title
       slug
+      postType
+      pageLayout
+      shopEditTitle
       category {
         title
         storySet(size: 6, sort: [{field: "_enabledAt", order: "desc"}]) {
@@ -12,6 +16,9 @@ query($images: TSImagesConfig) {
             _contentTypeName
             title
             slug
+            social {
+              title
+            }
             tout {
               image {
                 path
@@ -27,6 +34,9 @@ query($images: TSImagesConfig) {
             _contentTypeName
             title
             slug
+            social {
+              title
+            }
             tout {
               image {
                 path
@@ -75,10 +85,38 @@ query($images: TSImagesConfig) {
           rowsText
           footnote
         }
+        ... on StoryImageBlock {
+          label
+          image {
+            path
+          }
+          size
+          alignment
+          caption
+          altText
+          linkUrl
+          linkTarget
+        }
+        ... on StoryGalleryBlock {
+          label
+          layout
+          size
+          images {
+            image {
+              path
+            }
+            caption
+            altText
+            linkUrl
+          }
+        }
       }
       relatedStories {
         title
         slug
+        social {
+          title
+        }
         tout {
           image {
             path

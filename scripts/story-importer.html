@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Away Lands Post Importer</title>
+  <style>
+    :root {
+      --ink: #163f46;
+      --blue: #176e78;
+      --orange: #ec683d;
+      --paper: #f7f2e9;
+      --white: #fffdf8;
+      --line: rgba(22, 63, 70, 0.18);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    button, input, select { font: inherit; }
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 36px auto 72px; }
+    .top { display: flex; justify-content: space-between; gap: 24px; align-items: end; margin-bottom: 24px; }
+    .eyebrow { margin: 0 0 6px; color: var(--orange); font-size: 12px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; font: 500 clamp(40px, 6vw, 72px)/.92 Georgia, serif; letter-spacing: -.04em; }
+    .branch { border: 1px solid var(--line); border-radius: 999px; padding: 7px 12px; background: rgba(255,255,255,.48); font-size: 12px; }
+    .grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr); gap: 20px; }
+    .card { border: 1px solid var(--line); border-radius: 18px; background: var(--white); box-shadow: 0 14px 40px rgba(22,63,70,.07); overflow: hidden; }
+    .card__head { padding: 20px 22px 16px; border-bottom: 1px solid var(--line); }
+    .card__head h2 { margin: 0 0 4px; font: 600 22px/1.1 Georgia, serif; }
+    .card__head p { margin: 0; color: rgba(22,63,70,.7); font-size: 13px; }
+    .paste { min-height: 380px; padding: 28px; outline: 0; color: rgba(22,63,70,.65); }
+    .paste:focus, .paste.is-ready { color: var(--ink); }
+    .paste.is-dragging { background: rgba(23,110,120,.08); box-shadow: inset 0 0 0 3px var(--blue); }
+    .paste h1, .paste h2, .paste h3 { font-family: Georgia, serif; line-height: 1.08; }
+    .paste img { display: block; max-width: 100%; max-height: 420px; margin: 18px auto; object-fit: contain; }
+    .form { padding: 20px 22px 24px; }
+    label { display: block; margin-bottom: 14px; color: rgba(22,63,70,.74); font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+    input, select { width: 100%; margin-top: 6px; border: 1px solid var(--line); border-radius: 9px; padding: 11px 12px; background: white; color: var(--ink); }
+    input:focus, select:focus { outline: 2px solid rgba(23,110,120,.22); border-color: var(--blue); }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 2px 0 18px; }
+    .stat { border: 1px solid var(--line); border-radius: 10px; padding: 10px; background: rgba(247,242,233,.48); }
+    .stat strong { display: block; font-size: 20px; }
+    .stat span { color: rgba(22,63,70,.65); font-size: 11px; }
+    .button { width: 100%; border: 0; border-radius: 999px; padding: 13px 18px; background: var(--orange); color: white; font-weight: 750; cursor: pointer; }
+    .button:hover { filter: brightness(.97); transform: translateY(-1px); }
+    .button:disabled { opacity: .45; cursor: wait; transform: none; }
+    .status { min-height: 42px; margin: 14px 0 0; color: rgba(22,63,70,.74); font-size: 13px; }
+    .status.is-error { color: #a22f21; }
+    .status.is-success { color: var(--blue); font-weight: 650; }
+    .steps { margin: 18px 0 0; padding: 0; list-style: none; counter-reset: steps; }
+    .steps li { display: grid; grid-template-columns: 24px 1fr; gap: 8px; margin-top: 9px; color: rgba(22,63,70,.7); font-size: 13px; }
+    .steps li:before { counter-increment: steps; content: counter(steps); display: grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--blue); color: white; font-size: 11px; font-weight: 700; }
+    @media (max-width: 780px) { .grid { grid-template-columns: 1fr; } .top { align-items: start; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <div>
+        <p class="eyebrow">Away Lands editorial</p>
+        <h1>Post Importer</h1>
+      </div>
+      <span class="branch">__TAKESHAPE_PROJECT__ · __TAKESHAPE_BRANCH__</span>
+    </header>
+
+    <div class="grid">
+      <section class="card">
+        <div class="card__head">
+          <h2>Paste the entire Google Doc</h2>
+          <p>Click below, then press Command–V. Images, links, lists, headings, and emphasis are retained.</p>
+        </div>
+        <div id="paste" class="paste" contenteditable="true" role="textbox" aria-label="Paste Google Doc here">Paste or drag the full post here…</div>
+      </section>
+
+      <aside class="card">
+        <div class="card__head">
+          <h2>Review and create</h2>
+          <p>Everything stays editable after import.</p>
+        </div>
+        <div class="form">
+          <div class="stats">
+            <div class="stat"><strong id="wordCount">0</strong><span>words</span></div>
+            <div class="stat"><strong id="imageCount">0</strong><span>images</span></div>
+            <div class="stat"><strong id="savedSize">0</strong><span>MB removed</span></div>
+          </div>
+
+          <label>Post title
+            <input id="title" autocomplete="off">
+          </label>
+          <label>URL slug
+            <input id="slug" autocomplete="off">
+          </label>
+          <div class="two">
+            <label>Post type
+              <select id="postType">
+                <option value="auto">Auto</option>
+                <option value="standard">Standard</option>
+                <option value="quick-answer">Quick answer</option>
+                <option value="guide">Destination guide</option>
+                <option value="review">Review / ranking</option>
+                <option value="style-shopping">Style / shopping</option>
+              </select>
+            </label>
+            <label>Page layout
+              <select id="pageLayout">
+                <option value="auto">Auto</option>
+                <option value="simple">Simple</option>
+                <option value="sidebar">Sidebar</option>
+              </select>
+            </label>
+          </div>
+
+          <button id="create" class="button" disabled>Create enabled post</button>
+          <p id="status" class="status">Paste a document to begin.</p>
+
+          <ol class="steps">
+            <li>Images are resized to a maximum 1800px and compressed.</li>
+            <li>Images upload to the TakeShape gallery before the story is saved.</li>
+            <li>The post is created as Enabled with Auto sizing and layout.</li>
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const paste = document.getElementById('paste');
+      const title = document.getElementById('title');
+      const slug = document.getElementById('slug');
+      const create = document.getElementById('create');
+      const status = document.getElementById('status');
+      let sourceHtml = '';
+      let sourceDocument = null;
+
+      function slugify(value) {
+        return (value || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '')
+          .slice(0, 120);
+      }
+
+      function setStatus(message, type) {
+        status.textContent = message;
+        status.className = `status${type ? ` is-${type}` : ''}`;
+      }
+
+      function parsePaste(html, plainText) {
+        sourceHtml = html || '';
+        sourceDocument = new DOMParser().parseFromString(sourceHtml, 'text/html');
+
+        if (!sourceHtml && plainText) {
+          sourceDocument.body.innerHTML = plainText.split(/\n{2,}/).map(text => `<p>${text}</p>`).join('');
+          sourceHtml = sourceDocument.body.innerHTML;
+        }
+
+        sourceDocument.querySelectorAll('script, style, meta, link').forEach(node => node.remove());
+        const firstHeading = sourceDocument.querySelector('h1');
+        const detectedTitle = firstHeading ? firstHeading.textContent.trim() : '';
+        const text = sourceDocument.body.textContent || '';
+        const images = Array.from(sourceDocument.querySelectorAll('img'));
+        const dataCharacters = images.reduce((total, image) => total + (/^data:image/i.test(image.src) ? image.src.length : 0), 0);
+
+        title.value = detectedTitle || title.value;
+        slug.value = slugify(title.value);
+        document.getElementById('wordCount').textContent = (text.trim().match(/\S+/g) || []).length.toLocaleString();
+        document.getElementById('imageCount').textContent = images.length;
+        document.getElementById('savedSize').textContent = (dataCharacters / 1024 / 1024).toFixed(1);
+
+        paste.innerHTML = sourceDocument.body.innerHTML;
+        paste.classList.add('is-ready');
+        create.disabled = !title.value;
+        setStatus(`${images.length} image${images.length === 1 ? '' : 's'} will be compressed and uploaded when you create the post.`);
+      }
+
+      paste.addEventListener('paste', event => {
+        event.preventDefault();
+        parsePaste(
+          event.clipboardData.getData('text/html'),
+          event.clipboardData.getData('text/plain')
+        );
+      });
+
+      paste.addEventListener('dragover', event => {
+        event.preventDefault();
+        paste.classList.add('is-dragging');
+      });
+      paste.addEventListener('dragleave', () => paste.classList.remove('is-dragging'));
+      paste.addEventListener('drop', event => {
+        event.preventDefault();
+        paste.classList.remove('is-dragging');
+        parsePaste(
+          event.dataTransfer.getData('text/html'),
+          event.dataTransfer.getData('text/plain')
+        );
+      });
+
+      title.addEventListener('input', () => {
+        if (!slug.dataset.edited) {
+          slug.value = slugify(title.value);
+        }
+        create.disabled = !sourceDocument || !title.value.trim();
+      });
+      slug.addEventListener('input', () => { slug.dataset.edited = 'true'; });
+
+      function imageToJpeg(dataUrl) {
+        return new Promise((resolve, reject) => {
+          const image = new Image();
+          image.onload = () => {
+            const maxEdge = 1800;
+            const scale = Math.min(1, maxEdge / Math.max(image.naturalWidth, image.naturalHeight));
+            const width = Math.max(1, Math.round(image.naturalWidth * scale));
+            const height = Math.max(1, Math.round(image.naturalHeight * scale));
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            canvas.width = width;
+            canvas.height = height;
+            context.fillStyle = '#fff';
+            context.fillRect(0, 0, width, height);
+            context.drawImage(image, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', 0.78));
+          };
+          image.onerror = () => reject(new Error('One pasted image could not be read.'));
+          image.src = dataUrl;
+        });
+      }
+
+      async function postJson(url, data) {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || 'The importer could not complete that step.');
+        }
+
+        return result;
+      }
+
+      function draftKey() {
+        return Math.random().toString(36).slice(2, 7).padEnd(5, '0');
+      }
+
+      function emptyDraft() {
+        return {blocks: [{key: draftKey(), text: '', type: 'unstyled', depth: 0, inlineStyleRanges: [], entityRanges: [], data: {}}], entityMap: {}};
+      }
+
+      function styleNames(element, inherited) {
+        const styles = inherited.slice();
+        const tag = element.tagName ? element.tagName.toLowerCase() : '';
+        const css = element.getAttribute ? (element.getAttribute('style') || '') : '';
+
+        if ((tag === 'b' || tag === 'strong' || /font-weight:\s*(?:bold|[6-9]00)/i.test(css)) && styles.indexOf('BOLD') === -1) styles.push('BOLD');
+        if ((tag === 'i' || tag === 'em' || /font-style:\s*italic/i.test(css)) && styles.indexOf('ITALIC') === -1) styles.push('ITALIC');
+        if ((tag === 'u' || /text-decoration[^;]*underline/i.test(css)) && styles.indexOf('UNDERLINE') === -1) styles.push('UNDERLINE');
+        return styles;
+      }
+
+      function inlineTokens(root) {
+        const tokens = [];
+
+        function walk(node, styles, href) {
+          if (node.nodeType === Node.TEXT_NODE) {
+            tokens.push({text: node.nodeValue || '', styles, href});
+            return;
+          }
+          if (node.nodeType !== Node.ELEMENT_NODE) return;
+          if (node.tagName === 'IMG') {
+            tokens.push({image: node});
+            return;
+          }
+          if (node.tagName === 'BR') {
+            tokens.push({text: '\n', styles, href});
+            return;
+          }
+
+          const nextStyles = styleNames(node, styles);
+          const nextHref = node.tagName === 'A' ? (node.getAttribute('href') || '').trim() : href;
+          Array.from(node.childNodes).forEach(child => walk(child, nextStyles, nextHref));
+        }
+
+        Array.from(root.childNodes).forEach(child => walk(child, [], ''));
+        return tokens;
+      }
+
+      function buildDraft(doc, assetsBySource) {
+        const blocks = [];
+        const entityMap = {};
+        let entityIndex = 0;
+        let skippedTitle = false;
+
+        function addTextBlock(element, type, depth) {
+          const tokens = inlineTokens(element);
+          let block = {key: draftKey(), text: '', type, depth: depth || 0, inlineStyleRanges: [], entityRanges: [], data: {}};
+
+          function flush(force) {
+            block.text = block.text.replace(/\u00a0/g, ' ').replace(/[ \t]+\n/g, '\n').trim();
+            if (force || block.text) blocks.push(block);
+            block = {key: draftKey(), text: '', type, depth: depth || 0, inlineStyleRanges: [], entityRanges: [], data: {}};
+          }
+
+          tokens.forEach(token => {
+            if (token.image) {
+              flush(false);
+              const source = token.image.getAttribute('src') || '';
+              const asset = assetsBySource[source];
+              if (asset) {
+                entityMap[entityIndex] = {
+                  type: 'image',
+                  mutability: 'IMMUTABLE',
+                  data: {id: asset._id, path: asset.path, caption: emptyDraft(), credit: emptyDraft(), contentTypeId: 'ASSET'}
+                };
+                blocks.push({key: draftKey(), text: ' ', type: 'atomic', depth: 0, inlineStyleRanges: [], entityRanges: [{offset: 0, length: 1, key: entityIndex}], data: {}});
+                entityIndex += 1;
+              }
+              return;
+            }
+
+            const start = block.text.length;
+            block.text += token.text;
+            const length = token.text.length;
+            (token.styles || []).forEach(style => block.inlineStyleRanges.push({offset: start, length, style}));
+            if (token.href && length) {
+              entityMap[entityIndex] = {type: 'LINK', mutability: 'MUTABLE', data: {href: token.href.trim(), url: token.href.trim()}};
+              block.entityRanges.push({offset: start, length, key: entityIndex});
+              entityIndex += 1;
+            }
+          });
+          flush(type === 'unstyled');
+        }
+
+        function visit(element) {
+          const tag = (element.tagName || '').toLowerCase();
+          if (tag === 'script' || tag === 'style') return;
+          if (tag === 'h1' && !skippedTitle) { skippedTitle = true; return; }
+          if (/^h[1-6]$/.test(tag)) { addTextBlock(element, `header-${['one','two','three','four','five','six'][Number(tag.slice(1)) - 1]}`, 0); return; }
+          if (tag === 'p' || tag === 'div') {
+            const hasDirectBlocks = Array.from(element.children).some(child => /^(H[1-6]|P|UL|OL|DIV)$/.test(child.tagName));
+            if (!hasDirectBlocks) { addTextBlock(element, 'unstyled', 0); return; }
+          }
+          if (tag === 'ul' || tag === 'ol') {
+            Array.from(element.children).filter(child => child.tagName === 'LI').forEach(item => addTextBlock(item, tag === 'ol' ? 'ordered-list-item' : 'unordered-list-item', 0));
+            return;
+          }
+          if (tag === 'img') {
+            const wrapper = document.createElement('p');
+            wrapper.appendChild(element.cloneNode(true));
+            addTextBlock(wrapper, 'unstyled', 0);
+            return;
+          }
+          Array.from(element.children).forEach(visit);
+        }
+
+        Array.from(doc.body.children).forEach(visit);
+        if (!blocks.length) blocks.push(emptyDraft().blocks[0]);
+        return {blocks, entityMap};
+      }
+
+      create.addEventListener('click', async () => {
+        create.disabled = true;
+        try {
+          const images = Array.from(sourceDocument.querySelectorAll('img'));
+          const uniqueSources = Array.from(new Set(images.map(image => image.getAttribute('src')).filter(Boolean)));
+          const assetsBySource = {};
+          const nameBase = slugify(title.value) || 'imported-story';
+
+          for (let index = 0; index < uniqueSources.length; index += 1) {
+            const source = uniqueSources[index];
+            setStatus(`Optimizing and uploading image ${index + 1} of ${uniqueSources.length}…`);
+            const dataUrl = /^data:image/i.test(source) ? await imageToJpeg(source) : source;
+            if (!/^data:image/i.test(dataUrl)) throw new Error('A remote image could not be imported. Download it into the Google Doc and paste again.');
+            const result = await postJson('/api/upload-image', {dataUrl, filename: `${nameBase}-${String(index + 1).padStart(2, '0')}.jpg`});
+            assetsBySource[source] = result.asset;
+          }
+
+          setStatus('Creating the enabled post…');
+          const firstAsset = uniqueSources.length ? assetsBySource[uniqueSources[0]] : null;
+          const result = await postJson('/api/create-story', {
+            title: title.value.trim(),
+            slug: slug.value.trim() || slugify(title.value),
+            postType: document.getElementById('postType').value,
+            pageLayout: document.getElementById('pageLayout').value,
+            heroAssetId: firstAsset && firstAsset._id,
+            content: buildDraft(sourceDocument, assetsBySource)
+          });
+
+          setStatus(`Created “${result.story.title}” as Enabled. Story ID: ${result.story._id}`, 'success');
+        } catch (error) {
+          setStatus(error.message, 'error');
+          create.disabled = false;
+        }
+      });
+    }());
+  </script>
+</body>
+</html>
