@@ -860,15 +860,6 @@
           },
           "social": {
             "widget": "shapeObject"
-          },
-          "mainHtmlBlock1": {
-            "widget": "paragraphText"
-          },
-          "mainContentBlock1": {
-            "widget": "wysiwygText"
-          },
-          "additionalMainBlocks": {
-            "widget": "shapeObject"
           }
         },
         "order": [
@@ -878,16 +869,13 @@
           "tout",
           "category",
           "location",
+          "contentBlocks",
           "postType",
           "pageLayout",
           "shopEditTitle",
-          "content",
-          "mainHtmlBlock1",
-          "mainContentBlock1",
-          "additionalMainBlocks",
-          "contentBlocks",
           "relatedStories",
-          "social"
+          "social",
+          "content"
         ]
       }
     },
