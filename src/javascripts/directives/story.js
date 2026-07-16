@@ -236,6 +236,37 @@ function ensureSpaceBesideLink(link, before) {
   link.parentNode.insertBefore(document.createTextNode(' '), before ? link : link.nextSibling);
 }
 
+function restoreCollapsedInlineGap(link, before) {
+  let sibling = before ? link.previousSibling : link.nextSibling;
+  let crossedEmptyInlineElement = false;
+
+  while (
+    sibling &&
+    sibling.nodeType === 1 &&
+    /^(B|EM|I|SPAN|STRONG)$/.test(sibling.tagName) &&
+    !(sibling.textContent || '')
+  ) {
+    crossedEmptyInlineElement = true;
+    sibling = before ? sibling.previousSibling : sibling.nextSibling;
+  }
+
+  if (!crossedEmptyInlineElement || !sibling || sibling.nodeType !== TEXT_NODE) {
+    return;
+  }
+
+  const linkText = (link.textContent || '').trim();
+  const siblingText = sibling.nodeValue || '';
+  const needsSpace = before ? (
+    /[A-Za-z0-9]$/.test(siblingText) && /^[A-Za-z0-9]/.test(linkText)
+  ) : (
+    /[A-Za-z0-9]$/.test(linkText) && /^[A-Za-z0-9]/.test(siblingText)
+  );
+
+  if (needsSpace) {
+    ensureSpaceBesideLink(link, before);
+  }
+}
+
 function normalizeInlineLinkSpaces(el) {
   const links = el.querySelectorAll('a');
 
@@ -254,6 +285,9 @@ function normalizeInlineLinkSpaces(el) {
       lastNode.nodeValue = lastNode.nodeValue.replace(/\s+$/, '');
       ensureSpaceBesideLink(link, false);
     }
+
+    restoreCollapsedInlineGap(link, true);
+    restoreCollapsedInlineGap(link, false);
   });
 }
 
