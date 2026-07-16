@@ -9,6 +9,20 @@ query($images: TSImagesConfig) {
       postType
       pageLayout
       shopEditTitle
+      shopEditItems {
+        image {
+          path
+        }
+        title
+        productUrl
+      }
+      firstHandExpertise {
+        kicker
+        title
+        text
+      }
+      keepReadingKicker
+      keepReadingTitle
       category {
         title
         storySet(size: 6, sort: [{field: "_enabledAt", order: "desc"}]) {

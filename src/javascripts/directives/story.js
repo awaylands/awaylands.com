@@ -993,6 +993,32 @@ function advancedStoryPickCandidates(el, isStyleEdit) {
   return candidates.slice(0, 3);
 }
 
+function manualStoryPickCandidates(storyPage) {
+  if (!storyPage) {
+    return [];
+  }
+
+  return Array.prototype.map.call(
+    storyPage.querySelectorAll('[data-story-shop-item]'),
+    item => {
+      const imageUrl = (item.getAttribute('data-image') || '').trim();
+      let image = null;
+
+      if (imageUrl) {
+        image = document.createElement('img');
+        image.src = imageUrl;
+        image.alt = (item.getAttribute('data-title') || '').trim();
+      }
+
+      return {
+        href: (item.getAttribute('data-url') || '').trim(),
+        label: (item.getAttribute('data-title') || '').trim(),
+        image
+      };
+    }
+  ).filter(item => item.href && item.label).slice(0, 3);
+}
+
 function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
   const article = storyPage.querySelector('.story-article');
   const paragraphs = el.querySelectorAll('p');
@@ -1137,7 +1163,8 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
     return;
   }
 
-  const picks = advancedStoryPickCandidates(el, isStyleEdit);
+  const manualPicks = manualStoryPickCandidates(storyPage);
+  const picks = manualPicks.length ? manualPicks : advancedStoryPickCandidates(el, isStyleEdit);
   const picksSection = document.createElement('section');
   const picksKicker = document.createElement('p');
   const picksTitle = document.createElement('h2');
@@ -1216,11 +1243,11 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
 
   trustSection.className = 'story-rail__section story-rail__trust';
   trustKicker.className = 'story-rail__kicker';
-  trustKicker.textContent = 'First-hand expertise';
+  trustKicker.textContent = (storyPage.getAttribute('data-expertise-kicker') || '').trim() || 'First-hand expertise';
   trustTitle.className = 'story-rail__title';
-  trustTitle.textContent = 'Why trust this guide';
+  trustTitle.textContent = (storyPage.getAttribute('data-expertise-title') || '').trim() || 'Why trust this guide';
   trustText.className = 'story-rail__trust-text';
-  trustText.textContent = 'Amy Seder is a professional travel photographer with more than a decade of field experience.';
+  trustText.textContent = (storyPage.getAttribute('data-expertise-text') || '').trim() || 'Amy Seder is a professional travel photographer with more than a decade of field experience.';
   trustSection.appendChild(trustKicker);
   trustSection.appendChild(trustTitle);
   trustSection.appendChild(trustText);
@@ -1239,9 +1266,9 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
 
     relatedSection.className = 'story-rail__section story-rail__related';
     relatedKicker.className = 'story-rail__kicker';
-    relatedKicker.textContent = 'Keep reading';
+    relatedKicker.textContent = (storyPage.getAttribute('data-keep-reading-kicker') || '').trim() || 'Keep reading';
     relatedTitle.className = 'story-rail__title';
-    relatedTitle.textContent = 'More from Away Lands';
+    relatedTitle.textContent = (storyPage.getAttribute('data-keep-reading-title') || '').trim() || 'More from Away Lands';
     relatedList.className = 'story-rail__related-list';
 
     Array.prototype.slice.call(relatedItems, 0, 3).forEach(item => {

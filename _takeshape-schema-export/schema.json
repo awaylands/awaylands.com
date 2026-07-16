@@ -853,6 +853,24 @@
               "widget": "dropdown",
               "instructions": "Auto adds a sidebar to longer guides, reviews, and shopping posts. Simple and Sidebar are manual overrides."
             },
+            "shopEditTitle": {
+              "widget": "singleLineText",
+              "instructions": "Optional. Defaults to Shop The Edit; enter a custom title for this post's editor shortlist."
+            },
+            "shopEditItems": {
+              "widget": "shapeArray",
+              "instructions": "Optional manual shortlist. Add an image, display title, and product link. When left empty, the site automatically builds the shortlist from product links in the article."
+            },
+            "firstHandExpertise": {
+              "widget": "shapeObject",
+              "instructions": "Optional overrides for the First-hand expertise sidebar section."
+            },
+            "keepReadingKicker": {
+              "widget": "singleLineText"
+            },
+            "keepReadingTitle": {
+              "widget": "singleLineText"
+            },
             "content": {
               "widget": "wysiwygText",
               "instructions": "Primary article editor. Write or paste the full post here, including headings, links, lists, and images."
@@ -895,7 +913,55 @@
             "postType",
             "pageLayout",
             "shopEditTitle",
+            "shopEditItems",
+            "firstHandExpertise",
+            "keepReadingKicker",
+            "keepReadingTitle",
             "relatedStories"
+          ]
+        }
+      },
+      "StoryShopEditItem": {
+        "default": {
+          "widget": "repeater",
+          "properties": {
+            "image": {
+              "widget": "image",
+              "instructions": "Optional product image. Drag from the asset gallery or choose an image."
+            },
+            "title": {
+              "widget": "singleLineText"
+            },
+            "productUrl": {
+              "widget": "singleLineText",
+              "instructions": "Paste the full product URL. It opens externally."
+            }
+          },
+          "order": [
+            "image",
+            "title",
+            "productUrl"
+          ]
+        }
+      },
+      "StoryExpertise": {
+        "default": {
+          "widget": "object",
+          "properties": {
+            "kicker": {
+              "widget": "singleLineText"
+            },
+            "title": {
+              "widget": "singleLineText"
+            },
+            "text": {
+              "widget": "paragraphText"
+            }
+          },
+          "order": [
+            "kicker",
+            "title",
+            "text"
           ]
         }
       },
@@ -3926,7 +3992,7 @@
             "title": {
               "type": "string",
               "minLength": 1,
-              "title": "Title",
+              "title": "STORY — Title",
               "@mapping": "shapedb:Story.H1EAf19e-"
             },
             "publishedDate": {
@@ -3998,7 +4064,7 @@
             },
             "postType": {
               "type": "string",
-              "title": "Post Type",
+              "title": "POST LAYOUT — Post Type",
               "description": "Controls automatic modules and labels. Auto is recommended; a selected value is a manual override.",
               "oneOf": [
                 {
@@ -4065,6 +4131,39 @@
                 }
               ],
               "@mapping": "shapedb:Story.PageLayoutV2"
+            },
+            "shopEditTitle": {
+              "type": "string",
+              "title": "Shop The Edit Title",
+              "description": "Optional post-level override for the Shop The Edit shortlist heading.",
+              "default": "Shop The Edit",
+              "@mapping": "shapedb:Story.ShopEditTitleV1"
+            },
+            "shopEditItems": {
+              "type": "array",
+              "title": "Shop The Edit — Manual Items",
+              "description": "Optional manual product shortlist. When empty, the site automatically selects product links from the article.",
+              "items": {
+                "$ref": "#/shapes/StoryShopEditItem/schema"
+              },
+              "@mapping": "shapedb:Story.ShopEditItemsV1"
+            },
+            "firstHandExpertise": {
+              "$ref": "#/shapes/StoryExpertise/schema",
+              "title": "First-hand Expertise",
+              "@mapping": "shapedb:Story.FirstHandExpertiseV1"
+            },
+            "keepReadingKicker": {
+              "type": "string",
+              "title": "Keep Reading — Small Label",
+              "default": "Keep reading",
+              "@mapping": "shapedb:Story.KeepReadingKickerV1"
+            },
+            "keepReadingTitle": {
+              "type": "string",
+              "title": "Keep Reading — Main Title",
+              "default": "More from Away Lands",
+              "@mapping": "shapedb:Story.KeepReadingTitleV1"
             },
             "content": {
               "type": "object",
@@ -5204,6 +5303,78 @@
               "title": "Link URL",
               "minLength": 0,
               "@mapping": "shapedb:DestinationsEndingLink.url01"
+            }
+          }
+        }
+      },
+      "StoryShopEditItem": {
+        "id": "StoryShopEditItemV1",
+        "name": "StoryShopEditItem",
+        "title": "Shop The Edit Item",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "title": "Product Image",
+              "@mapping": "shapedb:StoryShopEditItem.Image",
+              "@backreference": {
+                "enabled": true
+              },
+              "@ref": "local:Asset",
+              "@input": {
+                "@ref": "local:TSRelationship"
+              },
+              "@args": "TSRelationshipArgs",
+              "@resolver": {
+                "name": "shapedb:getRelated",
+                "service": "shapedb",
+                "options": {
+                  "nullable": true
+                }
+              }
+            },
+            "title": {
+              "type": "string",
+              "title": "Display Title",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryShopEditItem.Title"
+            },
+            "productUrl": {
+              "type": "string",
+              "title": "Product Link",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryShopEditItem.ProductUrl"
+            }
+          }
+        }
+      },
+      "StoryExpertise": {
+        "id": "StoryExpertiseV1",
+        "name": "StoryExpertise",
+        "title": "First-hand Expertise",
+        "schema": {
+          "type": "object",
+          "properties": {
+            "kicker": {
+              "type": "string",
+              "title": "Small Label",
+              "default": "First-hand expertise",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryExpertise.Kicker"
+            },
+            "title": {
+              "type": "string",
+              "title": "Main Title",
+              "default": "Why trust this guide",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryExpertise.Title"
+            },
+            "text": {
+              "type": "string",
+              "title": "Text",
+              "default": "Amy Seder is a professional travel photographer with more than a decade of field experience.",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryExpertise.Text"
             }
           }
         }

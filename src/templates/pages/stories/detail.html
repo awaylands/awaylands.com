@@ -210,7 +210,32 @@
 {% endblock %}
 
 {% block content %}
-<article class="story-page story-page--{{ storyType }}" data-story-page data-story-type="{{ storyType }}" data-page-layout="{{ pageLayout }}"{% if page.shopEditTitle %} data-shop-edit-title="{{ page.shopEditTitle | escape }}"{% endif %}>
+<article
+  class="story-page story-page--{{ storyType }}"
+  data-story-page
+  data-story-type="{{ storyType }}"
+  data-page-layout="{{ pageLayout }}"
+  {% if page.shopEditTitle %}data-shop-edit-title="{{ page.shopEditTitle | escape }}"{% endif %}
+  {% if page.firstHandExpertise.kicker %}data-expertise-kicker="{{ page.firstHandExpertise.kicker | escape }}"{% endif %}
+  {% if page.firstHandExpertise.title %}data-expertise-title="{{ page.firstHandExpertise.title | escape }}"{% endif %}
+  {% if page.firstHandExpertise.text %}data-expertise-text="{{ page.firstHandExpertise.text | escape }}"{% endif %}
+  {% if page.keepReadingKicker %}data-keep-reading-kicker="{{ page.keepReadingKicker | escape }}"{% endif %}
+  {% if page.keepReadingTitle %}data-keep-reading-title="{{ page.keepReadingTitle | escape }}"{% endif %}
+>
+  {% if page.shopEditItems.length %}
+  <div data-story-shop-items hidden>
+    {% for item in page.shopEditItems %}
+      {% if item.productUrl and item.title %}
+      <span
+        data-story-shop-item
+        data-title="{{ item.title | escape }}"
+        data-url="{{ item.productUrl | trim | escape }}"
+        {% if item.image %}data-image="{{ item.image.path | image({auto: 'compress,format', w: 480}) | escape }}"{% endif %}
+      ></span>
+      {% endif %}
+    {% endfor %}
+  </div>
+  {% endif %}
   <header class="story-cover{% if not page.tout.image %} story-cover--no-image{% endif %}">
     <div class="story-cover__copy">
       <div class="story-cover__eyebrow">
