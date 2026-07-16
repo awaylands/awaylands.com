@@ -74,7 +74,7 @@
       <aside class="card">
         <div class="card__head">
           <h2>Review and create</h2>
-          <p>The new post is built as one draggable Story Body.</p>
+          <p>Everything stays editable after import.</p>
         </div>
         <div class="form">
           <div class="stats">
@@ -115,7 +115,6 @@
           <ol class="steps">
             <li>Images are resized to a maximum 1800px and compressed.</li>
             <li>Images upload to the TakeShape gallery before the story is saved.</li>
-            <li>Text and images become ordered, draggable Story Body blocks.</li>
             <li>The post is created as Enabled with Auto sizing and layout.</li>
           </ol>
         </div>
@@ -363,80 +362,6 @@
         return {blocks, entityMap};
       }
 
-      function draftHasContent(draft) {
-        return draft.blocks.some(block => (block.text || '').trim() || block.type !== 'unstyled');
-      }
-
-      function buildStoryBlocks(doc, assetsBySource) {
-        const storyBlocks = [];
-        let pendingTextElements = [];
-
-        function flushText() {
-          if (!pendingTextElements.length) return;
-
-          const textDocument = document.implementation.createHTMLDocument('Story text');
-          pendingTextElements.forEach(element => textDocument.body.appendChild(element));
-          const draft = buildDraft(textDocument, assetsBySource);
-
-          if (draftHasContent(draft)) {
-            storyBlocks.push({contentBlock: {content: draft}});
-          }
-
-          pendingTextElements = [];
-        }
-
-        Array.from(doc.body.children).forEach(element => {
-          const images = element.tagName === 'IMG'
-            ? [element]
-            : Array.from(element.querySelectorAll('img'));
-
-          if (!images.length) {
-            pendingTextElements.push(element.cloneNode(true));
-            return;
-          }
-
-          const textClone = element.cloneNode(true);
-          if (textClone.tagName === 'IMG') {
-            textClone.remove();
-          } else {
-            Array.from(textClone.querySelectorAll('img')).forEach(image => image.remove());
-          }
-
-          if ((textClone.textContent || '').trim()) {
-            pendingTextElements.push(textClone);
-          }
-
-          flushText();
-
-          images.forEach(image => {
-            const source = image.getAttribute('src') || '';
-            const asset = assetsBySource[source];
-            const linkedParent = image.closest('a[href]');
-
-            if (!asset) return;
-
-            storyBlocks.push({
-              storyImageBlock: {
-                image: {id: asset._id},
-                size: 'auto',
-                alignment: 'auto',
-                altText: (image.getAttribute('alt') || '').trim(),
-                linkUrl: linkedParent ? (linkedParent.getAttribute('href') || '').trim() : '',
-                linkTarget: 'external'
-              }
-            });
-          });
-        });
-
-        flushText();
-
-        if (!storyBlocks.length) {
-          storyBlocks.push({contentBlock: {content: emptyDraft()}});
-        }
-
-        return storyBlocks;
-      }
-
       create.addEventListener('click', async () => {
         create.disabled = true;
         try {
@@ -462,7 +387,7 @@
             postType: document.getElementById('postType').value,
             pageLayout: document.getElementById('pageLayout').value,
             heroAssetId: firstAsset && firstAsset._id,
-            contentBlocks: buildStoryBlocks(sourceDocument, assetsBySource)
+            content: buildDraft(sourceDocument, assetsBySource)
           });
 
           setStatus(`Created “${result.story.title}” as Enabled. Story ID: ${result.story._id}`, 'success');

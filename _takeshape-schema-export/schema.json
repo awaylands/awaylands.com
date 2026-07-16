@@ -855,16 +855,27 @@
             },
             "content": {
               "widget": "wysiwygText",
-              "instructions": "Existing posts only. This preserves the original article body during testing. Leave it blank on new posts and build the article in Story Body above."
+              "instructions": "Primary article editor. Write or paste the full post here, including headings, links, lists, and images."
             },
             "contentBlocks": {
               "widget": "shapeArray",
-              "instructions": "Use this for every new post. Add Text, Image, Gallery, Table, or Embed blocks and drag them into the exact published order."
+              "instructions": "Optional additional blocks. Use only when you need structured image, gallery, table, or embed controls outside the main Content editor."
             },
             "relatedStories": {
               "widget": "relationship"
             },
             "social": {
+              "widget": "shapeObject"
+            },
+            "mainHtmlBlock1": {
+              "widget": "paragraphText",
+              "instructions": "Optional raw HTML or embed code that should appear after the main Content field."
+            },
+            "mainContentBlock1": {
+              "widget": "wysiwygText",
+              "instructions": "Optional continuation of the article after the first HTML block."
+            },
+            "additionalMainBlocks": {
               "widget": "shapeObject"
             }
           },
@@ -875,13 +886,16 @@
             "tout",
             "category",
             "location",
+            "social",
+            "content",
+            "mainHtmlBlock1",
+            "mainContentBlock1",
+            "additionalMainBlocks",
             "contentBlocks",
             "postType",
             "pageLayout",
             "shopEditTitle",
-            "relatedStories",
-            "social",
-            "content"
+            "relatedStories"
           ]
         }
       },
@@ -4055,33 +4069,33 @@
             "content": {
               "type": "object",
               "@tag": "draftjs",
-              "title": "Legacy Article Body — Existing Posts Only",
-              "description": "Existing posts retain their original body here during testing. Leave this blank on new posts and use Story Body instead.",
+              "title": "CONTENT — Article Body",
+              "description": "Primary article editor for text, headings, links, lists, and inline images.",
               "@mapping": "shapedb:Story.rkzHXy9e-"
             },
             "contentBlocks": {
               "type": "array",
-              "description": "The complete ordered article body for new posts. Add and drag Text, Image, Gallery, Table, and Embed blocks.",
+              "description": "Optional structured blocks for layouts that cannot be handled in the main Content editor.",
               "items": {
                 "oneOf": [
                   {
                     "@ref": "local:ContentBlock"
                   },
                   {
-                    "@ref": "local:StoryImageBlock"
-                  },
-                  {
-                    "@ref": "local:StoryGalleryBlock"
+                    "@ref": "local:HtmlBlock"
                   },
                   {
                     "@ref": "local:TableBlock"
                   },
                   {
-                    "@ref": "local:HtmlBlock"
+                    "@ref": "local:StoryImageBlock"
+                  },
+                  {
+                    "@ref": "local:StoryGalleryBlock"
                   }
                 ]
               },
-              "title": "Story Body — New Posts",
+              "title": "Additional Structured Blocks — Optional",
               "@mapping": "shapedb:Story.Z1b3FgKbp"
             },
             "relatedStories": {
@@ -4177,7 +4191,8 @@
           },
           "required": [
             "title",
-            "tout"
+            "tout",
+            "content"
           ]
         }
       },
@@ -4806,7 +4821,7 @@
       "ContentBlock": {
         "id": "uxhJqMxSq",
         "name": "ContentBlock",
-        "title": "Text Section",
+        "title": "Content Block",
         "schema": {
           "type": "object",
           "properties": {
@@ -4822,7 +4837,7 @@
       "HtmlBlock": {
         "id": "DLA36KeM7",
         "name": "HtmlBlock",
-        "title": "Embed / Custom Code",
+        "title": "HTML Block",
         "schema": {
           "type": "object",
           "properties": {
@@ -4845,7 +4860,7 @@
       "TableBlock": {
         "id": "TableBlock",
         "name": "TableBlock",
-        "title": "Table",
+        "title": "Table Block",
         "schema": {
           "type": "object",
           "properties": {
@@ -5196,7 +5211,7 @@
       "StoryImageBlock": {
         "id": "StoryImageBlockV2",
         "name": "StoryImageBlock",
-        "title": "Image",
+        "title": "Image — fast controls",
         "schema": {
           "type": "object",
           "properties": {
@@ -5395,7 +5410,7 @@
       "StoryGalleryBlock": {
         "id": "StoryGalleryBlockV2",
         "name": "StoryGalleryBlock",
-        "title": "Gallery",
+        "title": "Gallery — drag to reorder",
         "schema": {
           "type": "object",
           "properties": {
