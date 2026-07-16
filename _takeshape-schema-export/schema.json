@@ -874,12 +874,16 @@
             "keepReadingTitle": {
               "widget": "singleLineText"
             },
-            "content": {
-              "widget": "wysiwygText",
-              "instructions": "Primary article editor. Write or paste the full post here, including headings, links, lists, and images."
-            },
-            "extraContentBlocks": {
-              "widget": "shapeArray"
+          "content": {
+            "widget": "wysiwygText",
+            "instructions": "Primary article editor. Write or paste the full post here, including headings, links, lists, and images."
+          },
+          "contentBlocks": {
+            "widget": "shapeArray",
+            "instructions": "Add Content, HTML, Table, Image, or Gallery blocks here. Drag blocks to alternate and reorder them in the exact sequence they should appear in the story."
+          },
+          "extraContentBlocks": {
+            "widget": "shapeArray"
             },
             "extraHtmlBlocks": {
               "widget": "shapeArray"
@@ -904,12 +908,10 @@
             "tout",
             "category",
             "location",
-            "social",
-            "content",
-            "extraContentBlocks",
-            "extraHtmlBlocks",
-            "extraTableBlocks",
-            "postType",
+          "social",
+          "content",
+          "contentBlocks",
+          "postType",
             "pageLayout",
             "atAGlance",
             "shopEditTitle",
