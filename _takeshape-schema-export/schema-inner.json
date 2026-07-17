@@ -869,8 +869,7 @@
             "instructions": "Primary article editor. Write or paste the full post here, including headings, links, lists, and images."
           },
           "contentBlocks": {
-            "widget": "shapeArray",
-            "instructions": "Add Content, HTML, Table, Image, or Gallery blocks here. Drag blocks to alternate and reorder them in the exact sequence they should appear in the story."
+            "widget": "shapeArray"
           },
           "extraContentBlocks": {
             "widget": "shapeArray"
@@ -4199,7 +4198,7 @@
           },
           "contentBlocks": {
             "type": "array",
-            "description": "Optional structured blocks for layouts that cannot be handled in the main Content editor.",
+            "description": "",
             "items": {
               "oneOf": [
                 {
@@ -4210,16 +4209,10 @@
                 },
                 {
                   "@ref": "local:TableBlock"
-                },
-                {
-                  "@ref": "local:StoryImageBlock"
-                },
-                {
-                  "@ref": "local:StoryGalleryBlock"
                 }
               ]
             },
-            "title": "Additional Structured Blocks — Optional",
+            "title": "Content Blocks",
             "@mapping": "shapedb:Story.Z1b3FgKbp"
           },
           "relatedStories": {
