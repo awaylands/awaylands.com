@@ -55,6 +55,1561 @@
   font-family: Georgia, 'Times New Roman', serif;
 }
 
+.postcard-destinations {
+  --pd-ink: #171817;
+  --pd-paper: #f7f0df;
+  --pd-cream: #fff9ea;
+  --pd-blue: #134f70;
+  --pd-red: #d8402b;
+  --pd-citron: #f2d54b;
+  --pd-postcard-yellow: #f7efa1;
+  --pd-sage: #9ba88f;
+  --pd-black: #050505;
+
+  background:
+    linear-gradient(90deg, rgba(19, 79, 112, 0.07) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(216, 64, 43, 0.06) 1px, transparent 1px),
+    var(--pd-paper);
+  background-size: 4.8rem 4.8rem;
+  color: var(--pd-ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  overflow: hidden;
+}
+
+.pd-kicker {
+  color: var(--pd-red);
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.pd-postcard-hero {
+  background:
+    linear-gradient(90deg, rgba(247, 240, 223, 0.9), rgba(247, 240, 223, 0.34) 40%, rgba(5, 5, 5, 0.22)),
+    url('https://images.takeshape.io/decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/4ac3a12f-3258-48b8-89a6-7a286e4ea246/Sandals-Emerald-Bay-Bahamas-Exuma-Resort-Review-Away-Lands-DJI_0879.jpg?auto=compress%2Cformat&w=2200');
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 6.4rem);
+  padding: clamp(2rem, 4vw, 6rem);
+  position: relative;
+}
+
+.pd-postcard-hero:before {
+  background:
+    radial-gradient(circle at 18% 28%, rgba(242, 213, 75, 0.18), rgba(242, 213, 75, 0) 28rem),
+    linear-gradient(180deg, rgba(247, 240, 223, 0.12), rgba(5, 5, 5, 0.22));
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.pd-postcard-hero:after {
+  background: repeating-linear-gradient(135deg, var(--pd-red) 0 1.6rem, transparent 1.6rem 3.2rem, var(--pd-blue) 3.2rem 4.8rem, transparent 4.8rem 6.4rem);
+  bottom: 0;
+  content: '';
+  height: 1.2rem;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.pd-postcard-hero__intro {
+  align-self: center;
+  color: var(--pd-ink);
+  left: clamp(2rem, 4vw, 6rem);
+  max-width: 54rem;
+  position: absolute;
+  top: clamp(8rem, 11vh, 14rem);
+  z-index: 2;
+}
+
+.pd-postcard-hero__intro h1 {
+  color: var(--pd-blue);
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: clamp(7rem, 9vw, 14rem);
+  font-weight: 300;
+  letter-spacing: 0.018em;
+  line-height: 0.82;
+  margin: 1.5rem 0 2.2rem;
+  text-transform: uppercase;
+}
+
+.pd-postcard-hero__intro h1 em {
+  color: var(--pd-red);
+  display: block;
+  font-family: 'OldMoneyItalic', Georgia, serif;
+  font-size: 0.42em;
+  font-style: italic;
+  letter-spacing: 0.035em;
+  line-height: 1.04;
+  text-transform: none;
+}
+
+.pd-postcard-hero__intro > p:last-of-type {
+  color: rgba(23, 24, 23, 0.74);
+  font-size: clamp(1.7rem, 1.5vw, 2.25rem);
+  line-height: 1.55;
+}
+
+.pd-postcard-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.pd-postcard-hero__actions a {
+  border: 0.1rem solid rgba(19, 79, 112, 0.48);
+  border-radius: 999rem;
+  color: var(--pd-blue);
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 1.15rem 1.55rem;
+  text-transform: uppercase;
+}
+
+.pd-postcard-carousel {
+  aspect-ratio: 4 / 3;
+  min-height: 48rem;
+  width: min(92rem, 72vw);
+  position: relative;
+  z-index: 2;
+}
+
+.pd-header-postcard {
+  animation: pdPostcardFlip 30s steps(1, end) infinite;
+  animation-delay: calc(var(--postcard-index) * -6s);
+  background:
+    radial-gradient(circle at 14% 18%, rgba(255, 255, 255, 0.62), rgba(255, 255, 255, 0) 16rem),
+    radial-gradient(circle at 84% 12%, rgba(217, 120, 74, 0.16), rgba(217, 120, 74, 0) 18rem),
+    radial-gradient(circle at 72% 78%, rgba(19, 79, 112, 0.12), rgba(19, 79, 112, 0) 20rem),
+    linear-gradient(135deg, rgba(255, 248, 219, 0.98), rgba(232, 215, 181, 0.96) 52%, rgba(255, 244, 206, 0.98));
+  border: 0;
+  border-radius: 0.6rem 0.6rem 3.2rem 0.6rem;
+  box-shadow:
+    0 2.8rem 8rem rgba(19, 79, 112, 0.22),
+    inset 0 0 0 0.1rem rgba(92, 57, 29, 0.28),
+    inset 0 0 0 1.4rem rgba(255, 253, 229, 0.45);
+  color: var(--pd-postcard-yellow);
+  inset: 0;
+  opacity: 1;
+  overflow: hidden;
+  position: absolute;
+  transform: rotateY(90deg);
+  transform-origin: center;
+  visibility: hidden;
+}
+
+.pd-header-postcard:before {
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.18) 0 0.1rem, transparent 0.1rem 0.42rem),
+    repeating-linear-gradient(0deg, rgba(92, 57, 29, 0.08) 0 0.1rem, transparent 0.1rem 0.52rem),
+    radial-gradient(circle at 20% 30%, rgba(92, 57, 29, 0.1) 0 0.09rem, transparent 0.1rem),
+    radial-gradient(circle at 78% 62%, rgba(92, 57, 29, 0.08) 0 0.08rem, transparent 0.09rem);
+  background-size: auto, auto, 2.7rem 2.7rem, 3.4rem 3.4rem;
+  content: '';
+  inset: 0;
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.pd-header-postcard:after {
+  background:
+    linear-gradient(90deg, rgba(194, 56, 42, 0.72) 0 1.2rem, transparent 1.2rem 2.4rem, rgba(19, 79, 112, 0.72) 2.4rem 3.6rem, transparent 3.6rem 4.8rem) top left / 4.8rem 1.1rem repeat-x,
+    linear-gradient(90deg, rgba(194, 56, 42, 0.62) 0 1.2rem, transparent 1.2rem 2.4rem, rgba(19, 79, 112, 0.62) 2.4rem 3.6rem, transparent 3.6rem 4.8rem) bottom left / 4.8rem 1.1rem repeat-x,
+    linear-gradient(180deg, rgba(194, 56, 42, 0.62) 0 1.2rem, transparent 1.2rem 2.4rem, rgba(19, 79, 112, 0.62) 2.4rem 3.6rem, transparent 3.6rem 4.8rem) top left / 1.1rem 4.8rem repeat-y,
+    linear-gradient(180deg, rgba(194, 56, 42, 0.62) 0 1.2rem, transparent 1.2rem 2.4rem, rgba(19, 79, 112, 0.62) 2.4rem 3.6rem, transparent 3.6rem 4.8rem) top right / 1.1rem 4.8rem repeat-y;
+  border: 0.1rem solid rgba(92, 57, 29, 0.22);
+  border-radius: 0.4rem 0.4rem 2.4rem 0.4rem;
+  content: '';
+  inset: 0.7rem;
+  pointer-events: none;
+  position: absolute;
+  z-index: 7;
+}
+
+.pd-header-postcard__image {
+  border: 0.85rem solid rgba(255, 246, 209, 0.84);
+  border-radius: 0.2rem 0.2rem 2rem 0.2rem;
+  box-shadow:
+    0 1.2rem 2.8rem rgba(19, 38, 38, 0.22),
+    inset 0 0 0 0.1rem rgba(92, 57, 29, 0.24);
+  inset: 2.6rem;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+}
+
+.pd-header-postcard__image:before {
+  background:
+    linear-gradient(135deg, rgba(255, 246, 202, 0.82), rgba(255, 246, 202, 0.28));
+  box-shadow: 0 0.4rem 1.1rem rgba(61, 42, 28, 0.16);
+  content: '';
+  height: 4.8rem;
+  opacity: 0.82;
+  pointer-events: none;
+  position: absolute;
+  right: 18%;
+  top: -1.3rem;
+  transform: rotate(3deg);
+  width: 15rem;
+  z-index: 4;
+}
+
+.pd-header-postcard__image:after {
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.36), rgba(0, 0, 0, 0.02) 46%, rgba(0, 0, 0, 0.2)),
+    radial-gradient(circle at 70% 45%, rgba(247, 239, 161, 0.08), rgba(247, 239, 161, 0) 25rem),
+    radial-gradient(circle at 8% 10%, rgba(255, 246, 202, 0.12), rgba(255, 246, 202, 0) 18rem);
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.pd-header-postcard__image img {
+  filter: saturate(1.06) contrast(0.92);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.pd-header-postcard__grain {
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.28) 0 0.08rem, transparent 0.1rem),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 1.9rem 1.9rem, 0.5rem 0.5rem, 0.5rem 0.5rem;
+  inset: 0;
+  mix-blend-mode: overlay;
+  opacity: 0.3;
+  position: absolute;
+  z-index: 3;
+}
+
+.pd-header-postcard__note {
+  bottom: 28%;
+  left: 5.4%;
+  max-width: 45%;
+  position: absolute;
+  z-index: 5;
+}
+
+.pd-header-postcard__note p {
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent calc(1.05em - 1px),
+      rgba(247, 239, 161, 0.38) calc(1.05em - 1px),
+      rgba(247, 239, 161, 0.38) 1.05em
+    );
+  background-position: 0 0.1em;
+  color: var(--pd-postcard-yellow);
+  font-family: 'La Belle Aurore', 'OldMoneyItalic', Georgia, serif;
+  font-size: clamp(2.4rem, 3.2vw, 5.5rem);
+  font-style: normal;
+  letter-spacing: 0.02em;
+  line-height: 1.05;
+  margin: 0;
+  padding-bottom: 0.4rem;
+  text-shadow: 0 0 1.4rem rgba(247, 239, 161, 0.22);
+}
+
+.pd-header-postcard__address {
+  bottom: 18%;
+  position: absolute;
+  right: 8%;
+  width: 33%;
+  z-index: 5;
+}
+
+.pd-header-postcard__address p {
+  border-bottom: 0.14rem solid rgba(247, 239, 161, 0.7);
+  color: var(--pd-postcard-yellow);
+  font-family: 'La Belle Aurore', 'OldMoneyItalic', Georgia, serif;
+  font-size: clamp(2.3rem, 2.8vw, 4.6rem);
+  font-style: normal;
+  line-height: 1.1;
+  margin: 0 0 1.2rem;
+}
+
+.pd-header-postcard__address span {
+  display: inline-block;
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 0.42em;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-right: 1rem;
+  text-transform: uppercase;
+}
+
+.pd-header-postcard__title {
+  bottom: 4.8%;
+  color: var(--pd-postcard-yellow);
+  left: 16%;
+  position: absolute;
+  right: 5%;
+  z-index: 5;
+}
+
+.pd-header-postcard__title span {
+  display: inline-block;
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: clamp(1rem, 1.5vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin-right: 1.2rem;
+  text-transform: uppercase;
+}
+
+.pd-header-postcard__title strong {
+  font-family: 'La Belle Aurore', 'OldMoneyItalic', Georgia, serif;
+  font-size: clamp(4rem, 6.4vw, 10rem);
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 0.75;
+}
+
+.pd-header-postcard__mark {
+  color: rgba(247, 239, 161, 0.88);
+  opacity: 0.92;
+  position: absolute;
+  z-index: 8;
+}
+
+.pd-header-postcard__mark--stamp {
+  background:
+    radial-gradient(circle at 0 0, transparent 0 0.42rem, rgba(247, 239, 161, 0.22) 0.44rem),
+    linear-gradient(135deg, rgba(247, 239, 161, 0.12), rgba(247, 239, 161, 0.02));
+  background-size: 1.1rem 1.1rem, auto;
+  border: 0.18rem solid currentColor;
+  box-shadow:
+    inset 0 0 0 0.28rem rgba(247, 239, 161, 0.36),
+    0 0 0 0.1rem rgba(66, 43, 24, 0.14);
+  height: 11.2rem;
+  right: 7%;
+  top: 7%;
+  transform: rotate(2deg);
+  width: 9.6rem;
+}
+
+.pd-header-postcard__mark--stamp:before {
+  border: 0.12rem solid currentColor;
+  border-radius: 0.2rem;
+  content: '';
+  inset: 1.1rem;
+  position: absolute;
+}
+
+.pd-header-postcard__mark--stamp:after {
+  border-bottom: 0.12rem solid currentColor;
+  border-top: 0.12rem solid currentColor;
+  content: '';
+  inset: 2.3rem 1.8rem;
+  opacity: 0.48;
+  position: absolute;
+}
+
+.pd-header-postcard__mark--stamp span {
+  display: block;
+  font-family: 'Still ITC Garamond Light Condensed', Georgia, serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1;
+  margin-top: 4.4rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.pd-header-postcard__mark--postmark {
+  border: 0.14rem solid currentColor;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.75rem rgba(247, 239, 161, 0.1);
+  height: 8.8rem;
+  right: 20%;
+  top: 7.8%;
+  transform: rotate(-8deg);
+  width: 8.8rem;
+}
+
+.pd-header-postcard__mark--postmark:after {
+  background:
+    repeating-linear-gradient(180deg, currentColor 0 0.12rem, transparent 0.12rem 1.1rem);
+  content: '';
+  height: 5.6rem;
+  left: 7.1rem;
+  opacity: 0.74;
+  position: absolute;
+  top: 1.2rem;
+  transform: skewX(-18deg) rotate(2deg);
+  width: 20rem;
+}
+
+.pd-header-postcard__mark--postmark:before {
+  border-top: 0.12rem solid currentColor;
+  content: '';
+  left: -1.8rem;
+  opacity: 0.52;
+  position: absolute;
+  top: 50%;
+  transform: rotate(20deg);
+  width: 12.5rem;
+}
+
+.pd-header-postcard__mark--postmark span {
+  display: block;
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 8.8rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.pd-header-postcard__caption {
+  align-items: center;
+  background: rgba(255, 249, 234, 0.84);
+  bottom: 3rem;
+  color: var(--pd-blue);
+  display: flex;
+  gap: 1rem;
+  left: 3rem;
+  padding: 0.85rem 1rem;
+  position: absolute;
+  z-index: 6;
+}
+
+.pd-header-postcard__caption span {
+  color: var(--pd-red);
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: 3.2rem;
+  line-height: 0.8;
+}
+
+.pd-header-postcard__caption p {
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  margin: 0;
+  max-width: 18rem;
+  text-transform: uppercase;
+}
+
+.pd-postcard-hero__dots {
+  bottom: 3.2rem;
+  display: flex;
+  gap: 0.8rem;
+  left: clamp(2rem, 4vw, 6rem);
+  position: absolute;
+  z-index: 4;
+}
+
+.pd-postcard-hero__dots span {
+  animation: pdPostcardDot 30s steps(1, end) infinite;
+  animation-delay: calc(var(--postcard-index) * -6s);
+  background: rgba(19, 79, 112, 0.25);
+  border-radius: 999rem;
+  display: block;
+  height: 0.7rem;
+  width: 3.2rem;
+}
+
+@keyframes pdPostcardFlip {
+  0%,
+  19.999% {
+    opacity: 1;
+    transform: rotateY(0deg);
+    visibility: visible;
+    z-index: 3;
+  }
+
+  20%,
+  100% {
+    opacity: 1;
+    transform: rotateY(90deg);
+    visibility: hidden;
+    z-index: 1;
+  }
+}
+
+@keyframes pdPostcardDot {
+  0%,
+  19.999% {
+    background: var(--pd-red);
+  }
+
+  20%,
+  100% {
+    background: rgba(19, 79, 112, 0.25);
+  }
+}
+
+.pd-hero {
+  min-height: calc(100vh - 8rem);
+  position: relative;
+}
+
+.pd-hero__image {
+  height: calc(100vh - 8rem);
+  min-height: 62rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.pd-hero__image:after {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.66), rgba(0, 0, 0, 0.12) 52%, rgba(0, 0, 0, 0.48));
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.pd-hero__image img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.pd-hero__copy {
+  bottom: 7vw;
+  color: var(--pd-cream);
+  left: 5vw;
+  max-width: 84rem;
+  position: absolute;
+  z-index: 2;
+}
+
+.pd-hero__copy h1 {
+  color: var(--pd-cream);
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: clamp(7rem, 13vw, 18rem);
+  font-weight: 300;
+  letter-spacing: 0.015em;
+  line-height: 0.78;
+  margin: 1.4rem 0 2rem;
+  text-transform: uppercase;
+}
+
+.pd-hero__copy h1 em {
+  color: var(--pd-citron);
+  display: block;
+  font-family: 'OldMoneyItalic', Georgia, serif;
+  font-size: 0.38em;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin-left: 0.06em;
+  text-transform: none;
+}
+
+.pd-hero__copy p:last-of-type {
+  font-size: clamp(1.8rem, 2vw, 2.8rem);
+  line-height: 1.45;
+  max-width: 56rem;
+}
+
+.pd-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-top: 3rem;
+}
+
+.pd-hero__actions a {
+  border: 0.1rem solid rgba(255, 249, 234, 0.65);
+  border-radius: 999rem;
+  color: var(--pd-cream);
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 1.2rem 1.7rem;
+  text-transform: uppercase;
+}
+
+.pd-airmail {
+  background: repeating-linear-gradient(135deg, var(--pd-red) 0 1.8rem, transparent 1.8rem 3.6rem, var(--pd-blue) 3.6rem 5.4rem, transparent 5.4rem 7.2rem);
+  height: 1.4rem;
+  inset: auto 0 0;
+  position: absolute;
+  z-index: 4;
+}
+
+.pd-region-strip {
+  background: var(--pd-cream);
+  border-bottom: 0.1rem solid rgba(23, 24, 23, 0.18);
+  border-top: 0.1rem solid rgba(23, 24, 23, 0.18);
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.pd-region-strip a {
+  border-right: 0.1rem solid rgba(23, 24, 23, 0.18);
+  color: var(--pd-ink);
+  min-height: 12rem;
+  padding: 2rem;
+  position: relative;
+}
+
+.pd-region-strip a:after {
+  border: 0.1rem solid var(--pd-red);
+  border-radius: 50%;
+  content: '';
+  height: 4.6rem;
+  opacity: 0.45;
+  position: absolute;
+  right: 1.2rem;
+  top: 1.2rem;
+  width: 4.6rem;
+}
+
+.pd-region-strip span {
+  display: block;
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: 3.2rem;
+  letter-spacing: 0.02em;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.pd-region-strip small {
+  color: var(--pd-red);
+  display: block;
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+.pd-editorial-grid {
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 6vw 4vw;
+}
+
+.pd-editorial-grid__title {
+  align-self: end;
+  background: var(--pd-blue);
+  color: var(--pd-cream);
+  grid-column: span 4;
+  min-height: 44rem;
+  padding: 4rem;
+}
+
+.pd-editorial-grid__title h2 {
+  color: var(--pd-cream);
+  font-family: 'OldMoneyRegular', Georgia, serif;
+  font-size: clamp(5rem, 7vw, 9rem);
+  font-weight: 400;
+  line-height: 0.86;
+  margin: 2rem 0 0;
+}
+
+.pd-photo-card {
+  color: var(--pd-cream);
+  display: block;
+  min-height: 34rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.pd-photo-card img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s ease;
+  width: 100%;
+}
+
+.pd-photo-card:after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.58));
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.pd-photo-card span {
+  bottom: 2rem;
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: clamp(4rem, 5vw, 7.6rem);
+  left: 2rem;
+  letter-spacing: 0.03em;
+  line-height: 0.82;
+  position: absolute;
+  right: 2rem;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.pd-photo-card:hover img {
+  transform: scale(1.04);
+}
+
+.pd-photo-card--1 { grid-column: span 5; min-height: 58rem; }
+.pd-photo-card--2 { grid-column: span 3; min-height: 58rem; }
+.pd-photo-card--3 { grid-column: span 4; min-height: 58rem; }
+.pd-photo-card--4 { grid-column: span 3; }
+.pd-photo-card--5 { grid-column: span 5; }
+.pd-photo-card--6 { grid-column: span 4; }
+
+.pd-map-block {
+  background: var(--pd-black);
+  color: var(--pd-cream);
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: minmax(28rem, 34rem) 1fr;
+  padding: 6vw 4vw;
+}
+
+.pd-map-block__copy h2 {
+  color: var(--pd-cream);
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: clamp(5rem, 7vw, 10rem);
+  font-weight: 300;
+  line-height: 0.82;
+  margin: 2rem 0;
+  text-transform: uppercase;
+}
+
+.pd-map-block__copy p:last-child {
+  font-size: 1.7rem;
+  line-height: 1.55;
+}
+
+.pd-map {
+  background: var(--pd-citron);
+  border: 0.1rem solid rgba(255, 249, 234, 0.36);
+  min-height: 56rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.pd-map svg {
+  height: 100%;
+  inset: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.pd-map__line {
+  fill: none;
+  opacity: 0.28;
+  stroke: var(--pd-blue);
+  stroke-width: 2;
+}
+
+.pd-map__land path {
+  fill: var(--pd-blue);
+  opacity: 0.82;
+  stroke: var(--pd-cream);
+  stroke-width: 2;
+}
+
+.pd-map__pin {
+  background: var(--pd-cream);
+  border: 0.1rem solid var(--pd-ink);
+  border-radius: 999rem;
+  color: var(--pd-ink);
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.7rem 1rem;
+  position: absolute;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.pd-map__pin--na { left: 20%; top: 35%; }
+.pd-map__pin--sa { left: 30%; top: 69%; }
+.pd-map__pin--eu { left: 48%; top: 30%; }
+.pd-map__pin--af { left: 51%; top: 58%; }
+.pd-map__pin--me { left: 60%; top: 48%; }
+.pd-map__pin--as { left: 75%; top: 37%; }
+.pd-map__pin--oc { left: 82%; top: 73%; }
+
+.pd-postcards {
+  background: var(--pd-sage);
+  display: grid;
+  gap: 4vw;
+  grid-template-columns: 28rem 1fr;
+  padding: 7vw 4vw;
+}
+
+.pd-postcards__intro h2 {
+  color: var(--pd-blue);
+  font-family: 'OldMoneyItalic', Georgia, serif;
+  font-size: clamp(4rem, 6vw, 8rem);
+  font-weight: 400;
+  line-height: 0.9;
+  margin: 2rem 0 0;
+}
+
+.pd-postcard-stack {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pd-postcard {
+  background: var(--pd-cream);
+  box-shadow: 0 2.4rem 5rem rgba(23, 24, 23, 0.18);
+  color: var(--pd-ink);
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  min-height: 54rem;
+  padding: 1.4rem;
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.pd-postcard--1 { --tilt: -2deg; }
+.pd-postcard--2 { --tilt: 1.5deg; margin-top: 3rem; }
+.pd-postcard--3 { --tilt: -1deg; }
+.pd-postcard--4 { --tilt: 2deg; margin-top: 4rem; }
+
+.pd-postcard__front {
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.pd-postcard__front img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.pd-postcard__front strong {
+  background: rgba(255, 249, 234, 0.86);
+  bottom: 1rem;
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: 3.3rem;
+  font-weight: 300;
+  left: 1rem;
+  line-height: 0.85;
+  padding: 0.8rem 1rem;
+  position: absolute;
+  right: 1rem;
+  text-transform: uppercase;
+}
+
+.pd-postcard__back {
+  border: 0.1rem solid rgba(23, 24, 23, 0.34);
+  display: block;
+  padding: 2rem;
+  position: relative;
+}
+
+.pd-postcard__back:before {
+  background: rgba(23, 24, 23, 0.45);
+  content: '';
+  height: calc(100% - 4rem);
+  left: 50%;
+  position: absolute;
+  top: 2rem;
+  width: 0.1rem;
+}
+
+.pd-postcard__label {
+  display: block;
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: 4.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.pd-postcard__stamp {
+  border: 0.1rem solid rgba(23, 24, 23, 0.55);
+  border-radius: 50%;
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  height: 7rem;
+  letter-spacing: 0.14em;
+  line-height: 1.55;
+  padding-top: 1.2rem;
+  position: absolute;
+  right: 1.6rem;
+  text-align: center;
+  text-transform: uppercase;
+  top: 1.5rem;
+  width: 7rem;
+}
+
+.pd-postcard__message {
+  color: var(--pd-blue);
+  display: block;
+  font-family: 'OldMoneyItalic', Georgia, serif;
+  font-size: 2.8rem;
+  line-height: 0.95;
+  margin-top: 4rem;
+  max-width: 42%;
+}
+
+.pd-postcard__lines {
+  background: repeating-linear-gradient(180deg, transparent 0 2.6rem, rgba(23, 24, 23, 0.65) 2.7rem 2.8rem);
+  bottom: 2rem;
+  height: 12rem;
+  left: 57%;
+  position: absolute;
+  right: 2rem;
+}
+
+.pd-destination-list {
+  background: var(--pd-cream);
+  padding: 6vw 4vw;
+}
+
+.pd-destination-list__header {
+  align-items: end;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr minmax(30rem, 52rem);
+  margin-bottom: 3rem;
+}
+
+.pd-destination-list__header h2 {
+  color: var(--pd-red);
+  font-family: 'OldMoneyRegular', Georgia, serif;
+  font-size: clamp(5rem, 7vw, 10rem);
+  font-weight: 400;
+  line-height: 0.82;
+  margin: 0;
+}
+
+.pd-destination-list__rows {
+  border-top: 0.1rem solid rgba(23, 24, 23, 0.25);
+}
+
+.pd-destination-list__rows a {
+  align-items: center;
+  border-bottom: 0.1rem solid rgba(23, 24, 23, 0.25);
+  color: var(--pd-ink);
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 8rem 1fr 12rem;
+  min-height: 8rem;
+}
+
+.pd-destination-list__rows span {
+  color: var(--pd-blue);
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: 5rem;
+}
+
+.pd-destination-list__rows strong {
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: clamp(3rem, 4vw, 6rem);
+  font-weight: 300;
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.pd-destination-list__rows em {
+  color: var(--pd-red);
+  font-family: Montserrat, Raleway, sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.pd-planning {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.pd-planning a {
+  align-items: center;
+  background: var(--pd-blue);
+  border-right: 0.1rem solid rgba(255, 249, 234, 0.35);
+  color: var(--pd-citron);
+  display: flex;
+  font-family: 'ITCGaramondLightCondensed', Georgia, serif;
+  font-size: clamp(3.8rem, 5vw, 7rem);
+  justify-content: center;
+  line-height: 0.85;
+  min-height: 24rem;
+  padding: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (max-width: 1000px) {
+  .pd-postcard-hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .pd-postcard-hero__intro {
+    max-width: 72rem;
+  }
+
+  .pd-postcard-carousel {
+    aspect-ratio: 4 / 3;
+    min-height: 48rem;
+  }
+
+  .pd-header-postcard__note {
+    max-width: 54%;
+  }
+
+  .pd-region-strip,
+  .pd-map-block,
+  .pd-postcards,
+  .pd-destination-list__header,
+  .pd-planning {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-editorial-grid,
+  .pd-postcard-stack {
+    display: block;
+  }
+
+  .pd-editorial-grid__title,
+  .pd-photo-card,
+  .pd-postcard {
+    margin-bottom: 1.4rem;
+  }
+
+  .pd-region-strip a {
+    min-height: 8rem;
+  }
+
+  .pd-map {
+    min-height: 42rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .pd-postcard-hero {
+    padding: 2rem 1.4rem 4rem;
+  }
+
+  .pd-postcard-hero__intro h1 {
+    font-size: clamp(6rem, 17vw, 9rem);
+  }
+
+  .pd-postcard-carousel {
+    aspect-ratio: 3 / 4;
+    min-height: 58rem;
+  }
+
+  .pd-header-postcard {
+    border-radius: 0.5rem 0.5rem 2rem 0.5rem;
+  }
+
+  .pd-header-postcard__image {
+    inset: 1.4rem;
+  }
+
+  .pd-header-postcard__note {
+    bottom: 34%;
+    left: 7%;
+    max-width: 72%;
+  }
+
+  .pd-header-postcard__note p {
+    font-size: clamp(2.6rem, 8vw, 4.2rem);
+  }
+
+  .pd-header-postcard__address {
+    bottom: 16%;
+    left: 12%;
+    right: 7%;
+    width: auto;
+  }
+
+  .pd-header-postcard__title {
+    left: 7%;
+  }
+
+  .pd-header-postcard__mark--stamp {
+    height: 7.8rem;
+    right: 7%;
+    top: 6%;
+    width: 6.8rem;
+  }
+
+  .pd-header-postcard__mark--stamp span {
+    font-size: 1.2rem;
+    margin-top: 3.1rem;
+  }
+
+  .pd-header-postcard__mark--postmark {
+    height: 6.2rem;
+    right: 29%;
+    top: 7%;
+    width: 6.2rem;
+  }
+
+  .pd-header-postcard__mark--postmark:after {
+    height: 4.2rem;
+    left: 5.1rem;
+    width: 8rem;
+  }
+
+  .pd-header-postcard__mark--postmark span {
+    font-size: 0.66rem;
+    line-height: 6.2rem;
+  }
+
+  .pd-header-postcard__caption {
+    display: none;
+  }
+
+  .pd-hero__copy {
+    bottom: 4rem;
+    left: 2rem;
+    right: 2rem;
+  }
+
+  .pd-hero__image {
+    min-height: 70rem;
+  }
+
+  .pd-destination-list__rows a {
+    grid-template-columns: 5rem 1fr;
+  }
+
+  .pd-destination-list__rows em {
+    grid-column: 2;
+    padding-bottom: 1rem;
+  }
+}
+
+.pd-postcard-hero {
+  min-height: calc(100vh - 6.4rem);
+  overflow: hidden;
+  padding: clamp(8rem, 10vh, 12rem) clamp(1.6rem, 4vw, 6rem) clamp(5rem, 8vh, 8rem);
+  position: relative;
+}
+
+.pd-postcard-hero__intro {
+  left: 50%;
+  max-width: none;
+  pointer-events: none;
+  text-align: center;
+  top: clamp(12rem, 17vh, 17.5rem);
+  transform: translateX(-50%);
+  width: min(90rem, 88vw);
+  z-index: 6;
+}
+
+.pd-postcard-hero__intro > .pd-kicker:last-of-type {
+  color: #d96932;
+  font-size: clamp(1.2rem, 1.16vw, 1.55rem);
+  letter-spacing: 0.28em;
+  text-shadow: 0 0.8rem 3rem rgba(255, 248, 226, 0.42);
+}
+
+.pd-postcard-carousel {
+  aspect-ratio: auto;
+  height: 100%;
+  inset: 0;
+  min-height: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.pd-header-postcard {
+  animation: none;
+  aspect-ratio: auto;
+  background: transparent;
+  background-position: center;
+  background-size: cover;
+  border-radius: 0;
+  color: inherit;
+  display: block;
+  filter: none;
+  height: 100%;
+  inset: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  text-decoration: none;
+  transform: translateX(4rem) scale(0.985);
+  transition: transform 0.42s ease, opacity 0.3s ease, filter 0.3s ease;
+  visibility: visible;
+  width: 100%;
+  z-index: var(--stack-z, 1);
+}
+
+.pd-header-postcard[data-stack-offset='0'] {
+  --stack-z: 8;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0) scale(1);
+}
+
+.pd-header-postcard[data-stack-offset='1'] {
+  --stack-z: 4;
+  transform: translateX(4rem) scale(0.985);
+}
+
+.pd-header-postcard[data-stack-offset='2'] {
+  --stack-z: 3;
+  transform: translateX(-4rem) scale(0.985);
+}
+
+.pd-header-postcard[data-stack-offset='3'] {
+  --stack-z: 2;
+  transform: translateX(-4rem) scale(0.985);
+}
+
+.pd-header-postcard[data-stack-offset='4'] {
+  --stack-z: 1;
+  transform: translateX(-4rem) scale(0.985);
+}
+
+.pd-header-postcard.is-flipping-next {
+  opacity: 0;
+  transform: translateX(-5rem) scale(0.985);
+  z-index: 20;
+}
+
+.pd-header-postcard.is-flipping-prev {
+  opacity: 0;
+  transform: translateX(5rem) scale(0.985);
+  z-index: 20;
+}
+
+.pd-header-postcard:before,
+.pd-header-postcard:after {
+  display: none;
+}
+
+.pd-header-postcard__background {
+  display: block;
+  inset: 0;
+  position: absolute;
+  z-index: 1;
+}
+
+.pd-header-postcard__background img {
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  object-fit: cover;
+}
+
+.pd-header-postcard__background:after {
+  background: transparent;
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.pd-header-postcard__frame {
+  aspect-ratio: 16 / 10;
+  display: block;
+  filter: drop-shadow(0 2.6rem 7rem rgba(9, 25, 26, 0.28));
+  left: 50%;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-1.2deg);
+  width: min(104rem, 76vw);
+  z-index: 4;
+  -webkit-mask-image: url('/assets/images/postcard006.png');
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-image: url('/assets/images/postcard006.png');
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+
+.pd-header-postcard__frame:after {
+  background: url('/assets/images/postcard006.png');
+  background-position: center;
+  background-size: 100% 100%;
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+}
+
+.pd-header-postcard__image {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  inset: 25.6% 7.7% 10.2% 13.7%;
+  z-index: 3;
+}
+
+.pd-header-postcard__image:before {
+  display: none;
+}
+
+.pd-header-postcard__image:after {
+  background: transparent;
+  background-position: center;
+  background-size: cover;
+  inset: 0;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  z-index: 2;
+}
+
+.pd-header-postcard__image img {
+  filter: none;
+}
+
+.pd-header-postcard__grain {
+  background-image: none;
+  background-position: center, center;
+  background-size: cover, 1.9rem 1.9rem;
+  inset: 0;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  z-index: 3;
+}
+
+.pd-header-postcard__caption {
+  display: none;
+}
+
+.pd-header-postcard__mark {
+  color: #fff4a6;
+  display: none;
+  opacity: 1;
+  transition: opacity 0.2s ease;
+  text-shadow: 0 0.4rem 1.6rem rgba(5, 7, 4, 0.4);
+  z-index: 9;
+}
+
+.pd-header-postcard__mark--stamp {
+  border-color: currentColor;
+  right: 7%;
+  top: 7.4%;
+}
+
+.pd-header-postcard__mark--stamp:before,
+.pd-header-postcard__mark--stamp:after,
+.pd-header-postcard__mark--postmark:before,
+.pd-header-postcard__mark--postmark:after {
+  border-color: currentColor;
+}
+
+.pd-header-postcard__mark--postmark {
+  right: 20%;
+  top: 9.5%;
+}
+
+.pd-header-postcard__note {
+  bottom: auto;
+  left: 17%;
+  max-width: 42%;
+  top: 34%;
+  z-index: 8;
+}
+
+.pd-header-postcard__note,
+.pd-header-postcard__address,
+.pd-header-postcard__title {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.pd-header-postcard:not(.is-active) .pd-header-postcard__mark,
+.pd-header-postcard:not(.is-active) .pd-header-postcard__note,
+.pd-header-postcard:not(.is-active) .pd-header-postcard__address,
+.pd-header-postcard:not(.is-active) .pd-header-postcard__title {
+  opacity: 0;
+}
+
+.pd-header-postcard__note span {
+  background:
+    repeating-linear-gradient(
+      180deg,
+      transparent 0,
+      transparent calc(1.08em - 1px),
+      rgba(255, 248, 190, 0.34) calc(1.08em - 1px),
+      rgba(255, 248, 190, 0.34) 1.08em
+    );
+  color: #fff4a6;
+  font-size: clamp(1.55rem, 1.85vw, 3.05rem);
+  line-height: 1.08;
+  text-shadow: 0 0.4rem 1.8rem rgba(5, 7, 4, 0.38);
+}
+
+.pd-header-postcard__address {
+  bottom: 24%;
+  right: 12%;
+  width: 31%;
+  z-index: 8;
+}
+
+.pd-header-postcard__address > span {
+  display: block;
+  border-bottom-color: rgba(255, 248, 190, 0.46);
+  color: #fff4a6;
+  font-size: clamp(1.45rem, 1.75vw, 2.7rem);
+  line-height: 1.08;
+  margin-bottom: 0.8rem;
+  text-shadow: 0 0.4rem 1.8rem rgba(5, 7, 4, 0.34);
+}
+
+.pd-header-postcard__address b {
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.42em;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pd-header-postcard__title {
+  bottom: 18%;
+  color: #fff4a6;
+  left: 17%;
+  right: 11%;
+  z-index: 8;
+}
+
+.pd-header-postcard__title span {
+  font-size: clamp(0.75rem, 0.82vw, 1.05rem);
+  letter-spacing: 0.2em;
+}
+
+.pd-header-postcard__title strong {
+  font-size: clamp(2.7rem, 3.8vw, 5.6rem);
+  line-height: 0.8;
+}
+
+.pd-postcard-hero__controls {
+  bottom: auto;
+  display: flex;
+  justify-content: space-between;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: min(108rem, 86vw);
+  z-index: 12;
+}
+
+.pd-postcard-hero__controls button {
+  align-items: center;
+  background: rgba(255, 248, 226, 0.74);
+  border: 0.1rem solid rgba(24, 32, 31, 0.32);
+  border-radius: 50%;
+  color: var(--pd-blue);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: Georgia, serif;
+  font-size: 2.6rem;
+  height: 4.8rem;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.18s ease, transform 0.18s ease;
+  width: 4.8rem;
+}
+
+.pd-postcard-hero__controls button:hover {
+  background: rgba(255, 248, 226, 0.94);
+  transform: translateY(-0.2rem);
+}
+
+.pd-postcard-hero__dots {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .pd-postcard-carousel {
+    aspect-ratio: auto;
+    height: 100%;
+    width: 100%;
+  }
+
+  .pd-header-postcard {
+    width: 100%;
+  }
+
+  .pd-header-postcard__frame {
+    width: min(88rem, 90vw);
+  }
+
+  .pd-postcard-hero__controls {
+    width: min(96rem, 94vw);
+  }
+}
+
+@media (max-width: 640px) {
+  .pd-postcard-hero {
+    min-height: 82rem;
+    padding-top: 8rem;
+  }
+
+  .pd-postcard-hero__intro {
+    top: 11.2rem;
+  }
+
+  .pd-postcard-carousel {
+    aspect-ratio: auto;
+    min-height: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  .pd-header-postcard {
+    aspect-ratio: auto;
+    width: 100%;
+  }
+
+  .pd-header-postcard__frame {
+    width: 98vw;
+  }
+
+  .pd-header-postcard__note {
+    left: 8%;
+    max-width: 35%;
+    top: 23%;
+  }
+
+  .pd-header-postcard__note span {
+    font-size: clamp(1.45rem, 4.6vw, 2.3rem);
+  }
+
+  .pd-header-postcard__address {
+    bottom: 16%;
+    left: auto;
+    right: 8%;
+    width: 35%;
+  }
+
+  .pd-header-postcard__address > span {
+    font-size: clamp(1.35rem, 4vw, 2rem);
+  }
+
+  .pd-header-postcard__title {
+    left: 8%;
+  }
+}
+
 .atlas-label {
   margin: 0 0 1.4rem;
   color: var(--atlas-orange);
@@ -888,4 +2443,1743 @@
   .atlas-trip-styles__copy {
     min-height: 16rem;
   }
+}
+
+.body--destinations3 {
+  background: #fffaf2;
+}
+
+.body--destinations3 .page {
+  background:
+    radial-gradient(circle at 16% 8%, rgba(242, 201, 76, 0.2), transparent 28rem),
+    radial-gradient(circle at 86% 14%, rgba(14, 124, 134, 0.14), transparent 34rem),
+    #fffaf2;
+}
+
+.body--destinations3 .page-header.is-sticky {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+@include for-desktop-up {
+  .body--destinations3 .page-header.is-sticky .logo__image {
+    display: none;
+  }
+
+  .body--destinations3 .page-header.is-sticky .logo__image--white {
+    display: block;
+  }
+
+  .body--destinations3 .page-header.is-sticky .page-nav__list > li > a {
+    color: -color(white);
+  }
+
+  .body--destinations3 .page-header.is-sticky .page-nav__list > li > a:after {
+    background-color: -color(white);
+  }
+}
+
+.destinations-three {
+  --d3-navy: #07345c;
+  --d3-sea: #1599b1;
+  --d3-teal: #006b73;
+  --d3-sand: #fff2df;
+  --d3-citron: #ffe8a4;
+  --d3-terracotta: #e94700;
+  --d3-coral: #ffa19b;
+  --d3-seafoam: #8fc9c2;
+  --d3-olive: #a7b397;
+  --d3-ink: #1a1a1a;
+  --d3-paper: #fff6df;
+
+  color: var(--d3-ink);
+  font-family: "Still ITC Garamond Light Condensed", Georgia, "Times New Roman", serif;
+}
+
+.d3-page-title {
+  position: absolute;
+  top: clamp(12.4rem, 14vh, 17.2rem);
+  left: 50%;
+  z-index: 8;
+  width: min(112rem, calc(100% - 4rem));
+  padding: 0;
+  text-align: center;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.d3-page-title__small {
+  display: none;
+  margin-bottom: 1rem;
+  color: rgba(255, 232, 164, 0.86);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.d3-page-title h1 {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--d3-terracotta);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(2rem, 2.4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  text-shadow: 0 0.8rem 2.8rem rgba(7, 52, 92, 0.28);
+  text-transform: uppercase;
+}
+
+.d3-page-title h1:after {
+  display: none;
+}
+
+.d3-hero {
+  position: relative;
+  width: 100%;
+  min-height: 72rem;
+  height: 100vh;
+  margin: 0;
+  border-radius: 0;
+  overflow: hidden;
+  perspective: 1600px;
+  background:
+    linear-gradient(135deg, rgba(7, 52, 92, 0.24), rgba(233, 71, 0, 0.16)),
+    var(--d3-navy);
+  box-shadow: 0 2.6rem 8rem rgba(7, 52, 92, 0.22);
+}
+
+.d3-hero__graphics {
+  display: none;
+}
+
+.d3-graphic-stamp {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  border: 2px solid currentColor;
+  color: rgba(255, 232, 164, 0.9);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.15;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.d3-graphic-stamp--one {
+  top: 4.2rem;
+  left: clamp(2rem, 4vw, 6rem);
+  width: 10rem;
+  height: 10rem;
+  border-radius: 999px;
+  color: rgba(255, 232, 164, 0.66);
+  font-family: "Still ITC Garamond Light Condensed", Georgia, serif;
+  font-size: 3.4rem;
+  transform: rotate(-10deg);
+}
+
+.d3-graphic-stamp--one:before {
+  content: "Collect moments";
+  position: absolute;
+  inset: -1.1rem;
+  display: grid;
+  place-items: start center;
+  padding-top: 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+}
+
+.d3-graphic-stamp--two {
+  right: clamp(2rem, 5vw, 7rem);
+  bottom: 5rem;
+  min-width: 16rem;
+  min-height: 7rem;
+  padding: 1.2rem 1.7rem;
+  border-radius: 50%;
+  color: rgba(233, 71, 0, 0.82);
+  font-size: 1rem;
+  transform: rotate(7deg);
+}
+
+.d3-graphic-wave {
+  position: absolute;
+  right: 10vw;
+  top: 5.5rem;
+  width: 16rem;
+  height: 4rem;
+  opacity: 0.8;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 0.7rem,
+    rgba(255, 232, 164, 0.82) 0.8rem,
+    transparent 0.95rem
+  );
+  border-radius: 50%;
+  transform: rotate(-4deg);
+}
+
+.d3-graphic-ticket {
+  position: absolute;
+  left: 5vw;
+  bottom: 4.4rem;
+  padding: 1.1rem 1.6rem;
+  border: 1px solid rgba(255, 232, 164, 0.72);
+  color: rgba(255, 232, 164, 0.82);
+  font-family: "Still ITC Garamond Light Condensed", Georgia, "Times New Roman", serif;
+  font-size: 1.45rem;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+  transform: rotate(3deg);
+}
+
+.d3-hero__stack {
+  position: absolute;
+  inset: 0;
+}
+
+.d3-hero-card {
+  position: absolute;
+  inset: 0;
+  display: block;
+  overflow: hidden;
+  color: var(--d3-sand);
+  text-decoration: none;
+  transform-origin: 50% 50%;
+  transition:
+    transform 560ms cubic-bezier(0.22, 0.78, 0.28, 1),
+    opacity 560ms ease;
+  will-change: transform, opacity;
+}
+
+.d3-hero-card[data-d3-offset="0"] {
+  z-index: 5;
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+
+.d3-hero-card[data-d3-offset="1"] {
+  z-index: 2;
+  opacity: 0;
+  transform: translateX(3rem) scale(0.985);
+  pointer-events: none;
+}
+
+.d3-hero-card[data-d3-offset="2"] {
+  z-index: 1;
+  opacity: 0;
+  transform: translateX(3rem) scale(0.985);
+  pointer-events: none;
+}
+
+.d3-hero-card[data-d3-offset="3"],
+.d3-hero-card[data-d3-offset="4"] {
+  z-index: 1;
+  opacity: 0;
+  transform: translateX(-3rem) scale(0.985);
+  pointer-events: none;
+}
+
+.d3-hero-card.is-flipping-next {
+  opacity: 0;
+  transform: translateX(-3rem) scale(0.985);
+}
+
+.d3-hero-card.is-flipping-prev {
+  opacity: 0;
+  transform: translateX(3rem) scale(0.985);
+}
+
+.d3-hero-card__bg,
+.d3-hero-card__bg img {
+  position: absolute;
+  inset: 0;
+}
+
+.d3-hero-card__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.01);
+}
+
+.d3-hero-card:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(7, 52, 92, 0.42), rgba(7, 52, 92, 0.1) 47%, rgba(7, 52, 92, 0.2)),
+    linear-gradient(0deg, rgba(7, 52, 92, 0.28), transparent 48%);
+}
+
+.d3-hero-card:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.22;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: screen;
+}
+
+.d3-hero-card__content {
+  position: absolute;
+  left: clamp(2.4rem, 7vw, 11rem);
+  bottom: clamp(6rem, 11vh, 12rem);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  width: min(58rem, 48vw);
+}
+
+.d3-hero-card__eyebrow {
+  width: max-content;
+  margin-bottom: 2.4rem;
+  color: var(--d3-citron);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.d3-hero-card__title {
+  color: #fff8df;
+  font-family: "Still ITC Garamond Light Condensed", "Times New Roman", Georgia, serif;
+  font-size: clamp(6rem, 8.8vw, 14.8rem);
+  font-weight: 200;
+  letter-spacing: 0.01em;
+  line-height: 0.78;
+  text-wrap: balance;
+}
+
+.d3-hero-card__dek {
+  max-width: 48rem;
+  margin-top: 2.6rem;
+  color: rgba(255, 248, 223, 0.86);
+  font-size: clamp(1.7rem, 1.5vw, 2.3rem);
+  line-height: 1.42;
+}
+
+.d3-hero-card__meta {
+  width: max-content;
+  margin-top: 2.6rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid rgba(255, 248, 223, 0.56);
+  color: #fff8df;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.d3-postcard {
+  position: absolute;
+  left: clamp(6rem, 9vw, 14rem);
+  top: clamp(33rem, 57vh, 57%);
+  z-index: 4;
+  display: grid;
+  width: min(76rem, 54vw);
+  grid-template-columns: 1fr;
+  gap: clamp(1rem, 1.4vw, 1.8rem);
+  color: var(--d3-ink);
+  transform: translateY(-50%) rotate(-1.2deg);
+}
+
+.d3-postcard__photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 1.56;
+  overflow: hidden;
+  padding: clamp(0.8rem, 1vw, 1.2rem);
+  background: rgba(255, 248, 229, 0.96);
+  border-radius: 2.1rem;
+  box-shadow: 0 2.4rem 6rem rgba(7, 52, 92, 0.3);
+}
+
+.d3-postcard__photo:after {
+  display: none;
+}
+
+.d3-postcard__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1.35rem;
+}
+
+.d3-postcard__photo-title {
+  position: absolute;
+  right: clamp(1.8rem, 2.1vw, 3rem);
+  bottom: clamp(1.4rem, 1.9vw, 2.7rem);
+  left: clamp(1.8rem, 2.1vw, 3rem);
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(0.45rem, 0.8vw, 1rem);
+  color: rgba(255, 245, 154, 0.94);
+  font-family: "La Belle Aurore", "OldMoneyItalic", Georgia, serif;
+  line-height: 0.78;
+  text-align: center;
+  text-shadow: 0 0.5rem 1.6rem rgba(6, 31, 45, 0.42);
+  transform: rotate(-2deg);
+  white-space: nowrap;
+}
+
+.d3-postcard__photo-title span {
+  margin-bottom: 0.55rem;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1rem, 1.05vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.d3-postcard__photo-title em {
+  margin-bottom: 0.55rem;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1rem, 1.05vw, 1.45rem);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.d3-postcard__photo-title strong {
+  font-size: clamp(5.2rem, 6.5vw, 9.6rem);
+  font-weight: 400;
+}
+
+.d3-postcard__photo-title--long strong {
+  font-size: clamp(4.2rem, 5.2vw, 7.4rem);
+}
+
+.d3-postcard__photo-title--very-long strong {
+  font-size: clamp(3.3rem, 4.2vw, 5.8rem);
+}
+
+.d3-postcard__photo-stamp {
+  position: absolute;
+  top: clamp(1.9rem, 2.2vw, 3rem);
+  right: clamp(2rem, 2.2vw, 3.2rem);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: clamp(8rem, 8vw, 12.5rem);
+  height: clamp(8rem, 8vw, 12.5rem);
+  border: 2px solid currentColor;
+  border-radius: 999px;
+  color: rgba(255, 245, 154, 0.9);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(0.72rem, 0.72vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.05;
+  text-align: center;
+  text-shadow: 0 0.5rem 1.6rem rgba(6, 31, 45, 0.4);
+  text-transform: uppercase;
+  transform: rotate(8deg);
+}
+
+.d3-postcard__photo-stamp:before {
+  content: "";
+  position: absolute;
+  inset: 0.55rem;
+  border: 1px solid currentColor;
+  border-radius: inherit;
+  opacity: 0.78;
+}
+
+.d3-postcard__photo-stamp:after {
+  content: "";
+  position: absolute;
+  top: 2.2rem;
+  right: 6.2rem;
+  width: clamp(9rem, 10vw, 14rem);
+  height: 4.4rem;
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  opacity: 0.62;
+  transform: rotate(-12deg);
+  box-shadow:
+    0 0.85rem 0 -1px currentColor,
+    0 1.7rem 0 -1px currentColor,
+    0 2.55rem 0 -1px currentColor;
+}
+
+.d3-postcard__photo-stamp span,
+.d3-postcard__photo-stamp em {
+  position: relative;
+  z-index: 1;
+}
+
+.d3-postcard__photo-stamp em {
+  display: block;
+  margin-top: 0.35rem;
+  font-style: normal;
+  font-size: 0.75em;
+  letter-spacing: 0.1em;
+}
+
+.d3-postcard__paper {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.82fr) minmax(12rem, 0.9fr);
+  gap: clamp(1.1rem, 1.5vw, 2rem);
+  min-height: clamp(25rem, 26vw, 35rem);
+  overflow: hidden;
+  padding: clamp(1.4rem, 1.7vw, 2.2rem);
+  border-radius: 2.1rem;
+  background:
+    linear-gradient(rgba(255, 248, 229, 0.18), rgba(255, 248, 229, 0.18)),
+    url("/assets/images/papertexture2.jpg") center/cover;
+  box-shadow: 0 2.4rem 6rem rgba(7, 52, 92, 0.3);
+  font-family: "Still ITC Garamond Light Condensed", Georgia, "Times New Roman", serif;
+}
+
+.d3-postcard__paper:before {
+  content: "";
+  position: absolute;
+  top: clamp(1.5rem, 1.9vw, 2.4rem);
+  bottom: clamp(1.5rem, 1.9vw, 2.4rem);
+  left: 50%;
+  z-index: 1;
+  border-left: 1px solid rgba(7, 52, 92, 0.38);
+  opacity: 0.85;
+}
+
+.d3-postcard__paper:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    url("/assets/images/papertexture1.jpeg") center/cover;
+  mix-blend-mode: multiply;
+  opacity: 0.36;
+  z-index: 0;
+}
+
+.d3-postcard__label {
+  grid-column: 1;
+  color: var(--d3-navy);
+  font-family: "Still ITC Garamond Light Condensed", Georgia, serif;
+  font-size: clamp(3.3rem, 4.1vw, 5.2rem);
+  line-height: 0.9;
+  text-transform: uppercase;
+}
+
+.d3-postcard__paper-photo {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  align-self: center;
+  display: block;
+  aspect-ratio: 1;
+  padding: clamp(0.6rem, 0.8vw, 0.95rem);
+  border: 1px solid rgba(26, 26, 26, 0.22);
+  background: rgba(255, 248, 229, 0.92);
+  box-shadow: 0 1.2rem 2.8rem rgba(26, 26, 26, 0.12);
+}
+
+.d3-postcard__paper-photo:before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  z-index: 2;
+  width: min(9rem, 42%);
+  height: 2.1rem;
+  background:
+    linear-gradient(90deg, rgba(213, 188, 142, 0.78), rgba(255, 236, 188, 0.66)),
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.18) 0 2px, transparent 2px 5px);
+  box-shadow: 0 0.4rem 1rem rgba(26, 26, 26, 0.12);
+  opacity: 0.9;
+  transform: translateX(-50%) rotate(-2deg);
+}
+
+.d3-postcard__paper-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.d3-postcard__paper-note {
+  position: absolute;
+  top: clamp(10.2rem, 10vw, 13.2rem);
+  right: clamp(2.8rem, 3.7vw, 5.2rem);
+  z-index: 1;
+  display: block;
+  width: calc(50% - clamp(4.4rem, 5.4vw, 7.2rem));
+  max-width: none;
+  color: var(--d3-teal);
+  font-family: "La Belle Aurore", "OldMoneyItalic", Georgia, serif;
+  font-size: clamp(2rem, 1.95vw, 3rem);
+  line-height: 1.72;
+  text-align: center;
+  transform: rotate(-2deg);
+}
+
+.d3-postcard__paper-note--short {
+  top: calc(clamp(10.2rem, 10vw, 13.2rem) + 5.55rem);
+}
+
+.d3-postcard__stamp-graphic {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  pointer-events: none;
+}
+
+.d3-postcard__stamp-graphic img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.d3-postcard__stamp-graphic--photo {
+  top: clamp(1.4rem, 1.8vw, 2.4rem);
+  right: clamp(2rem, 2.8vw, 4rem);
+  width: clamp(8.5rem, 8.6vw, 13rem);
+  opacity: 0.9;
+  transform: rotate(7deg);
+}
+
+.d3-postcard__stamp-graphic--paper {
+  top: clamp(1.5rem, 1.8vw, 2.4rem);
+  right: clamp(2rem, 2.8vw, 3.8rem);
+  width: clamp(8.5rem, 8.2vw, 12rem);
+  opacity: 0.92;
+  transform: rotate(5deg);
+}
+
+.d3-hero-card__writing {
+  display: none;
+}
+
+.d3-hero-card__writing span {
+  display: block;
+}
+
+.d3-hero-card__writing span:nth-child(2) {
+  max-width: 46rem;
+  font-size: 0.72em;
+  line-height: 1.02;
+}
+
+.d3-hero-card__writing span:not(.d3-hero-card__writing-line) {
+  border-bottom: 1px solid currentColor;
+}
+
+.d3-hero-card__writing-line {
+  width: 58%;
+  height: 1px;
+  margin-top: 0.4rem;
+  background: currentColor;
+}
+
+.d3-hero-card__to-from {
+  display: none;
+}
+
+.d3-hero-card__to-from span {
+  min-width: 22rem;
+  border-bottom: 1px solid currentColor;
+}
+
+.d3-postcard__stamp {
+  position: relative;
+  z-index: 2;
+  justify-self: end;
+  display: grid;
+  grid-template-rows: 1fr auto 1fr;
+  place-items: center;
+  width: clamp(11.5rem, 10vw, 14.2rem);
+  height: clamp(7.2rem, 6.4vw, 9rem);
+  padding: 0.8rem 1.2rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  color: rgba(68, 85, 63, 0.92);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(0.68rem, 0.68vw, 0.86rem);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(4deg);
+}
+
+.d3-postcard__stamp:before {
+  content: "";
+  position: absolute;
+  inset: 0.45rem 0.7rem;
+  border: 1px solid currentColor;
+  border-radius: inherit;
+  opacity: 0.72;
+}
+
+.d3-postcard__stamp:after {
+  content: "+";
+  position: absolute;
+  left: 1.35rem;
+  right: 1.35rem;
+  top: 50%;
+  z-index: 1;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid currentColor;
+  border-radius: 0;
+  font-size: 0;
+  line-height: 1;
+  opacity: 0.22;
+}
+
+.d3-postcard__stamp span,
+.d3-postcard__stamp em,
+.d3-postcard__stamp b {
+  position: relative;
+  z-index: 2;
+}
+
+.d3-postcard__stamp span {
+  align-self: end;
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transform: translateY(0.2rem) rotate(-5deg);
+}
+
+.d3-postcard__stamp em {
+  display: grid;
+  min-width: clamp(6rem, 5.8vw, 8rem);
+  min-height: clamp(2rem, 1.8vw, 2.4rem);
+  place-items: center;
+  margin: 0.2rem 0;
+  border: 1px solid currentColor;
+  font-style: normal;
+  font-size: clamp(0.68rem, 0.66vw, 0.82rem);
+  letter-spacing: 0.08em;
+}
+
+.d3-postcard__stamp b {
+  align-self: start;
+  font-size: clamp(0.62rem, 0.62vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  transform: translateY(-0.1rem) rotate(5deg);
+}
+
+.d3-postcard__note {
+  grid-column: 1;
+  align-self: end;
+  max-width: 18rem;
+  color: var(--d3-teal);
+  font-family: "La Belle Aurore", "OldMoneyItalic", Georgia, serif;
+  font-size: clamp(1.6rem, 1.55vw, 2.4rem);
+  line-height: 1.15;
+  transform: rotate(-3deg);
+}
+
+.d3-postcard__lines {
+  position: absolute;
+  top: clamp(11.6rem, 11vw, 14.5rem);
+  right: clamp(2.8rem, 3.7vw, 5.2rem);
+  z-index: 1;
+  display: block;
+  width: calc(50% - clamp(4.4rem, 5.4vw, 7.2rem));
+  height: clamp(15rem, 15vw, 21rem);
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 3.9rem,
+    rgba(7, 52, 92, 0.46) 4rem,
+    transparent 4.12rem,
+    transparent 5.35rem
+  );
+}
+
+.d3-postcard__lines:before {
+  content: "";
+  position: absolute;
+  right: clamp(4.8rem, 5.8vw, 8rem);
+  top: clamp(-8.6rem, -6.2vw, -6.2rem);
+  width: clamp(12.2rem, 11vw, 16.5rem);
+  height: clamp(3.8rem, 3.4vw, 5rem);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 244 70' fill='none'%3E%3Cpath d='M4 17 C21 7 38 24 55 16 C75 6 92 28 112 17 C132 7 151 28 170 17 C190 6 211 25 240 14' stroke='%2307345C' stroke-width='3.5' stroke-linecap='round' opacity='.82'/%3E%3Cpath d='M4 18 C23 10 39 26 57 18 C76 9 94 30 113 19 C135 9 151 29 171 19 C192 9 213 27 240 17' stroke='%2307345C' stroke-width='1.2' stroke-linecap='round' opacity='.35'/%3E%3Cpath d='M3 35 C21 24 40 43 58 34 C76 25 94 47 113 36 C134 24 151 46 172 35 C193 24 214 43 241 32' stroke='%2307345C' stroke-width='3.3' stroke-linecap='round' opacity='.78'/%3E%3Cpath d='M5 36 C23 27 41 44 59 36 C78 27 95 48 114 38 C134 27 153 48 173 38 C194 27 215 45 240 35' stroke='%2307345C' stroke-width='1.1' stroke-linecap='round' opacity='.32'/%3E%3Cpath d='M3 53 C23 42 40 60 59 51 C78 42 96 63 115 53 C136 42 154 62 174 53 C195 42 216 60 241 49' stroke='%2307345C' stroke-width='3.1' stroke-linecap='round' opacity='.74'/%3E%3Cpath d='M5 55 C24 45 41 61 60 54 C79 45 97 64 116 55 C137 45 155 63 175 55 C196 45 217 61 239 52' stroke='%2307345C' stroke-width='1.1' stroke-linecap='round' opacity='.28'/%3E%3C/svg%3E")
+    center/contain no-repeat;
+  opacity: 0.74;
+  filter: drop-shadow(0.08rem 0.06rem 0 rgba(7, 52, 92, 0.18));
+  transform: rotate(-7deg);
+}
+
+.d3-postcard__lines:after {
+  content: "✈";
+  position: absolute;
+  right: clamp(7rem, 7.4vw, 10.4rem);
+  top: clamp(-9.4rem, -6.8vw, -7.2rem);
+  z-index: 2;
+  display: grid;
+  width: clamp(4.2rem, 4vw, 5.8rem);
+  height: clamp(4.2rem, 4vw, 5.8rem);
+  place-items: center;
+  border: 1.5px solid var(--d3-teal);
+  border-radius: 1.1rem;
+  color: var(--d3-teal);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.1rem, 1vw, 1.45rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.05;
+  text-indent: 0.1em;
+  white-space: pre;
+  box-shadow: inset 0 0 0 0.35rem rgba(255, 248, 223, 0.2);
+  opacity: 0.78;
+  transform: rotate(5deg);
+}
+
+.d3-hero__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 12;
+  display: grid;
+  width: clamp(5.8rem, 5.2vw, 7.4rem);
+  height: clamp(5.8rem, 5.2vw, 7.4rem);
+  place-items: center;
+  border: 1px solid rgba(7, 52, 92, 0.62);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 248, 223, 0.82), rgba(255, 238, 204, 0.56) 62%, rgba(255, 248, 223, 0.42)),
+    rgba(255, 248, 223, 0.62);
+  color: #07345c;
+  cursor: pointer;
+  line-height: 1;
+  box-shadow:
+    inset 0 0 0 0.5rem rgba(255, 248, 223, 0.3),
+    0 1.2rem 2.6rem rgba(7, 52, 92, 0.18);
+  transform: translateY(-50%);
+  transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.d3-hero__arrow:before {
+  content: "";
+  position: absolute;
+  inset: 0.7rem;
+  border: 1px dashed rgba(7, 52, 92, 0.42);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.d3-hero__arrow img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 68%;
+  height: 68%;
+  object-fit: contain;
+  filter: sepia(1) saturate(2.2) hue-rotate(166deg) brightness(0.72);
+  mix-blend-mode: multiply;
+}
+
+.d3-hero__arrow-ink {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 3.4rem;
+  height: 1.5rem;
+  border-top: 0.22rem solid currentColor;
+  transform: rotate(-3deg);
+}
+
+.d3-hero__arrow-ink:before {
+  content: "";
+  position: absolute;
+  top: -0.52rem;
+  right: -0.08rem;
+  width: 1rem;
+  height: 1rem;
+  border-top: 0.22rem solid currentColor;
+  border-right: 0.22rem solid currentColor;
+  transform: rotate(45deg);
+}
+
+.d3-hero__arrow-ink:after {
+  content: "";
+  position: absolute;
+  left: 0.35rem;
+  right: 1.15rem;
+  top: 0.38rem;
+  height: 0.1rem;
+  background: currentColor;
+  opacity: 0.45;
+  transform: rotate(-2deg);
+}
+
+.d3-hero__arrow:hover {
+  background:
+    radial-gradient(circle at 28% 24%, rgba(255, 248, 223, 0.95), rgba(255, 238, 204, 0.72) 64%, rgba(255, 248, 223, 0.52)),
+    rgba(255, 248, 223, 0.8);
+  box-shadow:
+    inset 0 0 0 0.5rem rgba(255, 248, 223, 0.36),
+    0 1.4rem 3rem rgba(7, 52, 92, 0.24);
+  transform: translateY(-50%) scale(1.04);
+}
+
+.d3-hero__arrow--prev {
+  left: clamp(1.2rem, 2.4vw, 3.2rem);
+}
+
+.d3-hero__arrow--prev .d3-hero__arrow-ink {
+  transform: rotate(177deg);
+}
+
+.d3-hero__arrow--next {
+  right: clamp(1.2rem, 2.4vw, 3.2rem);
+}
+
+.d3-search-strip {
+  display: grid;
+  grid-template-columns: 20rem minmax(0, 1fr);
+  gap: 2.8rem;
+  align-items: center;
+  width: min(124rem, calc(100% - 4rem));
+  margin: 6rem auto;
+  padding: 1.8rem;
+  border: 2px solid var(--d3-navy);
+  border-radius: 1.8rem;
+  background: rgba(255, 246, 223, 0.9);
+  box-shadow: 1rem 1rem 0 rgba(233, 71, 0, 0.18);
+}
+
+.d3-search-strip p {
+  margin: 0;
+  color: var(--d3-navy);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.5rem, 1.35vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.d3-search-strip form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.d3-search-strip label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.d3-search-strip input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--d3-ink);
+  font-family: "Still ITC Garamond Light Condensed", Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 1.65vw, 2.45rem);
+  letter-spacing: 0.01em;
+  line-height: 0.98;
+}
+
+.d3-search-strip input:focus {
+  outline: 0;
+}
+
+.d3-search-strip button {
+  min-width: 11rem;
+  padding: 1.1rem 1.5rem;
+  border: 1px solid var(--d3-terracotta);
+  background: var(--d3-terracotta);
+  color: #fff8df;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.d3-map-section {
+  width: min(124rem, calc(100% - 4rem));
+  margin: 0 auto;
+}
+
+.d3-map-section {
+  padding: 1rem 0 4rem;
+}
+
+.d3-map-section__intro {
+  display: block;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.d3-kicker {
+  margin: 0;
+  color: var(--d3-sea);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.5rem, 1.35vw, 1.9rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.d3-kicker--orange {
+  color: var(--d3-terracotta);
+}
+
+.d3-map-section__intro h2,
+.d3-photo-destinations__heading h2 {
+  margin: 0;
+  color: var(--d3-terracotta);
+  font-family: "Still ITC Garamond Light Condensed", Georgia, serif;
+  font-size: clamp(6.8rem, 8vw, 12rem);
+  font-weight: 200;
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+}
+
+.d3-world-map {
+  position: relative;
+  min-height: clamp(44rem, 50vw, 59rem);
+  overflow: hidden;
+  border: 2px solid rgba(7, 52, 92, 0.22);
+  border-radius: 2.4rem;
+  background:
+    radial-gradient(circle at 15% 22%, rgba(255, 232, 164, 0.6), transparent 24rem),
+    linear-gradient(135deg, rgba(143, 201, 194, 0.88), rgba(255, 246, 223, 0.92));
+}
+
+.d3-world-map img {
+  position: absolute;
+  inset: -11% -8%;
+  width: 116%;
+  height: 122%;
+  object-fit: contain;
+  opacity: 0.78;
+  mix-blend-mode: multiply;
+}
+
+.d3-map-pin {
+  position: absolute;
+  z-index: 2;
+  display: inline-grid;
+  grid-template-columns: max-content max-content;
+  gap: 0.65rem 0.75rem;
+  align-items: start;
+  justify-content: start;
+  justify-items: start;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(7, 52, 92, 0.45);
+  border-radius: 0.9rem;
+  background: rgba(255, 248, 223, 0.86);
+  color: var(--d3-navy);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 0 1rem 2.4rem rgba(26, 26, 26, 0.1);
+  transform-origin: top left;
+  transition: background 340ms cubic-bezier(0.2, 0.65, 0.2, 1), color 340ms cubic-bezier(0.2, 0.65, 0.2, 1), transform 340ms cubic-bezier(0.2, 0.65, 0.2, 1);
+}
+
+.d3-map-pin__main {
+  display: inline-flex;
+  grid-column: 2;
+  grid-row: 1;
+  align-items: center;
+  gap: 0.65rem;
+  justify-self: start;
+  white-space: nowrap;
+}
+
+.d3-map-pin small {
+  display: inline-grid;
+  min-width: 2.2rem;
+  height: 2.2rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--d3-citron);
+  color: var(--d3-navy);
+  font-size: 0.82rem;
+  line-height: 1;
+}
+
+.d3-map-pin:before {
+  content: "";
+  grid-column: 1;
+  grid-row: 1;
+  display: block;
+  margin-top: 0.55rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: var(--d3-terracotta);
+}
+
+.d3-map-pin__locations {
+  grid-column: 2;
+  display: grid;
+  max-width: 28rem;
+  max-height: 0;
+  overflow: hidden;
+  gap: 0.35rem;
+  opacity: 0;
+  text-align: left;
+  transition: max-height 360ms cubic-bezier(0.2, 0.65, 0.2, 1), opacity 300ms ease, padding-top 360ms cubic-bezier(0.2, 0.65, 0.2, 1);
+}
+
+.d3-map-pin--long .d3-map-pin__locations {
+  width: auto;
+  max-width: 28rem;
+}
+
+.d3-map-pin--long:hover .d3-map-pin__locations,
+.d3-map-pin--long:focus .d3-map-pin__locations {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: min(42rem, 42vw);
+  max-width: 42rem;
+  column-gap: 1.4rem;
+}
+
+.d3-map-pin__locations span {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.d3-map-pin:hover,
+.d3-map-pin:focus {
+  z-index: 30;
+  background: var(--d3-terracotta);
+  color: #fff8df;
+  transform: translateY(-0.18rem);
+}
+
+.d3-map-pin:hover .d3-map-pin__locations,
+.d3-map-pin:focus .d3-map-pin__locations {
+  max-height: 24rem;
+  overflow-y: auto;
+  opacity: 1;
+  padding-top: 0.35rem;
+}
+
+.d3-photo-destinations {
+  width: min(124rem, calc(100% - 4rem));
+  margin: 0 auto;
+  padding: 7rem 0 9rem;
+}
+
+.d3-photo-destinations__heading {
+  display: block;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.d3-photo-destinations__heading h2 {
+  max-width: 62rem;
+  color: var(--d3-navy);
+  font-size: clamp(4.6rem, 5.2vw, 8rem);
+  text-align: right;
+}
+
+.d3-photo-destinations__grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: clamp(2.2rem, 3vw, 4rem);
+}
+
+.d3-photo-card {
+  position: relative;
+  display: block;
+  isolation: isolate;
+  min-height: 0;
+  overflow: hidden;
+  padding: 1.1rem 1.1rem 2rem;
+  border: 2px solid rgba(7, 52, 92, 0.24);
+  border-radius: 1.4rem;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(222, 177, 102, 0.12), transparent 20rem),
+    repeating-linear-gradient(82deg, rgba(104, 73, 34, 0.045) 0 1px, transparent 1px 6px),
+    linear-gradient(rgba(255, 248, 229, 0.7), rgba(255, 248, 229, 0.7)),
+    url("/assets/images/papertexture2.jpg") center/cover;
+  color: var(--d3-navy);
+  text-decoration: none;
+}
+
+.d3-photo-card:nth-child(1),
+.d3-photo-card:nth-child(2),
+.d3-photo-card:nth-child(3),
+.d3-photo-card:nth-child(4),
+.d3-photo-card:nth-child(5),
+.d3-photo-card:nth-child(6) {
+  grid-column: span 2;
+  transform: none;
+}
+
+.d3-photo-card img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 1rem;
+  transition: transform 300ms ease;
+}
+
+.d3-photo-card__graphic {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: clamp(7rem, 7.5vw, 11rem);
+  margin: clamp(-5.4rem, -4.6vw, -3.8rem) clamp(1.4rem, 1.8vw, 2.3rem) 0 auto;
+  pointer-events: none;
+}
+
+.d3-photo-card__graphic img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
+  border-radius: 0;
+  transform: rotate(-8deg);
+  transition: none;
+}
+
+.d3-photo-card:before {
+  display: none;
+}
+
+.d3-photo-card:hover img {
+  transform: scale(1.04);
+}
+
+.d3-photo-card:hover .d3-photo-card__graphic img {
+  transform: rotate(-8deg);
+}
+
+.d3-photo-card__number {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin: 1.5rem 0 0.8rem;
+  color: var(--d3-terracotta);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+}
+
+.d3-photo-card__title {
+  position: relative;
+  z-index: 1;
+  display: block;
+  font-family: "Still ITC Garamond Light Condensed", Georgia, "Times New Roman", serif;
+  font-size: clamp(2.9rem, 2.65vw, 4rem);
+  line-height: 0.92;
+}
+
+.d3-map-pin--north-america { left: 17%; top: 42%; }
+.d3-map-pin--south-america { left: 29%; top: 64%; }
+.d3-map-pin--europe { left: 49%; top: 39%; }
+.d3-map-pin--africa { left: 51%; top: 56%; }
+.d3-map-pin--middle-east { left: 58%; top: 49%; }
+.d3-map-pin--asia { left: 72%; top: 45%; }
+.d3-map-pin--oceania { left: 81%; top: 69%; }
+
+.d3-featured-destination {
+  position: relative;
+  min-height: clamp(46rem, 54vw, 68rem);
+  margin: 3rem 0 0;
+  overflow: hidden;
+  color: #fff8df;
+}
+
+.d3-featured-destination img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.d3-featured-destination:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 52, 92, 0.5), rgba(7, 52, 92, 0.08) 56%),
+    linear-gradient(0deg, rgba(7, 52, 92, 0.35), transparent 54%);
+}
+
+.d3-featured-destination__text {
+  position: absolute;
+  left: clamp(2.4rem, 7vw, 10rem);
+  right: clamp(2.4rem, 7vw, 10rem);
+  top: clamp(6rem, 9vw, 11rem);
+  z-index: 1;
+  display: flex;
+  gap: clamp(0.8rem, 1.1vw, 1.6rem);
+  align-items: baseline;
+  justify-content: flex-start;
+}
+
+.d3-featured-destination__text p {
+  margin: 0;
+  color: var(--d3-citron);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.1rem, 1.25vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.d3-featured-destination__text h2 {
+  margin: 0;
+  max-width: 68rem;
+  color: #fff8df;
+  font-family: "La Belle Aurore", "OldMoneyItalic", Georgia, serif;
+  font-size: clamp(7rem, 9.5vw, 14rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 0.78;
+}
+
+.d3-featured-destination__cards {
+  position: absolute;
+  right: clamp(7rem, 13vw, 18rem);
+  top: 50%;
+  bottom: auto;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(22rem, 32rem));
+  align-items: center;
+  gap: clamp(3rem, 4vw, 6rem);
+  transform: translateY(-50%);
+}
+
+.d3-featured-card {
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  display: grid;
+  grid-template-rows: auto clamp(5.6rem, 5.2vw, 7.2rem);
+  gap: 0;
+  padding: 1.35rem 1.35rem 1.35rem;
+  border: 1px solid rgba(7, 52, 92, 0.12);
+  border-radius: 0.18rem;
+  background:
+    linear-gradient(rgba(255, 249, 229, 0.62), rgba(255, 249, 229, 0.62)),
+    url("/assets/images/papertexture1.jpeg") center/cover;
+  color: var(--d3-navy);
+  text-decoration: none;
+  box-shadow:
+    0 1.8rem 4.2rem rgba(7, 52, 92, 0.24),
+    inset 0 0 0 0.7rem rgba(255, 255, 246, 0.26),
+    inset 0 -1.8rem 2.6rem rgba(155, 126, 88, 0.08);
+  transform: rotate(-2deg);
+}
+
+.d3-featured-card:nth-child(even) {
+  transform: rotate(2deg);
+}
+
+.d3-featured-card:after {
+  content: "";
+  position: absolute;
+  top: -1.55rem;
+  right: 1.35rem;
+  z-index: 3;
+  width: clamp(3.6rem, 3.1vw, 5rem);
+  height: clamp(3.6rem, 3.1vw, 5rem);
+  background: url("/assets/images/featured-thumbtack-brass.png") center/contain no-repeat;
+  filter: drop-shadow(0 0.35rem 0.55rem rgba(26, 26, 26, 0.22));
+}
+
+.d3-featured-card img {
+  position: static;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.18 / 1;
+  object-fit: cover;
+  border: 1px solid rgba(7, 52, 92, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.38),
+    0 0.25rem 0.8rem rgba(7, 52, 92, 0.08);
+}
+
+.d3-featured-card span {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: clamp(5.6rem, 5.2vw, 7.2rem);
+  place-items: center;
+  color: var(--d3-teal);
+  font-family: "La Belle Aurore", "Still Refined Society", cursive;
+  font-size: clamp(1.85rem, 1.85vw, 2.75rem);
+  line-height: 0.96;
+  letter-spacing: 0.025em;
+  text-align: center;
+  text-shadow: 0.025em 0.025em 0 rgba(7, 52, 92, 0.12);
+  transform: rotate(-1deg);
+}
+
+.d3-featured-destination__graphics {
+  position: absolute;
+  left: clamp(3rem, 7vw, 10rem);
+  bottom: clamp(3rem, 5vw, 6rem);
+  z-index: 2;
+  display: flex;
+  gap: clamp(1.6rem, 2.4vw, 3rem);
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.d3-featured-destination__graphic {
+  display: block;
+}
+
+.d3-featured-destination__graphic img {
+  position: static;
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.d3-featured-destination__graphic--stamp {
+  width: clamp(7rem, 7.4vw, 11rem);
+  transform: rotate(-8deg);
+}
+
+.d3-featured-destination__graphic--lemon {
+  width: clamp(6rem, 6.8vw, 10rem);
+  transform: rotate(9deg);
+}
+
+.d3-ending-panel {
+  position: relative;
+  display: grid;
+  min-height: clamp(48rem, 62vw, 78rem);
+  place-items: center;
+  overflow: hidden;
+  margin: 1rem 0 0;
+  color: #fff8df;
+}
+
+.body--destinations3 .page-footer {
+  margin-top: 0;
+}
+
+.d3-ending-panel > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.d3-ending-panel:after {
+  display: none;
+}
+
+.d3-ending-panel__box {
+  position: relative;
+  z-index: 1;
+  width: min(54rem, calc(100% - 4rem));
+  padding: clamp(3rem, 5vw, 5.8rem);
+  border: 1px solid rgba(255, 248, 223, 0.82);
+  background: rgba(255, 248, 229, 0.82);
+  color: var(--d3-navy);
+  text-align: center;
+  box-shadow: 0 2.4rem 8rem rgba(7, 52, 92, 0.24);
+}
+
+.d3-ending-panel__box h2 {
+  margin: 1.8rem 0 2.8rem;
+  color: var(--d3-terracotta);
+  font-family: "Still ITC Garamond Light Condensed", Georgia, "Times New Roman", serif;
+  font-size: clamp(3.2rem, 3.2vw, 4.8rem);
+  font-weight: 300;
+  line-height: 0.9;
+  white-space: nowrap;
+}
+
+.d3-ending-panel__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem 2.2rem;
+}
+
+.d3-ending-panel__links a {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(7, 52, 92, 0.26);
+  color: var(--d3-navy);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .d3-page-title {
+    top: 9.6rem;
+  }
+
+  .d3-hero {
+    width: 100%;
+    min-height: 72rem;
+    height: auto;
+  }
+
+  .d3-graphic-ticket,
+  .d3-graphic-stamp--two {
+    display: none;
+  }
+
+  .d3-postcard {
+    left: 50%;
+    top: 54%;
+    width: min(62rem, calc(100% - 8rem));
+    transform: translate(-50%, -50%) rotate(-1deg);
+  }
+
+  .d3-hero-card__writing {
+    right: 3rem;
+    width: min(38rem, 34vw);
+    font-size: clamp(2.8rem, 4vw, 4.6rem);
+  }
+
+  .d3-hero-card__to-from {
+    right: 3rem;
+    top: 31vh;
+  }
+
+  .d3-search-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .d3-photo-destinations__heading {
+    display: block;
+  }
+
+  .d3-photo-destinations__heading h2 {
+    margin-top: 1rem;
+    text-align: left;
+  }
+
+  .d3-photo-destinations__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .d3-photo-card:nth-child(n) {
+    grid-column: auto;
+    transform: none;
+  }
+
+  .d3-featured-destination {
+    min-height: 0;
+    padding: clamp(5.8rem, 7vw, 8rem) clamp(2rem, 5vw, 4rem) clamp(5.2rem, 7vw, 7rem);
+  }
+
+  .d3-featured-destination__text {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    display: flex;
+    width: min(100%, 78rem);
+    margin: 0 0 clamp(4rem, 6vw, 6.5rem);
+    gap: 1.2rem;
+  }
+
+  .d3-featured-destination__text h2 {
+    justify-self: start;
+    font-size: clamp(6.8rem, 10vw, 10rem);
+  }
+
+  .d3-featured-destination__cards {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: min(100%, 72rem);
+    margin: 0 auto;
+    grid-template-columns: repeat(2, minmax(22rem, 32rem));
+    justify-content: center;
+    transform: none;
+  }
+
+}
+
+@media (max-width: 640px) {
+  .d3-page-title {
+    width: min(100% - 2.4rem, 112rem);
+    top: 8.8rem;
+  }
+
+  .d3-page-title h1 {
+    font-size: clamp(1.8rem, 5.8vw, 2.8rem);
+  }
+
+  .d3-hero {
+    min-height: 61rem;
+    border-radius: 0;
+  }
+
+  .d3-hero-card[data-d3-offset="1"],
+  .d3-hero-card[data-d3-offset="2"] {
+    opacity: 0;
+  }
+
+  .d3-graphic-stamp--one,
+  .d3-graphic-wave {
+    display: none;
+  }
+
+  .d3-postcard {
+    left: 50%;
+    top: 55%;
+    width: min(43rem, calc(100% - 2.4rem));
+    grid-template-rows: auto auto;
+    padding: 1rem;
+    transform: translate(-50%, -50%) rotate(-1deg);
+  }
+
+  .d3-hero-card__writing {
+    right: 1.6rem;
+    bottom: 5rem;
+    width: min(36rem, calc(100% - 3.2rem));
+    font-size: clamp(2.3rem, 8vw, 3.8rem);
+  }
+
+  .d3-hero-card__to-from {
+    display: none;
+  }
+
+  .d3-postcard__label {
+    font-size: 3rem;
+  }
+
+  .d3-postcard__paper {
+    min-height: 15rem;
+    padding: 1.4rem 1.2rem 1.2rem;
+  }
+
+  .d3-postcard__paper-note {
+    font-size: clamp(1.25rem, 4.8vw, 1.8rem);
+    line-height: 1.55;
+  }
+
+  .d3-featured-destination__text {
+    left: 2rem;
+    right: 2rem;
+    bottom: auto;
+    display: block;
+    margin-bottom: clamp(3rem, 7vw, 5rem);
+  }
+
+  .d3-featured-destination__text h2 {
+    font-size: clamp(5rem, 16vw, 8rem);
+  }
+
+  .d3-featured-destination__cards {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: min(100% - 4rem, 34rem);
+    margin: 0 auto;
+    grid-template-columns: 1fr;
+  }
+
+  .d3-ending-panel__box h2 {
+    white-space: normal;
+  }
+
+  .d3-ending-panel__links {
+    grid-template-columns: 1fr;
+  }
+
+  .d3-search-strip form,
+  .d3-photo-destinations__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .d3-search-strip {
+    width: min(100% - 2.4rem, 124rem);
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+    margin: 3.2rem auto 4.8rem;
+  }
+
+  .d3-search-strip p {
+    font-size: 2.2rem;
+  }
+
+  .d3-search-strip input {
+    font-size: 2.25rem;
+  }
+
+  .d3-photo-card__title {
+    font-size: clamp(3.2rem, 10vw, 4.6rem);
+  }
+
+  .d3-map-section,
+  .d3-photo-destinations {
+    width: min(100% - 2.4rem, 124rem);
+  }
+
+  .d3-world-map {
+    min-height: 42rem;
+  }
+
+  .d3-map-pin {
+    padding: 0.55rem 0.7rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+  }
+
+  .d3-map-pin--asia { left: 67%; }
+  .d3-map-pin--middle-east { left: 54%; }
+  .d3-map-pin--oceania { left: 68%; }
 }

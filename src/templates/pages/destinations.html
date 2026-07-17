@@ -1,220 +1,279 @@
-{% extends "layouts/landing.html" %}
+{% extends "layouts/default.html" %}
 
-{% block body_class %}body--landing body--destinations has-no-hero{% endblock %}
+{% block body_class %}body body--destinations3{% endblock %}
 
-{% block filters %}
-  <li><a class="is-current" href="/destinations">Atlas</a></li>
-  <li><span class="separator"></span></li>
+{% block content %}
+{% set fallbackImages = [
+  "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/4b853dfb-82c2-4b7c-adaf-7c60821a7faf/AwayLands-PhotographyPortfolio-421.jpg",
+  "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/991a326d-7eb5-4ad8-ba9f-3a100e750af1/0B4A0113.jpg",
+  "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/bc9a69a2-7511-4dda-9128-eaafbf94534c/Away-Lands-Girls-Trip-Baha-Mar-Bahamas-009.jpg",
+  "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/df38ac28-41c7-43e8-96fd-b71102b2618a/AwayLands-PhotographyPortfolio-512.jpg",
+  "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/4ac3a12f-3258-48b8-89a6-7a286e4ea246/Sandals-Emerald-Bay-Bahamas-Exuma-Resort-Review-Away-Lands-DJI_0879.jpg"
+] %}
+{% set fallbackPostcardNotes = [
+  "Wish you were here. The light is ridiculous, the water is glass, and I found the hotel I want to return to every summer.",
+  "A little island, a long lunch, one perfect beach, and a guide worth saving before the ferry leaves.",
+  "Pack linen, book the pretty room, and leave space for the scenic route.",
+  "This one feels like a film still: warm nights, cold drinks, and a view that does half the planning for you.",
+  "Start here when you want the trip to feel considered before you even open the suitcase."
+] %}
+{% set fallbackPostcardLocations = ["Taormina", "Santorini", "Riviera", "Ibiza", "Hotel"] %}
+{% set fallbackPostcardDates = ["17 May 2024", "20 May 2026", "12 June 2026", "08 July 2026", "14 July 2026"] %}
+{% set heroPrevArrowIcon = page.heroPrevArrowIcon.path if page.heroPrevArrowIcon and page.heroPrevArrowIcon.path else null %}
+{% set heroNextArrowIcon = page.heroNextArrowIcon.path if page.heroNextArrowIcon and page.heroNextArrowIcon.path else null %}
+{% set fallbackPostcardUrls = [
+  "/story/best-travel-photography-cameras-and-gear-from-a-professional-photographer/",
+  "/story/what-to-wear-in-the-south-of-france-30-outfit-ideas-for-provence-and-french-riviera-summer-style/",
+  "/story/what-to-pack-for-summer-in-italy-a-complete-female-packing-list-for-an-italian-vacation/",
+  "/story/best-off-grid-campervan-destinations-for-remote-camping-and-scenic-road-trips/",
+  "/story/top-5-small-ship-cruises-around-the-british-isles/"
+] %}
+{% set fallbackCardTitles = ["Greece", "Italy", "Caribbean", "Morocco", "Portugal", "France"] %}
+{% set fallbackCardUrls = ["/destinations/greece/", "/destinations/italy/", "/destinations/caribbean/", "/destinations/morocco/", "/destinations/portugal/", "/destinations/france/"] %}
+{% set fallbackEndingLinks = [
+  { label: "Sea and sun", url: "/search/?q=beach" },
+  { label: "Beautiful hotels", url: "/search/?q=hotel" },
+  { label: "Packing guides", url: "/search/?q=packing" },
+  { label: "Scenic routes", url: "/search/?q=road%20trip" }
+] %}
+{% set editorPostcards = page.heroPostcards if page.heroPostcards and page.heroPostcards.length else [] %}
+{% set postcardSlides = editorPostcards if editorPostcards.length else fallbackPostcardLocations %}
+{% set editorCards = page.destinationCards if page.destinationCards and page.destinationCards.length else [] %}
+{% set destinationCards = editorCards if editorCards.length else fallbackCardTitles %}
+{% set editorFeaturedCards = page.featuredDestinationCards if page.featuredDestinationCards and page.featuredDestinationCards.length else [] %}
+{% set endingLinks = page.endingLinks if page.endingLinks and page.endingLinks.length else fallbackEndingLinks %}
+{% set heroInterval = page.heroIntervalSeconds or 10 %}
+{% set featuredImage = page.featuredDestinationImage.path if page.featuredDestinationImage and page.featuredDestinationImage.path else fallbackImages[3] %}
+{% set featuredStampGraphic = page.featuredDestinationStampGraphic.path if page.featuredDestinationStampGraphic and page.featuredDestinationStampGraphic.path else null %}
+{% set featuredLemonGraphic = page.featuredDestinationLemonGraphic.path if page.featuredDestinationLemonGraphic and page.featuredDestinationLemonGraphic.path else null %}
+{% set endingImage = page.endingImage.path if page.endingImage and page.endingImage.path else fallbackImages[1] %}
 
-  {% for continent in continents.items | reverse %}
-  <li>
-    <a href="{{ continent | route('continent') }}/#" {% if continent.name == page.name %}class="is-current"{% endif %}>{{ continent.name }}</a>
-
-    {% if continent.locations.length %}
-    <div class="dropdown dropdown--features">
-      <ul class="dropdown__list">
-        {% for location in continent.locations %}
-        <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-  </li>
-  {% endfor %}
-{% endblock %}
-
-{% block listings %}
-{% set heroImage = page.social.image.path %}
-{% if not heroImage and page.featuredLocations.length %}
-  {% set heroImage = page.featuredLocations[0].image.path %}
-{% endif %}
-
-<section class="destinations-atlas" aria-label="Away Lands destination atlas">
-  <div class="atlas-masthead-photos" aria-label="Destination photo preview">
-    {% for location in page.featuredLocations %}
-    {% if loop.index <= 3 %}
-    <a href="{{ location | route('location') }}" class="atlas-masthead-photo atlas-masthead-photo--{{ loop.index }}">
-      <img srcset="{{ location.image.path | image({w: 1400, auto: 'compress,format'}) }} 1400w,
-                   {{ location.image.path | image({w: 900, auto: 'compress,format'}) }} 900w,
-                   {{ location.image.path | image({w: 600, auto: 'compress,format'}) }} 600w"
-           sizes="(min-width: 900px) 33vw, 100vw"
-           src="{{ location.image.path | image({w: 900, auto: 'compress,format'}) }}"
-           alt=""
-           loading="{% if loop.index == 1 %}eager{% else %}lazy{% endif %}"
-           decoding="async"
-      />
-      <span>{% if loop.index == 1 %}the edit{% elif loop.index == 2 %}places to stay{% else %}routes worth taking{% endif %}</span>
-    </a>
-    {% endif %}
-    {% endfor %}
-  </div>
-
-  <header class="atlas-cover">
-    <div class="atlas-cover__copy">
-      <p class="atlas-label">Away Lands field atlas</p>
-      <h1 class="atlas-cover__title">
-        <span>The world</span><span>edited</span>
-      </h1>
-      <p class="atlas-cover__dek">A visual travel index for beach towns, city breaks, islands, hotels, road trips, packing guides, and the kinds of places worth building a whole mood board around.</p>
-      <a class="atlas-cover__cta" href="#destination-regions">Browse the regions</a>
-
-      <div class="atlas-cover__mini-photos" aria-label="Featured destination previews">
-        {% for location in page.featuredLocations %}
-        {% if loop.index <= 3 %}
-        <a href="{{ location | route('location') }}" class="atlas-mini-photo atlas-mini-photo--{{ loop.index }}">
-          <img src="{{ location.image.path | image({w: 520, auto: 'compress,format'}) }}" alt="" loading="{% if loop.index == 1 %}eager{% else %}lazy{% endif %}" decoding="async" />
-          <span>{{ location.title }}</span>
-        </a>
-        {% endif %}
-        {% endfor %}
-      </div>
+<section class="destinations-three">
+  <header class="d3-hero" data-d3-postcards data-d3-interval="{{ heroInterval * 1000 }}" aria-label="Featured destination postcard stories">
+    <div class="d3-page-title">
+      <span class="d3-page-title__small">Away Lands</span>
+      <h1>{{ page.pageTitle or page.title or "Destinations" }}</h1>
     </div>
 
-    <div class="atlas-map atlas-map--cover" id="destination-map" aria-label="World map with region links">
-      <svg class="atlas-map__svg" viewBox="0 0 1200 650" role="img" aria-labelledby="atlas-map-svg-title" focusable="false">
-        <title id="atlas-map-svg-title">World map</title>
-        <g class="atlas-map__graticule" aria-hidden="true">
-          <path d="M90 115 C330 70 720 70 1110 115" />
-          <path d="M75 230 C360 190 810 190 1130 230" />
-          <path d="M65 335 C355 315 850 315 1140 335" />
-          <path d="M75 455 C365 500 805 500 1125 455" />
-          <path d="M210 60 C150 230 150 420 210 592" />
-          <path d="M430 38 C390 210 390 440 430 610" />
-          <path d="M600 26 C600 220 600 430 600 625" />
-          <path d="M780 38 C820 210 820 440 780 610" />
-          <path d="M1000 60 C1060 230 1060 420 1000 592" />
-        </g>
-        <g class="atlas-map__land" aria-hidden="true">
-          <path d="M128 178 L169 142 L226 126 L292 139 L334 171 L385 184 L421 220 L403 267 L352 283 L318 314 L273 305 L240 333 L198 317 L165 344 L118 319 L104 270 L75 242 L94 203 Z" />
-          <path d="M247 88 L305 70 L356 82 L381 111 L353 141 L290 137 L238 120 Z" />
-          <path d="M325 328 L369 355 L398 410 L385 478 L416 548 L386 610 L341 579 L306 510 L273 458 L244 410 L265 358 Z" />
-          <path d="M424 205 L459 180 L507 174 L545 197 L531 231 L476 239 L438 228 Z" />
-          <path d="M474 261 L535 245 L596 277 L619 336 L603 410 L568 492 L518 520 L479 462 L443 402 L451 323 Z" />
-          <path d="M555 178 L640 136 L752 129 L876 151 L985 176 L1109 236 L1132 294 L1071 315 L997 291 L933 318 L850 301 L782 331 L706 302 L663 257 L597 245 Z" />
-          <path d="M802 349 L861 365 L909 415 L886 464 L827 455 L787 406 Z" />
-          <path d="M918 416 L1015 401 L1086 448 L1060 509 L972 526 L905 478 Z" />
-          <path d="M1100 334 L1132 348 L1124 376 L1089 369 Z" />
-          <path d="M1053 548 L1090 563 L1115 589 L1075 606 L1038 583 Z" />
-          <path d="M445 132 L496 106 L552 129 L526 160 L469 159 Z" />
-          <path d="M640 112 L675 94 L708 112 L690 135 L651 134 Z" />
-          <path d="M140 365 L170 370 L185 393 L160 409 L132 395 Z" />
-          <path d="M1016 341 L1049 354 L1041 384 L1008 373 Z" />
-        </g>
-      </svg>
-
-      {% for continent in continents.items %}
-        {% if continent.name == "North America" %}
-        <a class="atlas-map__hotspot atlas-map__hotspot--north-america" href="{{ continent | route('continent') }}/#"><span>North America</span></a>
-        {% elif continent.name == "South America" %}
-        <a class="atlas-map__hotspot atlas-map__hotspot--south-america" href="{{ continent | route('continent') }}/#"><span>South America</span></a>
-        {% elif continent.name == "Europe" %}
-        <a class="atlas-map__hotspot atlas-map__hotspot--europe" href="{{ continent | route('continent') }}/#"><span>Europe</span></a>
-        {% elif continent.name == "Africa" %}
-        <a class="atlas-map__hotspot atlas-map__hotspot--africa" href="{{ continent | route('continent') }}/#"><span>Africa</span></a>
-        {% elif continent.name == "Asia" %}
-        <a class="atlas-map__hotspot atlas-map__hotspot--asia" href="{{ continent | route('continent') }}/#"><span>Asia</span></a>
-        {% elif continent.name == "Middle East" %}
-        <a class="atlas-map__hotspot atlas-map__hotspot--middle-east" href="{{ continent | route('continent') }}/#"><span>Middle East</span></a>
-        {% elif continent.name == "Oceania" %}
-        <a class="atlas-map__hotspot atlas-map__hotspot--oceania" href="{{ continent | route('continent') }}/#"><span>Oceania</span></a>
-        {% endif %}
-      {% endfor %}
-
-      {% for location in page.featuredLocations %}
-      {% if loop.index <= 2 %}
-      <figure class="atlas-map__postcard atlas-map__postcard--{{ loop.index }}">
-        <img src="{{ location.image.path | image({w: 560, auto: 'compress,format'}) }}" alt="" decoding="async" loading="{% if loop.index == 1 %}eager{% else %}lazy{% endif %}" />
-        <figcaption>{{ location.title }}</figcaption>
-      </figure>
-      {% endif %}
-      {% endfor %}
-    </div>
-  </header>
-
-  <section class="atlas-photo-feature" aria-label="Featured travel edits">
-    <div class="atlas-photo-feature__headline">
-      <p class="atlas-label">Featured itineraries</p>
-      <h2><span>places that</span><em>stay with you</em></h2>
-    </div>
-    <div class="atlas-photo-feature__grid">
-      {% for location in page.featuredLocations %}
-      {% if loop.index <= 5 %}
-      <a href="{{ location | route('location') }}" class="atlas-feature-card atlas-feature-card--{{ loop.index }}">
-        <img srcset="{{ location.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-                     {{ location.image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
-                     {{ location.image.path | image({w: 520, auto: 'compress,format'}) }} 520w"
-             sizes="(min-width: 1000px) 24vw, 50vw"
-             src="{{ location.image.path | image({w: 800, auto: 'compress,format'}) }}"
-             alt=""
-             loading="{% if loop.index <= 2 %}eager{% else %}lazy{% endif %}"
-             decoding="async"
-        />
-        <span>{{ location.title }}</span>
-      </a>
-      {% endif %}
-      {% endfor %}
-    </div>
-  </section>
-
-  <section class="atlas-region-board" id="destination-regions" aria-label="Destinations by region">
-    {% for continent in continents.items | reverse %}
-    <article class="atlas-region-card">
-      <div>
-        <p class="atlas-region-card__count">{{ continent.locations.length }} places</p>
-        <h3><a href="{{ continent | route('continent') }}/#">{{ continent.name }}</a></h3>
-      </div>
-      {% if continent.locations.length %}
-      <ul>
-        {% for location in continent.locations %}
-          {% if loop.index <= 5 %}
-          <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-      {% endif %}
-    </article>
-    {% endfor %}
-  </section>
-
-  <section class="atlas-destination-edit" aria-label="Featured destination guides">
-    <div class="atlas-destination-edit__heading">
-      <p class="atlas-label">Featured coordinates</p>
-      <h2>Places with enough pull to plan around.</h2>
-    </div>
-
-    <div class="atlas-destination-list">
-      {% for location in page.featuredLocations %}
-      {% if loop.index <= 10 %}
-      <a class="atlas-destination-row atlas-destination-row--{{ loop.index }}" href="{{ location | route('location') }}">
-        <span class="atlas-destination-row__number">{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span>
-        <span class="atlas-destination-row__image">
-          <img srcset="{{ location.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-                       {{ location.image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
-                       {{ location.image.path | image({w: 500, auto: 'compress,format'}) }} 500w"
-               sizes="(min-width: 1000px) 26rem, 42vw"
-               src="{{ location.image.path | image({w: 800, auto: 'compress,format'}) }}"
+    <div class="d3-hero__stack">
+      {% for postcardSlide in postcardSlides %}
+      {% set cardIndex = loop.index0 %}
+      {% set editorCard = postcardSlide if editorPostcards.length else null %}
+      {% set mainImage = editorCard.heroImage.path if editorCard and editorCard.heroImage and editorCard.heroImage.path else fallbackImages[cardIndex] %}
+      {% set overlayImage = editorCard.photoPostcardImage.path if editorCard and editorCard.photoPostcardImage and editorCard.photoPostcardImage.path else fallbackImages[cardIndex + 1] or fallbackImages[0] %}
+      {% set paperImage = editorCard.paperPostcardImage.path if editorCard and editorCard.paperPostcardImage and editorCard.paperPostcardImage.path else fallbackImages[cardIndex + 2] or fallbackImages[0] %}
+      {% set stampGraphicImage = editorCard.stampGraphicImage.path if editorCard and editorCard.stampGraphicImage and editorCard.stampGraphicImage.path else null %}
+      {% set postmarkGraphicImage = editorCard.postmarkGraphicImage.path if editorCard and editorCard.postmarkGraphicImage and editorCard.postmarkGraphicImage.path else null %}
+      {% set postcardUrl = editorCard.linkUrl if editorCard and editorCard.linkUrl else fallbackPostcardUrls[cardIndex] %}
+      {% set postcardLocation = editorCard.location if editorCard and editorCard.location else fallbackPostcardLocations[cardIndex] %}
+      {% set postcardDate = editorCard.dateText if editorCard and editorCard.dateText else fallbackPostcardDates[cardIndex] %}
+      {% set postcardNote = editorCard.noteText if editorCard and editorCard.noteText else fallbackPostcardNotes[cardIndex] %}
+      <a class="d3-hero-card{% if cardIndex == 0 %} is-active{% endif %}" data-d3-card data-d3-index="{{ cardIndex }}" href="{{ postcardUrl }}">
+        <span class="d3-hero-card__bg">
+          <img srcset="{{ mainImage | image({w: 2600, auto: 'compress,format'}) }} 2600w,
+                       {{ mainImage | image({w: 1800, auto: 'compress,format'}) }} 1800w,
+                       {{ mainImage | image({w: 1000, auto: 'compress,format'}) }} 1000w"
+               sizes="100vw"
+               src="{{ mainImage | image({w: 1800, auto: 'compress,format'}) }}"
                alt=""
-               loading="{% if loop.index <= 3 %}eager{% else %}lazy{% endif %}"
+               loading="{% if cardIndex == 0 %}eager{% else %}lazy{% endif %}"
                decoding="async"
           />
         </span>
-        <span class="atlas-destination-row__title">{{ location.title }}</span>
-        <span class="atlas-destination-row__meta">Open guide</span>
+
+        <span class="d3-postcard" aria-hidden="true">
+          <span class="d3-postcard__photo">
+            <img src="{{ overlayImage | image({w: 820, auto: 'compress,format'}) }}" alt="" loading="{% if cardIndex == 0 %}eager{% else %}lazy{% endif %}" decoding="async" />
+            <span class="d3-postcard__photo-title{% if postcardLocation.length > 12 %} d3-postcard__photo-title--long{% endif %}{% if postcardLocation.length > 20 %} d3-postcard__photo-title--very-long{% endif %}">
+              <span>Postcard</span>
+              <em>from</em>
+              <strong>{{ postcardLocation }}</strong>
+            </span>
+            <span class="d3-postcard__photo-stamp">
+              <span>{{ postcardLocation }}</span>
+              <em>{{ postcardDate }}</em>
+            </span>
+            {% if stampGraphicImage %}
+            <span class="d3-postcard__stamp-graphic d3-postcard__stamp-graphic--photo">
+              <img src="{{ stampGraphicImage | image({w: 360, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+            </span>
+            {% endif %}
+          </span>
+          <span class="d3-postcard__paper">
+            <span class="d3-postcard__paper-photo">
+              <img src="{{ paperImage | image({w: 620, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="d3-postcard__stamp">
+              <span>{{ postcardLocation }}</span>
+              <em>{{ postcardDate }}</em>
+              <b>Away Lands</b>
+            </span>
+            {% if postmarkGraphicImage %}
+            <span class="d3-postcard__stamp-graphic d3-postcard__stamp-graphic--paper">
+              <img src="{{ postmarkGraphicImage | image({w: 360, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+            </span>
+            {% endif %}
+            <span class="d3-postcard__paper-note{% if postcardNote.length < 95 %} d3-postcard__paper-note--short{% endif %}">{{ postcardNote }}</span>
+            <span class="d3-postcard__lines"></span>
+          </span>
+        </span>
+      </a>
+      {% endfor %}
+    </div>
+
+    <button class="d3-hero__arrow d3-hero__arrow--prev" type="button" data-d3-prev aria-label="Previous postcard">
+      {% if heroPrevArrowIcon %}
+      <img src="{{ heroPrevArrowIcon | image({w: 180, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+      {% else %}
+      <span class="d3-hero__arrow-ink" aria-hidden="true"></span>
+      {% endif %}
+    </button>
+    <button class="d3-hero__arrow d3-hero__arrow--next" type="button" data-d3-next aria-label="Next postcard">
+      {% if heroNextArrowIcon %}
+      <img src="{{ heroNextArrowIcon | image({w: 180, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+      {% else %}
+      <span class="d3-hero__arrow-ink" aria-hidden="true"></span>
+      {% endif %}
+    </button>
+  </header>
+
+  <section class="d3-search-strip" aria-label="Search all Away Lands posts">
+    <p>{{ page.searchHeading or "Find the guide" }}</p>
+    <form action="/search/" method="get">
+      <label for="destinations3-search">Search all Away Lands posts</label>
+      <input id="destinations3-search" name="q" type="search" placeholder="{{ page.searchPlaceholder or 'Search Greece, packing lists, hotels, beaches...' }}" />
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <section class="d3-map-section" aria-label="Destination map">
+    <div class="d3-map-section__intro">
+      <p class="d3-kicker d3-kicker--orange">{{ page.mapHeading or "Destination map" }}</p>
+    </div>
+
+    <div class="d3-world-map">
+      <img src="/assets/images/destinations3-world-map.png" alt="" loading="lazy" decoding="async" />
+      {% for continent in continents.items %}
+        {% if continent.name == "North America" %}
+        <a class="d3-map-pin d3-map-pin--north-america{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">North America <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "South America" %}
+        <a class="d3-map-pin d3-map-pin--south-america{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">South America <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Europe" %}
+        <a class="d3-map-pin d3-map-pin--europe{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Europe <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Africa" %}
+        <a class="d3-map-pin d3-map-pin--africa{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Africa <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Asia" %}
+        <a class="d3-map-pin d3-map-pin--asia{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Asia <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Middle East" %}
+        <a class="d3-map-pin d3-map-pin--middle-east{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Middle East <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Oceania" %}
+        <a class="d3-map-pin d3-map-pin--oceania{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Oceania <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="d3-featured-destination" aria-label="Featured destination">
+    <img srcset="{{ featuredImage | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+                 {{ featuredImage | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+                 {{ featuredImage | image({w: 900, auto: 'compress,format'}) }} 900w"
+         sizes="100vw"
+         src="{{ featuredImage | image({w: 1600, auto: 'compress,format'}) }}"
+         alt=""
+         loading="lazy"
+         decoding="async"
+    />
+    <div class="d3-featured-destination__text">
+      <p>{{ page.featuredDestinationLabel or "Featured destination" }}</p>
+      <h2>{{ page.featuredDestinationTitle or "Riviera" }}</h2>
+    </div>
+    <div class="d3-featured-destination__cards" aria-label="Featured destination links">
+      {% for featuredCard in [0, 1] %}
+      {% set featuredCardIndex = loop.index0 %}
+      {% set editorFeaturedCard = editorFeaturedCards[featuredCardIndex] if editorFeaturedCards.length > featuredCardIndex else null %}
+      {% set featuredCardImage = editorFeaturedCard.image.path if editorFeaturedCard and editorFeaturedCard.image and editorFeaturedCard.image.path else fallbackImages[featuredCardIndex] %}
+      {% set featuredCardTitle = editorFeaturedCard.title if editorFeaturedCard and editorFeaturedCard.title else fallbackCardTitles[featuredCardIndex] %}
+      {% set featuredCardUrl = editorFeaturedCard.url if editorFeaturedCard and editorFeaturedCard.url else fallbackCardUrls[featuredCardIndex] %}
+      <a class="d3-featured-card" href="{{ featuredCardUrl }}">
+        <img src="{{ featuredCardImage | image({w: 560, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+        <span>{{ featuredCardTitle }}</span>
+      </a>
+      {% endfor %}
+    </div>
+    {% if featuredStampGraphic or featuredLemonGraphic %}
+    <div class="d3-featured-destination__graphics" aria-hidden="true">
+      {% if featuredStampGraphic %}
+      <span class="d3-featured-destination__graphic d3-featured-destination__graphic--stamp">
+        <img src="{{ featuredStampGraphic | image({w: 320, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+      </span>
+      {% endif %}
+      {% if featuredLemonGraphic %}
+      <span class="d3-featured-destination__graphic d3-featured-destination__graphic--lemon">
+        <img src="{{ featuredLemonGraphic | image({w: 320, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+      </span>
+      {% endif %}
+    </div>
+    {% endif %}
+  </section>
+
+  <section class="d3-photo-destinations" aria-label="Featured destination photo cards">
+    <div class="d3-photo-destinations__heading">
+      <p class="d3-kicker">{{ page.cardsHeading or "Start with a place" }}</p>
+    </div>
+
+    <div class="d3-photo-destinations__grid">
+      {% for destinationCard in destinationCards %}
+      {% if loop.index <= 6 %}
+      {% set cardIndex = loop.index0 %}
+      {% set editorDestinationCard = destinationCard if editorCards.length else null %}
+      {% set destinationImage = editorDestinationCard.image.path if editorDestinationCard and editorDestinationCard.image and editorDestinationCard.image.path else fallbackImages[cardIndex] or fallbackImages[0] %}
+      {% set destinationGraphic = editorDestinationCard.graphicImage.path if editorDestinationCard and editorDestinationCard.graphicImage and editorDestinationCard.graphicImage.path else null %}
+      {% set destinationTitle = editorDestinationCard.title if editorDestinationCard and editorDestinationCard.title else fallbackCardTitles[cardIndex] %}
+      {% set destinationUrl = editorDestinationCard.url if editorDestinationCard and editorDestinationCard.url else fallbackCardUrls[cardIndex] %}
+      <a class="d3-photo-card d3-photo-card--{{ loop.index }}" href="{{ destinationUrl }}">
+        <img srcset="{{ destinationImage | image({w: 1100, auto: 'compress,format'}) }} 1100w,
+                     {{ destinationImage | image({w: 760, auto: 'compress,format'}) }} 760w,
+                     {{ destinationImage | image({w: 480, auto: 'compress,format'}) }} 480w"
+             sizes="(min-width: 900px) 33vw, 100vw"
+             src="{{ destinationImage | image({w: 760, auto: 'compress,format'}) }}"
+             alt=""
+             loading="lazy"
+             decoding="async"
+        />
+        {% if destinationGraphic %}
+        <span class="d3-photo-card__graphic">
+          <img src="{{ destinationGraphic | image({w: 280, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />
+        </span>
+        {% endif %}
+        <span class="d3-photo-card__number">0{{ loop.index }}</span>
+        <span class="d3-photo-card__title">{{ destinationTitle }}</span>
       </a>
       {% endif %}
       {% endfor %}
     </div>
   </section>
 
-  <section class="atlas-trip-styles" aria-label="Plan by travel style">
-    <div class="atlas-trip-styles__copy">
-      <p class="atlas-label">Plan smarter</p>
-      <h2>Useful pages for turning inspiration into a booked trip.</h2>
+  <section class="d3-ending-panel" aria-label="Choose travel mood">
+    <img srcset="{{ endingImage | image({w: 2200, auto: 'compress,format'}) }} 2200w,
+                 {{ endingImage | image({w: 1400, auto: 'compress,format'}) }} 1400w,
+                 {{ endingImage | image({w: 900, auto: 'compress,format'}) }} 900w"
+         sizes="100vw"
+         src="{{ endingImage | image({w: 1400, auto: 'compress,format'}) }}"
+         alt=""
+         loading="lazy"
+         decoding="async"
+    />
+    <div class="d3-ending-panel__box">
+      <p class="d3-kicker">{{ page.endingKicker or "Choose by mood" }}</p>
+      {% set endingTitle = page.endingTitle or "Start with a feeling" %}
+      <h2>{{ "Start with a feeling" if endingTitle == "Start with the feeling." else endingTitle }}</h2>
+      <div class="d3-ending-panel__links">
+        {% for endingLink in endingLinks %}
+        <a href="{{ endingLink.url }}">{{ endingLink.label }}</a>
+        {% endfor %}
+      </div>
     </div>
-    <a href="/category/packing-guides">Packing guides</a>
-    <a href="/category/best-beaches">Best beaches</a>
-    <a href="/category/travel-guides">Travel guides</a>
-    <a href="/category/hotels">Hotels</a>
   </section>
 </section>
+
 {% endblock %}

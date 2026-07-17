@@ -2,11 +2,75 @@ query {
   page: getDestinations {
     _contentTypeName
     title
-    featuredLocations {
+    pageTitle
+    heroIntervalSeconds
+    heroPrevArrowIcon {
+      path
+    }
+    heroNextArrowIcon {
+      path
+    }
+    heroPostcards {
+      linkUrl
+      heroImage {
+        path
+      }
+      photoPostcardImage {
+        path
+      }
+      paperPostcardImage {
+        path
+      }
+      stampGraphicImage {
+        path
+      }
+      postmarkGraphicImage {
+        path
+      }
+      location
+      dateText
+      noteText
+    }
+    searchHeading
+    searchPlaceholder
+    mapHeading
+    featuredDestinationLabel
+    featuredDestinationTitle
+    featuredDestinationImage {
+      path
+    }
+    featuredDestinationStampGraphic {
+      path
+    }
+    featuredDestinationLemonGraphic {
+      path
+    }
+    featuredDestinationCards {
       title
+      url
       image {
         path
       }
+    }
+    cardsHeading
+    destinationCards {
+      title
+      url
+      image {
+        path
+      }
+      graphicImage {
+        path
+      }
+    }
+    endingKicker
+    endingTitle
+    endingImage {
+      path
+    }
+    endingLinks {
+      label
+      url
     }
     social {
       title

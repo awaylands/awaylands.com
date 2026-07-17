@@ -6,6 +6,7 @@ import PageHeader from './components/header';
 import InstaFeed from './components/insta-feed.vue';
 import Listings from './components/listings.vue';
 import initSearch from './components/search';
+import initDestinations3Postcards from './components/destinations3-postcards';
 
 import Imageloaded from './directives/imageloaded';
 import Slides from './directives/slides';
@@ -21,6 +22,7 @@ export default new Vue({
   mounted() {
     objectFitImages();
     initSearch();
+    initDestinations3Postcards();
   },
   methods: {},
   components: {
