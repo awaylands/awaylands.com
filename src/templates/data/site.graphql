@@ -36,6 +36,24 @@ query {
     }
     formEndpoint
   }
+  popularCategories: getCategoryList {
+    items {
+      title
+      storySet(size: 3) {
+        items {
+          _contentTypeName
+          title
+          slug
+          social {
+            title
+          }
+          category {
+            title
+          }
+        }
+      }
+    }
+  }
 }
 
 fragment LocationLinks on Location {

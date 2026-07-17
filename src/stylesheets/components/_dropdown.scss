@@ -48,6 +48,29 @@ $dropdownBorder: 1px solid -color(gallery);
     }
   }
 
+  &__list &__link--has-children {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.2rem;
+    align-items: center;
+
+    &:after {
+      content: "";
+      flex: 0 0 auto;
+      width: 0.6rem;
+      height: 0.6rem;
+      border-top: 2px solid currentColor;
+      border-right: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.12s $ease-in-out-quart;
+    }
+
+    &:hover:after,
+    &:focus:after {
+      transform: translateX(0.2rem) rotate(45deg);
+    }
+  }
+
   &--features {
     top: 0;
     left: 12rem;

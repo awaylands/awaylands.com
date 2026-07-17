@@ -15,8 +15,10 @@
           <nav class="page-nav">
             <ul class="page-nav__list">
               {% for link in site.navigation.links %}
+              {% set linkName = link.text | lower %}
               <li>
                 <a href="{{ link.url }}"
+                   {% if linkName == "shop" or link.externalLink %}target="_blank" rel="noopener"{% endif %}
                    {% if link.text == page.title or (link.children[0].contentTypeName and (link.children[0].contentTypeName == page._contentTypeName or link.children[1].contentTypeName == page._contentTypeName)) %}class="is-current"{% endif %}
                 >
                   {{ link.text }}
@@ -27,7 +29,9 @@
                   <ul class="dropdown__list">
                     {% for child in link.children %}
                       <li>
-                        <a href="{{ child | route(child._contentTypeName) }}">
+                        <a href="{{ child | route(child._contentTypeName) }}"
+                           {% if child._contentTypeName === "continent" and child.locations.length %}class="dropdown__link--has-children" aria-haspopup="true"{% endif %}
+                        >
                           {% if child.title %}
                             {{ child.title }}
                           {% elif child.name %}
@@ -89,27 +93,101 @@
             </li>
           </ul>
 
-          <button class="page-header__burger" @click="toggleOpen">
+          <a class="page-header__mobile-search" href="/search/">Search</a>
+
+          <button
+            class="page-header__burger"
+            type="button"
+            aria-controls="mobile-navigation"
+            :aria-expanded="isOpen ? 'true' : 'false'"
+            :aria-label="isOpen ? 'Close navigation' : 'Open navigation'"
+            @click="toggleOpen"
+          >
             <span></span>
           </button>
         </div>
       </div>
     </header>
 
-    <div class="mobile-nav" :class="{'is-visible': isOpen}">
+    <div
+      id="mobile-navigation"
+      class="mobile-nav"
+      :class="{'is-visible': isOpen}"
+      :aria-hidden="isOpen ? 'false' : 'true'"
+    >
       <div class="mobile-nav__inner">
         <div class="mobile-nav__target" @click="close"></div>
 
-        <ul class="mobile-nav__list">
-          {% for item in site.navigation.links %}
-          <li class="mobile-nav__item">
-            <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank"{% endif %}>{{ item.text }}</a>
-          </li>
-          {% endfor %}
-          <li class="mobile-nav__item">
-            <a href="/search/" class="mobile-nav__link">Search</a>
-          </li>
-        </ul>
+        <nav class="mobile-nav__panel" aria-label="Mobile navigation">
+          <form class="mobile-nav__search" action="/search/" method="get">
+            <label class="mobile-nav__search-label" for="mobile-search">Search Away Lands</label>
+            <input
+              class="mobile-nav__search-input"
+              id="mobile-search"
+              name="q"
+              type="search"
+              placeholder="Search stories and destinations"
+              autocomplete="off"
+            >
+            <button class="mobile-nav__search-button" type="submit">Go</button>
+          </form>
+
+          <div class="mobile-nav__group">
+            <p class="mobile-nav__eyebrow">Explore</p>
+            <ul class="mobile-nav__list">
+              {% for item in site.navigation.links %}
+                {% set itemName = item.text | lower %}
+                {% if itemName == "blog" or itemName == "destinations" %}
+                <li class="mobile-nav__item">
+                  <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank" rel="noopener"{% endif %}>{{ item.text }}</a>
+                </li>
+                {% endif %}
+              {% endfor %}
+              <li class="mobile-nav__item">
+                <a href="/category/most-popular-posts" class="mobile-nav__link">Most Popular</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mobile-nav__group">
+            <p class="mobile-nav__eyebrow">Our work</p>
+            <ul class="mobile-nav__list">
+              {% for item in site.navigation.links %}
+                {% set itemName = item.text | lower %}
+                {% if itemName == "film" or itemName == "still" %}
+                <li class="mobile-nav__item">
+                  <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank" rel="noopener"{% endif %}>{{ item.text }}</a>
+                </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+
+          <ul class="mobile-nav__list mobile-nav__list--primary">
+            {% for item in site.navigation.links %}
+              {% set itemName = item.text | lower %}
+              {% if itemName == "shop" %}
+              <li class="mobile-nav__item">
+                <a href="{{ item.url }}" class="mobile-nav__link mobile-nav__link--shop" target="_blank" rel="noopener">{{ item.text }}</a>
+              </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+
+          <ul class="mobile-nav__list mobile-nav__list--secondary">
+            {% for item in site.navigation.links %}
+              {% set itemName = item.text | lower %}
+              {% if itemName == "about" %}
+              <li class="mobile-nav__item">
+                <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank" rel="noopener"{% endif %}>{{ item.text }}</a>
+              </li>
+              {% endif %}
+            {% endfor %}
+            <li class="mobile-nav__item">
+              <a href="#footer" class="mobile-nav__link" @click="contactScroll">Contact</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>

@@ -22,13 +22,19 @@ export default {
   methods: {
     toggleOpen() {
       this.isOpen = !this.isOpen;
+      this.syncPageLock();
     },
     close() {
       this.isOpen = false;
+      this.syncPageLock();
+    },
+    syncPageLock() {
+      document.body.classList.toggle('is-mobile-nav-open', this.isOpen);
     },
     contactScroll() {
       const footer = document.getElementById('footer').offsetTop;
 
+      this.close();
       scrollTo(footer, null, 700);
     },
     captureEscape(event) {
@@ -57,7 +63,7 @@ export default {
     },
     checkWindowSize() {
       if (window.innerWidth >= 1200 && this.isOpen) {
-        this.toggleOpen();
+        this.close();
       }
     }
   }

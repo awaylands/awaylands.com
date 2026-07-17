@@ -2,6 +2,7 @@
 <html>
   <head>
     {% include "partials/head.html" %}
+    {% block extra_head %}{% endblock %}
 
     {# Favicons from Webpack favicon generator #}
     {% for element in global.favicon.html %}

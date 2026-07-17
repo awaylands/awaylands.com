@@ -369,42 +369,185 @@
   }
 }
 
+.body--search {
+  --search-paper: #fffdf7;
+  --search-cream: #f6eee2;
+  --search-ink: #18201f;
+  --search-muted: #66706e;
+  --search-blue: #166e78;
+  --search-deep-blue: #0e4855;
+  --search-orange: #dd682d;
+  --search-yellow: #fffbd8;
+
+  padding-top: 6rem;
+  background: var(--search-paper);
+  color: var(--search-ink);
+
+  .main {
+    background:
+      radial-gradient(circle at 8% 6%, rgba(221, 104, 45, 0.07), rgba(221, 104, 45, 0) 30rem),
+      radial-gradient(circle at 93% 17%, rgba(22, 110, 120, 0.08), rgba(22, 110, 120, 0) 36rem),
+      var(--search-paper);
+  }
+
+  .page-header {
+    height: 6rem;
+    background-color: rgba(255, 253, 247, 0.98);
+    border-bottom: 1px solid rgba(14, 72, 85, 0.22);
+    box-shadow: none;
+  }
+
+  .page-header .logo {
+    width: 17.5rem;
+    margin-top: 0;
+  }
+
+  .mobile-nav {
+    top: 6rem;
+    height: calc(100% - 6rem);
+  }
+
+  .page-header__mobile-search {
+    color: var(--search-blue);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+  }
+
+  .page-header .page-nav__list > li > a {
+    color: var(--search-blue);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+  }
+
+  .page-header .page-nav__list > li > a:after {
+    height: 1px;
+    border-radius: 0;
+    background-color: var(--search-orange);
+  }
+
+  .page-header .page-nav__list > li > a.is-current {
+    color: var(--search-orange);
+  }
+
+  .page-header__burger span,
+  .page-header__burger span:before,
+  .page-header__burger span:after {
+    height: 2px;
+    background-color: var(--search-blue);
+  }
+
+  .page-header.is-open .page-header__burger span {
+    background-color: transparent;
+  }
+
+  .mobile-nav__panel {
+    background:
+      linear-gradient(rgba(246, 238, 226, 0.97), rgba(246, 238, 226, 0.97)),
+      var(--search-cream);
+  }
+
+  .mobile-nav__item + * {
+    border-color: rgba(22, 110, 120, 0.18);
+  }
+
+  .mobile-nav__link {
+    color: var(--search-deep-blue);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+  }
+
+  @include for-desktop-up {
+    padding-top: 10.4rem;
+
+    .page-header {
+      height: 10.4rem;
+      background-color: var(--search-paper);
+    }
+
+    .page-header.is-sticky {
+      height: 6.8rem;
+      border-bottom-color: rgba(22, 110, 120, 0.28);
+      box-shadow: none;
+    }
+
+    .page-header .logo {
+      width: 22.5rem;
+    }
+
+    .page-header.is-sticky .logo {
+      width: 20.5rem;
+    }
+
+    .page-header .page-nav {
+      margin-left: 3.2rem;
+    }
+
+    .page-header .page-nav__list > li + * {
+      margin-left: 1.55vw;
+    }
+
+    .page-header .social svg {
+      fill: var(--search-deep-blue);
+    }
+
+    .page-header .social a:hover svg {
+      fill: var(--search-orange);
+    }
+  }
+}
+
 .search-page {
   @extend %basic-block;
 
-  padding: 15.2rem 2rem 8rem;
+  min-height: 70vh;
+  padding: 5.6rem 2rem 10rem;
+  color: var(--search-ink);
 
   &__inner {
-    max-width: 118rem;
+    max-width: 148rem;
     margin: 0 auto;
   }
 
   &__header {
-    max-width: 88rem;
-    margin: 0 auto 5.6rem;
-    text-align: center;
+    max-width: 116rem;
+    margin: 0 auto 6.8rem;
+    text-align: left;
   }
 
   &__eyebrow {
-    @include copy-a($family: $raleway, $weight: bold);
-
-    color: -color(cerulean);
-    letter-spacing: 0.16em;
+    margin-bottom: 1.8rem;
+    color: var(--search-orange);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
     text-transform: uppercase;
-    margin-bottom: 1.6rem;
   }
 
   &__heading {
-    @include hd-b($family: $raleway);
-
-    margin-bottom: 3.2rem;
-    text-transform: uppercase;
+    max-width: 102rem;
+    margin: 0 0 3.6rem;
+    color: var(--search-ink);
+    font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+    font-size: clamp(5.6rem, 7.1vw, 10.8rem);
+    font-weight: 300;
+    letter-spacing: 0.005em;
+    line-height: 0.88;
+    text-wrap: balance;
   }
 
   &__form {
-    display: flex;
-    max-width: 78rem;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    max-width: 92rem;
+    border: 2px solid var(--search-deep-blue);
+    background: var(--search-paper);
   }
 
   &__label {
@@ -419,59 +562,122 @@
   }
 
   &__input {
-    @include copy-a();
-
-    flex: 1 1 auto;
     min-width: 0;
-    border: 0.1rem solid -color(gallery);
-    border-right: 0;
-    padding: 1.8rem 2rem;
-    color: -color(tundora);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--search-ink);
+    font-family: 'Still EB Garamond', Georgia, serif;
+    font-size: 2rem;
+    line-height: 1.35;
+    padding: 1.8rem 2.2rem;
+
+    &::placeholder {
+      color: rgba(24, 32, 31, 0.54);
+      opacity: 1;
+    }
+
+    &:focus {
+      outline: 2px solid var(--search-orange);
+      outline-offset: -2px;
+    }
   }
 
   &__button {
-    @include copy-a($family: $raleway, $weight: bold);
-
-    flex: 0 0 auto;
+    min-width: 13rem;
     border: 0;
-    background-color: -color(cerulean);
-    color: -color(white);
-    padding: 1.8rem 2.8rem;
-    text-transform: uppercase;
+    border-left: 2px solid var(--search-deep-blue);
+    border-radius: 0;
+    background: var(--search-deep-blue);
+    color: var(--search-paper);
     cursor: pointer;
-  }
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    line-height: 1.3;
+    padding: 2rem 2.8rem;
+    text-transform: uppercase;
+    transition: background-color 0.2s ease, color 0.2s ease;
 
-  &__hint,
-  &__status {
-    @include copy-a();
-
-    color: -color(dust);
+    &:hover,
+    &:focus {
+      background: var(--search-orange);
+      color: var(--search-paper);
+      outline: 0;
+    }
   }
 
   &__hint {
-    margin-top: 1.6rem;
+    max-width: 92rem;
+    margin-top: 1.5rem;
+    color: var(--search-muted);
+    font-family: 'Still EB Garamond', Georgia, serif;
+    font-size: 1.55rem;
+    line-height: 1.5;
   }
 
   &__status {
-    margin-bottom: 3.2rem;
-    text-align: center;
+    display: flex;
+    gap: 1.4rem;
+    align-items: center;
+    margin: 0 0 2.4rem;
+    color: var(--search-blue);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    line-height: 1.5;
+    text-transform: uppercase;
+
+    &:after {
+      content: '';
+      flex: 1 1 auto;
+      height: 1px;
+      background: rgba(14, 72, 85, 0.3);
+    }
   }
 
   @include for-phone-only {
-    padding-top: 11.2rem;
+    padding: 4.2rem 1.6rem 7.2rem;
 
-    &__form {
-      display: block;
+    &__header {
+      margin-bottom: 5rem;
     }
 
-    &__input,
-    &__button {
-      display: block;
-      width: 100%;
+    &__eyebrow {
+      font-size: 1rem;
+    }
+
+    &__heading {
+      margin-bottom: 2.8rem;
+      font-size: clamp(4.7rem, 14vw, 6.5rem);
+      line-height: 0.91;
     }
 
     &__input {
-      border-right: 0.1rem solid -color(gallery);
+      font-size: 1.7rem;
+      padding: 1.5rem 1.4rem;
+    }
+
+    &__button {
+      min-width: 9.2rem;
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      padding: 1.6rem 1.3rem;
+    }
+
+    &__hint {
+      font-size: 1.4rem;
+    }
+
+    &__status {
+      align-items: flex-start;
+      font-size: 0.95rem;
+
+      &:after {
+        margin-top: 0.7rem;
+      }
     }
   }
 }
@@ -479,100 +685,141 @@
 .search-results {
   @extend %basic-block;
 
+  display: grid;
+  grid-template-columns: 1fr;
+
   &__item {
-    & + * {
-      margin-top: 2.4rem;
-    }
+    border-bottom: 1px solid rgba(14, 72, 85, 0.24);
+  }
+
+  @include for-tablet-landscape-up {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 4rem;
   }
 }
 
 .search-result {
-  display: flex;
-  align-items: center;
-  background-color: -color(white);
-  border: 0.1rem solid -color(gallery);
-  color: -color(tundora);
-  transition: border-color 0.2s $ease-in-out-quart, transform 0.2s $ease-in-out-quart;
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.72fr) minmax(0, 1.28fr);
+  gap: 2.2rem;
+  align-items: start;
+  height: 100%;
+  padding: 2.8rem 0;
+  color: var(--search-ink);
 
   &__image-wrap {
-    flex: 0 0 22rem;
-    align-self: stretch;
-    min-height: 16rem;
+    aspect-ratio: 4 / 5;
     overflow: hidden;
+    background: var(--search-cream);
   }
 
   &__image {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.35s ease;
   }
 
   &__content {
-    flex: 1 1 auto;
-    padding: 2.4rem 3.2rem;
+    min-width: 0;
+    padding-top: 0.2rem;
   }
 
   &__rubric {
-    @include copy-a($family: $raleway, $weight: bold);
-
-    color: -color(cerulean);
+    margin-bottom: 1rem;
+    color: var(--search-orange);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
     letter-spacing: 0.12em;
+    line-height: 1.45;
     text-transform: uppercase;
-    margin-bottom: 1.2rem;
   }
 
   &__title {
-    @include hd-c();
-
-    text-transform: uppercase;
-    margin-bottom: 1.2rem;
+    margin: 0 0 1.2rem;
+    color: var(--search-deep-blue);
+    font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+    font-size: clamp(3.2rem, 2.75vw, 4.6rem);
+    font-weight: 500;
+    letter-spacing: 0.005em;
+    line-height: 0.96;
+    text-wrap: balance;
+    transition: color 0.2s ease;
   }
 
   &__dek {
-    @include copy-a();
+    display: -webkit-box;
+    max-height: calc(1.45em * 4);
+    overflow: hidden;
+    color: rgba(24, 32, 31, 0.78);
+    font-family: 'Still EB Garamond', Georgia, serif;
+    font-size: 1.65rem;
+    line-height: 1.45;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
   }
 
   &__reason {
-    @include copy-c($line-height: 1.45);
-
-    color: -color(dust);
     margin-top: 1.6rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(14, 72, 85, 0.18);
+    color: var(--search-muted);
+    font-family: 'Still EB Garamond', Georgia, serif;
+    font-size: 1.35rem;
+    line-height: 1.45;
 
     mark {
-      background-color: rgba(-color(cerulean), 0.18);
-      color: -color(tundora);
+      background-color: var(--search-yellow);
+      color: var(--search-ink);
       padding: 0 0.2rem;
     }
   }
 
   &__reason-label {
-    color: -color(cerulean);
-    font-weight: -weight(bold);
+    color: var(--search-blue);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 0.85em;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  &:hover {
-    border-color: -color(cerulean);
-    transform: translateY(-0.2rem);
+  &:hover,
+  &:focus {
+    .search-result__title {
+      color: var(--search-orange);
+    }
+
+    .search-result__image {
+      transform: scale(1.025);
+    }
   }
 
   @include for-phone-only {
-    display: block;
+    grid-template-columns: 10.5rem minmax(0, 1fr);
+    gap: 1.6rem;
+    padding: 2.2rem 0;
 
-    &__image-wrap {
-      min-height: 0;
-      padding-bottom: 66%;
-      position: relative;
+    &__rubric {
+      font-size: 0.82rem;
+      letter-spacing: 0.09em;
     }
 
-    &__image {
-      position: absolute;
-      top: 0;
-      left: 0;
+    &__title {
+      font-size: 2.7rem;
+      line-height: 0.98;
     }
 
-    &__content {
-      padding: 2.4rem;
+    &__dek {
+      max-height: calc(1.45em * 3);
+      font-size: 1.45rem;
+      -webkit-line-clamp: 3;
+    }
+
+    &__reason {
+      font-size: 1.2rem;
     }
   }
 }
