@@ -117,31 +117,6 @@ query($images: TSImagesConfig) {
           pastedText
           columnCount
         }
-        ... on StoryImageBlock {
-          label
-          image {
-            path
-          }
-          size
-          alignment
-          caption
-          altText
-          linkUrl
-          linkTarget
-        }
-        ... on StoryGalleryBlock {
-          label
-          layout
-          size
-          images {
-            image {
-              path
-            }
-            caption
-            altText
-            linkUrl
-          }
-        }
       }
       relatedStories {
         title
