@@ -312,7 +312,8 @@ body.gallery-page {
 }
 
 body.body--homepage:not(.gallery-page),
-body.body--destinations3:not(.gallery-page) {
+body.body--destinations3:not(.gallery-page),
+body.body--still:not(.gallery-page) {
   .page-header:not(.is-sticky) {
     background-color: transparent;
     border-bottom-color: transparent;

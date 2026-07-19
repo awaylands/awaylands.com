@@ -184,7 +184,7 @@
   }
 
   @include for-desktop-up {
-    width: 22vw;
+    width: 30.1rem;
 
     .is-sticky & {
       width: 30.1rem;
@@ -192,7 +192,7 @@
   }
 
   @include for-big-desktop-up {
-    width: 39.6rem;
+    width: 30.1rem;
   }
 }
 
