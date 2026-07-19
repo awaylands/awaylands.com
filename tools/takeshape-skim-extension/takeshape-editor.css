@@ -84,6 +84,18 @@ body.awaylands-takeshape-skim .awaylands-editor-content-title {
   font-size: 14px !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-social-section-title {
+  margin: 4px 0 8px !important;
+  padding: 11px 16px !important;
+  border: 0 !important;
+  border-radius: 3px !important;
+  background: #ececec !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  text-align: left !important;
+}
+
 body.awaylands-takeshape-skim .MuiInputLabel-root,
 body.awaylands-takeshape-skim .MuiFormLabel-root {
   color: inherit !important;
@@ -292,6 +304,17 @@ body.awaylands-takeshape-skim .awaylands-choice-group {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+
+body.awaylands-takeshape-skim .awaylands-choice-original-label {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-choice-title {
+  margin: 0 0 8px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-group button {

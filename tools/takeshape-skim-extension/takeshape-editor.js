@@ -89,6 +89,15 @@
     createSectionBox('About the Author', fields.slice(15, 16), true);
     createSectionBox('Related Stories', fields.slice(16, 19), true);
 
+    const toutSection = form.querySelector(`.${SECTION_BOX_CLASS}[data-section="tout"]`);
+    const toutBody = toutSection && toutSection.querySelector('.awaylands-editor-section-body');
+    const postLayoutSection = form.querySelector(`.${SECTION_BOX_CLASS}[data-section="post-layout"]`);
+    const socialField = fields[6];
+
+    if (toutBody && postLayoutSection && socialField && socialField.parentElement === toutBody) {
+      toutBody.insertBefore(postLayoutSection, socialField);
+    }
+
     const storyHeading = Array.from(document.querySelectorAll('h4')).find(heading => normalizedText(heading) === 'Story');
 
     if (storyHeading) {
@@ -298,10 +307,13 @@
     }
 
     const group = document.createElement('div');
+    const title = document.createElement('div');
 
     group.className = CHOICE_GROUP_CLASS;
     group.setAttribute('role', 'group');
     group.setAttribute('aria-label', normalizedText(label));
+    title.className = 'awaylands-choice-title';
+    title.textContent = normalizedText(label).replace(/^POST LAYOUT\s*—\s*/i, '');
     choices.forEach(choice => {
       const button = document.createElement('button');
 
@@ -311,8 +323,10 @@
       button.addEventListener('click', () => selectMenuValue(original, choice[0]));
       group.appendChild(button);
     });
+    label.classList.add('awaylands-choice-original-label');
     original.parentElement.hidden = true;
-    original.parentElement.insertAdjacentElement('afterend', group);
+    original.parentElement.insertAdjacentElement('afterend', title);
+    title.insertAdjacentElement('afterend', group);
 
     const sync = () => {
       const value = native.value || 'auto';
@@ -749,6 +763,7 @@
 
       heading.classList.add(SECTION_CLASS);
       heading.classList.toggle(CONTENT_CLASS, text === 'Content' || text.indexOf('Content Block') === 0 || text === 'Image' || text === 'Social');
+      heading.classList.toggle('awaylands-social-section-title', text === 'Social');
     });
 
     document.querySelectorAll('label').forEach(label => {
