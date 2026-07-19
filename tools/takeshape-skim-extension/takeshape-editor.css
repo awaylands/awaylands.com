@@ -30,7 +30,7 @@ body.awaylands-takeshape-skim .awaylands-editor-section-toggle {
   padding: 11px 16px;
   font: inherit;
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 800 !important;
   line-height: 1.25;
   text-align: left;
 }
@@ -108,19 +108,28 @@ body.awaylands-takeshape-skim [contenteditable="true"] {
 body.awaylands-takeshape-skim .MuiSelect-select,
 body.awaylands-takeshape-skim [role="combobox"] {
   font-size: 15px !important;
-  font-weight: 600 !important;
+  font-weight: 400 !important;
 }
 
 body.awaylands-takeshape-skim .MuiFormHelperText-root,
 body.awaylands-takeshape-skim .MuiTypography-caption {
   color: inherit !important;
   font-size: 12px !important;
+  font-style: italic !important;
   line-height: 1.4 !important;
   opacity: 0.72;
 }
 
 body.awaylands-takeshape-skim button {
   font-size: 13px;
+  font-weight: 400 !important;
+}
+
+body.awaylands-takeshape-skim input[placeholder]:placeholder-shown,
+body.awaylands-takeshape-skim textarea[placeholder]:placeholder-shown,
+body.awaylands-takeshape-skim [contenteditable="true"][data-placeholder]:empty:before {
+  font-style: italic !important;
+  font-weight: 400 !important;
 }
 
 body.awaylands-takeshape-skim button:not(.MuiButton-containedPrimary) {
@@ -178,7 +187,7 @@ body.awaylands-takeshape-skim .awaylands-revolve-converter {
   padding: 8px 12px;
   font: inherit;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 400;
 }
 
 body.awaylands-takeshape-skim .awaylands-original-add-content {
@@ -235,6 +244,7 @@ body.awaylands-takeshape-skim .awaylands-shop-item-toggle {
 body.awaylands-takeshape-skim .awaylands-shop-item-toggle code {
   overflow: hidden;
   font-size: 11px;
+  font-style: italic;
   font-weight: 400;
   line-height: 1.35;
   text-overflow: ellipsis;
@@ -271,7 +281,7 @@ body.awaylands-takeshape-skim .awaylands-choice-group button {
   background: transparent;
   color: inherit;
   padding: 8px 10px;
-  font-weight: 650;
+  font-weight: 400;
   line-height: 1.2;
   overflow-wrap: anywhere;
   white-space: normal;
@@ -289,7 +299,7 @@ body.awaylands-takeshape-skim .awaylands-choice-group button.is-selected {
   border: 3px solid currentColor;
   background: #eeeeee;
   padding: 6px 8px;
-  font-weight: 800;
+  font-weight: 400;
 }
 
 body.awaylands-takeshape-skim .awaylands-revolve-converter {
@@ -457,7 +467,7 @@ body.awaylands-takeshape-skim .awaylands-image-size-label {
   border-radius: 3px;
   padding: 3px 6px;
   font-size: 10px;
-  font-weight: 850;
+  font-weight: 400;
   letter-spacing: 0.08em;
   line-height: 1;
   text-transform: uppercase;
@@ -474,12 +484,13 @@ body.awaylands-takeshape-skim .awaylands-image-link-indicator {
   padding: 2px 6px;
   background: #eeeeee;
   font-size: 13px;
-  font-weight: 900;
+  font-weight: 400;
   line-height: 1;
 }
 
 body.awaylands-takeshape-skim .awaylands-image-link-indicator strong {
   font-size: 9px;
+  font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

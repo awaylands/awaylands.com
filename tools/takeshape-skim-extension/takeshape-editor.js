@@ -107,8 +107,7 @@
     const types = [
       ['Content', 'Content Block'],
       ['HTML', 'HTML Block'],
-      ['Table', 'Table Block'],
-      ['Image', 'Image — fast controls']
+      ['Table', 'Table Block']
     ];
 
     row.className = 'awaylands-content-block-buttons';
