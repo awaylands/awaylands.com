@@ -406,6 +406,9 @@
       badges.appendChild(label);
     }
     label.textContent = size;
+    if (figure.querySelector('a[href]')) {
+      setFigureLinkIndicator(figure, true);
+    }
   }
 
   function setFigureLinkIndicator(figure, linked) {
