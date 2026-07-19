@@ -51,129 +51,110 @@
 
   {% set sortedStories = items | sort(true, true, "_enabledAt") %}
 
+  <form class="blog-search" action="/search/" method="get">
+    <label class="blog-search__label" for="blog-search">Search Away Lands</label>
+    <input class="blog-search__input" id="blog-search" name="q" type="search" placeholder="Search destinations, packing guides, hotels, beaches..." />
+    <button class="blog-search__button" type="submit">Search</button>
+  </form>
+
   {% if pagination.currentPage == 1 %}
-  <div class="magazine-blog">
-    <header class="magazine-blog__masthead">
-      <p class="magazine-blog__edition">{{ page.magazineKicker or "The Away Lands Journal" }}</p>
-      <h1 class="magazine-blog__title">{% if page.magazineHeadline %}{{ page.magazineHeadline }}{% else %}Travel, style<br />and a life well framed.{% endif %}</h1>
-      <p class="magazine-blog__intro">{{ page.magazineIntroduction or "Photographer-led destination guides, considered packing lists, beautiful stays and the pieces worth bringing with you." }}</p>
-      <form class="blog-search magazine-blog__search" action="/search/" method="get">
-        <label class="blog-search__label" for="blog-search">Search Away Lands</label>
-        <input class="blog-search__input" id="blog-search" name="q" type="search" placeholder="Where do you want to go?" />
-        <button class="blog-search__button" type="submit">Explore</button>
-      </form>
-    </header>
+  <section class="blog-featured" aria-label="Pinned post">
+    <div class="blog-featured__header">
+      <h1 class="blog-featured__heading">Featured</h1>
+    </div>
 
-    <section class="magazine-lead" aria-label="Editor's highlights">
-      <div class="magazine-lead__primary" data-story-dedupe-featured>
-        {% if page.featuredStory %}
-          {{ blogCard(page.featuredStory, "cover", "(min-width: 1000px) 66vw, 100vw", true) }}
-        {% else %}
-          {{ blogCard(sortedStories[0], "cover", "(min-width: 1000px) 66vw, 100vw", true) }}
-        {% endif %}
+    {% if page.featuredStory %}
+      <div class="blog-featured__pin" data-story-dedupe-featured>
+        {{ blogCard(page.featuredStory, "pinned", "(min-width: 1200px) 40vw, (min-width: 900px) 42vw, 100vw", true) }}
       </div>
-      <div class="magazine-lead__rail" data-story-dedupe-section data-story-limit="3">
-        <p class="magazine-section-label">Now reading</p>
-        {% for story in page.supportingStories %}
-          <div data-story-dedupe-item>{{ blogCard(story, "headline", "(min-width: 1000px) 18vw, 44vw", false) }}</div>
-        {% endfor %}
-        {% for story in sortedStories %}
-          {% if loop.index <= 7 %}<div data-story-dedupe-item>{{ blogCard(story, "headline", "(min-width: 1000px) 18vw, 44vw", false) }}</div>{% endif %}
-        {% endfor %}
+    {% else %}
+    {% for category in featuredCategories.items %}
+    {% if category.title == "* Most Popular Posts *" %}
+    {% for story in category.storySet.items %}
+    {% if story.title == "Best Travel Photography Cameras and Gear (From a Professional Photographer)" %}
+      <div class="blog-featured__pin" data-story-dedupe-featured>
+        {{ blogCard(story, "pinned", "(min-width: 1200px) 40vw, (min-width: 900px) 42vw, 100vw", true) }}
       </div>
-    </section>
-
-    <nav class="magazine-topics" aria-label="Explore by topic">
-      <span>Explore</span>
-      {% for category in page.categories %}
-        <a href="{{ category | route('category') }}">{{ category.title | replace('*', '') | trim }}</a>
-      {% endfor %}
-    </nav>
-
-    {% for category in page.categories %}
-      {% if loop.index <= 4 %}
-      <section class="magazine-department magazine-department--{{ loop.index }}" data-story-dedupe-section data-story-limit="5">
-        <header class="magazine-department__header">
-          <p class="magazine-section-label">The edit</p>
-          <h2>{{ category.title | replace('*', '') | trim }}</h2>
-          <a href="{{ category | route('category') }}">See the complete guide</a>
-        </header>
-        <div class="magazine-department__grid">
-          {% for story in category.storySet.items %}
-            <div data-story-dedupe-item>{{ blogCard(story, "department", "(min-width: 1000px) 33vw, (min-width: 700px) 50vw, 100vw", false) }}</div>
-          {% endfor %}
-        </div>
-      </section>
-
-      {% if loop.index == 2 %}
-      <section class="magazine-cinema" data-story-dedupe-section data-story-limit="1">
-        {% if page.fullBleedStory %}
-          <div class="magazine-cinema__story" data-story-dedupe-item>
-            <a href="{% if page.fullBleedStory.slug %}{{ page.fullBleedStory | route('storySlug') }}{% else %}{{ page.fullBleedStory | route('story') }}{% endif %}">
-              <img src="{{ page.fullBleedStory.tout.image.path | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="lazy" />
-              <div class="magazine-cinema__shade"></div>
-              <div class="magazine-cinema__content"><p>Worth the journey</p><h2>{{ page.fullBleedStory.title }}</h2><span>Read the story</span></div>
-            </a>
-          </div>
-        {% endif %}
-        {% for story in sortedStories %}
-          {% if loop.index > 5 and loop.index <= 12 %}
-          <div class="magazine-cinema__story" data-story-dedupe-item>
-            <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
-              <img src="{{ story.tout.image.path | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="lazy" />
-              <div class="magazine-cinema__shade"></div>
-              <div class="magazine-cinema__content">
-                <p>Worth the journey</p>
-                <h2>{{ story.title }}</h2>
-                <span>Read the story</span>
-              </div>
-            </a>
-          </div>
-          {% endif %}
-        {% endfor %}
-      </section>
-      {% endif %}
-      {% endif %}
+    {% endif %}
     {% endfor %}
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+  </section>
 
-    <section class="magazine-shop">
-      <header class="magazine-shop__header">
-        <p class="magazine-section-label">The packing desk</p>
-        <h2>{% if page.shoppingStory and page.shoppingStory.shopEditTitle %}{{ page.shoppingStory.shopEditTitle }}{% else %}Objects for the journey{% endif %}</h2>
-        <a href="https://www.amazon.com/shop/amyseder" target="_blank" rel="sponsored nofollow noopener">Visit the Away Lands shop</a>
-      </header>
-      <div class="magazine-shop__products">
-        {% if page.shoppingStory and page.shoppingStory.shopEditEnabled %}
-        {% for product in page.shoppingStory.shopEditItems %}
-          {% if product.productUrl %}
-          <a class="magazine-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored nofollow noopener">
-            {% if product.image %}<div class="magazine-product__image"><img src="{{ product.image.path | image({w: 600, auto: 'compress,format'}) }}" alt="{{ product.title or "Editor's pick" }}" loading="lazy" /></div>{% endif %}
-            <span>{{ product.title or "Editor's pick" }}</span><strong>Shop now</strong>
-          </a>
-          {% endif %}
-        {% endfor %}
-        {% endif %}
-        {% for story in sortedStories %}
-        {% if story.shopEditEnabled %}
-        {% for product in story.shopEditItems %}
-          {% if product.productUrl %}
-          <a class="magazine-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored nofollow noopener">
-            {% if product.image %}<div class="magazine-product__image"><img src="{{ product.image.path | image({w: 600, auto: 'compress,format'}) }}" alt="{{ product.title or "Editor's pick" }}" loading="lazy" /></div>{% endif %}
-            <span>{{ product.title or "Editor's pick" }}</span>
-            <strong>Shop now</strong>
-          </a>
-          {% endif %}
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
+  <section class="blog-category-strips" aria-label="Featured blog categories">
+    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
+      <div class="blog-category-strip__header">
+        <h2 class="blog-category-strip__heading">Most Popular Posts</h2>
+        <a class="blog-category-strip__link" href="/category/most-popular-posts">View All</a>
       </div>
-    </section>
-  </div>
+
+      <ul class="blog-category-strip__list">
+        {% for category in featuredCategoryCandidates.items %}
+        {% if category.title == "* Most Popular Posts *" %}
+        {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+        <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
+      <div class="blog-category-strip__header">
+        <h2 class="blog-category-strip__heading">Best Beaches</h2>
+        <a class="blog-category-strip__link" href="/category/best-beaches">View All</a>
+      </div>
+
+      <ul class="blog-category-strip__list">
+        {% for category in featuredCategoryCandidates.items %}
+        {% if category.title == "Best Beaches" %}
+        {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+        <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
+      <div class="blog-category-strip__header">
+        <h2 class="blog-category-strip__heading">Packing Guides</h2>
+        <a class="blog-category-strip__link" href="/category/packing-guides">View All</a>
+      </div>
+
+      <ul class="blog-category-strip__list">
+        {% for category in featuredCategoryCandidates.items %}
+        {% if category.title == "Packing Guides" %}
+        {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+        <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
+      <div class="blog-category-strip__header">
+        <h2 class="blog-category-strip__heading">Travel Guides</h2>
+        <a class="blog-category-strip__link" href="/category/travel-guides">View All</a>
+      </div>
+
+      <ul class="blog-category-strip__list">
+        {% for category in featuredCategoryCandidates.items %}
+        {% if category.title == "Travel Guides" %}
+        {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+        <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
   {% endif %}
 
   <div class="listings">
-    <p class="magazine-section-label">From the journal</p>
-    <h2 class="listings__heading">{% if pagination.currentPage == 1 %}The Latest{% else %}Blog Archive{% endif %}</h2>
+    <h2 class="listings__heading">{% if pagination.currentPage == 1 %}Recent Posts{% else %}Blog Archive{% endif %}</h2>
 
     <ul class="listings__list"{% if pagination.currentPage == 1 %} data-story-dedupe-recent{% endif %}>
       {% for story in sortedStories %}

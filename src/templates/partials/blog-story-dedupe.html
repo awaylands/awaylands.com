@@ -26,8 +26,11 @@
     claim(featured, used);
   });
 
-  function claimSections() {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-story-dedupe-section]'), function (section) {
+  Array.prototype.forEach.call(document.querySelectorAll('[data-story-dedupe-recent] [data-story-dedupe-item]'), function (item) {
+    claim(item, used);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-story-dedupe-section]'), function (section) {
     var limit = Number(section.getAttribute('data-story-limit')) || 6;
     var kept = 0;
     Array.prototype.forEach.call(section.querySelectorAll('[data-story-dedupe-item]'), function (item) {
@@ -37,21 +40,6 @@
       }
       kept += 1;
     });
-    });
-  }
-
-  function claimRecent() {
-    Array.prototype.forEach.call(document.querySelectorAll('[data-story-dedupe-recent] [data-story-dedupe-item]'), function (item) {
-      claim(item, used);
-    });
-  }
-
-  if (document.querySelector('.magazine-blog')) {
-    claimSections();
-    claimRecent();
-  } else {
-    claimRecent();
-    claimSections();
-  }
+  });
 })();
 </script>

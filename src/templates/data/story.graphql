@@ -62,9 +62,6 @@ query {
   page: getBlog {
     _contentTypeName
     title
-    magazineKicker
-    magazineHeadline
-    magazineIntroduction
     featuredStory {
       _contentTypeName
       _enabledAt
@@ -79,56 +76,9 @@ query {
         }
         dek
       }
-      shopEditTitle
-      shopEditEnabled
-      shopEditItems {
-        image { path }
-        title
-        productUrl
-      }
-    }
-    supportingStories {
-      _contentTypeName
-      _enabledAt
-      title
-      slug
-      category { title }
-      tout { image { path } dek }
-    }
-    fullBleedStory {
-      _contentTypeName
-      title
-      slug
-      category { title }
-      tout { image { path } dek }
-    }
-    shoppingStory {
-      _contentTypeName
-      title
-      slug
-      shopEditTitle
-      shopEditEnabled
-      shopEditItems {
-        image { path }
-        title
-        productUrl
-      }
     }
     categories {
       title
-      storySet(size: 10, sort: [{field: "_enabledAt", order: "desc"}]) {
-        items {
-          _contentTypeName
-          _enabledAt
-          title
-          slug
-          category { title }
-          tout {
-            image { path }
-            dek
-          }
-        }
-      }
     }
     social {
       title
