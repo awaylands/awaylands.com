@@ -1,0 +1,121 @@
+body.awaylands-takeshape-skim {
+  --al-editor-ink: #231f20;
+  --al-editor-muted: #6f6865;
+  --al-editor-accent: #785a50;
+  --al-editor-accent-soft: #f4ece8;
+  --al-editor-card: #fffdfb;
+  --al-editor-border: #cdbfb8;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-title {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 48px !important;
+  margin: 30px 0 14px !important;
+  padding: 11px 16px !important;
+  border: 1px solid var(--al-editor-border) !important;
+  border-left: 7px solid var(--al-editor-accent) !important;
+  border-radius: 5px !important;
+  background: var(--al-editor-accent-soft) !important;
+  color: var(--al-editor-ink) !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0.01em !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-content-title {
+  margin-top: 20px !important;
+  border-left-width: 10px !important;
+  background: #eee5df !important;
+  font-size: 18px !important;
+}
+
+body.awaylands-takeshape-skim .MuiInputLabel-root,
+body.awaylands-takeshape-skim .MuiFormLabel-root {
+  color: var(--al-editor-ink) !important;
+  font-size: 15px !important;
+  font-weight: 750 !important;
+  letter-spacing: 0.01em !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-important-field .MuiInputLabel-root,
+body.awaylands-takeshape-skim .awaylands-editor-important-field .MuiFormLabel-root {
+  color: var(--al-editor-accent) !important;
+  font-size: 16px !important;
+  font-weight: 850 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiInputLabel-root,
+body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiFormLabel-root {
+  color: var(--al-editor-muted) !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+}
+
+body.awaylands-takeshape-skim .MuiInputBase-input,
+body.awaylands-takeshape-skim [contenteditable="true"] {
+  color: var(--al-editor-ink) !important;
+  font-size: 16px !important;
+  line-height: 1.55 !important;
+}
+
+body.awaylands-takeshape-skim .MuiSelect-select,
+body.awaylands-takeshape-skim [role="combobox"] {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+}
+
+body.awaylands-takeshape-skim .MuiFormHelperText-root,
+body.awaylands-takeshape-skim .MuiTypography-caption {
+  color: var(--al-editor-muted) !important;
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+}
+
+body.awaylands-takeshape-skim .MuiOutlinedInput-root {
+  background: var(--al-editor-card) !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-important-field .MuiOutlinedInput-notchedOutline {
+  border-width: 2px !important;
+  border-color: var(--al-editor-border) !important;
+}
+
+body.awaylands-takeshape-skim button {
+  font-size: 14px;
+}
+
+body.awaylands-takeshape-skim button[aria-label*="Section"],
+body.awaylands-takeshape-skim button[aria-label*="Layout"] {
+  font-weight: 750 !important;
+}
+
+body.awaylands-takeshape-skim .ProseMirror h1,
+body.awaylands-takeshape-skim .ProseMirror h2,
+body.awaylands-takeshape-skim .ProseMirror h3 {
+  color: var(--al-editor-ink) !important;
+  font-weight: 800 !important;
+}
+
+body.awaylands-takeshape-skim .ProseMirror h1 {
+  font-size: 30px !important;
+}
+
+body.awaylands-takeshape-skim .ProseMirror h2 {
+  font-size: 25px !important;
+}
+
+body.awaylands-takeshape-skim .ProseMirror h3 {
+  font-size: 21px !important;
+}
+
+body.awaylands-takeshape-skim .ProseMirror p,
+body.awaylands-takeshape-skim .ProseMirror li {
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+}
+
+body.awaylands-takeshape-skim .ProseMirror strong {
+  font-weight: 800 !important;
+}

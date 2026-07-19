@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Away Lands TakeShape Editor Styling",
+  "version": "1.0.0",
+  "description": "Makes the Away Lands TakeShape story editor easier to scan without changing saved content.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://app.takeshape.io/project/*/branch/*/data/Story/*"
+      ],
+      "css": [
+        "takeshape-editor.css"
+      ],
+      "js": [
+        "takeshape-editor.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
