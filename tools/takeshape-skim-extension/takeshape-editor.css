@@ -236,6 +236,161 @@ body.awaylands-takeshape-skim .awaylands-content-block-buttons button:focus {
   background: rgb(73, 86, 160) !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-inline-html-button {
+  width: auto !important;
+  min-width: 46px !important;
+  min-height: 32px !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: rgb(92, 107, 192) !important;
+  color: #fff !important;
+  padding: 4px 10px !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 22px !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-button:hover,
+body.awaylands-takeshape-skim .awaylands-inline-html-button:focus {
+  background: rgb(73, 86, 160) !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-dialog {
+  position: fixed;
+  z-index: 15000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 24, 35, 0.58);
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-panel {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(180px, 1fr) auto minmax(150px, 0.7fr) auto;
+  gap: 12px;
+  width: min(920px, 94vw);
+  height: min(780px, 90vh);
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 5px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-panel header,
+body.awaylands-takeshape-skim .awaylands-inline-html-panel footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-panel h2,
+body.awaylands-takeshape-skim .awaylands-inline-html-panel p {
+  margin: 0;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-panel h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-panel header p,
+body.awaylands-takeshape-skim .awaylands-inline-html-preview-wrap > span {
+  color: #6f6f6f;
+  font-size: 12px;
+  font-style: italic;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-close {
+  border: 0;
+  background: transparent;
+  color: #555;
+  padding: 4px 8px;
+  font-size: 26px;
+  line-height: 1;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-source {
+  width: 100%;
+  min-height: 180px !important;
+  resize: none;
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  border-radius: 4px;
+  background: #f2f2f2;
+  color: #333;
+  padding: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-message {
+  color: #4f5f92;
+  font-size: 13px;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-message.is-error {
+  color: #a52a2a;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-preview-wrap {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 5px;
+  min-height: 0;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-preview {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  background: #fff;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-panel footer {
+  justify-content: flex-end;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-panel footer button {
+  width: auto !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  padding: 7px 14px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-cancel {
+  background: #ececec !important;
+  color: #333 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-insert {
+  background: rgb(92, 107, 192) !important;
+  color: #fff !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-insert:disabled {
+  opacity: 0.45;
+}
+
+body.awaylands-takeshape-skim .awaylands-new-inline-html-block {
+  outline: 3px solid rgba(92, 107, 192, 0.45);
+  outline-offset: 3px;
+}
+
 body.awaylands-takeshape-skim .awaylands-published-date-now {
   align-self: flex-start;
   width: auto !important;

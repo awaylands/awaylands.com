@@ -11,9 +11,13 @@
   const RELATED_RESULTS_CLASS = 'awaylands-related-results';
   const CHOICE_GROUP_CLASS = 'awaylands-choice-group';
   const IMAGE_DIALOG_CLASS = 'awaylands-image-dialog';
+  const HTML_INSERT_BUTTON_CLASS = 'awaylands-inline-html-button';
+  const HTML_INSERT_DIALOG_CLASS = 'awaylands-inline-html-dialog';
+  const INLINE_HTML_MARKER_PREFIX = 'AWAYLANDS_HTML';
   const pendingRevolveFrames = [];
   let storyTitleIndex = null;
   let storyTitleRequest = null;
+  let htmlInsertState = null;
 
   function normalizedText(element) {
     return (element.textContent || '').replace(/\s+/g, ' ').trim();
@@ -140,6 +144,291 @@
     });
     original.parentNode.insertBefore(row, original);
     original.classList.add('awaylands-original-add-content');
+  }
+
+  function contentEditorHost(editor) {
+    const host = editor && editor.closest('[data-testid^="contentForm-"]');
+    const testId = host && host.getAttribute('data-testid');
+
+    if (testId === 'contentForm-content' || /^contentForm-contentBlocks\[\d+\]\.content$/.test(testId || '')) {
+      return host;
+    }
+
+    return null;
+  }
+
+  function contentEditors() {
+    return Array.from(document.querySelectorAll('[contenteditable="true"][role="textbox"]')).filter(contentEditorHost);
+  }
+
+  function looksLikeHtml(value) {
+    const html = (value || '').trim();
+
+    return html.length > 2 && (
+      /^<!doctype\s+html/i.test(html) ||
+      /^<!--/.test(html) ||
+      /^<\/?[a-z][\s\S]*>/i.test(html)
+    );
+  }
+
+  function htmlValidationMessage(value) {
+    const html = (value || '').trim();
+
+    if (!html) {
+      return 'Paste HTML to continue.';
+    }
+    if (!looksLikeHtml(html)) {
+      return 'This does not look like HTML yet.';
+    }
+    if (/<\/?(?:html|head|body)(?:\s|>)/i.test(html)) {
+      return 'Paste the embed or element only, without HTML, HEAD, or BODY tags.';
+    }
+
+    return '';
+  }
+
+  function currentEditorSelection(editor) {
+    const selection = window.getSelection();
+
+    if (!selection || !selection.rangeCount || !editor.contains(selection.anchorNode)) {
+      return null;
+    }
+
+    return selection.getRangeAt(0).cloneRange();
+  }
+
+  function insertMarkerAtSelection(editor, range, marker) {
+    const selection = window.getSelection();
+
+    if (!editor || !range || !selection) {
+      return false;
+    }
+
+    editor.focus();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand('insertParagraph', false, null);
+    const inserted = document.execCommand('insertText', false, `[[${INLINE_HTML_MARKER_PREFIX}:${marker}]]`);
+
+    document.execCommand('insertParagraph', false, null);
+    return inserted;
+  }
+
+  function htmlTextareas() {
+    return Array.from(document.querySelectorAll('textarea')).filter(textarea => {
+      const field = textarea.closest('.MuiFormControl-root');
+      const label = field && field.querySelector('label');
+
+      return !textarea.readOnly &&
+        textarea.getAttribute('aria-hidden') !== 'true' &&
+        label &&
+        normalizedText(label) === 'HTML' &&
+        textarea.closest('[data-testid^="array-field-item-contentBlocks["]');
+    });
+  }
+
+  function waitForNewHtmlTextarea(previousFields, callback, attempts) {
+    const field = htmlTextareas().find(textarea => !previousFields.has(textarea));
+
+    if (field) {
+      callback(field);
+      return;
+    }
+    if (attempts <= 0) {
+      callback(null);
+      return;
+    }
+
+    window.setTimeout(() => waitForNewHtmlTextarea(previousFields, callback, attempts - 1), 100);
+  }
+
+  function waitForMenuItem(title, callback, attempts) {
+    const option = Array.from(document.querySelectorAll('[role="menuitem"]')).find(item => normalizedText(item) === title);
+
+    if (option) {
+      callback(option);
+      return;
+    }
+    if (attempts <= 0) {
+      callback(null);
+      return;
+    }
+
+    window.setTimeout(() => waitForMenuItem(title, callback, attempts - 1), 100);
+  }
+
+  function createNativeHtmlBlock(value, marker, callback) {
+    const addButton = document.querySelector('[data-testid="contentForm-contentBlocks-add"]') ||
+      Array.from(document.querySelectorAll('button')).find(button => normalizedText(button) === 'Add Content Block');
+    const previousFields = new Set(htmlTextareas());
+
+    if (!addButton) {
+      callback(false, 'TakeShape’s Add Content Block control could not be found.');
+      return;
+    }
+
+    addButton.click();
+    waitForMenuItem('HTML Block', option => {
+      if (!option) {
+        callback(false, 'TakeShape’s HTML Block option did not open.');
+        return;
+      }
+
+      option.click();
+      waitForNewHtmlTextarea(previousFields, textarea => {
+        if (!textarea) {
+          callback(false, 'The new HTML Block could not be filled.');
+          return;
+        }
+
+        setEditorValue(textarea, `<div data-awaylands-inline-html="${marker}">${value.trim()}</div>`);
+        textarea.closest('[data-testid^="array-field-item-contentBlocks["]').classList.add('awaylands-new-inline-html-block');
+        callback(true, textarea);
+      }, 30);
+    }, 30);
+  }
+
+  function closeHtmlInsertDialog() {
+    const dialog = document.querySelector(`.${HTML_INSERT_DIALOG_CLASS}`);
+
+    if (dialog) {
+      dialog.remove();
+    }
+    htmlInsertState = null;
+  }
+
+  function updateHtmlPreview(dialog) {
+    const textarea = dialog.querySelector('.awaylands-inline-html-source');
+    const preview = dialog.querySelector('.awaylands-inline-html-preview');
+    const message = dialog.querySelector('.awaylands-inline-html-message');
+    const insert = dialog.querySelector('.awaylands-inline-html-insert');
+    const validation = htmlValidationMessage(textarea.value);
+
+    message.textContent = validation || 'Ready to insert as a native HTML block at the selected position.';
+    message.classList.toggle('is-error', Boolean(validation));
+    insert.disabled = Boolean(validation);
+    preview.srcdoc = `<!doctype html><style>body{margin:16px;font:14px Arial,sans-serif;color:#333}img,iframe,video{max-width:100%}</style>${textarea.value}`;
+  }
+
+  function openHtmlInsertDialog(editor, value, source) {
+    closeHtmlInsertDialog();
+
+    const range = currentEditorSelection(editor);
+    const dialog = document.createElement('div');
+
+    htmlInsertState = { editor, range, source };
+    dialog.className = HTML_INSERT_DIALOG_CLASS;
+    dialog.innerHTML = [
+      '<div class="awaylands-inline-html-backdrop"></div>',
+      '<section class="awaylands-inline-html-panel" role="dialog" aria-modal="true" aria-labelledby="awaylands-inline-html-title">',
+      '<header><div><h2 id="awaylands-inline-html-title">Insert HTML</h2><p>Paste an embed, product list, table, button, or custom HTML.</p></div><button type="button" class="awaylands-inline-html-close" aria-label="Close">×</button></header>',
+      '<textarea class="awaylands-inline-html-source" aria-label="HTML source" spellcheck="false"></textarea>',
+      '<p class="awaylands-inline-html-message" role="status"></p>',
+      '<div class="awaylands-inline-html-preview-wrap"><span>Preview - scripts are disabled here for safety</span><iframe class="awaylands-inline-html-preview" title="HTML preview" sandbox=""></iframe></div>',
+      '<footer><button type="button" class="awaylands-inline-html-cancel">Cancel</button><button type="button" class="awaylands-inline-html-insert">Insert HTML</button></footer>',
+      '</section>'
+    ].join('');
+    document.body.appendChild(dialog);
+    const panel = dialog.querySelector('.awaylands-inline-html-panel');
+
+    const textarea = dialog.querySelector('.awaylands-inline-html-source');
+    const insert = dialog.querySelector('.awaylands-inline-html-insert');
+    const close = () => closeHtmlInsertDialog();
+
+    textarea.value = value || '';
+    textarea.addEventListener('input', () => updateHtmlPreview(dialog));
+    dialog.querySelector('.awaylands-inline-html-close').addEventListener('click', close);
+    dialog.querySelector('.awaylands-inline-html-cancel').addEventListener('click', close);
+    dialog.querySelector('.awaylands-inline-html-backdrop').addEventListener('click', close);
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        close();
+      }
+    });
+    insert.addEventListener('click', () => {
+      const state = htmlInsertState;
+      const html = textarea.value;
+      const marker = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+
+      if (!state || htmlValidationMessage(html)) {
+        updateHtmlPreview(dialog);
+        return;
+      }
+      insert.disabled = true;
+      insert.textContent = 'Inserting...';
+      if (!insertMarkerAtSelection(state.editor, state.range, marker)) {
+        insert.disabled = false;
+        insert.textContent = 'Insert HTML';
+        dialog.querySelector('.awaylands-inline-html-message').textContent = 'Place the cursor in the Content editor, then try again.';
+        dialog.querySelector('.awaylands-inline-html-message').classList.add('is-error');
+        return;
+      }
+
+      createNativeHtmlBlock(html, marker, (success, result) => {
+        if (!success) {
+          insert.disabled = false;
+          insert.textContent = 'Insert HTML';
+          dialog.querySelector('.awaylands-inline-html-message').textContent = result;
+          dialog.querySelector('.awaylands-inline-html-message').classList.add('is-error');
+          return;
+        }
+
+        closeHtmlInsertDialog();
+        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        result.focus();
+      });
+    });
+
+    updateHtmlPreview(dialog);
+    textarea.focus();
+    panel.scrollTop = 0;
+  }
+
+  function enhanceInlineHtmlInsertion() {
+    contentEditors().forEach(editor => {
+      const host = contentEditorHost(editor);
+      const codeButton = host && host.querySelector('button[title="Code Block"]');
+      const toolbar = codeButton && codeButton.parentElement;
+
+      if (!toolbar || toolbar.querySelector(`.${HTML_INSERT_BUTTON_CLASS}`)) {
+        return;
+      }
+
+      const button = document.createElement('button');
+
+      button.type = 'button';
+      button.className = HTML_INSERT_BUTTON_CLASS;
+      button.textContent = 'HTML';
+      button.title = 'Insert HTML at cursor';
+      button.setAttribute('aria-label', 'Insert HTML at cursor');
+      button.addEventListener('mousedown', event => {
+        const range = currentEditorSelection(editor);
+
+        event.preventDefault();
+        htmlInsertState = { editor, range, source: 'button' };
+      });
+      button.addEventListener('click', event => {
+        const savedRange = htmlInsertState && htmlInsertState.editor === editor ? htmlInsertState.range : currentEditorSelection(editor);
+
+        event.preventDefault();
+        openHtmlInsertDialog(editor, '', 'button');
+        if (htmlInsertState) {
+          htmlInsertState.range = savedRange;
+        }
+      });
+      toolbar.appendChild(button);
+
+      editor.addEventListener('paste', event => {
+        const plainText = event.clipboardData && event.clipboardData.getData('text/plain');
+
+        if (!looksLikeHtml(plainText)) {
+          return;
+        }
+
+        event.preventDefault();
+        openHtmlInsertDialog(editor, plainText, 'paste');
+      });
+    });
   }
 
   function removeUnusedControls() {
@@ -958,6 +1247,7 @@
     });
 
     addContentBlockButtons();
+    enhanceInlineHtmlInsertion();
     removeUnusedControls();
     collapseAtAGlanceOptions();
     collapseShopItems();

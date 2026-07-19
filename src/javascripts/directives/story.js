@@ -17,9 +17,40 @@ const COMMERCE_EMBED_PATTERN = /(rvlv\.me|on\.ltk\.com|rewardstyle|shopstyle)/i;
 const SHOP_EMBED_HOST_PATTERN = /(^|\.)(ltk\.app|ltkcdn\.com|shopltk\.com|rewardstyle\.com|rstyle\.me|shopstyle\.com|revolve\.com|rvlv\.me)$/i;
 const ADVANCED_STORY_PREVIEW_PATTERN = /^\/post[2-4]\/?$/;
 const DECORATIVE_IMAGE_PATTERN = /(rewardstyle.*\/search\/350\.gif|tracking|pixel)/i;
+const INLINE_HTML_MARKER_PATTERN = /^\[\[AWAYLANDS_HTML:([a-z0-9-]+)\]\]$/i;
 
 function isAdvancedStoryPreview() {
   return ADVANCED_STORY_PREVIEW_PATTERN.test(window.location.pathname);
+}
+
+function placeInlineHtmlBlocks(el) {
+  const blocks = el.querySelectorAll('[data-awaylands-inline-html]');
+
+  Array.prototype.forEach.call(blocks, block => {
+    const markerId = block.getAttribute('data-awaylands-inline-html');
+    const markerText = `[[AWAYLANDS_HTML:${markerId}]]`;
+    const paragraphs = el.querySelectorAll('p');
+    let marker = null;
+
+    Array.prototype.some.call(paragraphs, candidate => {
+      if (candidate === block || block.contains(candidate) || candidate.closest('[data-awaylands-inline-html]')) {
+        return false;
+      }
+      if ((candidate.textContent || '').trim() === markerText && INLINE_HTML_MARKER_PATTERN.test((candidate.textContent || '').trim())) {
+        marker = candidate;
+        return true;
+      }
+
+      return false;
+    });
+
+    if (!marker || !marker.parentNode) {
+      return;
+    }
+
+    marker.parentNode.insertBefore(block, marker);
+    marker.parentNode.removeChild(marker);
+  });
 }
 
 function storyImageWidth(image) {
@@ -1843,6 +1874,7 @@ function buildPastedStoryTables(el) {
 }
 
 function prepareStory(el) {
+  placeInlineHtmlBlocks(el);
   buildPastedStoryTables(el);
   normalizeInlineLinkSpaces(el);
   normalizeStoryLinks(el);

@@ -7,6 +7,7 @@ This Chrome extension makes the TakeShape story editor easier to scan. It only r
 - Separate collapsible boxes for Story, Tout, Content, Post Layout, At a Glance, Shop the Edit, About the Author, and Related Stories.
 - Compact subsection headings using TakeShape's default colors.
 - One-click Content, HTML, Table, and Image block buttons. Gallery is intentionally omitted.
+- Paste raw HTML directly into a Content editor or use its HTML toolbar button. The extension previews it, creates the native HTML block, and places it at the selected cursor position on the story page.
 - Hidden image-credit field and a wider three-column asset picker.
 - Collapsed At a Glance custom options.
 - Collapsed Shop the Edit items with their HTML visible in each item summary.
