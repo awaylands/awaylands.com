@@ -320,7 +320,11 @@
       button.type = 'button';
       button.textContent = choice[0];
       button.setAttribute('data-value', choice[1]);
-      button.addEventListener('click', () => selectMenuValue(original, choice[0]));
+      button.addEventListener('click', () => {
+        selectMenuValue(original, choice[0]);
+        window.setTimeout(sync, 100);
+        window.setTimeout(sync, 300);
+      });
       group.appendChild(button);
     });
     label.classList.add('awaylands-choice-original-label');
@@ -422,6 +426,18 @@
     if (figure.querySelector('a[href]')) {
       setFigureLinkIndicator(figure, true);
     }
+
+    const nativeStatus = figure.querySelector('[class*="image-properties-bar-module__statusIcons"]');
+
+    if (nativeStatus && !nativeStatus.hasAttribute('data-awaylands-size-watch')) {
+      nativeStatus.setAttribute('data-awaylands-size-watch', 'true');
+      new MutationObserver(() => decorateImageFigure(figure)).observe(nativeStatus, {
+        attributes: true,
+        attributeFilter: ['class'],
+        childList: true,
+        subtree: true
+      });
+    }
   }
 
   function setFigureLinkIndicator(figure, linked) {
@@ -442,6 +458,53 @@
     } else if (!linked && indicator) {
       indicator.remove();
     }
+  }
+
+  function enhanceImageSizeChoices(dialog) {
+    const field = dialog.querySelector('[data-testid="imageBlockForm-size"]');
+    const original = field && field.querySelector('[role="button"][aria-haspopup="listbox"]');
+    const native = field && field.querySelector('input.MuiSelect-nativeInput');
+
+    if (!field || !original || !native || field.querySelector('.awaylands-image-size-choices')) {
+      return;
+    }
+
+    const group = document.createElement('div');
+    const choices = [
+      ['Default', 'default'],
+      ['Small', 'small'],
+      ['Medium', 'medium'],
+      ['Large', 'large']
+    ];
+
+    group.className = 'awaylands-image-size-choices';
+    group.setAttribute('role', 'group');
+    group.setAttribute('aria-label', 'Image size');
+    choices.forEach(choice => {
+      const button = document.createElement('button');
+
+      button.type = 'button';
+      button.textContent = choice[0];
+      button.setAttribute('data-value', choice[1]);
+      button.addEventListener('click', () => selectMenuValue(original, choice[0]));
+      group.appendChild(button);
+    });
+    original.parentElement.hidden = true;
+    original.parentElement.insertAdjacentElement('afterend', group);
+
+    const sync = () => {
+      const value = (native.value || 'default').toLowerCase();
+
+      Array.from(group.children).forEach(button => {
+        const selected = button.getAttribute('data-value') === value;
+
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+    };
+
+    native.addEventListener('change', sync);
+    sync();
   }
 
   function enhanceImageEditor() {
@@ -486,6 +549,7 @@
     }
 
     dialog.classList.add(IMAGE_DIALOG_CLASS);
+    enhanceImageSizeChoices(dialog);
     const urlLabel = Array.from(dialog.querySelectorAll('label')).find(label => normalizedText(label).toLowerCase() === 'url');
     const urlInput = urlLabel && urlLabel.closest('.MuiFormControl-root') && urlLabel.closest('.MuiFormControl-root').querySelector('input');
     const submit = Array.from(dialog.querySelectorAll('button')).find(button => normalizedText(button) === 'Submit');
