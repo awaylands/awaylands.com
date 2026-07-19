@@ -249,6 +249,27 @@
     }
   }
 
+  function releaseBottomEditorBar() {
+    Array.from(document.querySelectorAll('body *')).forEach(element => {
+      if (element.closest('[role="dialog"], [role="menu"], [role="listbox"], .awaylands-inline-html-dialog')) {
+        return;
+      }
+
+      const style = window.getComputedStyle(element);
+      if (style.position !== 'fixed' && style.position !== 'sticky') {
+        return;
+      }
+
+      const rect = element.getBoundingClientRect();
+      const touchesBottom = rect.bottom >= window.innerHeight - 4;
+      const isBottomBar = touchesBottom && rect.width >= 200 && rect.height > 0 && rect.height <= 180;
+
+      if (isBottomBar) {
+        element.classList.add('awaylands-normal-flow-bottom-bar');
+      }
+    });
+  }
+
   function enableNewStoryByDefault() {
     if (!/\/data\/Story\/(?:new|create)(?:\/|$)/i.test(window.location.pathname)) {
       return;
@@ -1734,6 +1755,7 @@
     runEnhancement('persistent gallery', tryOpenPersistentGallery);
     runEnhancement('top publishing status', placePublishingStatusBeforeCancel);
     runEnhancement('story tools below gallery', moveStoryToolsBelowGallery);
+    runEnhancement('bottom editor bar', releaseBottomEditorBar);
     runEnhancement('new story publishing default', enableNewStoryByDefault);
   }
 

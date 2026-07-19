@@ -863,6 +863,15 @@ body.awaylands-takeshape-skim .awaylands-story-tools-panel {
   overflow: visible !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-normal-flow-bottom-bar {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  max-width: none !important;
+  transform: none !important;
+  z-index: auto !important;
+}
+
 body.awaylands-takeshape-skim {
   overflow-x: auto !important;
 }
