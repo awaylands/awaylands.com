@@ -520,10 +520,21 @@
     }
 
     if (!storyTitleRequest) {
-      storyTitleRequest = fetch('https://www.awaylands.com/story-titles.json', { credentials: 'omit' })
-        .then(response => response.ok ? response.json() : [])
+      storyTitleRequest = new Promise(resolve => {
+        chrome.runtime.sendMessage({ type: 'awaylands-story-titles' }, response => {
+          if (chrome.runtime.lastError || !response) {
+            resolve([]);
+            return;
+          }
+
+          resolve(response.items || []);
+        });
+      })
         .then(items => {
-          storyTitleIndex = Array.isArray(items) ? items.filter(item => item && item.title) : [];
+          storyTitleIndex = Array.isArray(items) ? items
+            .filter(item => item && item.title)
+            .map(item => Object.assign({}, item, { title: item.title.trim() }))
+            .filter(item => item.title) : [];
           return storyTitleIndex;
         })
         .catch(() => {
@@ -576,8 +587,10 @@
   }
 
   function selectRelatedStory(input, title, results) {
+    input.click();
     nativeInputValue(input, title);
     input.focus();
+    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
     let attempts = 0;
     const prefix = title.slice(0, 24).toLowerCase();
     const timer = window.setInterval(() => {
@@ -588,7 +601,7 @@
         window.clearInterval(timer);
         option.click();
         results.hidden = true;
-      } else if (attempts >= 20) {
+      } else if (attempts >= 50) {
         window.clearInterval(timer);
         results.innerHTML = '<p>TakeShape did not make this story selectable. The title is shown, but its publishing state may need to be enabled.</p>';
       }
@@ -597,6 +610,7 @@
 
   function renderRelatedResults(input, results, items) {
     const query = input.value.trim().toLowerCase();
+    const words = query.split(/\s+/).filter(Boolean);
 
     results.innerHTML = '';
     if (!query) {
@@ -604,7 +618,11 @@
       return;
     }
 
-    const matches = items.filter(item => item.title.toLowerCase().indexOf(query) !== -1).slice(0, 60);
+    const matches = items.filter(item => {
+      const title = item.title.toLowerCase();
+
+      return words.every(word => title.indexOf(word) !== -1);
+    }).slice(0, 60);
 
     if (!matches.length) {
       results.hidden = true;
