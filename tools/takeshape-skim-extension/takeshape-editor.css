@@ -132,15 +132,6 @@ body.awaylands-takeshape-skim [contenteditable="true"][data-placeholder]:empty:b
   font-weight: 400 !important;
 }
 
-body.awaylands-takeshape-skim button:not(.MuiButton-containedPrimary) {
-  background-color: #eeeeee;
-}
-
-body.awaylands-takeshape-skim button:not(.MuiButton-containedPrimary):hover,
-body.awaylands-takeshape-skim button:not(.MuiButton-containedPrimary):focus {
-  background-color: #e2e2e2;
-}
-
 body.awaylands-takeshape-skim .ProseMirror h1,
 body.awaylands-takeshape-skim .ProseMirror h2,
 body.awaylands-takeshape-skim .ProseMirror h3 {
@@ -193,8 +184,17 @@ body.awaylands-takeshape-skim .awaylands-revolve-converter {
 body.awaylands-takeshape-skim .awaylands-content-block-buttons button {
   width: auto !important;
   flex: 0 0 auto !important;
+  border-width: 2px;
+  background: #eeeeee;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-block-buttons button:hover,
+body.awaylands-takeshape-skim .awaylands-content-block-buttons button:focus,
+body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] button:hover,
+body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] button:focus {
+  background: #e2e2e2;
 }
 
 body.awaylands-takeshape-skim .awaylands-published-date-now {
@@ -203,6 +203,8 @@ body.awaylands-takeshape-skim .awaylands-published-date-now {
   margin-top: 8px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   border-radius: 3px;
+  background: transparent;
+  color: inherit;
   padding: 7px 11px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -311,6 +313,11 @@ body.awaylands-takeshape-skim .awaylands-choice-group button {
 
 body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] {
   display: flex;
+}
+
+body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] button {
+  border-width: 2px;
+  background: #eeeeee;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] button:first-child {
