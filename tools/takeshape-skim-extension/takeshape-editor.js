@@ -34,37 +34,183 @@
       }
 
       sidebarContent.classList.add('awaylands-gallery-drawer-content');
+      if (grid.parentElement) {
+        grid.parentElement.classList.add('awaylands-gallery-flow-host');
+      }
       if (sidebarShell) {
         sidebarShell.classList.add('awaylands-gallery-drawer-shell');
-      }
-      if (sidebarContent.querySelector('.awaylands-gallery-close')) {
-        return;
-      }
-
-      const nativeClose = Array.from(sidebarContent.querySelectorAll('button')).find(button => {
-        const label = `${button.getAttribute('aria-label') || ''} ${button.getAttribute('title') || ''}`.toLowerCase();
-
-        return label.indexOf('close') !== -1 || (!normalizedText(button) && button.querySelector('svg') && button.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING);
-      });
-      const close = document.createElement('button');
-
-      close.type = 'button';
-      close.className = 'awaylands-gallery-close';
-      close.textContent = 'Close gallery';
-      close.addEventListener('click', event => {
-        event.preventDefault();
-        event.stopPropagation();
-        if (nativeClose) {
-          nativeClose.click();
+        if (sidebarShell.parentElement && sidebarShell.parentElement !== document.body) {
+          sidebarShell.parentElement.classList.add('awaylands-gallery-layout-parent');
         }
-        window.setTimeout(() => {
-          if (grid.isConnected) {
-            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', bubbles: true }));
-          }
-        }, 80);
+      }
+      const galleryTop = grid.getBoundingClientRect().top;
+      const closeButtons = Array.from(sidebarContent.querySelectorAll('button')).filter(button => {
+        const label = `${button.getAttribute('aria-label') || ''} ${button.getAttribute('title') || ''}`.toLowerCase();
+        const rect = button.getBoundingClientRect();
+
+        return label.indexOf('close') !== -1 || (
+          !normalizedText(button) &&
+          button.querySelector('svg') &&
+          rect.bottom <= galleryTop - 12 &&
+          button.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING
+        );
       });
-      sidebarContent.insertBefore(close, sidebarContent.firstChild);
+      if (closeButtons.length) closeButtons[0].classList.add('awaylands-gallery-native-close');
+
+      if (!sidebarContent.hasAttribute('data-awaylands-persistent-gallery')) {
+        sidebarContent.setAttribute('data-awaylands-persistent-gallery', 'true');
+        sidebarContent.addEventListener('keydown', event => {
+          if (event.key === 'Escape') {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+      }
     });
+  }
+
+  function tryOpenPersistentGallery() {
+    if (document.querySelector('[class*="asset-picker-grid-module__grid"]')) {
+      return;
+    }
+
+    const opener = Array.from(document.querySelectorAll('button')).find(button => {
+      const names = [normalizedText(button), button.getAttribute('aria-label'), button.getAttribute('title')]
+        .filter(Boolean)
+        .map(name => name.trim().toLowerCase());
+
+      return !button.hasAttribute('data-awaylands-gallery-open-attempt') && names.some(name => /^(assets|media|media library|open assets|open asset picker)$/.test(name));
+    });
+
+    if (opener) {
+      opener.setAttribute('data-awaylands-gallery-open-attempt', 'true');
+      opener.click();
+    }
+  }
+
+  function topActionCandidate(pattern) {
+    return Array.from(document.querySelectorAll('button')).find(button => {
+      const rect = button.getBoundingClientRect();
+
+      return !button.closest('[role="dialog"], .awaylands-editor-action-dock') && rect.top < 180 && rect.bottom > 0 && pattern.test(normalizedText(button));
+    });
+  }
+
+  function ensureEditorActionDock() {
+    const gallery = document.querySelector('.awaylands-gallery-drawer-shell');
+
+    if (!gallery) {
+      return;
+    }
+
+    const nativeSave = document.querySelector('.awaylands-native-save-source') || topActionCandidate(/^(save|save changes|update)$/i);
+    const nativeStatusButton = document.querySelector('.awaylands-native-status-source') || topActionCandidate(/^(enabled|disabled|live|not live)$/i);
+    const nativeStatusInput = Array.from(document.querySelectorAll('input[type="checkbox"]')).find(input => {
+      const container = input.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
+
+      return container && /enabled|disabled|live/i.test(normalizedText(container));
+    });
+
+    if (!nativeSave && !nativeStatusButton && !nativeStatusInput) {
+      return;
+    }
+
+    let dock = document.querySelector('.awaylands-editor-action-dock');
+
+    if (!dock) {
+      dock = document.createElement('div');
+      dock.className = 'awaylands-editor-action-dock';
+      dock.setAttribute('aria-label', 'Story save and publishing controls');
+      document.body.appendChild(dock);
+    }
+
+    if (nativeSave) {
+      nativeSave.classList.add('awaylands-native-save-source');
+      let save = dock.querySelector('.awaylands-dock-save');
+
+      if (!save) {
+        save = document.createElement('button');
+        save.type = 'button';
+        save.className = 'awaylands-dock-save';
+        save.addEventListener('click', () => {
+          const source = document.querySelector('.awaylands-native-save-source');
+          if (source) source.click();
+        });
+        dock.appendChild(save);
+      }
+      save.textContent = normalizedText(nativeSave) || 'Save';
+      save.disabled = nativeSave.disabled;
+    }
+
+    const statusSource = nativeStatusButton || nativeStatusInput;
+
+    if (statusSource) {
+      if (nativeStatusButton) nativeStatusButton.classList.add('awaylands-native-status-source');
+      if (nativeStatusInput) {
+        nativeStatusInput.classList.add('awaylands-native-status-input');
+        const statusContainer = nativeStatusInput.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
+        if (statusContainer) statusContainer.classList.add('awaylands-native-status-container');
+      }
+      let status = dock.querySelector('.awaylands-dock-status');
+
+      if (!status) {
+        status = document.createElement('button');
+        status.type = 'button';
+        status.className = 'awaylands-dock-status';
+        status.addEventListener('click', () => {
+          const input = document.querySelector('.awaylands-native-status-input');
+          const button = document.querySelector('.awaylands-native-status-source');
+
+          if (input) {
+            input.click();
+          } else if (button) {
+            button.click();
+          }
+          window.setTimeout(ensureEditorActionDock, 150);
+        });
+        dock.insertBefore(status, dock.firstChild);
+      }
+      status.textContent = nativeStatusInput ? (nativeStatusInput.checked ? 'Enabled' : 'Disabled') : normalizedText(nativeStatusButton);
+      status.setAttribute('data-status', status.textContent.toLowerCase().replace(/\s+/g, '-'));
+    }
+  }
+
+  function moveStoryToolsBelowGallery() {
+    const galleryContent = document.querySelector('.awaylands-gallery-drawer-content');
+
+    if (!galleryContent) {
+      return;
+    }
+
+    const versionLabel = Array.from(document.querySelectorAll('button, h1, h2, h3, h4, h5, h6, label, [role="heading"]')).find(element => {
+      return !galleryContent.contains(element) && /^(versions|version history|history)$/i.test(normalizedText(element));
+    });
+
+    if (!versionLabel) {
+      return;
+    }
+
+    let panel = versionLabel.closest('aside, [class*="sidebar"]') ||
+      versionLabel.closest('section, .MuiPaper-root, [class*="panel"]') ||
+      versionLabel.parentElement;
+
+    if (!panel || panel === document.body || panel.contains(galleryContent)) {
+      return;
+    }
+
+    let tools = galleryContent.querySelector('.awaylands-gallery-story-tools');
+
+    if (!tools) {
+      tools = document.createElement('section');
+      const heading = document.createElement('h3');
+      tools.className = 'awaylands-gallery-story-tools';
+      heading.textContent = 'Story tools and versions';
+      tools.appendChild(heading);
+      galleryContent.appendChild(tools);
+    }
+    if (!tools.contains(panel)) {
+      tools.appendChild(panel);
+    }
   }
 
   function enableNewStoryByDefault() {
@@ -1549,6 +1695,9 @@
     runEnhancement('author defaults', fillDefaultAuthorText);
     runEnhancement('image editor', enhanceImageEditor);
     runEnhancement('gallery close', keepGallerySidebarUsable);
+    runEnhancement('persistent gallery', tryOpenPersistentGallery);
+    runEnhancement('editor action dock', ensureEditorActionDock);
+    runEnhancement('story tools below gallery', moveStoryToolsBelowGallery);
     runEnhancement('new story publishing default', enableNewStoryByDefault);
   }
 

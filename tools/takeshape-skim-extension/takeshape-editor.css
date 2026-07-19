@@ -771,34 +771,101 @@ body.awaylands-takeshape-skim [role="complementary"][class*="floating-sidebar-mo
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-drawer-shell {
+  position: static !important;
+  align-self: flex-start !important;
   width: 496px !important;
   min-width: 0 !important;
   max-width: 48vw !important;
+  height: auto !important;
+  max-height: none !important;
   flex: 0 0 496px !important;
   margin-left: auto !important;
+  overflow: visible !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-drawer-content {
+  position: static !important;
   box-sizing: border-box !important;
   width: 100% !important;
   min-width: 0 !important;
   max-width: 100% !important;
-  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-gallery-layout-parent {
+  align-items: flex-start !important;
+  min-width: 900px !important;
+  overflow: visible !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-flow-host {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-native-close,
 body.awaylands-takeshape-skim .awaylands-gallery-close {
-  position: sticky !important;
-  top: 0 !important;
-  z-index: 50 !important;
-  display: block !important;
-  width: calc(100% - 24px) !important;
-  margin: 8px 12px !important;
-  border: 1px solid rgb(92, 107, 192) !important;
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-native-save-source,
+body.awaylands-takeshape-skim .awaylands-native-status-source,
+body.awaylands-takeshape-skim .awaylands-native-status-container {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-action-dock {
+  position: fixed;
+  top: 10px;
+  right: min(512px, calc(48vw + 16px));
+  z-index: 12000;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 5px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
+  padding: 6px;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-action-dock button {
+  width: auto !important;
+  min-height: 34px !important;
+  border: 0 !important;
   border-radius: 4px !important;
   background: rgb(92, 107, 192) !important;
   color: #ffffff !important;
-  padding: 7px 12px !important;
-  pointer-events: auto !important;
+  padding: 6px 12px !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-action-dock .awaylands-dock-status[data-status="disabled"],
+body.awaylands-takeshape-skim .awaylands-editor-action-dock .awaylands-dock-status[data-status="not-live"] {
+  background: #757575 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-story-tools {
+  margin: 18px 12px 40px;
+  border-top: 1px solid rgba(0, 0, 0, 0.18);
+  padding-top: 16px;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-story-tools > h3 {
+  margin: 0 0 12px;
+  color: rgb(69, 90, 100);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+body.awaylands-takeshape-skim {
+  overflow-x: auto !important;
 }
 
 body.awaylands-takeshape-skim [class*="asset-picker-grid-module__grid"] {
