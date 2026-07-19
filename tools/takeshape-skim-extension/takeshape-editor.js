@@ -316,7 +316,13 @@
     const range = currentEditorSelection(editor);
     const dialog = document.createElement('div');
 
-    htmlInsertState = { editor, range, source };
+    htmlInsertState = {
+      editor,
+      range,
+      source,
+      scrollX: window.scrollX,
+      scrollY: window.scrollY
+    };
     dialog.className = HTML_INSERT_DIALOG_CLASS;
     dialog.innerHTML = [
       '<div class="awaylands-inline-html-backdrop"></div>',
@@ -373,9 +379,15 @@
           return;
         }
 
+        const returnEditor = state.editor;
+        const returnScrollX = state.scrollX;
+        const returnScrollY = state.scrollY;
+
         closeHtmlInsertDialog();
-        result.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        result.focus();
+        window.requestAnimationFrame(() => {
+          window.scrollTo(returnScrollX, returnScrollY);
+          returnEditor.focus({ preventScroll: true });
+        });
       });
     });
 
