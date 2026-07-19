@@ -208,10 +208,18 @@ body.awaylands-takeshape-skim .awaylands-revolve-converter {
 body.awaylands-takeshape-skim .awaylands-content-block-buttons button {
   width: auto !important;
   flex: 0 0 auto !important;
-  border-width: 2px;
-  background: #eeeeee;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  min-height: 0 !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: rgb(92, 107, 192) !important;
+  color: #ffffff !important;
+  padding: 4px 10px !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.37141px !important;
+  line-height: 22.75px !important;
+  text-transform: capitalize !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-content-block-buttons button,
@@ -223,7 +231,10 @@ body.awaylands-takeshape-skim .awaylands-published-date-now {
 }
 
 body.awaylands-takeshape-skim .awaylands-content-block-buttons button:hover,
-body.awaylands-takeshape-skim .awaylands-content-block-buttons button:focus,
+body.awaylands-takeshape-skim .awaylands-content-block-buttons button:focus {
+  background: rgb(73, 86, 160) !important;
+}
+
 body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] button:hover,
 body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] button:focus {
   background: #e2e2e2;
@@ -328,6 +339,27 @@ body.awaylands-takeshape-skim .awaylands-choice-group {
 
 body.awaylands-takeshape-skim .awaylands-choice-original-label {
   display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-choice-native-select {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  white-space: nowrap !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-category-listbox {
+  max-height: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-location-listbox {
+  max-height: 768px !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-title {

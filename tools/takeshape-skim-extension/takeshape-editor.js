@@ -114,9 +114,9 @@
 
     const row = document.createElement('div');
     const types = [
-      ['Content', 'Content Block'],
-      ['HTML', 'HTML Block'],
-      ['Table', 'Table Block']
+      ['+ Content', 'Content Block'],
+      ['+ HTML', 'HTML Block'],
+      ['+ Table', 'Table Block']
     ];
 
     row.className = 'awaylands-content-block-buttons';
@@ -293,7 +293,7 @@
       if (option) {
         option.click();
       }
-    }, 40);
+    }, 80);
   }
 
   function addChoiceBoxes(labelText, choices) {
@@ -328,7 +328,7 @@
       group.appendChild(button);
     });
     label.classList.add('awaylands-choice-original-label');
-    original.parentElement.hidden = true;
+    original.parentElement.classList.add('awaylands-choice-native-select');
     original.parentElement.insertAdjacentElement('afterend', title);
     title.insertAdjacentElement('afterend', group);
 
@@ -363,6 +363,21 @@
       ['Simple / no sidebar', 'simple'],
       ['Sidebar', 'sidebar']
     ]);
+  }
+
+  function expandRelationshipMenus() {
+    [
+      ['category', 'awaylands-category-listbox'],
+      ['location', 'awaylands-location-listbox']
+    ].forEach(([fieldName, className]) => {
+      const input = document.querySelector(`input[role="combobox"][data-testid*="-${fieldName}__input"]`);
+      const listboxId = input && input.getAttribute('aria-controls');
+      const listbox = listboxId && document.getElementById(listboxId);
+
+      if (listbox) {
+        listbox.classList.add(className);
+      }
+    });
   }
 
   function fillDefaultAuthorText() {
@@ -876,6 +891,7 @@
     collapseShopItems();
     improveRelatedStorySearch();
     improveLayoutSelectors();
+    expandRelationshipMenus();
     addPublishedDateNowButton();
     fillDefaultAuthorText();
     enhanceImageEditor();
