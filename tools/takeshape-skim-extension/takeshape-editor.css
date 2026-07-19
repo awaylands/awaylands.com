@@ -712,6 +712,18 @@ body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebarContent__
   overflow-y: auto !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-gallery-sidebar-content {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-flow-wrapper {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
 body.awaylands-takeshape-skim [class*="asset-picker-grid-module__grid"] {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;

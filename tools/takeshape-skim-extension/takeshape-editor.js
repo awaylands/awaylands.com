@@ -23,6 +23,24 @@
     return (element.textContent || '').replace(/\s+/g, ' ').trim();
   }
 
+  function keepGallerySidebarContentInFlow() {
+    document.querySelectorAll('[class*="asset-picker-grid-module__grid"]').forEach(grid => {
+      const sidebarContent = grid.closest('[class*="floating-sidebar-module__sidebarContent___"]');
+      let wrapper = grid.parentElement;
+
+      if (!sidebarContent) {
+        return;
+      }
+
+      sidebarContent.classList.add('awaylands-gallery-sidebar-content');
+
+      while (wrapper && wrapper !== sidebarContent) {
+        wrapper.classList.add('awaylands-gallery-flow-wrapper');
+        wrapper = wrapper.parentElement;
+      }
+    });
+  }
+
   function clearElement(element) {
     while (element.firstChild) {
       element.removeChild(element.firstChild);
@@ -1346,6 +1364,7 @@
     addPublishedDateNowButton();
     fillDefaultAuthorText();
     enhanceImageEditor();
+    keepGallerySidebarContentInFlow();
   }
 
   let frameRequested = false;
