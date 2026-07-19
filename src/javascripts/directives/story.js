@@ -1093,6 +1093,24 @@ function insertStoryShopEmbed(container, sourceHtml) {
   return Boolean(container.querySelector('iframe, img, a[href], [data-widget-id], [data-ltk-widget]'));
 }
 
+function storyShopEmbedLink(sourceHtml) {
+  const template = document.createElement('template');
+
+  template.innerHTML = sourceHtml || '';
+  const link = template.content.querySelector('a[href]');
+  const frame = template.content.querySelector('iframe[src]');
+
+  if (link) {
+    return safeStoryShopUrl(link.getAttribute('href'));
+  }
+
+  if (frame && isAllowedStoryShopHost(frame.getAttribute('src'))) {
+    return safeStoryShopUrl(frame.getAttribute('src'));
+  }
+
+  return '';
+}
+
 function advancedStoryPickCandidates(el, isStyleEdit) {
   const candidates = [];
   const usedLinks = {};
@@ -1239,8 +1257,8 @@ function manualStoryPickCandidates(storyPage) {
       }
 
       return {
-        href: safeStoryShopUrl(item.getAttribute('data-url')),
-        label: (item.getAttribute('data-title') || '').trim(),
+        href: safeStoryShopUrl(item.getAttribute('data-url')) || storyShopEmbedLink(item.getAttribute('data-embed-html')),
+        label: (item.getAttribute('data-title') || '').trim() || 'Editor\'s Pick',
         image,
         embedHtml: item.getAttribute('data-embed-html') || ''
       };
@@ -1455,6 +1473,9 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
     const label = document.createElement(pick.embedHtml && pick.href ? 'a' : 'span');
 
     card.className = 'story-rail__pick';
+    if (pick.embedHtml) {
+      card.classList.add('story-rail__pick--embed');
+    }
     if (!pick.embedHtml) {
       card.href = pick.href;
       card.target = '_blank';
@@ -1492,7 +1513,7 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
     count.className = 'story-rail__pick-number';
     count.textContent = `0${index + 1}`;
     label.className = 'story-rail__pick-name';
-    label.textContent = pick.label;
+    label.textContent = pick.label || 'Editor\'s Pick';
     card.appendChild(count);
     card.appendChild(label);
     picksList.appendChild(card);
