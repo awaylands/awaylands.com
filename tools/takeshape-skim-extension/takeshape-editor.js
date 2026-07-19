@@ -196,6 +196,7 @@
     toggle.className = 'awaylands-at-a-glance-toggle';
     toggle.textContent = 'Show custom titles and links';
     toggle.setAttribute('aria-expanded', 'false');
+    options.classList.add('awaylands-at-a-glance-fields');
     customBox.hidden = true;
     customBox.className = 'awaylands-at-a-glance-options';
     customFields.forEach(label => {
@@ -211,6 +212,11 @@
 
       if (field) {
         field.classList.add('awaylands-glance-section-field');
+        const row = directItemChild(options, field);
+
+        if (row) {
+          row.classList.add('awaylands-glance-section-row');
+        }
       }
       if (infoIcons && infoIcons.length) {
         infoIcons[infoIcons.length - 1].closest('.MuiGrid2-root').remove();

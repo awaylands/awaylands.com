@@ -282,8 +282,17 @@ body.awaylands-takeshape-skim .awaylands-at-a-glance-options {
   padding: 14px;
 }
 
+body.awaylands-takeshape-skim .awaylands-at-a-glance-fields {
+  gap: 6px !important;
+  row-gap: 6px !important;
+}
+
 body.awaylands-takeshape-skim .awaylands-glance-section-field {
-  margin-bottom: -14px !important;
+  margin-bottom: 0 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-glance-section-row + .awaylands-glance-section-row {
+  margin-top: -2px !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-glance-section-field .MuiFormHelperText-root {
