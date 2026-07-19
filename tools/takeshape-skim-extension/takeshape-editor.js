@@ -254,12 +254,12 @@
     }
   }
 
-  function releaseBottomEditorBar() {
+  function removeBottomEditorBar() {
     const excludedOverlay = '[role="dialog"], [role="menu"], [role="listbox"], [role="tooltip"], .awaylands-inline-html-dialog';
 
-    const release = element => {
+    const remove = element => {
       if (element && element !== document.body && element !== document.documentElement && !element.closest(excludedOverlay)) {
-        element.classList.add('awaylands-normal-flow-bottom-bar');
+        element.classList.add('awaylands-remove-bottom-bar');
       }
     };
 
@@ -270,15 +270,23 @@
     publishSiteLabels.forEach(label => {
       let ancestor = label;
       let levels = 0;
+      const bottomBarCandidates = [];
 
       while (ancestor && ancestor !== document.body && levels < 10) {
         const style = window.getComputedStyle(ancestor);
+        const rect = ancestor.getBoundingClientRect();
         if (style.position === 'fixed' || style.position === 'sticky') {
-          release(ancestor);
+          remove(ancestor);
+          return;
+        }
+        if (rect.width >= 200 && rect.height > 0 && rect.height <= 220 && rect.bottom >= window.innerHeight - 100) {
+          bottomBarCandidates.push(ancestor);
         }
         ancestor = ancestor.parentElement;
         levels += 1;
       }
+      const widestBottomBar = bottomBarCandidates.sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0];
+      if (widestBottomBar) remove(widestBottomBar);
     });
 
     Array.from(document.querySelectorAll('body *')).forEach(element => {
@@ -292,7 +300,7 @@
       const isEditorChrome = rect.width >= 200 && rect.height > 0 && rect.height <= 240 && nearViewportEdge;
 
       if (style.position === 'sticky' || (style.position === 'fixed' && isEditorChrome)) {
-        release(element);
+        element.classList.add('awaylands-editor-nonsticky');
       }
     });
   }
@@ -1629,6 +1637,36 @@
     }
     input.setAttribute('data-awaylands-native-related-search', 'true');
     input.setAttribute('title', 'Search and select a story from TakeShape’s relationship results.');
+
+    const inputRect = input.getBoundingClientRect();
+    const controlledId = input.getAttribute('aria-controls');
+    const listboxes = Array.from(document.querySelectorAll('[role="listbox"], .MuiAutocomplete-listbox')).filter(listbox => {
+      const rect = listbox.getBoundingClientRect();
+      const overlapsInput = rect.right >= inputRect.left && rect.left <= inputRect.right;
+      const nearInput = Math.abs(rect.top - inputRect.bottom) < 900 || Math.abs(rect.bottom - inputRect.top) < 900;
+
+      return rect.width > 0 && rect.height > 0 && overlapsInput && nearInput;
+    });
+
+    if (listboxes.length) {
+      const scoreListbox = listbox => {
+        const options = Array.from(listbox.querySelectorAll('[role="option"], .MuiAutocomplete-option'));
+        const enabledOptions = options.filter(option => option.getAttribute('aria-disabled') !== 'true');
+        let score = 0;
+
+        if (controlledId && listbox.id === controlledId) score += 100;
+        if (enabledOptions.length) score += 25;
+        if (window.getComputedStyle(listbox).pointerEvents !== 'none') score += 10;
+        score += Math.min(enabledOptions.length, 20);
+        return score;
+      };
+      const primaryListbox = listboxes.slice().sort((first, second) => scoreListbox(second) - scoreListbox(first))[0];
+
+      listboxes.forEach(listbox => {
+        listbox.classList.toggle('awaylands-primary-related-listbox', listbox === primaryListbox);
+        listbox.classList.toggle('awaylands-duplicate-related-listbox', listbox !== primaryListbox);
+      });
+    }
   }
 
   function setEditorValue(field, value) {
@@ -1786,7 +1824,7 @@
     runEnhancement('native publishing status', restoreNativePublishingStatus);
     runEnhancement('save and continue', makeStorySaveContinue);
     runEnhancement('story tools below gallery', moveStoryToolsBelowGallery);
-    runEnhancement('bottom editor bar', releaseBottomEditorBar);
+    runEnhancement('bottom editor bar', removeBottomEditorBar);
     runEnhancement('story publishing default', enableStoryOnOpen);
   }
 

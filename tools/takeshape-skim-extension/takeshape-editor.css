@@ -829,13 +829,29 @@ body.awaylands-takeshape-skim .awaylands-story-tools-panel {
   overflow: visible !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-normal-flow-bottom-bar {
+body.awaylands-takeshape-skim .awaylands-remove-bottom-bar {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-nonsticky {
   position: static !important;
   inset: auto !important;
   width: auto !important;
   max-width: none !important;
   transform: none !important;
   z-index: auto !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-duplicate-related-listbox {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-primary-related-listbox,
+body.awaylands-takeshape-skim .awaylands-primary-related-listbox [role="option"],
+body.awaylands-takeshape-skim .awaylands-primary-related-listbox .MuiAutocomplete-option {
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 body.awaylands-takeshape-skim {
