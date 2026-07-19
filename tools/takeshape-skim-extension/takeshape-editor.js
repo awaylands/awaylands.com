@@ -491,6 +491,8 @@
     }
 
     const group = document.createElement('div');
+    const title = document.createElement('div');
+    const nativeLabel = field.querySelector('label');
     const choices = [
       ['Default', 'default'],
       ['Small', 'small'],
@@ -498,6 +500,9 @@
       ['Large', 'large']
     ];
 
+    field.classList.add('awaylands-image-size-field');
+    title.className = 'awaylands-image-size-title';
+    title.textContent = 'Size';
     group.className = 'awaylands-image-size-choices';
     group.setAttribute('role', 'group');
     group.setAttribute('aria-label', 'Image size');
@@ -507,11 +512,20 @@
       button.type = 'button';
       button.textContent = choice[0];
       button.setAttribute('data-value', choice[1]);
-      button.addEventListener('click', () => selectMenuValue(original, choice[0]));
+      button.addEventListener('click', () => {
+        selectMenuValue(original, choice[0]);
+        window.setTimeout(sync, 120);
+        window.setTimeout(sync, 350);
+      });
       group.appendChild(button);
     });
-    original.parentElement.hidden = true;
-    original.parentElement.insertAdjacentElement('afterend', group);
+    if (nativeLabel) {
+      nativeLabel.classList.add('awaylands-image-size-native-label');
+    }
+    original.parentElement.hidden = false;
+    original.parentElement.classList.add('awaylands-choice-native-select');
+    original.parentElement.insertAdjacentElement('afterend', title);
+    title.insertAdjacentElement('afterend', group);
 
     const sync = () => {
       const value = (native.value || 'default').toLowerCase();
@@ -525,6 +539,7 @@
     };
 
     native.addEventListener('change', sync);
+    new MutationObserver(sync).observe(native, { attributes: true, attributeFilter: ['value'] });
     sync();
   }
 
