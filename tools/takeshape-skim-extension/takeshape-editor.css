@@ -717,11 +717,23 @@ body.awaylands-takeshape-skim .awaylands-gallery-sidebar-content {
   overflow-y: auto !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-gallery-flow-wrapper {
+body.awaylands-takeshape-skim .awaylands-gallery-grid-host {
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
   overflow: visible !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-close-button {
+  position: relative !important;
+  z-index: 20 !important;
+  pointer-events: auto !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-sidebar {
+  top: 64px !important;
+  height: calc(100vh - 64px) !important;
+  max-height: calc(100vh - 64px) !important;
 }
 
 body.awaylands-takeshape-skim [class*="asset-picker-grid-module__grid"] {

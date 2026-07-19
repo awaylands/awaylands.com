@@ -23,20 +23,32 @@
     return (element.textContent || '').replace(/\s+/g, ' ').trim();
   }
 
-  function keepGallerySidebarContentInFlow() {
+  function keepGallerySidebarUsable() {
     document.querySelectorAll('[class*="asset-picker-grid-module__grid"]').forEach(grid => {
       const sidebarContent = grid.closest('[class*="floating-sidebar-module__sidebarContent___"]');
-      let wrapper = grid.parentElement;
+      const sidebar = sidebarContent && sidebarContent.closest('[class*="floating-sidebar-module__sidebar___"]');
 
       if (!sidebarContent) {
         return;
       }
 
       sidebarContent.classList.add('awaylands-gallery-sidebar-content');
+      if (grid.parentElement) {
+        grid.parentElement.classList.add('awaylands-gallery-grid-host');
+      }
 
-      while (wrapper && wrapper !== sidebarContent) {
-        wrapper.classList.add('awaylands-gallery-flow-wrapper');
-        wrapper = wrapper.parentElement;
+      const closeButton = Array.from(sidebarContent.querySelectorAll('button')).find(button => {
+        const label = `${button.getAttribute('aria-label') || ''} ${button.getAttribute('title') || ''}`.toLowerCase();
+
+        return label.indexOf('close') !== -1 || (!normalizedText(button) && button.querySelector('svg'));
+      });
+
+      if (closeButton) {
+        closeButton.classList.add('awaylands-gallery-close-button');
+      }
+
+      if (sidebar) {
+        sidebar.classList.add('awaylands-gallery-sidebar');
       }
     });
   }
@@ -1364,7 +1376,7 @@
     addPublishedDateNowButton();
     fillDefaultAuthorText();
     enhanceImageEditor();
-    keepGallerySidebarContentInFlow();
+    keepGallerySidebarUsable();
   }
 
   let frameRequested = false;
