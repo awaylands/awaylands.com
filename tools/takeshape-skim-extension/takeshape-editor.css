@@ -97,16 +97,17 @@ body.awaylands-takeshape-skim .awaylands-social-section-title {
 }
 
 body.awaylands-takeshape-skim .MuiInputLabel-root,
-body.awaylands-takeshape-skim .MuiFormLabel-root {
+body.awaylands-takeshape-skim .MuiFormLabel-root,
+body.awaylands-takeshape-skim .MuiFormControlLabel-label {
   color: inherit !important;
-  font-size: 14px !important;
+  font-size: 15px !important;
   font-weight: 600 !important;
   letter-spacing: 0 !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiInputLabel-root,
 body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiFormLabel-root {
-  font-size: 13px !important;
+  font-size: 14px !important;
   font-weight: 500 !important;
 }
 
@@ -114,7 +115,14 @@ body.awaylands-takeshape-skim .MuiInputBase-input,
 body.awaylands-takeshape-skim [contenteditable="true"] {
   color: inherit !important;
   font-size: 15px !important;
+  font-weight: 400 !important;
   line-height: 1.5 !important;
+}
+
+body.awaylands-takeshape-skim .MuiFormControl-root input,
+body.awaylands-takeshape-skim .MuiFormControl-root textarea,
+body.awaylands-takeshape-skim .MuiChip-label {
+  font-weight: 400 !important;
 }
 
 body.awaylands-takeshape-skim .MuiSelect-select,
@@ -200,6 +208,14 @@ body.awaylands-takeshape-skim .awaylands-content-block-buttons button {
   background: #eeeeee;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-block-buttons button,
+body.awaylands-takeshape-skim .awaylands-choice-group button,
+body.awaylands-takeshape-skim .awaylands-at-a-glance-toggle,
+body.awaylands-takeshape-skim .awaylands-revolve-converter,
+body.awaylands-takeshape-skim .awaylands-published-date-now {
+  font-weight: 700 !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-content-block-buttons button:hover,
@@ -312,7 +328,7 @@ body.awaylands-takeshape-skim .awaylands-choice-original-label {
 
 body.awaylands-takeshape-skim .awaylands-choice-title {
   margin: 0 0 8px;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
 }
