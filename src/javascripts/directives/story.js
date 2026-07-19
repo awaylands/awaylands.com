@@ -1304,11 +1304,16 @@ function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
   links.className = 'story-overview__links';
 
   for (let index = 0; index < 3; index += 1) {
-    const heading = overviewHeadings[index];
+    const selectedSection = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-section`) || '').trim();
+    const hasSelectedSection = /^\d+$/.test(selectedSection);
+    const selectedIndex = hasSelectedSection ? parseInt(selectedSection, 10) - 1 : index;
+    const heading = overviewHeadings[selectedIndex];
     const manualTitle = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-title`) || '').trim();
     const manualLink = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-link`) || '').trim();
-    const itemTitle = manualTitle || (heading ? storyTocTitle(heading.textContent) : '');
-    const itemLink = manualLink || (heading ? `#${heading.id}` : '');
+    const headingTitle = heading ? storyTocTitle(heading.textContent) : '';
+    const headingLink = heading ? `#${heading.id}` : '';
+    const itemTitle = hasSelectedSection ? headingTitle : (manualTitle || headingTitle);
+    const itemLink = hasSelectedSection ? headingLink : (manualLink || headingLink);
 
     if (!itemTitle || !itemLink) {
       continue;
@@ -1405,12 +1410,16 @@ function finalizeRelatedStories(storyPage) {
     const link = item.querySelector('a[href]');
     const key = link && (link.getAttribute('href') || link.textContent || '').trim().toLowerCase();
 
-    if (!key || used[key] || kept >= 3) {
+    if (!key || used[key] || kept >= 6) {
       item.parentNode.removeChild(item);
       return;
     }
 
     used[key] = true;
+    if (kept >= 3) {
+      item.hidden = true;
+      item.setAttribute('aria-hidden', 'true');
+    }
     kept += 1;
   });
 }
@@ -1565,7 +1574,7 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
     relatedTitle.textContent = (storyPage.getAttribute('data-keep-reading-title') || '').trim() || 'More from Away Lands';
     relatedList.className = 'story-rail__related-list';
 
-    Array.prototype.slice.call(relatedItems, 0, 3).forEach(item => {
+    Array.prototype.slice.call(relatedItems, 3, 6).forEach(item => {
       const sourceLink = item.querySelector('a[href]');
       const sourceImage = item.querySelector('.related-stories__image img');
       const sourceTitle = item.querySelector('.related-stories__title');

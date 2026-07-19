@@ -12,10 +12,13 @@ query($images: TSImagesConfig) {
         kicker
         title
         summary
+        item1Section
         item1Title
         item1Link
+        item2Section
         item2Title
         item2Link
+        item3Section
         item3Title
         item3Link
       }

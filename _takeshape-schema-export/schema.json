@@ -878,15 +878,15 @@
             "keepReadingTitle": {
               "widget": "singleLineText"
             },
-          "content": {
-            "widget": "wysiwygText",
-            "instructions": "Primary article editor. Write or paste the full post here, including headings, links, lists, and images."
-          },
-          "contentBlocks": {
-            "widget": "shapeArray"
-          },
-          "extraContentBlocks": {
-            "widget": "shapeArray"
+            "content": {
+              "widget": "wysiwygText",
+              "instructions": "Primary article editor. Write or paste the full post here, including headings, links, lists, and images."
+            },
+            "contentBlocks": {
+              "widget": "shapeArray"
+            },
+            "extraContentBlocks": {
+              "widget": "shapeArray"
             },
             "extraHtmlBlocks": {
               "widget": "shapeArray"
@@ -900,9 +900,15 @@
             "social": {
               "widget": "shapeObject"
             },
-            "mainHtmlBlock1": {"widget": "paragraphText"},
-            "mainContentBlock1": {"widget": "wysiwygText"},
-            "additionalMainBlocks": {"widget": "shapeObject"}
+            "mainHtmlBlock1": {
+              "widget": "paragraphText"
+            },
+            "mainContentBlock1": {
+              "widget": "wysiwygText"
+            },
+            "additionalMainBlocks": {
+              "widget": "shapeObject"
+            }
           },
           "order": [
             "title",
@@ -911,10 +917,10 @@
             "tout",
             "category",
             "location",
-          "social",
-          "content",
-          "contentBlocks",
-          "postType",
+            "social",
+            "content",
+            "contentBlocks",
+            "postType",
             "pageLayout",
             "atAGlance",
             "shopEditEnabled",
@@ -937,20 +943,20 @@
             "title": {
               "widget": "singleLineText"
             },
-          "productUrl": {
-            "widget": "singleLineText",
-            "instructions": "Paste the full product URL. It opens externally."
-          },
-          "productEmbedHtml": {
-            "widget": "paragraphText",
-            "instructions": "Optional: paste a product embed iframe. It replaces the product image in Shop The Edit."
-          }
+            "productUrl": {
+              "widget": "singleLineText",
+              "instructions": "Paste the full product URL. It opens externally."
+            },
+            "productEmbedHtml": {
+              "widget": "paragraphText",
+              "instructions": "Optional: paste a product embed iframe. It replaces the product image in Shop The Edit."
+            }
           },
           "order": [
             "image",
             "title",
-          "productUrl"
-          ,"productEmbedHtml"
+            "productUrl",
+            "productEmbedHtml"
           ]
         }
       },
@@ -958,24 +964,57 @@
         "default": {
           "widget": "object",
           "properties": {
-            "kicker": {"widget": "singleLineText"},
-            "title": {"widget": "singleLineText"},
-            "summary": {"widget": "paragraphText"},
-            "item1Title": {"widget": "singleLineText"},
-            "item1Link": {"widget": "singleLineText"},
-            "item2Title": {"widget": "singleLineText"},
-            "item2Link": {"widget": "singleLineText"},
-            "item3Title": {"widget": "singleLineText"},
-            "item3Link": {"widget": "singleLineText"}
+            "kicker": {
+              "widget": "singleLineText"
+            },
+            "title": {
+              "widget": "singleLineText"
+            },
+            "summary": {
+              "widget": "paragraphText"
+            },
+            "item1Section": {
+              "widget": "dropdown",
+              "instructions": "Choose a top-level article section. Its current heading title and link are filled automatically."
+            },
+            "item1Title": {
+              "widget": "singleLineText"
+            },
+            "item1Link": {
+              "widget": "singleLineText"
+            },
+            "item2Section": {
+              "widget": "dropdown",
+              "instructions": "Choose a top-level article section. Its current heading title and link are filled automatically."
+            },
+            "item2Title": {
+              "widget": "singleLineText"
+            },
+            "item2Link": {
+              "widget": "singleLineText"
+            },
+            "item3Section": {
+              "widget": "dropdown",
+              "instructions": "Choose a top-level article section. Its current heading title and link are filled automatically."
+            },
+            "item3Title": {
+              "widget": "singleLineText"
+            },
+            "item3Link": {
+              "widget": "singleLineText"
+            }
           },
           "order": [
             "kicker",
             "title",
             "summary",
+            "item1Section",
             "item1Title",
             "item1Link",
+            "item2Section",
             "item2Title",
             "item2Link",
+            "item3Section",
             "item3Title",
             "item3Link"
           ]
@@ -1459,7 +1498,7 @@
         "default": {
           "widget": "repeater",
           "properties": {
-          "label": {
+            "label": {
               "widget": "singleLineText"
             },
             "url": {
@@ -1502,9 +1541,9 @@
               "widget": "singleLineText",
               "instructions": "Optional. When blank, the site creates alt text from the caption or filename."
             },
-          "linkUrl": {
-            "widget": "singleLineText",
-            "instructions": "Optional. Paste or edit the complete destination URL. Spaces in surrounding story text are preserved."
+            "linkUrl": {
+              "widget": "singleLineText",
+              "instructions": "Optional. Paste or edit the complete destination URL. Spaces in surrounding story text are preserved."
             },
             "linkTarget": {
               "widget": "dropdown",
@@ -1537,9 +1576,9 @@
             "altText": {
               "widget": "singleLineText"
             },
-          "linkUrl": {
-            "widget": "singleLineText",
-            "instructions": "Optional. Paste or edit the complete image URL. Image links open externally by default."
+            "linkUrl": {
+              "widget": "singleLineText",
+              "instructions": "Optional. Paste or edit the complete image URL. Image links open externally by default."
             }
           },
           "widget": "repeater",
@@ -4152,38 +4191,38 @@
                   ]
                 }
               ],
-            "@mapping": "shapedb:Story.PageLayoutV2"
-          },
-          "atAGlance": {
-            "$ref": "#/shapes/StoryAtAGlance/schema",
-            "title": "At a Glance",
-            "@mapping": "shapedb:Story.AtAGlanceV1"
-          },
-          "shopEditTitle": {
-            "type": "string",
-            "title": "Shop The Edit Title",
-            "default": "Shop The Edit",
-            "@mapping": "shapedb:Story.ShopEditTitleV1"
-          },
-          "shopEditEnabled": {
-            "type": "boolean",
-            "title": "Show Shop The Edit",
-            "description": "Disable to hide the entire Shop The Edit section on this story.",
-            "default": true,
-            "@mapping": "shapedb:Story.ShopEditEnabledV1"
-          },
-          "shopEditItems": {
-            "type": "array",
-            "title": "Shop The Edit — Manual Items",
-            "description": "Manual products appear first; remaining spaces are selected from article links.",
+              "@mapping": "shapedb:Story.PageLayoutV2"
+            },
+            "atAGlance": {
+              "$ref": "#/shapes/StoryAtAGlance/schema",
+              "title": "At a Glance",
+              "@mapping": "shapedb:Story.AtAGlanceV1"
+            },
+            "shopEditTitle": {
+              "type": "string",
+              "title": "Shop The Edit Title",
+              "default": "Shop The Edit",
+              "@mapping": "shapedb:Story.ShopEditTitleV1"
+            },
+            "shopEditEnabled": {
+              "type": "boolean",
+              "title": "Show Shop The Edit",
+              "description": "Disable to hide the entire Shop The Edit section on this story.",
+              "default": true,
+              "@mapping": "shapedb:Story.ShopEditEnabledV1"
+            },
+            "shopEditItems": {
+              "type": "array",
+              "title": "Shop The Edit — Manual Items",
+              "description": "Manual products appear first; remaining spaces are selected from article links.",
               "items": {
                 "$ref": "#/shapes/StoryShopEditItem/schema"
               },
               "@mapping": "shapedb:Story.ShopEditItemsV1"
             },
-          "firstHandExpertise": {
-            "$ref": "#/shapes/StoryExpertise/schema",
-            "title": "About the Author",
+            "firstHandExpertise": {
+              "$ref": "#/shapes/StoryExpertise/schema",
+              "title": "About the Author",
               "@mapping": "shapedb:Story.FirstHandExpertiseV1"
             },
             "keepReadingKicker": {
@@ -4198,39 +4237,39 @@
               "default": "More from Away Lands",
               "@mapping": "shapedb:Story.KeepReadingTitleV1"
             },
-          "content": {
-            "type": "object",
-            "@tag": "draftjs",
-            "title": "Content Block",
-            "@mapping": "shapedb:Story.rkzHXy9e-"
-          },
-          "extraContentBlocks": {
-            "type": "array",
-            "title": "Add Content Block",
-            "items": {
-              "$ref": "#/shapes/ContentBlock/schema"
+            "content": {
+              "type": "object",
+              "@tag": "draftjs",
+              "title": "Content Block",
+              "@mapping": "shapedb:Story.rkzHXy9e-"
             },
-            "@mapping": "shapedb:Story.ExtraContentBlocksV1"
-          },
-          "extraHtmlBlocks": {
-            "type": "array",
-            "title": "Add HTML Block",
-            "items": {
-              "$ref": "#/shapes/HtmlBlock/schema"
+            "extraContentBlocks": {
+              "type": "array",
+              "title": "Add Content Block",
+              "items": {
+                "$ref": "#/shapes/ContentBlock/schema"
+              },
+              "@mapping": "shapedb:Story.ExtraContentBlocksV1"
             },
-            "@mapping": "shapedb:Story.ExtraHtmlBlocksV1"
-          },
-          "extraTableBlocks": {
-            "type": "array",
-            "title": "Add Table Block",
-            "items": {
-              "$ref": "#/shapes/TableBlock/schema"
+            "extraHtmlBlocks": {
+              "type": "array",
+              "title": "Add HTML Block",
+              "items": {
+                "$ref": "#/shapes/HtmlBlock/schema"
+              },
+              "@mapping": "shapedb:Story.ExtraHtmlBlocksV1"
             },
-            "@mapping": "shapedb:Story.ExtraTableBlocksV1"
-          },
-          "contentBlocks": {
-            "type": "array",
-            "description": "",
+            "extraTableBlocks": {
+              "type": "array",
+              "title": "Add Table Block",
+              "items": {
+                "$ref": "#/shapes/TableBlock/schema"
+              },
+              "@mapping": "shapedb:Story.ExtraTableBlocksV1"
+            },
+            "contentBlocks": {
+              "type": "array",
+              "description": "",
               "items": {
                 "oneOf": [
                   {
@@ -4239,18 +4278,18 @@
                   {
                     "@ref": "local:HtmlBlock"
                   },
-                {
-                  "@ref": "local:TableBlock"
-                },
-                {
-                  "@ref": "local:StoryImageBlock"
-                },
-                {
-                  "@ref": "local:StoryGalleryBlock"
-                }
-              ]
-            },
-            "title": "Content Blocks",
+                  {
+                    "@ref": "local:TableBlock"
+                  },
+                  {
+                    "@ref": "local:StoryImageBlock"
+                  },
+                  {
+                    "@ref": "local:StoryGalleryBlock"
+                  }
+                ]
+              },
+              "title": "Content Blocks",
               "@mapping": "shapedb:Story.Z1b3FgKbp"
             },
             "relatedStories": {
@@ -5372,18 +5411,18 @@
               "minLength": 0,
               "@mapping": "shapedb:StoryShopEditItem.Title"
             },
-          "productUrl": {
-            "type": "string",
-            "title": "Product Link",
-            "minLength": 0,
-            "@mapping": "shapedb:StoryShopEditItem.ProductUrl"
-          },
-          "productEmbedHtml": {
-            "type": "string",
-            "title": "Product Embed HTML (optional)",
-            "minLength": 0,
-            "@mapping": "shapedb:StoryShopEditItem.ProductEmbedHtml"
-          }
+            "productUrl": {
+              "type": "string",
+              "title": "Product Link",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryShopEditItem.ProductUrl"
+            },
+            "productEmbedHtml": {
+              "type": "string",
+              "title": "Product Embed HTML (optional)",
+              "minLength": 0,
+              "@mapping": "shapedb:StoryShopEditItem.ProductEmbedHtml"
+            }
           }
         }
       },
@@ -5412,42 +5451,303 @@
               "minLength": 0,
               "@mapping": "shapedb:StoryAtAGlance.Summary"
             },
+            "item1Section": {
+              "type": "string",
+              "title": "Section 1 - choose article heading",
+              "description": "Select by article order. The heading title and anchor link are generated automatically.",
+              "oneOf": [
+                {
+                  "title": "Automatic - first section",
+                  "enum": [
+                    "auto"
+                  ]
+                },
+                {
+                  "title": "1st top-level section",
+                  "enum": [
+                    "1"
+                  ]
+                },
+                {
+                  "title": "2nd top-level section",
+                  "enum": [
+                    "2"
+                  ]
+                },
+                {
+                  "title": "3rd top-level section",
+                  "enum": [
+                    "3"
+                  ]
+                },
+                {
+                  "title": "4th top-level section",
+                  "enum": [
+                    "4"
+                  ]
+                },
+                {
+                  "title": "5th top-level section",
+                  "enum": [
+                    "5"
+                  ]
+                },
+                {
+                  "title": "6th top-level section",
+                  "enum": [
+                    "6"
+                  ]
+                },
+                {
+                  "title": "7th top-level section",
+                  "enum": [
+                    "7"
+                  ]
+                },
+                {
+                  "title": "8th top-level section",
+                  "enum": [
+                    "8"
+                  ]
+                },
+                {
+                  "title": "9th top-level section",
+                  "enum": [
+                    "9"
+                  ]
+                },
+                {
+                  "title": "10th top-level section",
+                  "enum": [
+                    "10"
+                  ]
+                },
+                {
+                  "title": "11th top-level section",
+                  "enum": [
+                    "11"
+                  ]
+                },
+                {
+                  "title": "12th top-level section",
+                  "enum": [
+                    "12"
+                  ]
+                }
+              ],
+              "default": "auto",
+              "@mapping": "shapedb:StoryAtAGlance.Item1Section"
+            },
             "item1Title": {
               "type": "string",
-              "title": "Section 1 Title",
+              "title": "Section 1 custom title - optional",
               "minLength": 0,
               "@mapping": "shapedb:StoryAtAGlance.Item1Title"
             },
             "item1Link": {
               "type": "string",
-              "title": "Section 1 Link",
-              "description": "Blank links to the first detected heading.",
+              "title": "Section 1 custom link - optional",
+              "description": "Leave blank to use the selected heading's link.",
               "minLength": 0,
               "@mapping": "shapedb:StoryAtAGlance.Item1Link"
             },
+            "item2Section": {
+              "type": "string",
+              "title": "Section 2 - choose article heading",
+              "description": "Select by article order. The heading title and anchor link are generated automatically.",
+              "oneOf": [
+                {
+                  "title": "Automatic - second section",
+                  "enum": [
+                    "auto"
+                  ]
+                },
+                {
+                  "title": "1st top-level section",
+                  "enum": [
+                    "1"
+                  ]
+                },
+                {
+                  "title": "2nd top-level section",
+                  "enum": [
+                    "2"
+                  ]
+                },
+                {
+                  "title": "3rd top-level section",
+                  "enum": [
+                    "3"
+                  ]
+                },
+                {
+                  "title": "4th top-level section",
+                  "enum": [
+                    "4"
+                  ]
+                },
+                {
+                  "title": "5th top-level section",
+                  "enum": [
+                    "5"
+                  ]
+                },
+                {
+                  "title": "6th top-level section",
+                  "enum": [
+                    "6"
+                  ]
+                },
+                {
+                  "title": "7th top-level section",
+                  "enum": [
+                    "7"
+                  ]
+                },
+                {
+                  "title": "8th top-level section",
+                  "enum": [
+                    "8"
+                  ]
+                },
+                {
+                  "title": "9th top-level section",
+                  "enum": [
+                    "9"
+                  ]
+                },
+                {
+                  "title": "10th top-level section",
+                  "enum": [
+                    "10"
+                  ]
+                },
+                {
+                  "title": "11th top-level section",
+                  "enum": [
+                    "11"
+                  ]
+                },
+                {
+                  "title": "12th top-level section",
+                  "enum": [
+                    "12"
+                  ]
+                }
+              ],
+              "default": "auto",
+              "@mapping": "shapedb:StoryAtAGlance.Item2Section"
+            },
             "item2Title": {
               "type": "string",
-              "title": "Section 2 Title",
+              "title": "Section 2 custom title - optional",
               "minLength": 0,
               "@mapping": "shapedb:StoryAtAGlance.Item2Title"
             },
             "item2Link": {
               "type": "string",
-              "title": "Section 2 Link",
-              "description": "Blank links to the second detected heading.",
+              "title": "Section 2 custom link - optional",
+              "description": "Leave blank to use the selected heading's link.",
               "minLength": 0,
               "@mapping": "shapedb:StoryAtAGlance.Item2Link"
             },
+            "item3Section": {
+              "type": "string",
+              "title": "Section 3 - choose article heading",
+              "description": "Select by article order. The heading title and anchor link are generated automatically.",
+              "oneOf": [
+                {
+                  "title": "Automatic - third section",
+                  "enum": [
+                    "auto"
+                  ]
+                },
+                {
+                  "title": "1st top-level section",
+                  "enum": [
+                    "1"
+                  ]
+                },
+                {
+                  "title": "2nd top-level section",
+                  "enum": [
+                    "2"
+                  ]
+                },
+                {
+                  "title": "3rd top-level section",
+                  "enum": [
+                    "3"
+                  ]
+                },
+                {
+                  "title": "4th top-level section",
+                  "enum": [
+                    "4"
+                  ]
+                },
+                {
+                  "title": "5th top-level section",
+                  "enum": [
+                    "5"
+                  ]
+                },
+                {
+                  "title": "6th top-level section",
+                  "enum": [
+                    "6"
+                  ]
+                },
+                {
+                  "title": "7th top-level section",
+                  "enum": [
+                    "7"
+                  ]
+                },
+                {
+                  "title": "8th top-level section",
+                  "enum": [
+                    "8"
+                  ]
+                },
+                {
+                  "title": "9th top-level section",
+                  "enum": [
+                    "9"
+                  ]
+                },
+                {
+                  "title": "10th top-level section",
+                  "enum": [
+                    "10"
+                  ]
+                },
+                {
+                  "title": "11th top-level section",
+                  "enum": [
+                    "11"
+                  ]
+                },
+                {
+                  "title": "12th top-level section",
+                  "enum": [
+                    "12"
+                  ]
+                }
+              ],
+              "default": "auto",
+              "@mapping": "shapedb:StoryAtAGlance.Item3Section"
+            },
             "item3Title": {
               "type": "string",
-              "title": "Section 3 Title",
+              "title": "Section 3 custom title - optional",
               "minLength": 0,
               "@mapping": "shapedb:StoryAtAGlance.Item3Title"
             },
             "item3Link": {
               "type": "string",
-              "title": "Section 3 Link",
-              "description": "Blank links to the third detected heading.",
+              "title": "Section 3 custom link - optional",
+              "description": "Leave blank to use the selected heading's link.",
               "minLength": 0,
               "@mapping": "shapedb:StoryAtAGlance.Item3Link"
             }
@@ -5545,30 +5845,30 @@
                     "medium"
                   ]
                 },
-              {
-                "title": "Wide",
-                "enum": [
-                  "wide"
-                ]
-              },
-              {
-                "title": "Large",
-                "enum": [
-                  "large"
-                ]
-              },
-              {
-                "title": "Full width",
-                "enum": [
-                  "full"
-                ]
-              },
-              {
-                "title": "Full bleed — edge to edge",
-                "enum": [
-                  "full-bleed"
-                ]
-              }
+                {
+                  "title": "Wide",
+                  "enum": [
+                    "wide"
+                  ]
+                },
+                {
+                  "title": "Large",
+                  "enum": [
+                    "large"
+                  ]
+                },
+                {
+                  "title": "Full width",
+                  "enum": [
+                    "full"
+                  ]
+                },
+                {
+                  "title": "Full bleed — edge to edge",
+                  "enum": [
+                    "full-bleed"
+                  ]
+                }
               ],
               "@mapping": "shapedb:StoryImageBlock.Size"
             },
@@ -5602,20 +5902,35 @@
                   ]
                 }
               ],
-            "@mapping": "shapedb:StoryImageBlock.Alignment"
-          },
-          "spacing": {
-            "type": "string",
-            "title": "Vertical Spacing",
-            "default": "standard",
-            "oneOf": [
-              {"title": "Standard", "enum": ["standard"]},
-              {"title": "Compact", "enum": ["compact"]},
-              {"title": "None / flush", "enum": ["none"]}
-            ],
-            "@mapping": "shapedb:StoryImageBlock.SpacingV1"
-          },
-          "caption": {
+              "@mapping": "shapedb:StoryImageBlock.Alignment"
+            },
+            "spacing": {
+              "type": "string",
+              "title": "Vertical Spacing",
+              "default": "standard",
+              "oneOf": [
+                {
+                  "title": "Standard",
+                  "enum": [
+                    "standard"
+                  ]
+                },
+                {
+                  "title": "Compact",
+                  "enum": [
+                    "compact"
+                  ]
+                },
+                {
+                  "title": "None / flush",
+                  "enum": [
+                    "none"
+                  ]
+                }
+              ],
+              "@mapping": "shapedb:StoryImageBlock.SpacingV1"
+            },
+            "caption": {
               "type": "string",
               "title": "Caption",
               "minLength": 0,

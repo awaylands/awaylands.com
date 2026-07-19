@@ -190,10 +190,13 @@
   {% if page.atAGlance and page.atAGlance.kicker %}data-at-a-glance-kicker="{{ page.atAGlance.kicker | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.title %}data-at-a-glance-title="{{ page.atAGlance.title | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.summary %}data-at-a-glance-summary="{{ page.atAGlance.summary | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item1Section %}data-at-a-glance-item-1-section="{{ page.atAGlance.item1Section | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.item1Title %}data-at-a-glance-item-1-title="{{ page.atAGlance.item1Title | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.item1Link %}data-at-a-glance-item-1-link="{{ page.atAGlance.item1Link | trim | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item2Section %}data-at-a-glance-item-2-section="{{ page.atAGlance.item2Section | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.item2Title %}data-at-a-glance-item-2-title="{{ page.atAGlance.item2Title | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.item2Link %}data-at-a-glance-item-2-link="{{ page.atAGlance.item2Link | trim | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item3Section %}data-at-a-glance-item-3-section="{{ page.atAGlance.item3Section | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.item3Title %}data-at-a-glance-item-3-title="{{ page.atAGlance.item3Title | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.item3Link %}data-at-a-glance-item-3-link="{{ page.atAGlance.item3Link | trim | escape }}"{% endif %}
   {% if page.shopEditTitle %}data-shop-edit-title="{{ page.shopEditTitle | escape }}"{% endif %}
@@ -353,7 +356,7 @@
 
       <div class="story-article__modules">
         {% set hasManualRelatedStories = page.relatedStories.length %}
-        {% set shouldAutofillRelatedStories = page.relatedStories.length < 3 %}
+        {% set shouldAutofillRelatedStories = page.relatedStories.length < 6 %}
         {% set hasAutoRelatedStories = shouldAutofillRelatedStories %}
 
         {% if hasManualRelatedStories or shouldAutofillRelatedStories %}

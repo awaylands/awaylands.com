@@ -951,10 +951,22 @@
           "kicker": {"widget": "singleLineText"},
           "title": {"widget": "singleLineText"},
           "summary": {"widget": "paragraphText"},
+          "item1Section": {
+            "widget": "dropdown",
+            "instructions": "Choose a top-level article section. Its current heading title and link are filled automatically."
+          },
           "item1Title": {"widget": "singleLineText"},
           "item1Link": {"widget": "singleLineText"},
+          "item2Section": {
+            "widget": "dropdown",
+            "instructions": "Choose a top-level article section. Its current heading title and link are filled automatically."
+          },
           "item2Title": {"widget": "singleLineText"},
           "item2Link": {"widget": "singleLineText"},
+          "item3Section": {
+            "widget": "dropdown",
+            "instructions": "Choose a top-level article section. Its current heading title and link are filled automatically."
+          },
           "item3Title": {"widget": "singleLineText"},
           "item3Link": {"widget": "singleLineText"}
         },
@@ -962,10 +974,13 @@
           "kicker",
           "title",
           "summary",
+          "item1Section",
           "item1Title",
           "item1Link",
+          "item2Section",
           "item2Title",
           "item2Link",
+          "item3Section",
           "item3Title",
           "item3Link"
         ]
@@ -5402,42 +5417,108 @@
             "minLength": 0,
             "@mapping": "shapedb:StoryAtAGlance.Summary"
           },
+          "item1Section": {
+            "type": "string",
+            "title": "Section 1 - choose article heading",
+            "description": "Select by article order. The heading title and anchor link are generated automatically.",
+            "oneOf": [
+              {"title": "Automatic - first section", "enum": ["auto"]},
+              {"title": "1st top-level section", "enum": ["1"]},
+              {"title": "2nd top-level section", "enum": ["2"]},
+              {"title": "3rd top-level section", "enum": ["3"]},
+              {"title": "4th top-level section", "enum": ["4"]},
+              {"title": "5th top-level section", "enum": ["5"]},
+              {"title": "6th top-level section", "enum": ["6"]},
+              {"title": "7th top-level section", "enum": ["7"]},
+              {"title": "8th top-level section", "enum": ["8"]},
+              {"title": "9th top-level section", "enum": ["9"]},
+              {"title": "10th top-level section", "enum": ["10"]},
+              {"title": "11th top-level section", "enum": ["11"]},
+              {"title": "12th top-level section", "enum": ["12"]}
+            ],
+            "default": "auto",
+            "@mapping": "shapedb:StoryAtAGlance.Item1Section"
+          },
           "item1Title": {
             "type": "string",
-            "title": "Section 1 Title",
+            "title": "Section 1 custom title - optional",
             "minLength": 0,
             "@mapping": "shapedb:StoryAtAGlance.Item1Title"
           },
           "item1Link": {
             "type": "string",
-            "title": "Section 1 Link",
-            "description": "Blank links to the first detected heading.",
+            "title": "Section 1 custom link - optional",
+            "description": "Leave blank to use the selected heading's link.",
             "minLength": 0,
             "@mapping": "shapedb:StoryAtAGlance.Item1Link"
           },
+          "item2Section": {
+            "type": "string",
+            "title": "Section 2 - choose article heading",
+            "description": "Select by article order. The heading title and anchor link are generated automatically.",
+            "oneOf": [
+              {"title": "Automatic - second section", "enum": ["auto"]},
+              {"title": "1st top-level section", "enum": ["1"]},
+              {"title": "2nd top-level section", "enum": ["2"]},
+              {"title": "3rd top-level section", "enum": ["3"]},
+              {"title": "4th top-level section", "enum": ["4"]},
+              {"title": "5th top-level section", "enum": ["5"]},
+              {"title": "6th top-level section", "enum": ["6"]},
+              {"title": "7th top-level section", "enum": ["7"]},
+              {"title": "8th top-level section", "enum": ["8"]},
+              {"title": "9th top-level section", "enum": ["9"]},
+              {"title": "10th top-level section", "enum": ["10"]},
+              {"title": "11th top-level section", "enum": ["11"]},
+              {"title": "12th top-level section", "enum": ["12"]}
+            ],
+            "default": "auto",
+            "@mapping": "shapedb:StoryAtAGlance.Item2Section"
+          },
           "item2Title": {
             "type": "string",
-            "title": "Section 2 Title",
+            "title": "Section 2 custom title - optional",
             "minLength": 0,
             "@mapping": "shapedb:StoryAtAGlance.Item2Title"
           },
           "item2Link": {
             "type": "string",
-            "title": "Section 2 Link",
-            "description": "Blank links to the second detected heading.",
+            "title": "Section 2 custom link - optional",
+            "description": "Leave blank to use the selected heading's link.",
             "minLength": 0,
             "@mapping": "shapedb:StoryAtAGlance.Item2Link"
           },
+          "item3Section": {
+            "type": "string",
+            "title": "Section 3 - choose article heading",
+            "description": "Select by article order. The heading title and anchor link are generated automatically.",
+            "oneOf": [
+              {"title": "Automatic - third section", "enum": ["auto"]},
+              {"title": "1st top-level section", "enum": ["1"]},
+              {"title": "2nd top-level section", "enum": ["2"]},
+              {"title": "3rd top-level section", "enum": ["3"]},
+              {"title": "4th top-level section", "enum": ["4"]},
+              {"title": "5th top-level section", "enum": ["5"]},
+              {"title": "6th top-level section", "enum": ["6"]},
+              {"title": "7th top-level section", "enum": ["7"]},
+              {"title": "8th top-level section", "enum": ["8"]},
+              {"title": "9th top-level section", "enum": ["9"]},
+              {"title": "10th top-level section", "enum": ["10"]},
+              {"title": "11th top-level section", "enum": ["11"]},
+              {"title": "12th top-level section", "enum": ["12"]}
+            ],
+            "default": "auto",
+            "@mapping": "shapedb:StoryAtAGlance.Item3Section"
+          },
           "item3Title": {
             "type": "string",
-            "title": "Section 3 Title",
+            "title": "Section 3 custom title - optional",
             "minLength": 0,
             "@mapping": "shapedb:StoryAtAGlance.Item3Title"
           },
           "item3Link": {
             "type": "string",
-            "title": "Section 3 Link",
-            "description": "Blank links to the third detected heading.",
+            "title": "Section 3 custom link - optional",
+            "description": "Leave blank to use the selected heading's link.",
             "minLength": 0,
             "@mapping": "shapedb:StoryAtAGlance.Item3Link"
           }
