@@ -92,63 +92,16 @@
     return Array.from(document.querySelectorAll('button')).find(button => {
       const rect = button.getBoundingClientRect();
 
-      return !button.closest('[role="dialog"], .awaylands-top-publishing-status') && rect.top < 180 && rect.bottom > 0 && pattern.test(normalizedText(button));
+      return !button.closest('[role="dialog"]') && rect.top < 180 && rect.bottom > 0 && pattern.test(normalizedText(button));
     });
   }
 
-  function placePublishingStatusBeforeCancel() {
-    const gallery = document.querySelector('.awaylands-gallery-drawer-shell');
-
-    if (!gallery) {
-      return;
-    }
-
+  function restoreNativePublishingStatus() {
+    document.querySelectorAll('.awaylands-top-publishing-status, .awaylands-editor-action-dock').forEach(element => element.remove());
     document.querySelectorAll('.awaylands-native-save-source').forEach(button => button.classList.remove('awaylands-native-save-source'));
-    const obsoleteDock = document.querySelector('.awaylands-editor-action-dock');
-    if (obsoleteDock) obsoleteDock.remove();
-
-    const cancel = topActionCandidate(/^cancel$/i);
-    const nativeStatusButton = document.querySelector('.awaylands-native-status-source') || topActionCandidate(/^(enabled|disabled|live|not live)$/i);
-    const nativeStatusInput = Array.from(document.querySelectorAll('input[type="checkbox"]')).find(input => {
-      const container = input.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
-
-      return container && /enabled|disabled|live/i.test(normalizedText(container));
-    });
-
-    if (!cancel || (!nativeStatusButton && !nativeStatusInput)) {
-      return;
-    }
-
-    if (nativeStatusButton) nativeStatusButton.classList.add('awaylands-native-status-source');
-    if (nativeStatusInput) {
-      nativeStatusInput.classList.add('awaylands-native-status-input');
-      const statusContainer = nativeStatusInput.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
-      if (statusContainer) statusContainer.classList.add('awaylands-native-status-container');
-    }
-
-    let status = document.querySelector('.awaylands-top-publishing-status');
-
-    if (!status) {
-      status = document.createElement('button');
-      status.type = 'button';
-      status.className = 'awaylands-top-publishing-status';
-      status.addEventListener('click', () => {
-        const input = document.querySelector('.awaylands-native-status-input');
-        const button = document.querySelector('.awaylands-native-status-source');
-
-        if (input) {
-          input.click();
-        } else if (button) {
-          button.click();
-        }
-        window.setTimeout(placePublishingStatusBeforeCancel, 150);
-      });
-    }
-    status.textContent = nativeStatusInput ? (nativeStatusInput.checked ? 'Enabled' : 'Disabled') : normalizedText(nativeStatusButton);
-    status.setAttribute('data-status', status.textContent.toLowerCase().replace(/\s+/g, '-'));
-    if (status.parentElement !== cancel.parentElement || status.nextElementSibling !== cancel) {
-      cancel.parentElement.insertBefore(status, cancel);
-    }
+    document.querySelectorAll('.awaylands-native-status-source').forEach(element => element.classList.remove('awaylands-native-status-source'));
+    document.querySelectorAll('.awaylands-native-status-input').forEach(element => element.classList.remove('awaylands-native-status-input'));
+    document.querySelectorAll('.awaylands-native-status-container').forEach(element => element.classList.remove('awaylands-native-status-container'));
   }
 
   function makeStorySaveContinue() {
@@ -344,21 +297,50 @@
     });
   }
 
-  function enableNewStoryByDefault() {
-    if (!/\/data\/Story\/(?:new|create)(?:\/|$)/i.test(window.location.pathname)) {
+  function enableStoryOnOpen() {
+    if (!/\/data\/Story\//i.test(window.location.pathname)) {
       return;
     }
 
-    const checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]')).find(input => {
-      const container = input.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
-      const text = normalizedText(container || input.parentElement).toLowerCase();
+    const workflowLabel = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, div, span'))
+      .filter(element => /^workflow status$/i.test(normalizedText(element)))
+      .sort((first, second) => first.getBoundingClientRect().width - second.getBoundingClientRect().width)[0];
+    const workflowPanel = workflowLabel && (
+      workflowLabel.closest('.awaylands-story-tools-panel, aside, section, [class*="sidebar"], [class*="panel"]') ||
+      workflowLabel.parentElement
+    );
 
-      return text === 'enabled' || text.indexOf('enable story') !== -1 || text.indexOf('publish story') !== -1;
-    });
+    if (!workflowPanel || workflowPanel.hasAttribute('data-awaylands-auto-enabled')) {
+      return;
+    }
 
-    if (checkbox && !checkbox.checked && !checkbox.hasAttribute('data-awaylands-auto-enabled')) {
-      checkbox.setAttribute('data-awaylands-auto-enabled', 'true');
-      checkbox.click();
+    const enabledText = Array.from(workflowPanel.querySelectorAll('button, label, [role="radio"], [role="option"], div, span'))
+      .filter(element => /^enabled$/i.test(normalizedText(element)))
+      .sort((first, second) => first.getBoundingClientRect().width - second.getBoundingClientRect().width)[0];
+    const enabledControl = enabledText && (
+      enabledText.closest('button, label, [role="radio"], [role="option"]') ||
+      enabledText.querySelector('input') ||
+      enabledText
+    );
+    const enabledInput = enabledControl && (
+      enabledControl.matches('input') ? enabledControl : enabledControl.querySelector('input[type="radio"], input[type="checkbox"]')
+    );
+    const enabledSelected = !!(
+      (enabledInput && enabledInput.checked) ||
+      (enabledControl && enabledControl.getAttribute('aria-checked') === 'true') ||
+      (enabledControl && enabledControl.getAttribute('aria-pressed') === 'true') ||
+      (enabledControl && /(^|\s)(active|checked|selected)(\s|$)/i.test(enabledControl.className || ''))
+    );
+
+    workflowPanel.setAttribute('data-awaylands-auto-enabled', 'true');
+    if (enabledSelected) {
+      return;
+    }
+
+    if (enabledInput) {
+      enabledInput.click();
+    } else if (enabledControl && typeof enabledControl.click === 'function') {
+      enabledControl.click();
     }
   }
 
@@ -1801,11 +1783,11 @@
     runEnhancement('image editor', enhanceImageEditor);
     runEnhancement('gallery close', keepGallerySidebarUsable);
     runEnhancement('persistent gallery', tryOpenPersistentGallery);
-    runEnhancement('top publishing status', placePublishingStatusBeforeCancel);
+    runEnhancement('native publishing status', restoreNativePublishingStatus);
     runEnhancement('save and continue', makeStorySaveContinue);
     runEnhancement('story tools below gallery', moveStoryToolsBelowGallery);
     runEnhancement('bottom editor bar', releaseBottomEditorBar);
-    runEnhancement('new story publishing default', enableNewStoryByDefault);
+    runEnhancement('story publishing default', enableStoryOnOpen);
   }
 
   let frameRequested = false;

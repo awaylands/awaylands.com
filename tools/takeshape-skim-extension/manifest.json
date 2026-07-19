@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Away Lands TakeShape Editor Styling",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Adds the Away Lands editing layout, product tools, media controls, and title search to TakeShape.",
   "background": {
     "service_worker": "background.js"
