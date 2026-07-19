@@ -812,29 +812,13 @@ body.awaylands-takeshape-skim .awaylands-gallery-close {
   display: none !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-native-save-source,
 body.awaylands-takeshape-skim .awaylands-native-status-source,
 body.awaylands-takeshape-skim .awaylands-native-status-container {
   visibility: hidden !important;
   pointer-events: none !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-editor-action-dock {
-  position: fixed;
-  top: 10px;
-  right: min(512px, calc(48vw + 16px));
-  z-index: 12000;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.16);
-  border-radius: 5px;
-  background: #ffffff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.14);
-  padding: 6px;
-}
-
-body.awaylands-takeshape-skim .awaylands-editor-action-dock button {
+body.awaylands-takeshape-skim .awaylands-top-publishing-status {
   width: auto !important;
   min-height: 34px !important;
   border: 0 !important;
@@ -846,8 +830,8 @@ body.awaylands-takeshape-skim .awaylands-editor-action-dock button {
   font-weight: 700 !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-editor-action-dock .awaylands-dock-status[data-status="disabled"],
-body.awaylands-takeshape-skim .awaylands-editor-action-dock .awaylands-dock-status[data-status="not-live"] {
+body.awaylands-takeshape-skim .awaylands-top-publishing-status[data-status="disabled"],
+body.awaylands-takeshape-skim .awaylands-top-publishing-status[data-status="not-live"] {
   background: #757575 !important;
 }
 

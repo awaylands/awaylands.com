@@ -92,18 +92,22 @@
     return Array.from(document.querySelectorAll('button')).find(button => {
       const rect = button.getBoundingClientRect();
 
-      return !button.closest('[role="dialog"], .awaylands-editor-action-dock') && rect.top < 180 && rect.bottom > 0 && pattern.test(normalizedText(button));
+      return !button.closest('[role="dialog"], .awaylands-top-publishing-status') && rect.top < 180 && rect.bottom > 0 && pattern.test(normalizedText(button));
     });
   }
 
-  function ensureEditorActionDock() {
+  function placePublishingStatusBeforeCancel() {
     const gallery = document.querySelector('.awaylands-gallery-drawer-shell');
 
     if (!gallery) {
       return;
     }
 
-    const nativeSave = document.querySelector('.awaylands-native-save-source') || topActionCandidate(/^(save|save changes|update)$/i);
+    document.querySelectorAll('.awaylands-native-save-source').forEach(button => button.classList.remove('awaylands-native-save-source'));
+    const obsoleteDock = document.querySelector('.awaylands-editor-action-dock');
+    if (obsoleteDock) obsoleteDock.remove();
+
+    const cancel = topActionCandidate(/^cancel$/i);
     const nativeStatusButton = document.querySelector('.awaylands-native-status-source') || topActionCandidate(/^(enabled|disabled|live|not live)$/i);
     const nativeStatusInput = Array.from(document.querySelectorAll('input[type="checkbox"]')).find(input => {
       const container = input.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
@@ -111,67 +115,39 @@
       return container && /enabled|disabled|live/i.test(normalizedText(container));
     });
 
-    if (!nativeSave && !nativeStatusButton && !nativeStatusInput) {
+    if (!cancel || (!nativeStatusButton && !nativeStatusInput)) {
       return;
     }
 
-    let dock = document.querySelector('.awaylands-editor-action-dock');
-
-    if (!dock) {
-      dock = document.createElement('div');
-      dock.className = 'awaylands-editor-action-dock';
-      dock.setAttribute('aria-label', 'Story save and publishing controls');
-      document.body.appendChild(dock);
+    if (nativeStatusButton) nativeStatusButton.classList.add('awaylands-native-status-source');
+    if (nativeStatusInput) {
+      nativeStatusInput.classList.add('awaylands-native-status-input');
+      const statusContainer = nativeStatusInput.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
+      if (statusContainer) statusContainer.classList.add('awaylands-native-status-container');
     }
 
-    if (nativeSave) {
-      nativeSave.classList.add('awaylands-native-save-source');
-      let save = dock.querySelector('.awaylands-dock-save');
+    let status = document.querySelector('.awaylands-top-publishing-status');
 
-      if (!save) {
-        save = document.createElement('button');
-        save.type = 'button';
-        save.className = 'awaylands-dock-save';
-        save.addEventListener('click', () => {
-          const source = document.querySelector('.awaylands-native-save-source');
-          if (source) source.click();
-        });
-        dock.appendChild(save);
-      }
-      save.textContent = normalizedText(nativeSave) || 'Save';
-      save.disabled = nativeSave.disabled;
+    if (!status) {
+      status = document.createElement('button');
+      status.type = 'button';
+      status.className = 'awaylands-top-publishing-status';
+      status.addEventListener('click', () => {
+        const input = document.querySelector('.awaylands-native-status-input');
+        const button = document.querySelector('.awaylands-native-status-source');
+
+        if (input) {
+          input.click();
+        } else if (button) {
+          button.click();
+        }
+        window.setTimeout(placePublishingStatusBeforeCancel, 150);
+      });
     }
-
-    const statusSource = nativeStatusButton || nativeStatusInput;
-
-    if (statusSource) {
-      if (nativeStatusButton) nativeStatusButton.classList.add('awaylands-native-status-source');
-      if (nativeStatusInput) {
-        nativeStatusInput.classList.add('awaylands-native-status-input');
-        const statusContainer = nativeStatusInput.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
-        if (statusContainer) statusContainer.classList.add('awaylands-native-status-container');
-      }
-      let status = dock.querySelector('.awaylands-dock-status');
-
-      if (!status) {
-        status = document.createElement('button');
-        status.type = 'button';
-        status.className = 'awaylands-dock-status';
-        status.addEventListener('click', () => {
-          const input = document.querySelector('.awaylands-native-status-input');
-          const button = document.querySelector('.awaylands-native-status-source');
-
-          if (input) {
-            input.click();
-          } else if (button) {
-            button.click();
-          }
-          window.setTimeout(ensureEditorActionDock, 150);
-        });
-        dock.insertBefore(status, dock.firstChild);
-      }
-      status.textContent = nativeStatusInput ? (nativeStatusInput.checked ? 'Enabled' : 'Disabled') : normalizedText(nativeStatusButton);
-      status.setAttribute('data-status', status.textContent.toLowerCase().replace(/\s+/g, '-'));
+    status.textContent = nativeStatusInput ? (nativeStatusInput.checked ? 'Enabled' : 'Disabled') : normalizedText(nativeStatusButton);
+    status.setAttribute('data-status', status.textContent.toLowerCase().replace(/\s+/g, '-'));
+    if (status.parentElement !== cancel.parentElement || status.nextElementSibling !== cancel) {
+      cancel.parentElement.insertBefore(status, cancel);
     }
   }
 
@@ -182,17 +158,17 @@
       return;
     }
 
-    const versionLabel = Array.from(document.querySelectorAll('button, h1, h2, h3, h4, h5, h6, label, [role="heading"]')).find(element => {
-      return !galleryContent.contains(element) && /^(versions|version history|history)$/i.test(normalizedText(element));
+    const storyToolLabel = Array.from(document.querySelectorAll('button, h1, h2, h3, h4, h5, h6, label, [role="heading"]')).find(element => {
+      return !galleryContent.contains(element) && /^(workflow status|versions|version history|history)$/i.test(normalizedText(element));
     });
 
-    if (!versionLabel) {
+    if (!storyToolLabel) {
       return;
     }
 
-    let panel = versionLabel.closest('aside, [class*="sidebar"]') ||
-      versionLabel.closest('section, .MuiPaper-root, [class*="panel"]') ||
-      versionLabel.parentElement;
+    let panel = storyToolLabel.closest('aside, [class*="sidebar"]') ||
+      storyToolLabel.closest('section, .MuiPaper-root, [class*="panel"]') ||
+      storyToolLabel.parentElement;
 
     if (!panel || panel === document.body || panel.contains(galleryContent)) {
       return;
@@ -1696,7 +1672,7 @@
     runEnhancement('image editor', enhanceImageEditor);
     runEnhancement('gallery close', keepGallerySidebarUsable);
     runEnhancement('persistent gallery', tryOpenPersistentGallery);
-    runEnhancement('editor action dock', ensureEditorActionDock);
+    runEnhancement('top publishing status', placePublishingStatusBeforeCancel);
     runEnhancement('story tools below gallery', moveStoryToolsBelowGallery);
     runEnhancement('new story publishing default', enableNewStoryByDefault);
   }
