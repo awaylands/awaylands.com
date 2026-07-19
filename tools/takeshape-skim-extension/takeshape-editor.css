@@ -183,7 +183,7 @@ body.awaylands-takeshape-skim .ProseMirror strong {
 }
 
 body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="content"] .awaylands-editor-section-body > :first-child .ProseMirror {
-  min-height: 560px !important;
+  min-height: 1680px !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-content-block-buttons {
