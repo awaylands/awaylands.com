@@ -726,11 +726,6 @@ body.awaylands-takeshape-skim .awaylands-related-search-host {
   z-index: 4;
 }
 
-body.awaylands-takeshape-skim .MuiFormControl-root:has(input[data-testid="contentForm-relatedStories__input"]) .MuiAutocomplete-popper {
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
 body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="related-stories"] {
   overflow: visible !important;
   margin-bottom: 320px !important;

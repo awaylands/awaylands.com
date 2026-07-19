@@ -18,6 +18,7 @@
   let storyTitleIndex = null;
   let storyTitleRequest = null;
   let htmlInsertState = null;
+  const relatedSelectionInputs = new WeakSet();
 
   function normalizedText(element) {
     return (element.textContent || '').replace(/\s+/g, ' ').trim();
@@ -1280,6 +1281,8 @@
       input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
     };
 
+    relatedSelectionInputs.add(input);
+    results.hidden = true;
     input.click();
     applyQuery(queryCandidates[queryIndex]);
     let attempts = 0;
@@ -1295,16 +1298,23 @@
       attempts += 1;
       if (option) {
         window.clearInterval(timer);
+        if (typeof PointerEvent === 'function') {
+          option.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, cancelable: true }));
+        }
         option.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, button: 0, cancelable: true, view: window }));
+        option.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, button: 0, cancelable: true, view: window }));
         option.click();
+        relatedSelectionInputs.delete(input);
         results.hidden = true;
       } else if (attempts % 12 === 0 && queryIndex < queryCandidates.length - 1) {
         queryIndex += 1;
         applyQuery(queryCandidates[queryIndex]);
       } else if (attempts >= Math.max(60, queryCandidates.length * 12)) {
         window.clearInterval(timer);
-        nativeInputValue(input, title);
-        showElementMessage(results, 'TakeShape did not return this story in its relationship selector. Try a shorter title word in the native search.');
+        relatedSelectionInputs.delete(input);
+        input.focus();
+        input.setAttribute('title', 'Choose the matching story from TakeShape’s native options to create a saved relationship.');
+        results.hidden = true;
       }
     }, 100);
   }
@@ -1364,6 +1374,10 @@
     host.classList.add('awaylands-related-search-host');
     host.insertBefore(results, field.nextSibling);
     const showResults = () => {
+      if (relatedSelectionInputs.has(input)) {
+        results.hidden = true;
+        return;
+      }
       showElementMessage(results, 'Loading stories...');
       results.hidden = false;
       storyTitles().then(items => renderRelatedResults(input, results, items));
