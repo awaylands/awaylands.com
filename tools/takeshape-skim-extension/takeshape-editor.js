@@ -529,6 +529,38 @@
     input.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
+  function localDateTimeValue(date) {
+    const localTime = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
+
+    return localTime.toISOString().slice(0, 16);
+  }
+
+  function addPublishedDateNowButton() {
+    const label = Array.from(document.querySelectorAll('label')).find(item => {
+      const text = normalizedText(item).toLowerCase();
+
+      return text.indexOf('published') !== -1 && text.indexOf('date') !== -1;
+    });
+    const field = label && label.closest('.MuiFormControl-root');
+    const input = field && field.querySelector('input');
+
+    if (!field || !input || field.querySelector('.awaylands-published-date-now')) {
+      return;
+    }
+
+    const button = document.createElement('button');
+
+    button.type = 'button';
+    button.className = 'awaylands-published-date-now';
+    button.textContent = 'Update to now';
+    button.title = 'Set published date to the current local date and time';
+    button.addEventListener('click', () => {
+      nativeInputValue(input, localDateTimeValue(new Date()));
+      input.focus();
+    });
+    field.appendChild(button);
+  }
+
   function selectRelatedStory(input, title, results) {
     nativeInputValue(input, title);
     input.focus();
@@ -747,6 +779,7 @@
     collapseShopItems();
     improveRelatedStorySearch();
     improveLayoutSelectors();
+    addPublishedDateNowButton();
     fillDefaultAuthorText();
     enhanceImageEditor();
   }
