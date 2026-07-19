@@ -517,7 +517,7 @@ body.awaylands-takeshape-skim [class*="asset-picker-grid-module__grid"] {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
   grid-auto-rows: auto !important;
-  gap: 16px 14px !important;
+  gap: 8px 14px !important;
   width: 100% !important;
   box-sizing: border-box !important;
   height: auto !important;
@@ -564,7 +564,7 @@ body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__inner"] im
 }
 
 body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__preview"] {
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+  border: 0 !important;
   border-radius: 3px !important;
   background-color: #ededed !important;
   background-position: center !important;
