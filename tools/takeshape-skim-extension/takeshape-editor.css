@@ -81,7 +81,7 @@ body.awaylands-takeshape-skim .awaylands-editor-section-title {
 
 body.awaylands-takeshape-skim .awaylands-editor-content-title {
   margin-top: 8px !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
 
 body.awaylands-takeshape-skim .MuiInputLabel-root,
@@ -94,7 +94,7 @@ body.awaylands-takeshape-skim .MuiFormLabel-root {
 
 body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiInputLabel-root,
 body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiFormLabel-root {
-  font-size: 12px !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
 }
 
@@ -121,7 +121,7 @@ body.awaylands-takeshape-skim .MuiTypography-caption {
 }
 
 body.awaylands-takeshape-skim button {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 400 !important;
 }
 
@@ -186,8 +186,15 @@ body.awaylands-takeshape-skim .awaylands-revolve-converter {
   color: inherit;
   padding: 8px 12px;
   font: inherit;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-block-buttons button {
+  width: auto !important;
+  flex: 0 0 auto !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 body.awaylands-takeshape-skim .awaylands-original-add-content {
@@ -265,16 +272,18 @@ body.awaylands-takeshape-skim .awaylands-shop-html-field textarea {
   min-height: 96px !important;
   background: #f2f2f2 !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
-  font-size: 12px !important;
+  font-size: 13px !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-group {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-group button {
+  flex: 0 0 auto;
+  width: auto;
   min-height: 44px;
   border: 1px solid rgba(0, 0, 0, 0.26);
   border-radius: 3px;
@@ -282,17 +291,19 @@ body.awaylands-takeshape-skim .awaylands-choice-group button {
   color: inherit;
   padding: 8px 10px;
   font-weight: 400;
+  letter-spacing: 0.04em;
   line-height: 1.2;
   overflow-wrap: anywhere;
+  text-transform: uppercase;
   white-space: normal;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display: flex;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-group[aria-label="POST LAYOUT — Post Type"] button:first-child {
-  grid-column: 1 / -1;
+  width: auto;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-group button.is-selected {
@@ -427,7 +438,7 @@ body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__title"] {
   padding: 0 !important;
   overflow: hidden !important;
   color: inherit !important;
-  font-size: 11px !important;
+  font-size: 13px !important;
   font-weight: 400 !important;
   line-height: 1.25 !important;
   text-overflow: ellipsis !important;
@@ -478,7 +489,7 @@ body.awaylands-takeshape-skim .awaylands-image-size-label {
   border: 2px solid currentColor;
   border-radius: 3px;
   padding: 3px 6px;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.08em;
   line-height: 1;
@@ -501,7 +512,7 @@ body.awaylands-takeshape-skim .awaylands-image-link-indicator {
 }
 
 body.awaylands-takeshape-skim .awaylands-image-link-indicator strong {
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -516,7 +527,7 @@ body.awaylands-takeshape-skim .awaylands-image-dialog input[autocomplete="url"] 
   min-width: 0 !important;
   background: #eeeeee !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
 }
 
 body.awaylands-takeshape-skim [role="dialog"] input[type="url"],
@@ -528,7 +539,7 @@ body.awaylands-takeshape-skim [role="dialog"] input[autocomplete="url"] {
 
 @media (max-width: 900px) {
   body.awaylands-takeshape-skim .awaylands-choice-group {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
   }
 
   body.awaylands-takeshape-skim [role="dialog"] input[type="url"],
