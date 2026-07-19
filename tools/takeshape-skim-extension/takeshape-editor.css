@@ -696,44 +696,26 @@ body.awaylands-takeshape-skim .awaylands-related-results p {
   line-height: 24px;
 }
 
-body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebar___"],
-body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebarContent___"] {
+body.awaylands-takeshape-skim aside[class*="floating-sidebar-module__sidebarContent___"],
+body.awaylands-takeshape-skim [role="complementary"][class*="floating-sidebar-module__sidebarContent___"] {
   width: 496px !important;
-  min-width: 0 !important;
   max-width: 48vw !important;
-  flex-basis: 496px !important;
-}
-
-body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebar___"] {
-  overflow: visible !important;
-}
-
-body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebarContent___"] {
   overflow-y: auto !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-gallery-sidebar-content {
-  overflow-x: hidden !important;
-  overflow-y: auto !important;
-}
-
-body.awaylands-takeshape-skim .awaylands-gallery-grid-host {
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-}
-
-body.awaylands-takeshape-skim .awaylands-gallery-close-button {
-  position: relative !important;
-  z-index: 20 !important;
+body.awaylands-takeshape-skim .awaylands-gallery-close {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
+  display: block !important;
+  width: calc(100% - 24px) !important;
+  margin: 8px 12px !important;
+  border: 1px solid rgb(92, 107, 192) !important;
+  border-radius: 4px !important;
+  background: rgb(92, 107, 192) !important;
+  color: #ffffff !important;
+  padding: 7px 12px !important;
   pointer-events: auto !important;
-}
-
-body.awaylands-takeshape-skim .awaylands-gallery-sidebar {
-  top: 64px !important;
-  height: calc(100vh - 64px) !important;
-  max-height: calc(100vh - 64px) !important;
 }
 
 body.awaylands-takeshape-skim [class*="asset-picker-grid-module__grid"] {

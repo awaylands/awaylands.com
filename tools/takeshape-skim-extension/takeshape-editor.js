@@ -26,31 +26,53 @@
   function keepGallerySidebarUsable() {
     document.querySelectorAll('[class*="asset-picker-grid-module__grid"]').forEach(grid => {
       const sidebarContent = grid.closest('[class*="floating-sidebar-module__sidebarContent___"]');
-      const sidebar = sidebarContent && sidebarContent.closest('[class*="floating-sidebar-module__sidebar___"]');
 
-      if (!sidebarContent) {
+      if (!sidebarContent || sidebarContent.querySelector('.awaylands-gallery-close')) {
         return;
       }
 
-      sidebarContent.classList.add('awaylands-gallery-sidebar-content');
-      if (grid.parentElement) {
-        grid.parentElement.classList.add('awaylands-gallery-grid-host');
-      }
-
-      const closeButton = Array.from(sidebarContent.querySelectorAll('button')).find(button => {
+      const nativeClose = Array.from(sidebarContent.querySelectorAll('button')).find(button => {
         const label = `${button.getAttribute('aria-label') || ''} ${button.getAttribute('title') || ''}`.toLowerCase();
 
-        return label.indexOf('close') !== -1 || (!normalizedText(button) && button.querySelector('svg'));
+        return label.indexOf('close') !== -1 || (!normalizedText(button) && button.querySelector('svg') && button.compareDocumentPosition(grid) & Node.DOCUMENT_POSITION_FOLLOWING);
       });
+      const close = document.createElement('button');
 
-      if (closeButton) {
-        closeButton.classList.add('awaylands-gallery-close-button');
-      }
-
-      if (sidebar) {
-        sidebar.classList.add('awaylands-gallery-sidebar');
-      }
+      close.type = 'button';
+      close.className = 'awaylands-gallery-close';
+      close.textContent = 'Close gallery';
+      close.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (nativeClose) {
+          nativeClose.click();
+        }
+        window.setTimeout(() => {
+          if (grid.isConnected) {
+            document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', code: 'Escape', bubbles: true }));
+          }
+        }, 80);
+      });
+      sidebarContent.insertBefore(close, sidebarContent.firstChild);
     });
+  }
+
+  function enableNewStoryByDefault() {
+    if (!/\/data\/Story\/(?:new|create)(?:\/|$)/i.test(window.location.pathname)) {
+      return;
+    }
+
+    const checkbox = Array.from(document.querySelectorAll('input[type="checkbox"]')).find(input => {
+      const container = input.closest('label, .MuiFormControlLabel-root, [class*="switch"]');
+      const text = normalizedText(container || input.parentElement).toLowerCase();
+
+      return text === 'enabled' || text.indexOf('enable story') !== -1 || text.indexOf('publish story') !== -1;
+    });
+
+    if (checkbox && !checkbox.checked && !checkbox.hasAttribute('data-awaylands-auto-enabled')) {
+      checkbox.setAttribute('data-awaylands-auto-enabled', 'true');
+      checkbox.click();
+    }
   }
 
   function clearElement(element) {
@@ -695,6 +717,8 @@
   }
 
   function selectMenuValue(original, title) {
+    const titles = (Array.isArray(title) ? title : [title]).map(item => item.toLowerCase());
+
     window.setTimeout(() => {
       original.dispatchEvent(new MouseEvent('mousedown', {
         bubbles: true,
@@ -708,9 +732,10 @@
         const labelledBy = original.getAttribute('aria-labelledby');
         const openList = listboxes.find(list => list.getAttribute('aria-labelledby') === labelledBy) || listboxes[listboxes.length - 1];
         const options = openList ? Array.from(openList.querySelectorAll('.MuiMenuItem-root, [role="option"]')) : [];
-        const option = options.find(item => normalizedText(item) === title);
+        const option = options.find(item => titles.indexOf(normalizedText(item).toLowerCase()) !== -1);
 
         if (option) {
+          option.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, button: 0, cancelable: true, view: window }));
           option.click();
         }
       }, 120);
@@ -835,9 +860,10 @@
   }
 
   function imageSizeName(figure) {
-    const icon = figure.querySelector('[class*="image-size-icon-module__"] svg');
-    const classes = icon ? icon.getAttribute('class') || '' : '';
-    const match = classes.match(/__(default|small|medium|large)___/i) || classes.match(/__(default|small|medium|large)_/i);
+    const icon = figure.querySelector('svg[class*="image-size-icon-module__"], [class*="image-size-icon-module__"]');
+    const classes = icon ? `${icon.getAttribute('class') || ''} ${icon.parentElement ? icon.parentElement.getAttribute('class') || '' : ''}` : '';
+    const accessibleName = icon ? `${icon.getAttribute('aria-label') || ''} ${icon.getAttribute('title') || ''}` : '';
+    const match = classes.match(/image-size-icon-module__(default|small|medium|large)/i) || accessibleName.match(/\b(default|small|medium|large)\b/i);
 
     return match ? match[1].toLowerCase() : 'default';
   }
@@ -912,9 +938,9 @@
   function enhanceImageSizeChoices(dialog) {
     const field = dialog.querySelector('[data-testid="imageBlockForm-size"]');
     const original = field && field.querySelector('[role="button"][aria-haspopup="listbox"]');
-    const native = field && field.querySelector('input.MuiSelect-nativeInput');
+    const native = field && field.querySelector('input.MuiSelect-nativeInput, input[type="hidden"], input');
 
-    if (!field || !original || !native || field.querySelector('.awaylands-image-size-choices')) {
+    if (!field || !original || field.querySelector('.awaylands-image-size-choices')) {
       return;
     }
 
@@ -922,7 +948,7 @@
     const title = document.createElement('div');
     const nativeLabel = field.querySelector('label');
     const choices = [
-      ['Default', '', 'None'],
+      ['Default', '', ['None', 'Default']],
       ['Small', 'small', 'Small'],
       ['Medium', 'medium', 'Medium'],
       ['Large', 'large', 'Large']
@@ -962,19 +988,40 @@
     title.insertAdjacentElement('afterend', group);
 
     const sync = () => {
-      const value = (native.value || '').toLowerCase();
+      const displayed = normalizedText(original).toLowerCase();
+      const value = native && typeof native.value === 'string' ? native.value.toLowerCase() : '';
+      const selectedValue = value || (displayed === 'small' ? 'small' : displayed === 'medium' ? 'medium' : displayed === 'large' ? 'large' : '');
 
       Array.from(group.children).forEach(button => {
-        const selected = button.getAttribute('data-value') === value;
+        const selected = button.getAttribute('data-value') === selectedValue;
 
         button.classList.toggle('is-selected', selected);
         button.setAttribute('aria-pressed', selected ? 'true' : 'false');
       });
     };
 
-    native.addEventListener('change', sync);
-    new MutationObserver(sync).observe(native, { attributes: true, attributeFilter: ['value'] });
+    if (native) {
+      native.addEventListener('input', sync);
+      native.addEventListener('change', sync);
+      new MutationObserver(sync).observe(native, { attributes: true, attributeFilter: ['value'] });
+    }
+    new MutationObserver(sync).observe(original, { attributes: true, childList: true, subtree: true });
+    const syncTimer = window.setInterval(() => {
+      if (!dialog.isConnected) {
+        window.clearInterval(syncTimer);
+        return;
+      }
+      sync();
+    }, 400);
     sync();
+  }
+
+  function runEnhancement(name, callback) {
+    try {
+      callback();
+    } catch (error) {
+      console.error(`[Away Lands TakeShape] ${name} failed`, error);
+    }
   }
 
   function enhanceImageEditor() {
@@ -1333,7 +1380,7 @@
     }
 
     document.body.classList.add(ROOT_CLASS);
-    groupMajorSections();
+    runEnhancement('section layout', groupMajorSections);
 
     document.querySelectorAll('h4').forEach(heading => {
       const text = normalizedText(heading);
@@ -1365,18 +1412,19 @@
       }
     });
 
-    addContentBlockButtons();
-    enhanceInlineHtmlInsertion();
-    removeUnusedControls();
-    collapseAtAGlanceOptions();
-    collapseShopItems();
-    improveRelatedStorySearch();
-    improveLayoutSelectors();
-    expandRelationshipMenus();
-    addPublishedDateNowButton();
-    fillDefaultAuthorText();
-    enhanceImageEditor();
-    keepGallerySidebarUsable();
+    runEnhancement('content block buttons', addContentBlockButtons);
+    runEnhancement('inline HTML', enhanceInlineHtmlInsertion);
+    runEnhancement('unused controls', removeUnusedControls);
+    runEnhancement('At a Glance', collapseAtAGlanceOptions);
+    runEnhancement('Shop the Edit', collapseShopItems);
+    runEnhancement('related stories', improveRelatedStorySearch);
+    runEnhancement('layout selectors', improveLayoutSelectors);
+    runEnhancement('relationship menus', expandRelationshipMenus);
+    runEnhancement('published date', addPublishedDateNowButton);
+    runEnhancement('author defaults', fillDefaultAuthorText);
+    runEnhancement('image editor', enhanceImageEditor);
+    runEnhancement('gallery close', keepGallerySidebarUsable);
+    runEnhancement('new story publishing default', enableNewStoryByDefault);
   }
 
   let frameRequested = false;
