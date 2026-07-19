@@ -103,6 +103,7 @@ body.awaylands-takeshape-skim .MuiFormControlLabel-label {
   font-size: 15px !important;
   font-weight: 400 !important;
   letter-spacing: 0 !important;
+  text-transform: capitalize !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiInputLabel-root,
