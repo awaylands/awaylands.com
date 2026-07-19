@@ -9,6 +9,8 @@
   const CONVERTER_CLASS = 'awaylands-revolve-converter';
   const SECTION_BOX_CLASS = 'awaylands-editor-section-box';
   const RELATED_RESULTS_CLASS = 'awaylands-related-results';
+  const CHOICE_GROUP_CLASS = 'awaylands-choice-group';
+  const IMAGE_DIALOG_CLASS = 'awaylands-image-dialog';
   const pendingRevolveFrames = [];
   let storyTitleIndex = null;
   let storyTitleRequest = null;
@@ -153,6 +155,16 @@
     });
   }
 
+  function directItemChild(item, element) {
+    let child = element;
+
+    while (child && child.parentElement !== item) {
+      child = child.parentElement;
+    }
+
+    return child;
+  }
+
   function collapseAtAGlanceOptions() {
     const section = document.querySelector(`.${SECTION_BOX_CLASS}[data-section="at-a-glance"]`);
     const field = section && Array.from(section.querySelectorAll('h4')).find(heading => normalizedText(heading) === 'At a Glance');
@@ -164,19 +176,33 @@
 
     const toggle = document.createElement('button');
     const options = container.children[1];
+    const customFields = Array.from(options.querySelectorAll('label')).filter(label => /custom (title|link)/i.test(normalizedText(label)));
+    const customBox = document.createElement('div');
+
+    if (!customFields.length) {
+      return;
+    }
 
     toggle.type = 'button';
     toggle.className = 'awaylands-at-a-glance-toggle';
-    toggle.textContent = 'Show custom options';
+    toggle.textContent = 'Show custom titles and links';
     toggle.setAttribute('aria-expanded', 'false');
-    options.hidden = true;
-    options.classList.add('awaylands-at-a-glance-options');
-    container.insertBefore(toggle, options);
-    toggle.addEventListener('click', () => {
-      const open = options.hidden;
+    customBox.hidden = true;
+    customBox.className = 'awaylands-at-a-glance-options';
+    customFields.forEach(label => {
+      const field = label.closest('.MuiFormControl-root') || label.parentElement;
 
-      options.hidden = !open;
-      toggle.textContent = open ? 'Hide custom options' : 'Show custom options';
+      if (field && !field.closest('.awaylands-at-a-glance-options')) {
+        customBox.appendChild(field);
+      }
+    });
+    options.appendChild(toggle);
+    options.appendChild(customBox);
+    toggle.addEventListener('click', () => {
+      const open = customBox.hidden;
+
+      customBox.hidden = !open;
+      toggle.textContent = open ? 'Hide custom titles and links' : 'Show custom titles and links';
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
   }
@@ -210,13 +236,23 @@
       const title = document.createElement('strong');
       const code = document.createElement('code');
       const markup = shopItemMarkup(item);
+      const htmlTextarea = Array.from(item.querySelectorAll('textarea')).find(field => {
+        const label = field.closest('.MuiFormControl-root') && field.closest('.MuiFormControl-root').querySelector('label');
+
+        return label && /product embed html/i.test(normalizedText(label));
+      });
+      const htmlField = htmlTextarea && htmlTextarea.closest('.MuiFormControl-root');
+      const htmlChild = htmlField && directItemChild(item, htmlField);
 
       item.classList.add('awaylands-shop-item', 'is-collapsed');
+      if (htmlChild) {
+        htmlChild.classList.add('awaylands-shop-html-field');
+      }
       toggle.type = 'button';
       toggle.className = 'awaylands-shop-item-toggle';
       toggle.setAttribute('aria-expanded', 'false');
-      title.textContent = `Item ${index + 1}`;
-      code.textContent = markup || 'No product HTML added yet';
+      title.textContent = `Item ${index + 1} custom fields`;
+      code.textContent = markup ? 'Image, title and link are available below' : 'Add HTML below or expand custom fields';
       toggle.appendChild(title);
       toggle.appendChild(code);
       item.insertBefore(toggle, item.firstChild);
@@ -227,6 +263,214 @@
         toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     });
+  }
+
+  function selectMenuValue(original, title) {
+    original.click();
+    window.setTimeout(() => {
+      const option = Array.from(document.querySelectorAll('[role="option"], .MuiMenuItem-root')).find(item => normalizedText(item) === title);
+
+      if (option) {
+        option.click();
+      }
+    }, 40);
+  }
+
+  function addChoiceBoxes(labelText, choices) {
+    const label = Array.from(document.querySelectorAll('label')).find(item => normalizedText(item).toLowerCase() === labelText.toLowerCase());
+    const field = label && label.closest('.MuiFormControl-root');
+    const original = field && field.querySelector('[role="button"][aria-haspopup="listbox"]');
+    const native = field && field.querySelector('input.MuiSelect-nativeInput');
+
+    if (!field || !original || !native || field.querySelector(`.${CHOICE_GROUP_CLASS}`)) {
+      return;
+    }
+
+    const group = document.createElement('div');
+
+    group.className = CHOICE_GROUP_CLASS;
+    group.setAttribute('role', 'group');
+    group.setAttribute('aria-label', normalizedText(label));
+    choices.forEach(choice => {
+      const button = document.createElement('button');
+
+      button.type = 'button';
+      button.textContent = choice[0];
+      button.setAttribute('data-value', choice[1]);
+      button.addEventListener('click', () => selectMenuValue(original, choice[0]));
+      group.appendChild(button);
+    });
+    original.parentElement.hidden = true;
+    original.parentElement.insertAdjacentElement('afterend', group);
+
+    const sync = () => {
+      const value = native.value || 'auto';
+
+      Array.from(group.children).forEach(button => {
+        const selected = button.getAttribute('data-value') === value;
+
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+    };
+
+    native.addEventListener('change', sync);
+    new MutationObserver(sync).observe(native, { attributes: true, attributeFilter: ['value'] });
+    window.setInterval(sync, 1200);
+    sync();
+  }
+
+  function improveLayoutSelectors() {
+    addChoiceBoxes('POST LAYOUT — Post Type', [
+      ['Auto — recommended', 'auto'],
+      ['Standard story', 'standard'],
+      ['Quick answer', 'quick-answer'],
+      ['Destination guide', 'guide'],
+      ['Product review / ranking', 'review'],
+      ['Style / shopping edit', 'style-shopping']
+    ]);
+    addChoiceBoxes('Page Layout', [
+      ['Auto — recommended', 'auto'],
+      ['Simple / no sidebar', 'simple'],
+      ['Sidebar', 'sidebar']
+    ]);
+  }
+
+  function fillDefaultAuthorText() {
+    const section = document.querySelector(`.${SECTION_BOX_CLASS}[data-section="about-the-author"]`);
+    const defaults = {
+      'small label': 'About the Author',
+      'main title': 'Why trust this guide',
+      text: 'Amy Seder is a professional travel photographer with more than a decade of field experience.'
+    };
+
+    if (!section || section.hasAttribute('data-author-defaults')) {
+      return;
+    }
+
+    section.setAttribute('data-author-defaults', 'true');
+    Object.keys(defaults).forEach(labelText => {
+      const label = Array.from(section.querySelectorAll('label')).find(item => normalizedText(item).toLowerCase() === labelText);
+      const input = label && label.closest('.MuiFormControl-root') && label.closest('.MuiFormControl-root').querySelector('input, textarea');
+
+      if (input && !input.value.trim()) {
+        if (input.tagName === 'TEXTAREA') {
+          setEditorValue(input, defaults[labelText]);
+        } else {
+          nativeInputValue(input, defaults[labelText]);
+        }
+      }
+    });
+  }
+
+  function imageSizeName(figure) {
+    const icon = figure.querySelector('[class*="image-size-icon-module__"] svg');
+    const classes = icon ? icon.getAttribute('class') || '' : '';
+    const match = classes.match(/__(default|small|medium|large)___/i) || classes.match(/__(default|small|medium|large)_/i);
+
+    return match ? match[1].toLowerCase() : '';
+  }
+
+  function decorateImageFigure(figure) {
+    const icons = figure.querySelector('[class*="image-properties-bar-module__statusIcons"]');
+    const size = imageSizeName(figure);
+
+    if (!icons) {
+      return;
+    }
+
+    let label = icons.querySelector('.awaylands-image-size-label');
+    if (size) {
+      if (!label) {
+        label = document.createElement('span');
+        label.className = 'awaylands-image-size-label';
+        icons.appendChild(label);
+      }
+      label.textContent = size;
+    }
+  }
+
+  function setFigureLinkIndicator(figure, linked) {
+    const icons = figure && figure.querySelector('[class*="image-properties-bar-module__statusIcons"]');
+    let indicator = icons && icons.querySelector('.awaylands-image-link-indicator');
+
+    if (!icons) {
+      return;
+    }
+
+    if (linked && !indicator) {
+      indicator = document.createElement('span');
+      indicator.className = 'awaylands-image-link-indicator';
+      indicator.title = 'This image has a link';
+      indicator.setAttribute('aria-label', 'Linked image');
+      indicator.textContent = '↗';
+      icons.appendChild(indicator);
+    } else if (!linked && indicator) {
+      indicator.remove();
+    }
+  }
+
+  function enhanceImageEditor() {
+    document.querySelectorAll('figure[data-block="true"]').forEach(figure => {
+      decorateImageFigure(figure);
+      if (figure.hasAttribute('data-awaylands-image-click')) {
+        return;
+      }
+      figure.setAttribute('data-awaylands-image-click', 'true');
+      const preview = figure.querySelector('[class*="image-preview-module__preview"]');
+      const edit = figure.querySelector('[class*="image-properties-bar-module__edit"] button');
+
+      if (preview && edit) {
+        preview.setAttribute('role', 'button');
+        preview.setAttribute('tabindex', '0');
+        preview.setAttribute('aria-label', 'Edit image');
+        const open = () => {
+          figure.setAttribute('data-awaylands-active-image', 'true');
+          edit.click();
+        };
+        preview.addEventListener('click', open);
+        preview.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            open();
+          }
+        });
+      }
+    });
+
+    const dialog = Array.from(document.querySelectorAll('[role="dialog"]')).find(item => /Image Caption and Credit/i.test(normalizedText(item)));
+
+    if (!dialog || dialog.classList.contains(IMAGE_DIALOG_CLASS)) {
+      return;
+    }
+
+    dialog.classList.add(IMAGE_DIALOG_CLASS);
+    const urlLabel = Array.from(dialog.querySelectorAll('label')).find(label => normalizedText(label).toLowerCase() === 'url');
+    const urlInput = urlLabel && urlLabel.closest('.MuiFormControl-root') && urlLabel.closest('.MuiFormControl-root').querySelector('input');
+    const submit = Array.from(dialog.querySelectorAll('button')).find(button => normalizedText(button) === 'Submit');
+    const activeFigure = document.querySelector('figure[data-awaylands-active-image="true"]');
+    const syncLink = () => setFigureLinkIndicator(activeFigure, Boolean(urlInput && urlInput.value.trim()));
+
+    syncLink();
+    if (urlInput) {
+      urlInput.addEventListener('input', syncLink);
+      urlInput.setAttribute('autocomplete', 'url');
+    }
+    dialog.addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !event.shiftKey && event.target.tagName !== 'TEXTAREA' && submit) {
+        event.preventDefault();
+        syncLink();
+        submit.click();
+      }
+    });
+    if (submit) {
+      submit.addEventListener('click', () => {
+        syncLink();
+        if (activeFigure) {
+          activeFigure.removeAttribute('data-awaylands-active-image');
+        }
+      });
+    }
   }
 
   function storyTitles() {
@@ -475,6 +719,9 @@
     collapseAtAGlanceOptions();
     collapseShopItems();
     improveRelatedStorySearch();
+    improveLayoutSelectors();
+    fillDefaultAuthorText();
+    enhanceImageEditor();
   }
 
   let frameRequested = false;

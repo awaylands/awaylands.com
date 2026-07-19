@@ -12,6 +12,14 @@ This Chrome extension makes the TakeShape story editor easier to scan. It only r
 - Collapsed Shop the Edit items with their HTML visible in each item summary.
 - Full-title Related Stories suggestions using the lightweight Away Lands title index.
 - Revolve embed conversion to native Away Lands product cards.
+- Gray major-section headers with clear collapsible hierarchy.
+- Three-column asset gallery with contained, uncropped image previews.
+- Clickable content images, Enter-to-submit image editing, strong size labels, and linked-image indicators.
+- Wider, light-gray image URL editing fields.
+- Visible button groups for Post Type and Page Layout instead of dropdowns.
+- At a Glance heading selectors visible by default with custom title and link fields collapsed.
+- Shop the Edit HTML visible by default with image, title, and link fields collapsed.
+- Automatic About the Author defaults when existing fields are blank.
 
 ## Install in Chrome
 
