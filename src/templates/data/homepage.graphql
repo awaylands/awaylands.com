@@ -22,6 +22,47 @@ query {
     }
   }
 
+  blog: getBlog {
+    featuredStory {
+      _contentTypeName
+      _enabledAt
+      title
+      slug
+      category {
+        title
+      }
+      tout {
+        image {
+          path
+        }
+        dek
+      }
+    }
+  }
+
+  featuredCategories: getCategoryList {
+    items {
+      title
+      storySet(size: 6, sort: [{field: "_enabledAt", order: "desc"}]) {
+        items {
+          _contentTypeName
+          _enabledAt
+          title
+          slug
+          category {
+            title
+          }
+          tout {
+            image {
+              path
+            }
+            dek
+          }
+        }
+      }
+    }
+  }
+
   stories: getStoryList {
     items {
       _enabledAt

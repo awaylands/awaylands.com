@@ -856,9 +856,13 @@
             "shopEditTitle": {
               "widget": "singleLineText"
             },
+            "shopEditEnabled": {
+              "widget": "checkbox",
+              "instructions": "Turn off to hide Shop The Edit completely on this story."
+            },
             "shopEditItems": {
               "widget": "shapeArray",
-              "instructions": "Add manual products here. When empty, the shortlist is built from product links in the article."
+              "instructions": "Add priority products here. Blank spaces are filled automatically from product links in the article."
             },
             "atAGlance": {
               "widget": "shapeObject",
@@ -913,6 +917,7 @@
           "postType",
             "pageLayout",
             "atAGlance",
+            "shopEditEnabled",
             "shopEditTitle",
             "shopEditItems",
             "firstHandExpertise",
@@ -932,15 +937,20 @@
             "title": {
               "widget": "singleLineText"
             },
-            "productUrl": {
-              "widget": "singleLineText",
-              "instructions": "Paste the full product URL. It opens externally."
-            }
+          "productUrl": {
+            "widget": "singleLineText",
+            "instructions": "Paste the full product URL. It opens externally."
+          },
+          "productEmbedHtml": {
+            "widget": "paragraphText",
+            "instructions": "Optional: paste a product embed iframe. It replaces the product image in Shop The Edit."
+          }
           },
           "order": [
             "image",
             "title",
-            "productUrl"
+          "productUrl"
+          ,"productEmbedHtml"
           ]
         }
       },
@@ -1479,7 +1489,11 @@
             },
             "alignment": {
               "widget": "dropdown",
-              "instructions": "Auto centers images. Left and right are most useful for Small and Medium images."
+              "instructions": "None aligns to the post text edge without wrapping. Left and Right use the expanded post width with text wrapping. Center does not wrap text."
+            },
+            "spacing": {
+              "widget": "dropdown",
+              "instructions": "Standard is recommended. Choose None when the image should sit flush against the surrounding content."
             },
             "caption": {
               "widget": "paragraphText"
@@ -1488,13 +1502,13 @@
               "widget": "singleLineText",
               "instructions": "Optional. When blank, the site creates alt text from the caption or filename."
             },
-            "linkUrl": {
-              "widget": "singleLineText",
-              "instructions": "Optional. Paste the complete destination URL; surrounding spaces are removed automatically."
+          "linkUrl": {
+            "widget": "singleLineText",
+            "instructions": "Optional. Paste or edit the complete destination URL. Spaces in surrounding story text are preserved."
             },
             "linkTarget": {
               "widget": "dropdown",
-              "instructions": "External/new tab is the default when left blank."
+              "instructions": "New tab is the default."
             }
           },
           "order": [
@@ -1502,6 +1516,7 @@
             "image",
             "size",
             "alignment",
+            "spacing",
             "caption",
             "altText",
             "linkUrl",
@@ -1522,9 +1537,9 @@
             "altText": {
               "widget": "singleLineText"
             },
-            "linkUrl": {
-              "widget": "singleLineText",
-              "instructions": "Optional. Image links open externally by default."
+          "linkUrl": {
+            "widget": "singleLineText",
+            "instructions": "Optional. Paste or edit the complete image URL. Image links open externally by default."
             }
           },
           "widget": "repeater",
@@ -4148,12 +4163,19 @@
             "type": "string",
             "title": "Shop The Edit Title",
             "default": "Shop The Edit",
-              "@mapping": "shapedb:Story.ShopEditTitleV1"
-            },
-            "shopEditItems": {
+            "@mapping": "shapedb:Story.ShopEditTitleV1"
+          },
+          "shopEditEnabled": {
+            "type": "boolean",
+            "title": "Show Shop The Edit",
+            "description": "Disable to hide the entire Shop The Edit section on this story.",
+            "default": true,
+            "@mapping": "shapedb:Story.ShopEditEnabledV1"
+          },
+          "shopEditItems": {
             "type": "array",
             "title": "Shop The Edit — Manual Items",
-            "description": "When empty, products are selected from article links.",
+            "description": "Manual products appear first; remaining spaces are selected from article links.",
               "items": {
                 "$ref": "#/shapes/StoryShopEditItem/schema"
               },
@@ -4219,6 +4241,12 @@
                   },
                 {
                   "@ref": "local:TableBlock"
+                },
+                {
+                  "@ref": "local:StoryImageBlock"
+                },
+                {
+                  "@ref": "local:StoryGalleryBlock"
                 }
               ]
             },
@@ -5344,12 +5372,18 @@
               "minLength": 0,
               "@mapping": "shapedb:StoryShopEditItem.Title"
             },
-            "productUrl": {
-              "type": "string",
-              "title": "Product Link",
-              "minLength": 0,
-              "@mapping": "shapedb:StoryShopEditItem.ProductUrl"
-            }
+          "productUrl": {
+            "type": "string",
+            "title": "Product Link",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryShopEditItem.ProductUrl"
+          },
+          "productEmbedHtml": {
+            "type": "string",
+            "title": "Product Embed HTML (optional)",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryShopEditItem.ProductEmbedHtml"
+          }
           }
         }
       },
@@ -5511,29 +5545,42 @@
                     "medium"
                   ]
                 },
-                {
-                  "title": "Wide",
-                  "enum": [
-                    "wide"
-                  ]
-                },
-                {
-                  "title": "Full width",
-                  "enum": [
-                    "full"
-                  ]
-                }
+              {
+                "title": "Wide",
+                "enum": [
+                  "wide"
+                ]
+              },
+              {
+                "title": "Large",
+                "enum": [
+                  "large"
+                ]
+              },
+              {
+                "title": "Full width",
+                "enum": [
+                  "full"
+                ]
+              },
+              {
+                "title": "Full bleed — edge to edge",
+                "enum": [
+                  "full-bleed"
+                ]
+              }
               ],
               "@mapping": "shapedb:StoryImageBlock.Size"
             },
             "alignment": {
               "type": "string",
               "title": "Alignment",
+              "default": "none",
               "oneOf": [
                 {
-                  "title": "Auto / centered",
+                  "title": "None - left aligned, no text wrapping",
                   "enum": [
-                    "auto"
+                    "none"
                   ]
                 },
                 {
@@ -5555,9 +5602,20 @@
                   ]
                 }
               ],
-              "@mapping": "shapedb:StoryImageBlock.Alignment"
-            },
-            "caption": {
+            "@mapping": "shapedb:StoryImageBlock.Alignment"
+          },
+          "spacing": {
+            "type": "string",
+            "title": "Vertical Spacing",
+            "default": "standard",
+            "oneOf": [
+              {"title": "Standard", "enum": ["standard"]},
+              {"title": "Compact", "enum": ["compact"]},
+              {"title": "None / flush", "enum": ["none"]}
+            ],
+            "@mapping": "shapedb:StoryImageBlock.SpacingV1"
+          },
+          "caption": {
               "type": "string",
               "title": "Caption",
               "minLength": 0,
@@ -5578,9 +5636,10 @@
             "linkTarget": {
               "type": "string",
               "title": "Link Behavior",
+              "default": "external",
               "oneOf": [
                 {
-                  "title": "External / new tab — default",
+                  "title": "New tab - default",
                   "enum": [
                     "external"
                   ]

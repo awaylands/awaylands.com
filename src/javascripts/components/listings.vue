@@ -153,7 +153,7 @@
 
               if (story.tout && story.tout.image) {
                 story.image = getImageUrl(story.tout.image.path);
-                story.imageSrcset = buildSrcset(story.tout.image, ['600','900','1200','1600'])
+                story.imageSrcset = buildSrcset(story.image, ['600','900','1200','1600'])
               } else {
                 story.image = null;
                 story.imageSrcset = null;
@@ -161,7 +161,7 @@
 
               if (story.tout && story.tout.secondaryImage) {
                 story.secondaryImage = getImageUrl(story.tout.secondaryImage.path);
-                story.secondaryImageSrcset = buildSrcset(story.tout.secondaryImage, ['600','900','1200','1600'])
+                story.secondaryImageSrcset = buildSrcset(story.secondaryImage, ['600','900','1200','1600'])
               } else {
                 story.secondaryImage = null;
                 story.secondaryImageSrcset = null;

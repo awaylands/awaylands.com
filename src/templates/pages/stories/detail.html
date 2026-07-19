@@ -41,11 +41,13 @@
     {% set imageSize = block.size %}
     {% if not imageSize %}{% set imageSize = "auto" %}{% endif %}
     {% set imageAlignment = block.alignment %}
-    {% if not imageAlignment or imageAlignment == "auto" %}{% set imageAlignment = "center" %}{% endif %}
+    {% if not imageAlignment or imageAlignment == "auto" %}{% set imageAlignment = "none" %}{% endif %}
+    {% set imageSpacing = block.spacing %}
+    {% if not imageSpacing %}{% set imageSpacing = "standard" %}{% endif %}
     {% set imageAlt = block.altText %}
     {% if not imageAlt %}{% set imageAlt = block.caption %}{% endif %}
 
-    <figure class="story-image-block {{ imageSize }} align-{{ imageAlignment }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
+    <figure class="story-image-block {{ imageSize }} align-{{ imageAlignment }} spacing-{{ imageSpacing }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
       {% if block.linkUrl %}
       <a href="{{ block.linkUrl | trim }}"{% if block.linkTarget != "same-tab" %} target="_blank" rel="noopener"{% endif %}>
       {% endif %}
@@ -185,30 +187,32 @@
   data-story-page
   data-story-type="{{ storyType }}"
   data-page-layout="{{ pageLayout }}"
-  {% if page.atAGlance.kicker %}data-at-a-glance-kicker="{{ page.atAGlance.kicker | escape }}"{% endif %}
-  {% if page.atAGlance.title %}data-at-a-glance-title="{{ page.atAGlance.title | escape }}"{% endif %}
-  {% if page.atAGlance.summary %}data-at-a-glance-summary="{{ page.atAGlance.summary | escape }}"{% endif %}
-  {% if page.atAGlance.item1Title %}data-at-a-glance-item-1-title="{{ page.atAGlance.item1Title | escape }}"{% endif %}
-  {% if page.atAGlance.item1Link %}data-at-a-glance-item-1-link="{{ page.atAGlance.item1Link | trim | escape }}"{% endif %}
-  {% if page.atAGlance.item2Title %}data-at-a-glance-item-2-title="{{ page.atAGlance.item2Title | escape }}"{% endif %}
-  {% if page.atAGlance.item2Link %}data-at-a-glance-item-2-link="{{ page.atAGlance.item2Link | trim | escape }}"{% endif %}
-  {% if page.atAGlance.item3Title %}data-at-a-glance-item-3-title="{{ page.atAGlance.item3Title | escape }}"{% endif %}
-  {% if page.atAGlance.item3Link %}data-at-a-glance-item-3-link="{{ page.atAGlance.item3Link | trim | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.kicker %}data-at-a-glance-kicker="{{ page.atAGlance.kicker | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.title %}data-at-a-glance-title="{{ page.atAGlance.title | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.summary %}data-at-a-glance-summary="{{ page.atAGlance.summary | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item1Title %}data-at-a-glance-item-1-title="{{ page.atAGlance.item1Title | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item1Link %}data-at-a-glance-item-1-link="{{ page.atAGlance.item1Link | trim | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item2Title %}data-at-a-glance-item-2-title="{{ page.atAGlance.item2Title | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item2Link %}data-at-a-glance-item-2-link="{{ page.atAGlance.item2Link | trim | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item3Title %}data-at-a-glance-item-3-title="{{ page.atAGlance.item3Title | escape }}"{% endif %}
+  {% if page.atAGlance and page.atAGlance.item3Link %}data-at-a-glance-item-3-link="{{ page.atAGlance.item3Link | trim | escape }}"{% endif %}
   {% if page.shopEditTitle %}data-shop-edit-title="{{ page.shopEditTitle | escape }}"{% endif %}
-  {% if page.firstHandExpertise.kicker %}data-expertise-kicker="{{ page.firstHandExpertise.kicker | escape }}"{% endif %}
-  {% if page.firstHandExpertise.title %}data-expertise-title="{{ page.firstHandExpertise.title | escape }}"{% endif %}
-  {% if page.firstHandExpertise.text %}data-expertise-text="{{ page.firstHandExpertise.text | escape }}"{% endif %}
+  data-shop-edit-enabled="{% if page.shopEditEnabled == false %}false{% else %}true{% endif %}"
+  {% if page.firstHandExpertise and page.firstHandExpertise.kicker %}data-expertise-kicker="{{ page.firstHandExpertise.kicker | escape }}"{% endif %}
+  {% if page.firstHandExpertise and page.firstHandExpertise.title %}data-expertise-title="{{ page.firstHandExpertise.title | escape }}"{% endif %}
+  {% if page.firstHandExpertise and page.firstHandExpertise.text %}data-expertise-text="{{ page.firstHandExpertise.text | escape }}"{% endif %}
   {% if page.keepReadingKicker %}data-keep-reading-kicker="{{ page.keepReadingKicker | escape }}"{% endif %}
   {% if page.keepReadingTitle %}data-keep-reading-title="{{ page.keepReadingTitle | escape }}"{% endif %}
 >
   {% if page.shopEditItems.length %}
   <div data-story-shop-items hidden>
     {% for item in page.shopEditItems %}
-      {% if item.productUrl and item.title %}
+      {% if item.productEmbedHtml or (item.productUrl and item.title) %}
       <span
         data-story-shop-item
-        data-title="{{ item.title | escape }}"
-        data-url="{{ item.productUrl | trim | escape }}"
+        data-title="{{ (item.title or 'Shop this edit') | escape }}"
+        data-url="{{ (item.productUrl or '') | trim | escape }}"
+        {% if item.productEmbedHtml %}data-embed-html="{{ item.productEmbedHtml | escape }}"{% endif %}
         {% if item.image %}data-image="{{ item.image.path | image({auto: 'compress,format', w: 480}) | escape }}"{% endif %}
       ></span>
       {% endif %}
@@ -268,12 +272,14 @@
   </div>
 
   <div class="story-layout">
-    <aside class="story-toc" data-story-toc hidden>
-      <details class="story-toc__panel" open>
-        <summary>In this story</summary>
-        <ol data-story-toc-list></ol>
-      </details>
-    </aside>
+    <div class="story-mediavine-sidebar">
+      <aside class="story-toc" data-story-toc hidden>
+        <details class="story-toc__panel" open>
+          <summary>In this story</summary>
+          <ol data-story-toc-list></ol>
+        </details>
+      </aside>
+    </div>
 
     <div class="story-article">
       {% if storyType == "quick-answer" %}
@@ -338,6 +344,13 @@
         <strong><a href="/about">Amy Seder</a></strong>
       </footer>
 
+      {% if page.category.length %}
+      <nav class="story-category-nav" aria-label="More stories in this category">
+        <span>Explore more in</span>
+        <a href="{{ page.category[0] | route('category') }}">{{ page.category[0].title }}</a>
+      </nav>
+      {% endif %}
+
       <div class="story-article__modules">
         {% set hasManualRelatedStories = page.relatedStories.length %}
         {% set shouldAutofillRelatedStories = page.relatedStories.length < 3 %}
@@ -388,6 +401,14 @@
                 and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
                 {{ renderRelatedStory(story) }}
               {% endif %}
+              {% endfor %}
+            {% endif %}
+
+            {% if shouldAutofillRelatedStories and not page.category.length and not page.location.length %}
+              {% for story in recentStories.items %}
+                {% if story.title != page.title %}
+                  {{ renderRelatedStory(story) }}
+                {% endif %}
               {% endfor %}
             {% endif %}
 

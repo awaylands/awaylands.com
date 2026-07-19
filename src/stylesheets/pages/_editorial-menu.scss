@@ -1,4 +1,6 @@
-.has-editorial-menu {
+body:not(.gallery-page) {
+  background-color: #f9f7f3;
+
   .page-header {
     background-color: #f9f7f3;
     border-bottom-color: rgba(5, 89, 103, 0.22);
@@ -8,6 +10,15 @@
   .page-header .page-nav__list > li > a {
     color: #055967;
     font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+  }
+
+  .page-header__mobile-search {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
   }
 
   .page-header .page-nav__list > li > a:after {
@@ -180,9 +191,82 @@
   .mobile-nav__link--shop:after {
     color: #ca5514;
   }
+
+  @include for-desktop-up {
+    .page-header {
+      height: 10.4rem;
+      border-bottom: 1px solid rgba(5, 89, 103, 0.22);
+    }
+
+    .page-header.is-sticky {
+      height: 6.8rem;
+    }
+
+    .page-nav {
+      margin-left: 3.2rem;
+    }
+
+    .page-nav__list > li + * {
+      margin-left: 1.55vw;
+    }
+
+    .dropdown,
+    .subdropdown {
+      width: 20rem;
+    }
+
+    .dropdown {
+      padding-top: 1.2rem;
+    }
+
+    .subdropdown {
+      top: -1px;
+    }
+
+    .page-nav__search-form {
+      width: 33rem;
+      border-width: 2px;
+    }
+
+    .page-nav__search-input,
+    .page-nav__search-button {
+      height: 5.4rem;
+    }
+
+    .page-nav__search-input {
+      font-size: 1.7rem;
+    }
+
+    .page-nav__search-button {
+      min-width: 0;
+      font-size: 1rem;
+    }
+
+    .page-header:not(.is-sticky) .page-nav__list > li > a {
+      color: #055967;
+    }
+
+    .page-header:not(.is-sticky) .page-nav__list > li > a:after {
+      background-color: #ca5514;
+    }
+
+    .page-header:not(.is-sticky) .page-nav__list > li > a.is-current {
+      color: #ca5514;
+    }
+
+    .page-header:not(.is-sticky) .page-header__burger span,
+    .page-header:not(.is-sticky) .page-header__burger span:before,
+    .page-header:not(.is-sticky) .page-header__burger span:after {
+      background-color: #055967;
+    }
+
+    .page-header:not(.is-sticky) .social svg {
+      fill: #055967;
+    }
+  }
 }
 
-body:not(.has-editorial-menu) {
+body.gallery-page {
   .mobile-nav__panel {
     background: -color(cerulean);
     box-shadow: -1.2rem 0 3rem rgba(0, 0, 0, 0.18);
@@ -224,5 +308,37 @@ body:not(.has-editorial-menu) {
   .mobile-nav__link:hover,
   .mobile-nav__link:focus {
     color: -color(black);
+  }
+}
+
+body.body--homepage:not(.gallery-page),
+body.body--destinations3:not(.gallery-page) {
+  .page-header:not(.is-sticky) {
+    background-color: transparent;
+    border-bottom-color: transparent;
+    box-shadow: none;
+  }
+
+  .page-header:not(.is-sticky) .page-nav__list > li > a,
+  .page-header:not(.is-sticky) .page-header__mobile-search {
+    color: #ffffff;
+  }
+
+  .page-header:not(.is-sticky) .page-nav__list > li > a:after {
+    background-color: #ffffff;
+  }
+
+  .page-header:not(.is-sticky) .page-nav__list > li > a.is-current {
+    color: #ffffff;
+  }
+
+  .page-header:not(.is-sticky) .page-header__burger span,
+  .page-header:not(.is-sticky) .page-header__burger span:before,
+  .page-header:not(.is-sticky) .page-header__burger span:after {
+    background-color: #ffffff;
+  }
+
+  .page-header:not(.is-sticky) .social svg {
+    fill: #ffffff;
   }
 }

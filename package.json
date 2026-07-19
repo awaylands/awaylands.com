@@ -24,6 +24,7 @@
     "images:dev": "cp -R src/images static/assets/images",
     "serve": "node -e 'setTimeout(function() {}, 2000)' && browser-sync start --server build --port 5000 --files 'build/**/*, !build/sitemap.xml, !build/feed.xml' --reload-debounce",
     "serve:stories": "node scripts/story-preview-server.js",
+    "story:editor": "node scripts/story-editor-server.js",
     "story:importer": "node scripts/story-importer-server.js",
     "takeshape:build": "takeshape build && npm run docs-images:localize",
     "docs-images:localize": "node scripts/localize-google-doc-images.js",
