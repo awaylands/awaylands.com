@@ -64,6 +64,29 @@ body.awaylands-takeshape-skim .awaylands-editor-section-body[hidden] {
   display: none !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="content"] .awaylands-editor-section-body,
+body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="content"] .awaylands-editor-section-body > *,
+body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="content"] .MuiFormControl-root,
+body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="content"] .ProseMirror {
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="content"] .awaylands-editor-section-body {
+  grid-template-columns: minmax(0, 1fr) !important;
+  width: 100% !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="content"] .awaylands-editor-section-body > * {
+  width: 100% !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="content"] .ProseMirror {
+  width: 100% !important;
+  overflow-wrap: anywhere;
+}
+
 body.awaylands-takeshape-skim .awaylands-editor-section-title {
   min-height: 0 !important;
   margin: 4px 0 8px !important;
