@@ -460,14 +460,33 @@ body.awaylands-takeshape-skim .awaylands-revolve-converter:disabled {
 }
 
 body.awaylands-takeshape-skim .awaylands-related-results {
-  position: relative;
-  z-index: 3;
-  max-height: 320px;
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 1400;
+  max-height: 420px;
   overflow-y: auto;
-  border: 1px solid rgba(0, 0, 0, 0.22);
-  border-radius: 3px;
-  background: Canvas;
-  padding: 5px;
+  border: 0;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0, rgba(0, 0, 0, 0.12) 0 1px 3px 0;
+  padding: 8px 0;
+}
+
+body.awaylands-takeshape-skim .awaylands-related-search-host {
+  position: relative !important;
+  z-index: 4;
+}
+
+body.awaylands-takeshape-skim .MuiFormControl-root:has(input[data-testid="contentForm-relatedStories__input"]) .MuiAutocomplete-popper {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="related-stories"] {
+  overflow: visible !important;
+  margin-bottom: 320px !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-related-results[hidden] {
@@ -478,10 +497,13 @@ body.awaylands-takeshape-skim .awaylands-related-results button {
   display: block;
   width: 100%;
   border: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 0;
   background: transparent;
-  color: inherit;
-  padding: 8px 9px;
+  color: rgb(69, 90, 100);
+  padding: 6px 16px;
+  font-size: 16px;
+  font-weight: 400 !important;
+  line-height: 24px;
   text-align: left;
 }
 
@@ -492,9 +514,11 @@ body.awaylands-takeshape-skim .awaylands-related-results button:focus {
 
 body.awaylands-takeshape-skim .awaylands-related-results p {
   margin: 0;
-  padding: 8px;
-  font-size: 12px;
-  line-height: 1.4;
+  color: rgb(69, 90, 100);
+  padding: 6px 16px;
+  font-size: 16px;
+  font-style: italic;
+  line-height: 24px;
 }
 
 body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebar___"],

@@ -772,10 +772,12 @@
     }
 
     const results = document.createElement('div');
+    const host = field.parentNode;
 
     results.className = RELATED_RESULTS_CLASS;
     results.hidden = true;
-    field.parentNode.insertBefore(results, field.nextSibling);
+    host.classList.add('awaylands-related-search-host');
+    host.insertBefore(results, field.nextSibling);
     const showResults = () => {
       results.innerHTML = '<p>Loading stories...</p>';
       results.hidden = false;
@@ -785,6 +787,16 @@
     input.addEventListener('input', showResults);
     input.addEventListener('focus', showResults);
     input.addEventListener('click', showResults);
+    input.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        results.hidden = true;
+      }
+    });
+    document.addEventListener('mousedown', event => {
+      if (!host.contains(event.target)) {
+        results.hidden = true;
+      }
+    });
   }
 
   function setEditorValue(field, value) {
