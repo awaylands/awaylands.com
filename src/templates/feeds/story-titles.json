@@ -5,7 +5,8 @@
   {% for story in stories %}
   {{ comma() }}{
     "title": {{ story.title | dump | safe }},
-    "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %}
+    "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %},
+    "updatedAt": {{ story._updatedAt | dump | safe }}
   }
   {% endfor %}
 {% endfor %}

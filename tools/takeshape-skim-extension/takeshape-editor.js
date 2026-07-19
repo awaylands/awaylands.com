@@ -601,8 +601,8 @@
     if (!storyTitleRequest) {
       storyTitleRequest = new Promise(resolve => {
         chrome.runtime.sendMessage({ type: 'awaylands-story-titles' }, response => {
-          if (chrome.runtime.lastError || !response) {
-            resolve([]);
+          if (chrome.runtime.lastError || !response || response.error) {
+            resolve(null);
             return;
           }
 
@@ -610,15 +610,20 @@
         });
       })
         .then(items => {
-          storyTitleIndex = Array.isArray(items) ? items
+          if (!Array.isArray(items)) {
+            storyTitleRequest = null;
+            return [];
+          }
+
+          storyTitleIndex = items
             .filter(item => item && item.title)
             .map(item => Object.assign({}, item, { title: item.title.trim() }))
-            .filter(item => item.title) : [];
+            .filter(item => item.title);
           return storyTitleIndex;
         })
         .catch(() => {
-          storyTitleIndex = [];
-          return storyTitleIndex;
+          storyTitleRequest = null;
+          return [];
         });
     }
 
@@ -690,21 +695,23 @@
   function renderRelatedResults(input, results, items) {
     const query = input.value.trim().toLowerCase();
     const words = query.split(/\s+/).filter(Boolean);
+    const sortedItems = items.slice().sort((first, second) => {
+      const firstTime = Date.parse(first.updatedAt || '') || 0;
+      const secondTime = Date.parse(second.updatedAt || '') || 0;
+
+      return secondTime - firstTime;
+    });
 
     results.innerHTML = '';
-    if (!query) {
-      results.hidden = true;
-      return;
-    }
-
-    const matches = items.filter(item => {
+    const matches = (query ? items.filter(item => {
       const title = item.title.toLowerCase();
 
       return words.every(word => title.indexOf(word) !== -1);
-    }).slice(0, 60);
+    }) : sortedItems).slice(0, query ? 60 : 15);
 
     if (!matches.length) {
-      results.hidden = true;
+      results.innerHTML = `<p>${query ? 'No matching stories found.' : 'Unable to load recent stories. Click the field to try again.'}</p>`;
+      results.hidden = false;
       return;
     }
 
@@ -737,12 +744,15 @@
     results.className = RELATED_RESULTS_CLASS;
     results.hidden = true;
     field.parentNode.insertBefore(results, field.nextSibling);
-    input.addEventListener('input', () => {
+    const showResults = () => {
+      results.innerHTML = '<p>Loading stories...</p>';
+      results.hidden = false;
       storyTitles().then(items => renderRelatedResults(input, results, items));
-    });
-    input.addEventListener('focus', () => {
-      storyTitles().then(items => renderRelatedResults(input, results, items));
-    });
+    };
+
+    input.addEventListener('input', showResults);
+    input.addEventListener('focus', showResults);
+    input.addEventListener('click', showResults);
   }
 
   function setEditorValue(field, value) {
