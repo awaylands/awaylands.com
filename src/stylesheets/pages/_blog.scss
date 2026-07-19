@@ -617,6 +617,367 @@
   font-size: 1.2rem;
 }
 
+// Magazine-style blog landing. Kept within .body--blog so category and story pages retain their layouts.
+.body--blog {
+  .landing > .landing__inner > .landing__section:first-child {
+    display: none;
+  }
+
+  .landing__inner {
+    width: 100%;
+    max-width: none;
+  }
+
+  .landing__section {
+    padding-right: clamp(2rem, 4vw, 7.2rem);
+    padding-left: clamp(2rem, 4vw, 7.2rem);
+  }
+
+  .magazine-blog {
+    --magazine-rule: rgba(24, 32, 31, 0.25);
+  }
+
+  .magazine-blog__masthead {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    border-top: 1px solid var(--magazine-rule);
+    border-bottom: 1px solid var(--magazine-rule);
+    margin: 0 0 clamp(4rem, 7vw, 10rem);
+    padding: clamp(3.2rem, 5vw, 7.2rem) 0;
+  }
+
+  .magazine-blog__edition,
+  .magazine-section-label,
+  .magazine-topics > span {
+    color: var(--editorial-orange);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .magazine-blog__title {
+    max-width: 105rem;
+    margin-top: 1.8rem;
+    font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+    font-size: clamp(5.4rem, 9.4vw, 14rem);
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    line-height: 0.78;
+  }
+
+  .magazine-blog__intro {
+    max-width: 58rem;
+    margin-top: 3.2rem;
+    font-family: 'Still EB Garamond', Georgia, serif;
+    font-size: clamp(2rem, 2.15vw, 2.8rem);
+    line-height: 1.35;
+  }
+
+  .magazine-blog__search {
+    width: 100%;
+    max-width: 48rem;
+    margin: 3.2rem 0 0;
+  }
+
+  .magazine-lead {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4rem;
+    margin-bottom: clamp(5.6rem, 8vw, 11rem);
+  }
+
+  .magazine-lead__rail {
+    border-top: 1px solid var(--magazine-rule);
+    padding-top: 1.6rem;
+  }
+
+  .magazine-lead__rail > [data-story-dedupe-item] {
+    border-bottom: 1px solid var(--magazine-rule);
+    padding: 2rem 0;
+  }
+
+  .blog-card--cover .blog-card__image {
+    padding-bottom: min(112%, 92rem);
+  }
+
+  .blog-card--cover .blog-card__content {
+    max-width: 88rem;
+    margin-top: 2.6rem;
+  }
+
+  .blog-card--cover .blog-card__heading {
+    font-size: clamp(4rem, 5.8vw, 8rem);
+    line-height: 0.94;
+  }
+
+  .blog-card--cover .blog-card__dek {
+    max-width: 70rem;
+    font-size: 2.1rem;
+  }
+
+  .blog-card--headline > a {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 1.8rem;
+    align-items: start;
+  }
+
+  .blog-card--headline .blog-card__image {
+    margin: 0;
+    padding-bottom: 125%;
+  }
+
+  .blog-card--headline .blog-card__heading {
+    font-size: 2.5rem;
+    line-height: 1.02;
+  }
+
+  .blog-card--headline .blog-card__dek {
+    display: none;
+  }
+
+  .magazine-topics {
+    display: flex;
+    gap: 1.4rem 3rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    border-top: 1px solid var(--magazine-rule);
+    border-bottom: 1px solid var(--magazine-rule);
+    margin-bottom: clamp(6.4rem, 9vw, 12rem);
+    padding: 2.2rem 0;
+  }
+
+  .magazine-topics a {
+    font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+    font-size: clamp(2.2rem, 2.4vw, 3.4rem);
+    line-height: 1;
+  }
+
+  .magazine-department {
+    margin-bottom: clamp(7.2rem, 10vw, 14rem);
+  }
+
+  .magazine-department__header,
+  .magazine-shop__header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    border-top: 1px solid var(--magazine-rule);
+    margin-bottom: 3.2rem;
+    padding-top: 1.6rem;
+  }
+
+  .magazine-department__header .magazine-section-label,
+  .magazine-shop__header .magazine-section-label {
+    grid-column: 1 / -1;
+    margin-bottom: 1.2rem;
+  }
+
+  .magazine-department__header h2,
+  .magazine-shop__header h2 {
+    font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+    font-size: clamp(4.6rem, 6.5vw, 9rem);
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+  }
+
+  .magazine-department__header > a,
+  .magazine-shop__header > a {
+    color: var(--editorial-link);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .magazine-department__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4rem;
+  }
+
+  .blog-card--department .blog-card__image {
+    padding-bottom: 116%;
+  }
+
+  .blog-card--department .blog-card__heading {
+    font-size: clamp(2.8rem, 3vw, 4.2rem);
+  }
+
+  .magazine-cinema {
+    width: 100vw;
+    margin: 0 0 clamp(7.2rem, 10vw, 14rem) calc(50% - 50vw);
+    background: var(--editorial-ink);
+  }
+
+  .magazine-cinema__story {
+    position: relative;
+    min-height: min(78rem, 82vh);
+  }
+
+  .magazine-cinema__story > a,
+  .magazine-cinema__story img,
+  .magazine-cinema__shade {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .magazine-cinema__story img {
+    object-fit: cover;
+  }
+
+  .magazine-cinema__shade {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.04) 30%, rgba(0, 0, 0, 0.72));
+  }
+
+  .magazine-cinema__content {
+    position: absolute;
+    right: clamp(2rem, 6vw, 9rem);
+    bottom: clamp(3rem, 7vw, 9rem);
+    left: clamp(2rem, 6vw, 9rem);
+    max-width: 90rem;
+    color: #fff;
+  }
+
+  .magazine-cinema__content p,
+  .magazine-cinema__content span,
+  .magazine-product strong {
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+  }
+
+  .magazine-cinema__content h2 {
+    margin: 1.4rem 0 2.2rem;
+    font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+    font-size: clamp(4.6rem, 7vw, 10rem);
+    font-weight: 300;
+    line-height: 0.9;
+  }
+
+  .magazine-shop {
+    width: 100vw;
+    margin: 0 0 clamp(7.2rem, 10vw, 14rem) calc(50% - 50vw);
+    padding: clamp(5rem, 7vw, 9rem) clamp(2rem, 4vw, 7.2rem);
+    background: #efebe4;
+  }
+
+  .magazine-shop__products {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3.2rem 1.6rem;
+  }
+
+  .magazine-shop__products .magazine-product:nth-child(n+7) {
+    display: none;
+  }
+
+  .magazine-product__image {
+    position: relative;
+    padding-bottom: 128%;
+    background: rgba(255, 255, 255, 0.56);
+    overflow: hidden;
+  }
+
+  .magazine-product__image img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .magazine-product > span {
+    display: block;
+    margin: 1.4rem 0 0.6rem;
+    font-family: 'Still EB Garamond', Georgia, serif;
+    font-size: 1.8rem;
+    line-height: 1.2;
+  }
+
+  .magazine-product strong {
+    color: var(--editorial-orange);
+  }
+
+  .listings {
+    border-top: 1px solid rgba(24, 32, 31, 0.25);
+    padding-top: 1.6rem;
+  }
+
+  .listings > .magazine-section-label {
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+
+  @include for-tablet-landscape-up {
+    .magazine-blog__masthead {
+      grid-template-columns: minmax(0, 1.55fr) minmax(28rem, 0.45fr);
+      column-gap: 6rem;
+    }
+
+    .magazine-blog__edition,
+    .magazine-blog__title {
+      grid-column: 1;
+    }
+
+    .magazine-blog__intro,
+    .magazine-blog__search {
+      grid-column: 2;
+    }
+
+    .magazine-blog__intro {
+      grid-row: 2;
+      align-self: end;
+      margin-top: 0;
+    }
+
+    .magazine-blog__search {
+      grid-row: 3;
+    }
+
+    .magazine-lead {
+      grid-template-columns: minmax(0, 2.15fr) minmax(28rem, 0.85fr);
+      gap: clamp(3.2rem, 4vw, 6.4rem);
+    }
+
+    .magazine-department__grid {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: 3.2rem;
+    }
+
+    .magazine-department__grid > [data-story-dedupe-item] {
+      grid-column: span 4;
+    }
+
+    .magazine-department__grid > [data-story-dedupe-item]:first-child {
+      grid-column: span 8;
+      grid-row: span 2;
+    }
+
+    .magazine-department__grid > [data-story-dedupe-item]:first-child .blog-card__image {
+      padding-bottom: 82%;
+    }
+
+    .magazine-department__grid > [data-story-dedupe-item]:nth-child(n+4) {
+      grid-column: span 6;
+    }
+
+    .magazine-shop__products {
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 2.4rem;
+    }
+  }
+}
+
 .body--blog .pagination {
   color: var(--editorial-menu);
   font-family: Montserrat, Helvetica, sans-serif;
