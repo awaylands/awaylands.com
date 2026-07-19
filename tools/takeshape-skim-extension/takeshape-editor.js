@@ -26,8 +26,17 @@
   function keepGallerySidebarUsable() {
     document.querySelectorAll('[class*="asset-picker-grid-module__grid"]').forEach(grid => {
       const sidebarContent = grid.closest('[class*="floating-sidebar-module__sidebarContent___"]');
+      const sidebarShell = sidebarContent && sidebarContent.closest('[class*="floating-sidebar-module__sidebar___"]');
 
-      if (!sidebarContent || sidebarContent.querySelector('.awaylands-gallery-close')) {
+      if (!sidebarContent) {
+        return;
+      }
+
+      sidebarContent.classList.add('awaylands-gallery-drawer-content');
+      if (sidebarShell) {
+        sidebarShell.classList.add('awaylands-gallery-drawer-shell');
+      }
+      if (sidebarContent.querySelector('.awaylands-gallery-close')) {
         return;
       }
 
