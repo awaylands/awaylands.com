@@ -467,10 +467,19 @@ body.awaylands-takeshape-skim .awaylands-related-results p {
   line-height: 1.4;
 }
 
-body.awaylands-takeshape-skim aside.floating-sidebar-module__sidebarContent___M-tdm,
-body.awaylands-takeshape-skim [role="complementary"].floating-sidebar-module__sidebarContent___M-tdm {
+body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebar___"],
+body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebarContent___"] {
   width: 496px !important;
+  min-width: 0 !important;
   max-width: 48vw !important;
+  flex-basis: 496px !important;
+}
+
+body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebar___"] {
+  overflow: visible !important;
+}
+
+body.awaylands-takeshape-skim [class*="floating-sidebar-module__sidebarContent___"] {
   overflow-y: auto !important;
 }
 
