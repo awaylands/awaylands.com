@@ -360,12 +360,24 @@ body.awaylands-takeshape-skim .awaylands-choice-native-select {
   white-space: nowrap !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-category-listbox {
+body.awaylands-takeshape-skim .awaylands-category-listbox,
+body.awaylands-takeshape-skim .MuiFormControl-root:has(input[data-testid="contentForm-category__input"][aria-expanded="true"]) .MuiAutocomplete-listbox {
+  height: auto !important;
   max-height: none !important;
+  overflow-y: visible !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-location-listbox {
-  max-height: 768px !important;
+body.awaylands-takeshape-skim .awaylands-location-listbox,
+body.awaylands-takeshape-skim .MuiFormControl-root:has(input[data-testid="contentForm-location__input"][aria-expanded="true"]) .MuiAutocomplete-listbox {
+  height: auto !important;
+  max-height: 1152px !important;
+}
+
+body.awaylands-takeshape-skim .MuiFormControl-root:has(input[data-testid="contentForm-category__input"][aria-expanded="true"]) .MuiAutocomplete-paper,
+body.awaylands-takeshape-skim .MuiFormControl-root:has(input[data-testid="contentForm-location__input"][aria-expanded="true"]) .MuiAutocomplete-paper {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-choice-title {
