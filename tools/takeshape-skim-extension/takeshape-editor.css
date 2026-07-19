@@ -123,6 +123,15 @@ body.awaylands-takeshape-skim button {
   font-size: 13px;
 }
 
+body.awaylands-takeshape-skim button:not(.MuiButton-containedPrimary) {
+  background-color: #eeeeee;
+}
+
+body.awaylands-takeshape-skim button:not(.MuiButton-containedPrimary):hover,
+body.awaylands-takeshape-skim button:not(.MuiButton-containedPrimary):focus {
+  background-color: #e2e2e2;
+}
+
 body.awaylands-takeshape-skim .ProseMirror h1,
 body.awaylands-takeshape-skim .ProseMirror h2,
 body.awaylands-takeshape-skim .ProseMirror h3 {
@@ -193,6 +202,14 @@ body.awaylands-takeshape-skim .awaylands-at-a-glance-options {
   border-radius: 3px;
   background: #f2f2f2;
   padding: 14px;
+}
+
+body.awaylands-takeshape-skim .awaylands-glance-section-field {
+  margin-bottom: -8px !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-glance-section-field .MuiFormHelperText-root {
+  margin-top: 3px !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-shop-item {
@@ -331,23 +348,23 @@ body.awaylands-takeshape-skim aside.floating-sidebar-module__sidebarContent___M-
 body.awaylands-takeshape-skim [role="complementary"].floating-sidebar-module__sidebarContent___M-tdm {
   width: 496px !important;
   max-width: 48vw !important;
-  overflow-y: hidden !important;
+  overflow-y: auto !important;
 }
 
 body.awaylands-takeshape-skim [class*="asset-picker-grid-module__grid"] {
   display: grid !important;
   grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  grid-auto-rows: 112px !important;
-  gap: 10px !important;
+  grid-auto-rows: auto !important;
+  gap: 16px 14px !important;
   width: 100% !important;
-  height: calc(100vh - 176px) !important;
-  overflow-y: auto !important;
-  padding: 10px !important;
+  height: auto !important;
+  overflow: visible !important;
+  padding: 10px 18px 20px 12px !important;
 }
 
 body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__asset"] {
   display: grid !important;
-  grid-template-rows: minmax(0, 1fr) auto !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
   width: auto !important;
   min-width: 0 !important;
   height: auto !important;
@@ -359,8 +376,17 @@ body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__content"],
 body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__inner"],
 body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__preview"] {
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
   min-height: 0 !important;
+}
+
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__content"],
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__inner"] {
+  aspect-ratio: 1 / 1 !important;
+}
+
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__preview"] {
+  height: 100% !important;
 }
 
 body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__preview"] {
@@ -373,9 +399,15 @@ body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__preview"] 
 }
 
 body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__title"] {
+  width: 100% !important;
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
   overflow: hidden !important;
-  font-size: 10px !important;
-  line-height: 1.15 !important;
+  color: inherit !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  line-height: 1.25 !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }

@@ -177,6 +177,7 @@
     const toggle = document.createElement('button');
     const options = container.children[1];
     const customFields = Array.from(options.querySelectorAll('label')).filter(label => /custom (title|link)/i.test(normalizedText(label)));
+    const sectionFields = Array.from(options.querySelectorAll('label')).filter(label => /^Section [123] - choose article heading$/i.test(normalizedText(label)));
     const customBox = document.createElement('div');
 
     if (!customFields.length) {
@@ -194,6 +195,17 @@
 
       if (field && !field.closest('.awaylands-at-a-glance-options')) {
         customBox.appendChild(field);
+      }
+    });
+    sectionFields.forEach(label => {
+      const field = label.closest('.MuiFormControl-root');
+      const infoIcons = field && field.querySelectorAll('[data-testid="InfoIcon"]');
+
+      if (field) {
+        field.classList.add('awaylands-glance-section-field');
+      }
+      if (infoIcons && infoIcons.length) {
+        infoIcons[infoIcons.length - 1].closest('.MuiGrid2-root').remove();
       }
     });
     options.appendChild(toggle);
