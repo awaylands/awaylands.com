@@ -1111,6 +1111,32 @@ function storyShopEmbedLink(sourceHtml) {
   return '';
 }
 
+function storyShopNativeProduct(sourceHtml) {
+  const template = document.createElement('template');
+
+  template.innerHTML = sourceHtml || '';
+  const product = template.content.querySelector('[data-awaylands-product]');
+
+  if (!product) {
+    return null;
+  }
+
+  const href = safeStoryShopUrl(product.getAttribute('href') || product.getAttribute('data-url'));
+  const image = safeStoryShopUrl(product.getAttribute('data-image'));
+
+  if (!href || !image) {
+    return null;
+  }
+
+  return {
+    href,
+    image,
+    name: (product.getAttribute('data-name') || '').trim(),
+    brand: (product.getAttribute('data-brand') || '').trim(),
+    price: (product.getAttribute('data-price') || '').trim()
+  };
+}
+
 function advancedStoryPickCandidates(el, isStyleEdit) {
   const candidates = [];
   const usedLinks = {};
@@ -1248,19 +1274,24 @@ function manualStoryPickCandidates(storyPage) {
     storyPage.querySelectorAll('[data-story-shop-item]'),
     item => {
       const imageUrl = (item.getAttribute('data-image') || '').trim();
+      const embedHtml = item.getAttribute('data-embed-html') || '';
+      const nativeProduct = storyShopNativeProduct(embedHtml);
       let image = null;
 
-      if (imageUrl) {
+      if (nativeProduct || imageUrl) {
         image = document.createElement('img');
-        image.src = imageUrl;
-        image.alt = (item.getAttribute('data-title') || '').trim();
+        image.src = nativeProduct ? nativeProduct.image : imageUrl;
+        image.alt = nativeProduct ? nativeProduct.name : (item.getAttribute('data-title') || '').trim();
       }
 
       return {
-        href: safeStoryShopUrl(item.getAttribute('data-url')) || storyShopEmbedLink(item.getAttribute('data-embed-html')),
-        label: (item.getAttribute('data-title') || '').trim() || 'Editor\'s Pick',
+        href: (nativeProduct && nativeProduct.href) || safeStoryShopUrl(item.getAttribute('data-url')) || storyShopEmbedLink(embedHtml),
+        label: (nativeProduct && nativeProduct.name) || (item.getAttribute('data-title') || '').trim() || 'Editor\'s Pick',
+        brand: nativeProduct && nativeProduct.brand,
+        price: nativeProduct && nativeProduct.price,
+        nativeProduct: Boolean(nativeProduct),
         image,
-        embedHtml: item.getAttribute('data-embed-html') || ''
+        embedHtml: nativeProduct ? '' : embedHtml
       };
     }
   ).filter(item => (item.href && item.label) || item.embedHtml);
@@ -1517,7 +1548,30 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
     count.className = 'story-rail__pick-number';
     count.textContent = `0${index + 1}`;
     label.className = 'story-rail__pick-name';
-    label.textContent = pick.label || 'Editor\'s Pick';
+    if (pick.nativeProduct) {
+      const brand = document.createElement('span');
+      const name = document.createElement('span');
+      const price = document.createElement('span');
+      const action = document.createElement('span');
+
+      label.classList.add('story-rail__pick-product-copy');
+      brand.className = 'story-rail__pick-brand';
+      brand.textContent = pick.brand || 'Revolve';
+      name.className = 'story-rail__pick-product-name';
+      name.textContent = pick.label || 'Editor\'s Pick';
+      price.className = 'story-rail__pick-price';
+      price.textContent = pick.price || '';
+      action.className = 'story-rail__pick-action';
+      action.textContent = 'Shop the List';
+      label.appendChild(brand);
+      label.appendChild(name);
+      if (pick.price) {
+        label.appendChild(price);
+      }
+      label.appendChild(action);
+    } else {
+      label.textContent = pick.label || 'Editor\'s Pick';
+    }
     card.appendChild(count);
     card.appendChild(label);
     picksList.appendChild(card);

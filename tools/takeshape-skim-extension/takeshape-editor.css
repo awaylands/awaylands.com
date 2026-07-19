@@ -119,3 +119,25 @@ body.awaylands-takeshape-skim .ProseMirror li {
 body.awaylands-takeshape-skim .ProseMirror strong {
   font-weight: 800 !important;
 }
+
+body.awaylands-takeshape-skim .awaylands-revolve-converter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0 4px;
+  border: 1px solid var(--al-editor-accent);
+  border-radius: 3px;
+  background: #fffdf9;
+  color: var(--al-editor-accent);
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+body.awaylands-takeshape-skim .awaylands-revolve-converter:disabled {
+  border-color: var(--al-editor-border);
+  color: var(--al-editor-muted);
+  cursor: default;
+}
