@@ -159,9 +159,9 @@
       return;
     }
 
-    const storyToolLabel = Array.from(document.querySelectorAll('button, h1, h2, h3, h4, h5, h6, label, [role="heading"]')).find(element => {
-      return !galleryContent.contains(element) && /^(workflow status|versions|version history|history)$/i.test(normalizedText(element));
-    });
+    const storyToolLabel = Array.from(document.querySelectorAll('button, h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
+      .filter(element => !galleryContent.contains(element) && /^(workflow status|versions|version history|history)$/i.test(normalizedText(element)))
+      .sort((first, second) => first.getBoundingClientRect().width - second.getBoundingClientRect().width)[0];
 
     if (!storyToolLabel) {
       return;
@@ -170,6 +170,7 @@
     let panel = storyToolLabel.closest('aside, [class*="sidebar"]') ||
       storyToolLabel.closest('section, .MuiPaper-root, [class*="panel"]') ||
       storyToolLabel.parentElement;
+    let completeColumn = null;
 
     const directChildWithin = (ancestor, descendant) => {
       let child = descendant;
@@ -195,11 +196,37 @@
         galleryColumn !== storyToolsColumn &&
         !storyToolsColumn.querySelector('textarea, [contenteditable="true"]')
       ) {
-        panel = storyToolsColumn;
+        completeColumn = storyToolsColumn;
         break;
       }
       layoutAncestor = layoutAncestor.parentElement;
       levels += 1;
+    }
+
+    if (!completeColumn) {
+      const galleryRect = galleryShell.getBoundingClientRect();
+      const geometricCandidates = [];
+      let candidate = storyToolLabel.parentElement;
+      let candidateLevels = 0;
+
+      while (candidate && candidate !== document.body && candidateLevels < 10) {
+        const rect = candidate.getBoundingClientRect();
+        const reachesGallery = Math.abs(rect.right - galleryRect.left) <= 24;
+        const isFullHeightPanel = rect.height >= Math.max(500, window.innerHeight * 0.7);
+        const isSidebarWidth = rect.width >= 220 && rect.width <= 620;
+        const containsEditor = !!candidate.querySelector('textarea, [contenteditable="true"]');
+
+        if (reachesGallery && isFullHeightPanel && isSidebarWidth && !containsEditor && !candidate.contains(galleryShell)) {
+          geometricCandidates.push(candidate);
+        }
+        candidate = candidate.parentElement;
+        candidateLevels += 1;
+      }
+      completeColumn = geometricCandidates.sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0] || null;
+    }
+
+    if (completeColumn) {
+      panel = completeColumn;
     }
 
     if (!panel || panel === document.body || panel.contains(galleryContent)) {
