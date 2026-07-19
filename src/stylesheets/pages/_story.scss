@@ -796,6 +796,21 @@ body.body--story {
   margin-left: auto;
 }
 
+.story-article__body > table,
+.story-article__body > .table,
+.story-article__body > .table-responsive,
+.story-article__body > div > table {
+  width: 100%;
+  max-width: 84rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.story-article__body > table,
+.story-article__body > div > table {
+  border-collapse: collapse;
+}
+
 .story-article__body > p,
 .story-article__body li,
 .story-article__body blockquote {

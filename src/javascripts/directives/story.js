@@ -560,11 +560,15 @@ function promoteQuickAnswer(el) {
 
 function enhanceAffiliateLinks(el) {
   const links = el.querySelectorAll('a[href]');
+  const isMobileDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(window.navigator.userAgent || '');
 
   Array.prototype.forEach.call(links, link => {
     const href = link.getAttribute('href') || '';
+    const isAmazonLink = /(^|\/\/)([^/]+\.)?(amazon\.[a-z.]+|amzn\.to)(\/|$)/i.test(href);
+    const isLtkLink = /(^|\/\/)([^/]+\.)?(ltk\.app|shopltk\.com|liketk\.it|on\.ltk\.com|rstyle\.me|rewardstyle\.com)(\/|$)/i.test(href);
+    const isBestBuyLink = /(^|\/\/)([^/]+\.)?(bestbuy\.com|bestbuy\.7tiv\.net|bby\.me)(\/|$)/i.test(href);
 
-    if (!AFFILIATE_URL_PATTERN.test(href) && !link.closest('.shopthepost-widget, [data-affiliate-link]')) {
+    if (!AFFILIATE_URL_PATTERN.test(href) && !isBestBuyLink && !link.closest('.shopthepost-widget, [data-affiliate-link]')) {
       return;
     }
 
@@ -579,6 +583,29 @@ function enhanceAffiliateLinks(el) {
 
     link.setAttribute('rel', rel.join(' '));
     link.setAttribute('target', '_blank');
+
+    if (isMobileDevice && (isAmazonLink || isLtkLink)) {
+      link.setAttribute('target', '_self');
+      link.setAttribute('data-mobile-app-link', isAmazonLink ? 'amazon' : 'ltk');
+    }
+
+    if (isMobileDevice && isBestBuyLink) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('data-mobile-browser-link', 'best-buy');
+      if (!link._storyBestBuyBrowser) {
+        link._storyBestBuyBrowser = true;
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          const opened = window.open(link.href, '_blank');
+
+          if (opened) {
+            opened.opener = null;
+          } else {
+            window.location.assign(link.href);
+          }
+        });
+      }
+    }
 
     const figure = link.closest('figure');
 
@@ -1469,10 +1496,9 @@ function finalizeRelatedStories(storyPage) {
     }
 
     used[key] = true;
-    if (kept >= 3) {
-      item.hidden = true;
-      item.setAttribute('aria-hidden', 'true');
-    }
+    item.hidden = false;
+    item.removeAttribute('aria-hidden');
+    item.setAttribute('data-related-position', String(kept + 1));
     kept += 1;
   });
 }
@@ -1653,7 +1679,7 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
     relatedTitle.textContent = (storyPage.getAttribute('data-keep-reading-title') || '').trim() || 'More from Away Lands';
     relatedList.className = 'story-rail__related-list';
 
-    Array.prototype.slice.call(relatedItems, 3, 6).forEach(item => {
+    Array.prototype.slice.call(relatedItems, 0, 3).forEach(item => {
       const sourceLink = item.querySelector('a[href]');
       const sourceImage = item.querySelector('.related-stories__image img');
       const sourceTitle = item.querySelector('.related-stories__title');
@@ -1687,6 +1713,18 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
       link.appendChild(title);
       listItem.appendChild(link);
       relatedList.appendChild(listItem);
+    });
+
+    Array.prototype.slice.call(relatedItems, 0, 3).forEach(item => {
+      item.hidden = true;
+      item.style.display = 'none';
+      item.setAttribute('aria-hidden', 'true');
+    });
+
+    Array.prototype.slice.call(relatedItems, 3, 6).forEach(item => {
+      item.hidden = false;
+      item.style.display = 'block';
+      item.removeAttribute('aria-hidden');
     });
 
     relatedSection.appendChild(relatedKicker);
