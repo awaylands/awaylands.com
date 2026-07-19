@@ -380,33 +380,39 @@
     const classes = icon ? icon.getAttribute('class') || '' : '';
     const match = classes.match(/__(default|small|medium|large)___/i) || classes.match(/__(default|small|medium|large)_/i);
 
-    return match ? match[1].toLowerCase() : '';
+    return match ? match[1].toLowerCase() : 'default';
   }
 
   function decorateImageFigure(figure) {
-    const icons = figure.querySelector('[class*="image-properties-bar-module__statusIcons"]');
+    const bar = figure.querySelector('[class*="image-properties-bar-module__propertiesBar"]');
+    const edit = figure.querySelector('[class*="image-properties-bar-module__edit"]');
     const size = imageSizeName(figure);
 
-    if (!icons) {
+    if (!bar || !edit) {
       return;
     }
 
-    let label = icons.querySelector('.awaylands-image-size-label');
-    if (size) {
-      if (!label) {
-        label = document.createElement('span');
-        label.className = 'awaylands-image-size-label';
-        icons.appendChild(label);
-      }
-      label.textContent = size;
+    let badges = bar.querySelector('.awaylands-image-status-badges');
+    let label = badges && badges.querySelector('.awaylands-image-size-label');
+
+    if (!badges) {
+      badges = document.createElement('div');
+      badges.className = 'awaylands-image-status-badges';
+      bar.insertBefore(badges, edit);
     }
+    if (!label) {
+      label = document.createElement('span');
+      label.className = 'awaylands-image-size-label';
+      badges.appendChild(label);
+    }
+    label.textContent = size;
   }
 
   function setFigureLinkIndicator(figure, linked) {
-    const icons = figure && figure.querySelector('[class*="image-properties-bar-module__statusIcons"]');
-    let indicator = icons && icons.querySelector('.awaylands-image-link-indicator');
+    const badges = figure && figure.querySelector('.awaylands-image-status-badges');
+    let indicator = badges && badges.querySelector('.awaylands-image-link-indicator');
 
-    if (!icons) {
+    if (!badges) {
       return;
     }
 
@@ -415,8 +421,8 @@
       indicator.className = 'awaylands-image-link-indicator';
       indicator.title = 'This image has a link';
       indicator.setAttribute('aria-label', 'Linked image');
-      indicator.textContent = '↗';
-      icons.appendChild(indicator);
+      indicator.innerHTML = '<span aria-hidden="true">↗</span><strong>Linked</strong>';
+      badges.appendChild(indicator);
     } else if (!linked && indicator) {
       indicator.remove();
     }
@@ -437,6 +443,7 @@
         preview.setAttribute('tabindex', '0');
         preview.setAttribute('aria-label', 'Edit image');
         const open = () => {
+          document.querySelectorAll('figure[data-awaylands-active-image="true"]').forEach(item => item.removeAttribute('data-awaylands-active-image'));
           figure.setAttribute('data-awaylands-active-image', 'true');
           edit.click();
         };
@@ -447,6 +454,12 @@
             open();
           }
         });
+      }
+      if (edit) {
+        edit.addEventListener('click', () => {
+          document.querySelectorAll('figure[data-awaylands-active-image="true"]').forEach(item => item.removeAttribute('data-awaylands-active-image'));
+          figure.setAttribute('data-awaylands-active-image', 'true');
+        }, true);
       }
     });
 
