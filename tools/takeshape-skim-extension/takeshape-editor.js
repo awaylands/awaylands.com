@@ -292,14 +292,20 @@
   }
 
   function selectMenuValue(original, title) {
-    original.click();
+    original.dispatchEvent(new MouseEvent('mousedown', {
+      bubbles: true,
+      cancelable: true,
+      view: window
+    }));
     window.setTimeout(() => {
-      const option = Array.from(document.querySelectorAll('[role="option"], .MuiMenuItem-root')).find(item => normalizedText(item) === title);
+      const openList = Array.from(document.querySelectorAll('[role="listbox"]')).find(list => list.querySelector('.MuiMenuItem-root, [role="option"]'));
+      const options = openList ? Array.from(openList.querySelectorAll('.MuiMenuItem-root, [role="option"]')) : [];
+      const option = options.find(item => normalizedText(item) === title);
 
       if (option) {
         option.click();
       }
-    }, 80);
+    }, 120);
   }
 
   function addChoiceBoxes(labelText, choices) {
@@ -494,10 +500,10 @@
     const title = document.createElement('div');
     const nativeLabel = field.querySelector('label');
     const choices = [
-      ['Default', 'default'],
-      ['Small', 'small'],
-      ['Medium', 'medium'],
-      ['Large', 'large']
+      ['Default', '', 'None'],
+      ['Small', 'small', 'Small'],
+      ['Medium', 'medium', 'Medium'],
+      ['Large', 'large', 'Large']
     ];
 
     field.classList.add('awaylands-image-size-field');
@@ -513,7 +519,7 @@
       button.textContent = choice[0];
       button.setAttribute('data-value', choice[1]);
       button.addEventListener('click', () => {
-        selectMenuValue(original, choice[0]);
+        selectMenuValue(original, choice[2]);
         window.setTimeout(sync, 120);
         window.setTimeout(sync, 350);
       });
@@ -528,7 +534,7 @@
     title.insertAdjacentElement('afterend', group);
 
     const sync = () => {
-      const value = (native.value || 'default').toLowerCase();
+      const value = (native.value || '').toLowerCase();
 
       Array.from(group.children).forEach(button => {
         const selected = button.getAttribute('data-value') === value;
@@ -595,7 +601,12 @@
     syncLink();
     if (urlInput) {
       urlInput.addEventListener('input', syncLink);
-      urlInput.setAttribute('autocomplete', 'url');
+      urlInput.setAttribute('autocomplete', 'off');
+      urlInput.setAttribute('inputmode', 'url');
+      urlInput.setAttribute('type', 'url');
+      urlInput.setAttribute('name', 'awaylands-image-link-url');
+      urlInput.setAttribute('data-form-type', 'other');
+      urlInput.setAttribute('data-lpignore', 'true');
     }
     dialog.addEventListener('keydown', event => {
       if (event.key === 'Enter' && !event.shiftKey && event.target.tagName !== 'TEXTAREA' && submit) {

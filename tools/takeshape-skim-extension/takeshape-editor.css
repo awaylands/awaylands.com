@@ -724,7 +724,7 @@ body.awaylands-takeshape-skim .awaylands-image-dialog {
   max-width: 880px !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-image-dialog input[autocomplete="url"] {
+body.awaylands-takeshape-skim .awaylands-image-dialog input[name="awaylands-image-link-url"] {
   min-width: 0 !important;
   background: #eeeeee !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
@@ -732,7 +732,7 @@ body.awaylands-takeshape-skim .awaylands-image-dialog input[autocomplete="url"] 
 }
 
 body.awaylands-takeshape-skim [role="dialog"] input[type="url"],
-body.awaylands-takeshape-skim [role="dialog"] input[autocomplete="url"] {
+body.awaylands-takeshape-skim [role="dialog"] input[name="awaylands-image-link-url"] {
   width: 100% !important;
   min-width: 520px !important;
   background: #eeeeee !important;
@@ -744,7 +744,7 @@ body.awaylands-takeshape-skim [role="dialog"] input[autocomplete="url"] {
   }
 
   body.awaylands-takeshape-skim [role="dialog"] input[type="url"],
-  body.awaylands-takeshape-skim [role="dialog"] input[autocomplete="url"] {
+  body.awaylands-takeshape-skim [role="dialog"] input[name="awaylands-image-link-url"] {
     min-width: 0 !important;
   }
 }
