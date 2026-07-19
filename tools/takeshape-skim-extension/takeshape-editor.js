@@ -1250,23 +1250,52 @@
   }
 
   function selectRelatedStory(input, title, results) {
+    const normalizedTitle = title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const stopWords = new Set(['about', 'after', 'before', 'best', 'from', 'have', 'into', 'that', 'this', 'with', 'world', 'your']);
+    const significantWords = title.split(/\s+/).map(word => word.replace(/[^a-z0-9']/gi, '')).filter(word => word.length >= 4 && !stopWords.has(word.toLowerCase()));
+    const queryCandidates = Array.from(new Set([
+      significantWords[0],
+      significantWords[1],
+      significantWords.slice(0, 2).join(' '),
+      significantWords.slice(0, 3).join(' '),
+      title
+    ].concat(significantWords).filter(Boolean)));
+    let queryIndex = 0;
+
+    const applyQuery = value => {
+      nativeInputValue(input, value);
+      if (typeof InputEvent === 'function') {
+        input.dispatchEvent(new InputEvent('input', { bubbles: true, data: value, inputType: 'insertText' }));
+      }
+      input.focus();
+      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    };
+
     input.click();
-    nativeInputValue(input, title);
-    input.focus();
-    input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+    applyQuery(queryCandidates[queryIndex]);
     let attempts = 0;
-    const prefix = title.slice(0, 24).toLowerCase();
     const timer = window.setInterval(() => {
-      const option = Array.from(document.querySelectorAll('[role="option"]')).find(item => normalizedText(item).toLowerCase().indexOf(prefix) !== -1);
+      const controlledList = input.getAttribute('aria-controls') && document.getElementById(input.getAttribute('aria-controls'));
+      const options = controlledList ? Array.from(controlledList.querySelectorAll('[role="option"], .MuiAutocomplete-option')) : Array.from(document.querySelectorAll('[role="option"], .MuiAutocomplete-option'));
+      const option = options.find(item => {
+        const optionTitle = normalizedText(item).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+        return optionTitle === normalizedTitle || optionTitle.indexOf(normalizedTitle) !== -1;
+      });
 
       attempts += 1;
       if (option) {
         window.clearInterval(timer);
+        option.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, button: 0, cancelable: true, view: window }));
         option.click();
         results.hidden = true;
-      } else if (attempts >= 50) {
+      } else if (attempts % 12 === 0 && queryIndex < queryCandidates.length - 1) {
+        queryIndex += 1;
+        applyQuery(queryCandidates[queryIndex]);
+      } else if (attempts >= Math.max(60, queryCandidates.length * 12)) {
         window.clearInterval(timer);
-        showElementMessage(results, 'TakeShape did not make this story selectable. The title is shown, but its publishing state may need to be enabled.');
+        nativeInputValue(input, title);
+        showElementMessage(results, 'TakeShape did not return this story in its relationship selector. Try a shorter title word in the native search.');
       }
     }, 100);
   }
