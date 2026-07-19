@@ -472,8 +472,8 @@ body.body--story {
   column-gap: 0.7rem;
   align-content: start;
   min-width: 0;
-  border: 1px solid rgba(22, 110, 120, 0.22);
-  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(22, 110, 120, 0.26);
+  background: #fffdf9;
   color: var(--story-link);
   text-decoration: none;
   scroll-snap-align: start;
@@ -504,7 +504,7 @@ body.body--story {
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: rgba(22, 110, 120, 0.08);
+  background: #fffdf9;
 }
 
 .story-rail__pick-embed iframe,
@@ -537,6 +537,18 @@ body.body--story {
   font-weight: 600;
   line-height: 0.95;
   text-decoration: none;
+}
+
+.story-rail__pick--embed .story-rail__pick-number,
+.story-rail__pick--embed .story-rail__pick-name {
+  background: #fffdf9;
+}
+
+// Native affiliate markup inherits the story typography. Cross-origin iframe
+// contents remain controlled by the affiliate provider.
+.story-rail__pick-embed :where(.brand, .product-brand, .product-name, .product-title, .price, .product-price, .shop-the-list) {
+  color: var(--story-ink);
+  font-family: 'Still EB Garamond', Georgia, serif;
 }
 
 .story-rail__pick-name:hover,
