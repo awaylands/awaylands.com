@@ -1267,21 +1267,25 @@ function manualStoryPickCandidates(storyPage) {
 }
 
 function mergedStoryPickCandidates(el, storyPage, isStyleEdit) {
-  const candidates = manualStoryPickCandidates(storyPage).concat(
-    advancedStoryPickCandidates(el, isStyleEdit)
-  );
+  const manualCandidates = manualStoryPickCandidates(storyPage);
+  const automaticCandidates = advancedStoryPickCandidates(el, isStyleEdit);
+  const targetCount = Math.max(3, manualCandidates.length);
   const used = {};
+  const picks = [];
 
-  return candidates.filter(pick => {
+  manualCandidates.concat(automaticCandidates).forEach(pick => {
+    const isAutomatic = manualCandidates.indexOf(pick) === -1;
     const key = pick.href || pick.embedHtml;
 
-    if (!key || used[key]) {
-      return false;
+    if (!key || used[key] || (isAutomatic && picks.length >= targetCount)) {
+      return;
     }
 
     used[key] = true;
-    return true;
-  }).slice(0, 3);
+    picks.push(pick);
+  });
+
+  return picks;
 }
 
 function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
