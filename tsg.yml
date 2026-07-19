@@ -32,6 +32,11 @@ routes:
     template: feeds/search.json
     context: data/search.graphql
 
+  storyTitles:
+    path: /story-titles.json
+    template: feeds/story-titles.json
+    context: data/story-titles.graphql
+
   search:
     path: /search/
     template: pages/search.html

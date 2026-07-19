@@ -1,0 +1,12 @@
+[
+{% set titlePages = [storyTitles1.items, storyTitles2.items, storyTitles3.items, storyTitles4.items] %}
+{% set comma = joiner(",") %}
+{% for stories in titlePages %}
+  {% for story in stories %}
+  {{ comma() }}{
+    "title": {{ story.title | dump | safe }},
+    "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %}
+  }
+  {% endfor %}
+{% endfor %}
+]

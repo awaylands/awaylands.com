@@ -1,123 +1,216 @@
-body.awaylands-takeshape-skim {
-  --al-editor-ink: #231f20;
-  --al-editor-muted: #6f6865;
-  --al-editor-accent: #785a50;
-  --al-editor-accent-soft: #f4ece8;
-  --al-editor-card: #fffdfb;
-  --al-editor-border: #cdbfb8;
+body.awaylands-takeshape-skim .awaylands-editor-original-story-heading {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-grid {
+  display: grid !important;
+  gap: 18px !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-box {
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 4px;
+  background: transparent;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 48px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  padding: 11px 16px;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: left;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-toggle[aria-expanded="false"] {
+  border-bottom-color: transparent;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-indicator:before {
+  content: "−";
+  font-size: 22px;
+  font-weight: 500;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-toggle[aria-expanded="false"] .awaylands-editor-section-indicator:before {
+  content: "+";
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-body {
+  display: grid;
+  gap: 20px;
+  padding: 18px;
+}
+
+body.awaylands-takeshape-skim .awaylands-editor-section-body[hidden] {
+  display: none !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-editor-section-title {
-  display: flex !important;
-  align-items: center !important;
-  min-height: 48px !important;
-  margin: 30px 0 14px !important;
-  padding: 11px 16px !important;
-  border: 1px solid var(--al-editor-border) !important;
-  border-left: 7px solid var(--al-editor-accent) !important;
-  border-radius: 5px !important;
-  background: var(--al-editor-accent-soft) !important;
-  color: var(--al-editor-ink) !important;
-  font-size: 20px !important;
-  font-weight: 800 !important;
-  line-height: 1.25 !important;
-  letter-spacing: 0.01em !important;
+  min-height: 0 !important;
+  margin: 4px 0 8px !important;
+  padding: 0 0 7px 10px !important;
+  border: 0 !important;
+  border-left: 2px solid currentColor !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: inherit !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0 !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-editor-content-title {
-  margin-top: 20px !important;
-  border-left-width: 10px !important;
-  background: #eee5df !important;
-  font-size: 18px !important;
+  margin-top: 8px !important;
+  font-size: 13px !important;
 }
 
 body.awaylands-takeshape-skim .MuiInputLabel-root,
 body.awaylands-takeshape-skim .MuiFormLabel-root {
-  color: var(--al-editor-ink) !important;
-  font-size: 15px !important;
-  font-weight: 750 !important;
-  letter-spacing: 0.01em !important;
-}
-
-body.awaylands-takeshape-skim .awaylands-editor-important-field .MuiInputLabel-root,
-body.awaylands-takeshape-skim .awaylands-editor-important-field .MuiFormLabel-root {
-  color: var(--al-editor-accent) !important;
-  font-size: 16px !important;
-  font-weight: 850 !important;
+  color: inherit !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiInputLabel-root,
 body.awaylands-takeshape-skim .awaylands-editor-optional-field .MuiFormLabel-root {
-  color: var(--al-editor-muted) !important;
-  font-size: 13px !important;
-  font-weight: 650 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
 }
 
 body.awaylands-takeshape-skim .MuiInputBase-input,
 body.awaylands-takeshape-skim [contenteditable="true"] {
-  color: var(--al-editor-ink) !important;
-  font-size: 16px !important;
-  line-height: 1.55 !important;
+  color: inherit !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
 }
 
 body.awaylands-takeshape-skim .MuiSelect-select,
 body.awaylands-takeshape-skim [role="combobox"] {
-  font-size: 16px !important;
-  font-weight: 700 !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
 }
 
 body.awaylands-takeshape-skim .MuiFormHelperText-root,
 body.awaylands-takeshape-skim .MuiTypography-caption {
-  color: var(--al-editor-muted) !important;
+  color: inherit !important;
   font-size: 12px !important;
-  line-height: 1.45 !important;
-}
-
-body.awaylands-takeshape-skim .MuiOutlinedInput-root {
-  background: var(--al-editor-card) !important;
-}
-
-body.awaylands-takeshape-skim .awaylands-editor-important-field .MuiOutlinedInput-notchedOutline {
-  border-width: 2px !important;
-  border-color: var(--al-editor-border) !important;
+  line-height: 1.4 !important;
+  opacity: 0.72;
 }
 
 body.awaylands-takeshape-skim button {
-  font-size: 14px;
-}
-
-body.awaylands-takeshape-skim button[aria-label*="Section"],
-body.awaylands-takeshape-skim button[aria-label*="Layout"] {
-  font-weight: 750 !important;
+  font-size: 13px;
 }
 
 body.awaylands-takeshape-skim .ProseMirror h1,
 body.awaylands-takeshape-skim .ProseMirror h2,
 body.awaylands-takeshape-skim .ProseMirror h3 {
-  color: var(--al-editor-ink) !important;
+  color: inherit !important;
   font-weight: 800 !important;
 }
 
 body.awaylands-takeshape-skim .ProseMirror h1 {
-  font-size: 30px !important;
+  font-size: 28px !important;
 }
 
 body.awaylands-takeshape-skim .ProseMirror h2 {
-  font-size: 25px !important;
+  font-size: 23px !important;
 }
 
 body.awaylands-takeshape-skim .ProseMirror h3 {
-  font-size: 21px !important;
+  font-size: 19px !important;
 }
 
 body.awaylands-takeshape-skim .ProseMirror p,
 body.awaylands-takeshape-skim .ProseMirror li {
-  font-size: 16px !important;
-  line-height: 1.7 !important;
+  font-size: 15px !important;
+  line-height: 1.65 !important;
 }
 
 body.awaylands-takeshape-skim .ProseMirror strong {
   font-weight: 800 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-block-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-block-buttons button,
+body.awaylands-takeshape-skim .awaylands-at-a-glance-toggle,
+body.awaylands-takeshape-skim .awaylands-revolve-converter {
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  background: transparent;
+  color: inherit;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+body.awaylands-takeshape-skim .awaylands-original-add-content {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-at-a-glance-toggle {
+  width: fit-content;
+  margin: 4px 0 8px;
+}
+
+body.awaylands-takeshape-skim .awaylands-at-a-glance-options[hidden] {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-shop-item {
+  margin-bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 3px;
+  padding: 10px;
+}
+
+body.awaylands-takeshape-skim .awaylands-shop-item-toggle {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 4px;
+  text-align: left;
+}
+
+body.awaylands-takeshape-skim .awaylands-shop-item-toggle code {
+  overflow: hidden;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.awaylands-takeshape-skim .awaylands-shop-item.is-collapsed > :not(.awaylands-shop-item-toggle) {
+  display: none !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-revolve-converter {
@@ -125,19 +218,96 @@ body.awaylands-takeshape-skim .awaylands-revolve-converter {
   align-items: center;
   justify-content: center;
   margin: 10px 0 4px;
-  border: 1px solid var(--al-editor-accent);
-  border-radius: 3px;
-  background: #fffdf9;
-  color: var(--al-editor-accent);
-  padding: 8px 12px;
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 body.awaylands-takeshape-skim .awaylands-revolve-converter:disabled {
-  border-color: var(--al-editor-border);
-  color: var(--al-editor-muted);
   cursor: default;
+  opacity: 0.6;
+}
+
+body.awaylands-takeshape-skim .awaylands-related-results {
+  position: relative;
+  z-index: 3;
+  max-height: 320px;
+  overflow-y: auto;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  border-radius: 3px;
+  background: Canvas;
+  padding: 5px;
+}
+
+body.awaylands-takeshape-skim .awaylands-related-results[hidden] {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-related-results button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  background: transparent;
+  color: inherit;
+  padding: 8px 9px;
+  text-align: left;
+}
+
+body.awaylands-takeshape-skim .awaylands-related-results button:hover,
+body.awaylands-takeshape-skim .awaylands-related-results button:focus {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+body.awaylands-takeshape-skim .awaylands-related-results p {
+  margin: 0;
+  padding: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+body.awaylands-takeshape-skim aside.floating-sidebar-module__sidebarContent___M-tdm,
+body.awaylands-takeshape-skim [role="complementary"].floating-sidebar-module__sidebarContent___M-tdm {
+  width: 373px !important;
+  max-width: 40vw !important;
+  overflow-y: hidden !important;
+}
+
+body.awaylands-takeshape-skim [class*="asset-picker-grid-module__grid"] {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  grid-template-rows: repeat(7, minmax(0, 1fr)) !important;
+  width: 100% !important;
+  height: calc(100vh - 176px) !important;
+  overflow: hidden !important;
+}
+
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__asset"] {
+  display: grid !important;
+  grid-template-rows: auto minmax(0, 1fr) !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+}
+
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__content"],
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__inner"],
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__preview"] {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+}
+
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__preview"] {
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__title"] {
+  overflow: hidden !important;
+  font-size: 10px !important;
+  line-height: 1.15 !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
 }
