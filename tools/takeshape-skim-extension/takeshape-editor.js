@@ -151,6 +151,58 @@
     }
   }
 
+  function makeStorySaveContinue() {
+    if (!/\/data\/Story\//i.test(window.location.pathname)) {
+      return;
+    }
+
+    const save = topActionCandidate(/^save$/i);
+
+    if (!save || save.hasAttribute('data-awaylands-save-continue')) {
+      return;
+    }
+
+    save.setAttribute('data-awaylands-save-continue', 'true');
+    save.setAttribute('title', 'Save and continue editing this story');
+    save.addEventListener('click', event => {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      const saveRect = save.getBoundingClientRect();
+      const nearbyButtons = Array.from((save.parentElement || document).querySelectorAll('button')).filter(button => {
+        if (button === save || button.closest('[role="dialog"], [role="menu"], [role="listbox"]')) {
+          return false;
+        }
+        const rect = button.getBoundingClientRect();
+        return Math.abs(rect.top - saveRect.top) < 8 && rect.left >= saveRect.right - 4 && rect.left <= saveRect.right + 90;
+      });
+      const menuToggle = nearbyButtons.find(button => button.getAttribute('aria-haspopup')) ||
+        nearbyButtons.find(button => button.querySelector('svg') || !normalizedText(button));
+
+      if (!menuToggle) {
+        save.removeAttribute('data-awaylands-save-continue');
+        save.setAttribute('title', 'Save menu was not available. Use the adjacent arrow and choose Save and Continue.');
+        return;
+      }
+
+      menuToggle.click();
+      let attempts = 0;
+      const chooseContinue = window.setInterval(() => {
+        const choices = Array.from(document.querySelectorAll('[role="menuitem"], [role="option"], [role="menu"] button, li button, li[role="button"]'));
+        const continueChoice = choices.find(choice => /^save\s+(and|&)\s+(continue|keep editing|continue editing)$/i.test(normalizedText(choice)));
+
+        attempts += 1;
+        if (continueChoice) {
+          window.clearInterval(chooseContinue);
+          continueChoice.click();
+        } else if (attempts >= 20) {
+          window.clearInterval(chooseContinue);
+          save.setAttribute('title', 'Choose Save and Continue from the open Save menu.');
+        }
+      }, 50);
+    }, true);
+  }
+
   function moveStoryToolsBelowGallery() {
     const galleryContent = document.querySelector('.awaylands-gallery-drawer-content');
     const galleryShell = document.querySelector('.awaylands-gallery-drawer-shell');
@@ -1750,6 +1802,7 @@
     runEnhancement('gallery close', keepGallerySidebarUsable);
     runEnhancement('persistent gallery', tryOpenPersistentGallery);
     runEnhancement('top publishing status', placePublishingStatusBeforeCancel);
+    runEnhancement('save and continue', makeStorySaveContinue);
     runEnhancement('story tools below gallery', moveStoryToolsBelowGallery);
     runEnhancement('bottom editor bar', releaseBottomEditorBar);
     runEnhancement('new story publishing default', enableNewStoryByDefault);
