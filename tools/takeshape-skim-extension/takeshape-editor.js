@@ -483,6 +483,11 @@
     dialog.addEventListener('keydown', event => {
       if (event.key === 'Escape') {
         close();
+      } else if (event.key === 'Enter' && !event.shiftKey && !event.isComposing && event.target === textarea) {
+        event.preventDefault();
+        if (!insert.disabled) {
+          insert.click();
+        }
       }
     });
     insert.addEventListener('click', () => {
