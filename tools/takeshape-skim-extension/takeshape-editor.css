@@ -434,6 +434,55 @@ body.awaylands-takeshape-skim .awaylands-new-inline-html-block textarea {
   overflow-wrap: anywhere;
 }
 
+body.awaylands-takeshape-skim [data-awaylands-inline-html-marker] {
+  display: grid !important;
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  gap: 6px 14px !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-height: 64px !important;
+  margin: 16px 0 !important;
+  border: 2px solid rgb(92, 107, 192) !important;
+  border-radius: 4px !important;
+  background: rgba(92, 107, 192, 0.08) !important;
+  color: transparent !important;
+  padding: 12px 14px !important;
+  font-size: 0 !important;
+  cursor: pointer !important;
+}
+
+body.awaylands-takeshape-skim [data-awaylands-inline-html-marker]:before {
+  content: "HTML BLOCK";
+  grid-row: 1 / span 2;
+  border-radius: 3px;
+  background: rgb(92, 107, 192);
+  color: #ffffff;
+  padding: 6px 9px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+body.awaylands-takeshape-skim [data-awaylands-inline-html-marker]:after {
+  content: "Inserted here - click to preview or edit";
+  color: rgb(69, 90, 100);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+body.awaylands-takeshape-skim [data-awaylands-inline-html-marker]:hover,
+body.awaylands-takeshape-skim [data-awaylands-inline-html-marker]:focus {
+  background: rgba(92, 107, 192, 0.15) !important;
+  outline: 2px solid rgba(92, 107, 192, 0.35) !important;
+  outline-offset: 2px !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-inline-html-storage-block {
+  display: none !important;
+}
+
 body.awaylands-takeshape-skim .awaylands-published-date-now {
   align-self: flex-start;
   width: auto !important;

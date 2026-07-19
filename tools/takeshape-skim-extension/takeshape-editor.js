@@ -349,6 +349,7 @@
 
         setEditorValue(textarea, `<div data-awaylands-inline-html="${marker}">${value.trim()}</div>`);
         textarea.closest('[data-testid^="array-field-item-contentBlocks["]').classList.add('awaylands-new-inline-html-block');
+        window.setTimeout(decorateInlineHtmlMarkers, 0);
         callback(true, textarea);
       }, 30);
     }, 30);
@@ -388,7 +389,14 @@
     preview.src = preview._awaylandsPreviewUrl;
   }
 
-  function openHtmlInsertDialog(editor, value, source) {
+  function storedInlineHtml(textarea, marker) {
+    const escapedMarker = marker.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const match = (textarea.value || '').match(new RegExp(`^\\s*<div\\b[^>]*data-awaylands-inline-html=["']${escapedMarker}["'][^>]*>([\\s\\S]*)<\\/div>\\s*$`, 'i'));
+
+    return match ? match[1] : textarea.value;
+  }
+
+  function openHtmlInsertDialog(editor, value, source, existingTextarea, existingMarker) {
     closeHtmlInsertDialog();
 
     const range = currentEditorSelection(editor);
@@ -413,6 +421,8 @@
       editor,
       range,
       source,
+      existingTextarea: existingTextarea || null,
+      existingMarker: existingMarker || '',
       scrollX: window.scrollX,
       scrollY: window.scrollY
     };
@@ -423,8 +433,8 @@
     panel.setAttribute('aria-modal', 'true');
     panel.setAttribute('aria-labelledby', 'awaylands-inline-html-title');
     heading.id = 'awaylands-inline-html-title';
-    heading.textContent = 'Insert HTML';
-    description.textContent = 'Paste an embed, product list, table, button, or custom HTML.';
+    heading.textContent = existingTextarea ? 'Edit HTML Block' : 'Insert HTML';
+    description.textContent = existingTextarea ? 'This block stays linked to the inline position shown in Content.' : 'Paste an embed, product list, table, button, or custom HTML.';
     closeButton.type = 'button';
     closeButton.className = 'awaylands-inline-html-close';
     closeButton.setAttribute('aria-label', 'Close');
@@ -444,7 +454,7 @@
     cancelButton.textContent = 'Cancel';
     insert.type = 'button';
     insert.className = 'awaylands-inline-html-insert';
-    insert.textContent = 'Insert HTML';
+    insert.textContent = existingTextarea ? 'Save HTML' : 'Insert HTML';
 
     headingGroup.appendChild(heading);
     headingGroup.appendChild(description);
@@ -484,6 +494,15 @@
         updateHtmlPreview(dialog);
         return;
       }
+      if (state.existingTextarea && state.existingMarker) {
+        const returnScrollX = state.scrollX;
+        const returnScrollY = state.scrollY;
+
+        setEditorValue(state.existingTextarea, `<div data-awaylands-inline-html="${state.existingMarker}">${html.trim()}</div>`);
+        closeHtmlInsertDialog();
+        window.requestAnimationFrame(() => window.scrollTo(returnScrollX, returnScrollY));
+        return;
+      }
       insert.disabled = true;
       insert.textContent = 'Inserting...';
       if (!insertMarkerAtSelection(state.editor, state.range, marker)) {
@@ -518,6 +537,54 @@
     updateHtmlPreview(dialog);
     textarea.focus();
     panel.scrollTop = 0;
+  }
+
+  function inlineHtmlTextareasByMarker() {
+    const fields = new Map();
+
+    htmlTextareas().forEach(textarea => {
+      const match = (textarea.value || '').match(/data-awaylands-inline-html=["']([a-z0-9-]+)["']/i);
+
+      if (match) {
+        fields.set(match[1], textarea);
+      }
+    });
+    return fields;
+  }
+
+  function decorateInlineHtmlMarkers() {
+    const fields = inlineHtmlTextareasByMarker();
+
+    contentEditors().forEach(editor => {
+      editor.querySelectorAll('p, div').forEach(element => {
+        const match = normalizedText(element).match(/^\[\[AWAYLANDS_HTML:([a-z0-9-]+)\]\]$/i);
+        const textarea = match && fields.get(match[1]);
+
+        if (!textarea || element.querySelector('p, div') || element.hasAttribute('data-awaylands-inline-html-marker')) {
+          return;
+        }
+
+        const marker = match[1];
+        const storageBlock = textarea.closest('[data-testid^="array-field-item-contentBlocks["]');
+        const edit = () => openHtmlInsertDialog(editor, storedInlineHtml(textarea, marker), 'existing', textarea, marker);
+
+        element.setAttribute('data-awaylands-inline-html-marker', marker);
+        element.setAttribute('role', 'button');
+        element.setAttribute('tabindex', '0');
+        element.setAttribute('aria-label', 'Edit inline HTML block');
+        element.addEventListener('click', edit);
+        element.addEventListener('keydown', event => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            edit();
+          }
+        });
+        if (storageBlock) {
+          storageBlock.classList.remove('awaylands-new-inline-html-block');
+          storageBlock.classList.add('awaylands-inline-html-storage-block');
+        }
+      });
+    });
   }
 
   function enhanceInlineHtmlInsertion() {
@@ -1414,6 +1481,7 @@
 
     runEnhancement('content block buttons', addContentBlockButtons);
     runEnhancement('inline HTML', enhanceInlineHtmlInsertion);
+    runEnhancement('inline HTML markers', decorateInlineHtmlMarkers);
     runEnhancement('unused controls', removeUnusedControls);
     runEnhancement('At a Glance', collapseAtAGlanceOptions);
     runEnhancement('Shop the Edit', collapseShopItems);
