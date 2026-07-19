@@ -884,18 +884,13 @@ function normalizeStorySpacing(el) {
       return;
     }
 
-    const previous = child.previousElementSibling;
     const next = child.nextElementSibling;
-    const previousIsImage = previous && (
-      previous.tagName === 'FIGURE' ||
-      previous.classList.contains('story-gallery')
-    );
     const nextIsImage = next && (
       next.tagName === 'FIGURE' ||
       next.classList.contains('story-gallery')
     );
 
-    if (previousIsImage && nextIsImage) {
+    if (nextIsImage) {
       child.parentNode.removeChild(child);
       return;
     }
@@ -908,6 +903,14 @@ function normalizeStorySpacing(el) {
     child.classList.add('story-line-break');
     child.setAttribute('aria-hidden', 'true');
     previousWasLineBreak = true;
+  });
+
+  Array.prototype.slice.call(el.children).forEach(child => {
+    const next = child.nextElementSibling;
+    const childIsImage = child.tagName === 'FIGURE' || child.classList.contains('story-gallery');
+    const nextIsImage = next && (next.tagName === 'FIGURE' || next.classList.contains('story-gallery'));
+
+    child.classList.toggle('story-image-followed-by-image', !!(childIsImage && nextIsImage));
   });
 }
 

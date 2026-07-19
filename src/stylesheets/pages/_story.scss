@@ -978,7 +978,7 @@ body.body--story {
   float: none;
   width: auto;
   max-width: 84rem;
-  margin: 4.8rem auto 4.8rem calc(50% - 42rem);
+  margin: 0 auto 4.8rem calc(50% - 42rem);
   padding: 0;
   cursor: zoom-in;
 }
@@ -1030,6 +1030,10 @@ body.body--story {
 
 .story-article__body figure.spacing-none {
   margin-top: 0;
+  margin-bottom: 0;
+}
+
+.story-article__body .story-image-followed-by-image {
   margin-bottom: 0;
 }
 
@@ -1186,7 +1190,7 @@ body.body--story {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   max-width: 84rem;
-  margin: 5.4rem auto;
+  margin: 0 auto 5.4rem;
   clear: both;
 }
 
