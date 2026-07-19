@@ -1,0 +1,45 @@
+<script>
+(function () {
+  function storyKey(element) {
+    var link = element && element.querySelector('a[href*="/story/"]');
+    if (!link) return '';
+    try {
+      return new URL(link.href, window.location.origin).pathname.replace(/\/+$/, '').toLowerCase();
+    } catch (error) {
+      return link.getAttribute('href').replace(/[?#].*$/, '').replace(/\/+$/, '').toLowerCase();
+    }
+  }
+
+  function claim(element, used) {
+    var key = storyKey(element);
+    if (!key || used.has(key)) {
+      element.remove();
+      return false;
+    }
+    used.add(key);
+    return true;
+  }
+
+  var used = new Set();
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-story-dedupe-featured]'), function (featured) {
+    claim(featured, used);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-story-dedupe-recent] [data-story-dedupe-item]'), function (item) {
+    claim(item, used);
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-story-dedupe-section]'), function (section) {
+    var limit = Number(section.getAttribute('data-story-limit')) || 6;
+    var kept = 0;
+    Array.prototype.forEach.call(section.querySelectorAll('[data-story-dedupe-item]'), function (item) {
+      if (kept >= limit || !claim(item, used)) {
+        item.remove();
+        return;
+      }
+      kept += 1;
+    });
+  });
+})();
+</script>

@@ -64,7 +64,7 @@
     </div>
 
     {% if page.featuredStory %}
-      <div class="blog-featured__pin">
+      <div class="blog-featured__pin" data-story-dedupe-featured>
         {{ blogCard(page.featuredStory, "pinned", "(min-width: 1200px) 40vw, (min-width: 900px) 42vw, 100vw", true) }}
       </div>
     {% else %}
@@ -72,7 +72,7 @@
     {% if category.title == "* Most Popular Posts *" %}
     {% for story in category.storySet.items %}
     {% if story.title == "Best Travel Photography Cameras and Gear (From a Professional Photographer)" %}
-      <div class="blog-featured__pin">
+      <div class="blog-featured__pin" data-story-dedupe-featured>
         {{ blogCard(story, "pinned", "(min-width: 1200px) 40vw, (min-width: 900px) 42vw, 100vw", true) }}
       </div>
     {% endif %}
@@ -83,68 +83,68 @@
   </section>
 
   <section class="blog-category-strips" aria-label="Featured blog categories">
-    <div class="blog-category-strip">
+    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
       <div class="blog-category-strip__header">
         <h2 class="blog-category-strip__heading">Most Popular Posts</h2>
         <a class="blog-category-strip__link" href="/category/most-popular-posts">View All</a>
       </div>
 
       <ul class="blog-category-strip__list">
-        {% for category in featuredCategories.items %}
+        {% for category in featuredCategoryCandidates.items %}
         {% if category.title == "* Most Popular Posts *" %}
         {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
-        <li>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
         {% endfor %}
         {% endif %}
         {% endfor %}
       </ul>
     </div>
 
-    <div class="blog-category-strip">
+    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
       <div class="blog-category-strip__header">
         <h2 class="blog-category-strip__heading">Best Beaches</h2>
         <a class="blog-category-strip__link" href="/category/best-beaches">View All</a>
       </div>
 
       <ul class="blog-category-strip__list">
-        {% for category in featuredCategories.items %}
+        {% for category in featuredCategoryCandidates.items %}
         {% if category.title == "Best Beaches" %}
         {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
-        <li>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
         {% endfor %}
         {% endif %}
         {% endfor %}
       </ul>
     </div>
 
-    <div class="blog-category-strip">
+    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
       <div class="blog-category-strip__header">
         <h2 class="blog-category-strip__heading">Packing Guides</h2>
         <a class="blog-category-strip__link" href="/category/packing-guides">View All</a>
       </div>
 
       <ul class="blog-category-strip__list">
-        {% for category in featuredCategories.items %}
+        {% for category in featuredCategoryCandidates.items %}
         {% if category.title == "Packing Guides" %}
         {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
-        <li>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
         {% endfor %}
         {% endif %}
         {% endfor %}
       </ul>
     </div>
 
-    <div class="blog-category-strip">
+    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
       <div class="blog-category-strip__header">
         <h2 class="blog-category-strip__heading">Travel Guides</h2>
         <a class="blog-category-strip__link" href="/category/travel-guides">View All</a>
       </div>
 
       <ul class="blog-category-strip__list">
-        {% for category in featuredCategories.items %}
+        {% for category in featuredCategoryCandidates.items %}
         {% if category.title == "Travel Guides" %}
         {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
-        <li>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
+        <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
         {% endfor %}
         {% endif %}
         {% endfor %}
@@ -156,9 +156,9 @@
   <div class="listings">
     <h2 class="listings__heading">{% if pagination.currentPage == 1 %}Recent Posts{% else %}Blog Archive{% endif %}</h2>
 
-    <ul class="listings__list">
+    <ul class="listings__list"{% if pagination.currentPage == 1 %} data-story-dedupe-recent{% endif %}>
       {% for story in sortedStories %}
-      <li>
+      <li{% if pagination.currentPage == 1 %} data-story-dedupe-item{% endif %}>
         <div class="listing">
           <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
             <div class="listing__image">
@@ -199,6 +199,10 @@
       {% endfor %}
     </ul>
   </div>
+
+  {% if pagination.currentPage == 1 %}
+  {% include "partials/blog-story-dedupe.html" %}
+  {% endif %}
 
   {% include "partials/pagination.html" %}
 {% endblock %}

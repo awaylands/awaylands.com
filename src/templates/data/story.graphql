@@ -32,6 +32,24 @@ query {
       }
     }
   }
+  featuredCategoryCandidates: getCategoryList {
+    items {
+      title
+      storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
+        items {
+          _contentTypeName
+          _enabledAt
+          title
+          slug
+          category { title }
+          tout {
+            image { path }
+            dek
+          }
+        }
+      }
+    }
+  }
   recentStories: getStoryList(size: 8, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
