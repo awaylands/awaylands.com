@@ -292,20 +292,26 @@
   }
 
   function selectMenuValue(original, title) {
-    original.dispatchEvent(new MouseEvent('mousedown', {
-      bubbles: true,
-      cancelable: true,
-      view: window
-    }));
     window.setTimeout(() => {
-      const openList = Array.from(document.querySelectorAll('[role="listbox"]')).find(list => list.querySelector('.MuiMenuItem-root, [role="option"]'));
-      const options = openList ? Array.from(openList.querySelectorAll('.MuiMenuItem-root, [role="option"]')) : [];
-      const option = options.find(item => normalizedText(item) === title);
+      original.dispatchEvent(new MouseEvent('mousedown', {
+        bubbles: true,
+        button: 0,
+        buttons: 1,
+        cancelable: true,
+        view: window
+      }));
+      window.setTimeout(() => {
+        const listboxes = Array.from(document.querySelectorAll('[role="listbox"]'));
+        const labelledBy = original.getAttribute('aria-labelledby');
+        const openList = listboxes.find(list => list.getAttribute('aria-labelledby') === labelledBy) || listboxes[listboxes.length - 1];
+        const options = openList ? Array.from(openList.querySelectorAll('.MuiMenuItem-root, [role="option"]')) : [];
+        const option = options.find(item => normalizedText(item) === title);
 
-      if (option) {
-        option.click();
-      }
-    }, 120);
+        if (option) {
+          option.click();
+        }
+      }, 120);
+    }, 0);
   }
 
   function addChoiceBoxes(labelText, choices) {
@@ -332,7 +338,13 @@
       button.type = 'button';
       button.textContent = choice[0];
       button.setAttribute('data-value', choice[1]);
-      button.addEventListener('click', () => {
+      button.addEventListener('mousedown', event => {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
         selectMenuValue(original, choice[0]);
         window.setTimeout(sync, 100);
         window.setTimeout(sync, 300);
@@ -518,7 +530,13 @@
       button.type = 'button';
       button.textContent = choice[0];
       button.setAttribute('data-value', choice[1]);
-      button.addEventListener('click', () => {
+      button.addEventListener('mousedown', event => {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
         selectMenuValue(original, choice[2]);
         window.setTimeout(sync, 120);
         window.setTimeout(sync, 350);
