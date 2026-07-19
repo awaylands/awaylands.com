@@ -707,28 +707,17 @@ body.awaylands-takeshape-skim .awaylands-revolve-converter:disabled {
 }
 
 body.awaylands-takeshape-skim .awaylands-related-results {
-  position: absolute;
-  right: 0;
-  bottom: calc(100% + 8px);
-  left: 0;
-  z-index: 1400;
-  max-height: 420px;
-  overflow-y: auto;
-  border: 0;
-  border-radius: 4px;
-  background: #ffffff;
-  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 1px -1px, rgba(0, 0, 0, 0.14) 0 1px 1px 0, rgba(0, 0, 0, 0.12) 0 1px 3px 0;
-  padding: 8px 0;
+  display: none !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-related-search-host {
-  position: relative !important;
-  z-index: 4;
+  position: static !important;
+  z-index: auto !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-editor-section-box[data-section="related-stories"] {
   overflow: visible !important;
-  margin-bottom: 320px !important;
+  margin-bottom: 0 !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-related-results[hidden] {

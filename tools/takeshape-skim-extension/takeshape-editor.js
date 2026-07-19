@@ -1583,44 +1583,18 @@
   }
 
   function improveRelatedStorySearch() {
+    document.querySelectorAll(`.${RELATED_RESULTS_CLASS}`).forEach(results => results.remove());
+    document.querySelectorAll('.awaylands-related-search-host').forEach(host => host.classList.remove('awaylands-related-search-host'));
+
     const label = Array.from(document.querySelectorAll('label')).find(item => normalizedText(item) === 'Related Stories');
     const field = label && label.closest('.MuiFormControl-root');
     const input = field && field.querySelector('input[role="combobox"]');
 
-    if (!field || !input || field.parentNode.querySelector(`.${RELATED_RESULTS_CLASS}`)) {
+    if (!field || !input) {
       return;
     }
-
-    const results = document.createElement('div');
-    const host = field.parentNode;
-
-    results.className = RELATED_RESULTS_CLASS;
-    results.hidden = true;
-    host.classList.add('awaylands-related-search-host');
-    host.insertBefore(results, field.nextSibling);
-    const showResults = () => {
-      if (relatedSelectionInputs.has(input)) {
-        results.hidden = true;
-        return;
-      }
-      showElementMessage(results, 'Loading stories...');
-      results.hidden = false;
-      storyTitles().then(items => renderRelatedResults(input, results, items));
-    };
-
-    input.addEventListener('input', showResults);
-    input.addEventListener('focus', showResults);
-    input.addEventListener('click', showResults);
-    input.addEventListener('keydown', event => {
-      if (event.key === 'Escape') {
-        results.hidden = true;
-      }
-    });
-    document.addEventListener('mousedown', event => {
-      if (!host.contains(event.target)) {
-        results.hidden = true;
-      }
-    });
+    input.setAttribute('data-awaylands-native-related-search', 'true');
+    input.setAttribute('title', 'Search and select a story from TakeShape’s relationship results.');
   }
 
   function setEditorValue(field, value) {
