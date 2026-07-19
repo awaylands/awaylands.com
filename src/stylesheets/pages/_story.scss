@@ -472,10 +472,8 @@ body.body--story {
   column-gap: 0.7rem;
   align-content: start;
   min-width: 0;
-  border: 1px solid rgba(128, 92, 70, 0.25);
-  border-radius: 0.3rem;
-  background: rgba(255, 252, 248, 0.78);
-  box-shadow: 0 0.8rem 2.4rem rgba(54, 39, 31, 0.06);
+  border: 1px solid rgba(22, 110, 120, 0.22);
+  background: rgba(255, 255, 255, 0.28);
   color: var(--story-link);
   text-decoration: none;
   scroll-snap-align: start;
@@ -483,7 +481,6 @@ body.body--story {
 
 .story-rail__pick:hover {
   border-color: var(--story-orange);
-  box-shadow: 0 1rem 2.8rem rgba(54, 39, 31, 0.1);
   color: var(--story-orange);
 }
 
@@ -503,16 +500,11 @@ body.body--story {
 }
 
 .story-rail__pick-embed {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   grid-column: 1 / -1;
   width: 100%;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  padding: 0.8rem;
-  background: #f5eee8;
+  background: rgba(22, 110, 120, 0.08);
 }
 
 .story-rail__pick-embed iframe,
@@ -524,35 +516,6 @@ body.body--story {
   max-width: 100%;
   border: 0;
   object-fit: cover;
-}
-
-.story-rail__pick-embed > a {
-  overflow: hidden;
-}
-
-.story-rail__pick-embed .shopthepost-widget,
-.story-rail__pick-embed [data-ltk-widget] {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background: transparent !important;
-}
-
-.story-rail__pick-embed .rs-adblock {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  color: rgba(24, 32, 31, 0.7);
-  font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.4;
-  text-align: center;
 }
 
 .story-rail__pick-number {
@@ -582,11 +545,6 @@ body.body--story {
   text-decoration: underline;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.14em;
-}
-
-.story-rail__pick--embed .story-rail__pick-number,
-.story-rail__pick--embed .story-rail__pick-name {
-  background: rgba(255, 252, 248, 0.94);
 }
 
 .story-rail__pick--text-only {
