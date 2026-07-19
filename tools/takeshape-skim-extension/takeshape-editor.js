@@ -23,6 +23,20 @@
     return (element.textContent || '').replace(/\s+/g, ' ').trim();
   }
 
+  function clearElement(element) {
+    while (element.firstChild) {
+      element.removeChild(element.firstChild);
+    }
+  }
+
+  function showElementMessage(element, message) {
+    const paragraph = document.createElement('p');
+
+    paragraph.textContent = message;
+    clearElement(element);
+    element.appendChild(paragraph);
+  }
+
   function storyForm() {
     const storyHeading = Array.from(document.querySelectorAll('h4')).find(heading => normalizedText(heading) === 'Story');
     let box = storyHeading;
@@ -292,6 +306,11 @@
     const dialog = document.querySelector(`.${HTML_INSERT_DIALOG_CLASS}`);
 
     if (dialog) {
+      const preview = dialog.querySelector('.awaylands-inline-html-preview');
+
+      if (preview && preview._awaylandsPreviewUrl) {
+        URL.revokeObjectURL(preview._awaylandsPreviewUrl);
+      }
       dialog.remove();
     }
     htmlInsertState = null;
@@ -307,7 +326,14 @@
     message.textContent = validation || 'Ready to insert as a native HTML block at the selected position.';
     message.classList.toggle('is-error', Boolean(validation));
     insert.disabled = Boolean(validation);
-    preview.srcdoc = `<!doctype html><style>body{margin:16px;font:14px Arial,sans-serif;color:#333}img,iframe,video{max-width:100%}</style>${textarea.value}`;
+    if (preview._awaylandsPreviewUrl) {
+      URL.revokeObjectURL(preview._awaylandsPreviewUrl);
+    }
+    preview._awaylandsPreviewUrl = URL.createObjectURL(new Blob([
+      '<!doctype html><style>body{margin:16px;font:14px Arial,sans-serif;color:#333}img,iframe,video{max-width:100%}</style>',
+      textarea.value
+    ], { type: 'text/html' }));
+    preview.src = preview._awaylandsPreviewUrl;
   }
 
   function openHtmlInsertDialog(editor, value, source) {
@@ -315,6 +341,21 @@
 
     const range = currentEditorSelection(editor);
     const dialog = document.createElement('div');
+    const backdrop = document.createElement('div');
+    const panel = document.createElement('section');
+    const header = document.createElement('header');
+    const headingGroup = document.createElement('div');
+    const heading = document.createElement('h2');
+    const description = document.createElement('p');
+    const closeButton = document.createElement('button');
+    const textarea = document.createElement('textarea');
+    const message = document.createElement('p');
+    const previewWrap = document.createElement('div');
+    const previewLabel = document.createElement('span');
+    const preview = document.createElement('iframe');
+    const footer = document.createElement('footer');
+    const cancelButton = document.createElement('button');
+    const insert = document.createElement('button');
 
     htmlInsertState = {
       editor,
@@ -324,28 +365,59 @@
       scrollY: window.scrollY
     };
     dialog.className = HTML_INSERT_DIALOG_CLASS;
-    dialog.innerHTML = [
-      '<div class="awaylands-inline-html-backdrop"></div>',
-      '<section class="awaylands-inline-html-panel" role="dialog" aria-modal="true" aria-labelledby="awaylands-inline-html-title">',
-      '<header><div><h2 id="awaylands-inline-html-title">Insert HTML</h2><p>Paste an embed, product list, table, button, or custom HTML.</p></div><button type="button" class="awaylands-inline-html-close" aria-label="Close">×</button></header>',
-      '<textarea class="awaylands-inline-html-source" aria-label="HTML source" spellcheck="false"></textarea>',
-      '<p class="awaylands-inline-html-message" role="status"></p>',
-      '<div class="awaylands-inline-html-preview-wrap"><span>Preview - scripts are disabled here for safety</span><iframe class="awaylands-inline-html-preview" title="HTML preview" sandbox=""></iframe></div>',
-      '<footer><button type="button" class="awaylands-inline-html-cancel">Cancel</button><button type="button" class="awaylands-inline-html-insert">Insert HTML</button></footer>',
-      '</section>'
-    ].join('');
-    document.body.appendChild(dialog);
-    const panel = dialog.querySelector('.awaylands-inline-html-panel');
+    backdrop.className = 'awaylands-inline-html-backdrop';
+    panel.className = 'awaylands-inline-html-panel';
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-modal', 'true');
+    panel.setAttribute('aria-labelledby', 'awaylands-inline-html-title');
+    heading.id = 'awaylands-inline-html-title';
+    heading.textContent = 'Insert HTML';
+    description.textContent = 'Paste an embed, product list, table, button, or custom HTML.';
+    closeButton.type = 'button';
+    closeButton.className = 'awaylands-inline-html-close';
+    closeButton.setAttribute('aria-label', 'Close');
+    closeButton.textContent = '×';
+    textarea.className = 'awaylands-inline-html-source';
+    textarea.setAttribute('aria-label', 'HTML source');
+    textarea.spellcheck = false;
+    message.className = 'awaylands-inline-html-message';
+    message.setAttribute('role', 'status');
+    previewWrap.className = 'awaylands-inline-html-preview-wrap';
+    previewLabel.textContent = 'Preview - scripts are disabled here for safety';
+    preview.className = 'awaylands-inline-html-preview';
+    preview.title = 'HTML preview';
+    preview.setAttribute('sandbox', 'allow-same-origin');
+    cancelButton.type = 'button';
+    cancelButton.className = 'awaylands-inline-html-cancel';
+    cancelButton.textContent = 'Cancel';
+    insert.type = 'button';
+    insert.className = 'awaylands-inline-html-insert';
+    insert.textContent = 'Insert HTML';
 
-    const textarea = dialog.querySelector('.awaylands-inline-html-source');
-    const insert = dialog.querySelector('.awaylands-inline-html-insert');
+    headingGroup.appendChild(heading);
+    headingGroup.appendChild(description);
+    header.appendChild(headingGroup);
+    header.appendChild(closeButton);
+    previewWrap.appendChild(previewLabel);
+    previewWrap.appendChild(preview);
+    footer.appendChild(cancelButton);
+    footer.appendChild(insert);
+    panel.appendChild(header);
+    panel.appendChild(textarea);
+    panel.appendChild(message);
+    panel.appendChild(previewWrap);
+    panel.appendChild(footer);
+    dialog.appendChild(backdrop);
+    dialog.appendChild(panel);
+    document.body.appendChild(dialog);
+
     const close = () => closeHtmlInsertDialog();
 
     textarea.value = value || '';
     textarea.addEventListener('input', () => updateHtmlPreview(dialog));
-    dialog.querySelector('.awaylands-inline-html-close').addEventListener('click', close);
-    dialog.querySelector('.awaylands-inline-html-cancel').addEventListener('click', close);
-    dialog.querySelector('.awaylands-inline-html-backdrop').addEventListener('click', close);
+    closeButton.addEventListener('click', close);
+    cancelButton.addEventListener('click', close);
+    backdrop.addEventListener('click', close);
     dialog.addEventListener('keydown', event => {
       if (event.key === 'Escape') {
         close();
@@ -789,11 +861,18 @@
     }
 
     if (linked && !indicator) {
+      const icon = document.createElement('span');
+      const text = document.createElement('strong');
+
       indicator = document.createElement('span');
       indicator.className = 'awaylands-image-link-indicator';
       indicator.title = 'This image has a link';
       indicator.setAttribute('aria-label', 'Linked image');
-      indicator.innerHTML = '<span aria-hidden="true">↗</span><strong>Linked</strong>';
+      icon.setAttribute('aria-hidden', 'true');
+      icon.textContent = '↗';
+      text.textContent = 'Linked';
+      indicator.appendChild(icon);
+      indicator.appendChild(text);
       badges.appendChild(indicator);
     } else if (!linked && indicator) {
       indicator.remove();
@@ -1038,7 +1117,7 @@
         results.hidden = true;
       } else if (attempts >= 50) {
         window.clearInterval(timer);
-        results.innerHTML = '<p>TakeShape did not make this story selectable. The title is shown, but its publishing state may need to be enabled.</p>';
+        showElementMessage(results, 'TakeShape did not make this story selectable. The title is shown, but its publishing state may need to be enabled.');
       }
     }, 100);
   }
@@ -1053,7 +1132,7 @@
       return secondTime - firstTime;
     });
 
-    results.innerHTML = '';
+    clearElement(results);
     const matches = (query ? items.filter(item => {
       const title = item.title.toLowerCase();
 
@@ -1061,7 +1140,7 @@
     }) : sortedItems).slice(0, query ? 60 : 15);
 
     if (!matches.length) {
-      results.innerHTML = `<p>${query ? 'No matching stories found.' : 'Unable to load recent stories. Click the field to try again.'}</p>`;
+      showElementMessage(results, query ? 'No matching stories found.' : 'Unable to load recent stories. Click the field to try again.');
       results.hidden = false;
       return;
     }
@@ -1098,7 +1177,7 @@
     host.classList.add('awaylands-related-search-host');
     host.insertBefore(results, field.nextSibling);
     const showResults = () => {
-      results.innerHTML = '<p>Loading stories...</p>';
+      showElementMessage(results, 'Loading stories...');
       results.hidden = false;
       storyTitles().then(items => renderRelatedResults(input, results, items));
     };
@@ -1139,19 +1218,17 @@
   }
 
   function requestRevolveProduct(field, button) {
-    const template = document.createElement('template');
+    const match = (field.value || '').match(/<iframe\b[^>]*\bsrc\s*=\s*(["'])(https:\/\/rvlv\.me\/[^"']+)\1/i);
+    const sourceUrl = match && match[2] ? match[2].replace(/&amp;/g, '&') : '';
 
-    template.innerHTML = field.value || '';
-    const sourceFrame = template.content.querySelector('iframe[src*="rvlv.me"]');
-
-    if (!sourceFrame) {
+    if (!sourceUrl) {
       button.textContent = 'Paste a Revolve iframe first';
       return;
     }
 
     const preview = document.createElement('iframe');
 
-    preview.src = sourceFrame.src;
+    preview.src = sourceUrl;
     preview.hidden = true;
     preview.setAttribute('aria-hidden', 'true');
     preview.tabIndex = -1;
