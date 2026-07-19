@@ -848,6 +848,21 @@ body.awaylands-takeshape-skim .awaylands-gallery-story-tools > h3 {
   font-weight: 700;
 }
 
+body.awaylands-takeshape-skim .awaylands-story-tools-panel {
+  position: static !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: auto !important;
+  max-height: none !important;
+  flex: none !important;
+  margin: 0 !important;
+  transform: none !important;
+  overflow: visible !important;
+}
+
 body.awaylands-takeshape-skim {
   overflow-x: auto !important;
 }

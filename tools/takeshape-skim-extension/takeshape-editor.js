@@ -153,8 +153,9 @@
 
   function moveStoryToolsBelowGallery() {
     const galleryContent = document.querySelector('.awaylands-gallery-drawer-content');
+    const galleryShell = document.querySelector('.awaylands-gallery-drawer-shell');
 
-    if (!galleryContent) {
+    if (!galleryContent || !galleryShell) {
       return;
     }
 
@@ -169,6 +170,37 @@
     let panel = storyToolLabel.closest('aside, [class*="sidebar"]') ||
       storyToolLabel.closest('section, .MuiPaper-root, [class*="panel"]') ||
       storyToolLabel.parentElement;
+
+    const directChildWithin = (ancestor, descendant) => {
+      let child = descendant;
+
+      while (child && child.parentElement !== ancestor) {
+        child = child.parentElement;
+      }
+      return child && child.parentElement === ancestor ? child : null;
+    };
+
+    let layoutAncestor = galleryShell.parentElement;
+    let levels = 0;
+
+    while (layoutAncestor && layoutAncestor !== document.body && levels < 8) {
+      const display = window.getComputedStyle(layoutAncestor).display;
+      const galleryColumn = directChildWithin(layoutAncestor, galleryShell);
+      const storyToolsColumn = directChildWithin(layoutAncestor, storyToolLabel);
+
+      if (
+        (display === 'flex' || display === 'grid') &&
+        galleryColumn &&
+        storyToolsColumn &&
+        galleryColumn !== storyToolsColumn &&
+        !storyToolsColumn.querySelector('textarea, [contenteditable="true"]')
+      ) {
+        panel = storyToolsColumn;
+        break;
+      }
+      layoutAncestor = layoutAncestor.parentElement;
+      levels += 1;
+    }
 
     if (!panel || panel === document.body || panel.contains(galleryContent)) {
       return;
@@ -185,6 +217,7 @@
       galleryContent.appendChild(tools);
     }
     if (!tools.contains(panel)) {
+      panel.classList.add('awaylands-story-tools-panel');
       tools.appendChild(panel);
     }
   }
