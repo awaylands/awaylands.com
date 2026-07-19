@@ -250,22 +250,44 @@
   }
 
   function releaseBottomEditorBar() {
+    const excludedOverlay = '[role="dialog"], [role="menu"], [role="listbox"], [role="tooltip"], .awaylands-inline-html-dialog';
+
+    const release = element => {
+      if (element && element !== document.body && element !== document.documentElement && !element.closest(excludedOverlay)) {
+        element.classList.add('awaylands-normal-flow-bottom-bar');
+      }
+    };
+
+    const publishSiteLabels = Array.from(document.querySelectorAll('button, a, div, span'))
+      .filter(element => /^publish site$/i.test(normalizedText(element)))
+      .sort((first, second) => first.getBoundingClientRect().width - second.getBoundingClientRect().width);
+
+    publishSiteLabels.forEach(label => {
+      let ancestor = label;
+      let levels = 0;
+
+      while (ancestor && ancestor !== document.body && levels < 10) {
+        const style = window.getComputedStyle(ancestor);
+        if (style.position === 'fixed' || style.position === 'sticky') {
+          release(ancestor);
+        }
+        ancestor = ancestor.parentElement;
+        levels += 1;
+      }
+    });
+
     Array.from(document.querySelectorAll('body *')).forEach(element => {
-      if (element.closest('[role="dialog"], [role="menu"], [role="listbox"], .awaylands-inline-html-dialog')) {
+      if (element.closest(excludedOverlay)) {
         return;
       }
 
       const style = window.getComputedStyle(element);
-      if (style.position !== 'fixed' && style.position !== 'sticky') {
-        return;
-      }
-
       const rect = element.getBoundingClientRect();
-      const touchesBottom = rect.bottom >= window.innerHeight - 4;
-      const isBottomBar = touchesBottom && rect.width >= 200 && rect.height > 0 && rect.height <= 180;
+      const nearViewportEdge = rect.top <= 80 || rect.bottom >= window.innerHeight - 80;
+      const isEditorChrome = rect.width >= 200 && rect.height > 0 && rect.height <= 240 && nearViewportEdge;
 
-      if (isBottomBar) {
-        element.classList.add('awaylands-normal-flow-bottom-bar');
+      if (style.position === 'sticky' || (style.position === 'fixed' && isEditorChrome)) {
+        release(element);
       }
     });
   }
