@@ -2,6 +2,7 @@ const fs = require('fs');
 const http = require('http');
 const https = require('https');
 const path = require('path');
+const Jimp = require('jimp');
 
 const root = path.resolve(__dirname, '..');
 const config = JSON.parse(fs.readFileSync(path.join(root, '.takeshaperc'), 'utf8'));
@@ -99,6 +100,85 @@ function putBuffer(url, buffer, type) {
   });
 }
 
+function isAllowedGoogleImageUrl(value) {
+  try {
+    const target = new URL(String(value || ''));
+
+    return target.protocol === 'https:' && /(^|\.)(googleusercontent\.com|docs\.google\.com)$/i.test(target.hostname);
+  } catch (error) {
+    return false;
+  }
+}
+
+function downloadGoogleImage(url, redirects) {
+  return new Promise((resolve, reject) => {
+    if (!isAllowedGoogleImageUrl(url)) {
+      reject(new Error('A pasted image URL was not a supported Google Docs image.'));
+      return;
+    }
+
+    const target = new URL(url);
+    const request = https.get({
+      hostname: target.hostname,
+      path: `${target.pathname}${target.search}`,
+      headers: {'User-Agent': 'Mozilla/5.0 Away Lands Google Docs Importer'}
+    }, response => {
+      if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
+        response.resume();
+        if ((redirects || 0) >= 4) {
+          reject(new Error('A Google Docs image redirected too many times.'));
+          return;
+        }
+        const nextUrl = new URL(response.headers.location, target).toString();
+        downloadGoogleImage(nextUrl, (redirects || 0) + 1).then(resolve, reject);
+        return;
+      }
+
+      if (response.statusCode < 200 || response.statusCode >= 300) {
+        response.resume();
+        reject(new Error(`A Google Docs image returned HTTP ${response.statusCode}.`));
+        return;
+      }
+
+      const chunks = [];
+      let size = 0;
+      response.on('data', chunk => {
+        size += chunk.length;
+        if (size > 20 * 1024 * 1024) {
+          request.destroy(new Error('A Google Docs image exceeded the 20 MB import limit.'));
+          return;
+        }
+        chunks.push(chunk);
+      });
+      response.on('end', () => resolve(Buffer.concat(chunks)));
+    });
+
+    request.on('error', reject);
+  });
+}
+
+function optimizeImage(buffer) {
+  return Jimp.read(buffer).then(image => {
+    const maxEdge = 1800;
+    const width = image.bitmap.width;
+    const height = image.bitmap.height;
+
+    if (Math.max(width, height) > maxEdge) {
+      if (width >= height) image.resize(maxEdge, Jimp.AUTO);
+      else image.resize(Jimp.AUTO, maxEdge);
+    }
+    image.background(0xffffffff);
+    image.quality(78);
+
+    return new Promise((resolve, reject) => {
+      image.getBuffer(Jimp.MIME_JPEG, (error, output) => {
+        if (error) reject(error);
+        else resolve(output);
+      });
+    });
+  });
+}
+
 function readJson(request) {
   return new Promise((resolve, reject) => {
     const chunks = [];
@@ -131,12 +211,13 @@ function readJson(request) {
 async function uploadImage(input) {
   const match = String(input.dataUrl || '').match(/^data:(image\/[a-z0-9.+-]+);base64,([a-z0-9+/=]+)$/i);
 
-  if (!match) {
+  if (!match && !isAllowedGoogleImageUrl(input.sourceUrl)) {
     throw new Error('The pasted image data is not valid.');
   }
 
-  const mimeType = match[1].toLowerCase();
-  const buffer = Buffer.from(match[2], 'base64');
+  const mimeType = 'image/jpeg';
+  const sourceBuffer = match ? Buffer.from(match[2], 'base64') : await downloadGoogleImage(input.sourceUrl);
+  const buffer = await optimizeImage(sourceBuffer);
   const filename = String(input.filename || 'google-doc-image.jpg').replace(/[^a-z0-9._-]+/gi, '-');
   const data = await graphql(`
     mutation UploadStoryImage($files: [TSFile]!) {
@@ -177,6 +258,15 @@ async function createStory(input) {
 
   if (input.pageLayout) {
     storyInput.pageLayout = input.pageLayout;
+  }
+
+  const serializedInput = JSON.stringify(storyInput);
+
+  if (/data:image\//i.test(serializedInput)) {
+    throw new Error('An embedded Google Docs image remained in the story payload. The import was stopped before GraphQL so the story item would not be oversized.');
+  }
+  if (Buffer.byteLength(serializedInput) > 350 * 1024) {
+    throw new Error('The finished story content exceeds 350 KB after image removal. Split the article into additional Content blocks before importing.');
   }
 
   const data = await graphql(`

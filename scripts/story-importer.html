@@ -373,9 +373,12 @@
           for (let index = 0; index < uniqueSources.length; index += 1) {
             const source = uniqueSources[index];
             setStatus(`Optimizing and uploading image ${index + 1} of ${uniqueSources.length}…`);
-            const dataUrl = /^data:image/i.test(source) ? await imageToJpeg(source) : source;
-            if (!/^data:image/i.test(dataUrl)) throw new Error('A remote image could not be imported. Download it into the Google Doc and paste again.');
-            const result = await postJson('/api/upload-image', {dataUrl, filename: `${nameBase}-${String(index + 1).padStart(2, '0')}.jpg`});
+            const uploadInput = /^data:image/i.test(source) ?
+              {dataUrl: await imageToJpeg(source)} :
+              {sourceUrl: source};
+            const result = await postJson('/api/upload-image', Object.assign(uploadInput, {
+              filename: `${nameBase}-${String(index + 1).padStart(2, '0')}.jpg`
+            }));
             assetsBySource[source] = result.asset;
           }
 
