@@ -187,6 +187,7 @@
     };
 
     let layoutAncestor = galleryShell.parentElement;
+    let editorColumn = null;
     let levels = 0;
 
     while (layoutAncestor && layoutAncestor !== document.body && levels < 8) {
@@ -202,6 +203,11 @@
         !storyToolsColumn.querySelector('textarea, [contenteditable="true"]')
       ) {
         completeColumn = storyToolsColumn;
+        editorColumn = Array.prototype.slice.call(layoutAncestor.children).find(child => (
+          child !== galleryColumn &&
+          child !== storyToolsColumn &&
+          !!child.querySelector('textarea, [contenteditable="true"]')
+        )) || null;
         break;
       }
       layoutAncestor = layoutAncestor.parentElement;
@@ -238,15 +244,44 @@
       return;
     }
 
-    let tools = galleryContent.querySelector('.awaylands-gallery-story-tools');
+    if (!editorColumn) {
+      const layoutParent = galleryShell.parentElement;
+      const galleryColumn = layoutParent && directChildWithin(layoutParent, galleryShell);
+
+      editorColumn = layoutParent && Array.prototype.slice.call(layoutParent.children).find(child => (
+        child !== galleryColumn &&
+        child !== completeColumn &&
+        !!child.querySelector('textarea, [contenteditable="true"]')
+      ));
+    }
+
+    if (!editorColumn) {
+      return;
+    }
+
+    let tools = document.querySelector('.awaylands-left-story-tools, .awaylands-gallery-story-tools');
 
     if (!tools) {
       tools = document.createElement('section');
       const heading = document.createElement('h3');
-      tools.className = 'awaylands-gallery-story-tools';
+      tools.className = 'awaylands-left-story-tools';
       heading.textContent = 'Story tools and versions';
       tools.appendChild(heading);
-      galleryContent.appendChild(tools);
+    } else {
+      tools.classList.remove('awaylands-gallery-story-tools');
+      tools.classList.add('awaylands-left-story-tools');
+    }
+    if (!tools.hasAttribute('data-awaylands-preserved-width')) {
+      const panelWidth = Math.round(panel.getBoundingClientRect().width);
+
+      if (panelWidth > 0) {
+        tools.style.width = `${panelWidth}px`;
+        tools.style.maxWidth = '100%';
+      }
+      tools.setAttribute('data-awaylands-preserved-width', 'true');
+    }
+    if (tools.parentElement !== editorColumn) {
+      editorColumn.appendChild(tools);
     }
     if (!tools.contains(panel)) {
       panel.classList.add('awaylands-story-tools-panel');
@@ -299,7 +334,22 @@
       const nearViewportEdge = rect.top <= 80 || rect.bottom >= window.innerHeight - 80;
       const isEditorChrome = rect.width >= 200 && rect.height > 0 && rect.height <= 240 && nearViewportEdge;
 
-      if (style.position === 'sticky' || (style.position === 'fixed' && isEditorChrome)) {
+      const hasInteractiveContent = !!element.querySelector('button, a, input, textarea, select, [role="button"]');
+      const isEmptyTopChrome = (
+        rect.top <= 180 &&
+        rect.bottom <= 300 &&
+        rect.width >= window.innerWidth * 0.5 &&
+        !normalizedText(element) &&
+        !hasInteractiveContent
+      );
+
+      if (
+        isEmptyTopChrome &&
+        (style.position === 'sticky' || style.position === 'fixed' || element.classList.contains('awaylands-editor-nonsticky'))
+      ) {
+        element.classList.remove('awaylands-editor-nonsticky');
+        element.classList.add('awaylands-remove-empty-sticky-bar');
+      } else if (style.position === 'sticky' || (style.position === 'fixed' && isEditorChrome)) {
         element.classList.add('awaylands-editor-nonsticky');
       }
     });

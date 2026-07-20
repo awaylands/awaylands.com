@@ -801,13 +801,14 @@ body.awaylands-takeshape-skim .awaylands-gallery-close {
   display: none !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-gallery-story-tools {
+body.awaylands-takeshape-skim .awaylands-left-story-tools {
+  box-sizing: border-box;
   margin: 18px 12px 40px;
   border-top: 1px solid rgba(0, 0, 0, 0.18);
   padding-top: 16px;
 }
 
-body.awaylands-takeshape-skim .awaylands-gallery-story-tools > h3 {
+body.awaylands-takeshape-skim .awaylands-left-story-tools > h3 {
   margin: 0 0 12px;
   color: rgb(69, 90, 100);
   font-size: 16px;
@@ -830,6 +831,10 @@ body.awaylands-takeshape-skim .awaylands-story-tools-panel {
 }
 
 body.awaylands-takeshape-skim .awaylands-remove-bottom-bar {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-remove-empty-sticky-bar {
   display: none !important;
 }
 
