@@ -1865,127 +1865,13 @@
     field.appendChild(button);
   }
 
-  function selectRelatedStory(input, title, results) {
-    const normalizedTitle = title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-    const stopWords = new Set(['about', 'after', 'before', 'best', 'from', 'have', 'into', 'that', 'this', 'with', 'world', 'your']);
-    const significantWords = title.split(/\s+/).map(word => word.replace(/[^a-z0-9']/gi, '')).filter(word => word.length >= 4 && !stopWords.has(word.toLowerCase()));
-    const queryCandidates = Array.from(new Set([
-      significantWords[0],
-      significantWords[1],
-      significantWords.slice(0, 2).join(' '),
-      significantWords.slice(0, 3).join(' '),
-      title
-    ].concat(significantWords).filter(Boolean)));
-    let queryIndex = 0;
-
-    const exposeNativeList = () => {
-      const controlledList = input.getAttribute('aria-controls') && document.getElementById(input.getAttribute('aria-controls'));
-
-      if (controlledList) {
-        controlledList.classList.remove('awaylands-duplicate-related-listbox');
-        controlledList.classList.add('awaylands-primary-related-listbox');
-      }
-      return controlledList;
-    };
-
-    const applyQuery = value => {
-      nativeInputValue(input, value);
-      if (typeof InputEvent === 'function') {
-        input.dispatchEvent(new InputEvent('input', { bubbles: true, data: value, inputType: 'insertText' }));
-      }
-      input.focus();
-      input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
-      exposeNativeList();
-    };
-
-    relatedSelectionInputs.add(input);
-    results.hidden = true;
-    input.click();
-    applyQuery(queryCandidates[queryIndex]);
-    let attempts = 0;
-    const timer = window.setInterval(() => {
-      const controlledList = exposeNativeList();
-      const options = controlledList ? Array.from(controlledList.querySelectorAll('[role="option"], .MuiAutocomplete-option')) : Array.from(document.querySelectorAll('[role="option"], .MuiAutocomplete-option'));
-      const option = options.find(item => {
-        const optionTitle = normalizedText(item).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-
-        return optionTitle === normalizedTitle || optionTitle.indexOf(normalizedTitle) !== -1;
-      });
-
-      attempts += 1;
-      if (option) {
-        window.clearInterval(timer);
-        const optionList = option.closest('[role="listbox"], .MuiAutocomplete-listbox');
-
-        if (optionList) {
-          optionList.classList.remove('awaylands-duplicate-related-listbox');
-          optionList.classList.add('awaylands-primary-related-listbox');
-        }
-        if (typeof PointerEvent === 'function') {
-          option.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, cancelable: true }));
-        }
-        option.dispatchEvent(new MouseEvent('mousedown', { bubbles: true, button: 0, cancelable: true, view: window }));
-        option.dispatchEvent(new MouseEvent('mouseup', { bubbles: true, button: 0, cancelable: true, view: window }));
-        option.click();
-        relatedSelectionInputs.delete(input);
-        results.hidden = true;
-      } else if (attempts % 12 === 0 && queryIndex < queryCandidates.length - 1) {
-        queryIndex += 1;
-        applyQuery(queryCandidates[queryIndex]);
-      } else if (attempts >= Math.max(60, queryCandidates.length * 12)) {
-        window.clearInterval(timer);
-        relatedSelectionInputs.delete(input);
-        input.focus();
-        input.setAttribute('title', 'Choose the matching story from TakeShape’s native options to create a saved relationship.');
-        results.hidden = true;
-      }
-    }, 100);
-  }
-
-  function renderRelatedResults(input, results, items) {
-    const query = input.value.trim().toLowerCase();
-    const words = query.split(/\s+/).filter(Boolean);
-    const sortedItems = items.slice().sort((first, second) => {
-      const firstTime = Date.parse(first.updatedAt || '') || 0;
-      const secondTime = Date.parse(second.updatedAt || '') || 0;
-
-      return secondTime - firstTime;
-    });
-
-    clearElement(results);
-    const matches = (query ? items.filter(item => {
-      const title = item.title.toLowerCase();
-
-      return words.every(word => title.indexOf(word) !== -1);
-    }) : sortedItems).slice(0, query ? 60 : 15);
-
-    if (!matches.length) {
-      showElementMessage(results, query ? 'No matching stories found.' : 'Unable to load recent stories. Click the field to try again.');
-      results.hidden = false;
-      return;
-    }
-
-    const list = document.createElement('div');
-
-    matches.forEach(item => {
-      const button = document.createElement('button');
-
-      button.type = 'button';
-      button.textContent = item.title;
-      button.setAttribute('data-awaylands-story-title', item.title);
-      button.addEventListener('mousedown', event => event.preventDefault());
-      button.addEventListener('click', event => selectRelatedStory(
-        input,
-        event.currentTarget.getAttribute('data-awaylands-story-title') || event.currentTarget.textContent || '',
-        results
-      ));
-      list.appendChild(button);
-    });
-    results.appendChild(list);
-    results.hidden = false;
-  }
-
   function improveRelatedStorySearch() {
+    document.querySelectorAll(`.${RELATED_RESULTS_CLASS}`).forEach(results => results.remove());
+    document.querySelectorAll('.awaylands-related-search-host').forEach(field => field.classList.remove('awaylands-related-search-host'));
+    document.querySelectorAll('.awaylands-primary-related-listbox, .awaylands-duplicate-related-listbox').forEach(listbox => {
+      listbox.classList.remove('awaylands-primary-related-listbox', 'awaylands-duplicate-related-listbox');
+    });
+
     const label = Array.from(document.querySelectorAll('label')).find(item => normalizedText(item) === 'Related Stories');
     const field = label && label.closest('.MuiFormControl-root');
     const input = field && field.querySelector('input[role="combobox"]');
@@ -1994,80 +1880,9 @@
       return;
     }
     input.setAttribute('data-awaylands-native-related-search', 'true');
-    input.setAttribute('title', 'Search and select a story from TakeShape’s relationship results.');
-    field.classList.add('awaylands-related-search-host');
-
-    let results = field.querySelector(`.${RELATED_RESULTS_CLASS}`);
-
-    if (!results) {
-      results = document.createElement('div');
-      results.className = RELATED_RESULTS_CLASS;
-      results.hidden = true;
-      field.appendChild(results);
-    }
-
-    if (!input.hasAttribute('data-awaylands-related-listeners')) {
-      input.setAttribute('data-awaylands-related-listeners', 'true');
-      const refresh = () => {
-        const requestId = String(Date.now()) + Math.random().toString(36).slice(2);
-
-        input.setAttribute('data-awaylands-related-request', requestId);
-        storyTitles().then(items => {
-          if (
-            !input.isConnected ||
-            relatedSelectionInputs.has(input) ||
-            input.getAttribute('data-awaylands-related-request') !== requestId
-          ) {
-            return;
-          }
-          renderRelatedResults(input, results, items || []);
-        });
-      };
-
-      input.addEventListener('focus', refresh);
-      input.addEventListener('input', refresh);
-      input.addEventListener('keydown', event => {
-        if (event.key === 'Escape') {
-          results.hidden = true;
-        }
-      });
-      document.addEventListener('mousedown', event => {
-        if (!field.contains(event.target)) {
-          results.hidden = true;
-        }
-      });
-    }
-
-    const inputRect = input.getBoundingClientRect();
-    const controlledId = input.getAttribute('aria-controls');
-    const listboxes = Array.from(document.querySelectorAll('[role="listbox"], .MuiAutocomplete-listbox')).filter(listbox => {
-      const rect = listbox.getBoundingClientRect();
-      const overlapsInput = rect.right >= inputRect.left && rect.left <= inputRect.right;
-      const nearInput = Math.abs(rect.top - inputRect.bottom) < 900 || Math.abs(rect.bottom - inputRect.top) < 900;
-
-      return rect.width > 0 && rect.height > 0 && overlapsInput && nearInput;
-    });
-
-    if (listboxes.length) {
-      const scoreListbox = listbox => {
-        const options = Array.from(listbox.querySelectorAll('[role="option"], .MuiAutocomplete-option'));
-        const enabledOptions = options.filter(option => option.getAttribute('aria-disabled') !== 'true');
-        let score = 0;
-
-        if (controlledId && listbox.id === controlledId) score += 100;
-        if (enabledOptions.length) score += 25;
-        if (window.getComputedStyle(listbox).pointerEvents !== 'none') score += 10;
-        score += Math.min(enabledOptions.length, 20);
-        return score;
-      };
-      const selectingNative = relatedSelectionInputs.has(input);
-      const primaryListbox = selectingNative ? listboxes.slice().sort((first, second) => scoreListbox(second) - scoreListbox(first))[0] : null;
-
-      listboxes.forEach(listbox => {
-        listbox.classList.toggle('awaylands-primary-related-listbox', selectingNative && listbox === primaryListbox);
-        listbox.classList.toggle('awaylands-duplicate-related-listbox', !selectingNative || listbox !== primaryListbox);
-      });
-    }
+    input.setAttribute('title', 'Search and select directly from TakeShape’s native story results.');
+    input.removeAttribute('data-awaylands-related-listeners');
+    input.removeAttribute('data-awaylands-related-request');
   }
 
   function setEditorValue(field, value) {
