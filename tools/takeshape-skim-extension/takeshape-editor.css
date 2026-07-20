@@ -784,9 +784,18 @@ body.awaylands-takeshape-skim .awaylands-gallery-drawer-content {
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-layout-parent {
+  display: flex !important;
+  grid-template-columns: none !important;
   align-items: flex-start !important;
   min-width: 900px !important;
   overflow: visible !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-layout-parent > .awaylands-main-editor-column {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 1 1 auto !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-flow-host {
@@ -835,6 +844,10 @@ body.awaylands-takeshape-skim .awaylands-remove-bottom-bar {
 }
 
 body.awaylands-takeshape-skim .awaylands-remove-empty-sticky-bar {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-remove-sticky-strip {
   display: none !important;
 }
 

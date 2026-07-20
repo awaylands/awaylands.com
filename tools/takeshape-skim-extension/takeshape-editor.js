@@ -203,11 +203,14 @@
         !storyToolsColumn.querySelector('textarea, [contenteditable="true"]')
       ) {
         completeColumn = storyToolsColumn;
-        editorColumn = Array.prototype.slice.call(layoutAncestor.children).find(child => (
+        const editorCandidates = Array.prototype.slice.call(layoutAncestor.children).filter(child => (
           child !== galleryColumn &&
-          child !== storyToolsColumn &&
-          !!child.querySelector('textarea, [contenteditable="true"]')
-        )) || null;
+          child !== storyToolsColumn
+        ));
+
+        editorColumn = editorCandidates.find(child => !!child.querySelector('textarea, [contenteditable="true"]')) ||
+          editorCandidates.sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0] ||
+          null;
         break;
       }
       layoutAncestor = layoutAncestor.parentElement;
@@ -248,15 +251,19 @@
       const layoutParent = galleryShell.parentElement;
       const galleryColumn = layoutParent && directChildWithin(layoutParent, galleryShell);
 
-      editorColumn = layoutParent && Array.prototype.slice.call(layoutParent.children).find(child => (
+      const editorCandidates = layoutParent && Array.prototype.slice.call(layoutParent.children).filter(child => (
         child !== galleryColumn &&
-        child !== completeColumn &&
-        !!child.querySelector('textarea, [contenteditable="true"]')
+        child !== completeColumn
       ));
+
+      editorColumn = editorCandidates && (
+        editorCandidates.find(child => !!child.querySelector('textarea, [contenteditable="true"]')) ||
+        editorCandidates.sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0]
+      );
     }
 
-    if (!editorColumn) {
-      return;
+    if (editorColumn) {
+      editorColumn.classList.add('awaylands-main-editor-column');
     }
 
     let tools = document.querySelector('.awaylands-left-story-tools, .awaylands-gallery-story-tools');
@@ -280,8 +287,10 @@
       }
       tools.setAttribute('data-awaylands-preserved-width', 'true');
     }
-    if (tools.parentElement !== editorColumn) {
-      editorColumn.appendChild(tools);
+    const toolsHost = editorColumn || galleryContent;
+
+    if (tools.parentElement !== toolsHost) {
+      toolsHost.appendChild(tools);
     }
     if (!tools.contains(panel)) {
       panel.classList.add('awaylands-story-tools-panel');
@@ -333,6 +342,15 @@
       const rect = element.getBoundingClientRect();
       const nearViewportEdge = rect.top <= 80 || rect.bottom >= window.innerHeight - 80;
       const isEditorChrome = rect.width >= 200 && rect.height > 0 && rect.height <= 240 && nearViewportEdge;
+      const isHorizontalStrip = rect.width >= window.innerWidth * 0.55 && rect.height > 0 && rect.height <= 180;
+      const isTopGrayStrip = isHorizontalStrip && rect.top >= 70 && rect.top <= 190 && rect.bottom <= 320;
+      const isBottomGrayStrip = isHorizontalStrip && rect.bottom >= window.innerHeight - 20;
+      const isTakeShapeNavigation = /\b(agents|data|api|settings)\b/i.test(normalizedText(element));
+      const isOrWasSticky = (
+        style.position === 'sticky' ||
+        style.position === 'fixed' ||
+        element.classList.contains('awaylands-editor-nonsticky')
+      );
 
       const hasInteractiveContent = !!element.querySelector('button, a, input, textarea, select, [role="button"]');
       const isEmptyTopChrome = (
@@ -343,7 +361,10 @@
         !hasInteractiveContent
       );
 
-      if (
+      if ((isTopGrayStrip || isBottomGrayStrip) && isOrWasSticky && !isTakeShapeNavigation) {
+        element.classList.remove('awaylands-editor-nonsticky');
+        element.classList.add('awaylands-remove-sticky-strip');
+      } else if (
         isEmptyTopChrome &&
         (style.position === 'sticky' || style.position === 'fixed' || element.classList.contains('awaylands-editor-nonsticky'))
       ) {
