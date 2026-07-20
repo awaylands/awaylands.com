@@ -783,6 +783,15 @@ body.awaylands-takeshape-skim .awaylands-gallery-drawer-shell {
   overflow: visible !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-gallery-column-wrapper {
+  box-sizing: border-box !important;
+  width: 496px !important;
+  min-width: 0 !important;
+  max-width: 48vw !important;
+  flex: 0 0 496px !important;
+  overflow: visible !important;
+}
+
 body.awaylands-takeshape-skim .awaylands-gallery-drawer-content {
   position: static !important;
   box-sizing: border-box !important;

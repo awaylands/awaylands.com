@@ -39,7 +39,11 @@
       }
       if (sidebarShell) {
         sidebarShell.classList.add('awaylands-gallery-drawer-shell');
-        if (sidebarShell.parentElement && sidebarShell.parentElement !== document.body) {
+        if (
+          !sidebarShell.hasAttribute('data-awaylands-layout-resolved') &&
+          sidebarShell.parentElement &&
+          sidebarShell.parentElement !== document.body
+        ) {
           sidebarShell.parentElement.classList.add('awaylands-gallery-layout-parent');
         }
       }
@@ -164,6 +168,13 @@
       return;
     }
 
+    if (
+      galleryShell.hasAttribute('data-awaylands-layout-resolved') &&
+      document.querySelector('.awaylands-left-story-tools .awaylands-story-tools-panel')
+    ) {
+      return;
+    }
+
     const directChildWithin = (ancestor, descendant) => {
       let child = descendant;
 
@@ -172,19 +183,48 @@
       }
       return child && child.parentElement === ancestor ? child : null;
     };
-    const layoutParent = galleryShell.parentElement;
-    const galleryColumn = layoutParent && directChildWithin(layoutParent, galleryShell);
-    const siblings = layoutParent && Array.prototype.slice.call(layoutParent.children).filter(child => child !== galleryColumn);
-    let completeColumn = siblings && siblings.find(child => (
-      /workflow status/i.test(normalizedText(child)) &&
-      /\bversions?\b/i.test(normalizedText(child)) &&
-      !child.querySelector('textarea, [contenteditable="true"]')
-    ));
-    let editorColumn = siblings && (
-      siblings.find(child => child !== completeColumn && !!child.querySelector('textarea, [contenteditable="true"], form')) ||
-      siblings.filter(child => child !== completeColumn)
-        .sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0]
-    );
+    let layoutParent = galleryShell.parentElement;
+    let galleryColumn = null;
+    let siblings = [];
+    let completeColumn = null;
+    let editorColumn = null;
+    let ancestorLevels = 0;
+
+    while (layoutParent && layoutParent !== document.body && ancestorLevels < 12) {
+      galleryColumn = directChildWithin(layoutParent, galleryShell);
+      siblings = galleryColumn ? Array.prototype.slice.call(layoutParent.children).filter(child => child !== galleryColumn) : [];
+      completeColumn = siblings.find(child => (
+        /workflow status/i.test(normalizedText(child)) &&
+        /\bversions?\b/i.test(normalizedText(child)) &&
+        !child.querySelector('textarea, [contenteditable="true"]') &&
+        !child.contains(galleryShell)
+      ));
+      editorColumn = siblings.find(child => (
+        child !== completeColumn &&
+        !!child.querySelector('textarea, [contenteditable="true"], form')
+      ));
+
+      if (galleryColumn && completeColumn && editorColumn) {
+        break;
+      }
+
+      layoutParent = layoutParent.parentElement;
+      ancestorLevels += 1;
+      galleryColumn = null;
+      completeColumn = null;
+      editorColumn = null;
+    }
+
+    if (layoutParent && galleryColumn && completeColumn && editorColumn) {
+      document.querySelectorAll('.awaylands-gallery-layout-parent').forEach(element => {
+        if (element !== layoutParent) {
+          element.classList.remove('awaylands-gallery-layout-parent');
+        }
+      });
+      layoutParent.classList.add('awaylands-gallery-layout-parent');
+      galleryColumn.classList.add('awaylands-gallery-column-wrapper');
+      galleryShell.setAttribute('data-awaylands-layout-resolved', 'true');
+    }
 
     if (!completeColumn) {
       const labels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
