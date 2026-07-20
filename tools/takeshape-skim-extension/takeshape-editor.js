@@ -384,13 +384,17 @@
       return;
     }
 
-    const workflowLabel = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, div, span'))
-      .filter(element => /^workflow status$/i.test(normalizedText(element)))
-      .sort((first, second) => first.getBoundingClientRect().width - second.getBoundingClientRect().width)[0];
-    const workflowPanel = workflowLabel && (
+    const workflowLabels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, div, span'))
+      .filter(element => /^workflow status$/i.test(normalizedText(element)));
+    const workflowPanels = workflowLabels.map(workflowLabel => (
       workflowLabel.closest('.awaylands-story-tools-panel, aside, section, [class*="sidebar"], [class*="panel"]') ||
       workflowLabel.parentElement
-    );
+    )).filter(Boolean);
+    const workflowPanel = workflowPanels.find(panel => {
+      const choices = Array.from(panel.querySelectorAll('button, label, [role="radio"], [role="option"], div, span')).map(normalizedText);
+
+      return choices.some(text => /^enabled$/i.test(text)) && choices.some(text => /^disabled$/i.test(text));
+    });
 
     if (!workflowPanel || workflowPanel.hasAttribute('data-awaylands-auto-enabled')) {
       return;
@@ -414,8 +418,8 @@
       (enabledControl && /(^|\s)(active|checked|selected)(\s|$)/i.test(enabledControl.className || ''))
     );
 
-    workflowPanel.setAttribute('data-awaylands-auto-enabled', 'true');
     if (enabledSelected) {
+      workflowPanel.setAttribute('data-awaylands-auto-enabled', 'true');
       return;
     }
 
@@ -424,6 +428,18 @@
     } else if (enabledControl && typeof enabledControl.click === 'function') {
       enabledControl.click();
     }
+    window.setTimeout(() => {
+      const selectedAfterClick = !!(
+        (enabledInput && enabledInput.checked) ||
+        (enabledControl && enabledControl.getAttribute('aria-checked') === 'true') ||
+        (enabledControl && enabledControl.getAttribute('aria-pressed') === 'true') ||
+        (enabledControl && /(^|\s)(active|checked|selected)(\s|$)/i.test(enabledControl.className || ''))
+      );
+
+      if (selectedAfterClick) {
+        workflowPanel.setAttribute('data-awaylands-auto-enabled', 'true');
+      }
+    }, 200);
   }
 
   function clearElement(element) {
@@ -607,11 +623,19 @@
   function currentEditorSelection(editor) {
     const selection = window.getSelection();
 
-    if (!selection || !selection.rangeCount || !editor.contains(selection.anchorNode)) {
+    if (selection && selection.rangeCount && editor.contains(selection.anchorNode)) {
+      return selection.getRangeAt(0).cloneRange();
+    }
+
+    if (!editor) {
       return null;
     }
 
-    return selection.getRangeAt(0).cloneRange();
+    const fallback = document.createRange();
+
+    fallback.selectNodeContents(editor);
+    fallback.collapse(false);
+    return fallback;
   }
 
   function insertMarkerAtSelection(editor, range, marker) {
@@ -1196,6 +1220,8 @@
       button.addEventListener('click', event => {
         event.preventDefault();
         event.stopPropagation();
+        nativeInputValue(native, choice[1]);
+        sync();
         selectMenuValue(original, choice[0]);
         window.setTimeout(sync, 100);
         window.setTimeout(sync, 300);
@@ -1396,6 +1422,10 @@
       button.addEventListener('click', event => {
         event.preventDefault();
         event.stopPropagation();
+        if (native) {
+          nativeInputValue(native, choice[1]);
+          sync();
+        }
         selectMenuValue(original, choice[2]);
         window.setTimeout(sync, 120);
         window.setTimeout(sync, 350);
@@ -1613,6 +1643,16 @@
     ].concat(significantWords).filter(Boolean)));
     let queryIndex = 0;
 
+    const exposeNativeList = () => {
+      const controlledList = input.getAttribute('aria-controls') && document.getElementById(input.getAttribute('aria-controls'));
+
+      if (controlledList) {
+        controlledList.classList.remove('awaylands-duplicate-related-listbox');
+        controlledList.classList.add('awaylands-primary-related-listbox');
+      }
+      return controlledList;
+    };
+
     const applyQuery = value => {
       nativeInputValue(input, value);
       if (typeof InputEvent === 'function') {
@@ -1620,6 +1660,7 @@
       }
       input.focus();
       input.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
+      exposeNativeList();
     };
 
     relatedSelectionInputs.add(input);
@@ -1628,7 +1669,7 @@
     applyQuery(queryCandidates[queryIndex]);
     let attempts = 0;
     const timer = window.setInterval(() => {
-      const controlledList = input.getAttribute('aria-controls') && document.getElementById(input.getAttribute('aria-controls'));
+      const controlledList = exposeNativeList();
       const options = controlledList ? Array.from(controlledList.querySelectorAll('[role="option"], .MuiAutocomplete-option')) : Array.from(document.querySelectorAll('[role="option"], .MuiAutocomplete-option'));
       const option = options.find(item => {
         const optionTitle = normalizedText(item).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
@@ -1639,6 +1680,12 @@
       attempts += 1;
       if (option) {
         window.clearInterval(timer);
+        const optionList = option.closest('[role="listbox"], .MuiAutocomplete-listbox');
+
+        if (optionList) {
+          optionList.classList.remove('awaylands-duplicate-related-listbox');
+          optionList.classList.add('awaylands-primary-related-listbox');
+        }
         if (typeof PointerEvent === 'function') {
           option.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0, cancelable: true }));
         }
@@ -1690,8 +1737,13 @@
 
       button.type = 'button';
       button.textContent = item.title;
+      button.setAttribute('data-awaylands-story-title', item.title);
       button.addEventListener('mousedown', event => event.preventDefault());
-      button.addEventListener('click', () => selectRelatedStory(input, item.title, results));
+      button.addEventListener('click', event => selectRelatedStory(
+        input,
+        event.currentTarget.getAttribute('data-awaylands-story-title') || event.currentTarget.textContent || '',
+        results
+      ));
       list.appendChild(button);
     });
     results.appendChild(list);
@@ -1699,9 +1751,6 @@
   }
 
   function improveRelatedStorySearch() {
-    document.querySelectorAll(`.${RELATED_RESULTS_CLASS}`).forEach(results => results.remove());
-    document.querySelectorAll('.awaylands-related-search-host').forEach(host => host.classList.remove('awaylands-related-search-host'));
-
     const label = Array.from(document.querySelectorAll('label')).find(item => normalizedText(item) === 'Related Stories');
     const field = label && label.closest('.MuiFormControl-root');
     const input = field && field.querySelector('input[role="combobox"]');
@@ -1711,6 +1760,48 @@
     }
     input.setAttribute('data-awaylands-native-related-search', 'true');
     input.setAttribute('title', 'Search and select a story from TakeShape’s relationship results.');
+    field.classList.add('awaylands-related-search-host');
+
+    let results = field.querySelector(`.${RELATED_RESULTS_CLASS}`);
+
+    if (!results) {
+      results = document.createElement('div');
+      results.className = RELATED_RESULTS_CLASS;
+      results.hidden = true;
+      field.appendChild(results);
+    }
+
+    if (!input.hasAttribute('data-awaylands-related-listeners')) {
+      input.setAttribute('data-awaylands-related-listeners', 'true');
+      const refresh = () => {
+        const requestId = String(Date.now()) + Math.random().toString(36).slice(2);
+
+        input.setAttribute('data-awaylands-related-request', requestId);
+        storyTitles().then(items => {
+          if (
+            !input.isConnected ||
+            relatedSelectionInputs.has(input) ||
+            input.getAttribute('data-awaylands-related-request') !== requestId
+          ) {
+            return;
+          }
+          renderRelatedResults(input, results, items || []);
+        });
+      };
+
+      input.addEventListener('focus', refresh);
+      input.addEventListener('input', refresh);
+      input.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+          results.hidden = true;
+        }
+      });
+      document.addEventListener('mousedown', event => {
+        if (!field.contains(event.target)) {
+          results.hidden = true;
+        }
+      });
+    }
 
     const inputRect = input.getBoundingClientRect();
     const controlledId = input.getAttribute('aria-controls');
@@ -1734,11 +1825,12 @@
         score += Math.min(enabledOptions.length, 20);
         return score;
       };
-      const primaryListbox = listboxes.slice().sort((first, second) => scoreListbox(second) - scoreListbox(first))[0];
+      const selectingNative = relatedSelectionInputs.has(input);
+      const primaryListbox = selectingNative ? listboxes.slice().sort((first, second) => scoreListbox(second) - scoreListbox(first))[0] : null;
 
       listboxes.forEach(listbox => {
-        listbox.classList.toggle('awaylands-primary-related-listbox', listbox === primaryListbox);
-        listbox.classList.toggle('awaylands-duplicate-related-listbox', listbox !== primaryListbox);
+        listbox.classList.toggle('awaylands-primary-related-listbox', selectingNative && listbox === primaryListbox);
+        listbox.classList.toggle('awaylands-duplicate-related-listbox', !selectingNative || listbox !== primaryListbox);
       });
     }
   }
