@@ -1073,17 +1073,20 @@ body.awaylands-takeshape-skim .awaylands-image-size-label {
   text-transform: uppercase;
 }
 
-body.awaylands-takeshape-skim .awaylands-image-size-field {
+body.awaylands-takeshape-skim .awaylands-image-size-field,
+body.awaylands-takeshape-skim .awaylands-image-alignment-field {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
   gap: 8px !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-image-size-native-label {
+body.awaylands-takeshape-skim .awaylands-image-size-native-label,
+body.awaylands-takeshape-skim .awaylands-image-alignment-native-label {
   display: none !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-image-size-title {
+body.awaylands-takeshape-skim .awaylands-image-size-title,
+body.awaylands-takeshape-skim .awaylands-image-alignment-title {
   display: block;
   width: 100%;
   color: #6f6f6f;
@@ -1092,14 +1095,20 @@ body.awaylands-takeshape-skim .awaylands-image-size-title {
   line-height: 1.4;
 }
 
-body.awaylands-takeshape-skim .awaylands-image-size-choices {
+body.awaylands-takeshape-skim .awaylands-image-size-choices,
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   width: 100%;
 }
 
-body.awaylands-takeshape-skim .awaylands-image-size-choices button {
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices {
+  flex-wrap: nowrap !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-image-size-choices button,
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices button {
   width: auto !important;
   min-width: 0 !important;
   min-height: 0 !important;
@@ -1117,16 +1126,20 @@ body.awaylands-takeshape-skim .awaylands-image-size-choices button {
 }
 
 body.awaylands-takeshape-skim .awaylands-image-size-choices button:hover,
-body.awaylands-takeshape-skim .awaylands-image-size-choices button:focus {
+body.awaylands-takeshape-skim .awaylands-image-size-choices button:focus,
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices button:hover,
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices button:focus {
   background: rgb(73, 86, 160) !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-image-size-choices button.is-selected {
+body.awaylands-takeshape-skim .awaylands-image-size-choices button.is-selected,
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices button.is-selected {
   background: rgb(55, 68, 145) !important;
   box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.34) !important;
 }
 
-body.awaylands-takeshape-skim .awaylands-image-size-choices button.is-selected:before {
+body.awaylands-takeshape-skim .awaylands-image-size-choices button.is-selected:before,
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices button.is-selected:before {
   content: "✓";
   margin-right: 6px;
   font-size: 15px;

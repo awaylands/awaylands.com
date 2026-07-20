@@ -1538,6 +1538,7 @@
         event.preventDefault();
         event.stopPropagation();
         if (native) {
+          field.setAttribute('data-awaylands-selected-value', choice[1]);
           nativeInputValue(native, choice[1]);
           sync();
         }
@@ -1558,7 +1559,106 @@
     const sync = () => {
       const displayed = normalizedText(original).toLowerCase();
       const value = native && typeof native.value === 'string' ? native.value.toLowerCase() : '';
-      const selectedValue = value || (displayed === 'small' ? 'small' : displayed === 'medium' ? 'medium' : displayed === 'large' ? 'large' : '');
+      const selectedValue = field.hasAttribute('data-awaylands-selected-value') ?
+        field.getAttribute('data-awaylands-selected-value') :
+        value || (displayed === 'small' ? 'small' : displayed === 'medium' ? 'medium' : displayed === 'large' ? 'large' : '');
+
+      Array.from(group.children).forEach(button => {
+        const selected = button.getAttribute('data-value') === selectedValue;
+
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+    };
+
+    if (native) {
+      native.addEventListener('input', sync);
+      native.addEventListener('change', sync);
+      new MutationObserver(sync).observe(native, { attributes: true, attributeFilter: ['value'] });
+    }
+    new MutationObserver(sync).observe(original, { attributes: true, childList: true, subtree: true });
+    const syncTimer = window.setInterval(() => {
+      if (!dialog.isConnected) {
+        window.clearInterval(syncTimer);
+        return;
+      }
+      sync();
+    }, 400);
+    sync();
+  }
+
+  function enhanceImageAlignmentChoices(dialog) {
+    const field = dialog.querySelector('[data-testid="imageBlockForm-alignment"]') ||
+      Array.from(dialog.querySelectorAll('.MuiFormControl-root')).find(item => {
+        const label = item.querySelector('label');
+
+        return label && /^alignment$/i.test(normalizedText(label));
+      });
+    const original = field && field.querySelector('[role="button"][aria-haspopup="listbox"]');
+    const native = field && field.querySelector('input.MuiSelect-nativeInput, input[type="hidden"], input');
+
+    if (!field || !original || field.querySelector('.awaylands-image-alignment-choices')) {
+      return;
+    }
+
+    const group = document.createElement('div');
+    const title = document.createElement('div');
+    const nativeLabel = field.querySelector('label');
+    const choices = [
+      ['None', '', ['None', 'Default']],
+      ['Left', 'left', 'Left'],
+      ['Center', 'center', 'Center'],
+      ['Right', 'right', 'Right']
+    ];
+
+    field.classList.add('awaylands-image-alignment-field');
+    title.className = 'awaylands-image-alignment-title';
+    title.textContent = 'Alignment';
+    group.className = 'awaylands-image-alignment-choices';
+    group.setAttribute('role', 'group');
+    group.setAttribute('aria-label', 'Image alignment');
+    choices.forEach(choice => {
+      const button = document.createElement('button');
+
+      button.type = 'button';
+      button.textContent = choice[0];
+      button.setAttribute('data-value', choice[1]);
+      button.addEventListener('mousedown', event => {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (native) {
+          field.setAttribute('data-awaylands-selected-value', choice[1]);
+          nativeInputValue(native, choice[1]);
+          sync();
+        }
+        selectMenuValue(original, choice[2]);
+        window.setTimeout(sync, 120);
+        window.setTimeout(sync, 350);
+      });
+      group.appendChild(button);
+    });
+    if (nativeLabel) {
+      nativeLabel.classList.add('awaylands-image-alignment-native-label');
+    }
+    original.parentElement.hidden = false;
+    original.parentElement.classList.add('awaylands-choice-native-select');
+    original.parentElement.insertAdjacentElement('afterend', title);
+    title.insertAdjacentElement('afterend', group);
+
+    const sync = () => {
+      const displayed = normalizedText(original).toLowerCase();
+      const value = native && typeof native.value === 'string' ? native.value.toLowerCase() : '';
+      const selectedValue = field.hasAttribute('data-awaylands-selected-value') ?
+        field.getAttribute('data-awaylands-selected-value') :
+        value || (
+          displayed === 'left' ? 'left' :
+            displayed === 'center' ? 'center' :
+              displayed === 'right' ? 'right' : ''
+        );
 
       Array.from(group.children).forEach(button => {
         const selected = button.getAttribute('data-value') === selectedValue;
@@ -1629,12 +1729,32 @@
 
     const dialog = Array.from(document.querySelectorAll('[role="dialog"]')).find(item => /Image Caption and Credit/i.test(normalizedText(item)));
 
-    if (!dialog || dialog.classList.contains(IMAGE_DIALOG_CLASS)) {
+    if (!dialog) {
+      return;
+    }
+
+    Array.from(dialog.querySelectorAll('label')).forEach(label => {
+      if (!/^credit$/i.test(normalizedText(label))) {
+        return;
+      }
+
+      const creditField = label.closest('.MuiFormControl-root') || label.parentElement;
+
+      if (creditField) {
+        creditField.hidden = true;
+        creditField.classList.add('awaylands-removed-credit-field');
+      }
+    });
+
+    if (dialog.classList.contains(IMAGE_DIALOG_CLASS)) {
+      enhanceImageSizeChoices(dialog);
+      enhanceImageAlignmentChoices(dialog);
       return;
     }
 
     dialog.classList.add(IMAGE_DIALOG_CLASS);
     enhanceImageSizeChoices(dialog);
+    enhanceImageAlignmentChoices(dialog);
     const urlLabel = Array.from(dialog.querySelectorAll('label')).find(label => normalizedText(label).toLowerCase() === 'url');
     const urlInput = urlLabel && urlLabel.closest('.MuiFormControl-root') && urlLabel.closest('.MuiFormControl-root').querySelector('input');
     const submit = Array.from(dialog.querySelectorAll('button')).find(button => normalizedText(button) === 'Submit');
