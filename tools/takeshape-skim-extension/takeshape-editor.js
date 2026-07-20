@@ -164,19 +164,6 @@
       return;
     }
 
-    const storyToolLabel = Array.from(document.querySelectorAll('button, h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
-      .filter(element => !galleryContent.contains(element) && /^(workflow status|versions|version history|history)$/i.test(normalizedText(element)))
-      .sort((first, second) => first.getBoundingClientRect().width - second.getBoundingClientRect().width)[0];
-
-    if (!storyToolLabel) {
-      return;
-    }
-
-    let panel = storyToolLabel.closest('aside, [class*="sidebar"]') ||
-      storyToolLabel.closest('section, .MuiPaper-root, [class*="panel"]') ||
-      storyToolLabel.parentElement;
-    let completeColumn = null;
-
     const directChildWithin = (ancestor, descendant) => {
       let child = descendant;
 
@@ -185,81 +172,59 @@
       }
       return child && child.parentElement === ancestor ? child : null;
     };
-
-    let layoutAncestor = galleryShell.parentElement;
-    let editorColumn = null;
-    let levels = 0;
-
-    while (layoutAncestor && layoutAncestor !== document.body && levels < 8) {
-      const display = window.getComputedStyle(layoutAncestor).display;
-      const galleryColumn = directChildWithin(layoutAncestor, galleryShell);
-      const storyToolsColumn = directChildWithin(layoutAncestor, storyToolLabel);
-
-      if (
-        (display === 'flex' || display === 'grid') &&
-        galleryColumn &&
-        storyToolsColumn &&
-        galleryColumn !== storyToolsColumn &&
-        !storyToolsColumn.querySelector('textarea, [contenteditable="true"]')
-      ) {
-        completeColumn = storyToolsColumn;
-        const editorCandidates = Array.prototype.slice.call(layoutAncestor.children).filter(child => (
-          child !== galleryColumn &&
-          child !== storyToolsColumn
-        ));
-
-        editorColumn = editorCandidates.find(child => !!child.querySelector('textarea, [contenteditable="true"]')) ||
-          editorCandidates.sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0] ||
-          null;
-        break;
-      }
-      layoutAncestor = layoutAncestor.parentElement;
-      levels += 1;
-    }
+    const layoutParent = galleryShell.parentElement;
+    const galleryColumn = layoutParent && directChildWithin(layoutParent, galleryShell);
+    const siblings = layoutParent && Array.prototype.slice.call(layoutParent.children).filter(child => child !== galleryColumn);
+    let completeColumn = siblings && siblings.find(child => (
+      /workflow status/i.test(normalizedText(child)) &&
+      /\bversions?\b/i.test(normalizedText(child)) &&
+      !child.querySelector('textarea, [contenteditable="true"]')
+    ));
+    let editorColumn = siblings && (
+      siblings.find(child => child !== completeColumn && !!child.querySelector('textarea, [contenteditable="true"], form')) ||
+      siblings.filter(child => child !== completeColumn)
+        .sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0]
+    );
 
     if (!completeColumn) {
+      const labels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
+        .filter(element => !galleryContent.contains(element) && /^(workflow status|versions|version history)$/i.test(normalizedText(element)));
       const galleryRect = galleryShell.getBoundingClientRect();
       const geometricCandidates = [];
-      let candidate = storyToolLabel.parentElement;
-      let candidateLevels = 0;
 
-      while (candidate && candidate !== document.body && candidateLevels < 10) {
-        const rect = candidate.getBoundingClientRect();
-        const reachesGallery = Math.abs(rect.right - galleryRect.left) <= 24;
-        const isFullHeightPanel = rect.height >= Math.max(500, window.innerHeight * 0.7);
-        const isSidebarWidth = rect.width >= 220 && rect.width <= 620;
-        const containsEditor = !!candidate.querySelector('textarea, [contenteditable="true"]');
+      labels.forEach(label => {
+        let candidate = label.parentElement;
+        let levels = 0;
 
-        if (reachesGallery && isFullHeightPanel && isSidebarWidth && !containsEditor && !candidate.contains(galleryShell)) {
-          geometricCandidates.push(candidate);
+        while (candidate && candidate !== document.body && levels < 10) {
+          const rect = candidate.getBoundingClientRect();
+          const isBetweenEditorAndGallery = rect.right <= galleryRect.left + 24 && rect.left < galleryRect.left;
+          const isColumnWidth = rect.width >= 220 && rect.width <= 620;
+          const isColumnHeight = rect.height >= Math.max(480, window.innerHeight * 0.6);
+
+          if (
+            isBetweenEditorAndGallery &&
+            isColumnWidth &&
+            isColumnHeight &&
+            !candidate.querySelector('textarea, [contenteditable="true"]') &&
+            !candidate.contains(galleryShell)
+          ) {
+            geometricCandidates.push(candidate);
+          }
+          candidate = candidate.parentElement;
+          levels += 1;
         }
-        candidate = candidate.parentElement;
-        candidateLevels += 1;
-      }
+      });
       completeColumn = geometricCandidates.sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0] || null;
     }
 
-    if (completeColumn) {
-      panel = completeColumn;
-    }
-
-    if (!panel || panel === document.body || panel.contains(galleryContent)) {
+    if (!completeColumn || completeColumn === document.body || completeColumn.contains(galleryContent)) {
       return;
     }
 
-    if (!editorColumn) {
-      const layoutParent = galleryShell.parentElement;
-      const galleryColumn = layoutParent && directChildWithin(layoutParent, galleryShell);
-
-      const editorCandidates = layoutParent && Array.prototype.slice.call(layoutParent.children).filter(child => (
-        child !== galleryColumn &&
-        child !== completeColumn
-      ));
-
-      editorColumn = editorCandidates && (
-        editorCandidates.find(child => !!child.querySelector('textarea, [contenteditable="true"]')) ||
-        editorCandidates.sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0]
-      );
+    if (!editorColumn || editorColumn === completeColumn) {
+      editorColumn = siblings && siblings.filter(child => child !== completeColumn)
+        .sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0];
     }
 
     if (editorColumn) {
@@ -279,7 +244,7 @@
       tools.classList.add('awaylands-left-story-tools');
     }
     if (!tools.hasAttribute('data-awaylands-preserved-width')) {
-      const panelWidth = Math.round(panel.getBoundingClientRect().width);
+      const panelWidth = Math.round(completeColumn.getBoundingClientRect().width);
 
       if (panelWidth > 0) {
         tools.style.width = `${panelWidth}px`;
@@ -292,9 +257,9 @@
     if (tools.parentElement !== toolsHost) {
       toolsHost.appendChild(tools);
     }
-    if (!tools.contains(panel)) {
-      panel.classList.add('awaylands-story-tools-panel');
-      tools.appendChild(panel);
+    if (!tools.contains(completeColumn)) {
+      completeColumn.classList.add('awaylands-story-tools-panel');
+      tools.appendChild(completeColumn);
     }
   }
 
