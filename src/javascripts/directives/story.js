@@ -615,16 +615,16 @@ function enhanceAffiliateLinks(el) {
     link.setAttribute('rel', rel.join(' '));
     link.setAttribute('target', '_blank');
 
-    if (isMobileDevice && (isAmazonLink || isLtkLink)) {
+    if (isMobileDevice && isAmazonLink) {
       link.setAttribute('target', '_self');
-      link.setAttribute('data-mobile-app-link', isAmazonLink ? 'amazon' : 'ltk');
+      link.setAttribute('data-mobile-app-link', 'amazon');
     }
 
-    if (isMobileDevice && isBestBuyLink) {
+    if (isMobileDevice && (isLtkLink || isBestBuyLink)) {
       link.setAttribute('target', '_blank');
-      link.setAttribute('data-mobile-browser-link', 'best-buy');
-      if (!link._storyBestBuyBrowser) {
-        link._storyBestBuyBrowser = true;
+      link.setAttribute('data-mobile-browser-link', isLtkLink ? 'ltk' : 'best-buy');
+      if (!link._storyMobileBrowser) {
+        link._storyMobileBrowser = true;
         link.addEventListener('click', event => {
           event.preventDefault();
           const opened = window.open(link.href, '_blank');
