@@ -301,9 +301,16 @@
   function removeBottomEditorBar() {
     const excludedOverlay = '[role="dialog"], [role="menu"], [role="listbox"], [role="tooltip"], .awaylands-inline-html-dialog';
 
+    document.querySelectorAll('.awaylands-remove-bottom-bar, .awaylands-remove-sticky-strip').forEach(element => {
+      if (element.querySelector('button, a, input, textarea, select, [role="button"]')) {
+        element.classList.remove('awaylands-remove-bottom-bar', 'awaylands-remove-sticky-strip');
+      }
+    });
+
     const remove = element => {
       if (element && element !== document.body && element !== document.documentElement && !element.closest(excludedOverlay)) {
-        element.classList.add('awaylands-remove-bottom-bar');
+        element.classList.remove('awaylands-remove-bottom-bar', 'awaylands-remove-sticky-strip');
+        element.classList.add('awaylands-editor-nonsticky', 'awaylands-clean-editor-bar');
       }
     };
 
@@ -361,7 +368,7 @@
         !hasInteractiveContent
       );
 
-      if ((isTopGrayStrip || isBottomGrayStrip) && isOrWasSticky && !isTakeShapeNavigation) {
+      if ((isTopGrayStrip || isBottomGrayStrip) && isOrWasSticky && !isTakeShapeNavigation && !hasInteractiveContent) {
         element.classList.remove('awaylands-editor-nonsticky');
         element.classList.add('awaylands-remove-sticky-strip');
       } else if (

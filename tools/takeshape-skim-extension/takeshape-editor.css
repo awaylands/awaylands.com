@@ -840,7 +840,10 @@ body.awaylands-takeshape-skim .awaylands-story-tools-panel {
 }
 
 body.awaylands-takeshape-skim .awaylands-remove-bottom-bar {
-  display: none !important;
+  position: static !important;
+  display: block !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-remove-empty-sticky-bar {
@@ -858,6 +861,11 @@ body.awaylands-takeshape-skim .awaylands-editor-nonsticky {
   max-width: none !important;
   transform: none !important;
   z-index: auto !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-clean-editor-bar {
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-duplicate-related-listbox {
