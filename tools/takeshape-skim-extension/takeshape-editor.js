@@ -266,6 +266,27 @@
   function removeBottomEditorBar() {
     const excludedOverlay = '[role="dialog"], [role="menu"], [role="listbox"], [role="tooltip"], .awaylands-inline-html-dialog';
 
+    const containsNativeStoryActions = element => {
+      if (!element) {
+        return false;
+      }
+
+      const buttonLabels = Array.from(element.querySelectorAll('button')).map(button => normalizedText(button));
+      return buttonLabels.some(label => /^save$/i.test(label)) &&
+        buttonLabels.some(label => /^cancel$/i.test(label));
+    };
+
+    document.querySelectorAll('.awaylands-editor-nonsticky, .awaylands-clean-editor-bar, .awaylands-remove-empty-sticky-bar, .awaylands-remove-sticky-strip').forEach(element => {
+      if (containsNativeStoryActions(element)) {
+        element.classList.remove(
+          'awaylands-editor-nonsticky',
+          'awaylands-clean-editor-bar',
+          'awaylands-remove-empty-sticky-bar',
+          'awaylands-remove-sticky-strip'
+        );
+      }
+    });
+
     document.querySelectorAll('.awaylands-remove-bottom-bar, .awaylands-remove-sticky-strip').forEach(element => {
       if (element.querySelector('button, a, input, textarea, select, [role="button"]')) {
         element.classList.remove('awaylands-remove-bottom-bar', 'awaylands-remove-sticky-strip');
@@ -307,6 +328,16 @@
 
     Array.from(document.querySelectorAll('body *')).forEach(element => {
       if (element.closest(excludedOverlay)) {
+        return;
+      }
+
+      if (containsNativeStoryActions(element)) {
+        element.classList.remove(
+          'awaylands-editor-nonsticky',
+          'awaylands-clean-editor-bar',
+          'awaylands-remove-empty-sticky-bar',
+          'awaylands-remove-sticky-strip'
+        );
         return;
       }
 
