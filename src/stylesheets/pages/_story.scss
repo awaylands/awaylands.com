@@ -1033,7 +1033,12 @@ body.body--story {
   margin-bottom: 0;
 }
 
-.story-article__body .story-image-followed-by-image {
+.story-article__body .story-image-followed-by-image,
+.story-article__body .story-content-followed-by-image {
+  margin-bottom: 1rem;
+}
+
+.story-article__body .story-content-followed-by-no-spacing-image {
   margin-bottom: 0;
 }
 

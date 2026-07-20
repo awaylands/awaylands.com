@@ -909,8 +909,11 @@ function normalizeStorySpacing(el) {
     const next = child.nextElementSibling;
     const childIsImage = child.tagName === 'FIGURE' || child.classList.contains('story-gallery');
     const nextIsImage = next && (next.tagName === 'FIGURE' || next.classList.contains('story-gallery'));
+    const nextRemovesSpacing = nextIsImage && next.classList.contains('spacing-none');
 
-    child.classList.toggle('story-image-followed-by-image', !!(childIsImage && nextIsImage));
+    child.classList.toggle('story-image-followed-by-image', !!(childIsImage && nextIsImage && !nextRemovesSpacing));
+    child.classList.toggle('story-content-followed-by-image', !!(!childIsImage && nextIsImage && !nextRemovesSpacing));
+    child.classList.toggle('story-content-followed-by-no-spacing-image', !!(!childIsImage && nextIsImage && nextRemovesSpacing));
   });
 }
 
@@ -931,6 +934,7 @@ function removeDuplicateHero(el) {
 
   const heroPath = normalizedImagePath(hero.currentSrc || hero.src || '');
   const images = el.querySelectorAll('figure img');
+  const firstArticleFigure = el.querySelector('figure');
 
   Array.prototype.forEach.call(images, image => {
     const original = image.getAttribute('data-full-src') || image.currentSrc || image.src || '';
@@ -939,15 +943,32 @@ function removeDuplicateHero(el) {
       const figure = image.closest('figure');
 
       if (figure) {
+        if (figure !== firstArticleFigure) {
+          figure.classList.remove('story-duplicate-hero');
+          return;
+        }
+
         const previous = figure.previousElementSibling;
         const next = figure.nextElementSibling;
+        let preceding = previous;
+        let hasMeaningfulContentBefore = false;
+
+        while (preceding) {
+          if ((preceding.textContent || '').trim() || preceding.querySelector('img, iframe, video, table')) {
+            hasMeaningfulContentBefore = true;
+            break;
+          }
+          preceding = preceding.previousElementSibling;
+        }
         const belongsToLegacyImageSequence = (
           (previous && previous.tagName === 'FIGURE') ||
           (next && next.tagName === 'FIGURE')
         );
 
-        if (!belongsToLegacyImageSequence) {
+        if (!hasMeaningfulContentBefore && !belongsToLegacyImageSequence) {
           figure.classList.add('story-duplicate-hero');
+        } else {
+          figure.classList.remove('story-duplicate-hero');
         }
       }
     }
