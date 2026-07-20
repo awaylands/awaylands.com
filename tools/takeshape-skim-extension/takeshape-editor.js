@@ -303,6 +303,81 @@
     }
   }
 
+  function addOneClickPublishButtons() {
+    const nativePublish = Array.from(document.querySelectorAll('button')).find(button => (
+      /^publish site$/i.test(normalizedText(button)) &&
+      !button.closest('.awaylands-publish-targets')
+    ));
+
+    if (!nativePublish) {
+      return;
+    }
+
+    const nativeGroup = nativePublish.parentElement;
+
+    if (!nativeGroup || nativeGroup.parentElement.querySelector(':scope > .awaylands-publish-targets')) {
+      return;
+    }
+
+    const nearbyButtons = Array.from(nativeGroup.querySelectorAll('button')).filter(button => button !== nativePublish);
+    const menuToggle = nativePublish.getAttribute('aria-haspopup') ? nativePublish : (
+      nearbyButtons.find(button => button.getAttribute('aria-haspopup')) ||
+      nearbyButtons.find(button => button.querySelector('svg') || !normalizedText(button))
+    );
+
+    if (!menuToggle) {
+      return;
+    }
+
+    const targets = [
+      ['Publish www.awaylands.com', 'www.awaylands.com'],
+      ['Publish www.stage.awaylands.com', 'www.stage.awaylands.com']
+    ];
+    const stack = document.createElement('div');
+
+    stack.className = 'awaylands-publish-targets';
+    targets.forEach(([label, domain]) => {
+      const button = document.createElement('button');
+
+      button.type = 'button';
+      button.textContent = label;
+      button.setAttribute('data-awaylands-publish-domain', domain);
+      button.addEventListener('click', () => {
+        if (button.disabled) {
+          return;
+        }
+
+        button.disabled = true;
+        button.textContent = `Opening ${domain}...`;
+        menuToggle.click();
+        let attempts = 0;
+        const chooseTarget = window.setInterval(() => {
+          const choices = Array.from(document.querySelectorAll(
+            '[role="menuitem"], [role="option"], [role="menu"] button, li button, li[role="button"]'
+          ));
+          const target = choices.find(choice => normalizedText(choice).toLowerCase().indexOf(domain.toLowerCase()) !== -1);
+
+          attempts += 1;
+          if (target) {
+            window.clearInterval(chooseTarget);
+            target.click();
+            button.textContent = label;
+            button.disabled = false;
+          } else if (attempts >= 30) {
+            window.clearInterval(chooseTarget);
+            button.textContent = label;
+            button.disabled = false;
+            button.title = `TakeShape did not provide a publishing option for ${domain}.`;
+          }
+        }, 50);
+      });
+      stack.appendChild(button);
+    });
+
+    nativeGroup.classList.add('awaylands-native-publish-group');
+    nativeGroup.insertAdjacentElement('afterend', stack);
+  }
+
   function removeBottomEditorBar() {
     const excludedOverlay = '[role="dialog"], [role="menu"], [role="listbox"], [role="tooltip"], .awaylands-inline-html-dialog';
 
@@ -2030,6 +2105,7 @@
     runEnhancement('native publishing status', restoreNativePublishingStatus);
     runEnhancement('save and continue', makeStorySaveContinue);
     runEnhancement('story tools below gallery', moveStoryToolsBelowGallery);
+    runEnhancement('one-click publishing', addOneClickPublishButtons);
     runEnhancement('bottom editor bar', removeBottomEditorBar);
     runEnhancement('story publishing default', enableStoryOnOpen);
   }
