@@ -313,6 +313,7 @@ body.gallery-page {
 
 body.body--homepage:not(.gallery-page),
 body.body--destinations3:not(.gallery-page),
+body.body--blog-magazine:not(.gallery-page),
 body.body--still:not(.gallery-page) {
   @include for-desktop-up {
     .page-header.is-sticky {

@@ -2,7 +2,7 @@
   @extend %basic-block;
 
   --still-title-blue: #166e78;
-  --still-title-orange: #dd682d;
+  --still-title-orange: #d84a3a;
   --still-title-yellow: #fffbd8;
 
   background:
@@ -79,7 +79,7 @@
   width: 16rem;
   height: 0.2rem;
   margin-top: 2.2rem;
-  background: #dd682d;
+  background: #d84a3a;
 }
 
 .still-index__inner {
@@ -110,7 +110,7 @@
     &:after {
       content: "/";
       margin-left: 1rem;
-      color: #dd682d;
+      color: #d84a3a;
     }
   }
 }

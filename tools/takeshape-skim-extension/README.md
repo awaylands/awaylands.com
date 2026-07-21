@@ -21,6 +21,9 @@ This Chrome extension makes the TakeShape story editor easier to scan. It only r
 - At a Glance heading selectors visible by default with custom title and link fields collapsed.
 - Shop the Edit HTML visible by default with image, title, and link fields collapsed.
 - Automatic About the Author defaults when existing fields are blank.
+- Sticky Save Story control above Workflow Status and publishing, replacing the top Edit Story action bar.
+- Story tools and version history are hidden without moving TakeShape's native React nodes, preventing duplicate panels and sticky bars after saving.
+- The gallery remains in a constant 496px viewport frame with no internal scrollbar; the center story editor is the only scrolling pane, and each gallery page displays a complete 18-image grid.
 
 ## Install in Chrome
 

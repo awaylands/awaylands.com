@@ -18,7 +18,12 @@
   let storyTitleIndex = null;
   let storyTitleRequest = null;
   let htmlInsertState = null;
+  let activePublishState = null;
   const relatedSelectionInputs = new WeakSet();
+
+  function isStoryEditorPath() {
+    return /\/project\/[^/]+\/branch\/[^/]+\/data\/Story(?:\/|$)/i.test(window.location.pathname);
+  }
 
   function normalizedText(element) {
     return (element.textContent || '').replace(/\s+/g, ' ').trim();
@@ -34,17 +39,42 @@
       }
 
       sidebarContent.classList.add('awaylands-gallery-drawer-content');
-      if (grid.parentElement) {
-        grid.parentElement.classList.add('awaylands-gallery-flow-host');
+      let galleryLayer = grid.parentElement;
+      while (galleryLayer && galleryLayer !== sidebarContent) {
+        galleryLayer.classList.add('awaylands-gallery-flow-host');
+        galleryLayer = galleryLayer.parentElement;
       }
+
+      const tiles = Array.from(grid.querySelectorAll('[class*="asset-picker-grid-item-module__asset"]'));
+      tiles.forEach((tile, index) => {
+        tile.classList.toggle('awaylands-gallery-overflow-tile', index >= 20);
+      });
+
+      moveGalleryPaginationIntoGrid(sidebarContent, grid);
+
       if (sidebarShell) {
         sidebarShell.classList.add('awaylands-gallery-drawer-shell');
-        if (
-          !sidebarShell.hasAttribute('data-awaylands-layout-resolved') &&
-          sidebarShell.parentElement &&
-          sidebarShell.parentElement !== document.body
-        ) {
-          sidebarShell.parentElement.classList.add('awaylands-gallery-layout-parent');
+        let layoutParent = sidebarShell.parentElement;
+        let levels = 0;
+
+        while (layoutParent && layoutParent !== document.body && levels < 10) {
+          const children = Array.from(layoutParent.children);
+          const galleryColumn = children.find(child => child === sidebarShell || child.contains(sidebarShell));
+          const editorColumn = children.find(child => (
+            child !== galleryColumn &&
+            !/workflow status/i.test(normalizedText(child)) &&
+            !!child.querySelector('textarea, [contenteditable="true"]')
+          ));
+
+          if (galleryColumn && editorColumn) {
+            layoutParent.classList.add('awaylands-gallery-layout-parent');
+            galleryColumn.classList.add('awaylands-gallery-column-wrapper');
+            editorColumn.classList.add('awaylands-main-editor-column');
+            sidebarShell.setAttribute('data-awaylands-layout-resolved', 'true');
+            break;
+          }
+          layoutParent = layoutParent.parentElement;
+          levels += 1;
         }
       }
       const galleryTop = grid.getBoundingClientRect().top;
@@ -73,6 +103,55 @@
     });
   }
 
+  function moveGalleryPaginationIntoGrid(sidebarContent, grid) {
+    const ranges = Array.from(sidebarContent.querySelectorAll('*')).filter(element => (
+      /^\d+\s*[-–]\s*\d+\s+of\s+\d+$/i.test(normalizedText(element)) &&
+      !Array.from(element.children).some(child => /^\d+\s*[-–]\s*\d+\s+of\s+\d+$/i.test(normalizedText(child)))
+    ));
+    const range = ranges[0];
+
+    if (!range) {
+      return;
+    }
+
+    let pagination = range.closest('.MuiTablePagination-root');
+    if (!pagination) {
+      pagination = range.parentElement;
+      while (pagination && pagination !== sidebarContent && pagination.querySelectorAll('button').length < 2) {
+        pagination = pagination.parentElement;
+      }
+    }
+
+    if (!pagination || pagination === sidebarContent || pagination.contains(grid)) {
+      return;
+    }
+
+    pagination.classList.add('awaylands-gallery-pagination-tile');
+    range.classList.add('awaylands-gallery-pagination-range');
+    const buttons = Array.from(pagination.querySelectorAll('button'));
+    if (buttons.length >= 2) {
+      let layout = range.parentElement;
+      while (layout && layout !== pagination && !buttons.every(button => layout.contains(button))) {
+        layout = layout.parentElement;
+      }
+      if (layout) {
+        layout.classList.add('awaylands-gallery-pagination-layout');
+      }
+
+      let actions = buttons[0].parentElement;
+      while (actions && actions !== pagination && !buttons.every(button => actions.contains(button))) {
+        actions = actions.parentElement;
+      }
+      if (actions && actions !== pagination && !actions.classList.contains('MuiToolbar-root')) {
+        actions.classList.add('awaylands-gallery-pagination-actions');
+      }
+    }
+
+    if (pagination.parentElement !== grid) {
+      grid.appendChild(pagination);
+    }
+  }
+
   function tryOpenPersistentGallery() {
     if (document.querySelector('[class*="asset-picker-grid-module__grid"]')) {
       return;
@@ -89,6 +168,35 @@
     if (opener) {
       opener.setAttribute('data-awaylands-gallery-open-attempt', 'true');
       opener.click();
+    }
+  }
+
+  function persistGalleryFilter() {
+    const gallery = document.querySelector('.awaylands-gallery-drawer-content');
+    const input = gallery && gallery.querySelector('input[placeholder="Filter"], input[role="combobox"]');
+
+    if (!input || input.hasAttribute('data-awaylands-persistent-gallery-filter')) {
+      return;
+    }
+
+    const projectMatch = window.location.pathname.match(/\/project\/([^/]+)\/branch\/([^/]+)/i);
+    const projectKey = projectMatch ? `${projectMatch[1]}:${projectMatch[2]}` : 'default';
+    const storageKey = `awaylands-gallery-filter:${projectKey}`;
+    const savedValue = window.localStorage.getItem(storageKey) || '';
+    const rememberValue = () => {
+      if (input.value) {
+        window.localStorage.setItem(storageKey, input.value);
+      } else {
+        window.localStorage.removeItem(storageKey);
+      }
+    };
+
+    input.setAttribute('data-awaylands-persistent-gallery-filter', 'true');
+    input.addEventListener('input', rememberValue);
+    input.addEventListener('change', rememberValue);
+
+    if (!input.value && savedValue) {
+      nativeInputValue(input, savedValue);
     }
   }
 
@@ -125,13 +233,8 @@
       event.preventDefault();
       event.stopImmediatePropagation();
 
-      const saveRect = save.getBoundingClientRect();
       const nearbyButtons = Array.from((save.parentElement || document).querySelectorAll('button')).filter(button => {
-        if (button === save || button.closest('[role="dialog"], [role="menu"], [role="listbox"]')) {
-          return false;
-        }
-        const rect = button.getBoundingClientRect();
-        return Math.abs(rect.top - saveRect.top) < 8 && rect.left >= saveRect.right - 4 && rect.left <= saveRect.right + 90;
+        return button !== save && !button.closest('[role="dialog"], [role="menu"], [role="listbox"]');
       });
       const menuToggle = nearbyButtons.find(button => button.getAttribute('aria-haspopup')) ||
         nearbyButtons.find(button => button.querySelector('svg') || !normalizedText(button));
@@ -160,146 +263,265 @@
     }, true);
   }
 
-  function moveStoryToolsBelowGallery() {
+  function installLeftSaveControl() {
+    const existing = document.querySelector('.awaylands-left-save-control');
+    let save = existing && existing.__awaylandsSaveSource;
+
+    if (!save || !document.contains(save)) {
+      save = topActionCandidate(/^save$/i);
+    }
+    if (!save) return;
+
+    const publishFooter = Array.from(document.querySelectorAll('footer'))
+      .find(footer => /publish site|publish www\./i.test(normalizedText(footer)));
+    const publishAnchor = publishFooter || document.querySelector('.awaylands-publish-targets');
+    const leftNav = publishAnchor && publishAnchor.closest('nav');
+
+    if (!publishAnchor || !leftNav) return;
+    leftNav.classList.add('awaylands-left-controls-nav');
+
+    let navAnchor = publishAnchor;
+    while (navAnchor.parentElement && navAnchor.parentElement !== leftNav) {
+      navAnchor = navAnchor.parentElement;
+    }
+    if (navAnchor.parentElement !== leftNav) return;
+
+    const workflow = leftNav.querySelector(':scope > .awaylands-left-status-proxy');
+    let control = existing;
+    let button = control && control.querySelector('button');
+
+    if (!control) {
+      control = document.createElement('section');
+      control.className = 'awaylands-left-save-control';
+      button = document.createElement('button');
+      button.type = 'button';
+      button.textContent = 'Save Story';
+      control.appendChild(button);
+    }
+
+    control.__awaylandsSaveSource = save;
+    button.disabled = save.disabled;
+    button.title = save.disabled ? 'Make a change before saving' : 'Save and continue editing this story';
+    button.onclick = event => {
+      event.preventDefault();
+      event.stopPropagation();
+      const currentSave = control.__awaylandsSaveSource;
+
+      if (currentSave && document.contains(currentSave) && !currentSave.disabled) {
+        currentSave.click();
+      }
+    };
+
+    const anchor = workflow || navAnchor;
+    if (control.parentElement !== leftNav || control.nextElementSibling !== anchor) {
+      leftNav.insertBefore(control, anchor);
+    }
+
+    const actionHeader = save.closest('header');
+    if (actionHeader && /edit story|cancel|save/i.test(normalizedText(actionHeader))) {
+      actionHeader.classList.add('awaylands-hidden-story-action-header');
+    }
+  }
+
+  function installLeftPublishingStatus() {
+    const workflowLabels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
+      .filter(element => (
+        /^workflow status$/i.test(normalizedText(element)) &&
+        !element.closest('.awaylands-left-status-proxy')
+      ));
+    let nativeControl = null;
+
+    workflowLabels.some(workflowLabel => {
+      let candidate = workflowLabel;
+      let levels = 0;
+
+      while (candidate && candidate !== document.body && levels < 8) {
+        const choiceLabels = Array.from(candidate.querySelectorAll('button, [role="radio"], [role="option"]'))
+          .map(choice => normalizedText(choice));
+
+        if (
+          choiceLabels.some(text => /^enabled$/i.test(text)) &&
+          choiceLabels.some(text => /^disabled$/i.test(text))
+        ) {
+          nativeControl = candidate;
+          return true;
+        }
+        candidate = candidate.parentElement;
+        levels += 1;
+      }
+      return false;
+    });
+
+    const publishFooter = Array.from(document.querySelectorAll('footer'))
+      .find(footer => /publish site|publish www\./i.test(normalizedText(footer)));
+    const publishAnchor = publishFooter || document.querySelector('.awaylands-publish-targets');
+    const leftNav = publishAnchor && publishAnchor.closest('nav');
+
+    if (!nativeControl || !publishAnchor || !leftNav) {
+      return;
+    }
+    leftNav.classList.add('awaylands-left-controls-nav');
+
+    let navAnchor = publishAnchor;
+    while (navAnchor.parentElement && navAnchor.parentElement !== leftNav) {
+      navAnchor = navAnchor.parentElement;
+    }
+
+    if (navAnchor.parentElement !== leftNav) {
+      return;
+    }
+
+    // Hide the complete native Workflow / Versions column without depending on
+    // TakeShape's generated component name. The working control is mirrored
+    // below before this source column is removed from layout.
+    let nativeSidebar = nativeControl.parentElement;
+    let sidebarLevels = 0;
+    while (nativeSidebar && nativeSidebar !== document.body && sidebarLevels < 10) {
+      if (/\bversions?\b/i.test(normalizedText(nativeSidebar))) {
+        nativeSidebar.classList.add('awaylands-hide-story-tools');
+        break;
+      }
+      nativeSidebar = nativeSidebar.parentElement;
+      sidebarLevels += 1;
+    }
+
+    let proxy = leftNav.querySelector(':scope > .awaylands-left-status-proxy');
+    if (!proxy) {
+      proxy = document.createElement('section');
+      proxy.className = 'awaylands-left-status-proxy';
+      leftNav.insertBefore(proxy, navAnchor);
+    } else if (proxy.nextElementSibling !== navAnchor) {
+      leftNav.insertBefore(proxy, navAnchor);
+    }
+
+    const nativeButtons = Array.from(nativeControl.querySelectorAll('button'));
+    const signature = nativeButtons.map(button => [
+      normalizedText(button),
+      button.disabled ? 'disabled' : 'enabled',
+      button.getAttribute('aria-pressed') || '',
+      button.getAttribute('aria-checked') || ''
+    ].join(':')).join('|');
+
+    if (proxy.__awaylandsSource === nativeControl && proxy.dataset.awaylandsStatusSignature === signature) {
+      return;
+    }
+
+    if (proxy.__awaylandsStatusObserver) {
+      proxy.__awaylandsStatusObserver.disconnect();
+    }
+
+    const control = document.createElement('div');
+    const title = document.createElement('div');
+    const choices = document.createElement('div');
+
+    control.className = 'awaylands-left-status-control';
+    title.className = 'awaylands-left-status-title';
+    title.textContent = 'Workflow Status';
+    choices.className = 'awaylands-left-status-choices';
+    ['Disabled', 'Enabled'].forEach(choiceText => {
+      const nativeButton = nativeButtons.find(button => normalizedText(button).toLowerCase() === choiceText.toLowerCase());
+      const choiceButton = document.createElement('button');
+
+      choiceButton.type = 'button';
+      choiceButton.textContent = choiceText;
+      if (!nativeButton) {
+        choiceButton.disabled = true;
+        choices.appendChild(choiceButton);
+        return;
+      }
+
+      const selected = nativeButton.disabled ||
+        nativeButton.getAttribute('aria-pressed') === 'true' ||
+        nativeButton.getAttribute('aria-checked') === 'true';
+      choiceButton.classList.toggle('is-selected', selected);
+      choiceButton.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      choiceButton.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!selected) {
+          nativeButton.click();
+          window.setTimeout(requestMarking, 0);
+          window.setTimeout(requestMarking, 150);
+        }
+      });
+      choices.appendChild(choiceButton);
+    });
+    control.appendChild(title);
+    control.appendChild(choices);
+
+    proxy.replaceChildren(control);
+    proxy.__awaylandsSource = nativeControl;
+    proxy.dataset.awaylandsStatusSignature = signature;
+    proxy.__awaylandsStatusObserver = new MutationObserver(requestMarking);
+    proxy.__awaylandsStatusObserver.observe(nativeControl, {
+      attributes: true,
+      attributeFilter: ['disabled', 'aria-pressed', 'aria-checked', 'class'],
+      childList: true,
+      subtree: true
+    });
+  }
+
+  function hideStoryToolsAndVersions() {
     const galleryContent = document.querySelector('.awaylands-gallery-drawer-content');
     const galleryShell = document.querySelector('.awaylands-gallery-drawer-shell');
 
-    if (!galleryContent || !galleryShell) {
-      return;
-    }
+    // Older extension versions moved this React-managed panel into a custom
+    // wrapper. TakeShape creates a new panel after every save, leaving the old
+    // moved panel behind. Remove those stale wrappers instead of moving native
+    // editor nodes again.
+    document.querySelectorAll('.awaylands-left-story-tools, .awaylands-gallery-story-tools').forEach(wrapper => {
+      wrapper.remove();
+    });
 
-    if (
-      galleryShell.hasAttribute('data-awaylands-layout-resolved') &&
-      document.querySelector('.awaylands-left-story-tools .awaylands-story-tools-panel')
-    ) {
-      return;
-    }
-
-    const directChildWithin = (ancestor, descendant) => {
-      let child = descendant;
-
-      while (child && child.parentElement !== ancestor) {
-        child = child.parentElement;
+    // This is TakeShape's native Story workflow/version sidebar. Targeting the
+    // component itself makes the fix immediate and independent of gallery load
+    // timing. The text-based detection below remains as a fallback if TakeShape
+    // renames the generated component class.
+    document.querySelectorAll('[class*="Sidebar-sc-17tr324-0"]').forEach(sidebar => {
+      if (/workflow status/i.test(normalizedText(sidebar)) && /\bversions?\b/i.test(normalizedText(sidebar))) {
+        sidebar.classList.remove('awaylands-status-sidebar-source');
+        sidebar.classList.add('awaylands-hide-story-tools');
       }
-      return child && child.parentElement === ancestor ? child : null;
-    };
-    let layoutParent = galleryShell.parentElement;
-    let galleryColumn = null;
-    let siblings = [];
-    let completeColumn = null;
-    let editorColumn = null;
-    let ancestorLevels = 0;
+    });
 
-    while (layoutParent && layoutParent !== document.body && ancestorLevels < 12) {
-      galleryColumn = directChildWithin(layoutParent, galleryShell);
-      siblings = galleryColumn ? Array.prototype.slice.call(layoutParent.children).filter(child => child !== galleryColumn) : [];
-      completeColumn = siblings.find(child => (
-        /workflow status/i.test(normalizedText(child)) &&
-        /\bversions?\b/i.test(normalizedText(child)) &&
-        !child.querySelector('textarea, [contenteditable="true"]') &&
-        !child.contains(galleryShell)
-      ));
-      editorColumn = siblings.find(child => (
-        child !== completeColumn &&
-        !!child.querySelector('textarea, [contenteditable="true"], form')
-      ));
+    const labels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
+      .filter(element => (!galleryContent || !galleryContent.contains(element)) && /^(workflow status|versions|version history)$/i.test(normalizedText(element)));
+    const candidates = [];
 
-      if (galleryColumn && completeColumn && editorColumn) {
-        break;
-      }
+    labels.forEach(label => {
+      let candidate = label.parentElement;
+      let levels = 0;
 
-      layoutParent = layoutParent.parentElement;
-      ancestorLevels += 1;
-      galleryColumn = null;
-      completeColumn = null;
-      editorColumn = null;
-    }
+      while (candidate && candidate !== document.body && levels < 10) {
+        const text = normalizedText(candidate);
+        const rect = candidate.getBoundingClientRect();
+        const hasBothSections = /workflow status/i.test(text) && /\bversions?\b/i.test(text);
+        const isSafePanel = (!galleryContent || !candidate.contains(galleryContent)) &&
+          !candidate.querySelector('textarea, [contenteditable="true"], form') &&
+          rect.width >= 180 && rect.width <= 700;
 
-    if (layoutParent && galleryColumn && completeColumn && editorColumn) {
-      document.querySelectorAll('.awaylands-gallery-layout-parent').forEach(element => {
-        if (element !== layoutParent) {
-          element.classList.remove('awaylands-gallery-layout-parent');
+        if (hasBothSections && isSafePanel) {
+          candidates.push(candidate);
         }
+        candidate = candidate.parentElement;
+        levels += 1;
+      }
+    });
+
+    // Select the smallest matching container so the editor and gallery columns
+    // remain untouched. Mark every duplicate of that native panel as hidden.
+    candidates
+      .sort((first, second) => {
+        const firstRect = first.getBoundingClientRect();
+        const secondRect = second.getBoundingClientRect();
+        return firstRect.width * firstRect.height - secondRect.width * secondRect.height;
+      })
+      .forEach(candidate => {
+        candidate.classList.add('awaylands-hide-story-tools');
       });
-      layoutParent.classList.add('awaylands-gallery-layout-parent');
-      galleryColumn.classList.add('awaylands-gallery-column-wrapper');
+
+    if (galleryShell) {
       galleryShell.setAttribute('data-awaylands-layout-resolved', 'true');
-    }
-
-    if (!completeColumn) {
-      const labels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
-        .filter(element => !galleryContent.contains(element) && /^(workflow status|versions|version history)$/i.test(normalizedText(element)));
-      const galleryRect = galleryShell.getBoundingClientRect();
-      const geometricCandidates = [];
-
-      labels.forEach(label => {
-        let candidate = label.parentElement;
-        let levels = 0;
-
-        while (candidate && candidate !== document.body && levels < 10) {
-          const rect = candidate.getBoundingClientRect();
-          const isBetweenEditorAndGallery = rect.right <= galleryRect.left + 24 && rect.left < galleryRect.left;
-          const isColumnWidth = rect.width >= 220 && rect.width <= 620;
-          const isColumnHeight = rect.height >= Math.max(480, window.innerHeight * 0.6);
-
-          if (
-            isBetweenEditorAndGallery &&
-            isColumnWidth &&
-            isColumnHeight &&
-            !candidate.querySelector('textarea, [contenteditable="true"]') &&
-            !candidate.contains(galleryShell)
-          ) {
-            geometricCandidates.push(candidate);
-          }
-          candidate = candidate.parentElement;
-          levels += 1;
-        }
-      });
-      completeColumn = geometricCandidates.sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0] || null;
-    }
-
-    if (!completeColumn || completeColumn === document.body || completeColumn.contains(galleryContent)) {
-      return;
-    }
-
-    if (!editorColumn || editorColumn === completeColumn) {
-      editorColumn = siblings && siblings.filter(child => child !== completeColumn)
-        .sort((first, second) => second.getBoundingClientRect().width - first.getBoundingClientRect().width)[0];
-    }
-
-    if (editorColumn) {
-      editorColumn.classList.add('awaylands-main-editor-column');
-    }
-
-    let tools = document.querySelector('.awaylands-left-story-tools, .awaylands-gallery-story-tools');
-
-    if (!tools) {
-      tools = document.createElement('section');
-      const heading = document.createElement('h3');
-      tools.className = 'awaylands-left-story-tools';
-      heading.textContent = 'Story tools and versions';
-      tools.appendChild(heading);
-    } else {
-      tools.classList.remove('awaylands-gallery-story-tools');
-      tools.classList.add('awaylands-left-story-tools');
-    }
-    if (!tools.hasAttribute('data-awaylands-preserved-width')) {
-      const panelWidth = Math.round(completeColumn.getBoundingClientRect().width);
-
-      if (panelWidth > 0) {
-        tools.style.width = `${panelWidth}px`;
-        tools.style.maxWidth = '100%';
-      }
-      tools.setAttribute('data-awaylands-preserved-width', 'true');
-    }
-    const toolsHost = editorColumn || galleryContent;
-
-    if (tools.parentElement !== toolsHost) {
-      toolsHost.appendChild(tools);
-    }
-    if (!tools.contains(completeColumn)) {
-      completeColumn.classList.add('awaylands-story-tools-panel');
-      tools.appendChild(completeColumn);
     }
   }
 
@@ -330,26 +552,109 @@
     }
 
     const targets = [
-      ['Publish www.awaylands.com', 'www.awaylands.com'],
-      ['Publish www.stage.awaylands.com', 'www.stage.awaylands.com']
+      ['Publish AwayLands.com', 'AwayLands.com', 'www.awaylands.com'],
+      ['Publish Stage.AwayLands.com', 'Stage.AwayLands.com', 'www.stage.awaylands.com']
     ];
     const stack = document.createElement('div');
+    const status = document.createElement('div');
+
+    const clickEvenIfBusy = control => {
+      const wasDisabled = control.disabled;
+
+      if (wasDisabled) control.disabled = false;
+      control.click();
+      if (wasDisabled) window.setTimeout(() => { control.disabled = true; }, 0);
+    };
+
+    const clearPublishMonitors = () => {
+      if (!activePublishState) return;
+      if (activePublishState.timer) window.clearInterval(activePublishState.timer);
+      if (activePublishState.chooser) window.clearInterval(activePublishState.chooser);
+    };
+
+    const renderPublishingState = () => {
+      const buttons = Array.from(stack.querySelectorAll('button[data-awaylands-publish-domain]'));
+
+      buttons.forEach(publishButton => {
+        const domain = publishButton.getAttribute('data-awaylands-publish-domain');
+        const siteLabel = publishButton.getAttribute('data-awaylands-publish-label');
+        const isActiveTarget = activePublishState && activePublishState.domain === domain;
+
+        publishButton.disabled = false;
+        publishButton.textContent = isActiveTarget ? `Publish latest update to ${siteLabel}` : `Publish ${siteLabel}`;
+      });
+
+      status.classList.toggle('is-active', !!activePublishState);
+      status.setAttribute('aria-hidden', activePublishState ? 'false' : 'true');
+      status.setAttribute('aria-live', 'polite');
+      status.innerHTML = activePublishState ? '<span class="awaylands-publish-spinner" aria-hidden="true"></span><span>Publishing site — press again to publish the latest update</span>' : '';
+    };
+
+    const nativePublishIsBusy = () => {
+      const sources = Array.from(document.querySelectorAll('.awaylands-native-publish-group'));
+      if (!sources.includes(nativeGroup)) {
+        sources.push(nativeGroup);
+      }
+      const text = sources.map(source => normalizedText(source)).join(' ');
+
+      return /\b(publishing|deploying|building)\b/i.test(text) || sources.some(source => !!source.querySelector(
+        '[aria-busy="true"], [role="progressbar"], [class*="spinner" i], [class*="loading" i], [class*="progress" i], .animate-spin'
+      ));
+    };
+
+    const visiblePublishResult = () => Array.from(document.querySelectorAll('[role="status"], [role="alert"]'))
+      .map(element => normalizedText(element))
+      .find(text => (
+        /publish(ed|ing)?|deploy(ed|ing)?/i.test(text) &&
+        (!activePublishState || !activePublishState.baselineResults.includes(text))
+      ));
+
+    const monitorPublishingState = () => {
+      if (!activePublishState) {
+        renderPublishingState();
+        return;
+      }
+
+      const busy = nativePublishIsBusy();
+      const result = visiblePublishResult();
+      const elapsed = Date.now() - activePublishState.startedAt;
+
+      if (busy) {
+        activePublishState.sawNativeBusy = true;
+      }
+
+      if (
+        (activePublishState.sawNativeBusy && !busy && elapsed > 750) ||
+        (result && /published|deployed|complete|success|failed|error/i.test(result)) ||
+        elapsed > 10 * 60 * 1000
+      ) {
+        clearPublishMonitors();
+        activePublishState = null;
+      }
+      renderPublishingState();
+    };
 
     stack.className = 'awaylands-publish-targets';
-    targets.forEach(([label, domain]) => {
+    targets.forEach(([label, siteLabel, domain]) => {
       const button = document.createElement('button');
 
       button.type = 'button';
       button.textContent = label;
       button.setAttribute('data-awaylands-publish-domain', domain);
+      button.setAttribute('data-awaylands-publish-label', siteLabel);
       button.addEventListener('click', () => {
-        if (button.disabled) {
-          return;
-        }
+        clearPublishMonitors();
 
-        button.disabled = true;
-        button.textContent = `Opening ${domain}...`;
-        menuToggle.click();
+        activePublishState = {
+          domain,
+          startedAt: Date.now(),
+          sawNativeBusy: false,
+          baselineResults: Array.from(document.querySelectorAll('[role="status"], [role="alert"]')).map(element => normalizedText(element)),
+          timer: null,
+          chooser: null
+        };
+        renderPublishingState();
+        clickEvenIfBusy(menuToggle);
         let attempts = 0;
         const chooseTarget = window.setInterval(() => {
           const choices = Array.from(document.querySelectorAll(
@@ -360,22 +665,31 @@
           attempts += 1;
           if (target) {
             window.clearInterval(chooseTarget);
-            target.click();
-            button.textContent = label;
-            button.disabled = false;
+            activePublishState.chooser = null;
+            clickEvenIfBusy(target);
+            activePublishState.timer = window.setInterval(monitorPublishingState, 250);
+            monitorPublishingState();
           } else if (attempts >= 30) {
             window.clearInterval(chooseTarget);
-            button.textContent = label;
-            button.disabled = false;
+            activePublishState = null;
+            renderPublishingState();
             button.title = `TakeShape did not provide a publishing option for ${domain}.`;
           }
         }, 50);
+        activePublishState.chooser = chooseTarget;
       });
       stack.appendChild(button);
     });
+    status.className = 'awaylands-publish-status';
+    stack.appendChild(status);
+    renderPublishingState();
 
     nativeGroup.classList.add('awaylands-native-publish-group');
     nativeGroup.insertAdjacentElement('afterend', stack);
+    const leftNav = stack.closest('nav');
+    if (leftNav) {
+      leftNav.classList.add('awaylands-left-controls-nav');
+    }
   }
 
   function removeBottomEditorBar() {
@@ -1684,6 +1998,94 @@
     sync();
   }
 
+  function enhanceImageCropChoices(dialog) {
+    const creditLabel = Array.from(dialog.querySelectorAll('label')).find(label => /^credit$/i.test(normalizedText(label)));
+    const creditField = creditLabel && (creditLabel.closest('.MuiFormControl-root') || creditLabel.parentElement);
+    const creditInput = creditField && creditField.querySelector('input, textarea');
+
+    if (!creditField || !creditInput || dialog.querySelector('.awaylands-image-crop-field')) {
+      return;
+    }
+
+    const field = document.createElement('div');
+    const group = document.createElement('div');
+    const title = document.createElement('div');
+    const choices = [
+      ['↖', 'top-left', 'Top Left'],
+      ['↑', 'top', 'Top'],
+      ['↗', 'top-right', 'Top Right'],
+      ['←', 'left', 'Left'],
+      ['•', 'center', ['Center - default', 'Center']],
+      ['→', 'right', 'Right'],
+      ['↙', 'bottom-left', 'Bottom Left'],
+      ['↓', 'bottom', 'Bottom'],
+      ['↘', 'bottom-right', 'Bottom Right']
+    ];
+
+    field.className = 'awaylands-image-crop-field';
+    title.className = 'awaylands-image-crop-title';
+    title.textContent = 'Crop Focus - choose what stays visible';
+    group.className = 'awaylands-image-crop-choices';
+    group.setAttribute('role', 'group');
+    group.setAttribute('aria-label', 'Image crop focus');
+    choices.forEach(choice => {
+      const button = document.createElement('button');
+
+      button.type = 'button';
+      button.textContent = choice[0];
+      button.title = Array.isArray(choice[2]) ? choice[2][0] : choice[2];
+      button.setAttribute('aria-label', button.title);
+      button.setAttribute('data-value', choice[1]);
+      button.addEventListener('mousedown', event => {
+        event.preventDefault();
+        event.stopPropagation();
+      });
+      button.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopPropagation();
+        const marker = `[awaylands-crop:${choice[1]}]`;
+
+        if (creditInput.tagName === 'TEXTAREA') {
+          setEditorValue(creditInput, marker);
+        } else {
+          nativeInputValue(creditInput, marker);
+        }
+        field.setAttribute('data-awaylands-selected-value', choice[1]);
+        sync();
+        window.setTimeout(sync, 120);
+      });
+      group.appendChild(button);
+    });
+    field.appendChild(title);
+    field.appendChild(group);
+    creditField.insertAdjacentElement('beforebegin', field);
+
+    const sync = () => {
+      const markerMatch = (creditInput.value || '').match(/\[awaylands-crop:([a-z-]+)\]/i);
+      const selectedValue = field.hasAttribute('data-awaylands-selected-value') ?
+        field.getAttribute('data-awaylands-selected-value') :
+        markerMatch ? markerMatch[1].toLowerCase() : 'center';
+
+      Array.from(group.children).forEach(button => {
+        const selected = button.getAttribute('data-value') === selectedValue;
+
+        button.classList.toggle('is-selected', selected);
+        button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+    };
+
+    creditInput.addEventListener('input', sync);
+    creditInput.addEventListener('change', sync);
+    const syncTimer = window.setInterval(() => {
+      if (!dialog.isConnected) {
+        window.clearInterval(syncTimer);
+        return;
+      }
+      sync();
+    }, 400);
+    sync();
+  }
+
   function runEnhancement(name, callback) {
     try {
       callback();
@@ -1749,12 +2151,14 @@
     if (dialog.classList.contains(IMAGE_DIALOG_CLASS)) {
       enhanceImageSizeChoices(dialog);
       enhanceImageAlignmentChoices(dialog);
+      enhanceImageCropChoices(dialog);
       return;
     }
 
     dialog.classList.add(IMAGE_DIALOG_CLASS);
     enhanceImageSizeChoices(dialog);
     enhanceImageAlignmentChoices(dialog);
+    enhanceImageCropChoices(dialog);
     const urlLabel = Array.from(dialog.querySelectorAll('label')).find(label => normalizedText(label).toLowerCase() === 'url');
     const urlInput = urlLabel && urlLabel.closest('.MuiFormControl-root') && urlLabel.closest('.MuiFormControl-root').querySelector('input');
     const submit = Array.from(dialog.querySelectorAll('button')).find(button => normalizedText(button) === 'Submit');
@@ -1985,8 +2389,105 @@
     item.button.textContent = 'Native Away Lands card ready';
   });
 
+  function enhanceContentLinkEditor() {
+    document.querySelectorAll('input').forEach(input => {
+      if (input.closest('.awaylands-image-dialog')) {
+        return;
+      }
+
+      const field = input.closest('.MuiFormControl-root') || input.parentElement;
+      const label = field && field.querySelector('label');
+      const hint = [
+        input.getAttribute('type'),
+        input.getAttribute('name'),
+        input.getAttribute('placeholder'),
+        input.getAttribute('aria-label'),
+        label && normalizedText(label)
+      ].filter(Boolean).join(' ');
+
+      if (!/(?:url|link|href)/i.test(hint)) {
+        return;
+      }
+
+      let surface = input.closest('[role="dialog"], .MuiPopover-paper, .MuiPaper-root');
+      if (!surface) {
+        let candidate = input.parentElement;
+        let levels = 0;
+
+        while (candidate && candidate !== document.body && levels < 8) {
+          const controls = candidate.querySelectorAll('button, [role="button"]');
+          if (controls.length) {
+            surface = candidate;
+            break;
+          }
+          candidate = candidate.parentElement;
+          levels += 1;
+        }
+      }
+
+      if (!surface) {
+        return;
+      }
+
+      surface.classList.add('awaylands-content-link-editor');
+      input.classList.add('awaylands-content-link-input');
+      const inputField = input.closest('.MuiInputBase-root') || input.parentElement;
+      if (inputField) {
+        inputField.classList.add('awaylands-content-link-field');
+      }
+      let fieldShell = input.parentElement;
+      while (fieldShell && fieldShell !== surface) {
+        fieldShell.classList.add('awaylands-content-link-field-shell');
+        fieldShell = fieldShell.parentElement;
+      }
+      window.requestAnimationFrame(() => keepContentLinkEditorInView(surface));
+    });
+  }
+
+  function keepContentLinkEditorInView(surface) {
+    if (!surface || !surface.isConnected) {
+      return;
+    }
+
+    const safeEdge = 16;
+    const rect = surface.getBoundingClientRect();
+    let correction = 0;
+
+    if (rect.right > window.innerWidth - safeEdge) {
+      correction = window.innerWidth - safeEdge - rect.right;
+    }
+    if (rect.left + correction < safeEdge) {
+      correction += safeEdge - (rect.left + correction);
+    }
+
+    if (Math.abs(correction) >= 0.5) {
+      const existingShift = Number(surface.getAttribute('data-awaylands-link-shift') || 0);
+      const nextShift = existingShift + correction;
+      surface.setAttribute('data-awaylands-link-shift', String(nextShift));
+      surface.style.setProperty('margin-left', `${nextShift}px`, 'important');
+    }
+  }
+
+  function boldContentEditorLinks() {
+    document.querySelectorAll('[contenteditable="true"] a[href]').forEach(link => {
+      link.classList.add('awaylands-content-editor-bold-link');
+      link.style.setProperty('font-weight', '700', 'important');
+    });
+  }
+
   function markEditorElements() {
     if (!document.body) {
+      return;
+    }
+
+    if (!isStoryEditorPath()) {
+      document.body.classList.remove(ROOT_CLASS);
+      document.querySelectorAll('.awaylands-left-save-control, .awaylands-left-status-proxy, .awaylands-publish-targets, .awaylands-inline-html-dialog')
+        .forEach(element => element.remove());
+      document.querySelectorAll('.awaylands-hidden-story-action-header')
+        .forEach(element => element.classList.remove('awaylands-hidden-story-action-header'));
+      document.querySelectorAll('.awaylands-native-publish-group')
+        .forEach(element => element.classList.remove('awaylands-native-publish-group'));
       return;
     }
 
@@ -2035,14 +2536,19 @@
     runEnhancement('published date', addPublishedDateNowButton);
     runEnhancement('author defaults', fillDefaultAuthorText);
     runEnhancement('image editor', enhanceImageEditor);
+    runEnhancement('content link editor', enhanceContentLinkEditor);
+    runEnhancement('bold content links', boldContentEditorLinks);
     runEnhancement('gallery close', keepGallerySidebarUsable);
     runEnhancement('persistent gallery', tryOpenPersistentGallery);
+    runEnhancement('persistent gallery filter', persistGalleryFilter);
     runEnhancement('native publishing status', restoreNativePublishingStatus);
     runEnhancement('save and continue', makeStorySaveContinue);
-    runEnhancement('story tools below gallery', moveStoryToolsBelowGallery);
+    runEnhancement('story publishing default', enableStoryOnOpen);
+    runEnhancement('left publishing status', installLeftPublishingStatus);
+    runEnhancement('left save control', installLeftSaveControl);
+    runEnhancement('hide story tools and versions', hideStoryToolsAndVersions);
     runEnhancement('one-click publishing', addOneClickPublishButtons);
     runEnhancement('bottom editor bar', removeBottomEditorBar);
-    runEnhancement('story publishing default', enableStoryOnOpen);
   }
 
   let frameRequested = false;
@@ -2063,4 +2569,32 @@
     childList: true,
     subtree: true
   });
+
+  ['pushState', 'replaceState'].forEach(methodName => {
+    const nativeMethod = window.history[methodName];
+
+    if (typeof nativeMethod !== 'function' || nativeMethod.__awaylandsRouteObserver) {
+      return;
+    }
+
+    const observedMethod = function () {
+      const result = nativeMethod.apply(this, arguments);
+
+      requestMarking();
+      return result;
+    };
+
+    observedMethod.__awaylandsRouteObserver = true;
+    window.history[methodName] = observedMethod;
+  });
+  window.addEventListener('popstate', requestMarking);
+  let lastObservedPath = window.location.pathname;
+  window.setInterval(() => {
+    if (window.location.pathname === lastObservedPath) {
+      return;
+    }
+
+    lastObservedPath = window.location.pathname;
+    requestMarking();
+  }, 250);
 }());

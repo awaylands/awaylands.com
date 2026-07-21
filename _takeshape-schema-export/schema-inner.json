@@ -802,6 +802,48 @@
           "featuredStory": {
             "widget": "relationship"
           },
+          "heroImageOverride": {"widget": "image", "instructions": "Optional. Overrides the featured story image in the 01 header."},
+          "supportingStories": {"widget": "relationship", "instructions": "Optional. Choose up to four header stories. Recent stories fill empty positions."},
+          "editorsPicks": {"widget": "relationship", "instructions": "Optional. Choose up to four Editor's Picks. Automatic choices fill empty positions."},
+          "shoppingStory": {"widget": "relationship", "instructions": "Optional. Products come from this story's Shop the Edit."},
+          "travelEssentialsBackgroundImage": {"widget": "image", "instructions": "Optional. Full-bleed background for 03 - Travel Essentials."},
+          "travelEssentialsLabel": {"widget": "singleLineText", "instructions": "Optional. Defaults to 03 - Travel Essentials."},
+          "travelEssentialsTitle": {"widget": "paragraphText", "instructions": "Optional. Headline for the shopping section."},
+          "travelEssentialsLinkText": {"widget": "singleLineText", "instructions": "Optional. Defaults to Shop The Edit."},
+          "travelEssentialsLinkUrl": {"widget": "singleLineText", "instructions": "Optional. Defaults to the Packing Guides category."},
+          "travelEssentialsItems": {"widget": "shapeList", "instructions": "Optional. Add product image, title, and link overrides. Automatic Shop the Edit products fill empty positions."},
+          "categoryFeatureStories": {"widget": "relationship", "instructions": "Optional. Choose up to ten stories to provide the category tile images."},
+          "categoryTile1Category": {"widget": "relationship", "instructions": "Choose the category for tile 1."},
+          "categoryTile1Image": {"widget": "image", "instructions": "Choose the image for tile 1."},
+          "categoryTile2Category": {"widget": "relationship", "instructions": "Choose the category for tile 2."},
+          "categoryTile2Image": {"widget": "image", "instructions": "Choose the image for tile 2."},
+          "categoryTile3Category": {"widget": "relationship", "instructions": "Choose the category for tile 3."},
+          "categoryTile3Image": {"widget": "image", "instructions": "Choose the image for tile 3."},
+          "categoryTile4Category": {"widget": "relationship", "instructions": "Choose the category for tile 4."},
+          "categoryTile4Image": {"widget": "image", "instructions": "Choose the image for tile 4."},
+          "categoryTile5Category": {"widget": "relationship", "instructions": "Choose the category for tile 5."},
+          "categoryTile5Image": {"widget": "image", "instructions": "Choose the image for tile 5."},
+          "categoryTile6Category": {"widget": "relationship", "instructions": "Choose the category for tile 6."},
+          "categoryTile6Image": {"widget": "image", "instructions": "Choose the image for tile 6."},
+          "categoryTile7Category": {"widget": "relationship", "instructions": "Choose the category for tile 7."},
+          "categoryTile7Image": {"widget": "image", "instructions": "Choose the image for tile 7."},
+          "categoryTile8Category": {"widget": "relationship", "instructions": "Choose the category for tile 8."},
+          "categoryTile8Image": {"widget": "image", "instructions": "Choose the image for tile 8."},
+          "categoryTile9Category": {"widget": "relationship", "instructions": "Choose the category for tile 9."},
+          "categoryTile9Image": {"widget": "image", "instructions": "Choose the image for tile 9."},
+          "categoryTile10Category": {"widget": "relationship", "instructions": "Choose the category for tile 10."},
+          "categoryTile10Image": {"widget": "image", "instructions": "Choose the image for tile 10."},
+          "revolveSectionTitle": {"widget": "singleLineText", "instructions": "Optional. Defaults to What To Wear on Vacation."},
+          "revolveSectionLinkUrl": {"widget": "singleLineText", "instructions": "The Revolve collection link opened from the section heading."},
+          "revolveSectionEmbedHtml": {"widget": "paragraphText", "instructions": "Paste the complete Revolve iframe embed HTML."},
+          "featuredItineraries": {"widget": "relationship", "instructions": "Optional. Choose up to five itinerary carousel stories."},
+          "leftFullBleedStory": {"widget": "relationship", "instructions": "Optional. Controls 07 - Featured Story."},
+          "leftFullBleedImageOverride": {"widget": "image", "instructions": "Optional. Overrides the selected story image in 07 - Featured Story."},
+          "leftFullBleedMobileImageOverride": {"widget": "image", "instructions": "Optional. Vertical mobile image override for 07 - Featured Story."},
+          "rightFullBleedStory": {"widget": "relationship", "instructions": "Optional. Controls 08 - Featured Story."},
+          "rightFullBleedImageOverride": {"widget": "image", "instructions": "Optional. Overrides the selected story image in 08 - Featured Story."},
+          "rightFullBleedMobileImageOverride": {"widget": "image", "instructions": "Optional. Vertical mobile image override for 08 - Featured Story."},
+          "latestStories": {"widget": "relationship", "instructions": "Optional. Choose up to six stories for 09 - Latest Stories."},
           "categories": {
             "widget": "relationship"
           }
@@ -809,6 +851,48 @@
         "order": [
           "title",
           "featuredStory",
+          "heroImageOverride",
+          "supportingStories",
+          "editorsPicks",
+          "shoppingStory",
+          "travelEssentialsBackgroundImage",
+          "travelEssentialsLabel",
+          "travelEssentialsTitle",
+          "travelEssentialsLinkText",
+          "travelEssentialsLinkUrl",
+          "travelEssentialsItems",
+          "categoryFeatureStories",
+          "categoryTile1Image",
+          "categoryTile1Category",
+          "categoryTile2Image",
+          "categoryTile2Category",
+          "categoryTile3Image",
+          "categoryTile3Category",
+          "categoryTile4Image",
+          "categoryTile4Category",
+          "categoryTile5Image",
+          "categoryTile5Category",
+          "categoryTile6Image",
+          "categoryTile6Category",
+          "categoryTile7Image",
+          "categoryTile7Category",
+          "categoryTile8Image",
+          "categoryTile8Category",
+          "categoryTile9Image",
+          "categoryTile9Category",
+          "categoryTile10Image",
+          "categoryTile10Category",
+          "revolveSectionTitle",
+          "revolveSectionLinkUrl",
+          "revolveSectionEmbedHtml",
+          "featuredItineraries",
+          "leftFullBleedStory",
+          "leftFullBleedImageOverride",
+          "leftFullBleedMobileImageOverride",
+          "rightFullBleedStory",
+          "rightFullBleedImageOverride",
+          "rightFullBleedMobileImageOverride",
+          "latestStories",
           "categories",
           "social"
         ]
@@ -925,7 +1009,12 @@
             "widget": "image"
           },
           "title": {
-            "widget": "singleLineText"
+            "widget": "singleLineText",
+            "instructions": "Product name shown as the single centered label beneath the image."
+          },
+          "description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the product name in Travel Essentials."
           },
           "productUrl": {
             "widget": "singleLineText",
@@ -939,6 +1028,7 @@
         "order": [
           "image",
           "title",
+          "description",
           "productUrl"
           ,"productEmbedHtml"
         ]
@@ -1496,6 +1586,10 @@
             "widget": "dropdown",
             "instructions": "None aligns to the post text edge without wrapping. Left and Right use the expanded post width with text wrapping. Center does not wrap text."
           },
+          "cropPosition": {
+            "widget": "dropdown",
+            "instructions": "Choose which part of the photo remains visible when the image is cropped. Center is the default."
+          },
           "spacing": {
             "widget": "dropdown",
             "instructions": "Standard is recommended. Choose None when the image should sit flush against the surrounding content."
@@ -1521,6 +1615,7 @@
           "image",
           "size",
           "alignment",
+          "cropPosition",
           "spacing",
           "caption",
           "altText",
@@ -3933,6 +4028,185 @@
               }
             }
           },
+          "heroImageOverride": {
+            "title": "01 - Header Image Override",
+            "@mapping": "shapedb:Blog.MagazineHeroImageOverrideV1",
+            "@backreference": {"enabled": true},
+            "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"},
+            "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "supportingStories": {
+            "title": "Header Supporting Stories", "description": "Optional. Choose up to four. Recent stories fill empty positions.",
+            "type": "array", "items": {"@ref": "local:Story"}, "@mapping": "shapedb:Blog.MagazineSupportingStoriesV2",
+            "@input": {"type": "array", "items": {"@ref": "local:TSRelationship"}}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb"}
+          },
+          "editorsPicks": {
+            "title": "Editor's Picks", "description": "Optional. Choose up to four. Automatic choices fill empty positions.",
+            "type": "array", "items": {"@ref": "local:Story"}, "@mapping": "shapedb:Blog.MagazineEditorsPicksV2",
+            "@input": {"type": "array", "items": {"@ref": "local:TSRelationship"}}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb"}
+          },
+          "shoppingStory": {
+            "title": "Shopping Feature Story", "description": "Optional. Products come from this story's Shop the Edit.",
+            "@mapping": "shapedb:Blog.MagazineShoppingStoryV2", "@ref": "local:Story",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "travelEssentialsBackgroundImage": {
+            "title": "03 - Background Photo",
+            "@mapping": "shapedb:Blog.MagazineTravelEssentialsBackgroundV1",
+            "@backreference": {"enabled": true},
+            "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"},
+            "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "travelEssentialsLabel": {
+            "type": "string", "title": "03 - Small Label", "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineTravelEssentialsLabelV1"
+          },
+          "travelEssentialsTitle": {
+            "type": "string", "title": "03 - Title", "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineTravelEssentialsTitleV1"
+          },
+          "travelEssentialsLinkText": {
+            "type": "string", "title": "03 - Link Text", "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineTravelEssentialsLinkTextV1"
+          },
+          "travelEssentialsLinkUrl": {
+            "type": "string", "title": "03 - Link URL", "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineTravelEssentialsLinkUrlV1"
+          },
+          "travelEssentialsItems": {
+            "title": "03 - Product Cards",
+            "type": "array",
+            "items": {"$ref": "#/shapes/StoryShopEditItem/schema"},
+            "@mapping": "shapedb:Blog.MagazineTravelEssentialsItemsV1"
+          },
+          "categoryFeatureStories": {
+            "title": "Explore by Category Images", "description": "Optional. Choose up to ten stories to provide tile images.",
+            "type": "array", "items": {"@ref": "local:Story"}, "@mapping": "shapedb:Blog.MagazineCategoryStoriesV2",
+            "@input": {"type": "array", "items": {"@ref": "local:TSRelationship"}}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb"}
+          },
+          "categoryTile1Category": {
+            "title": "04 - Tile 1 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile1CategoryV1", "@ref": "local:Category",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile1Image": {
+            "title": "04 - Tile 1 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile1ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile2Category": {
+            "title": "04 - Tile 2 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile2CategoryV1", "@ref": "local:Category",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile2Image": {
+            "title": "04 - Tile 2 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile2ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile3Category": {
+            "title": "04 - Tile 3 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile3CategoryV1", "@ref": "local:Category",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile3Image": {
+            "title": "04 - Tile 3 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile3ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile4Category": {
+            "title": "04 - Tile 4 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile4CategoryV1", "@ref": "local:Category",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile4Image": {
+            "title": "04 - Tile 4 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile4ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile5Category": {
+            "title": "04 - Tile 5 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile5CategoryV1", "@ref": "local:Category",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile5Image": {
+            "title": "04 - Tile 5 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile5ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "categoryTile6Category": {"title": "04 - Tile 6 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile6CategoryV1", "@ref": "local:Category", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile6Image": {"title": "04 - Tile 6 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile6ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile7Category": {"title": "04 - Tile 7 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile7CategoryV1", "@ref": "local:Category", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile7Image": {"title": "04 - Tile 7 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile7ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile8Category": {"title": "04 - Tile 8 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile8CategoryV1", "@ref": "local:Category", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile8Image": {"title": "04 - Tile 8 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile8ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile9Category": {"title": "04 - Tile 9 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile9CategoryV1", "@ref": "local:Category", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile9Image": {"title": "04 - Tile 9 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile9ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile10Category": {"title": "04 - Tile 10 Category", "@mapping": "shapedb:Blog.MagazineCategoryTile10CategoryV1", "@ref": "local:Category", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "categoryTile10Image": {"title": "04 - Tile 10 Image", "@mapping": "shapedb:Blog.MagazineCategoryTile10ImageV1", "@backreference": {"enabled": true}, "@ref": "local:Asset", "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}},
+          "revolveSectionTitle": {
+            "type": "string", "title": "05 - Revolve Section Title", "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineRevolveSectionTitleV1"
+          },
+          "revolveSectionLinkUrl": {
+            "type": "string", "title": "05 - Revolve Collection Link", "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineRevolveSectionLinkUrlV1"
+          },
+          "revolveSectionEmbedHtml": {
+            "type": "string", "title": "05 - Revolve Embed HTML", "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineRevolveSectionEmbedHtmlV1"
+          },
+          "featuredItineraries": {
+            "title": "06 - Featured Itineraries", "description": "Optional. Choose up to five carousel stories.",
+            "type": "array", "items": {"@ref": "local:Story"}, "@mapping": "shapedb:Blog.MagazineItinerariesV2",
+            "@input": {"type": "array", "items": {"@ref": "local:TSRelationship"}}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb"}
+          },
+          "leftFullBleedStory": {
+            "title": "07 - Featured Story", "description": "Optional. Automatic fallback is used when empty.",
+            "@mapping": "shapedb:Blog.MagazineLeftFeatureV2", "@ref": "local:Story",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "leftFullBleedImageOverride": {
+            "title": "07 - Full Bleed Image Override",
+            "@mapping": "shapedb:Blog.MagazineLeftFullBleedImageOverrideV1",
+            "@backreference": {"enabled": true},
+            "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"},
+            "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "leftFullBleedMobileImageOverride": {
+            "title": "07 - Mobile Image Override",
+            "@mapping": "shapedb:Blog.MagazineLeftFullBleedMobileImageOverrideV1", "@backreference": {"enabled": true}, "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "rightFullBleedStory": {
+            "title": "08 - Featured Story", "description": "Optional. Automatic fallback is used when empty.",
+            "@mapping": "shapedb:Blog.MagazineRightFeatureV2", "@ref": "local:Story",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "rightFullBleedImageOverride": {
+            "title": "08 - Full Bleed Image Override",
+            "@mapping": "shapedb:Blog.MagazineRightFullBleedImageOverrideV1",
+            "@backreference": {"enabled": true},
+            "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"},
+            "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "rightFullBleedMobileImageOverride": {
+            "title": "08 - Mobile Image Override",
+            "@mapping": "shapedb:Blog.MagazineRightFullBleedMobileImageOverrideV1", "@backreference": {"enabled": true}, "@ref": "local:Asset",
+            "@input": {"@ref": "local:TSRelationship"}, "@args": "TSRelationshipArgs", "@resolver": {"name": "shapedb:getRelated", "service": "shapedb", "options": {"nullable": true}}
+          },
+          "latestStories": {
+            "title": "09 - Latest Stories", "description": "Optional. Choose up to six. Recent stories fill empty positions.",
+            "type": "array", "items": {"@ref": "local:Story"}, "@mapping": "shapedb:Blog.MagazineLatestStoriesV2",
+            "@input": {"type": "array", "items": {"@ref": "local:TSRelationship"}}, "@args": "TSRelationshipArgs",
+            "@resolver": {"name": "shapedb:getRelated", "service": "shapedb"}
+          },
           "categories": {
             "title": "Categories",
             "@mapping": "shapedb:Blog.Hyf1iX3VZ",
@@ -5373,9 +5647,15 @@
           },
           "title": {
             "type": "string",
-            "title": "Display Title",
+            "title": "Product Name",
             "minLength": 0,
             "@mapping": "shapedb:StoryShopEditItem.Title"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:StoryShopEditItem.DescriptionV1"
           },
           "productUrl": {
             "type": "string",
@@ -5674,6 +5954,23 @@
               }
             ],
             "@mapping": "shapedb:StoryImageBlock.Alignment"
+          },
+          "cropPosition": {
+            "type": "string",
+            "title": "Crop Focus",
+            "default": "center",
+            "oneOf": [
+              {"title": "Top Left", "enum": ["top-left"]},
+              {"title": "Top", "enum": ["top"]},
+              {"title": "Top Right", "enum": ["top-right"]},
+              {"title": "Left", "enum": ["left"]},
+              {"title": "Center - default", "enum": ["center"]},
+              {"title": "Right", "enum": ["right"]},
+              {"title": "Bottom Left", "enum": ["bottom-left"]},
+              {"title": "Bottom", "enum": ["bottom"]},
+              {"title": "Bottom Right", "enum": ["bottom-right"]}
+            ],
+            "@mapping": "shapedb:StoryImageBlock.CropPositionV1"
           },
           "spacing": {
             "type": "string",

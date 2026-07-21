@@ -28,3 +28,5 @@ graphql.config.json
 takeshape-project.graphql
 .graphqlconfig
 .takeshaperc
+.amazon-creators.env
+/tools/amazon-creators-sdk/

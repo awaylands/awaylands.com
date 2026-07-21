@@ -183,6 +183,14 @@ body.awaylands-takeshape-skim .ProseMirror h3 {
   font-weight: 800 !important;
 }
 
+body.awaylands-takeshape-skim .ProseMirror a,
+body.awaylands-takeshape-skim [contenteditable="true"] a,
+body.awaylands-takeshape-skim [contenteditable="true"] a[href],
+body.awaylands-takeshape-skim [contenteditable="true"] * a[href],
+body.awaylands-takeshape-skim .awaylands-content-editor-bold-link {
+  font-weight: 700 !important;
+}
+
 body.awaylands-takeshape-skim .ProseMirror h1 {
   font-size: 28px !important;
 }
@@ -767,20 +775,23 @@ body.awaylands-takeshape-skim aside[class*="floating-sidebar-module__sidebarCont
 body.awaylands-takeshape-skim [role="complementary"][class*="floating-sidebar-module__sidebarContent___"] {
   width: 496px !important;
   max-width: 48vw !important;
-  overflow-y: auto !important;
+  height: calc(100vh - 48px) !important;
+  max-height: calc(100vh - 48px) !important;
+  overflow: hidden !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-drawer-shell {
-  position: static !important;
+  position: sticky !important;
+  top: 0 !important;
   align-self: flex-start !important;
   width: 496px !important;
   min-width: 0 !important;
   max-width: 48vw !important;
-  height: auto !important;
-  max-height: none !important;
+  height: calc(100vh - 48px) !important;
+  max-height: calc(100vh - 48px) !important;
   flex: 0 0 496px !important;
   margin-left: auto !important;
-  overflow: visible !important;
+  overflow: hidden !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-column-wrapper {
@@ -789,7 +800,9 @@ body.awaylands-takeshape-skim .awaylands-gallery-column-wrapper {
   min-width: 0 !important;
   max-width: 48vw !important;
   flex: 0 0 496px !important;
-  overflow: visible !important;
+  height: calc(100vh - 48px) !important;
+  max-height: calc(100vh - 48px) !important;
+  overflow: hidden !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-drawer-content {
@@ -798,17 +811,19 @@ body.awaylands-takeshape-skim .awaylands-gallery-drawer-content {
   width: 100% !important;
   min-width: 0 !important;
   max-width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-  overflow: visible !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-layout-parent {
   display: flex !important;
   grid-template-columns: none !important;
   align-items: flex-start !important;
+  height: calc(100vh - 48px) !important;
+  max-height: calc(100vh - 48px) !important;
   min-width: 900px !important;
-  overflow: visible !important;
+  overflow: hidden !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-layout-parent > .awaylands-main-editor-column {
@@ -816,13 +831,85 @@ body.awaylands-takeshape-skim .awaylands-gallery-layout-parent > .awaylands-main
   min-width: 0 !important;
   max-width: none !important;
   flex: 1 1 auto !important;
+  height: 100% !important;
+  max-height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-flow-host {
   height: auto !important;
   min-height: 0 !important;
   max-height: none !important;
-  overflow: visible !important;
+  overflow: hidden !important;
+}
+
+body.awaylands-takeshape-skim [class*="asset-picker-grid-item-module__asset"].awaylands-gallery-overflow-tile {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-tile {
+  grid-column: 3 !important;
+  grid-row: 7 !important;
+  order: 2147483647 !important;
+  align-self: stretch !important;
+  box-sizing: border-box !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-layout,
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-tile .MuiToolbar-root {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-actions {
+  order: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-tile .MuiTablePagination-actions {
+  order: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-range {
+  order: 2 !important;
+  width: 100% !important;
+  margin: 0 !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-tile .MuiTablePagination-spacer,
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-tile .MuiTablePagination-selectLabel,
+body.awaylands-takeshape-skim .awaylands-gallery-pagination-tile .MuiInputBase-root {
+  display: none !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-gallery-native-close,
@@ -859,6 +946,152 @@ body.awaylands-takeshape-skim .awaylands-story-tools-panel {
   overflow: visible !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-hide-story-tools,
+body.awaylands-takeshape-skim .awaylands-left-story-tools,
+body.awaylands-takeshape-skim .awaylands-gallery-story-tools,
+body.awaylands-takeshape-skim [class*="Sidebar-sc-17tr324-0"] {
+  display: none !important;
+  position: static !important;
+  inset: auto !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  overflow: hidden !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-status-proxy {
+  display: block !important;
+  position: static !important;
+  flex: 0 0 auto !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-controls-nav {
+  box-sizing: border-box !important;
+  padding-bottom: calc((100vh - 48px) / 4) !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-save-control {
+  position: sticky !important;
+  top: 8px !important;
+  z-index: 12 !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 12px !important;
+  border-top: 1px solid #d8d8d8 !important;
+  background: #ffffff !important;
+  text-align: center !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-save-control button {
+  width: 100% !important;
+  min-height: 42px !important;
+  border: 0 !important;
+  border-radius: 4px !important;
+  background: rgb(92, 107, 192) !important;
+  color: #ffffff !important;
+  padding: 8px 14px !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-save-control button:hover,
+body.awaylands-takeshape-skim .awaylands-left-save-control button:focus {
+  background: rgb(73, 86, 160) !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-save-control button:disabled {
+  opacity: 0.52 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-hidden-story-action-header {
+  display: none !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-status-control {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  padding: 12px !important;
+  border-top: 1px solid #d8d8d8 !important;
+  background: #ffffff !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-status-title {
+  margin-bottom: 8px !important;
+  color: #4c5c66 !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-status-choices {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 6px !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-status-choices button {
+  min-width: 0 !important;
+  min-height: 34px !important;
+  padding: 6px 8px !important;
+  border: 1px solid #c7cbd8 !important;
+  border-radius: 4px !important;
+  background: #f4f4f6 !important;
+  color: #4c5c66 !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-status-choices button.is-selected {
+  border-color: rgb(92, 107, 192) !important;
+  background: rgb(92, 107, 192) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(92, 107, 192, 0.24) !important;
+}
+
+/* TakeShape's Publish Site footer is natively sticky. Apply this directly to
+   the native footer so React replacements after Save cannot restore sticking. */
+body.awaylands-takeshape-skim footer.sticky.bottom-0,
+body.awaylands-takeshape-skim footer[class*="sticky"][class*="bottom-0"] {
+  position: static !important;
+  inset: auto !important;
+  bottom: auto !important;
+  top: auto !important;
+  z-index: auto !important;
+  align-self: auto !important;
+  box-shadow: none !important;
+}
+
+/* The Edit Story action header should scroll normally with the form. */
+body.awaylands-takeshape-skim header[class*="Header-sc-l8okjh-0"] {
+  position: static !important;
+  inset: auto !important;
+  top: auto !important;
+  z-index: auto !important;
+}
+
 body.awaylands-takeshape-skim .awaylands-remove-bottom-bar {
   position: static !important;
   display: block !important;
@@ -881,9 +1114,9 @@ body.awaylands-takeshape-skim .awaylands-native-publish-group {
 body.awaylands-takeshape-skim .awaylands-publish-targets {
   display: flex !important;
   flex-direction: column !important;
-  align-items: stretch !important;
+  align-items: center !important;
   gap: 8px !important;
-  width: min(320px, 100%) !important;
+  width: 100% !important;
   margin: 12px 0 !important;
 }
 
@@ -909,6 +1142,55 @@ body.awaylands-takeshape-skim .awaylands-publish-targets button:focus {
 
 body.awaylands-takeshape-skim .awaylands-publish-targets button:disabled {
   opacity: 0.72 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-left-save-control button,
+body.awaylands-takeshape-skim .awaylands-publish-targets button {
+  box-sizing: border-box !important;
+  width: 80% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  height: 34px !important;
+  min-height: 34px !important;
+  padding: 6px 11px !important;
+  font-size: 14px !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-publish-status {
+  display: none !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 28px !important;
+  color: #4a4a4a !important;
+  font-family: Roboto, Helvetica, Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  text-align: center !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-publish-status.is-active {
+  display: flex !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-publish-spinner {
+  display: inline-block !important;
+  box-sizing: border-box !important;
+  width: 16px !important;
+  height: 16px !important;
+  border: 2px solid rgba(92, 107, 192, 0.28) !important;
+  border-top-color: rgb(92, 107, 192) !important;
+  border-radius: 50% !important;
+  animation: awaylands-publish-spin 0.75s linear infinite !important;
+}
+
+@keyframes awaylands-publish-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 body.awaylands-takeshape-skim .awaylands-remove-empty-sticky-bar {
@@ -957,7 +1239,7 @@ body.awaylands-takeshape-skim [class*="asset-picker-grid-module__grid"] {
   width: 100% !important;
   box-sizing: border-box !important;
   height: auto !important;
-  overflow: visible !important;
+  overflow: hidden !important;
   padding: 10px 18px 20px 12px !important;
 }
 
@@ -1074,19 +1356,22 @@ body.awaylands-takeshape-skim .awaylands-image-size-label {
 }
 
 body.awaylands-takeshape-skim .awaylands-image-size-field,
-body.awaylands-takeshape-skim .awaylands-image-alignment-field {
+body.awaylands-takeshape-skim .awaylands-image-alignment-field,
+body.awaylands-takeshape-skim .awaylands-image-crop-field {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
   gap: 8px !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-image-size-native-label,
-body.awaylands-takeshape-skim .awaylands-image-alignment-native-label {
+body.awaylands-takeshape-skim .awaylands-image-alignment-native-label,
+body.awaylands-takeshape-skim .awaylands-image-crop-native-label {
   display: none !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-image-size-title,
-body.awaylands-takeshape-skim .awaylands-image-alignment-title {
+body.awaylands-takeshape-skim .awaylands-image-alignment-title,
+body.awaylands-takeshape-skim .awaylands-image-crop-title {
   display: block;
   width: 100%;
   color: #6f6f6f;
@@ -1096,7 +1381,8 @@ body.awaylands-takeshape-skim .awaylands-image-alignment-title {
 }
 
 body.awaylands-takeshape-skim .awaylands-image-size-choices,
-body.awaylands-takeshape-skim .awaylands-image-alignment-choices {
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices,
+body.awaylands-takeshape-skim .awaylands-image-crop-choices {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -1107,8 +1393,15 @@ body.awaylands-takeshape-skim .awaylands-image-alignment-choices {
   flex-wrap: nowrap !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-image-crop-choices {
+  display: grid !important;
+  grid-template-columns: repeat(3, 42px) !important;
+  gap: 6px !important;
+}
+
 body.awaylands-takeshape-skim .awaylands-image-size-choices button,
-body.awaylands-takeshape-skim .awaylands-image-alignment-choices button {
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices button,
+body.awaylands-takeshape-skim .awaylands-image-crop-choices button {
   width: auto !important;
   min-width: 0 !important;
   min-height: 0 !important;
@@ -1125,15 +1418,25 @@ body.awaylands-takeshape-skim .awaylands-image-alignment-choices button {
   text-transform: capitalize !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-image-crop-choices button {
+  width: 42px !important;
+  height: 36px !important;
+  padding: 0 !important;
+  font-size: 19px !important;
+}
+
 body.awaylands-takeshape-skim .awaylands-image-size-choices button:hover,
 body.awaylands-takeshape-skim .awaylands-image-size-choices button:focus,
 body.awaylands-takeshape-skim .awaylands-image-alignment-choices button:hover,
-body.awaylands-takeshape-skim .awaylands-image-alignment-choices button:focus {
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices button:focus,
+body.awaylands-takeshape-skim .awaylands-image-crop-choices button:hover,
+body.awaylands-takeshape-skim .awaylands-image-crop-choices button:focus {
   background: rgb(73, 86, 160) !important;
 }
 
 body.awaylands-takeshape-skim .awaylands-image-size-choices button.is-selected,
-body.awaylands-takeshape-skim .awaylands-image-alignment-choices button.is-selected {
+body.awaylands-takeshape-skim .awaylands-image-alignment-choices button.is-selected,
+body.awaylands-takeshape-skim .awaylands-image-crop-choices button.is-selected {
   background: rgb(55, 68, 145) !important;
   box-shadow: 0 0 0 3px rgba(92, 107, 192, 0.34) !important;
 }
@@ -1187,6 +1490,65 @@ body.awaylands-takeshape-skim [role="dialog"] input[name="awaylands-image-link-u
   background: #eeeeee !important;
 }
 
+body.awaylands-takeshape-skim .awaylands-content-link-editor {
+  box-sizing: border-box !important;
+  width: min(600px, calc(100vw - 32px)) !important;
+  min-width: min(600px, calc(100vw - 32px)) !important;
+  max-width: calc(100vw - 32px) !important;
+  color: #000000 !important;
+  background: #ffffff !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-link-editor > * {
+  background-color: #ffffff !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-link-editor .awaylands-content-link-field {
+  box-sizing: border-box !important;
+  width: auto !important;
+  min-width: min(450px, calc(100vw - 160px)) !important;
+  max-width: none !important;
+  flex: 1 1 450px !important;
+  color: #000000 !important;
+  background: #ffffff !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-link-editor .awaylands-content-link-field-shell {
+  box-sizing: border-box !important;
+  max-width: none !important;
+  color: #000000 !important;
+  background: #ffffff !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-link-editor > .awaylands-content-link-field-shell {
+  width: auto !important;
+  min-width: min(450px, calc(100vw - 160px)) !important;
+  flex: 1 1 450px !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-link-editor .awaylands-content-link-input {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 1 1 auto !important;
+  color: #000000 !important;
+  background: #ffffff !important;
+  -webkit-text-fill-color: #000000 !important;
+  opacity: 1 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-link-editor .awaylands-content-link-input::placeholder {
+  color: rgba(0, 0, 0, 0.55) !important;
+  -webkit-text-fill-color: rgba(0, 0, 0, 0.55) !important;
+  opacity: 1 !important;
+}
+
+body.awaylands-takeshape-skim .awaylands-content-link-editor button,
+body.awaylands-takeshape-skim .awaylands-content-link-editor [role="button"] {
+  color: #222222 !important;
+}
+
 @media (max-width: 900px) {
   body.awaylands-takeshape-skim .awaylands-choice-group {
     display: flex;
@@ -1195,5 +1557,14 @@ body.awaylands-takeshape-skim [role="dialog"] input[name="awaylands-image-link-u
   body.awaylands-takeshape-skim [role="dialog"] input[type="url"],
   body.awaylands-takeshape-skim [role="dialog"] input[name="awaylands-image-link-url"] {
     min-width: 0 !important;
+  }
+
+  body.awaylands-takeshape-skim .awaylands-content-link-editor .awaylands-content-link-input {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  body.awaylands-takeshape-skim .awaylands-content-link-editor .awaylands-content-link-field {
+    min-width: calc(100vw - 160px) !important;
   }
 }

@@ -55,6 +55,15 @@ export default {
         maxOffset = window.innerHeight - 20;
       }
 
+      if (document.body.classList.contains('body--blog-magazine')) {
+        const heroTitle = document.querySelector('.bm-hero__copy h1');
+
+        if (heroTitle) {
+          const headerHeight = this.$el ? this.$el.getBoundingClientRect().height : 0;
+          maxOffset = heroTitle.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        }
+      }
+
       if (!this.isSticky && window.pageYOffset >= maxOffset) {
         this.isSticky = true;
       } else if (this.isSticky && window.pageYOffset < maxOffset) {

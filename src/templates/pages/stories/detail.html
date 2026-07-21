@@ -44,10 +44,12 @@
     {% if not imageAlignment or imageAlignment == "auto" %}{% set imageAlignment = "none" %}{% endif %}
     {% set imageSpacing = block.spacing %}
     {% if not imageSpacing %}{% set imageSpacing = "standard" %}{% endif %}
+    {% set imageCropPosition = block.cropPosition %}
+    {% if not imageCropPosition %}{% set imageCropPosition = "center" %}{% endif %}
     {% set imageAlt = block.altText %}
     {% if not imageAlt %}{% set imageAlt = block.caption %}{% endif %}
 
-    <figure class="story-image-block {{ imageSize }} align-{{ imageAlignment }} spacing-{{ imageSpacing }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
+    <figure class="story-image-block {{ imageSize }} align-{{ imageAlignment }} crop-{{ imageCropPosition }} spacing-{{ imageSpacing }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
       {% if block.linkUrl %}
       <a href="{{ block.linkUrl | trim }}"{% if block.linkTarget != "same-tab" %} target="_blank" rel="noopener"{% endif %}>
       {% endif %}
@@ -385,7 +387,7 @@
               {% endfor %}
             {% endif %}
 
-            {% if shouldAutofillRelatedStories and page.location.length %}
+            {% if page.location.length %}
               {% for story in page.location[0].storySet.items %}
               {% if story.title != page.title
                 and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
@@ -396,7 +398,7 @@
               {% endfor %}
             {% endif %}
 
-            {% if shouldAutofillRelatedStories and page.category.length %}
+            {% if page.category.length %}
               {% for story in page.category[0].storySet.items %}
               {% if story.title != page.title
                 and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
@@ -407,13 +409,14 @@
               {% endfor %}
             {% endif %}
 
-            {% if shouldAutofillRelatedStories and not page.category.length and not page.location.length %}
-              {% for story in recentStories.items %}
-                {% if story.title != page.title %}
-                  {{ renderRelatedStory(story) }}
-                {% endif %}
-              {% endfor %}
-            {% endif %}
+            {# Final universal fallback. The browser removes duplicate URLs and
+               keeps six unique stories, providing three for the sidebar and
+               three different stories for Explore Further. #}
+            {% for story in recentStories.items %}
+              {% if story.title != page.title %}
+                {{ renderRelatedStory(story) }}
+              {% endif %}
+            {% endfor %}
 
           </ul>
         </section>

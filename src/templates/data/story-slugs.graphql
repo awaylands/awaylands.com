@@ -41,7 +41,7 @@ query($images: TSImagesConfig) {
       keepReadingTitle
       category {
         title
-        storySet(size: 6, sort: [{field: "_enabledAt", order: "desc"}]) {
+        storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
           items {
             _contentTypeName
             title
@@ -59,7 +59,7 @@ query($images: TSImagesConfig) {
       }
       location {
         title
-        storySet(size: 6, sort: [{field: "_enabledAt", order: "desc"}]) {
+        storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
           items {
             _contentTypeName
             title
@@ -126,6 +126,7 @@ query($images: TSImagesConfig) {
           image { path }
           size
           alignment
+          cropPosition
           spacing
           linkUrl
           linkTarget

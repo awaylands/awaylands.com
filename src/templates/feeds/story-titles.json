@@ -6,7 +6,10 @@
   {{ comma() }}{
     "title": {{ story.title | dump | safe }},
     "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %},
-    "updatedAt": {{ story._updatedAt | dump | safe }}
+    "updatedAt": {{ story._updatedAt | dump | safe }},
+    "enabledAt": {{ story._enabledAt | dump | safe }},
+    "socialTitle": {% if story.social.title %}{{ story.social.title | dump | safe }}{% else %}""{% endif %},
+    "image": {% if story.tout.image.path %}{{ (story.tout.image.path | image({w: 960, auto: 'compress,format'})) | dump | safe }}{% else %}""{% endif %}
   }
   {% endfor %}
 {% endfor %}

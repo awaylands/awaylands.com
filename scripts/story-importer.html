@@ -280,8 +280,8 @@
             return;
           }
 
-          const nextStyles = styleNames(node, styles);
           const nextHref = node.tagName === 'A' ? (node.getAttribute('href') || '').trim() : href;
+          const nextStyles = styleNames(node, styles).filter(style => !(nextHref && style === 'UNDERLINE'));
           Array.from(node.childNodes).forEach(child => walk(child, nextStyles, nextHref));
         }
 
@@ -291,9 +291,48 @@
 
       function buildDraft(doc, assetsBySource) {
         const blocks = [];
-        const entityMap = {};
+        let entityMap = {};
         let entityIndex = 0;
         let skippedTitle = false;
+        let mainContent = null;
+        const contentBlocks = [];
+
+        function currentDraft() {
+          return {blocks: blocks.slice(), entityMap};
+        }
+
+        function resetDraft() {
+          blocks.length = 0;
+          entityMap = {};
+          entityIndex = 0;
+        }
+
+        function flushContent(forceMain) {
+          const draft = blocks.length ? currentDraft() : emptyDraft();
+
+          if (mainContent === null) {
+            mainContent = draft;
+          } else if (blocks.length || forceMain) {
+            contentBlocks.push({_contentTypeName: 'ContentBlock', content: draft});
+          }
+          resetDraft();
+        }
+
+        function addTableBlock(table) {
+          const rows = Array.from(table.querySelectorAll('tr')).map(row =>
+            Array.from(row.children)
+              .filter(cell => cell.tagName === 'TH' || cell.tagName === 'TD')
+              .map(cell => (cell.textContent || '').replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim())
+          ).filter(row => row.length);
+
+          if (!rows.length) return;
+          flushContent(false);
+          contentBlocks.push({
+            _contentTypeName: 'TableBlock',
+            pastedText: rows.map(row => row.join('\t')).join('\n'),
+            columnCount: Math.max.apply(null, rows.map(row => row.length))
+          });
+        }
 
         function addTextBlock(element, type, depth) {
           const tokens = inlineTokens(element);
@@ -338,6 +377,7 @@
         function visit(element) {
           const tag = (element.tagName || '').toLowerCase();
           if (tag === 'script' || tag === 'style') return;
+          if (tag === 'table') { addTableBlock(element); return; }
           if (tag === 'h1' && !skippedTitle) { skippedTitle = true; return; }
           if (/^h[1-6]$/.test(tag)) { addTextBlock(element, `header-${['one','two','three','four','five','six'][Number(tag.slice(1)) - 1]}`, 0); return; }
           if (tag === 'p' || tag === 'div') {
@@ -358,8 +398,12 @@
         }
 
         Array.from(doc.body.children).forEach(visit);
-        if (!blocks.length) blocks.push(emptyDraft().blocks[0]);
-        return {blocks, entityMap};
+        if (mainContent === null) {
+          mainContent = blocks.length ? currentDraft() : emptyDraft();
+        } else if (blocks.length) {
+          contentBlocks.push({_contentTypeName: 'ContentBlock', content: currentDraft()});
+        }
+        return {content: mainContent, contentBlocks};
       }
 
       create.addEventListener('click', async () => {
@@ -384,13 +428,15 @@
 
           setStatus('Creating the enabled post…');
           const firstAsset = uniqueSources.length ? assetsBySource[uniqueSources[0]] : null;
+          const builtContent = buildDraft(sourceDocument, assetsBySource);
           const result = await postJson('/api/create-story', {
             title: title.value.trim(),
             slug: slug.value.trim() || slugify(title.value),
             postType: document.getElementById('postType').value,
             pageLayout: document.getElementById('pageLayout').value,
             heroAssetId: firstAsset && firstAsset._id,
-            content: buildDraft(sourceDocument, assetsBySource)
+            content: builtContent.content,
+            contentBlocks: builtContent.contentBlocks
           });
 
           setStatus(`Created “${result.story.title}” as Enabled. Story ID: ${result.story._id}`, 'success');

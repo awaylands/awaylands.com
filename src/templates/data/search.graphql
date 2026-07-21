@@ -62,6 +62,7 @@ query($images: TSImagesConfig) {
           image { path }
           size
           alignment
+          cropPosition
           spacing
           linkUrl
           linkTarget

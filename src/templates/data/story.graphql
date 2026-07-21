@@ -53,10 +53,40 @@ query {
   recentStories: getStoryList(size: 8, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
+      _enabledAt
       title
       slug
       social { title }
+      category { title }
       tout { image { path } }
+    }
+  }
+  archiveStories: getStoryList(size: 30, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      _contentTypeName
+      _enabledAt
+      title
+      slug
+      social { title }
+      category { title }
+      tout { image { path } }
+    }
+  }
+  shoppingStories: getStoryList(
+    size: 8,
+    where: {shopEditItems: {productUrl: {regexp: ".+"}}},
+    sort: [{field: "_enabledAt", order: "desc"}]
+  ) {
+    items {
+      _contentTypeName
+      title
+      slug
+      shopEditItems {
+        image { path }
+        title
+        productUrl
+        productEmbedHtml
+      }
     }
   }
   page: getBlog {
@@ -76,6 +106,78 @@ query {
         }
         dek
       }
+      shopEditItems {
+        image { path }
+        title
+        productUrl
+        productEmbedHtml
+      }
+    }
+    heroImageOverride { path }
+    supportingStories {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    editorsPicks {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    shoppingStory {
+      _contentTypeName title slug
+      shopEditItems { image { path } title productUrl productEmbedHtml }
+    }
+    travelEssentialsBackgroundImage { path }
+    travelEssentialsLabel
+    travelEssentialsTitle
+    travelEssentialsLinkText
+    travelEssentialsLinkUrl
+    travelEssentialsItems { image { path } title description productUrl productEmbedHtml }
+    categoryFeatureStories {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    categoryTile1Category { title }
+    categoryTile1Image { path }
+    categoryTile2Category { title }
+    categoryTile2Image { path }
+    categoryTile3Category { title }
+    categoryTile3Image { path }
+    categoryTile4Category { title }
+    categoryTile4Image { path }
+    categoryTile5Category { title }
+    categoryTile5Image { path }
+    categoryTile6Category { title }
+    categoryTile6Image { path }
+    categoryTile7Category { title }
+    categoryTile7Image { path }
+    categoryTile8Category { title }
+    categoryTile8Image { path }
+    categoryTile9Category { title }
+    categoryTile9Image { path }
+    categoryTile10Category { title }
+    categoryTile10Image { path }
+    revolveSectionTitle
+    revolveSectionLinkUrl
+    revolveSectionEmbedHtml
+    featuredItineraries {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    leftFullBleedStory {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    leftFullBleedImageOverride { path }
+    leftFullBleedMobileImageOverride { path }
+    rightFullBleedStory {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    rightFullBleedImageOverride { path }
+    rightFullBleedMobileImageOverride { path }
+    latestStories {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
     }
     categories {
       title

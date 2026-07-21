@@ -352,7 +352,7 @@
       margin-top: 0;
       color: #f5ece5;
       font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
-      font-size: 3rem;
+      font-size: 2.6rem;
       font-weight: 500;
       line-height: 0.95;
     }
@@ -369,7 +369,7 @@
       padding-bottom: 1.4rem;
 
       h2 {
-        font-size: 3.7rem;
+        font-size: 3.2rem;
       }
     }
   }
@@ -377,7 +377,7 @@
 
 .footer-insta-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
   width: 100%;
 
@@ -413,49 +413,49 @@
 body {
   .page-footer__eyebrow,
   .page-footer__nav-heading {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
   }
 
   .page-footer__brand p {
-    font-size: 1.8rem;
+    font-size: 1.55rem;
   }
 
   .page-footer__nav-column a,
   .page-footer__contact a {
-    font-size: 1.8rem;
+    font-size: 1.55rem;
   }
 
   .page-footer__popular-all,
   .page-footer__popular-number,
   .page-footer__legal {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
   }
 
   .page-footer__popular-title {
-    font-size: 2.3rem;
+    font-size: 2rem;
   }
 
   .contact__heading {
-    font-size: 1.05rem;
+    font-size: 0.9rem;
   }
 
   .contact a {
-    font-size: 1.8rem;
+    font-size: 1.55rem;
   }
 
   @include for-tablet-landscape-up {
     .page-footer__brand p,
     .contact a {
-      font-size: 1.95rem;
+      font-size: 1.65rem;
     }
 
     .page-footer__nav-column a,
     .page-footer__contact a {
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
 
     .page-footer__popular-title {
-      font-size: 3.5rem;
+      font-size: 3rem;
     }
 
     .footer-insta-grid {

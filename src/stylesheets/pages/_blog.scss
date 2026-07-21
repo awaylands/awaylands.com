@@ -6,11 +6,1742 @@
   --editorial-blue: #166e78;
   --editorial-menu: #055967;
   --editorial-link: #147f8d;
-  --editorial-orange: #dd682d;
+  --editorial-orange: #d84a3a;
   --editorial-paper: #f9f7f3;
 
   background: var(--editorial-paper);
   color: var(--editorial-ink);
+}
+
+/* Local magazine-style blog homepage. Scoped so category and story pages retain
+   their existing layout. */
+.body--blog-magazine {
+  --bm-paper: #f7f4ee;
+  --bm-paper-deep: #ece7de;
+  --bm-ink: #18201f;
+  --bm-muted: #6f736f;
+  --bm-line: rgba(24, 32, 31, 0.2);
+  --bm-teal: #166e78;
+  --bm-orange: #d84a3a;
+  --bm-pink: #f8aea1;
+  --editorial-orange: var(--bm-orange);
+
+  background: var(--bm-paper);
+  padding-top: 0;
+
+  .landing__inner,
+  .landing__section,
+  .blog-magazine,
+  .blog-archive {
+    max-width: none;
+    width: 100%;
+  }
+
+  .landing__inner {
+    display: block;
+    padding: 0;
+  }
+
+  .landing__section {
+    flex: none;
+    margin: 0;
+    max-width: none;
+  }
+
+  .landing__section:first-child,
+  .landing__section:last-child {
+    flex: none;
+    margin: 0 !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+
+  .landing__section:first-child {
+    display: none;
+  }
+
+  .landing__section + .landing__section {
+    margin-top: 0;
+  }
+
+  .filters {
+    justify-content: center;
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .pagination {
+    background: var(--bm-ink);
+    border-top: 0;
+    color: var(--bm-paper);
+    margin: 0;
+    padding: 3rem clamp(2rem, 4vw, 7rem) 5rem;
+  }
+
+  .pagination a,
+  .pagination li {
+    color: var(--bm-paper);
+  }
+
+  .pagination svg path {
+    fill: var(--bm-paper);
+  }
+
+  .page-header:not(.is-sticky) .logo__image {
+    display: none;
+  }
+
+  .page-header:not(.is-sticky) .logo__image--white {
+    display: block;
+  }
+
+  .page-header.is-sticky .logo__image {
+    display: block;
+  }
+
+  .page-header.is-sticky .logo__image--white {
+    display: none;
+  }
+}
+
+.blog-magazine,
+.blog-archive {
+  color: var(--bm-ink);
+  overflow: hidden;
+}
+
+.blog-magazine a,
+.blog-archive a {
+  color: inherit;
+}
+
+.body--blog-magazine a {
+  transition: color 0.2s ease;
+}
+
+.body--blog-magazine a:hover,
+.body--blog-magazine a:focus,
+.body--blog-magazine a:hover h1,
+.body--blog-magazine a:focus h1,
+.body--blog-magazine a:hover h2,
+.body--blog-magazine a:focus h2,
+.body--blog-magazine a:hover strong,
+.body--blog-magazine a:focus strong,
+.body--blog-magazine a:hover small,
+.body--blog-magazine a:focus small,
+.body--blog-magazine a:hover .bm-kicker,
+.body--blog-magazine a:focus .bm-kicker {
+  color: var(--bm-orange) !important;
+}
+
+.body--blog-magazine a:hover svg,
+.body--blog-magazine a:focus svg {
+  fill: var(--bm-orange) !important;
+}
+
+.body--blog-magazine .bm-hero__lead:hover,
+.body--blog-magazine .bm-hero__lead:focus,
+.body--blog-magazine .bm-hero__lead:hover .bm-hero__copy *,
+.body--blog-magazine .bm-hero__lead:focus .bm-hero__copy *,
+.body--blog-magazine .bm-feature > a:hover,
+.body--blog-magazine .bm-feature > a:focus,
+.body--blog-magazine .bm-feature > a:hover .bm-feature__copy *,
+.body--blog-magazine .bm-feature > a:focus .bm-feature__copy * {
+  color: #fff !important;
+}
+
+.blog-magazine p,
+.blog-archive p {
+  font-family: 'Still EB Garamond', Georgia, serif;
+}
+
+.bm-section {
+  border-bottom: 0.1rem solid var(--bm-line);
+  position: relative;
+}
+
+.bm-kicker,
+.bm-section-heading a,
+.bm-hero small,
+.bm-compact-story small,
+.bm-editor-card small,
+.bm-itineraries__heading a,
+.bm-itineraries__journal,
+.bm-products__intro > a,
+.bm-duo__copy small,
+.bm-feature__copy small {
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.1rem, 0.9vw, 1.4rem);
+  font-style: normal;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.bm-kicker {
+  color: var(--bm-teal);
+  display: block;
+}
+
+.bm-hero .bm-kicker,
+.bm-compact-story .bm-kicker,
+.bm-feature .bm-kicker {
+  color: #fff;
+}
+
+.bm-section-heading {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: clamp(2.8rem, 4vw, 5.6rem);
+}
+
+.bm-section-heading > div {
+  align-items: baseline;
+  display: flex;
+  gap: 1.4rem;
+}
+
+.bm-section-heading span,
+.bm-index > header > span {
+  color: var(--bm-orange);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.5rem, 1.35vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.bm-section-heading h2,
+.bm-index h2 {
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(3.2rem, 4.4vw, 7rem);
+  font-weight: 300;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.bm-section-heading a {
+  color: var(--bm-ink);
+  padding-bottom: 0.5rem;
+}
+
+.bm-section-heading--center {
+  justify-content: center;
+}
+
+.bm-section-heading--center > div {
+  align-items: center;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.bm-hero {
+  display: grid;
+  gap: clamp(2rem, 3vw, 5rem);
+  grid-template-columns: minmax(0, 1.75fr) minmax(28rem, 0.9fr);
+  min-height: min(84rem, calc(100vh - 2rem));
+  overflow: hidden;
+  padding: clamp(2rem, 3vw, 5rem);
+}
+
+.bm-hero__lead,
+.bm-hero__image,
+.bm-hero__shade {
+  inset: 0;
+  position: absolute;
+}
+
+.bm-hero__lead {
+  color: #fff;
+  overflow: hidden;
+  position: absolute;
+}
+
+.bm-hero__image img,
+.bm-feature__image img,
+.bm-products__background img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bm-feature__image picture {
+  display: block;
+  height: 100%;
+}
+
+.bm-hero__shade {
+  background: linear-gradient(90deg, rgba(10, 15, 15, 0.56), rgba(10, 15, 15, 0.032) 76%), linear-gradient(0deg, rgba(10, 15, 15, 0.272), transparent 55%);
+}
+
+.bm-hero__copy {
+  bottom: clamp(3rem, 5vw, 8rem);
+  left: clamp(2.5rem, 4vw, 7rem);
+  max-width: 68rem;
+  position: absolute;
+  right: 3rem;
+  z-index: 2;
+}
+
+.bm-hero__copy h1 {
+  color: #fff;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(4.2rem, 4vw, 6.2rem);
+  font-weight: 300;
+  line-height: 0.9;
+  margin: 1.8rem 0 2rem;
+  max-width: 13ch;
+  text-transform: none;
+}
+
+.bm-hero__copy p {
+  color: #fff;
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(1.7rem, 1.35vw, 2.2rem);
+  line-height: 1.6;
+  margin-bottom: 2.6rem;
+  max-width: 52rem;
+}
+
+.bm-hero__copy small {
+  color: #fff;
+}
+
+.bm-hero__copy small,
+.bm-feature__copy small {
+  border-bottom: 0.1rem solid currentColor;
+  display: inline-block;
+  padding-bottom: 0.7rem;
+}
+
+.bm-hero__rail {
+  align-content: stretch;
+  align-self: start;
+  background: rgba(247, 244, 238, 0.94);
+  color: var(--bm-ink);
+  display: grid;
+  grid-column: 2;
+  grid-template-rows: repeat(4, auto);
+  margin: clamp(7rem, 7vw, 10rem) 0 clamp(2rem, 2.5vw, 4rem) clamp(3rem, 4vw, 6rem);
+  padding: clamp(1.2rem, 1.6vw, 2.4rem);
+  position: relative;
+  z-index: 3;
+}
+
+.bm-hero__rail .bm-compact-story {
+  border-color: var(--bm-line);
+  color: var(--bm-ink);
+}
+
+.bm-hero__rail .bm-compact-story:first-child {
+  align-items: start;
+  padding-top: 0;
+}
+
+.bm-hero__rail .bm-compact-story:last-child {
+  align-items: end;
+  padding-bottom: 0;
+}
+
+.bm-hero__rail .bm-compact-story__copy strong,
+.bm-hero__rail .bm-compact-story__copy small {
+  color: var(--bm-ink);
+}
+
+.bm-hero__rail .bm-compact-story__copy small,
+.bm-editor-card__copy small {
+  color: var(--bm-teal);
+}
+
+.bm-hero__rail .bm-compact-story .bm-kicker {
+  color: var(--bm-teal);
+}
+
+.bm-compact-story {
+  align-items: center;
+  border-top: 0.1rem solid var(--bm-line);
+  display: grid;
+  column-gap: clamp(0.8rem, 1vw, 1.4rem);
+  grid-template-columns: minmax(11rem, 46%) minmax(0, 1fr) minmax(2.2rem, auto);
+  min-height: 0;
+  padding: 1.2rem 0;
+}
+
+.bm-compact-story:first-child {
+  border-top: 0;
+}
+
+.bm-compact-story__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.bm-compact-story__image img,
+.bm-editor-card__image img,
+.bm-category__image img,
+.bm-duo__image img,
+.bm-latest-card__image img {
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s $ease-out-quint;
+  width: 100%;
+}
+
+.bm-compact-story__copy strong,
+.bm-editor-card__copy strong,
+.bm-latest-card strong {
+  display: block;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(2rem, 1.7vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1;
+  margin: 1.15rem 0 1rem;
+}
+
+.bm-compact-story__copy small,
+.bm-editor-card__copy small {
+  font-size: 1.05rem;
+}
+
+.bm-compact-story > em {
+  align-self: center;
+  color: var(--bm-orange);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.15rem, 0.95vw, 1.6rem);
+  font-style: normal;
+  font-weight: 700;
+  justify-self: center;
+}
+
+.bm-hero__rail .bm-compact-story:first-child > em {
+  transform: translateY(0.6rem);
+}
+
+.bm-hero__rail .bm-compact-story:last-child > em {
+  transform: translateY(-0.6rem);
+}
+
+.bm-editors,
+.bm-categories,
+.bm-itineraries,
+.bm-latest,
+.bm-index,
+.blog-archive {
+  padding: clamp(5rem, 7vw, 11rem) clamp(2rem, 4vw, 7rem);
+}
+
+.bm-editors {
+  padding-top: clamp(3rem, 4vw, 6rem);
+}
+
+@media (min-width: 800px) {
+  .bm-hero__rail {
+    margin: 0;
+    position: absolute;
+    right: clamp(2rem, 3vw, 5rem);
+    top: clamp(7rem, 7vw, 10rem);
+    transform: scale(0.72);
+    transform-origin: top right;
+    width: clamp(44rem, 42vw, 52rem);
+  }
+
+  .bm-hero__rail .bm-compact-story__copy strong {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    overflow: hidden;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1399px) {
+  .bm-hero__rail {
+    transform: scale(0.7);
+  }
+}
+
+.bm-editors .bm-section-heading span {
+  font-size: clamp(1.15rem, 0.95vw, 1.6rem);
+}
+
+.bm-editor-card__copy strong {
+  margin-top: 1.38rem;
+}
+
+.bm-editors__grid {
+  display: grid;
+  gap: clamp(1.5rem, 2.2vw, 3.8rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.bm-editor-card {
+  border-bottom: 0.1rem solid var(--bm-line);
+  display: block;
+  text-align: center;
+}
+
+.bm-editor-card__image {
+  aspect-ratio: 4 / 5;
+  display: block;
+  overflow: hidden;
+}
+
+.bm-editor-card__copy {
+  display: block;
+  padding: 2.2rem 1.2rem 2.8rem;
+}
+
+.bm-editors .bm-section-heading h2 {
+  font-size: clamp(3.6rem, 4.8vw, 7.4rem);
+}
+
+.bm-editors .bm-section-heading {
+  margin-bottom: clamp(1.2rem, 1.68vw, 2.34rem);
+}
+
+.bm-editor-card:hover img,
+.bm-compact-story:hover img,
+.bm-category:hover img,
+.bm-duo__card:hover img,
+.bm-latest-card:hover img {
+  transform: scale(1.035);
+}
+
+.bm-products {
+  align-items: center;
+  color: #fff;
+  display: grid;
+  gap: clamp(2rem, 3vw, 5rem);
+  grid-template-columns: minmax(24rem, 0.7fr) minmax(0, 2fr);
+  min-height: 68.75rem;
+  padding: clamp(4rem, 6vw, 9rem) clamp(2rem, 4vw, 7rem);
+}
+
+.bm-products__background {
+  inset: 0;
+  position: absolute;
+}
+
+.bm-products__background:after {
+  background: linear-gradient(90deg, rgba(6, 25, 29, 0.52), rgba(6, 25, 29, 0.12) 30%, transparent 58%);
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.bm-products__intro,
+.bm-products__track {
+  position: relative;
+  z-index: 1;
+}
+
+.bm-products__intro {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.6rem, 3vw, 4.5rem);
+}
+
+.bm-products__intro h2 {
+  color: #fff;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(4.5rem, 5.4vw, 8.2rem);
+  font-weight: 300;
+  line-height: 0.96;
+  margin: 0;
+}
+
+.bm-products__intro .bm-kicker {
+  color: #fff;
+}
+
+.bm-products__intro > a {
+  color: #fff;
+}
+
+.bm-products__track {
+  align-self: end;
+  cursor: grab;
+  display: flex;
+  gap: 0.8rem;
+  overflow-x: auto;
+  padding-bottom: 1.4rem;
+  scroll-snap-type: x proximity;
+  scrollbar-color: rgba(247, 244, 238, 0.7) rgba(247, 244, 238, 0.2);
+  scrollbar-width: thin;
+  touch-action: pan-y;
+}
+
+.bm-products__track.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.bm-products__controls {
+  align-self: start;
+  display: flex;
+  gap: clamp(3.5rem, 5vw, 7rem);
+  grid-column: 2;
+  justify-content: center;
+  margin-top: clamp(0.5rem, 1vw, 1.5rem);
+  position: relative;
+  z-index: 2;
+}
+
+.bm-products__control {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--bm-ink);
+  cursor: pointer;
+  display: flex;
+  font-family: Georgia, serif;
+  font-size: 5.2rem;
+  height: 6rem;
+  justify-content: center;
+  padding: 0;
+  transition: color 0.2s ease, transform 0.2s ease;
+  width: 8rem;
+}
+
+.bm-products__control:hover,
+.bm-products__control:focus {
+  color: var(--bm-orange);
+  transform: translateY(-0.2rem);
+}
+
+.bm-product {
+  background: var(--bm-paper);
+  border-radius: 0.4rem;
+  color: var(--bm-ink);
+  display: block;
+  flex: 0 0 24rem;
+  min-width: 0;
+  overflow: hidden;
+  padding: 1.2rem 1.2rem 2.4rem;
+  position: relative;
+  scroll-snap-align: start;
+}
+
+.bm-product:after {
+  background: linear-gradient(90deg, rgba(216, 74, 58, 0.21), rgba(216, 74, 58, 0) 72%);
+  content: '';
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 0.25s ease;
+  z-index: 2;
+}
+
+.bm-product:hover:after,
+.bm-product:focus:after {
+  opacity: 1;
+}
+
+.blog-magazine .bm-product {
+  color: var(--bm-ink);
+}
+
+.bm-product__image {
+  aspect-ratio: 1;
+  display: block;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.bm-product__image img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bm-product--story .bm-product__image img {
+  object-fit: cover;
+}
+
+.bm-product strong {
+  display: block;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.bm-product p {
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+  margin: 0.8rem 0 0;
+  text-align: center;
+}
+
+.bm-categories__grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.bm-revolve {
+  background: var(--bm-paper);
+  padding: clamp(5rem, 7vw, 11rem) clamp(2rem, 4vw, 7rem);
+}
+
+.bm-revolve .bm-section-heading {
+  margin-bottom: clamp(1.8rem, 2.5vw, 3.5rem);
+}
+
+.bm-revolve .bm-section-heading span {
+  font-size: clamp(1.15rem, 0.95vw, 1.6rem);
+}
+
+.bm-revolve .bm-section-heading h2 {
+  font-size: clamp(3.6rem, 4.8vw, 7.4rem);
+}
+
+.bm-revolve .bm-section-heading > a {
+  color: var(--bm-ink);
+}
+
+.bm-revolve__embed {
+  background: rgba(246, 238, 226, 0.48);
+  border: 0.2rem solid rgba(22, 110, 120, 0.34);
+  isolation: isolate;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 104rem;
+  min-height: 46rem;
+  overflow: hidden;
+  padding: 1.4rem;
+  width: 100%;
+}
+
+.bm-revolve__embed iframe {
+  background: var(--editorial-paper);
+  border: 0;
+  display: block;
+  min-height: 46rem;
+  mix-blend-mode: multiply;
+  width: 100%;
+}
+
+@media (max-width: 799px) {
+  .bm-revolve__embed {
+    min-height: 0;
+  }
+
+  .bm-revolve__embed iframe {
+    height: clamp(34rem, 70vw, 46rem);
+    min-height: 0;
+  }
+}
+
+.bm-categories .bm-section-heading h2 {
+  font-size: clamp(3.6rem, 4.8vw, 7.4rem);
+}
+
+.bm-categories .bm-section-heading {
+  margin-bottom: clamp(1.4rem, 2vw, 2.8rem);
+}
+
+.bm-categories .bm-section-heading span {
+  font-size: clamp(1.15rem, 0.95vw, 1.6rem);
+}
+
+.bm-category {
+  aspect-ratio: 1;
+  color: #fff;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.bm-category:nth-child(2),
+.bm-category:nth-child(4) {
+  margin-top: 0;
+}
+
+.bm-category__image {
+  aspect-ratio: 1;
+  display: block;
+  overflow: hidden;
+}
+
+.bm-category__image img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bm-category:after {
+  background: linear-gradient(0deg, rgba(7, 15, 15, 0.56), transparent 62%);
+  content: '';
+  inset: 0;
+  position: absolute;
+}
+
+.bm-category > span:last-child {
+  bottom: 2.5rem;
+  left: 1rem;
+  position: absolute;
+  right: 1rem;
+  text-align: center;
+  z-index: 1;
+}
+
+.bm-category strong {
+  color: #fff;
+  display: block;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.25rem, 1.15vw, 1.8rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.bm-category small {
+  color: #fff;
+  display: block;
+  font-family: 'Still Old Money', Georgia, serif;
+  font-size: 2.4rem;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  margin-top: 0.8rem;
+}
+
+.body--blog-magazine .bm-category:hover strong,
+.body--blog-magazine .bm-category:focus strong,
+.body--blog-magazine .bm-category:hover small,
+.body--blog-magazine .bm-category:focus small {
+  color: var(--bm-pink) !important;
+}
+
+.bm-category:hover img,
+.bm-category:focus img {
+  transform: scale(1.0175);
+}
+
+.bm-visual-break {
+  height: 100vh;
+  min-height: 64rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.bm-visual-break > a,
+.bm-visual-break__image,
+.bm-visual-break__shade {
+  inset: 0;
+  position: absolute;
+}
+
+.bm-visual-break__image img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bm-visual-break__shade {
+  background: linear-gradient(0deg, rgba(5, 16, 18, 0.68), rgba(5, 16, 18, 0.02) 58%);
+}
+
+.bm-visual-break__copy {
+  bottom: clamp(4rem, 8vw, 12rem);
+  color: #fff;
+  display: block;
+  left: clamp(2.5rem, 7vw, 11rem);
+  max-width: 68rem;
+  position: absolute;
+  z-index: 1;
+}
+
+.bm-visual-break__copy strong {
+  color: #fff;
+  display: block;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(5rem, 7vw, 11rem);
+  font-weight: 300;
+  line-height: 0.88;
+  margin: 1.6rem 0 2.4rem;
+}
+
+.bm-visual-break__copy small {
+  color: #fff;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.bm-visual-break--light .bm-visual-break__copy {
+  left: auto;
+  right: clamp(2.5rem, 7vw, 11rem);
+  text-align: right;
+}
+
+.bm-itineraries {
+  background: #f1ede5;
+  position: relative;
+}
+
+.bm-itineraries__heading {
+  align-items: end;
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: auto 1fr auto;
+  left: clamp(2rem, 4vw, 7rem);
+  margin: 0;
+  position: absolute;
+  right: clamp(2rem, 4vw, 7rem);
+  top: clamp(5rem, 7vw, 11rem);
+  z-index: 3;
+}
+
+.bm-itineraries__heading > div {
+  align-items: baseline;
+  display: flex;
+  gap: 1.4rem;
+}
+
+.bm-itineraries__heading span {
+  color: var(--bm-orange);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.15rem, 0.95vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+}
+
+.bm-itineraries__heading h2 {
+  color: #d84a3a;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(4.8rem, 7vw, 11rem);
+  font-weight: 300;
+  line-height: 0.82;
+  margin: 0;
+}
+
+.bm-itineraries__heading p {
+  font-family: 'Still Old Money', Georgia, serif;
+  font-size: clamp(2.4rem, 2.25vw, 3.8rem);
+  font-style: italic;
+  letter-spacing: 0.055em;
+  line-height: 1.15;
+  margin: 0 0 0.6rem;
+}
+
+.bm-itineraries__heading a {
+  color: var(--bm-ink);
+}
+
+.bm-itineraries__journal {
+  color: var(--bm-orange);
+}
+
+.bm-itineraries__grid {
+  align-items: flex-start;
+  cursor: grab;
+  display: flex;
+  gap: clamp(0.8rem, 1vw, 1.6rem);
+  overflow-x: auto;
+  padding-top: clamp(5.3rem, 7.7vw, 11.3rem);
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  touch-action: pan-y;
+}
+
+.bm-itineraries__grid.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+.bm-itineraries__grid::-webkit-scrollbar {
+  display: none;
+}
+
+.bm-itinerary-card {
+  align-self: flex-start;
+  display: block;
+  flex: 0 0 clamp(23rem, 25vw, 38rem);
+  scroll-snap-align: start;
+}
+
+.bm-itinerary-card__image {
+  aspect-ratio: 4 / 5;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.bm-itinerary-card__image img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.bm-itinerary-card__image:after {
+  background: linear-gradient(145deg, rgba(216, 74, 58, 0.056), rgba(216, 74, 58, 0.266));
+  content: '';
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 0.35s ease;
+}
+
+.bm-itinerary-card:hover .bm-itinerary-card__image:after,
+.bm-itinerary-card:focus-visible .bm-itinerary-card__image:after {
+  opacity: 1;
+}
+
+.bm-itinerary-card__copy {
+  display: block;
+  padding: 1.6rem 0.8rem 0;
+  text-align: center;
+}
+
+.bm-itinerary-card__copy strong {
+  display: block;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(1.8rem, 1.8vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1;
+  margin-top: 1.4rem;
+}
+
+.bm-itineraries__journal {
+  display: block;
+}
+
+.bm-itineraries__footer {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: clamp(3rem, 4vw, 5rem);
+}
+
+.bm-itineraries__controls {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 4;
+}
+
+.bm-itineraries__control {
+  align-items: center;
+  background: rgba(241, 237, 229, 0.88);
+  border: 0.1rem solid #d84a3a;
+  border-radius: 50%;
+  color: #d84a3a;
+  cursor: pointer;
+  display: flex;
+  font-size: 3.2rem;
+  height: 6rem;
+  justify-content: center;
+  pointer-events: auto;
+  position: absolute;
+  top: calc(clamp(5rem, 7vw, 11rem) + clamp(5.3rem, 7.7vw, 11.3rem) + clamp(14.375rem, 15.625vw, 23.75rem));
+  transform: translate(-50%, -50%);
+  width: 6rem;
+}
+
+.bm-itineraries__control[data-itinerary-direction='previous'] {
+  left: calc(clamp(2rem, 4vw, 7rem) + clamp(11.5rem, 12.5vw, 19rem));
+}
+
+.bm-itineraries__control[data-itinerary-direction='next'] {
+  left: calc(clamp(2rem, 4vw, 7rem) + clamp(11.5rem, 12.5vw, 19rem) + clamp(23rem, 25vw, 38rem) + clamp(0.8rem, 1vw, 1.6rem) + clamp(23rem, 25vw, 38rem) + clamp(0.8rem, 1vw, 1.6rem) + clamp(23rem, 25vw, 38rem) + clamp(0.8rem, 1vw, 1.6rem));
+}
+
+.bm-duo {
+  align-items: end;
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 5rem);
+  grid-template-columns: 1.35fr 0.8fr;
+  padding: clamp(3rem, 4vw, 7rem);
+}
+
+.bm-duo__card {
+  min-height: 48rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.bm-duo__card--offset {
+  margin-bottom: 8rem;
+  min-height: 42rem;
+}
+
+.bm-duo__image,
+.bm-duo__image:after {
+  inset: 0;
+  position: absolute;
+}
+
+.bm-duo__image:after {
+  background: linear-gradient(90deg, rgba(247, 244, 238, 0.94), rgba(247, 244, 238, 0.12) 75%);
+  content: '';
+}
+
+.bm-duo__copy {
+  display: block;
+  left: clamp(2rem, 4vw, 6rem);
+  max-width: 34rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bm-duo__copy strong {
+  display: block;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(3.6rem, 4.2vw, 6.4rem);
+  font-weight: 300;
+  line-height: 0.92;
+  margin: 1.6rem 0 3rem;
+}
+
+.bm-feature > a {
+  color: #fff;
+  display: block;
+  min-height: 62rem;
+  position: relative;
+}
+
+.bm-feature__image,
+.bm-feature__shade {
+  inset: 0;
+  position: absolute;
+}
+
+.bm-feature__shade {
+  background: linear-gradient(90deg, rgba(4, 18, 22, 0.02), rgba(4, 18, 22, 0.52));
+}
+
+.bm-feature__shade:after {
+  background: linear-gradient(110deg, rgba(216, 74, 58, 0.2), rgba(216, 74, 58, 0.03) 62%);
+  content: '';
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 0.35s ease;
+}
+
+.bm-feature > a:hover .bm-feature__shade:after,
+.bm-feature > a:focus .bm-feature__shade:after {
+  opacity: 1;
+}
+
+.bm-feature__copy {
+  max-width: 58rem;
+  position: absolute;
+  right: clamp(3rem, 8vw, 14rem);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 42%;
+}
+
+.bm-feature--left .bm-feature__shade {
+  background: linear-gradient(90deg, rgba(4, 18, 22, 0.58), rgba(4, 18, 22, 0.03) 68%);
+}
+
+.bm-feature--left .bm-feature__copy {
+  left: clamp(3rem, 8vw, 14rem);
+  right: auto;
+}
+
+.bm-feature__copy h2 {
+  color: #fff;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(3.5rem, 4.3vw, 6.7rem);
+  font-weight: 300;
+  line-height: 0.88;
+  margin: 2.2rem 0 1.7rem;
+}
+
+.bm-feature__copy p {
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+}
+
+.bm-feature__copy small {
+  display: block;
+  transform: translateY(clamp(4rem, 5vw, 7rem));
+}
+
+.bm-latest__grid {
+  display: grid;
+  gap: clamp(1.4rem, 2vw, 3rem);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.bm-latest .bm-section-heading {
+  margin-bottom: clamp(1.4rem, 2vw, 2.8rem);
+}
+
+.bm-latest .bm-section-heading span {
+  font-size: clamp(1.15rem, 0.95vw, 1.6rem);
+}
+
+.bm-latest-card__image {
+  aspect-ratio: 1;
+  display: block;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.bm-latest-card strong {
+  font-size: clamp(1.8rem, 1.55vw, 2.7rem);
+}
+
+.bm-index {
+  background: var(--bm-ink);
+  color: var(--bm-paper);
+  display: grid;
+  gap: 6vw;
+  grid-template-columns: minmax(26rem, 0.7fr) minmax(0, 1.3fr);
+}
+
+.bm-index h2 {
+  color: var(--bm-paper);
+  font-size: clamp(4rem, 5.2vw, 8rem);
+  margin-top: 2rem;
+}
+
+.bm-index__links {
+  border-top: 0.1rem solid rgba(247, 244, 238, 0.35);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.bm-index__links a {
+  align-items: center;
+  border-bottom: 0.1rem solid rgba(247, 244, 238, 0.35);
+  color: var(--bm-paper);
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 3rem 1fr auto;
+  padding: 1.8rem 0;
+}
+
+.bm-index__links a:nth-child(odd) {
+  border-right: 0.1rem solid rgba(247, 244, 238, 0.35);
+  padding-right: 2rem;
+}
+
+.bm-index__links a:nth-child(even) {
+  padding-left: 2rem;
+}
+
+.bm-index__links span,
+.bm-index__links i {
+  color: var(--bm-orange);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.8rem, 1.6vw, 2.5rem);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.bm-index__links strong {
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(2rem, 1.9vw, 3rem);
+  font-weight: 300;
+}
+
+.blog-archive > header {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+  min-height: clamp(9rem, 12vw, 15rem);
+  text-align: center;
+}
+
+.blog-archive > header span {
+  color: var(--bm-orange);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.blog-archive > header h1 {
+  color: var(--bm-orange);
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(3.6rem, 4.5vw, 6rem);
+  font-weight: 300;
+  line-height: 0.95;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.body--blog-archive-page .page-header:not(.is-sticky) .logo__image {
+  display: block;
+}
+
+.body--blog-archive-page .page-header:not(.is-sticky) .logo__image--white {
+  display: none;
+}
+
+body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header:not(.is-sticky) .page-nav__list > li > a,
+body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header:not(.is-sticky) .page-header__mobile-search {
+  color: var(--editorial-blue) !important;
+}
+
+body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header:not(.is-sticky) .social svg {
+  fill: var(--editorial-blue) !important;
+}
+
+.blog-archive__grid {
+  display: grid;
+  gap: 4rem 2rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.blog-archive .bm-editor-card__copy strong {
+  font-size: clamp(2.7rem, 2.15vw, 4rem);
+  line-height: 0.98;
+}
+
+@media (min-width: 1200px) {
+  .bm-hero__copy {
+    max-width: 94rem;
+  }
+
+  .bm-hero__copy h1 {
+    font-size: clamp(5.4rem, 4.8vw, 8rem);
+    max-width: min(82rem, 58vw);
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1199px) {
+  .bm-hero__copy h1 {
+    max-width: 52vw;
+  }
+
+  .bm-hero__copy p {
+    max-width: 48vw;
+  }
+}
+
+@media (max-width: 1099px) {
+  .bm-hero {
+    grid-template-columns: minmax(0, 1fr) minmax(34rem, 42vw);
+  }
+
+  .bm-hero__rail {
+    padding-right: clamp(1.8rem, 2vw, 2.8rem);
+    padding-left: clamp(1.8rem, 2vw, 2.8rem);
+  }
+
+  @media (min-width: 800px) {
+    .bm-hero__rail {
+      transform: none;
+      width: 42vw;
+    }
+
+  }
+
+  .bm-hero__rail .bm-compact-story {
+    column-gap: clamp(0.8rem, 1vw, 1.3rem);
+    grid-template-columns: minmax(12rem, 46%) minmax(0, 1fr) minmax(2.2rem, auto);
+  }
+
+  .bm-hero__rail .bm-compact-story__image {
+    align-self: stretch;
+    aspect-ratio: auto;
+    min-height: 10rem;
+  }
+
+  .bm-hero__rail .bm-compact-story__copy strong {
+    font-size: clamp(2.15rem, 2.2vw, 2.4rem);
+  }
+
+  @media (min-width: 800px) {
+    .bm-hero__rail .bm-compact-story,
+    .bm-hero__rail .bm-compact-story:first-child,
+    .bm-hero__rail .bm-compact-story:last-child {
+      align-items: center;
+      padding-bottom: 1.2rem;
+      padding-top: 1.2rem;
+    }
+
+    .bm-hero__rail .bm-compact-story__image {
+      align-self: center;
+      aspect-ratio: 4 / 3;
+      min-height: 0;
+    }
+
+    .bm-hero__rail .bm-compact-story__copy strong {
+      -webkit-line-clamp: 4;
+      max-height: 4em;
+    }
+
+    .bm-hero__rail .bm-compact-story:first-child > em,
+    .bm-hero__rail .bm-compact-story:last-child > em {
+      transform: none;
+    }
+  }
+
+  .bm-products {
+    grid-template-columns: 1fr;
+  }
+
+  .bm-products__controls {
+    grid-column: 1;
+  }
+
+  .bm-products__intro h2 br {
+    display: none;
+  }
+
+  .bm-products__track {
+    grid-template-columns: repeat(5, minmax(16rem, 1fr));
+  }
+
+  .bm-latest__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 4rem;
+  }
+}
+
+@media (max-width: 1201px) {
+  .blog-magazine {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .bm-hero { order: 1; }
+  .bm-products { order: 2; }
+  .bm-editors { order: 3; }
+  .bm-categories { order: 4; }
+  .bm-revolve { order: 5; }
+  .bm-itineraries { order: 6; }
+  .bm-feature--left { order: 7; }
+  .bm-feature:not(.bm-feature--left) { order: 8; }
+  .bm-latest { order: 9; }
+}
+
+@media (min-width: 800px) and (max-width: 1201px) {
+  .bm-hero {
+    display: block;
+    min-height: 0;
+    padding: 1.5rem;
+  }
+
+  .bm-hero__lead {
+    display: block;
+    min-height: 61rem;
+    position: relative;
+  }
+
+  .bm-hero__rail {
+    margin: 3rem 1rem 0;
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: auto;
+  }
+
+  .bm-hero__rail .bm-compact-story {
+    grid-template-columns: minmax(0, 46%) minmax(0, 1fr) minmax(2.2rem, auto);
+    min-height: 16rem;
+  }
+
+  .bm-hero__rail .bm-compact-story__image {
+    min-height: 13rem;
+  }
+
+  .bm-hero__rail .bm-compact-story__copy strong {
+    font-size: clamp(2.7rem, 3.5vw, 3.4rem);
+    line-height: 0.96;
+  }
+}
+
+@media (max-width: 799px) {
+  .bm-section-heading {
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .bm-hero {
+    display: block;
+    min-height: 0;
+    padding: 1.5rem;
+  }
+
+  .bm-hero__lead {
+    display: block;
+    min-height: 61rem;
+    position: relative;
+  }
+
+  .bm-hero__copy {
+    bottom: 3rem;
+    left: 2.5rem;
+  }
+
+  .bm-hero__copy h1 {
+    font-size: clamp(4.6rem, 13vw, 7.2rem);
+  }
+
+  .bm-hero__copy p {
+    font-size: clamp(1.8rem, 4.5vw, 2.3rem);
+    line-height: 1.25;
+  }
+
+  .bm-hero__rail {
+    margin: 3rem 1rem 0;
+  }
+
+  .bm-compact-story {
+    grid-template-columns: minmax(0, 46%) minmax(0, 1fr) minmax(2.2rem, auto);
+    min-height: 16rem;
+  }
+
+  .bm-hero__rail .bm-compact-story__image {
+    min-height: 13rem;
+  }
+
+  .bm-hero__rail .bm-compact-story__copy strong {
+    font-size: clamp(2.7rem, 6.4vw, 3.6rem);
+    line-height: 0.94;
+  }
+
+  .bm-editors__grid,
+  .bm-categories__grid,
+  .bm-itineraries__grid,
+  .blog-archive__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bm-categories__grid {
+    gap: 1rem;
+  }
+
+  .bm-category:nth-child(2),
+  .bm-category:nth-child(4) {
+    margin-top: 0;
+  }
+
+  .bm-category:last-child {
+    grid-column: auto;
+    width: 100%;
+  }
+
+  .bm-products__track {
+    margin-right: -2rem;
+  }
+
+  .bm-visual-break {
+    height: 90vh;
+    min-height: 58rem;
+  }
+
+  .bm-visual-break--light .bm-visual-break__copy {
+    left: 2.5rem;
+    right: 2.5rem;
+    text-align: left;
+  }
+
+  .bm-itineraries__heading {
+    align-items: start;
+    grid-template-columns: 1fr auto;
+    row-gap: 0.8rem;
+  }
+
+  .bm-itineraries__heading > div {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .bm-itineraries__heading h2 {
+    font-size: clamp(3rem, 8.8vw, 4.6rem);
+    white-space: nowrap;
+  }
+
+  .bm-itineraries__grid {
+    padding-top: clamp(9.8rem, 14vw, 12rem);
+  }
+
+  .bm-itineraries__control {
+    top: calc(clamp(5rem, 7vw, 11rem) + clamp(9.8rem, 14vw, 12rem) + min(48.75vw, 21.25rem));
+  }
+
+  .bm-itineraries__control[data-itinerary-direction='previous'] {
+    left: 25%;
+  }
+
+  .bm-itineraries__control[data-itinerary-direction='next'] {
+    left: 75%;
+  }
+
+  .bm-itineraries__heading p {
+    align-self: end;
+    grid-column: 1;
+    grid-row: 2;
+    margin-bottom: 0;
+  }
+
+  .bm-itineraries__heading > a {
+    align-self: end;
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .bm-itinerary-card {
+    flex-basis: min(78vw, 34rem);
+  }
+
+  .bm-itinerary-card__copy strong {
+    font-size: clamp(2.7rem, 7vw, 3.4rem);
+    line-height: 1;
+    white-space: normal;
+  }
+
+  .bm-duo {
+    display: block;
+  }
+
+  .bm-duo__card {
+    display: block;
+    min-height: 46rem;
+  }
+
+  .bm-duo__card--offset {
+    margin: 2rem 0 0 12%;
+    min-height: 40rem;
+  }
+
+  .bm-feature > a {
+    height: 74svh;
+    max-height: 72rem;
+    min-height: 56rem;
+  }
+
+  .bm-feature__shade,
+  .bm-feature--left .bm-feature__shade {
+    background: linear-gradient(0deg, rgba(4, 18, 22, 0.9) 0%, rgba(4, 18, 22, 0.68) 34%, rgba(4, 18, 22, 0.18) 68%, rgba(4, 18, 22, 0) 100%);
+  }
+
+  .bm-feature__copy {
+    bottom: 3rem;
+    left: 2.5rem;
+    right: 2.5rem;
+    top: auto;
+    transform: none;
+    width: auto;
+  }
+
+  .bm-feature__copy h2 {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    display: -webkit-box;
+    font-size: clamp(3.6rem, 9.5vw, 5rem);
+    line-height: 0.9;
+    margin: 1.5rem 0 2rem;
+    max-height: 3.6em;
+    overflow: hidden;
+  }
+
+  .bm-feature__copy p {
+    display: none;
+  }
+
+  .bm-feature__copy small {
+    transform: none;
+  }
+
+  .bm-latest__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bm-latest .bm-section-heading h2 {
+    font-size: clamp(4.2rem, 11vw, 5.2rem);
+  }
+
+  .bm-latest-card strong {
+    font-size: clamp(2.6rem, 7vw, 3.2rem);
+    line-height: 1;
+  }
+
+  .bm-index {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 499px) {
+  .bm-section-heading a {
+    display: none;
+  }
+
+  .bm-editors__grid,
+  .bm-itineraries__grid,
+  .blog-archive__grid {
+    gap: 3rem 1.2rem;
+  }
+
+  .bm-editor-card__copy {
+    padding: 1.6rem 0.4rem 2rem;
+  }
+
+  .bm-itineraries__heading {
+    display: grid;
+  }
+
+  .bm-itineraries__heading p {
+    margin-top: 0;
+  }
+
+  .bm-itinerary-card__copy {
+    padding: 1.3rem 0.2rem 0;
+  }
+
+  .bm-editor-card__copy strong {
+    font-size: 2.1rem;
+  }
+
+  .bm-products {
+    min-height: 77.5rem;
+  }
+
+  .bm-products__track {
+    grid-template-columns: repeat(5, minmax(15rem, 1fr));
+  }
+
+  .bm-categories__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bm-category:last-child {
+    width: 100%;
+  }
+
+  .bm-latest__grid {
+    gap: 3rem 1.2rem;
+  }
+
+  .bm-duo__copy strong {
+    font-size: 4rem;
+  }
 }
 
 .body--blog .page-header .page-nav__list > li > a,
@@ -660,7 +2391,7 @@
   --search-muted: #66706e;
   --search-blue: #166e78;
   --search-deep-blue: #0e4855;
-  --search-orange: #dd682d;
+  --search-orange: #d84a3a;
   --search-yellow: #fffbd8;
 
   padding-top: 6rem;

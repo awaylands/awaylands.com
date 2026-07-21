@@ -6,7 +6,7 @@
   --story-blue: #166e78;
   --story-link: #147f8d;
   --story-deep-blue: #0e4855;
-  --story-orange: #dd682d;
+  --story-orange: #d84a3a;
   --story-yellow: #fffbd8;
 
   padding-top: 6rem;
@@ -1023,6 +1023,16 @@ body.body--story {
   margin-left: calc(50% - 50vw);
 }
 
+.story-article__body figure.crop-top-left img { object-position: left top; }
+.story-article__body figure.crop-top img { object-position: center top; }
+.story-article__body figure.crop-top-right img { object-position: right top; }
+.story-article__body figure.crop-left img { object-position: left center; }
+.story-article__body figure.crop-center img { object-position: center center; }
+.story-article__body figure.crop-right img { object-position: right center; }
+.story-article__body figure.crop-bottom-left img { object-position: left bottom; }
+.story-article__body figure.crop-bottom img { object-position: center bottom; }
+.story-article__body figure.crop-bottom-right img { object-position: right bottom; }
+
 .story-article__body figure.spacing-compact {
   margin-top: 2.4rem;
   margin-bottom: 2.4rem;
@@ -1543,26 +1553,48 @@ body.body--story {
 }
 
 .story-article__body .story-table__scroller {
-  border-color: rgba(22, 110, 120, 0.2);
+  border: 0;
 }
 
 .story-article__body .story-table__table {
+  width: 100%;
+  table-layout: auto;
+  border-collapse: collapse;
   background: rgba(255, 255, 255, 0.58);
 }
 
 .story-article__body .story-table th {
-  background: var(--story-cream);
-  color: var(--story-blue);
+  background: var(--story-blue);
+  color: #fff;
   font-family: Montserrat, Helvetica, sans-serif;
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 .story-article__body .story-table th,
 .story-article__body .story-table td {
-  border: 1px solid rgba(22, 110, 120, 0.16);
-  font-family: 'Still EB Garamond', Georgia, serif;
+  border: 2px solid rgba(22, 110, 120, 0.32);
+  padding: 1.4rem 1.6rem;
   font-size: 1.6rem;
   letter-spacing: 0;
+  line-height: 1.45;
+  text-align: left;
+  vertical-align: top;
+}
+
+.story-article__body .story-table td {
+  font-family: 'Still EB Garamond', Georgia, serif;
+}
+
+.story-article__body .story-table th:first-child,
+.story-article__body .story-table td:first-child {
+  width: 1%;
+  min-width: max-content;
+  white-space: nowrap;
+}
+
+.story-article__body .story-table td:first-child {
+  font-weight: 700;
 }
 
 .story-article__footer {
