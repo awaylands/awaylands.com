@@ -1,11 +1,11 @@
 .body--film-portfolio {
-  background: #111211;
-  color: #eceae4;
+  background: #30312f;
+  color: #e8e3d9;
 }
 
 .body--film-portfolio .page,
 .body--film-portfolio .main {
-  background: #111211;
+  background: #30312f;
 }
 
 .body--film-portfolio .page-footer {
@@ -14,30 +14,41 @@
 
 .body--film-portfolio .page-header,
 .body--film-portfolio .page-header.is-sticky {
-  background: rgba(17, 18, 17, 0.94);
-  border-bottom: 1px solid rgba(236, 234, 228, 0.15);
+  background: rgba(48, 49, 47, 0.96);
+  border-bottom: 1px solid rgba(232, 227, 217, 0.16);
   box-shadow: none;
 }
 
 .body--film-portfolio .page-header .page-nav__list > li > a,
 .body--film-portfolio .page-header__mobile-search,
 .body--film-portfolio .mobile-nav__link {
-  color: #eceae4;
+  color: #b8b5ae;
   font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
   letter-spacing: 0.14em;
 }
 
 .body--film-portfolio .page-header .page-nav__list > li > a:after {
-  background: #eceae4;
+  background: #a56d65;
+}
+
+.body--film-portfolio .page-header .page-nav__list > li > a:hover,
+.body--film-portfolio .page-header .page-nav__list > li > a:focus,
+.body--film-portfolio .page-header .page-nav__list > li > a.is-current {
+  color: #e8e3d9;
+}
+
+.body--film-portfolio .page-header .social svg {
+  fill: #b8b5ae;
 }
 
 .film-portfolio {
-  --film-bg: #111211;
-  --film-panel: #1a1b1a;
-  --film-ink: #eceae4;
-  --film-muted: #969994;
-  --film-line: rgba(236, 234, 228, 0.2);
-  --film-accent: #d84a3a;
+  --film-bg: #30312f;
+  --film-panel: #393a37;
+  --film-ink: #e8e3d9;
+  --film-muted: #aaa79f;
+  --film-line: rgba(232, 227, 217, 0.18);
+  --film-accent: #a56d65;
+  --film-blue: #768f94;
 
   min-height: 100vh;
   padding: 12rem 2.4rem 0;
@@ -74,9 +85,10 @@
 }
 
 .film-portfolio__mark strong {
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
   font-size: clamp(2.4rem, 2.5vw, 3.8rem);
-  font-weight: 500;
-  letter-spacing: -0.06em;
+  font-weight: 300;
+  letter-spacing: 0;
   line-height: 0.85;
 }
 
@@ -91,17 +103,28 @@
 
 .film-index {
   position: sticky;
-  top: 10rem;
+  top: 9.9rem;
   z-index: 8;
-  float: left;
-  width: 12rem;
-  margin-top: clamp(7rem, 9vw, 13rem);
-  padding-right: 2rem;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 2.6rem;
+  overflow-x: auto;
+  margin-top: 1.8rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--film-line);
+  border-bottom: 1px solid var(--film-line);
+  background: rgba(48, 49, 47, 0.96);
+  white-space: nowrap;
+  scrollbar-width: none;
 }
 
+.film-index::-webkit-scrollbar { display: none; }
+
 .film-index p {
-  margin: 0 0 1.5rem;
-  color: var(--film-muted);
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--film-blue);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.18em;
@@ -109,50 +132,55 @@
 }
 
 .film-index button {
-  display: block;
-  width: 100%;
-  padding: 0.6rem 0;
+  position: relative;
+  flex: 0 0 auto;
+  width: auto;
+  padding: 0.5rem 0;
   border: 0;
   background: transparent;
   color: var(--film-muted);
   cursor: pointer;
   font-family: inherit;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
   line-height: 1.2;
   text-align: left;
-  transition: color 180ms ease, transform 180ms ease;
+  text-transform: uppercase;
+  transition: color 180ms ease;
 }
 
 .film-index button:hover,
 .film-index button:focus,
 .film-index button.is-active {
   color: var(--film-ink);
-  transform: translateX(0.35rem);
 }
 
-.film-index button.is-active:before {
-  content: '—';
-  margin-right: 0.5rem;
-  color: var(--film-accent);
+.film-index button.is-active:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1.1rem;
+  left: 0;
+  height: 0.2rem;
+  background: var(--film-accent);
 }
 
 .film-portfolio__intro,
 .film-waterfall,
 .film-portfolio__footer {
-  margin-left: 14rem;
+  margin-left: 0;
 }
 
 .film-portfolio__intro {
   display: grid;
-  grid-template-columns: 18rem minmax(0, 1fr);
+  grid-template-columns: 16rem minmax(0, 1fr) minmax(24rem, 38rem);
   gap: 3rem;
   align-items: start;
   padding: clamp(6rem, 8vw, 11rem) 0 clamp(8rem, 10vw, 14rem);
 }
 
-.film-portfolio__intro > p {
+.film-portfolio__intro > p:not(.film-portfolio__dek) {
   margin: 0.8rem 0 0;
   color: var(--film-accent);
   font-size: 0.85rem;
@@ -165,16 +193,21 @@
   max-width: 105rem;
   margin: 0;
   color: var(--film-ink);
-  font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
   font-size: clamp(4.5rem, 7.4vw, 11rem);
-  font-weight: 400;
-  letter-spacing: -0.065em;
+  font-weight: 300;
+  letter-spacing: 0;
   line-height: 0.86;
 }
 
-.film-portfolio__intro h1 em {
+.film-portfolio__dek {
+  align-self: end;
+  max-width: 36rem;
+  margin: 0 0 0.8rem;
   color: var(--film-muted);
-  font-style: normal;
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: 1.75rem;
+  line-height: 1.5;
 }
 
 .film-waterfall {
@@ -321,11 +354,11 @@
 .film-card__caption h2 {
   margin: 0;
   color: var(--film-ink);
-  font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
-  font-size: clamp(1.3rem, 1.3vw, 1.9rem);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  line-height: 1.08;
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(1.7rem, 1.7vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.12;
 }
 
 .film-card__caption > span {
@@ -354,8 +387,9 @@
 }
 
 .film-portfolio__footer a {
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 400;
 }
 
 .film-portfolio__footer a span {
@@ -369,8 +403,8 @@
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
   visibility: hidden;
-  background: #080908;
-  color: #f2f0e9;
+  background: #262725;
+  color: #e8e3d9;
   opacity: 0;
   pointer-events: none;
   transition: opacity 240ms ease, visibility 240ms ease;
@@ -478,11 +512,11 @@
 
 .film-player__details h2 {
   margin: 0;
-  color: #f2f0e9;
-  font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif;
-  font-size: clamp(1.7rem, 2.2vw, 3.2rem);
-  font-weight: 500;
-  letter-spacing: -0.04em;
+  color: #e8e3d9;
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(2rem, 2.5vw, 3.8rem);
+  font-weight: 400;
+  letter-spacing: 0;
   line-height: 1;
 }
 
