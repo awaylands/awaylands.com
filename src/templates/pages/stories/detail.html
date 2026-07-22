@@ -230,7 +230,7 @@
       <span
         data-story-shop-item
         {% if isAutomatic %}data-category-product data-travel-essential-fallback{% endif %}
-        data-title="{{ (item.title or "Editor's Pick") | escape }}"
+        data-title="{{ (item.title or '') | escape }}"
         data-url="{{ (item.productUrl or '') | trim | escape }}"
         {% if item.productEmbedHtml %}data-embed-html="{{ item.productEmbedHtml | escape }}"{% endif %}
         {% if item.image %}data-image="{{ item.image.path | image({auto: 'compress,format', w: 480}) | escape }}"{% endif %}

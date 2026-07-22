@@ -1221,6 +1221,25 @@ function storyShopEmbedLink(sourceHtml) {
   return '';
 }
 
+function storyShopEmbedProductName(sourceHtml) {
+  const template = document.createElement('template');
+
+  template.innerHTML = sourceHtml || '';
+  const namedProduct = template.content.querySelector(
+    '[data-product-name], [data-name], .product-name, .product-title'
+  );
+  const image = template.content.querySelector('img[alt]');
+  const frame = template.content.querySelector('iframe[title]');
+  const name = (namedProduct && (
+    namedProduct.getAttribute('data-product-name') ||
+    namedProduct.getAttribute('data-name') ||
+    namedProduct.textContent
+  )) || (image && image.getAttribute('alt')) || (frame && frame.getAttribute('title')) || '';
+  const cleanName = name.replace(/\s+/g, ' ').trim();
+
+  return !cleanName || /\{\{|\}\}|^(editor'?s pick|shop this product)$/i.test(cleanName) ? '' : cleanName;
+}
+
 function storyShopNativeProduct(sourceHtml) {
   const template = document.createElement('template');
 
@@ -1402,17 +1421,21 @@ function manualStoryPickCandidates(storyPage) {
       const imageUrl = (item.getAttribute('data-image') || '').trim();
       const embedHtml = item.getAttribute('data-embed-html') || '';
       const nativeProduct = storyShopNativeProduct(embedHtml);
+      const itemTitle = (item.getAttribute('data-title') || '').trim();
+      const productName = (nativeProduct && nativeProduct.name) ||
+        storyShopEmbedProductName(embedHtml) ||
+        (/^editor'?s pick$/i.test(itemTitle) ? '' : itemTitle);
       let image = null;
 
       if (nativeProduct || imageUrl) {
         image = document.createElement('img');
         image.src = nativeProduct ? nativeProduct.image : imageUrl;
-        image.alt = nativeProduct ? nativeProduct.name : (item.getAttribute('data-title') || '').trim();
+        image.alt = productName;
       }
 
       return {
         href: (nativeProduct && nativeProduct.href) || safeStoryShopUrl(item.getAttribute('data-url')) || storyShopEmbedLink(embedHtml),
-        label: (nativeProduct && nativeProduct.name) || (item.getAttribute('data-title') || '').trim() || 'Editor\'s Pick',
+        label: productName,
         brand: nativeProduct && nativeProduct.brand,
         price: nativeProduct && nativeProduct.price,
         nativeProduct: Boolean(nativeProduct),
@@ -1799,8 +1822,10 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
     } else {
       label.textContent = pick.label || 'Editor\'s Pick';
     }
-    card.appendChild(count);
-    card.appendChild(label);
+    if (!pick.embedHtml || pick.label) {
+      card.appendChild(count);
+      card.appendChild(label);
+    }
     picksList.appendChild(card);
   });
 
