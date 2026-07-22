@@ -215,13 +215,15 @@
   {% if page.keepReadingKicker %}data-keep-reading-kicker="{{ page.keepReadingKicker | escape }}"{% endif %}
   {% if page.keepReadingTitle %}data-keep-reading-title="{{ page.keepReadingTitle | escape }}"{% endif %}
 >
-  {% set primaryCategory = page.category[0].title if page.category.length else '' %}
-  {% set useTravelProducts = primaryCategory == 'Travel Guides' or primaryCategory == 'Travel Tips' or primaryCategory == 'Best Beaches' or primaryCategory == 'Hotels and Resorts' or primaryCategory == 'Travel Adventures' or primaryCategory == 'Packing Guides' or primaryCategory == 'Los Angeles Life' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
-  {% set useBeautyProducts = primaryCategory == 'Beauty' or primaryCategory == 'Wedding and Honeymoon' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
-  {% set useStyleProducts = primaryCategory == 'Style' or primaryCategory == 'Packing Guides' or primaryCategory == 'Instagram Guides' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
-  {% set usePhotographyProducts = primaryCategory == 'Photography' or primaryCategory == 'Films' or primaryCategory == 'Instagram Guides' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
-  {% set useFitnessProducts = primaryCategory == 'Health and Fitness' or primaryCategory == 'Health & Fitness' %}
-  {% set useHomeProducts = primaryCategory == 'Home and Garden' or primaryCategory == 'Home & Garden' %}
+  {# Test the complete category relationship so multi-category stories merge
+     every relevant Products collection instead of using only category[0]. #}
+  {% set categoryData = page.categoryLabels | dump %}
+  {% set useTravelProducts = 'Travel Guides' in categoryData or 'Travel Tips' in categoryData or 'Best Beaches' in categoryData or 'Hotels and Resorts' in categoryData or 'Travel Adventures' in categoryData or 'Packing Guides' in categoryData or 'Los Angeles Life' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData %}
+  {% set useBeautyProducts = 'Beauty' in categoryData or 'Wedding and Honeymoon' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData %}
+  {% set useStyleProducts = 'Style' in categoryData or 'Packing Guides' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData %}
+  {% set usePhotographyProducts = 'Photography' in categoryData or 'Films' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData %}
+  {% set useFitnessProducts = 'Health and Fitness' in categoryData or 'Health & Fitness' in categoryData %}
+  {% set useHomeProducts = 'Home and Garden' in categoryData or 'Home & Garden' in categoryData %}
   {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts or useFitnessProducts or useHomeProducts %}
   {% if page.shopEditItems.length or hasCategoryProducts or blogShopFallback.travelEssentialsItems.length %}
   <div data-story-shop-items hidden>

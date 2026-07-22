@@ -39,6 +39,7 @@ query($images: TSImagesConfig) {
       }
       keepReadingKicker
       keepReadingTitle
+      categoryLabels: category { title }
       category {
         title
         storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
