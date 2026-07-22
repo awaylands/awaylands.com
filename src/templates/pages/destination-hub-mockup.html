@@ -1,0 +1,168 @@
+{% extends "layouts/default.html" %}
+
+{% block body_class %}body body--destination-hub{% endblock %}
+
+{% block extra_head %}
+  <title>Italy Travel Guide: Hotels, Beaches, Itineraries & More | Away Lands</title>
+  <meta name="description" content="Plan a beautiful trip to Italy with first-hand guides to the best regions, hotels, beaches, road trips, packing lists, and photography locations.">
+  <meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
+{% block content %}
+{% set images = {
+  hero: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/4b853dfb-82c2-4b7c-adaf-7c60821a7faf/AwayLands-PhotographyPortfolio-421.jpg",
+  coast: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/991a326d-7eb5-4ad8-ba9f-3a100e750af1/0B4A0113.jpg",
+  resort: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/bc9a69a2-7511-4dda-9128-eaafbf94534c/Away-Lands-Girls-Trip-Baha-Mar-Bahamas-009.jpg",
+  road: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/df38ac28-41c7-43e8-96fd-b71102b2618a/AwayLands-PhotographyPortfolio-512.jpg",
+  hotel: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/4ac3a12f-3258-48b8-89a6-7a286e4ea246/Sandals-Emerald-Bay-Bahamas-Exuma-Resort-Review-Away-Lands-DJI_0879.jpg"
+} %}
+
+<article class="dh">
+  <nav class="dh-breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li><a href="/destinations">Destinations</a></li>
+      <li><a href="/continent/europe">Europe</a></li>
+      <li aria-current="page">Italy</li>
+    </ol>
+  </nav>
+
+  <header class="dh-hero">
+    <div class="dh-hero__image">
+      <img srcset="{{ images.hero | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+                   {{ images.hero | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+                   {{ images.hero | image({w: 900, auto: 'compress,format'}) }} 900w"
+           sizes="100vw"
+           src="{{ images.hero | image({w: 1600, auto: 'compress,format'}) }}"
+           alt="Cliffside towns and blue Mediterranean water along the Italian coast"
+           fetchpriority="high"
+           decoding="async">
+    </div>
+    <div class="dh-hero__shade"></div>
+    <div class="dh-hero__copy">
+      <p class="dh-eyebrow">Away Lands Destination Guide</p>
+      <h1>Italy</h1>
+      <p>Art-filled cities, sunlit coastlines, beautiful hotels, and the kind of meals that become the reason to return.</p>
+      <a href="#start-planning">Start planning <span>↓</span></a>
+    </div>
+    <aside class="dh-hero__note">
+      <span>First visited</span><strong>2016</strong>
+      <span>Last photographed</span><strong>Summer 2025</strong>
+    </aside>
+  </header>
+
+  <section class="dh-intro" id="start-planning" aria-labelledby="dh-intro-title">
+    <div class="dh-intro__title">
+      <p class="dh-section-number">01 — The guide</p>
+      <h2 id="dh-intro-title">A considered guide to Italy</h2>
+    </div>
+    <div class="dh-intro__copy">
+      <p class="dh-intro__lead">Italy rewards a slower itinerary. Choose one or two regions, leave space for long lunches, and let the smaller roads lead somewhere unexpected.</p>
+      <p>These first-hand guides bring together the places we have stayed, photographed, and returned to—from the villas of Lake Como to the limestone beaches of Puglia and the villages of the Amalfi Coast.</p>
+    </div>
+    <dl class="dh-facts" aria-label="Italy quick facts">
+      <div><dt>Best time</dt><dd>May–June<br>September</dd></div>
+      <div><dt>Ideal trip</dt><dd>7–14 days</dd></div>
+      <div><dt>Currency</dt><dd>Euro</dd></div>
+      <div><dt>Known for</dt><dd>Coast, culture<br>& cuisine</dd></div>
+    </dl>
+  </section>
+
+  <nav class="dh-jump" aria-label="Explore this Italy guide">
+    <a href="#where-to-go">Where to go</a>
+    <a href="#plan-your-trip">Plan your trip</a>
+    <a href="#featured-guides">Guides</a>
+    <a href="#when-to-go">When to visit</a>
+  </nav>
+
+  <section class="dh-regions" id="where-to-go" aria-labelledby="dh-regions-title">
+    <header class="dh-section-heading">
+      <div><p class="dh-section-number">02 — Places</p><h2 id="dh-regions-title">Where to go in Italy</h2></div>
+      <p>Begin with the Italy you are dreaming of: coastal, countryside, city, or island.</p>
+    </header>
+    <div class="dh-regions__grid">
+      <a class="dh-region dh-region--large" href="/search/?q=amalfi%20coast">
+        <img src="{{ images.coast | image({w: 1400, auto: 'compress,format'}) }}" alt="The Amalfi Coast seen from the water" loading="lazy" decoding="async">
+        <span><small>Campania</small><strong>Amalfi Coast</strong><em>12 guides →</em></span>
+      </a>
+      <a class="dh-region" href="/search/?q=lake%20como">
+        <img src="{{ images.hotel | image({w: 900, auto: 'compress,format'}) }}" alt="A waterfront hotel and mountains at Lake Como" loading="lazy" decoding="async">
+        <span><small>Lombardy</small><strong>Lake Como</strong><em>8 guides →</em></span>
+      </a>
+      <a class="dh-region" href="/search/?q=puglia">
+        <img src="{{ images.road | image({w: 900, auto: 'compress,format'}) }}" alt="A scenic road through the Italian countryside" loading="lazy" decoding="async">
+        <span><small>Southern Italy</small><strong>Puglia</strong><em>7 guides →</em></span>
+      </a>
+      <a class="dh-region dh-region--wide" href="/search/?q=sicily">
+        <img src="{{ images.resort | image({w: 1200, auto: 'compress,format'}) }}" alt="Sunlit Mediterranean resort overlooking clear blue water" loading="lazy" decoding="async">
+        <span><small>Island guide</small><strong>Sicily</strong><em>9 guides →</em></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="dh-planning" id="plan-your-trip" aria-labelledby="dh-planning-title">
+    <div class="dh-planning__intro">
+      <p class="dh-section-number">03 — Before you go</p>
+      <h2 id="dh-planning-title">Plan your trip</h2>
+      <p>Everything worth knowing before the first reservation.</p>
+    </div>
+    <div class="dh-planning__links">
+      <a href="/search/?q=italy%20itinerary"><span>01</span><strong>Itineraries</strong><small>One week, two weeks, and slow routes</small></a>
+      <a href="/search/?q=italy%20hotel"><span>02</span><strong>Beautiful hotels</strong><small>Places we have stayed and would return to</small></a>
+      <a href="/search/?q=italy%20packing"><span>03</span><strong>What to pack</strong><small>Seasonal lists and Italian summer style</small></a>
+      <a href="/search/?q=italy%20road%20trip"><span>04</span><strong>Getting around</strong><small>Trains, rental cars, ferries, and road trips</small></a>
+    </div>
+  </section>
+
+  <section class="dh-featured" id="featured-guides" aria-labelledby="dh-featured-title">
+    <header class="dh-section-heading">
+      <div><p class="dh-section-number">04 — Start here</p><h2 id="dh-featured-title">Essential Italy guides</h2></div>
+      <a href="/search/?q=italy">View all Italy stories →</a>
+    </header>
+    <div class="dh-featured__grid">
+      <a class="dh-story dh-story--lead" href="/search/?q=italy%20summer%20packing">
+        <img src="{{ images.hero | image({w: 1400, auto: 'compress,format'}) }}" alt="Summer on the Italian coast" loading="lazy" decoding="async">
+        <span><small>Packing guide</small><strong>What to Pack for Summer in Italy</strong><p>A complete packing list for an Italian vacation.</p></span>
+      </a>
+      <a class="dh-story" href="/search/?q=lake%20como%20guide">
+        <img src="{{ images.hotel | image({w: 900, auto: 'compress,format'}) }}" alt="A luxury waterfront hotel in Italy" loading="lazy" decoding="async">
+        <span><small>Destination guide</small><strong>The Complete Lake Como Travel Guide</strong></span>
+      </a>
+      <a class="dh-story" href="/search/?q=italy%20road%20trip">
+        <img src="{{ images.road | image({w: 900, auto: 'compress,format'}) }}" alt="Scenic Italian road trip route" loading="lazy" decoding="async">
+        <span><small>Road trip</small><strong>A Beautiful Two-Week Route Through Italy</strong></span>
+      </a>
+    </div>
+  </section>
+
+  <section class="dh-season" id="when-to-go" aria-labelledby="dh-season-title">
+    <div class="dh-season__image"><img src="{{ images.coast | image({w: 1500, auto: 'compress,format'}) }}" alt="Warm evening light along the Italian coast" loading="lazy" decoding="async"></div>
+    <div class="dh-season__copy">
+      <p class="dh-section-number">05 — Timing</p>
+      <h2 id="dh-season-title">When to visit Italy</h2>
+      <p>The shoulder seasons bring warm days, softer light, and more room to linger. July and August are best reserved for islands, lake days, or a hotel worth staying in all afternoon.</p>
+      <div class="dh-season__months">
+        <span><strong>Spring</strong>April–June</span>
+        <span><strong>Summer</strong>July–August</span>
+        <span><strong>Autumn</strong>September–October</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="dh-experience" aria-labelledby="dh-experience-title">
+    <p class="dh-section-number">06 — First hand</p>
+    <blockquote id="dh-experience-title">“My favorite way to experience Italy is to choose one beautiful base, rent a small car, and leave half the itinerary unplanned.”</blockquote>
+    <p class="dh-experience__byline">Amy Seder — photographer and editor, Away Lands</p>
+  </section>
+
+  <section class="dh-continue" aria-labelledby="dh-continue-title">
+    <div><p class="dh-section-number">Continue planning</p><h2 id="dh-continue-title">Build your Italy trip</h2></div>
+    <nav aria-label="Continue planning an Italy trip">
+      <a href="/search/?q=italy%20hotels">Hotels <span>→</span></a>
+      <a href="/search/?q=italy%20beaches">Beaches <span>→</span></a>
+      <a href="/search/?q=italy%20packing">Packing lists <span>→</span></a>
+      <a href="/search/?q=italy%20photography">Photography <span>→</span></a>
+    </nav>
+  </section>
+</article>
+{% endblock %}

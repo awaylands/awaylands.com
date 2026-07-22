@@ -765,7 +765,7 @@ body.body--story {
 }
 
 .story-article__body {
-  max-width: 124rem;
+  max-width: 155rem;
   margin: 0 auto;
   color: var(--story-ink);
   font-family: 'Still EB Garamond', Georgia, serif;
@@ -791,7 +791,7 @@ body.body--story {
 .story-article__body > blockquote,
 .story-article__body > hr,
 .story-article__body > .story-table {
-  max-width: 84rem;
+  max-width: 105rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -801,7 +801,7 @@ body.body--story {
 .story-article__body > .table-responsive,
 .story-article__body > div > table {
   width: 100%;
-  max-width: 84rem;
+  max-width: 105rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -867,6 +867,7 @@ body.body--story {
   margin-bottom: 1.9rem;
   border-top: 1px solid rgba(22, 110, 120, 0.24);
   padding-top: 1.6rem;
+  font-weight: 700;
   font-size: clamp(3.5rem, 4.3vw, 5rem);
   line-height: 0.9;
 }
@@ -977,23 +978,23 @@ body.body--story {
   position: relative;
   float: none;
   width: auto;
-  max-width: 84rem;
-  margin: 0 auto 4.8rem calc(50% - 42rem);
+  max-width: 105rem;
+  margin: 0 auto 4.8rem calc(50% - 52.5rem);
   padding: 0;
   cursor: zoom-in;
 }
 
 .story-article__body figure.default,
 .story-article__body figure.text {
-  max-width: 84rem;
+  max-width: 105rem;
 }
 
 .story-article__body figure.small {
-  max-width: 20.25rem;
+  max-width: 25.5rem;
 }
 
 .story-article__body figure.medium {
-  max-width: 41.5rem;
+  max-width: 52rem;
 }
 
 .story-article__body figure.large {
@@ -1055,7 +1056,7 @@ body.body--story {
 .story-article__body > figure.align-none {
   clear: both;
   margin-right: auto;
-  margin-left: calc(50% - 42rem);
+  margin-left: calc(50% - 52.5rem);
 }
 
 .story-article__body > figure.align-center,
@@ -1083,9 +1084,9 @@ body.body--story {
   .story-article__body > figure.image-left,
   .story-article__body > figure.float-left {
     float: left;
-    width: 84rem;
+    width: 105rem;
     max-width: calc(100% - 3rem);
-    margin: 0.8rem 3rem 2rem 0;
+    margin: 0.8rem 3rem 2rem calc(50% - 52.5rem);
   }
 
   .story-article__body > figure.align-right,
@@ -1094,9 +1095,9 @@ body.body--story {
   .story-article__body > figure.image-right,
   .story-article__body > figure.float-right {
     float: right;
-    width: 84rem;
+    width: 105rem;
     max-width: calc(100% - 3rem);
-    margin: 0.8rem 0 2rem 3rem;
+    margin: 0.8rem calc(50% - 52.5rem) 2rem 3rem;
   }
 
   .story-article__body > figure.align-left.small,
@@ -1109,7 +1110,7 @@ body.body--story {
   .story-article__body > figure.image-right.small,
   .story-article__body > figure.float-left.small,
   .story-article__body > figure.float-right.small {
-    width: 20.25rem;
+    width: 25.5rem;
   }
 
   .story-article__body > figure.align-left.medium,
@@ -1122,7 +1123,7 @@ body.body--story {
   .story-article__body > figure.image-right.medium,
   .story-article__body > figure.float-left.medium,
   .story-article__body > figure.float-right.medium {
-    width: 41.5rem;
+    width: 52rem;
   }
 
   .story-article__body > figure.align-left.large,
@@ -1204,21 +1205,21 @@ body.body--story {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
-  max-width: 84rem;
+  max-width: 105rem;
   margin: 0 auto 5.4rem;
   clear: both;
 }
 
 .story-gallery--size-text {
-  max-width: 84rem;
+  max-width: 105rem;
 }
 
 .story-gallery--size-wide {
-  max-width: 84rem;
+  max-width: 105rem;
 }
 
 .story-gallery--size-full {
-  max-width: 124rem;
+  max-width: 155rem;
 }
 
 .story-gallery--pair,
@@ -1235,7 +1236,7 @@ body.body--story {
 @media (min-width: 900px) {
   .story-article__body > .story-gallery--small-grid {
     margin-right: auto;
-    margin-left: calc(50% - 42rem);
+    margin-left: calc(50% - 52.5rem);
   }
 }
 
@@ -1293,7 +1294,7 @@ body.body--story {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.story-gallery--products[data-count='4'] {
+  .story-gallery--products[data-count='4'] {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -1960,14 +1961,14 @@ body.body--story {
   .story-page--standard .story-article,
   .story-page--quick-answer .story-article {
     width: 100%;
-    max-width: 124rem;
+    max-width: 155rem;
     margin: 0 auto;
   }
 
   .story-page--advanced .story-layout {
     grid-template-columns: minmax(0, 1fr) 29rem;
     gap: clamp(5rem, 5vw, 8rem);
-    max-width: 176rem;
+    max-width: 200rem;
   }
 
   .story-page--advanced .story-article {

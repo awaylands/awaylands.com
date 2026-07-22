@@ -389,6 +389,7 @@
         {% set hasManualRelatedStories = page.relatedStories.length %}
         {% set shouldAutofillRelatedStories = page.relatedStories.length < 6 %}
         {% set hasAutoRelatedStories = shouldAutofillRelatedStories %}
+        {% set hasImportantAutoPosts = importantAutoStories.total > 0 %}
 
         {% if hasManualRelatedStories or shouldAutofillRelatedStories %}
         <section class="related-stories{% if hasAutoRelatedStories %} related-stories--auto{% endif %}">
@@ -408,10 +409,19 @@
                 {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
                 {% set matchesCategory = page.category.length and story.category.length and story.category[0].title == page.category[0].title %}
                 {% set matchesLocation = page.location.length and story.location.length and story.location[0].title == page.location[0].title %}
-                {% if story.isImportant != false and story.title != page.title and (matchesCategory or matchesLocation) %}
+                {% if (story.isImportant != false or not hasImportantAutoPosts) and story.title != page.title and (matchesCategory or matchesLocation) %}
                   {{ renderRelatedStory(story) }}
                 {% endif %}
                 {% endfor %}
+                {# While no posts are curated, fill any remaining slots from the
+                   complete Most Popular set after the relevant matches above. #}
+                {% if not hasImportantAutoPosts %}
+                  {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
+                    {% if story.title != page.title %}
+                      {{ renderRelatedStory(story) }}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
               {% endif %}
               {% endfor %}
             {% endif %}
@@ -438,11 +448,11 @@
               {% endfor %}
             {% endif %}
 
-            {# Final universal fallback. The browser removes duplicate URLs and
-               keeps six unique stories, providing three for the sidebar and
-               three different stories for Explore Further. #}
-            {% for story in recentStories.items %}
-              {% if story.isImportant != false and story.title != page.title %}
+            {# Once posts are checked Important, use that complete curated set as
+               the universal fallback. Until then the Most Popular collection
+               above remains the automatic source. #}
+            {% for story in importantAutoStories.items %}
+              {% if story.title != page.title %}
                 {{ renderRelatedStory(story) }}
               {% endif %}
             {% endfor %}

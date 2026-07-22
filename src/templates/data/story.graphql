@@ -68,7 +68,12 @@ query {
       }
     }
   }
-  recentStories: getStoryList(size: 8, sort: [{field: "_enabledAt", order: "desc"}]) {
+  importantAutoStories: getStoryList(
+    size: 100,
+    where: {isImportant: {eq: true}},
+    sort: [{field: "_enabledAt", order: "desc"}]
+  ) {
+    total
     items {
       _contentTypeName
       _enabledAt
@@ -80,7 +85,7 @@ query {
       tout { image { path } }
     }
   }
-  archiveStories: getStoryList(size: 30, sort: [{field: "_enabledAt", order: "desc"}]) {
+  archiveStories: getStoryList(size: 32, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
       _enabledAt
@@ -134,6 +139,7 @@ query {
       }
     }
     heroImageOverride { path }
+    heroImageFocus
     supportingStories {
       _contentTypeName title slug category { title }
       tout { image { path } dek }
@@ -147,6 +153,7 @@ query {
       shopEditItems { image { path } title productUrl productEmbedHtml }
     }
     travelEssentialsBackgroundImage { path }
+    travelEssentialsBackgroundFocus
     travelEssentialsLabel
     travelEssentialsTitle
     travelEssentialsLinkText
@@ -158,24 +165,34 @@ query {
     }
     categoryTile1Category { title }
     categoryTile1Image { path }
+    categoryTile1Focus
     categoryTile2Category { title }
     categoryTile2Image { path }
+    categoryTile2Focus
     categoryTile3Category { title }
     categoryTile3Image { path }
+    categoryTile3Focus
     categoryTile4Category { title }
     categoryTile4Image { path }
+    categoryTile4Focus
     categoryTile5Category { title }
     categoryTile5Image { path }
+    categoryTile5Focus
     categoryTile6Category { title }
     categoryTile6Image { path }
+    categoryTile6Focus
     categoryTile7Category { title }
     categoryTile7Image { path }
+    categoryTile7Focus
     categoryTile8Category { title }
     categoryTile8Image { path }
+    categoryTile8Focus
     categoryTile9Category { title }
     categoryTile9Image { path }
+    categoryTile9Focus
     categoryTile10Category { title }
     categoryTile10Image { path }
+    categoryTile10Focus
     revolveSectionTitle
     revolveSectionLinkUrl
     revolveSectionEmbedHtml
@@ -188,13 +205,17 @@ query {
       tout { image { path } dek }
     }
     leftFullBleedImageOverride { path }
+    leftFullBleedImageFocus
     leftFullBleedMobileImageOverride { path }
+    leftFullBleedMobileImageFocus
     rightFullBleedStory {
       _contentTypeName title slug category { title }
       tout { image { path } dek }
     }
     rightFullBleedImageOverride { path }
+    rightFullBleedImageFocus
     rightFullBleedMobileImageOverride { path }
+    rightFullBleedMobileImageFocus
     latestStories {
       _contentTypeName title slug category { title }
       tout { image { path } dek }

@@ -14,15 +14,172 @@
   const HTML_INSERT_BUTTON_CLASS = 'awaylands-inline-html-button';
   const HTML_INSERT_DIALOG_CLASS = 'awaylands-inline-html-dialog';
   const INLINE_HTML_MARKER_PREFIX = 'AWAYLANDS_HTML';
+  const IMPORTANCE_CHANNEL = 'awaylands-story-importance';
   const pendingRevolveFrames = [];
   let storyTitleIndex = null;
   let storyTitleRequest = null;
   let htmlInsertState = null;
   let activePublishState = null;
+  let lastStoryToolsAuditAt = 0;
+  let lastBottomBarAuditAt = 0;
   const relatedSelectionInputs = new WeakSet();
+  const importanceRequests = new Map();
+  let importanceRequestId = 0;
+  let importanceStoriesByTitle = null;
+  let importanceListRequest = null;
 
   function isStoryEditorPath() {
     return /\/project\/[^/]+\/branch\/[^/]+\/data\/Story(?:\/|$)/i.test(window.location.pathname);
+  }
+
+  function isStoryListPath() {
+    return /\/project\/[^/]+\/branch\/[^/]+\/data\/Story\/?$/i.test(window.location.pathname);
+  }
+
+  function importanceBridgeRequest(type, story) {
+    const requestId = `importance-${Date.now()}-${importanceRequestId += 1}`;
+
+    return new Promise((resolve, reject) => {
+      const timeout = window.setTimeout(() => {
+        importanceRequests.delete(requestId);
+        reject(new Error('TakeShape did not respond. Reload the page and try again.'));
+      }, 30000);
+
+      importanceRequests.set(requestId, {resolve, reject, timeout});
+      window.postMessage({
+        channel: IMPORTANCE_CHANNEL,
+        direction: 'request',
+        requestId,
+        type,
+        story
+      }, window.location.origin);
+    });
+  }
+
+  window.addEventListener('message', event => {
+    const message = event.data;
+    if (event.source !== window || !message || message.channel !== IMPORTANCE_CHANNEL || message.direction !== 'response') return;
+
+    const request = importanceRequests.get(message.requestId);
+    if (!request) return;
+    window.clearTimeout(request.timeout);
+    importanceRequests.delete(message.requestId);
+    if (message.error) request.reject(new Error(message.error));
+    else request.resolve(message.result);
+  });
+
+  function indexImportanceStories(stories) {
+    const index = new Map();
+
+    (stories || []).forEach(story => {
+      const title = String(story.title || '').trim();
+      if (title && !index.has(title)) index.set(title, story);
+    });
+    importanceStoriesByTitle = index;
+    return index;
+  }
+
+  function loadImportanceStories() {
+    if (importanceStoriesByTitle) return Promise.resolve(importanceStoriesByTitle);
+    if (importanceListRequest) return importanceListRequest;
+
+    importanceListRequest = importanceBridgeRequest('list')
+      .then(indexImportanceStories)
+      .finally(() => { importanceListRequest = null; });
+    return importanceListRequest;
+  }
+
+  function makeImportanceCheckbox(story) {
+    const label = document.createElement('label');
+    const checkbox = document.createElement('input');
+    const status = document.createElement('span');
+
+    label.className = 'awaylands-story-importance-control';
+    checkbox.type = 'checkbox';
+    checkbox.checked = story.isImportant === true;
+    checkbox.setAttribute('aria-label', `Mark ${story.title} as important`);
+    checkbox.title = checkbox.checked ? 'Important post' : 'Unimportant post';
+    status.className = 'awaylands-story-importance-status';
+    status.setAttribute('aria-live', 'polite');
+    label.appendChild(checkbox);
+    label.appendChild(status);
+
+    ['click', 'mousedown', 'mouseup'].forEach(type => {
+      label.addEventListener(type, event => event.stopPropagation());
+    });
+    checkbox.addEventListener('change', () => {
+      const previous = !checkbox.checked;
+      checkbox.disabled = true;
+      label.classList.add('is-saving');
+      label.classList.remove('is-error');
+      status.textContent = 'Saving';
+
+      importanceBridgeRequest('update', {
+        id: story._id,
+        version: story._version,
+        isImportant: checkbox.checked
+      }).then(updated => {
+        Object.assign(story, updated);
+        checkbox.checked = story.isImportant === true;
+        checkbox.title = checkbox.checked ? 'Important post' : 'Unimportant post';
+        status.textContent = 'Saved';
+        window.setTimeout(() => { status.textContent = ''; }, 1200);
+      }).catch(error => {
+        checkbox.checked = previous;
+        label.classList.add('is-error');
+        label.title = error.message;
+        status.textContent = 'Try again';
+      }).finally(() => {
+        checkbox.disabled = false;
+        label.classList.remove('is-saving');
+      });
+    });
+    return label;
+  }
+
+  function renderStoryImportanceColumn() {
+    if (!isStoryListPath() || !importanceStoriesByTitle) return;
+
+    const table = document.querySelector('table');
+    const headerRow = table && table.querySelector('thead tr');
+    if (!headerRow) return;
+    const headers = Array.from(headerRow.children);
+    const titleIndex = headers.findIndex(cell => /^STORY\s*[—-]\s*Title$/i.test(normalizedText(cell)));
+    if (titleIndex < 0) return;
+
+    if (!headerRow.querySelector('.awaylands-story-importance-heading')) {
+      const heading = document.createElement('th');
+      heading.className = 'MuiTableCell-root MuiTableCell-head awaylands-story-importance-heading';
+      heading.scope = 'col';
+      heading.textContent = 'Important';
+      headers[titleIndex].insertAdjacentElement('afterend', heading);
+    }
+
+    table.querySelectorAll('tbody tr').forEach(row => {
+      if (row.querySelector('.awaylands-story-importance-cell')) return;
+      const cells = Array.from(row.children);
+      const titleCell = cells[titleIndex];
+      const title = titleCell && String(titleCell.getAttribute('title') || normalizedText(titleCell)).trim();
+      const story = importanceStoriesByTitle.get(title);
+      if (!story) return;
+
+      const cell = document.createElement('td');
+      cell.className = 'MuiTableCell-root MuiTableCell-body awaylands-story-importance-cell';
+      cell.appendChild(makeImportanceCheckbox(story));
+      titleCell.insertAdjacentElement('afterend', cell);
+    });
+  }
+
+  function addStoryImportanceColumn() {
+    if (!isStoryListPath()) return;
+    document.body.classList.add('awaylands-story-list-importance');
+    loadImportanceStories().then(() => {
+      renderStoryImportanceColumn();
+    }).catch(error => {
+      const table = document.querySelector('table');
+      if (table) table.setAttribute('data-awaylands-importance-error', error.message);
+    });
+    renderStoryImportanceColumn();
   }
 
   function normalizedText(element) {
@@ -324,7 +481,7 @@
   }
 
   function installLeftPublishingStatus() {
-    const workflowLabels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
+    const workflowLabels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"]'))
       .filter(element => (
         /^workflow status$/i.test(normalizedText(element)) &&
         !element.closest('.awaylands-left-status-proxy')
@@ -462,6 +619,13 @@
   }
 
   function hideStoryToolsAndVersions() {
+    const now = Date.now();
+
+    if (now - lastStoryToolsAuditAt < 750) {
+      return;
+    }
+    lastStoryToolsAuditAt = now;
+
     const galleryContent = document.querySelector('.awaylands-gallery-drawer-content');
     const galleryShell = document.querySelector('.awaylands-gallery-drawer-shell');
 
@@ -484,7 +648,7 @@
       }
     });
 
-    const labels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"], div, span'))
+    const labels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"]'))
       .filter(element => (!galleryContent || !galleryContent.contains(element)) && /^(workflow status|versions|version history)$/i.test(normalizedText(element)));
     const candidates = [];
 
@@ -693,6 +857,13 @@
   }
 
   function removeBottomEditorBar() {
+    const now = Date.now();
+
+    if (now - lastBottomBarAuditAt < 750) {
+      return;
+    }
+    lastBottomBarAuditAt = now;
+
     const excludedOverlay = '[role="dialog"], [role="menu"], [role="listbox"], [role="tooltip"], .awaylands-inline-html-dialog';
 
     const containsNativeStoryActions = element => {
@@ -755,6 +926,13 @@
       if (widestBottomBar) remove(widestBottomBar);
     });
 
+    // Do not walk every node in the TakeShape application here. Reading
+    // textContent and layout for every descendant causes quadratic work during
+    // React renders and can freeze the editor. Native footer selectors above,
+    // plus the targeted publish controls, cover the supported layouts.
+    return;
+
+    /* istanbul ignore next -- retained only as historical fallback reference
     Array.from(document.querySelectorAll('body *')).forEach(element => {
       if (element.closest(excludedOverlay)) {
         return;
@@ -805,7 +983,7 @@
       } else if (style.position === 'sticky' || (style.position === 'fixed' && isEditorChrome)) {
         element.classList.add('awaylands-editor-nonsticky');
       }
-    });
+    }); */
   }
 
   function enableStoryOnOpen() {
@@ -813,7 +991,7 @@
       return;
     }
 
-    const workflowLabels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, div, span'))
+    const workflowLabels = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, [role="heading"]'))
       .filter(element => /^workflow status$/i.test(normalizedText(element)));
     const workflowPanels = workflowLabels.map(workflowLabel => (
       workflowLabel.closest('.awaylands-story-tools-panel, aside, section, [class*="sidebar"], [class*="panel"]') ||
@@ -1031,6 +1209,51 @@
       /^<!--/.test(html) ||
       /^<\/?[a-z][\s\S]*>/i.test(html)
     );
+  }
+
+  function isGoogleDocsClipboard(html) {
+    return /docs-internal-guid|docs\.googleusercontent|googleusercontent|class=["'][^"']*kix/i.test(html || '');
+  }
+
+  function compressClipboardImage(src) {
+    return new Promise(resolve => {
+      if (!/^data:image\//i.test(src || '') || src.length < 120000) {
+        resolve(src);
+        return;
+      }
+
+      const image = new Image();
+      image.onload = () => {
+        const maxDimension = 1600;
+        const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth || image.width, image.naturalHeight || image.height));
+        const canvas = document.createElement('canvas');
+
+        canvas.width = Math.max(1, Math.round((image.naturalWidth || image.width) * scale));
+        canvas.height = Math.max(1, Math.round((image.naturalHeight || image.height) * scale));
+        canvas.getContext('2d').drawImage(image, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.72));
+      };
+      image.onerror = () => resolve('');
+      image.src = src;
+    });
+  }
+
+  function insertGoogleDocsClipboard(editor, html, plainText, range) {
+    if (!editor.isConnected) {
+      return;
+    }
+    editor.focus({ preventScroll: true });
+    if (range) {
+      const selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+    // Google Docs can put megabytes of image data on the clipboard. Insert the
+    // text representation here so TakeShape never receives that oversized
+    // payload and crashes its React form. Users can still use the HTML button
+    // for deliberate embeds.
+    document.execCommand('insertText', false, plainText || '');
+    editor.dispatchEvent(new InputEvent('input', { bubbles: true, inputType: 'insertFromPaste', data: null }));
   }
 
   function htmlValidationMessage(value) {
@@ -1430,15 +1653,21 @@
       });
       toolbar.appendChild(button);
 
+      if (editor.hasAttribute('data-awaylands-google-paste')) {
+        return;
+      }
+      editor.setAttribute('data-awaylands-google-paste', 'true');
       editor.addEventListener('paste', event => {
+        const html = event.clipboardData && event.clipboardData.getData('text/html');
         const plainText = event.clipboardData && event.clipboardData.getData('text/plain');
 
-        if (!looksLikeHtml(plainText)) {
+        if (!html || (!isGoogleDocsClipboard(html) && !/<img\b/i.test(html))) {
           return;
         }
 
         event.preventDefault();
-        openHtmlInsertDialog(editor, plainText, 'paste');
+        const range = currentEditorSelection(editor);
+        insertGoogleDocsClipboard(editor, html, plainText, range);
       });
     });
   }
@@ -1451,7 +1680,8 @@
     });
 
     document.querySelectorAll('label').forEach(label => {
-      if (normalizedText(label).toLowerCase() !== 'credit') {
+      const labelText = normalizedText(label).toLowerCase();
+      if (labelText !== 'credit' && labelText !== 'important post') {
         return;
       }
 
@@ -1459,7 +1689,7 @@
 
       if (field) {
         field.hidden = true;
-        field.classList.add('awaylands-removed-credit-field');
+        field.classList.add(labelText === 'important post' ? 'awaylands-removed-important-field' : 'awaylands-removed-credit-field');
       }
     });
   }
@@ -2086,6 +2316,53 @@
     sync();
   }
 
+  // TakeShape re-renders the story form when an image dialog is submitted. That
+  // can reset the internal editor pane (and, in some layouts, the window) to
+  // the top. Keep the user's position while the native save is allowed to run.
+  function captureEditorScrollPositions() {
+    const positions = [];
+    const scrollingElement = document.scrollingElement || document.documentElement;
+
+    if (scrollingElement) {
+      positions.push({ element: scrollingElement, top: scrollingElement.scrollTop, left: scrollingElement.scrollLeft });
+    }
+
+    document.querySelectorAll('*').forEach(element => {
+      if (element === scrollingElement || element.scrollHeight <= element.clientHeight + 1) {
+        return;
+      }
+
+      const style = window.getComputedStyle(element);
+      if (!/(auto|scroll|overlay)/.test(style.overflowY) && !/(auto|scroll|overlay)/.test(style.overflow)) {
+        return;
+      }
+
+      positions.push({ element, top: element.scrollTop, left: element.scrollLeft });
+    });
+
+    return positions;
+  }
+
+  function restoreEditorScrollPositions(positions) {
+    if (!positions || !positions.length) {
+      return;
+    }
+
+    const restore = () => positions.forEach(position => {
+      if (position.element && position.element.isConnected) {
+        position.element.scrollTop = position.top;
+        position.element.scrollLeft = position.left;
+      }
+    });
+
+    // React may commit the dialog close and form update over several frames.
+    // Restore after each commit without stealing focus or changing the URL.
+    restore();
+    window.requestAnimationFrame(restore);
+    window.setTimeout(restore, 40);
+    window.setTimeout(restore, 160);
+  }
+
   function runEnhancement(name, callback) {
     try {
       callback();
@@ -2178,16 +2455,20 @@
     dialog.addEventListener('keydown', event => {
       if (event.key === 'Enter' && !event.shiftKey && event.target.tagName !== 'TEXTAREA' && submit) {
         event.preventDefault();
+        const scrollPositions = captureEditorScrollPositions();
         syncLink();
         submit.click();
+        restoreEditorScrollPositions(scrollPositions);
       }
     });
     if (submit) {
       submit.addEventListener('click', () => {
+        const scrollPositions = captureEditorScrollPositions();
         syncLink();
         if (activeFigure) {
           activeFigure.removeAttribute('data-awaylands-active-image');
         }
+        restoreEditorScrollPositions(scrollPositions);
       });
     }
   }
@@ -2429,6 +2710,11 @@
         return;
       }
 
+      if (input.hasAttribute('data-awaylands-link-enhanced')) {
+        return;
+      }
+      input.setAttribute('data-awaylands-link-enhanced', 'true');
+
       surface.classList.add('awaylands-content-link-editor');
       input.classList.add('awaylands-content-link-input');
       const inputField = input.closest('.MuiInputBase-root') || input.parentElement;
@@ -2480,7 +2766,13 @@
       return;
     }
 
-    if (!isStoryEditorPath()) {
+    if (isStoryListPath()) {
+      runEnhancement('story importance list', addStoryImportanceColumn);
+    } else {
+      document.body.classList.remove('awaylands-story-list-importance');
+    }
+
+    if (!isStoryEditorPath() || isStoryListPath()) {
       document.body.classList.remove(ROOT_CLASS);
       document.querySelectorAll('.awaylands-left-save-control, .awaylands-left-status-proxy, .awaylands-publish-targets, .awaylands-inline-html-dialog')
         .forEach(element => element.remove());
@@ -2552,16 +2844,26 @@
   }
 
   let frameRequested = false;
+  let markTimer = null;
   const requestMarking = () => {
     if (frameRequested) {
       return;
     }
 
-    frameRequested = true;
-    window.requestAnimationFrame(() => {
-      frameRequested = false;
-      markEditorElements();
-    });
+    // TakeShape renders large React subtrees while typing, pasting, saving, and
+    // opening dialogs. Debounce the audit so a burst of mutations produces one
+    // pass instead of a layout-read loop that can freeze the editor.
+    if (markTimer) {
+      window.clearTimeout(markTimer);
+    }
+    markTimer = window.setTimeout(() => {
+      markTimer = null;
+      frameRequested = true;
+      window.requestAnimationFrame(() => {
+        frameRequested = false;
+        markEditorElements();
+      });
+    }, 120);
   };
 
   markEditorElements();

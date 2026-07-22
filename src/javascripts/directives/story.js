@@ -2083,6 +2083,12 @@ function prepareStory(el) {
   groupStoryFigures(el);
   normalizeStorySpacing(el);
   addPreviewAdPlaceholders(el);
+  // Remove duplicate and excess server-rendered candidates before deciding
+  // whether the list needs a fallback. Otherwise duplicate URLs can make the
+  // fallback think six stories exist, only for finalization to leave five (or
+  // fewer), which starves the three-card Explore Further row after the first
+  // three cards are copied into the desktop sidebar.
+  finalizeRelatedStories(storyPage);
   fillRelatedStoryCandidates(storyPage).then(() => {
     finalizeRelatedStories(storyPage);
     prepareAdvancedStoryPreview(el);

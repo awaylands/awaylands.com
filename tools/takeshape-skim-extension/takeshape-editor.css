@@ -1158,6 +1158,15 @@ body.awaylands-takeshape-skim .awaylands-publish-targets button {
   text-align: center !important;
 }
 
+/* The Stage label is long enough to wrap in the narrow left rail. Do not let
+   the compact Save button sizing clip its second line. */
+body.awaylands-takeshape-skim .awaylands-publish-targets button {
+  height: auto !important;
+  min-height: 40px !important;
+  white-space: normal !important;
+  overflow: visible !important;
+}
+
 body.awaylands-takeshape-skim .awaylands-publish-status {
   display: none !important;
   align-items: center !important;
@@ -1567,4 +1576,70 @@ body.awaylands-takeshape-skim .awaylands-content-link-editor [role="button"] {
   body.awaylands-takeshape-skim .awaylands-content-link-editor .awaylands-content-link-field {
     min-width: calc(100vw - 160px) !important;
   }
+}
+
+body.awaylands-story-list-importance .awaylands-story-importance-heading,
+body.awaylands-story-list-importance .awaylands-story-importance-cell {
+  box-sizing: border-box;
+  width: 104px;
+  min-width: 104px;
+  padding: 8px 16px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+
+body.awaylands-story-list-importance .awaylands-story-importance-heading {
+  color: rgba(0, 0, 0, 0.68);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+body.awaylands-story-list-importance .awaylands-story-importance-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-height: 30px;
+  cursor: pointer;
+}
+
+body.awaylands-story-list-importance .awaylands-story-importance-control input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: #3f51b5;
+  cursor: pointer;
+}
+
+body.awaylands-story-list-importance .awaylands-story-importance-control input:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+body.awaylands-story-list-importance .awaylands-story-importance-status {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+body.awaylands-story-list-importance .awaylands-story-importance-control.is-saving:after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(63, 81, 181, 0.25);
+  border-top-color: #3f51b5;
+  border-radius: 50%;
+  animation: awaylands-importance-spin 0.7s linear infinite;
+}
+
+body.awaylands-story-list-importance .awaylands-story-importance-control.is-error input {
+  outline: 2px solid #b3261e;
+  outline-offset: 2px;
+}
+
+@keyframes awaylands-importance-spin {
+  to { transform: rotate(360deg); }
 }
