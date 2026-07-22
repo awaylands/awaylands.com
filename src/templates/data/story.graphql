@@ -1,4 +1,18 @@
 query {
+  products: getProducts {
+    travel { image { path } title description productUrl productEmbedHtml addToHomepage }
+    style { image { path } title description productUrl productEmbedHtml addToHomepage }
+    photography { image { path } title description productUrl productEmbedHtml addToHomepage }
+    beauty { image { path } title description productUrl productEmbedHtml addToHomepage }
+  }
+  blogShopFallback: getBlog {
+    travelEssentialsItems {
+      image { path }
+      title
+      productUrl
+      productEmbedHtml
+    }
+  }
   categories: getBlog {
     categories {
       title

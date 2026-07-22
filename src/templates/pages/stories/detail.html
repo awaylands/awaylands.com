@@ -209,19 +209,36 @@
   {% if page.keepReadingKicker %}data-keep-reading-kicker="{{ page.keepReadingKicker | escape }}"{% endif %}
   {% if page.keepReadingTitle %}data-keep-reading-title="{{ page.keepReadingTitle | escape }}"{% endif %}
 >
-  {% if page.shopEditItems.length %}
+  {% set primaryCategory = page.category[0].title if page.category.length else '' %}
+  {% set useTravelProducts = primaryCategory == 'Travel Guides' or primaryCategory == 'Travel Tips' or primaryCategory == 'Best Beaches' or primaryCategory == 'Hotels and Resorts' or primaryCategory == 'Travel Adventures' or primaryCategory == 'Packing Guides' or primaryCategory == 'Los Angeles Life' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
+  {% set useBeautyProducts = primaryCategory == 'Beauty' or primaryCategory == 'Wedding and Honeymoon' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
+  {% set useStyleProducts = primaryCategory == 'Style' or primaryCategory == 'Packing Guides' or primaryCategory == 'Instagram Guides' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
+  {% set usePhotographyProducts = primaryCategory == 'Photography' or primaryCategory == 'Films' or primaryCategory == 'Instagram Guides' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
+  {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts %}
+  {% if page.shopEditItems.length or hasCategoryProducts or blogShopFallback.travelEssentialsItems.length %}
   <div data-story-shop-items hidden>
-    {% for item in page.shopEditItems %}
-      {% if item.productEmbedHtml or (item.productUrl and item.title) %}
+    {% macro shopItem(item, isAutomatic) %}
+    {% if item.productEmbedHtml or (item.productUrl and item.title) %}
       <span
         data-story-shop-item
+        {% if isAutomatic %}data-category-product data-travel-essential-fallback{% endif %}
         data-title="{{ (item.title or "Editor's Pick") | escape }}"
         data-url="{{ (item.productUrl or '') | trim | escape }}"
         {% if item.productEmbedHtml %}data-embed-html="{{ item.productEmbedHtml | escape }}"{% endif %}
         {% if item.image %}data-image="{{ item.image.path | image({auto: 'compress,format', w: 480}) | escape }}"{% endif %}
       ></span>
-      {% endif %}
-    {% endfor %}
+    {% endif %}
+    {% endmacro %}
+    {% if page.shopEditItems.length %}
+      {% for item in page.shopEditItems %}{{ shopItem(item, false) }}{% endfor %}
+    {% elif hasCategoryProducts %}
+      {% if useTravelProducts %}{% for item in products.travel %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
+      {% if useBeautyProducts %}{% for item in products.beauty %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
+      {% if useStyleProducts %}{% for item in products.style %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
+      {% if usePhotographyProducts %}{% for item in products.photography %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
+    {% else %}
+      {% for item in blogShopFallback.travelEssentialsItems %}{{ shopItem(item, true) }}{% endfor %}
+    {% endif %}
   </div>
   {% endif %}
   <header class="story-cover{% if not page.tout.image %} story-cover--no-image{% endif %}">
