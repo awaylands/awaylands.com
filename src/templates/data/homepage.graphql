@@ -4,6 +4,8 @@ query {
     style { image { path } title description productUrl productEmbedHtml addToHomepage }
     photography { image { path } title description productUrl productEmbedHtml addToHomepage }
     beauty { image { path } title description productUrl productEmbedHtml addToHomepage }
+    fitness { image { path } title description productUrl productEmbedHtml addToHomepage }
+    home { image { path } title description productUrl productEmbedHtml addToHomepage }
   }
   page: getHomepage {
     _contentTypeName

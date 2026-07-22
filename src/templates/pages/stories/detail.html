@@ -216,7 +216,9 @@
   {% set useBeautyProducts = primaryCategory == 'Beauty' or primaryCategory == 'Wedding and Honeymoon' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
   {% set useStyleProducts = primaryCategory == 'Style' or primaryCategory == 'Packing Guides' or primaryCategory == 'Instagram Guides' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
   {% set usePhotographyProducts = primaryCategory == 'Photography' or primaryCategory == 'Films' or primaryCategory == 'Instagram Guides' or primaryCategory == 'Shopping' or primaryCategory == 'Social Media' %}
-  {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts %}
+  {% set useFitnessProducts = primaryCategory == 'Health and Fitness' or primaryCategory == 'Health & Fitness' %}
+  {% set useHomeProducts = primaryCategory == 'Home and Garden' or primaryCategory == 'Home & Garden' %}
+  {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts or useFitnessProducts or useHomeProducts %}
   {% if page.shopEditItems.length or hasCategoryProducts or blogShopFallback.travelEssentialsItems.length %}
   <div data-story-shop-items hidden>
     {% macro shopItem(item, isAutomatic) %}
@@ -238,6 +240,8 @@
       {% if useBeautyProducts %}{% for item in products.beauty %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
       {% if useStyleProducts %}{% for item in products.style %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
       {% if usePhotographyProducts %}{% for item in products.photography %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
+      {% if useFitnessProducts %}{% for item in products.fitness %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
+      {% if useHomeProducts %}{% for item in products.home %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
     {% else %}
       {% for item in blogShopFallback.travelEssentialsItems %}{{ shopItem(item, true) }}{% endfor %}
     {% endif %}
