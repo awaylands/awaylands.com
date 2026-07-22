@@ -35,7 +35,7 @@
 
   {% macro homepageProductCards(productList) %}
     {% for product in productList %}
-      {% if product.addToHomepage %}
+      {% if product.addToHomepage and product.productUrl %}
       <a class="bm-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored noopener">
         <span class="bm-product__image">{% if product.image %}<img src="{{ product.image.path | image({w: 520, h: 650, fit: 'contain', auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />{% endif %}</span>
         <strong title="{{ (product.title or 'Shop This Edit') | escape }}">{{ product.title or "Shop This Edit" }}</strong>
