@@ -6,6 +6,7 @@ query {
       title
     }
     featuredFilms {
+      _id
       title
       image {
         path
@@ -19,5 +20,16 @@ query {
         path
       }
     }
+  }
+  allFilms: getFilmList(size: 100, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      _id
+      _enabledAt
+      title
+      image { path }
+      youTubeUrl
+      filmCategory { title }
+    }
+    total
   }
 }

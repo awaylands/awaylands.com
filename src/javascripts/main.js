@@ -7,6 +7,7 @@ import InstaFeed from './components/insta-feed.vue';
 import Listings from './components/listings.vue';
 import initSearch from './components/search';
 import initDestinations3Postcards from './components/destinations3-postcards';
+import initFilmGallery from './components/film-gallery';
 
 const enableDragScrolling = track => {
   if (!track || track.dataset.dragScrolling === 'true') return;
@@ -174,6 +175,7 @@ export default new Vue({
     objectFitImages();
     initSearch();
     initDestinations3Postcards();
+    initFilmGallery();
     initBlogItineraryCarousel();
     initBlogProductCarousel();
     initBlogInfiniteCarousels();
