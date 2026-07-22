@@ -1661,19 +1661,20 @@ body.body--story {
 }
 
 .body--story .related-stories > .story-kicker {
+  display: none !important;
   text-align: center;
 }
 
 .body--story .related-stories__heading {
   margin: 0 0 3.4rem;
   padding: 0;
-  color: var(--story-ink);
+  color: var(--story-orange);
   font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
-  font-size: clamp(4.5rem, 7vw, 7.5rem);
+  font-size: clamp(3.6rem, 4.5vw, 6rem);
   font-weight: 300;
   letter-spacing: 0;
   line-height: 0.96;
-  text-transform: none;
+  text-transform: uppercase;
 }
 
 .body--story .related-stories__heading:after {
@@ -1721,6 +1722,7 @@ body.body--story {
   height: 100%;
   inset: 0;
   position: absolute;
+  z-index: 0;
   transform: none;
   transition: filter 240ms ease;
   width: 100%;
@@ -1752,8 +1754,11 @@ body.body--story {
   position: absolute;
   right: 0;
   transform: none;
-  transition: transform 240ms ease;
-  z-index: 2;
+  transition: none;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  z-index: 3;
 }
 
 .body--story .related-stories__category,
@@ -1785,27 +1790,27 @@ body.body--story {
   margin: 0;
   text-align: left;
   text-transform: none;
-  transform: none;
-  transition: color 240ms ease;
+  transform: none !important;
+  transition: none;
 }
 
-.body--story .related-stories__list a:hover .related-stories__copy,
-.body--story .related-stories__list a:focus .related-stories__copy {
-  opacity: 1;
-  transform: none;
-  visibility: visible;
+/* Related cards are intentionally static: no hover animation or state change. */
+.body--story .related-stories__list a,
+.body--story .related-stories__list a .related-stories__image,
+.body--story .related-stories__list a .related-stories__copy,
+.body--story .related-stories__list a .related-stories__title {
+  filter: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+  visibility: visible !important;
 }
 
+/* Hover affects only the image overlay; related-card text remains untouched. */
 .body--story .related-stories__list a:hover:after,
-.body--story .related-stories__list a:focus:after {
-  background: linear-gradient(180deg, rgba(22, 110, 120, 0.015) 20%, rgba(14, 72, 85, 0.2325) 100%);
-  box-shadow: none;
-}
-
-.body--story .related-stories__list a:hover .related-stories__image,
-.body--story .related-stories__list a:focus .related-stories__image {
-  filter: none;
-  transform: none;
+.body--story .related-stories__list a:focus:after,
+.body--story .related-stories__list a:active:after {
+  background: linear-gradient(180deg, rgba(22, 110, 120, 0) 0%, rgba(14, 72, 85, 0) 100%) !important;
 }
 
 @media (max-width: 899px) {

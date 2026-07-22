@@ -3495,20 +3495,6 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
         }
       }
 
-      a {
-        &:hover {
-          .related-stories__image {
-            transform: scale(1.1) translateY(-0.6rem);
-            z-index: -z(content);
-            transition: transform 0.2s $ease-out-quint;
-          }
-
-          .related-stories__title {
-            transform: scale(1.05);
-            transition: transform 0.2s $ease-out-quint;
-          }
-        }
-      }
     }
 
     &__image {
