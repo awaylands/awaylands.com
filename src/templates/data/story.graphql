@@ -27,6 +27,7 @@ query {
         items {
           _contentTypeName
           _enabledAt
+          isImportant
           title
           slug
           social {
@@ -55,6 +56,7 @@ query {
         items {
           _contentTypeName
           _enabledAt
+          isImportant
           title
           slug
           category { title }
@@ -70,6 +72,7 @@ query {
     items {
       _contentTypeName
       _enabledAt
+      isImportant
       title
       slug
       social { title }
@@ -81,6 +84,7 @@ query {
     items {
       _contentTypeName
       _enabledAt
+      isImportant
       title
       slug
       social { title }

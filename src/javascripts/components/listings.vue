@@ -108,6 +108,7 @@
               items {
                 _id
                 _enabledAt
+                isImportant
                 _contentTypeName
                 title
                 slug
@@ -169,7 +170,16 @@
             }
 
             this.stories.push(...stories.items);
-            this.stories.sort((a, b) => (a._enabledAt < b._enabledAt) ? 1 : -1);
+            this.stories.sort((a, b) => {
+              const aImportant = a.isImportant !== false;
+              const bImportant = b.isImportant !== false;
+
+              if (aImportant !== bImportant) {
+                return aImportant ? -1 : 1;
+              }
+
+              return (a._enabledAt < b._enabledAt) ? 1 : -1;
+            });
             this.variables.from += Number(this.paginationLength);
             this.isLoaded = true;
           })

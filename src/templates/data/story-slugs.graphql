@@ -6,6 +6,7 @@ query($images: TSImagesConfig) {
       _updatedAt
       title
       slug
+      isImportant
       postType
       pageLayout
       atAGlance {
@@ -46,6 +47,7 @@ query($images: TSImagesConfig) {
           items {
             _contentTypeName
             _enabledAt
+            isImportant
             title
             slug
             category { title }
@@ -66,6 +68,7 @@ query($images: TSImagesConfig) {
           items {
             _contentTypeName
             _enabledAt
+            isImportant
             title
             slug
             category { title }
@@ -153,6 +156,7 @@ query($images: TSImagesConfig) {
       }
       relatedStories {
         _enabledAt
+        isImportant
         title
         slug
         category {

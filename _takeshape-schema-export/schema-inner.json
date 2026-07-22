@@ -904,6 +904,10 @@
           "title": {
             "widget": "singleLineText"
           },
+          "isImportant": {
+            "widget": "checkbox",
+            "instructions": "Keep checked to allow this post in automatic post suggestions and feature it earlier on category and destination pages. Uncheck to keep it out of suggestions and show it later in listings."
+          },
           "publishedDate": {
             "widget": "datetime"
           },
@@ -980,6 +984,7 @@
         },
         "order": [
           "title",
+          "isImportant",
           "publishedDate",
           "slug",
           "tout",
@@ -4295,6 +4300,13 @@
             "minLength": 1,
             "title": "STORY — Title",
             "@mapping": "shapedb:Story.H1EAf19e-"
+          },
+          "isImportant": {
+            "type": "boolean",
+            "title": "Important post",
+            "description": "Important posts can appear in automatic post suggestions and are shown before unimportant posts on category and destination pages.",
+            "default": true,
+            "@mapping": "shapedb:Story.ImportantPostV1"
           },
           "publishedDate": {
             "type": "string",

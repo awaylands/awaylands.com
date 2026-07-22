@@ -408,7 +408,7 @@
                 {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
                 {% set matchesCategory = page.category.length and story.category.length and story.category[0].title == page.category[0].title %}
                 {% set matchesLocation = page.location.length and story.location.length and story.location[0].title == page.location[0].title %}
-                {% if story.title != page.title and (matchesCategory or matchesLocation) %}
+                {% if story.isImportant != false and story.title != page.title and (matchesCategory or matchesLocation) %}
                   {{ renderRelatedStory(story) }}
                 {% endif %}
                 {% endfor %}
@@ -418,7 +418,7 @@
 
             {% if page.location.length %}
               {% for story in page.location[0].storySet.items %}
-              {% if story.title != page.title
+              {% if story.isImportant != false and story.title != page.title
                 and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
                 and (page.relatedStories.length < 2 or story.title != page.relatedStories[1].title)
                 and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
@@ -429,7 +429,7 @@
 
             {% if page.category.length %}
               {% for story in page.category[0].storySet.items %}
-              {% if story.title != page.title
+              {% if story.isImportant != false and story.title != page.title
                 and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
                 and (page.relatedStories.length < 2 or story.title != page.relatedStories[1].title)
                 and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
@@ -442,7 +442,7 @@
                keeps six unique stories, providing three for the sidebar and
                three different stories for Explore Further. #}
             {% for story in recentStories.items %}
-              {% if story.title != page.title %}
+              {% if story.isImportant != false and story.title != page.title %}
                 {{ renderRelatedStory(story) }}
               {% endif %}
             {% endfor %}

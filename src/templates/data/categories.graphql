@@ -9,6 +9,7 @@ query {
       storySet(size: 250) {
         items {
           _enabledAt
+          isImportant
           title
           slug
           tout {

@@ -19,10 +19,21 @@
   {% endif %}
 {% endmacro %}
 
+{% macro latestStoryCard(story, categoryTitle) %}
+  <article class="category-story-card">
+    <a href="{{ storyUrl(story) }}">
+      <span class="category-story-card__image">{{ storyImage(story, "(min-width: 1200px) 25vw, (min-width: 700px) 45vw, 100vw", false) }}</span>
+      <span class="category-story-card__copy">
+        <small>{{ categoryTitle }}{% if story._enabledAt %} · {{ story._enabledAt | date("MMMM D, YYYY") }}{% endif %}</small>
+        <h3>{{ story.title }}</h3>
+        {% if story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
+        <strong>Read the story</strong>
+      </span>
+    </a>
+  </article>
+{% endmacro %}
+
 {% set sortedStories = page.storySet.items | sort(true, true, "_enabledAt") %}
-{% set featuredStory = page.storySet.items[0] %}
-{% set featuredStoryTwo = page.storySet.items[1] %}
-{% set featuredStoryThree = page.storySet.items[2] %}
 {% set categoryTopic = page.title | lower %}
 {% set categoryHeadingSuffix = "Guides, Tips & Inspiration" %}
 {% if page.title == "Travel Guides" or page.title == "Packing Guides" or page.title == "Instagram Guides" %}
@@ -96,16 +107,18 @@
         <span>Curated by Amy Seder</span>
       </div>
     </div>
-    {% if featuredStory %}
-    <a class="category-hub__hero-story" href="{{ storyUrl(featuredStory) }}">
-      <span class="category-hub__hero-image">{{ storyImage(featuredStory, "(min-width: 900px) 52vw, 100vw", true) }}</span>
+    {% for story in sortedStories if story.isImportant != false %}
+    {% if loop.first %}
+    <a class="category-hub__hero-story" href="{{ storyUrl(story) }}">
+      <span class="category-hub__hero-image">{{ storyImage(story, "(min-width: 900px) 52vw, 100vw", true) }}</span>
       <span class="category-hub__hero-overlay">
         <small>Editor’s essential</small>
-        <strong>{{ featuredStory.title }}</strong>
+        <strong>{{ story.title }}</strong>
         <span>Read the guide</span>
       </span>
     </a>
     {% endif %}
+    {% endfor %}
   </header>
 
   <nav class="category-hub__topics" aria-label="Explore blog categories">
@@ -128,7 +141,7 @@
     </header>
 
     <div class="category-best__grid">
-      {% for story in page.storySet.items %}
+      {% for story in sortedStories if story.isImportant != false %}
       {% if loop.index > 1 and loop.index < 4 %}
       <article class="category-best__card">
         <a href="{{ storyUrl(story) }}">
@@ -156,22 +169,13 @@
     </header>
 
     <div class="category-latest__grid">
-      {% for story in sortedStories %}
-      {% if story.title != featuredStory.title
-        and (not featuredStoryTwo or story.title != featuredStoryTwo.title)
-        and (not featuredStoryThree or story.title != featuredStoryThree.title) %}
-      <article class="category-story-card">
-        <a href="{{ storyUrl(story) }}">
-          <span class="category-story-card__image">{{ storyImage(story, "(min-width: 1200px) 25vw, (min-width: 700px) 45vw, 100vw", false) }}</span>
-          <span class="category-story-card__copy">
-            <small>{{ page.title }}{% if story._enabledAt %} · {{ story._enabledAt | date("MMMM D, YYYY") }}{% endif %}</small>
-            <h3>{{ story.title }}</h3>
-            {% if story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
-            <strong>Read the story</strong>
-          </span>
-        </a>
-      </article>
+      {% for story in sortedStories if story.isImportant != false %}
+      {% if loop.index > 3 %}
+        {{ latestStoryCard(story, page.title) }}
       {% endif %}
+      {% endfor %}
+      {% for story in sortedStories if story.isImportant == false %}
+        {{ latestStoryCard(story, page.title) }}
       {% endfor %}
     </div>
   </section>
