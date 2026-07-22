@@ -12,8 +12,9 @@
   {% endfor %}
 {% endblock %}
 
-{% block listings %}
-  {% set sortedStories = items | sort(true, true, "_enabledAt") %}
+{% macro magazineHome(blogPage, storyItems, isEmbedded) %}
+  {% set page = blogPage %}
+  {% set sortedStories = storyItems | sort(true, true, "_enabledAt") %}
   {% set heroStory = page.featuredStory or sortedStories[0] %}
   {% set leftFeatureStory = page.leftFullBleedStory or sortedStories[14] %}
   {% set rightFeatureStory = page.rightFullBleedStory or sortedStories[16] %}
@@ -31,6 +32,18 @@
   {% if editor4.title == support1.title or editor4.title == support2.title or editor4.title == support3.title or editor4.title == support4.title %}{% set editor4 = sortedStories[26] %}{% endif %}
 
   {% macro storyUrl(story) %}{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}{% endmacro %}
+
+  {% macro homepageProductCards(productList) %}
+    {% for product in productList %}
+      {% if product.addToHomepage %}
+      <a class="bm-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored noopener">
+        <span class="bm-product__image">{% if product.image %}<img src="{{ product.image.path | image({w: 520, h: 650, fit: 'contain', auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />{% endif %}</span>
+        <strong title="{{ (product.title or 'Shop This Edit') | escape }}">{{ product.title or "Shop This Edit" }}</strong>
+        {% if product.description %}<p>{{ product.description }}</p>{% endif %}
+      </a>
+      {% endif %}
+    {% endfor %}
+  {% endmacro %}
 
   {% macro storyImage(story, sizes, priority) %}
     {% set imageStory = story if story and story.tout and story.tout.image else heroStory %}
@@ -99,11 +112,11 @@
     {% endif %}
   {% endmacro %}
 
-  {% if pagination.currentPage == 1 %}
+  {% if isEmbedded or pagination.currentPage == 1 %}
   <main class="blog-magazine" data-story-dedupe-recent>
     <section class="bm-section bm-hero" data-bm-row="01" aria-label="Featured stories">
       <a class="bm-hero__lead" href="{{ storyUrl(heroStory) }}" data-story-dedupe-featured>
-        <span class="bm-hero__image">{% if page.heroImageOverride %}{{ assetImage(page.heroImageOverride, '(min-width: 900px) 64vw, 100vw', true) }}{% else %}{{ storyImage(heroStory, '(min-width: 900px) 64vw, 100vw', true) }}{% endif %}</span>
+        <span class="bm-hero__image" data-focus="{{ page.heroImageFocus or 'center' }}">{% if page.heroImageOverride %}{{ assetImage(page.heroImageOverride, '(min-width: 900px) 64vw, 100vw', true) }}{% else %}{{ storyImage(heroStory, '(min-width: 900px) 64vw, 100vw', true) }}{% endif %}</span>
         <span class="bm-hero__shade"></span>
         <span class="bm-hero__copy">
           {{ storyMeta(heroStory, "Travel Guide") }}
@@ -134,7 +147,7 @@
     </section>
 
     <section class="bm-section bm-products" data-bm-row="03" aria-labelledby="bm-products-title">
-      <div class="bm-products__background">
+      <div class="bm-products__background" data-focus="{{ page.travelEssentialsBackgroundFocus or 'center' }}">
         {% if page.travelEssentialsBackgroundImage %}
           <img srcset="{{ page.travelEssentialsBackgroundImage.path | image({w: 1800, auto: 'compress,format'}) }} 1800w,
                        {{ page.travelEssentialsBackgroundImage.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
@@ -154,43 +167,10 @@
         <a href="{{ page.travelEssentialsLinkUrl or '/category/packing-guides' }}">{{ page.travelEssentialsLinkText or "Shop The Edit" }} <i>→</i></a>
       </div>
       <div class="bm-products__track">
-        {% set productStory = page.shoppingStory or (heroStory if heroStory.shopEditItems.length else shoppingStories.items[0]) %}
-        {% if page.travelEssentialsItems.length %}
-          {% for product in page.travelEssentialsItems %}
-          <a class="bm-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored noopener">
-            <span class="bm-product__image">{% if product.image %}<img src="{{ product.image.path | image({w: 520, h: 650, fit: 'contain', auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />{% endif %}</span>
-            <strong title="{{ (product.title or 'Shop This Edit') | escape }}">{{ product.title or "Shop This Edit" }}</strong>
-            {% if product.description %}<p>{{ product.description }}</p>{% endif %}
-          </a>
-          {% endfor %}
-        {% elif productStory.shopEditItems.length %}
-          {% for product in productStory.shopEditItems %}
-          {% if loop.index <= 5 %}
-          <a class="bm-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored noopener">
-            <span class="bm-product__image">{% if product.image %}<img src="{{ product.image.path | image({w: 520, h: 650, fit: 'contain', auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />{% endif %}</span>
-            <strong title="{{ (product.title or 'Shop This Edit') | escape }}">{{ product.title or "Shop This Edit" }}</strong>
-          </a>
-          {% endif %}
-          {% endfor %}
-          {% if productStory.shopEditItems.length < 5 and shoppingStories.items[1] %}
-            {% set remainingProductCount = 5 - productStory.shopEditItems.length %}
-            {% for product in shoppingStories.items[1].shopEditItems %}
-            {% if loop.index <= remainingProductCount %}
-            <a class="bm-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored noopener">
-              <span class="bm-product__image">{% if product.image %}<img src="{{ product.image.path | image({w: 520, h: 650, fit: 'contain', auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async" />{% endif %}</span>
-              <strong title="{{ (product.title or 'Shop This Edit') | escape }}">{{ product.title or "Shop This Edit" }}</strong>
-            </a>
-            {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% else %}
-          {% for story in [sortedStories[9], sortedStories[10], sortedStories[11], sortedStories[12], sortedStories[13]] %}
-          <a class="bm-product bm-product--story" href="{{ storyUrl(story) }}">
-            <span class="bm-product__image">{{ storyImage(story, '(min-width: 900px) 14vw, 42vw', false) }}</span>
-            <strong title="{{ story.title | escape }}">{{ story.title }}</strong>
-          </a>
-          {% endfor %}
-        {% endif %}
+        {{ homepageProductCards(products.travel) }}
+        {{ homepageProductCards(products.style) }}
+        {{ homepageProductCards(products.photography) }}
+        {{ homepageProductCards(products.beauty) }}
       </div>
       <div class="bm-products__controls" aria-label="Shopping carousel controls">
         <button class="bm-products__control" type="button" data-product-direction="previous" aria-label="Previous products">⟵</button>
@@ -200,24 +180,24 @@
 
     <section class="bm-section bm-categories" data-bm-row="04" aria-labelledby="bm-categories-title">
       <header class="bm-section-heading">
-        <div><span>04</span><h2 id="bm-categories-title">Explore By Category</h2></div>
+        <div><span>04</span><h2 id="bm-categories-title">Explore By Topic</h2></div>
       </header>
       <div class="bm-categories__grid">
         {% set categoryCards = [
-          {category: page.categoryTile1Category, image: page.categoryTile1Image, title: "Destinations", url: "/destinations", story: page.categoryFeatureStories[0] or sortedStories[4]},
-          {category: page.categoryTile2Category, image: page.categoryTile2Image, title: "Hotels", url: "/category/hotels-and-resorts", story: page.categoryFeatureStories[1] or sortedStories[6]},
-          {category: page.categoryTile3Category, image: page.categoryTile3Image, title: "Style", url: "/category/style", story: page.categoryFeatureStories[2] or sortedStories[8]},
-          {category: page.categoryTile4Category, image: page.categoryTile4Image, title: "Packing Guides", url: "/category/packing-guides", story: page.categoryFeatureStories[3] or sortedStories[10]},
-          {category: page.categoryTile5Category, image: page.categoryTile5Image, title: "Photography", url: "/category/photography", story: page.categoryFeatureStories[4] or sortedStories[12]},
-          {category: page.categoryTile6Category, image: page.categoryTile6Image, title: "Travel Guides", url: "/category/travel-guides", story: page.categoryFeatureStories[5] or sortedStories[14]},
-          {category: page.categoryTile7Category, image: page.categoryTile7Image, title: "Food & Drink", url: "/category/food-and-drink", story: page.categoryFeatureStories[6] or sortedStories[16]},
-          {category: page.categoryTile8Category, image: page.categoryTile8Image, title: "Things To Do", url: "/category/things-to-do", story: page.categoryFeatureStories[7] or sortedStories[18]},
-          {category: page.categoryTile9Category, image: page.categoryTile9Image, title: "Travel Tips", url: "/category/travel-tips", story: page.categoryFeatureStories[8] or sortedStories[20]},
-          {category: page.categoryTile10Category, image: page.categoryTile10Image, title: "Inspiration", url: "/category/inspiration", story: page.categoryFeatureStories[9] or sortedStories[22]}
+          {category: page.categoryTile1Category, image: page.categoryTile1Image, focus: page.categoryTile1Focus, title: "Destinations", url: "/destinations", story: page.categoryFeatureStories[0] or sortedStories[4]},
+          {category: page.categoryTile2Category, image: page.categoryTile2Image, focus: page.categoryTile2Focus, title: "Hotels", url: "/category/hotels-and-resorts", story: page.categoryFeatureStories[1] or sortedStories[6]},
+          {category: page.categoryTile3Category, image: page.categoryTile3Image, focus: page.categoryTile3Focus, title: "Style", url: "/category/style", story: page.categoryFeatureStories[2] or sortedStories[8]},
+          {category: page.categoryTile4Category, image: page.categoryTile4Image, focus: page.categoryTile4Focus, title: "Packing Guides", url: "/category/packing-guides", story: page.categoryFeatureStories[3] or sortedStories[10]},
+          {category: page.categoryTile5Category, image: page.categoryTile5Image, focus: page.categoryTile5Focus, title: "Photography", url: "/category/photography", story: page.categoryFeatureStories[4] or sortedStories[12]},
+          {category: page.categoryTile6Category, image: page.categoryTile6Image, focus: page.categoryTile6Focus, title: "Travel Guides", url: "/category/travel-guides", story: page.categoryFeatureStories[5] or sortedStories[14]},
+          {category: page.categoryTile7Category, image: page.categoryTile7Image, focus: page.categoryTile7Focus, title: "Food & Drink", url: "/category/food-and-drink", story: page.categoryFeatureStories[6] or sortedStories[16]},
+          {category: page.categoryTile8Category, image: page.categoryTile8Image, focus: page.categoryTile8Focus, title: "Things To Do", url: "/category/things-to-do", story: page.categoryFeatureStories[7] or sortedStories[18]},
+          {category: page.categoryTile9Category, image: page.categoryTile9Image, focus: page.categoryTile9Focus, title: "Travel Tips", url: "/category/travel-tips", story: page.categoryFeatureStories[8] or sortedStories[20]},
+          {category: page.categoryTile10Category, image: page.categoryTile10Image, focus: page.categoryTile10Focus, title: "Inspiration", url: "/category/inspiration", story: page.categoryFeatureStories[9] or sortedStories[22]}
         ] %}
         {% for categoryCard in categoryCards %}
         <a class="bm-category" href="{% if categoryCard.category %}{{ categoryCard.category | route('category') }}{% else %}{{ categoryCard.url }}{% endif %}">
-          <span class="bm-category__image">{% if categoryCard.image %}{{ assetImage(categoryCard.image, '(min-width: 900px) 20vw, 90vw', false) }}{% else %}{{ storyImage(categoryCard.story, '(min-width: 900px) 20vw, 90vw', false) }}{% endif %}</span>
+          <span class="bm-category__image" data-focus="{{ categoryCard.focus or 'center' }}">{% if categoryCard.image %}{{ assetImage(categoryCard.image, '(min-width: 900px) 20vw, 90vw', false) }}{% else %}{{ storyImage(categoryCard.story, '(min-width: 900px) 20vw, 90vw', false) }}{% endif %}</span>
           <span><strong>{{ categoryCard.category.title or categoryCard.title }}</strong><small>View All <i>→</i></small></span>
         </a>
         {% endfor %}
@@ -283,7 +263,7 @@
 
     <section class="bm-section bm-feature bm-feature--left" data-bm-row="07" aria-label="Featured destination">
       <a href="{{ storyUrl(leftFeatureStory) }}">
-        <span class="bm-feature__image">{% if page.leftFullBleedMobileImageOverride %}<picture><source media="(max-width: 799px)" srcset="{{ page.leftFullBleedMobileImageOverride.path | image({w: 1200, auto: 'compress,format'}) }} 1200w, {{ page.leftFullBleedMobileImageOverride.path | image({w: 800, auto: 'compress,format'}) }} 800w, {{ page.leftFullBleedMobileImageOverride.path | image({w: 480, auto: 'compress,format'}) }} 480w">{% if page.leftFullBleedImageOverride %}{{ assetImage(page.leftFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(leftFeatureStory, '100vw', false) }}{% endif %}</picture>{% elif page.leftFullBleedImageOverride %}{{ assetImage(page.leftFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(leftFeatureStory, '100vw', false) }}{% endif %}</span>
+        <span class="bm-feature__image" data-focus="{{ page.leftFullBleedImageFocus or 'center' }}" data-mobile-focus="{{ page.leftFullBleedMobileImageFocus or page.leftFullBleedImageFocus or 'center' }}">{% if page.leftFullBleedMobileImageOverride %}<picture><source media="(max-width: 799px)" srcset="{{ page.leftFullBleedMobileImageOverride.path | image({w: 1200, auto: 'compress,format'}) }} 1200w, {{ page.leftFullBleedMobileImageOverride.path | image({w: 800, auto: 'compress,format'}) }} 800w, {{ page.leftFullBleedMobileImageOverride.path | image({w: 480, auto: 'compress,format'}) }} 480w">{% if page.leftFullBleedImageOverride %}{{ assetImage(page.leftFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(leftFeatureStory, '100vw', false) }}{% endif %}</picture>{% elif page.leftFullBleedImageOverride %}{{ assetImage(page.leftFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(leftFeatureStory, '100vw', false) }}{% endif %}</span>
         <span class="bm-feature__shade"></span>
         <span class="bm-feature__copy"><span class="bm-kicker">07 - Featured Story</span><h2>{{ leftFeatureStory.title }}</h2>{% if leftFeatureStory.tout.dek %}<p>{{ leftFeatureStory.tout.dek }}</p>{% endif %}<small>Read The Guide <i>→</i></small></span>
       </a>
@@ -291,7 +271,7 @@
 
     <section class="bm-section bm-feature" data-bm-row="08" aria-label="Featured destination">
       <a href="{{ storyUrl(rightFeatureStory) }}">
-        <span class="bm-feature__image">{% if page.rightFullBleedMobileImageOverride %}<picture><source media="(max-width: 799px)" srcset="{{ page.rightFullBleedMobileImageOverride.path | image({w: 1200, auto: 'compress,format'}) }} 1200w, {{ page.rightFullBleedMobileImageOverride.path | image({w: 800, auto: 'compress,format'}) }} 800w, {{ page.rightFullBleedMobileImageOverride.path | image({w: 480, auto: 'compress,format'}) }} 480w">{% if page.rightFullBleedImageOverride %}{{ assetImage(page.rightFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(rightFeatureStory, '100vw', false) }}{% endif %}</picture>{% elif page.rightFullBleedImageOverride %}{{ assetImage(page.rightFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(rightFeatureStory, '100vw', false) }}{% endif %}</span>
+        <span class="bm-feature__image" data-focus="{{ page.rightFullBleedImageFocus or 'center' }}" data-mobile-focus="{{ page.rightFullBleedMobileImageFocus or page.rightFullBleedImageFocus or 'center' }}">{% if page.rightFullBleedMobileImageOverride %}<picture><source media="(max-width: 799px)" srcset="{{ page.rightFullBleedMobileImageOverride.path | image({w: 1200, auto: 'compress,format'}) }} 1200w, {{ page.rightFullBleedMobileImageOverride.path | image({w: 800, auto: 'compress,format'}) }} 800w, {{ page.rightFullBleedMobileImageOverride.path | image({w: 480, auto: 'compress,format'}) }} 480w">{% if page.rightFullBleedImageOverride %}{{ assetImage(page.rightFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(rightFeatureStory, '100vw', false) }}{% endif %}</picture>{% elif page.rightFullBleedImageOverride %}{{ assetImage(page.rightFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(rightFeatureStory, '100vw', false) }}{% endif %}</span>
         <span class="bm-feature__shade"></span>
         <span class="bm-feature__copy"><span class="bm-kicker">08 - Featured Story</span><h2>{{ rightFeatureStory.title }}</h2>{% if rightFeatureStory.tout.dek %}<p>{{ rightFeatureStory.tout.dek }}</p>{% endif %}<small>Read The Guide <i>→</i></small></span>
       </a>
@@ -325,5 +305,9 @@
   </main>
   {% endif %}
 
-  {% if pagination.currentPage != 1 %}{% include "partials/pagination.html" %}{% endif %}
+  {% if not isEmbedded and pagination.currentPage != 1 %}{% include "partials/pagination.html" %}{% endif %}
+{% endmacro %}
+
+{% block listings %}
+  {{ magazineHome(page, items, false) }}
 {% endblock %}

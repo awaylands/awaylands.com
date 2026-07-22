@@ -137,15 +137,6 @@
     </button>
   </header>
 
-  <section class="d3-search-strip" aria-label="Search all Away Lands posts">
-    <p>{{ page.searchHeading or "Find the guide" }}</p>
-    <form action="/search/" method="get">
-      <label for="destinations3-search">Search all Away Lands posts</label>
-      <input id="destinations3-search" name="q" type="search" placeholder="{{ page.searchPlaceholder or 'Search Greece, packing lists, hotels, beaches...' }}" />
-      <button type="submit">Search</button>
-    </form>
-  </section>
-
   <section class="d3-map-section" aria-label="Destination map">
     <div class="d3-map-section__intro">
       <p class="d3-kicker d3-kicker--orange">{{ page.mapHeading or "Destination map" }}</p>
@@ -171,6 +162,15 @@
         {% endif %}
       {% endfor %}
     </div>
+  </section>
+
+  <section class="d3-search-strip" aria-label="Search all Away Lands posts">
+    <p>{{ page.searchHeading or "Find the guide" }}</p>
+    <form action="/search/" method="get">
+      <label for="destinations3-search">Search all Away Lands posts</label>
+      <input id="destinations3-search" name="q" type="search" placeholder="{{ page.searchPlaceholder or 'Search Greece, packing lists, hotels, beaches...' }}" />
+      <button type="submit">Search</button>
+    </form>
   </section>
 
   <section class="d3-featured-destination" aria-label="Featured destination">

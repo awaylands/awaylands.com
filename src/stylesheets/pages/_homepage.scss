@@ -9,7 +9,11 @@
   color: var(--homepage-ink);
 
   .main {
-    background: var(--homepage-paper);
+    background: #ece7de;
+  }
+
+  .hero {
+    margin-bottom: 0;
   }
 
   .page-header {
@@ -175,6 +179,14 @@
       margin-top: 0;
     }
 
+    .page-header:not(.is-sticky) .logo__image {
+      display: none;
+    }
+
+    .page-header:not(.is-sticky) .logo__image--white {
+      display: block;
+    }
+
     .page-header.is-sticky .logo {
       width: 20.5rem;
     }
@@ -252,6 +264,83 @@
       color: var(--homepage-blue);
     }
   }
+}
+
+.homepage-blog-transition {
+  align-items: center;
+  background: #ece7de;
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  min-height: clamp(12rem, 18vw, 22rem);
+  padding: clamp(7rem, 10vw, 14rem) 2rem 3rem;
+  text-align: center;
+}
+
+.homepage-blog-transition__subtitle {
+  color: #18201f;
+  display: block;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.15rem, 1.2vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  margin-top: 1.4rem;
+  text-transform: uppercase;
+}
+
+.homepage-blog-transition h2 {
+  color: #d84a3a;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(3.6rem, 4.5vw, 6rem);
+  font-weight: 300;
+  line-height: 0.95;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.homepage-blog-magazine {
+  --bm-paper: #f7f4ee;
+  --bm-paper-deep: #ece7de;
+  --bm-ink: #18201f;
+  --bm-muted: #6f736f;
+  --bm-line: rgba(24, 32, 31, 0.2);
+  --bm-teal: #166e78;
+  --bm-orange: #d84a3a;
+  --bm-pink: #f8aea1;
+
+  background: #f7f4ee;
+  overflow: hidden;
+}
+
+.homepage-blog-magazine a {
+  transition: color 0.2s ease;
+}
+
+.homepage-blog-magazine a:hover,
+.homepage-blog-magazine a:focus,
+.homepage-blog-magazine a:hover h1,
+.homepage-blog-magazine a:focus h1,
+.homepage-blog-magazine a:hover h2,
+.homepage-blog-magazine a:focus h2,
+.homepage-blog-magazine a:hover strong,
+.homepage-blog-magazine a:focus strong,
+.homepage-blog-magazine a:hover small,
+.homepage-blog-magazine a:focus small,
+.homepage-blog-magazine a:hover .bm-kicker,
+.homepage-blog-magazine a:focus .bm-kicker {
+  color: var(--bm-orange) !important;
+}
+
+.homepage-blog-magazine .bm-hero__lead:hover,
+.homepage-blog-magazine .bm-hero__lead:focus,
+.homepage-blog-magazine .bm-hero__lead:hover .bm-hero__copy *,
+.homepage-blog-magazine .bm-hero__lead:focus .bm-hero__copy *,
+.homepage-blog-magazine .bm-feature > a:hover,
+.homepage-blog-magazine .bm-feature > a:focus,
+.homepage-blog-magazine .bm-feature > a:hover .bm-feature__copy *,
+.homepage-blog-magazine .bm-feature > a:focus .bm-feature__copy * {
+  color: #fff !important;
 }
 
 .body--homepage {

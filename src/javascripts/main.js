@@ -18,6 +18,9 @@ const enableDragScrolling = track => {
 
   track.dataset.dragScrolling = 'true';
   track.addEventListener('pointerdown', event => {
+    // Touchscreens get smoother momentum from the browser's native overflow
+    // scrolling. Pointer dragging is retained for mouse and pen input.
+    if (event.pointerType === 'touch') return;
     if (event.pointerType === 'mouse' && event.button !== 0) return;
     pointerId = event.pointerId;
     startX = event.clientX;

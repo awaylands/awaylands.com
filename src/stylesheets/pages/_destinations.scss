@@ -4169,19 +4169,38 @@
     width: min(100% - 2.4rem, 124rem);
   }
 
+  .d3-map-section {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    padding-bottom: 2rem;
+    scrollbar-width: thin;
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .d3-map-section__intro {
+    position: sticky;
+    left: 0;
+  }
+
   .d3-world-map {
-    min-height: 42rem;
+    min-height: 43rem;
+    width: 70rem;
   }
 
   .d3-map-pin {
-    padding: 0.55rem 0.7rem;
-    font-size: 0.72rem;
+    padding: 0.65rem 0.8rem;
+    font-size: 0.8rem;
     letter-spacing: 0.08em;
   }
 
-  .d3-map-pin--asia { left: 67%; }
-  .d3-map-pin--middle-east { left: 54%; }
-  .d3-map-pin--oceania { left: 68%; }
+  .d3-map-pin--north-america { left: 12%; top: 35%; }
+  .d3-map-pin--south-america { left: 25%; top: 66%; }
+  .d3-map-pin--europe { left: 43%; top: 28%; }
+  .d3-map-pin--africa { left: 45%; top: 57%; }
+  .d3-map-pin--middle-east { left: 58%; top: 44%; }
+  .d3-map-pin--asia { left: 71%; top: 29%; }
+  .d3-map-pin--oceania { left: 76%; top: 70%; }
 }
 
 .body--destinations3 {

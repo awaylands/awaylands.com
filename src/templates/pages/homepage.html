@@ -1,4 +1,5 @@
 {% extends "layouts/default.html" %}
+{% from "pages/stories/landing.html" import magazineHome with context %}
 
 {% block body_class %}body--homepage{% endblock %}
 
@@ -62,6 +63,9 @@
   </div>
 </div>
 
+{# The legacy homepage blog modules are intentionally retired. The homepage
+   now moves from the opening image directly into the magazine transition. #}
+{% if false %}
 <section class="blog-featured" aria-label="Featured blog post">
   <div class="blog-featured__header">
     <h1 class="blog-featured__heading">Featured</h1>
@@ -112,4 +116,16 @@
   {% endfor %}
 </section>
 {% include "partials/blog-story-dedupe.html" %}
+{% endif %}
+
+<section class="homepage-blog-transition" aria-labelledby="homepage-blog-transition-title">
+  <div>
+    <h2 id="homepage-blog-transition-title">Away Lands Blog</h2>
+    <span class="homepage-blog-transition__subtitle">Travel guides, photography tips, outfit ideas &amp; packing lists</span>
+  </div>
+</section>
+
+<div class="homepage-blog-magazine">
+  {{ magazineHome(blog, stories.items, true) }}
+</div>
 {% endblock %}
