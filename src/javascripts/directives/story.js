@@ -1372,7 +1372,7 @@ function advancedStoryPickCandidates(el, isStyleEdit) {
 
   return candidates.sort((left, right) => (
     right.relevance - left.relevance || left.order - right.order
-  )).slice(0, 3);
+  )).slice(0, 4);
 }
 
 function manualStoryPickCandidates(storyPage) {
@@ -1380,8 +1380,24 @@ function manualStoryPickCandidates(storyPage) {
     return [];
   }
 
-  return Array.prototype.map.call(
+  const items = Array.prototype.slice.call(
     storyPage.querySelectorAll('[data-story-shop-item]'),
+  );
+  const isTravelEssentialsFallback = items.length > 0 && items.every(
+    item => item.hasAttribute('data-travel-essential-fallback')
+  );
+
+  if (isTravelEssentialsFallback) {
+    for (let index = items.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      const item = items[index];
+
+      items[index] = items[randomIndex];
+      items[randomIndex] = item;
+    }
+  }
+
+  const candidates = items.map(
     item => {
       const imageUrl = (item.getAttribute('data-image') || '').trim();
       const embedHtml = item.getAttribute('data-embed-html') || '';
@@ -1405,12 +1421,14 @@ function manualStoryPickCandidates(storyPage) {
       };
     }
   ).filter(item => (item.href && item.label) || item.embedHtml);
+
+  return isTravelEssentialsFallback ? candidates.slice(0, 4) : candidates;
 }
 
 function mergedStoryPickCandidates(el, storyPage, isStyleEdit) {
   const manualCandidates = manualStoryPickCandidates(storyPage);
   const automaticCandidates = advancedStoryPickCandidates(el, isStyleEdit);
-  const targetCount = Math.max(3, manualCandidates.length);
+  const targetCount = Math.max(4, manualCandidates.length);
   const used = {};
   const picks = [];
 
