@@ -76,6 +76,13 @@ routes:
       data: data/story-slugs.graphql
       itemName: page
 
+  unpublishedStorySlug:
+    path: /story/:slug
+    template: pages/stories/unpublished.html
+    paginate:
+      data: data/unpublished-story-slugs.graphql
+      itemName: unpublishedStory
+
   destinations:
     path: /destinations
     template: pages/destinations.html

@@ -1,0 +1,17 @@
+{% extends "layouts/default.html" %}
+
+{% block extra_head %}
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="refresh" content="0; url=/blog/">
+  <link rel="canonical" href="https://www.awaylands.com/blog/">
+  <script>window.location.replace('/blog/');</script>
+{% endblock %}
+
+{% block body_class %}body--landing has-no-hero has-editorial-menu{% endblock %}
+
+{% block content %}
+  <section class="container" style="padding: 12rem 1.5rem; text-align: center;">
+    <h1>This story is not published.</h1>
+    <p><a href="/blog/">Return to the Away Lands Blog</a></p>
+  </section>
+{% endblock %}
