@@ -1,5 +1,5 @@
 query($images: TSImagesConfig) {
-  getStoryList {
+  getStoryList(sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
       _enabledAt
