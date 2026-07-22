@@ -488,7 +488,7 @@ body.body--story {
   display: block;
   grid-column: 1 / -1;
   overflow: hidden;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   background: rgba(22, 110, 120, 0.08);
 }
 
@@ -502,7 +502,7 @@ body.body--story {
 .story-rail__pick-embed {
   grid-column: 1 / -1;
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
   background: #fffdf9;
 }
@@ -1842,7 +1842,7 @@ body.body--story {
     grid-row: 1;
     grid-column: 1 / -1;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 1 / 1;
   }
 
   .story-page--advanced .story-rail__pick-number {
