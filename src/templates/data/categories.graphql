@@ -1,4 +1,7 @@
 query {
+  blog: getBlog {
+    categories { title }
+  }
   getCategoryList {
     items {
       _contentTypeName

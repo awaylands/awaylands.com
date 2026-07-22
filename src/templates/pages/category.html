@@ -1,61 +1,185 @@
-{% extends "layouts/landing.html" %}
+{% extends "layouts/default.html" %}
 
-{% block body_class %}body--landing body--blog body--blog-category has-no-hero{% endblock %}
+{% macro storyUrl(story) %}{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}{% endmacro %}
 
-{% block filters %}
-  <li><a href="/blog/">Recent</a></li>
-  <li><span class="separator"></span></li>
+{% macro storyImage(story, sizes, eager) %}
+  {% if story.tout.image %}
+  <img
+    src="{{ story.tout.image.path | image({w: 960, auto: 'compress,format'}) }}"
+    srcset="{{ story.tout.image.path | image({w: 480, auto: 'compress,format'}) }} 480w,
+      {{ story.tout.image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
+      {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
+      {{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w"
+    sizes="{{ sizes }}"
+    alt="{{ story.title | escape }}"
+    loading="{% if eager %}eager{% else %}lazy{% endif %}"
+    decoding="async"
+    {% if eager %}fetchpriority="high"{% endif %}
+  >
+  {% endif %}
+{% endmacro %}
 
-  {% for category in blog.categories %}
-  <li><a href="{{ category | route('category') }}/#" {% if category.title == page.title %}class="is-current"{% endif %}>{{ category.title }}</a></li>
-  {% endfor %}
+{% set sortedStories = page.storySet.items | sort(true, true, "_enabledAt") %}
+{% set featuredStory = page.storySet.items[0] %}
+{% set featuredStoryTwo = page.storySet.items[1] %}
+{% set featuredStoryThree = page.storySet.items[2] %}
+{% set categoryTopic = page.title | lower %}
+{% set categoryHeadingSuffix = "Guides, Tips & Inspiration" %}
+{% if page.title == "Travel Guides" or page.title == "Packing Guides" or page.title == "Instagram Guides" %}
+  {% set categoryHeadingSuffix = "Tips & Inspiration" %}
+{% endif %}
+{% set categoryDescription = page.social.description %}
+{% if not categoryDescription %}
+  {% set categoryDescription = "Explore the best " + categoryTopic + " stories, expert tips, inspiring ideas, and practical resources from Away Lands." %}
+{% endif %}
+
+{% block body_class %}body--blog-category body--category-hub has-no-hero has-editorial-menu{% endblock %}
+
+{% block extra_head %}
+  <link rel="canonical" href="https://www.awaylands.com{{ currentPath }}">
+  <meta property="og:url" content="https://www.awaylands.com{{ currentPath }}">
+  <meta property="og:type" content="website">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CollectionPage",
+        "@id": "https://www.awaylands.com{{ currentPath }}#collection",
+        "url": "https://www.awaylands.com{{ currentPath }}",
+        "name": {{ (page.title + " " + categoryHeadingSuffix) | dump | safe }},
+        "description": {{ categoryDescription | dump | safe }},
+        "isPartOf": {"@id": "https://www.awaylands.com/#website"},
+        "about": {"@type": "Thing", "name": {{ page.title | dump | safe }}},
+        "mainEntity": {"@id": "https://www.awaylands.com{{ currentPath }}#articles"}
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.awaylands.com/"},
+          {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.awaylands.com/blog/"},
+          {"@type": "ListItem", "position": 3, "name": {{ page.title | dump | safe }}, "item": "https://www.awaylands.com{{ currentPath }}"}
+        ]
+      },
+      {
+        "@type": "ItemList",
+        "@id": "https://www.awaylands.com{{ currentPath }}#articles",
+        "name": {{ ("Best " + page.title + " Articles") | dump | safe }},
+        "numberOfItems": {{ sortedStories.length }},
+        "itemListElement": [
+          {% set comma = joiner(",") %}
+          {% for story in sortedStories %}
+          {{ comma() }}{"@type": "ListItem", "position": {{ loop.index }}, "url": "https://www.awaylands.com{{ storyUrl(story) }}", "name": {{ story.title | dump | safe }}}
+          {% endfor %}
+        ]
+      }
+    ]
+  }
+  </script>
 {% endblock %}
 
-{% block listings %}
-<div class="listings">
-  <h1 class="listings__heading">{{ page.title }}</h1>
+{% block content %}
+<div class="category-hub">
+  <nav class="category-hub__breadcrumbs" aria-label="Breadcrumb">
+    <a href="/">Home</a><span aria-hidden="true">/</span>
+    <a href="/blog/">Blog</a><span aria-hidden="true">/</span>
+    <span aria-current="page">{{ page.title }}</span>
+  </nav>
 
-  <ul class="listings__list">
-    {% for story in page.storySet.items | sort(true, true, "_enabledAt") %}
-    <li>
-      <div class="listing">
-        <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
-          <div class="listing__image">
-            <img srcset="{{ story.tout.image.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
-                {{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
-                {{ story.tout.image.path | image({w: 1440, auto: 'compress,format'}) }} 1440w,
-                {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-                {{ story.tout.image.path | image({w: 1014, auto: 'compress,format'}) }} 1014w"
-                 sizes="(min-width: 1500px) 1014px,(min-width: 900px) 75vw, (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
-                 src="{{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }}"
-                 data-image
-                 loading="{% if loop.first %}eager{% else %}lazy{% endif %}"
-                 decoding="async"
-                 {% if loop.first %}fetchpriority="high"{% endif %}
-                 v-imageloaded
-            />
-
-            {% if story.tout.secondaryImage %}
-            <img srcset="{{ story.tout.secondaryImage.path | image({w: 2028, auto: 'compress,format'}) }} 2028w,
-                {{ story.tout.secondaryImage.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
-                {{ story.tout.secondaryImage.path | image({w: 1440, auto: 'compress,format'}) }} 1440w,
-                {{ story.tout.secondaryImage.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-                {{ story.tout.secondaryImage.path | image({w: 1014, auto: 'compress,format'}) }} 1014w"
-                 sizes="(min-width: 1500px) 1014px,(min-width: 900px) 75vw, (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
-                 src="{{ story.tout.secondaryImage.path | image({w: 1200, auto: 'compress,format'}) }}"
-                 loading="lazy"
-                 decoding="async"
-            />
-            {% endif %}
-          </div>
-
-          <h2 class="listing__heading">{{ story.title }}</h2>
-
-          <div class="listing__content">{{ story.tout.dek }}</div>
-        </a>
+  <header class="category-hub__hero">
+    <div class="category-hub__hero-copy">
+      <p class="category-hub__eyebrow">Away Lands Journal</p>
+      <h1>{{ page.title }} <em>{{ categoryHeadingSuffix }}</em></h1>
+      <p class="category-hub__intro">{{ categoryDescription }}</p>
+      <div class="category-hub__stats" aria-label="Category overview">
+        <span><strong>{{ sortedStories.length }}</strong> expert stories</span>
+        <span>Curated by Amy Seder</span>
       </div>
-    </li>
-    {% endfor %}
-  </ul>
+    </div>
+    {% if featuredStory %}
+    <a class="category-hub__hero-story" href="{{ storyUrl(featuredStory) }}">
+      <span class="category-hub__hero-image">{{ storyImage(featuredStory, "(min-width: 900px) 52vw, 100vw", true) }}</span>
+      <span class="category-hub__hero-overlay">
+        <small>Editor’s essential</small>
+        <strong>{{ featuredStory.title }}</strong>
+        <span>Read the guide</span>
+      </span>
+    </a>
+    {% endif %}
+  </header>
+
+  <nav class="category-hub__topics" aria-label="Explore blog categories">
+    <span>Explore:</span>
+    <div>
+      {% for category in blog.categories %}
+      <a href="{{ category | route('category') }}"{% if category.title == page.title %} aria-current="page"{% endif %}>{{ category.title }}</a>
+      {% endfor %}
+    </div>
+  </nav>
+
+  {% if sortedStories.length > 1 %}
+  <section class="category-best" aria-labelledby="category-best-title">
+    <header class="category-section-heading">
+      <div>
+        <p>Start here</p>
+        <h2 id="category-best-title">The Best of {{ page.title }}</h2>
+      </div>
+      <p>Our most useful, inspiring, and reader-loved stories for exploring {{ page.title | lower }}.</p>
+    </header>
+
+    <div class="category-best__grid">
+      {% for story in page.storySet.items %}
+      {% if loop.index > 1 and loop.index < 4 %}
+      <article class="category-best__card">
+        <a href="{{ storyUrl(story) }}">
+          <span class="category-best__image">{{ storyImage(story, "(min-width: 900px) 42vw, 100vw", false) }}</span>
+          <span class="category-best__copy">
+            <small>Best of {{ page.title }}</small>
+            <h3>{{ story.title }}</h3>
+            {% if story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
+            <strong>Read more</strong>
+          </span>
+        </a>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="category-latest" aria-labelledby="category-latest-title">
+    <header class="category-section-heading category-section-heading--compact">
+      <div>
+        <p>Browse the journal</p>
+        <h2 id="category-latest-title">Latest {{ page.title }} Stories</h2>
+      </div>
+    </header>
+
+    <div class="category-latest__grid">
+      {% for story in sortedStories %}
+      {% if story.title != featuredStory.title
+        and (not featuredStoryTwo or story.title != featuredStoryTwo.title)
+        and (not featuredStoryThree or story.title != featuredStoryThree.title) %}
+      <article class="category-story-card">
+        <a href="{{ storyUrl(story) }}">
+          <span class="category-story-card__image">{{ storyImage(story, "(min-width: 1200px) 25vw, (min-width: 700px) 45vw, 100vw", false) }}</span>
+          <span class="category-story-card__copy">
+            <small>{{ page.title }}{% if story._enabledAt %} · {{ story._enabledAt | date("MMMM D, YYYY") }}{% endif %}</small>
+            <h3>{{ story.title }}</h3>
+            {% if story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
+            <strong>Read the story</strong>
+          </span>
+        </a>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
+  <aside class="category-hub__footer" aria-label="About Away Lands">
+    <p>Travel deeper with Away Lands</p>
+    <h2>Beautiful places, practical details, and stories worth saving.</h2>
+    <div><a href="/blog/">Explore all stories</a><a href="/about">Meet Amy</a></div>
+  </aside>
 </div>
 {% endblock %}
