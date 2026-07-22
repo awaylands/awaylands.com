@@ -1707,17 +1707,13 @@ body.body--story {
 }
 
 .body--story .related-stories__list a:after {
-  background: linear-gradient(180deg, rgba(216, 74, 58, 0.04) 20%, rgba(126, 36, 29, 0.62) 100%);
+  background: linear-gradient(180deg, rgba(216, 74, 58, 0.03) 20%, rgba(126, 36, 29, 0.465) 100%);
   content: '';
   inset: 0;
   pointer-events: none;
   position: absolute;
   transition: background 240ms ease, box-shadow 240ms ease;
   z-index: 1;
-}
-
-.body--story .related-stories__list li:nth-child(n+4) a:after {
-  background: linear-gradient(180deg, rgba(22, 110, 120, 0.04) 20%, rgba(14, 72, 85, 0.62) 100%);
 }
 
 .body--story .related-stories__image {
@@ -1743,7 +1739,7 @@ body.body--story {
 }
 
 .body--story .related-stories__copy {
-  align-items: center;
+  align-items: flex-start;
   bottom: 0;
   color: #fff;
   display: flex;
@@ -1751,7 +1747,7 @@ body.body--story {
   inset: 0;
   justify-content: flex-end;
   left: 0;
-  padding: clamp(1.8rem, 2.2vw, 3rem);
+  padding: clamp(1.8rem, 1.9vw, 2.4rem);
   position: absolute;
   right: 0;
   transform: none;
@@ -1762,44 +1758,31 @@ body.body--story {
 .body--story .related-stories__category,
 .body--story .related-stories__meta {
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
-  letter-spacing: 0.13em;
-  line-height: 1.4;
+  letter-spacing: 0.15em;
+  line-height: 1.33;
   text-transform: uppercase;
 }
 
 .body--story .related-stories__category {
-  left: clamp(1.8rem, 2.2vw, 3rem);
-  margin: 0;
-  position: absolute;
-  right: clamp(1.8rem, 2.2vw, 3rem);
-  text-align: center;
-  top: clamp(1.8rem, 2.2vw, 3rem);
+  margin: 0 0 0.8rem;
 }
 
 .body--story .related-stories__meta {
-  display: flex;
-  gap: 0.8rem;
-  justify-content: center;
-  margin: 1.2rem 0 0;
+  margin: 1rem 0 0;
   text-transform: uppercase;
-}
-
-.body--story .related-stories__date:before {
-  content: '·';
-  margin-right: 0.8rem;
 }
 
 .body--story .related-stories__title {
   color: #fff;
-  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
-  font-size: clamp(1.9rem, 1.8vw, 2.8rem);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: clamp(1.6rem, 1.4vw, 1.8rem);
   font-weight: 600;
-  letter-spacing: 0.01em;
-  line-height: 1;
+  letter-spacing: -0.0125em;
+  line-height: 1.22;
   margin: 0;
-  text-align: center;
+  text-align: left;
   text-transform: none;
   transform: none;
   transition: color 240ms ease;
@@ -1812,13 +1795,8 @@ body.body--story {
 
 .body--story .related-stories__list a:hover:after,
 .body--story .related-stories__list a:focus:after {
-  background: linear-gradient(180deg, rgba(216, 74, 58, 0.02) 20%, rgba(126, 36, 29, 0.31) 100%);
+  background: linear-gradient(180deg, rgba(216, 74, 58, 0.015) 20%, rgba(126, 36, 29, 0.2325) 100%);
   box-shadow: none;
-}
-
-.body--story .related-stories__list li:nth-child(n+4) a:hover:after,
-.body--story .related-stories__list li:nth-child(n+4) a:focus:after {
-  background: linear-gradient(180deg, rgba(22, 110, 120, 0.02) 20%, rgba(14, 72, 85, 0.31) 100%);
 }
 
 .body--story .related-stories__list a:hover .related-stories__image,
@@ -2246,7 +2224,7 @@ body.body--story {
   }
 
   .body--story .related-stories__title {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-size: 1.8rem;
   }
 }
 
@@ -2256,6 +2234,6 @@ body.body--story {
   }
 
   .body--story .related-stories__title {
-    font-size: clamp(2.2rem, 6.8vw, 3rem);
+    font-size: 1.8rem;
   }
 }
