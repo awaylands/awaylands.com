@@ -2,7 +2,9 @@
 
 {% set socialGlobal = site.social %}
 
-{% if page.social.title %}
+{% if page._status == "disabled" %}
+  <title>{{ socialGlobal.siteName }}</title>
+{% elif page.social.title %}
   <title>{{ page.social.title }} | {{ socialGlobal.siteName }}</title>
 {% elif page.title %}
   <title>{{ page.title }} | {{ socialGlobal.siteName }}</title>
@@ -14,6 +16,7 @@
   <title>{{ socialGlobal.siteName }}</title>
 {% endif %}
 
+{% if page._status != "disabled" %}
 {% if page.social.description %}
   <meta name="description" content="{{ page.social.description }}">
   <meta property="og:description" content="{{ page.social.description }}">
@@ -39,6 +42,7 @@
 
 {% if page._contentTypeName %}
   <meta property="og:type" content="article">
+{% endif %}
 {% endif %}
 
 <meta name="twitter:card" content="summary_large_image">

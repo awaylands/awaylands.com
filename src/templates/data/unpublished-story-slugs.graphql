@@ -1,8 +1,0 @@
-query {
-  getStoryList(where: {_status: {eq: "disabled"}, slug: {regexp: ".+"}}) {
-    items {
-      title
-      slug
-    }
-  }
-}

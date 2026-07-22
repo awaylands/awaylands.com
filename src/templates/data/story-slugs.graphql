@@ -1,7 +1,8 @@
 query($images: TSImagesConfig) {
-  getStoryList(onlyEnabled: true, where: {_status: {eq: "enabled"}, slug: {regexp: ".+"}}) {
+  getStoryList(where: {slug: {regexp: ".+"}}) {
     items {
       _contentTypeName
+      _status
       _enabledAt
       _updatedAt
       title

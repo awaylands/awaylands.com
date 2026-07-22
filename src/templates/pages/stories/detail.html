@@ -102,6 +102,12 @@
 {% block body_class %}body--story has-no-hero has-editorial-menu story-type--{{ storyType }}{% endblock %}
 
 {% block extra_head %}
+  {% if page._status == "disabled" %}
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="refresh" content="0; url=/blog/">
+  <link rel="canonical" href="https://www.awaylands.com/blog/">
+  <script>window.location.replace('/blog/');</script>
+  {% else %}
   {% set storyCanonical = currentPath %}
   {% set storyDescription = page.tout.dek %}
   {% if page.social.description %}{% set storyDescription = page.social.description %}{% endif %}
@@ -184,9 +190,16 @@
     ]
   }
   </script>
+  {% endif %}
 {% endblock %}
 
 {% block content %}
+{% if page._status == "disabled" %}
+  <section class="container" style="padding: 12rem 1.5rem; text-align: center;">
+    <h1>This story is not published.</h1>
+    <p><a href="/blog/">Return to the Away Lands Blog</a></p>
+  </section>
+{% else %}
 <article
   class="story-page story-page--{{ storyType }}"
   data-story-page
@@ -462,4 +475,5 @@
         {% endif %}
       </div>
 </article>
+{% endif %}
 {% endblock %}
