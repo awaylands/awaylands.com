@@ -47,6 +47,7 @@ query($images: TSImagesConfig) {
             _enabledAt
             title
             slug
+            category { title }
             social {
               title
             }
@@ -66,6 +67,7 @@ query($images: TSImagesConfig) {
             _enabledAt
             title
             slug
+            category { title }
             social {
               title
             }
@@ -152,6 +154,9 @@ query($images: TSImagesConfig) {
         _enabledAt
         title
         slug
+        category {
+          title
+        }
         social {
           title
         }

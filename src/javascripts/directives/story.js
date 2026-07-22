@@ -1654,6 +1654,9 @@ function fillRelatedStoryCandidates(storyPage) {
           const media = document.createElement('div');
           const image = document.createElement('img');
           const copy = document.createElement('div');
+          const category = document.createElement('p');
+          const meta = document.createElement('p');
+          const readMore = document.createElement('span');
           const date = document.createElement('time');
           const title = document.createElement('h3');
 
@@ -1664,6 +1667,10 @@ function fillRelatedStoryCandidates(storyPage) {
           image.loading = 'lazy';
           image.decoding = 'async';
           copy.className = 'related-stories__copy';
+          category.className = 'related-stories__category';
+          category.textContent = story.category || 'Away Lands';
+          meta.className = 'related-stories__meta';
+          readMore.textContent = 'Read More';
           date.className = 'related-stories__date';
           date.dateTime = story.enabledAt;
           date.textContent = new Date(story.enabledAt).toLocaleDateString('en-US', {
@@ -1678,8 +1685,11 @@ function fillRelatedStoryCandidates(storyPage) {
           }
 
           media.appendChild(image);
-          copy.appendChild(date);
+          copy.appendChild(category);
           copy.appendChild(title);
+          meta.appendChild(readMore);
+          meta.appendChild(date);
+          copy.appendChild(meta);
           link.appendChild(media);
           link.appendChild(copy);
           item.appendChild(link);

@@ -1,14 +1,14 @@
 query {
   storyTitles1: getStoryList(size: 250, from: 0, onlyEnabled: false, sort: [{field: "title", order: "asc"}]) {
-    items { title slug _updatedAt _enabledAt social { title } tout { image { path } } }
+    items { title slug _updatedAt _enabledAt category { title } social { title } tout { image { path } } }
   }
   storyTitles2: getStoryList(size: 250, from: 250, onlyEnabled: false, sort: [{field: "title", order: "asc"}]) {
-    items { title slug _updatedAt _enabledAt social { title } tout { image { path } } }
+    items { title slug _updatedAt _enabledAt category { title } social { title } tout { image { path } } }
   }
   storyTitles3: getStoryList(size: 250, from: 500, onlyEnabled: false, sort: [{field: "title", order: "asc"}]) {
-    items { title slug _updatedAt _enabledAt social { title } tout { image { path } } }
+    items { title slug _updatedAt _enabledAt category { title } social { title } tout { image { path } } }
   }
   storyTitles4: getStoryList(size: 250, from: 750, onlyEnabled: false, sort: [{field: "title", order: "asc"}]) {
-    items { title slug _updatedAt _enabledAt social { title } tout { image { path } } }
+    items { title slug _updatedAt _enabledAt category { title } social { title } tout { image { path } } }
   }
 }
