@@ -4233,3 +4233,393 @@
   line-height: 0.94;
   text-transform: none;
 }
+
+/* Editorial destinations refresh: share the same visual language as the
+   magazine, category hubs, and story templates while retaining the postcard
+   hero and interactive map. */
+.body--destinations3,
+.body--destinations3 .page {
+  background: #f5f2ec;
+}
+
+.destinations-three {
+  --d3-navy: #166e78;
+  --d3-sea: #166e78;
+  --d3-teal: #166e78;
+  --d3-sand: #f5f2ec;
+  --d3-citron: #f3d8b7;
+  --d3-terracotta: #d84a3a;
+  --d3-coral: #d84a3a;
+  --d3-seafoam: #c8d9d4;
+  --d3-ink: #18201f;
+  --d3-paper: #f5f2ec;
+}
+
+.d3-hero {
+  border-bottom: 2px solid var(--d3-navy);
+  box-shadow: none;
+}
+
+.d3-page-title {
+  top: clamp(11.5rem, 13vh, 15.5rem);
+}
+
+.d3-page-title__small {
+  display: block;
+  color: var(--d3-terracotta);
+  font-size: 1rem;
+  letter-spacing: 0.2em;
+}
+
+.body--destinations3 .d3-page-title h1 {
+  color: var(--d3-ink);
+  font-size: clamp(4.8rem, 5.8vw, 8rem);
+  line-height: 0.86;
+  text-shadow: none;
+}
+
+.d3-map-section,
+.d3-photo-destinations {
+  width: min(136rem, calc(100% - 6rem));
+}
+
+.d3-map-section {
+  padding: clamp(7rem, 9vw, 12rem) 0 clamp(6rem, 8vw, 10rem);
+}
+
+.d3-map-section__intro,
+.d3-photo-destinations__heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: 1.4rem clamp(3rem, 6vw, 9rem);
+  align-items: end;
+  margin-bottom: clamp(3rem, 4vw, 5rem);
+  padding-top: 1.8rem;
+  border-top: 2px solid var(--d3-navy);
+  text-align: left;
+}
+
+.d3-map-section__intro .d3-kicker,
+.d3-photo-destinations__heading .d3-kicker {
+  grid-column: 1;
+  grid-row: 1;
+  align-self: start;
+}
+
+.d3-map-section__intro h2,
+.d3-photo-destinations__heading h2 {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  max-width: 80rem;
+  margin: 0;
+  color: var(--d3-ink);
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(5.6rem, 7vw, 10rem);
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 0.82;
+  text-align: left;
+}
+
+.d3-map-section__intro h2 em,
+.d3-photo-destinations__heading h2 em {
+  display: block;
+  color: var(--d3-terracotta);
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-weight: 400;
+}
+
+.d3-map-section__dek {
+  grid-column: 1;
+  grid-row: 2;
+  max-width: 42rem;
+  margin: 0;
+  color: rgba(24, 32, 31, 0.76);
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(1.7rem, 1.45vw, 2.1rem);
+  line-height: 1.42;
+}
+
+.d3-kicker {
+  color: var(--d3-navy);
+  font-size: 1.05rem;
+  letter-spacing: 0.18em;
+}
+
+.d3-kicker--orange {
+  color: var(--d3-terracotta);
+}
+
+.d3-world-map {
+  min-height: clamp(48rem, 50vw, 66rem);
+  border: 1px solid rgba(22, 110, 120, 0.36);
+  border-radius: 0;
+  background: #e6ede9;
+}
+
+.d3-world-map img {
+  opacity: 0.58;
+}
+
+.d3-map-pin {
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(22, 110, 120, 0.52);
+  border-radius: 0;
+  background: rgba(245, 242, 236, 0.94);
+  color: var(--d3-navy);
+  box-shadow: none;
+}
+
+.d3-map-pin small {
+  background: #f3d8b7;
+  color: var(--d3-ink);
+}
+
+.d3-map-pin:hover,
+.d3-map-pin:focus {
+  background: var(--d3-terracotta);
+  color: #fff;
+}
+
+.d3-search-strip {
+  width: 100%;
+  margin: 0;
+  padding: clamp(2.8rem, 4vw, 4.5rem) max(3rem, calc((100vw - 136rem) / 2));
+  border: 0;
+  border-top: 2px solid var(--d3-navy);
+  border-bottom: 2px solid var(--d3-navy);
+  border-radius: 0;
+  background: #efe9df;
+  box-shadow: none;
+}
+
+.d3-search-strip p {
+  color: var(--d3-terracotta);
+  font-size: 1.05rem;
+}
+
+.d3-search-strip form {
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(22, 110, 120, 0.52);
+}
+
+.d3-search-strip input {
+  color: var(--d3-ink);
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(2.2rem, 2.3vw, 3.4rem);
+}
+
+.d3-search-strip button {
+  border-color: var(--d3-terracotta);
+  background: transparent;
+  color: var(--d3-terracotta);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.d3-search-strip button:hover,
+.d3-search-strip button:focus {
+  background: var(--d3-terracotta);
+  color: #fff;
+}
+
+.d3-featured-destination {
+  margin: 0;
+  border-bottom: 2px solid var(--d3-navy);
+}
+
+.d3-featured-destination:after {
+  background: linear-gradient(90deg, rgba(12, 48, 53, 0.6), rgba(12, 48, 53, 0.08) 64%);
+}
+
+.d3-featured-destination__text {
+  display: block;
+}
+
+.d3-featured-destination__text p {
+  margin-bottom: 0.7rem;
+  color: #f3d8b7;
+  font-size: 1.05rem;
+}
+
+.d3-featured-destination__text h2 {
+  color: #fff;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(7rem, 10vw, 15rem);
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 0.78;
+}
+
+.d3-featured-card,
+.d3-featured-card:nth-child(even) {
+  grid-template-rows: auto 5.8rem;
+  padding: 0.9rem;
+  border: 0;
+  border-radius: 0;
+  background: #f5f2ec;
+  box-shadow: 0 1.6rem 4.8rem rgba(12, 48, 53, 0.22);
+  transform: none;
+}
+
+.d3-featured-card:after {
+  display: none;
+}
+
+.d3-featured-card img {
+  border: 0;
+  box-shadow: none;
+  transition: opacity 220ms ease;
+}
+
+.d3-featured-card:hover img,
+.d3-featured-card:focus img {
+  opacity: 0.86;
+}
+
+.d3-featured-card span {
+  min-height: 5.8rem;
+  color: var(--d3-ink);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-shadow: none;
+  transform: none;
+}
+
+.d3-photo-destinations {
+  padding: clamp(7rem, 9vw, 12rem) 0 clamp(8rem, 10vw, 14rem);
+}
+
+.d3-photo-destinations__heading h2 {
+  text-align: left;
+}
+
+.d3-photo-destinations__grid {
+  gap: clamp(3rem, 4vw, 6rem) clamp(1.8rem, 2.6vw, 3.5rem);
+}
+
+.d3-photo-card {
+  padding: 0;
+  border: 0;
+  border-top: 2px solid var(--d3-navy);
+  border-radius: 0;
+  background: transparent;
+  color: var(--d3-ink);
+}
+
+.d3-photo-card img {
+  aspect-ratio: 4 / 5;
+  border-radius: 0;
+}
+
+.d3-photo-card__number {
+  margin: 1.8rem 0 0.7rem;
+  color: var(--d3-terracotta);
+  font-size: 1rem;
+}
+
+.d3-photo-card__title {
+  padding-right: 1.5rem;
+  color: var(--d3-ink);
+  font-size: clamp(3.4rem, 3.5vw, 5.2rem);
+  line-height: 0.88;
+}
+
+.d3-ending-panel {
+  margin: 0;
+  border-top: 2px solid var(--d3-navy);
+}
+
+.d3-ending-panel:after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: rgba(12, 48, 53, 0.25);
+}
+
+.d3-ending-panel__box {
+  z-index: 2;
+  border: 0;
+  border-top: 2px solid var(--d3-navy);
+  background: rgba(245, 242, 236, 0.94);
+  color: var(--d3-ink);
+  box-shadow: none;
+}
+
+.d3-ending-panel__box h2 {
+  color: var(--d3-ink);
+  font-size: clamp(4.2rem, 5vw, 7rem);
+  line-height: 0.86;
+}
+
+.d3-ending-panel__links a {
+  border-bottom-color: rgba(22, 110, 120, 0.34);
+  color: var(--d3-navy);
+}
+
+.d3-ending-panel__links a:hover,
+.d3-ending-panel__links a:focus {
+  color: var(--d3-terracotta);
+}
+
+@media (max-width: 980px) {
+  .d3-map-section__intro,
+  .d3-photo-destinations__heading {
+    grid-template-columns: 1fr;
+  }
+
+  .d3-map-section__intro .d3-kicker,
+  .d3-photo-destinations__heading .d3-kicker,
+  .d3-map-section__intro h2,
+  .d3-photo-destinations__heading h2,
+  .d3-map-section__dek {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .d3-search-strip {
+    padding-right: 3rem;
+    padding-left: 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .d3-page-title__small {
+    font-size: 0.82rem;
+  }
+
+  .body--destinations3 .d3-page-title h1 {
+    font-size: clamp(4rem, 14vw, 6rem);
+  }
+
+  .d3-map-section,
+  .d3-photo-destinations {
+    width: min(100% - 2.4rem, 136rem);
+  }
+
+  .d3-map-section__intro h2,
+  .d3-photo-destinations__heading h2 {
+    font-size: clamp(4.8rem, 16vw, 7rem);
+  }
+
+  .d3-search-strip {
+    width: 100%;
+    margin: 0;
+    padding: 3rem 1.2rem;
+  }
+
+  .d3-search-strip form {
+    grid-template-columns: 1fr;
+  }
+
+  .d3-search-strip button {
+    width: 100%;
+  }
+
+  .d3-photo-card__title {
+    font-size: clamp(3.8rem, 13vw, 5.4rem);
+  }
+}
