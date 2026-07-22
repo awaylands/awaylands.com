@@ -1,92 +1,154 @@
 .still-index {
   @extend %basic-block;
 
-  --still-title-blue: #166e78;
-  --still-title-orange: #d84a3a;
-  --still-title-yellow: #fffbd8;
+  --still-cream: #f5f1e8;
+  --still-ink: #1b1b18;
+  --still-blue: #24596a;
+  --still-red: #a94b3c;
 
-  background:
-    radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.18), rgba(237, 161, 128, 0) 34rem),
-    linear-gradient(180deg, #fffaf0 0%, #f8f2ea 100%);
-  color: #16120e;
+  background: var(--still-cream);
+  color: var(--still-ink);
 }
 
 .still-index__hero {
   position: relative;
-  min-height: 62rem;
+  min-height: 60rem;
   overflow: hidden;
-  background: #166e78;
+  background: var(--still-blue);
 
-  &:before,
   &:after {
     content: "";
     position: absolute;
     z-index: 1;
-    pointer-events: none;
-  }
-
-  &:before {
-    top: 1.2rem;
-    right: 1.2rem;
-    bottom: 1.2rem;
-    left: 1.2rem;
-    border: 1px solid rgba(255, 248, 229, 0.72);
-  }
-
-  &:after {
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     background:
-      linear-gradient(90deg, rgba(22, 110, 120, 0.72) 0%, rgba(22, 110, 120, 0.25) 44%, rgba(22, 110, 120, 0.06) 100%),
-      linear-gradient(180deg, rgba(16, 14, 10, 0.02) 0%, rgba(16, 14, 10, 0.48) 100%);
+      linear-gradient(90deg, rgba(15, 45, 55, 0.72) 0%, rgba(15, 45, 55, 0.3) 48%, rgba(15, 45, 55, 0.08) 100%),
+      linear-gradient(180deg, rgba(14, 17, 15, 0.04) 48%, rgba(14, 17, 15, 0.55) 100%);
   }
 }
 
 .still-index__hero-image {
   display: block;
   width: 100%;
-  height: 62rem;
+  height: 60rem;
   object-fit: cover;
-  filter: saturate(1.08) contrast(0.94);
+  filter: saturate(0.92) contrast(0.96);
 }
 
 .still-index__hero-copy {
   position: absolute;
   z-index: 2;
-  right: 2rem;
-  bottom: 5rem;
-  left: 2rem;
-  color: #fffbd8;
+  right: 2.4rem;
+  bottom: 5.4rem;
+  left: 2.4rem;
+  color: var(--still-cream);
+}
+
+.still-index__eyebrow {
+  margin: 0 0 2rem;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.95rem;
+  font-weight: -weight(bold);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  span {
+    margin: 0 0.8rem;
+    color: #e6a091;
+  }
 }
 
 .still-index__title {
   max-width: 108rem;
   margin: 0;
-  color: var(--still-title-yellow);
-  font-family: "Still ITC Garamond Light Condensed", "Still Old Money", Georgia, "Times New Roman", serif;
-  font-size: 7.8rem;
+  color: var(--still-cream);
+  font-family: "Still ITC Garamond Light Condensed", "Still EB Garamond", Georgia, serif;
+  font-size: 8rem;
   font-weight: 200;
   line-height: 0.78;
-  letter-spacing: 0.035em;
+  letter-spacing: -0.01em;
   text-transform: none;
-  text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.18);
+  text-shadow: 0 0.8rem 3rem rgba(0, 0, 0, 0.16);
 }
 
+.still-index__hero-dek {
+  max-width: 48rem;
+  margin: 2.8rem 0 0;
+  padding-top: 1.8rem;
+  border-top: 1px solid rgba(245, 241, 232, 0.58);
+  font-family: "Still EB Garamond", Georgia, serif;
+  font-size: 1.8rem;
+  line-height: 1.45;
+}
 
-.still-index__hero-rule {
-  width: 16rem;
-  height: 0.2rem;
-  margin-top: 2.2rem;
-  background: #d84a3a;
+.still-index__hero-note {
+  position: absolute;
+  z-index: 2;
+  right: 2.4rem;
+  bottom: 2.2rem;
+  display: none;
+  margin: 0;
+  color: rgba(245, 241, 232, 0.82);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-align: right;
+  text-transform: uppercase;
+
+  span {
+    display: block;
+    margin-top: 0.5rem;
+  }
 }
 
 .still-index__inner {
   @extend %container;
 
-  padding-top: 3rem;
-  padding-bottom: 3.8rem;
+  padding-top: 6rem;
+  padding-bottom: 8rem;
+}
+
+.still-index__section-heading {
+  display: block;
+  margin-bottom: 4.5rem;
+  padding-top: 2.2rem;
+  border-top: 1px solid rgba(27, 27, 24, 0.25);
+
+  > div {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+
+  > div > span {
+    color: var(--still-red);
+    font-family: Montserrat, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    font-weight: -weight(bold);
+    letter-spacing: 0.15em;
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--still-blue);
+    font-family: "Still ITC Garamond Light Condensed", "Still EB Garamond", Georgia, serif;
+    font-size: 5.6rem;
+    font-weight: 200;
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    text-transform: none;
+  }
+
+  > p {
+    max-width: 44rem;
+    margin: 2.2rem 0 0 3.8rem;
+    font-family: "Still EB Garamond", Georgia, serif;
+    font-size: 1.7rem;
+    line-height: 1.55;
+  }
 }
 
 .still-index__marquee {
@@ -95,81 +157,87 @@
   gap: 1rem;
   overflow: hidden;
   margin-bottom: 2.4rem;
-  padding: 1.2rem 0;
-  border-top: 1px solid rgba(22, 110, 120, 0.3);
-  border-bottom: 1px solid rgba(22, 110, 120, 0.3);
-  color: #166e78;
+  padding: 1.3rem 0;
+  border-top: 1px solid rgba(36, 89, 106, 0.28);
+  border-bottom: 1px solid rgba(36, 89, 106, 0.28);
+  color: var(--still-blue);
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: -weight(bold);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   white-space: nowrap;
 
-  span {
-    &:after {
-      content: "/";
-      margin-left: 1rem;
-      color: #d84a3a;
-    }
+  span:after {
+    content: "/";
+    margin-left: 1rem;
+    color: var(--still-red);
   }
 }
 
 .still-index__grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
 }
 
 .still-index-card {
   position: relative;
   display: block;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #ebe1d9;
-  border-radius: 1.4rem;
-  color: #fff8e5;
+  background: #d9d3c8;
+  color: var(--still-cream);
   text-decoration: none;
 
   &:before,
   &:after {
     content: "";
     position: absolute;
+    z-index: 1;
     pointer-events: none;
   }
 
   &:before {
-    z-index: 1;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     background:
-      linear-gradient(180deg, rgba(10, 12, 12, 0.02) 0%, rgba(10, 12, 12, 0.55) 100%),
-      linear-gradient(90deg, rgba(22, 110, 120, 0.32) 0%, rgba(22, 110, 120, 0) 54%);
-    transition: background 0.25s $ease-in-out-quart;
+      linear-gradient(180deg, rgba(11, 14, 14, 0.04) 30%, rgba(11, 14, 14, 0.7) 100%),
+      linear-gradient(90deg, rgba(36, 89, 106, 0.24), rgba(36, 89, 106, 0) 58%);
+    transition: background 0.3s $ease-in-out-quart;
   }
 
   &:after {
-    z-index: 2;
-    top: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    left: 1rem;
-    border: 2px solid rgba(255, 248, 229, 0.68);
-    border-radius: 1rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 0.4rem;
+    background: var(--still-red);
+    transform: scaleX(0.2);
+    transform-origin: left;
+    transition: transform 0.45s $ease-in-out-quart;
   }
 
   &:hover,
   &:focus {
-    img {
-      transform: scale(1.035);
-    }
-
     &:before {
       background:
-        linear-gradient(180deg, rgba(10, 12, 12, 0.02) 0%, rgba(10, 12, 12, 0.66) 100%),
-        linear-gradient(90deg, rgba(221, 104, 45, 0.28) 0%, rgba(221, 104, 45, 0) 58%);
+        linear-gradient(180deg, rgba(11, 14, 14, 0.02) 28%, rgba(11, 14, 14, 0.58) 100%),
+        linear-gradient(90deg, rgba(36, 89, 106, 0.36), rgba(36, 89, 106, 0) 68%);
+    }
+
+    &:after {
+      transform: scaleX(1);
+    }
+
+    img {
+      transform: scale(1.02);
+    }
+
+    .still-index-card__link i {
+      transform: translateX(0.4rem);
     }
   }
 
@@ -178,60 +246,77 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: saturate(1.08) contrast(0.92);
-    transition: transform 0.45s $ease-in-out-quart;
+    filter: saturate(0.96) contrast(0.96);
+    transition: transform 0.6s $ease-in-out-quart;
   }
 }
 
 .still-index-card__number,
-.still-index-card__title,
+.still-index-card__copy,
 .still-index-card__note {
   position: absolute;
-  z-index: 3;
+  z-index: 2;
 }
 
 .still-index-card__number {
-  top: 2.1rem;
-  left: 2.1rem;
-  color: rgba(255, 251, 216, 0.78);
-  font-family: "Still EB Garamond", Georgia, "Times New Roman", serif;
-  font-size: 1.7rem;
-  font-weight: -weight(regular);
-  letter-spacing: 0.02em;
-  line-height: 1;
+  top: 1.6rem;
+  left: 1.6rem;
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 0.82rem;
+  font-weight: -weight(bold);
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.still-index-card__copy {
+  right: 1.6rem;
+  bottom: 1.8rem;
+  left: 1.6rem;
 }
 
 .still-index-card__title {
-  top: 68%;
-  right: 1.8rem;
-  left: 1.8rem;
-  transform: translateY(-50%);
-  color: rgba(255, 251, 216, 0.88);
-  opacity: 0.75;
+  display: block;
+  color: var(--still-cream);
+  font-family: "Still ITC Garamond Light Condensed", "Still EB Garamond", Georgia, serif;
+  font-size: 3.4rem;
+  font-weight: 200;
+  line-height: 0.94;
+  letter-spacing: 0;
+  text-shadow: 0 0.8rem 2.4rem rgba(0, 0, 0, 0.28);
+  text-transform: none;
+}
+
+.still-index-card__link {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.4rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(245, 241, 232, 0.5);
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 2.4rem;
+  font-size: 0.8rem;
   font-weight: -weight(bold);
-  line-height: 1.06;
-  letter-spacing: 0.18em;
-  text-align: center;
-  text-shadow: 0 0.9rem 2.8rem rgba(0, 0, 0, 0.38);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+
+  i {
+    font-style: normal;
+    transition: transform 0.3s $ease-in-out-quart;
+  }
 }
 
 .still-index-card__note {
   display: none;
 }
 
-
 @media (min-width: 700px) {
   .still-index__hero,
   .still-index__hero-image {
-    height: 66rem;
+    height: 68rem;
   }
 
   .still-index__hero-copy {
     right: 4rem;
-    bottom: 6.2rem;
+    bottom: 6.5rem;
     left: 4rem;
   }
 
@@ -239,24 +324,39 @@
     font-size: 12rem;
   }
 
+  .still-index__hero-note {
+    right: 4rem;
+    display: block;
+  }
+
+  .still-index__section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    > p {
+      margin: 0;
+    }
+  }
+
   .still-index__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.6rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
   }
 
   .still-index-card {
-    grid-column: auto;
+    aspect-ratio: 3 / 4;
   }
 
   .still-index-card__title {
-    font-size: 2.6rem;
+    font-size: 4.8rem;
   }
 }
 
 @include for-desktop-up {
   .still-index__hero,
   .still-index__hero-image {
-    height: 72rem;
+    height: 76rem;
   }
 
   .still-index__hero-copy {
@@ -267,33 +367,73 @@
 
   .still-index__title {
     max-width: 128rem;
-    font-size: 16rem;
+    font-size: 15.5rem;
+  }
+
+  .still-index__hero-dek {
+    max-width: 54rem;
+    font-size: 2rem;
+  }
+
+  .still-index__hero-note {
+    right: 7rem;
+    bottom: 3rem;
   }
 
   .still-index__inner {
-    padding-top: 4.2rem;
-    padding-bottom: 5.2rem;
+    padding-top: 8.5rem;
+    padding-bottom: 11rem;
+  }
+
+  .still-index__section-heading h2 {
+    font-size: 7.2rem;
   }
 
   .still-index__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.6rem;
   }
 
   .still-index-card {
-    grid-column: auto;
+    grid-column: span 3;
+
+    &--1,
+    &--6,
+    &--7,
+    &--8 {
+      grid-column: span 6;
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  .still-index-card__number {
+    top: 2rem;
+    left: 2rem;
+  }
+
+  .still-index-card__copy {
+    right: 2rem;
+    bottom: 2.2rem;
+    left: 2rem;
+  }
+
+  .still-index-card__title {
+    font-size: 5.2rem;
+  }
+
+  .still-index-card--1 .still-index-card__title,
+  .still-index-card--6 .still-index-card__title,
+  .still-index-card--7 .still-index-card__title,
+  .still-index-card--8 .still-index-card__title {
+    font-size: 6.6rem;
   }
 }
 
 .body--still {
-  background:
-    radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.18), rgba(237, 161, 128, 0) 34rem),
-    linear-gradient(180deg, #fffaf0 0%, #f8f2ea 100%);
+  background: var(--still-cream, #f5f1e8);
 
   .main {
-    background:
-      radial-gradient(circle at 12% 5%, rgba(237, 161, 128, 0.18), rgba(237, 161, 128, 0) 34rem),
-      linear-gradient(180deg, #fffaf0 0%, #f8f2ea 100%);
+    background: var(--still-cream, #f5f1e8);
   }
 
   .page-footer {

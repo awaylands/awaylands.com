@@ -27,12 +27,23 @@
       {% endif %}
 
       <div class="still-index__hero-copy">
+        <p class="still-index__eyebrow">Away Lands <span>/</span> Commercial Photography</p>
         <h1 class="still-index__title">{{ heroTitle }}</h1>
-        <div class="still-index__hero-rule"></div>
+        <p class="still-index__hero-dek">Travel, hospitality, lifestyle, and editorial imagery created around the world.</p>
       </div>
+
+      <p class="still-index__hero-note"><span>Selected work</span><span>Los Angeles / Worldwide</span></p>
     </div>
 
     <div class="still-index__inner">
+      <header class="still-index__section-heading">
+        <div>
+          <span>01</span>
+          <h2>Selected Portfolios</h2>
+        </div>
+        <p>Explore commissioned campaigns, destination stories, and personal work by Amy Seder and Away Lands.</p>
+      </header>
+
       <div class="still-index__marquee" aria-hidden="true">
         {% for category in page.stillCategories %}
           <span>{{ category.title }}</span>
@@ -94,8 +105,11 @@
               />
             {% endif %}
 
-            <span class="still-index-card__number">0{{ loop.index }}</span>
-            <span class="still-index-card__title">{{ categoryTitle }}</span>
+            <span class="still-index-card__number">Portfolio / 0{{ loop.index }}</span>
+            <span class="still-index-card__copy">
+              <span class="still-index-card__title">{{ categoryTitle }}</span>
+              <span class="still-index-card__link">View gallery <i>→</i></span>
+            </span>
             {% if categoryDescription and categoryDescription | length < 55 %}
               <span class="still-index-card__note">{{ categoryDescription }}</span>
             {% endif %}
