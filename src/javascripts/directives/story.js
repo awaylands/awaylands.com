@@ -1635,6 +1635,8 @@ function fillRelatedStoryCandidates(storyPage) {
           const link = document.createElement('a');
           const media = document.createElement('div');
           const image = document.createElement('img');
+          const copy = document.createElement('div');
+          const date = document.createElement('time');
           const title = document.createElement('h3');
 
           link.href = url;
@@ -1643,6 +1645,14 @@ function fillRelatedStoryCandidates(storyPage) {
           image.alt = story.title;
           image.loading = 'lazy';
           image.decoding = 'async';
+          copy.className = 'related-stories__copy';
+          date.className = 'related-stories__date';
+          date.dateTime = story.enabledAt;
+          date.textContent = new Date(story.enabledAt).toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric'
+          });
           title.className = 'related-stories__title';
           title.textContent = story.title;
           if (story.socialTitle) {
@@ -1650,8 +1660,10 @@ function fillRelatedStoryCandidates(storyPage) {
           }
 
           media.appendChild(image);
+          copy.appendChild(date);
+          copy.appendChild(title);
           link.appendChild(media);
-          link.appendChild(title);
+          link.appendChild(copy);
           item.appendChild(link);
           list.appendChild(item);
           existingUrls[key] = true;
@@ -1876,13 +1888,7 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
       relatedList.appendChild(listItem);
     });
 
-    Array.prototype.slice.call(relatedItems, 0, 3).forEach(item => {
-      item.hidden = true;
-      item.style.display = 'none';
-      item.setAttribute('aria-hidden', 'true');
-    });
-
-    Array.prototype.slice.call(relatedItems, 3, 6).forEach(item => {
+    Array.prototype.slice.call(relatedItems, 0, 6).forEach(item => {
       item.hidden = false;
       item.style.display = 'block';
       item.removeAttribute('aria-hidden');

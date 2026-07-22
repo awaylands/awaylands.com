@@ -44,6 +44,7 @@ query($images: TSImagesConfig) {
         storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
           items {
             _contentTypeName
+            _enabledAt
             title
             slug
             social {
@@ -62,6 +63,7 @@ query($images: TSImagesConfig) {
         storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
           items {
             _contentTypeName
+            _enabledAt
             title
             slug
             social {
@@ -147,6 +149,7 @@ query($images: TSImagesConfig) {
         }
       }
       relatedStories {
+        _enabledAt
         title
         slug
         social {
