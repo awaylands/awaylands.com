@@ -6,6 +6,7 @@
   url('/assets/fonts/montserrat-light-webfont.svg#montserratlight') format('svg');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -16,6 +17,7 @@
   url('/assets/fonts/montserrat-regular-webfont.svg#montserratregular') format('svg');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 
 }
 
@@ -27,6 +29,7 @@
   url('/assets/fonts/montserrat-medium-webfont.svg#montserratmedium') format('svg');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 
 }
 
@@ -38,6 +41,7 @@
   url('/assets/fonts/montserrat-bold-webfont.svg#montserratbold') format('svg');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -45,6 +49,7 @@
   src: url('/assets/fonts/still-preview/eb-garamond-regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -52,6 +57,7 @@
   src: url('/assets/fonts/still-preview/voyage.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -59,6 +65,7 @@
   src: url('/assets/fonts/still-preview/dahlia-regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -66,6 +73,7 @@
   src: url('/assets/fonts/still-preview/galisteo-regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -73,6 +81,7 @@
   src: url('/assets/fonts/still-preview/cote-lumiere.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -80,6 +89,7 @@
   src: url('/assets/fonts/still-preview/countryclub.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -87,12 +97,14 @@
   src: url('/assets/fonts/still-preview/itc-garamond-light-condensed.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: 'Still Old Money';
   src: url('/assets/fonts/still-preview/oldmoney-regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -100,6 +112,7 @@
   src: url('/assets/fonts/still-preview/oldmoney-italic.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
@@ -107,6 +120,7 @@
   src: url('/assets/fonts/still-preview/refined-society.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -114,6 +128,7 @@
   src: url('/assets/fonts/still-preview/vigro.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -121,4 +136,5 @@
   src: url('/assets/fonts/still-preview/fitzgerald-regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }

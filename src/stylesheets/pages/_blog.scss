@@ -1982,6 +1982,25 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   }
 }
 
+// Destination story grids are populated by Vue after the initial HTML arrives.
+// Reserve the first desktop viewport so the footer and surrounding content do
+// not jump when the cards are inserted.
+.body--destination-detail listings {
+  display: block;
+  min-height: 72rem;
+}
+
+.body--destination-detail listings .listings {
+  min-height: 72rem;
+}
+
+@media (max-width: 899px) {
+  .body--destination-detail listings,
+  .body--destination-detail listings .listings {
+    min-height: 0;
+  }
+}
+
 .listing {
   &__image {
     @include ratio-box(144%);
