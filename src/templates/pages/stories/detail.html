@@ -520,3 +520,35 @@
 </article>
 {% endif %}
 {% endblock %}
+
+{% block extra_scripts %}
+<script>
+  (function () {
+    function filenameAlt(src) {
+      var filename = decodeURIComponent((src || '').split('?')[0].split('/').pop() || '');
+      var cleaned = filename
+        .replace(/\.(jpe?g|png|webp|gif|avif)$/i, '')
+        .replace(/(?:[-_ ]?Away[-_ ]?Lands)/ig, '')
+        .replace(/[-_ ]+\d{1,4}$/g, '')
+        .replace(/[-_]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toLowerCase();
+      return cleaned ? cleaned.charAt(0).toUpperCase() + cleaned.slice(1) : {{ page.title | dump | safe }};
+    }
+
+    function addMissingImageAltText() {
+      var images = document.querySelectorAll('.story-article img:not([alt])');
+      for (var i = 0; i < images.length; i += 1) {
+        images[i].setAttribute('alt', filenameAlt(images[i].currentSrc || images[i].src));
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', addMissingImageAltText);
+    } else {
+      addMissingImageAltText();
+    }
+  }());
+</script>
+{% endblock %}
