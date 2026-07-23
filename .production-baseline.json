@@ -1,0 +1,24 @@
+{
+  "name": "Away Lands verified production baseline",
+  "baselineDate": "2026-07-22",
+  "baselineCommit": "0b4e6700f447e2315872372ca3ceee4502907991",
+  "branch": "production-baseline",
+  "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
+  "siteName": "www.awaylands.com",
+  "assets": {
+    "javascript": "javascripts/main.91618a6ec51b6585278d.js",
+    "stylesheet": "stylesheets/main.40b648f5eb8084bbffbcd7fe991ad825.css"
+  },
+  "sourceFiles": {
+    "src/templates/pages/stories/detail.html": "50f408b7738bffed0bc8ac4991b7a854dbe702d73324324759ae3d8087e54b26",
+    "src/templates/pages/stories/landing.html": "52ddc48b5ade36e46d4afccc3aacc161c0cec4ba90c75afd7a83503d9bb778d5",
+    "src/templates/pages/category.html": "17064e433b871d4a06ea7eb11375feb2895a8329ea93f51250dd019b6861027d",
+    "src/templates/pages/destinations.html": "817c84946fd878545c3382aae8fe6d7c2759d376db92f374ed46a99e637ce491",
+    "src/templates/pages/film.html": "156e8106a7c2432867f70b663148cb32fa1f030c6480df47e5923715bbcc3ed3",
+    "src/templates/data/homepage.graphql": "75d3301f550c66fe9990ba07568dd0c98de694c6a9ed8f86373568bfc60e5450",
+    "src/templates/data/stories.graphql": "5d299c9d7a1146ddbd1a3e315775f80be24043c0e7f88f29dffbd566550bcde8",
+    "src/stylesheets/pages/_blog.scss": "690047c0691abffb9c2a316b522cc42074ef85384affd64f7719bedcdd515e3a",
+    "src/javascripts/components/listings.vue": "dc89aef078abf2ddb4f3bcf273feaa9f5fd344314a5c162c01eb21b6d44b3902",
+    "tsg.yml": "2e7626d20f472eb490c0ca0caae901976ec305d1c0c94a9b1d4c60cb2eb0348b"
+  }
+}
