@@ -2,6 +2,20 @@
 
 {% block body_class %}body--landing body--blog body--blog-magazine{% if pagination.currentPage != 1 %} body--blog-archive-page{% endif %}{% endblock %}
 
+{% block extra_head %}
+  <link rel="canonical" href="https://www.awaylands.com{{ currentPath }}">
+  <meta property="og:url" content="https://www.awaylands.com{{ currentPath }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "url": "https://www.awaylands.com{{ currentPath }}",
+    "name": "Away Lands Travel Journal",
+    "isPartOf": {"@id": "https://www.awaylands.com/#website"}
+  }
+  </script>
+{% endblock %}
+
 {% block filters %}
   <li><a class="is-current" href="/blog/">Journal</a></li>
   <li><span class="separator"></span></li>

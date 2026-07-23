@@ -17,7 +17,7 @@
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "8bdf82317a9969698cb3ef7ae800c2289afbbb494ea9f6b2af43cd8d4630c7e1",
-    "src/templates/pages/stories/landing.html": "e019f320e636958194dc28d77031de1d6df9f199df43bf2656c1184d644f9c6e",
+    "src/templates/pages/stories/landing.html": "b846ced3f6c43426212ad83f4777aa4d900feac5672508927c5d6cac2256279d",
     "src/templates/pages/category.html": "17064e433b871d4a06ea7eb11375feb2895a8329ea93f51250dd019b6861027d",
     "src/templates/pages/destinations.html": "817c84946fd878545c3382aae8fe6d7c2759d376db92f374ed46a99e637ce491",
     "src/templates/pages/film.html": "a2651aa15596f6b78f6a0c5f23a686c47bb3abf9dd3a30279985f475f6e82a1b",
