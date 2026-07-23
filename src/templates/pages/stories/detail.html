@@ -22,8 +22,9 @@
   {% set storyLabel = "Quick Guide" %}
 {% endif %}
 
-{% set storyDisplayDate = page._enabledAt %}
-{% if page._updatedAt %}{% set storyDisplayDate = page._updatedAt %}{% endif %}
+{% set storyPublishedDate = page._enabledAt %}
+{% set storyModifiedDate = page._enabledAt %}
+{% if page._updatedAt %}{% set storyModifiedDate = page._updatedAt %}{% endif %}
 
 {% macro renderTableBlock(block) %}
   {% if block.pastedText %}
@@ -278,7 +279,10 @@
 
       <div class="story-cover__meta">
         <span>By <a href="/about">Amy Seder</a></span>
-        <time datetime="{{ storyDisplayDate }}">Updated {{ storyDisplayDate | date("MMMM D, YYYY") }}</time>
+        <time datetime="{{ storyPublishedDate }}">Published {{ storyPublishedDate | date("MMMM D, YYYY") }}</time>
+        {% if storyModifiedDate and storyModifiedDate != storyPublishedDate %}
+        <time datetime="{{ storyModifiedDate }}">Updated {{ storyModifiedDate | date("MMMM D, YYYY") }}</time>
+        {% endif %}
       </div>
 
     </div>
@@ -312,7 +316,7 @@
   </header>
 
   <div class="story-rule" aria-hidden="true">
-    <span>{{ storyDisplayDate | date("YYYY") }}</span>
+    <span>{{ storyPublishedDate | date("YYYY") }}</span>
     <span>{{ storyLabel }}</span>
     <span>Away Lands</span>
   </div>
