@@ -1,7 +1,7 @@
 {
   "name": "Away Lands verified production baseline",
-  "baselineDate": "2026-07-22",
-  "baselineCommit": "0b4e6700f447e2315872372ca3ceee4502907991",
+  "baselineDate": "2026-07-23",
+  "baselineCommit": "c05ff0652942484055ee91a09110f6eb47d67240",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
@@ -12,8 +12,8 @@
   "assets": {
     "javascript": "javascripts/main.6bd6eb018c7934496285.js",
     "javascriptSha256": "f3d39f380f59064f42cea709c2cf7b1d1c93d22cdfe90eedf2133d5a73792395",
-    "stylesheet": "stylesheets/main.861bc19b5b0eb8f5e968aa0e52d93cbf.css",
-    "stylesheetSha256": "136a355dfd20778f75168b4f5cf19e5e487827aca1dfcfffe986e918fefd163d"
+    "stylesheet": "stylesheets/main.ba130c0e1c8dcfb2ad0800e2a78bef96.css",
+    "stylesheetSha256": "d0b6a55e9b5293e04b99b3a89395a92bee600a1a28c1ce3ad05384594d1cdb31"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "0ee972672d751acbd4dbdffc410ee615e5617f8d2828b96826670645e09a71d3",
@@ -24,7 +24,10 @@
     "src/templates/data/homepage.graphql": "772eaf52e0eec8ba049fcab470fdcd64b22ab1ff8c1b028555eb0ad4cac07720",
     "src/templates/data/stories.graphql": "c5c9ca859cb18d804b0973caeaab5f661ded08a747ad6d7df665eaae43946b73",
     "src/templates/data/story-slugs.graphql": "ad322ab16e304c216c82945c78da642434c2eab5f7931ba1a8448b606cdbd578",
-    "src/stylesheets/pages/_blog.scss": "bd65dce620d48e3d155aab25a9957081dcb12684dddae2c505950a270ea79fd4",
+    "src/stylesheets/_fonts.scss": "b05225055efbc331165fd91081489382024a57dc9dd1bbb1642db70f3ad4cf17",
+    "src/stylesheets/pages/_blog.scss": "b49aa6f76a973a0d81d150a4a60c6ee66338054d04d7881176f9fd5009f3c9a5",
+    "src/stylesheets/pages/_story.scss": "fd4e6c97ea2f649214f19fb937c6e893af441b271ee50618df8f9fad7b55d4e3",
+    "src/templates/partials/head.html": "1aa71d5dd88f2c5779cc6303c4a49dd23e0c2347e28ef6fcc506ee6f452cde77",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "_takeshape-schema-export/schema.json": "b64807238b3b5a2c1626330b776357a3a70e896203328e257a81b0364cd77411",
     "_takeshape-schema-export/schema-inner.json": "aa6ea7684cb25382d64b10116b2b30690d8c9d5a23d03c7b54653539a8680ffd",
