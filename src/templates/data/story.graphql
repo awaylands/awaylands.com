@@ -1,4 +1,20 @@
 query {
+  products: getProducts {
+    travel { image { path } title description productUrl productEmbedHtml addToHomepage }
+    style { image { path } title description productUrl productEmbedHtml addToHomepage }
+    photography { image { path } title description productUrl productEmbedHtml addToHomepage }
+    beauty { image { path } title description productUrl productEmbedHtml addToHomepage }
+    fitness { image { path } title description productUrl productEmbedHtml addToHomepage }
+    home { image { path } title description productUrl productEmbedHtml addToHomepage }
+  }
+  blogShopFallback: getBlog {
+    travelEssentialsItems {
+      image { path }
+      title
+      productUrl
+      productEmbedHtml
+    }
+  }
   categories: getBlog {
     categories {
       title
@@ -11,9 +27,16 @@ query {
         items {
           _contentTypeName
           _enabledAt
+          isImportant
           title
           slug
+          social {
+            title
+          }
           category {
+            title
+          }
+          location {
             title
           }
           tout {
@@ -23,6 +46,71 @@ query {
             dek
           }
         }
+      }
+    }
+  }
+  featuredCategoryCandidates: getCategoryList {
+    items {
+      title
+      storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
+        items {
+          _contentTypeName
+          _enabledAt
+          isImportant
+          title
+          slug
+          category { title }
+          tout {
+            image { path }
+            dek
+          }
+        }
+      }
+    }
+  }
+  importantAutoStories: getStoryList(
+    size: 100,
+    where: {isImportant: {eq: true}},
+    sort: [{field: "_enabledAt", order: "desc"}]
+  ) {
+    total
+    items {
+      _contentTypeName
+      _enabledAt
+      isImportant
+      title
+      slug
+      social { title }
+      category { title }
+      tout { image { path } }
+    }
+  }
+  archiveStories: getStoryList(size: 32, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      _contentTypeName
+      _enabledAt
+      isImportant
+      title
+      slug
+      social { title }
+      category { title }
+      tout { image { path } }
+    }
+  }
+  shoppingStories: getStoryList(
+    size: 8,
+    where: {shopEditItems: {productUrl: {regexp: ".+"}}},
+    sort: [{field: "_enabledAt", order: "desc"}]
+  ) {
+    items {
+      _contentTypeName
+      title
+      slug
+      shopEditItems {
+        image { path }
+        title
+        productUrl
+        productEmbedHtml
       }
     }
   }
@@ -43,6 +131,80 @@ query {
         }
         dek
       }
+      shopEditItems {
+        image { path }
+        title
+        productUrl
+        productEmbedHtml
+      }
+    }
+    heroImageOverride { path }
+    heroImageFocus
+    supportingStories {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    editorsPicks {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    travelEssentialsBackgroundImage { path }
+    travelEssentialsBackgroundFocus
+    travelEssentialsLabel
+    travelEssentialsTitle
+    travelEssentialsLinkText
+    travelEssentialsLinkUrl
+    travelEssentialsItems { image { path } title description productUrl productEmbedHtml }
+    categoryTile1Category { title }
+    categoryTile1Image { path }
+    categoryTile1Focus
+    categoryTile2Category { title }
+    categoryTile2Image { path }
+    categoryTile2Focus
+    categoryTile3Category { title }
+    categoryTile3Image { path }
+    categoryTile3Focus
+    categoryTile4Category { title }
+    categoryTile4Image { path }
+    categoryTile4Focus
+    categoryTile5Category { title }
+    categoryTile5Image { path }
+    categoryTile5Focus
+    categoryTile6Category { title }
+    categoryTile6Image { path }
+    categoryTile6Focus
+    categoryTile7Category { title }
+    categoryTile7Image { path }
+    categoryTile7Focus
+    categoryTile8Category { title }
+    categoryTile8Image { path }
+    categoryTile8Focus
+    revolveSectionTitle
+    revolveSectionLinkUrl
+    revolveSectionEmbedHtml
+    featuredItineraries {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    leftFullBleedStory {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    leftFullBleedImageOverride { path }
+    leftFullBleedImageFocus
+    leftFullBleedMobileImageOverride { path }
+    leftFullBleedMobileImageFocus
+    rightFullBleedStory {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
+    }
+    rightFullBleedImageOverride { path }
+    rightFullBleedImageFocus
+    rightFullBleedMobileImageOverride { path }
+    rightFullBleedMobileImageFocus
+    latestStories {
+      _contentTypeName title slug category { title }
+      tout { image { path } dek }
     }
     categories {
       title
