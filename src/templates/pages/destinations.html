@@ -2,6 +2,20 @@
 
 {% block body_class %}body body--destinations3{% endblock %}
 
+{% block extra_head %}
+  <link rel="canonical" href="https://www.awaylands.com/destinations/">
+  <meta property="og:url" content="https://www.awaylands.com/destinations/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "url": "https://www.awaylands.com/destinations/",
+    "name": "Away Lands Destinations",
+    "isPartOf": {"@id": "https://www.awaylands.com/#website"}
+  }
+  </script>
+{% endblock %}
+
 {% block content %}
 {% set fallbackImages = [
   "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/4b853dfb-82c2-4b7c-adaf-7c60821a7faf/AwayLands-PhotographyPortfolio-421.jpg",

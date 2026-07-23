@@ -13,19 +13,19 @@
   <url><loc>{{ siteUrl }}/about/</loc></url>
 {% for category in categories.items %}
   <url>
-    <loc>{{ siteUrl }}{{ category | route('category') }}</loc>
+    <loc>{{ siteUrl }}{{ category | route('category') }}/</loc>
     <lastmod>{{ category._updatedAt }}</lastmod>
   </url>
 {% endfor %}
 {% for location in locations.items %}
   <url>
-    <loc>{{ siteUrl }}{{ location | route('location') }}</loc>
+    <loc>{{ siteUrl }}{{ location | route('location') }}/</loc>
     <lastmod>{{ location._updatedAt }}</lastmod>
   </url>
 {% endfor %}
 {% for continent in continents.items %}
   <url>
-    <loc>{{ siteUrl }}{{ continent | route('continent') }}</loc>
+    <loc>{{ siteUrl }}{{ continent | route('continent') }}/</loc>
     <lastmod>{{ continent._updatedAt }}</lastmod>
   </url>
 {% endfor %}
