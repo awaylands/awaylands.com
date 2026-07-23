@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 
 const MAX_RESULTS = 24;
 const SNIPPET_RADIUS = 90;
+const IMPORTANT_SCORE = 3;
 
 function normalize(value) {
   return (value || '')
@@ -109,6 +110,10 @@ function scoreStory(story, terms) {
       score += 1;
     }
   });
+
+  if (score > 0 && story.isImportant === true) {
+    score += IMPORTANT_SCORE;
+  }
 
   return score;
 }

@@ -1,9 +1,13 @@
 [
-{% for story in getStoryList.items | sort(true, true, "_enabledAt") %}
+{% set storyPages = [stories1.items, stories2.items, stories3.items, stories4.items] %}
+{% for stories in storyPages %}
+{% set lastPage = loop.last %}
+{% for story in stories %}
   {
     "title": {{ story.title | dump | safe }},
     "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %},
     "date": {{ (story._enabledAt | date("MMMM D, YYYY")) | dump | safe }},
+    "isImportant": {% if story.isImportant == true %}true{% else %}false{% endif %},
     "category": {% if story.category.length %}{{ story.category[0].title | dump | safe }}{% else %}""{% endif %},
     "location": {% if story.location.length %}{{ story.location[0].title | dump | safe }}{% else %}""{% endif %},
     "dek": {% if story.tout.dek %}{{ story.tout.dek | dump | safe }}{% elif story.social.description %}{{ story.social.description | dump | safe }}{% else %}""{% endif %},
@@ -55,6 +59,7 @@
     "extraTableBlocks": [
       {% for block in story.extraTableBlocks %}{{ block.pastedText | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
     ]
-  }{% if not loop.last %},{% endif %}
+  }{% if not loop.last or not lastPage %},{% endif %}
+{% endfor %}
 {% endfor %}
 ]

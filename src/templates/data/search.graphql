@@ -1,8 +1,22 @@
 query($images: TSImagesConfig) {
-  getStoryList(size: 250, sort: [{field: "_enabledAt", order: "desc"}]) {
-    items {
+  stories1: getStoryList(size: 250, from: 0, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items { ...SearchStoryFields }
+  }
+  stories2: getStoryList(size: 250, from: 250, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items { ...SearchStoryFields }
+  }
+  stories3: getStoryList(size: 250, from: 500, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items { ...SearchStoryFields }
+  }
+  stories4: getStoryList(size: 250, from: 750, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items { ...SearchStoryFields }
+  }
+}
+
+fragment SearchStoryFields on Story {
       _contentTypeName
       _enabledAt
+      isImportant
       title
       slug
       category {
@@ -92,7 +106,4 @@ query($images: TSImagesConfig) {
         title
         description
       }
-    }
-    total
-  }
 }
