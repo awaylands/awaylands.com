@@ -281,7 +281,7 @@
         <span>By <a href="/about">Amy Seder</a></span>
         <time datetime="{{ storyPublishedDate }}">Published {{ storyPublishedDate | date("MMMM D, YYYY") }}</time>
         {% if storyModifiedDate and storyModifiedDate != storyPublishedDate %}
-        <time datetime="{{ storyModifiedDate }}">Updated {{ storyModifiedDate | date("MMMM D, YYYY") }}</time>
+        <time class="story-cover__updated" datetime="{{ storyModifiedDate }}">Updated {{ storyModifiedDate | date("MMMM D, YYYY") }}</time>
         {% endif %}
       </div>
 
