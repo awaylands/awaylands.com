@@ -10,8 +10,8 @@
     "hash": "0d37847fae178a9c3bab931bdaa1a50523650dd4b140db1599c50d2cf0b2f4d6"
   },
   "assets": {
-    "javascript": "javascripts/main.91618a6ec51b6585278d.js",
-    "javascriptSha256": "fc8da82fe4330cf4e2d3c30ef940d5779b183fdc5d43c827d88dfa865c6dc846",
+    "javascript": "javascripts/main.70e1b4c5099eb49439eb.js",
+    "javascriptSha256": "112bb7322ba778a1b710b744fbea081274f58b5e0bc9d7208af5a85ac6ba5fb9",
     "stylesheet": "stylesheets/main.861bc19b5b0eb8f5e968aa0e52d93cbf.css",
     "stylesheetSha256": "136a355dfd20778f75168b4f5cf19e5e487827aca1dfcfffe986e918fefd163d"
   },
@@ -24,7 +24,7 @@
     "src/templates/data/homepage.graphql": "772eaf52e0eec8ba049fcab470fdcd64b22ab1ff8c1b028555eb0ad4cac07720",
     "src/templates/data/stories.graphql": "5d299c9d7a1146ddbd1a3e315775f80be24043c0e7f88f29dffbd566550bcde8",
     "src/stylesheets/pages/_blog.scss": "bd65dce620d48e3d155aab25a9957081dcb12684dddae2c505950a270ea79fd4",
-    "src/javascripts/components/listings.vue": "dc89aef078abf2ddb4f3bcf273feaa9f5fd344314a5c162c01eb21b6d44b3902",
+    "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "_takeshape-schema-export/schema.json": "6fa771d4a8b8e212403d59392d7c5f2a0dd6d62986a97f0216671e91e580e3e7",
     "_takeshape-schema-export/schema-inner.json": "0b52a1e03b6d97158f9078d224ac5b3111d0718a350c7d0fe55d9bc77ddb86e1",
     "tsg.yml": "2e7626d20f472eb490c0ca0caae901976ec305d1c0c94a9b1d4c60cb2eb0348b"
