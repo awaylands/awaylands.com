@@ -27,6 +27,15 @@ if (branch !== baseline.branch) {
   fail(`run this only from branch ${baseline.branch}, not ${branch || 'a detached checkout'}.`);
 }
 
+try {
+  childProcess.execFileSync('git', ['merge-base', '--is-ancestor', baseline.baselineCommit, 'HEAD'], {
+    cwd: root,
+    stdio: 'ignore'
+  });
+} catch (error) {
+  fail(`the current commit does not descend from verified baseline ${baseline.baselineCommit}.`);
+}
+
 const status = git('status', '--porcelain');
 if (status) {
   fail('the production worktree has uncommitted changes.');
@@ -37,9 +46,22 @@ if (!fs.existsSync(takeShapeConfigPath)) {
   fail('the production TakeShape configuration is missing.');
 }
 
+if ((fs.statSync(takeShapeConfigPath).mode & 0o077) !== 0) {
+  fail('the production TakeShape configuration must use private file permissions (0600).');
+}
+
 const takeShapeConfig = JSON.parse(fs.readFileSync(takeShapeConfigPath, 'utf8'));
 if (takeShapeConfig.siteId !== baseline.siteId || takeShapeConfig.siteName !== baseline.siteName) {
   fail(`TakeShape must target ${baseline.siteName}.`);
+}
+
+const schemaSnapshotPath = path.join(root, '_takeshape-schema-export/schema.json');
+const schemaSnapshot = JSON.parse(fs.readFileSync(schemaSnapshotPath, 'utf8'));
+if (
+  schemaSnapshot.version !== baseline.schema.version ||
+  schemaSnapshot.schemaHash !== baseline.schema.hash
+) {
+  fail(`the stored TakeShape schema does not match verified backend schema version ${baseline.schema.version}.`);
 }
 
 Object.keys(baseline.sourceFiles).forEach(file => {

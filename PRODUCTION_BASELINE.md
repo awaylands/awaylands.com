@@ -9,6 +9,7 @@ Verified baseline:
 - Source commit: `0b4e6700f447e2315872372ca3ceee4502907991`
 - JavaScript: `main.91618a6ec51b6585278d.js`
 - Stylesheet: `main.40b648f5eb8084bbffbcd7fe991ad825.css`
+- TakeShape schema: version `212`
 
 ## Safe publishing workflow
 
@@ -21,7 +22,7 @@ Verified baseline:
 7. Publish `www.awaylands.com` from TakeShape.
 8. Verify the homepage, blog, category, destination, and story pages.
 
-`npm run deploy` refuses to run from another branch, a dirty worktree, the wrong TakeShape target, changed protected files, or unverified compiled assets.
+`npm run deploy` refuses to run from another branch, a commit outside the verified baseline history, a dirty worktree, the wrong TakeShape target, an exposed credential file, a stale backend schema snapshot, changed protected files, or unverified compiled assets.
 
 Older versions and the mixed work in progress state are archived under:
 

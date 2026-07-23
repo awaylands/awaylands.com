@@ -5,6 +5,10 @@
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
+  "schema": {
+    "version": 212,
+    "hash": "0d37847fae178a9c3bab931bdaa1a50523650dd4b140db1599c50d2cf0b2f4d6"
+  },
   "assets": {
     "javascript": "javascripts/main.91618a6ec51b6585278d.js",
     "stylesheet": "stylesheets/main.40b648f5eb8084bbffbcd7fe991ad825.css"
@@ -19,6 +23,8 @@
     "src/templates/data/stories.graphql": "5d299c9d7a1146ddbd1a3e315775f80be24043c0e7f88f29dffbd566550bcde8",
     "src/stylesheets/pages/_blog.scss": "690047c0691abffb9c2a316b522cc42074ef85384affd64f7719bedcdd515e3a",
     "src/javascripts/components/listings.vue": "dc89aef078abf2ddb4f3bcf273feaa9f5fd344314a5c162c01eb21b6d44b3902",
+    "_takeshape-schema-export/schema.json": "6fa771d4a8b8e212403d59392d7c5f2a0dd6d62986a97f0216671e91e580e3e7",
+    "_takeshape-schema-export/schema-inner.json": "0b52a1e03b6d97158f9078d224ac5b3111d0718a350c7d0fe55d9bc77ddb86e1",
     "tsg.yml": "2e7626d20f472eb490c0ca0caae901976ec305d1c0c94a9b1d4c60cb2eb0348b"
   }
 }

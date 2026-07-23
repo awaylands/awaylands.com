@@ -818,10 +818,6 @@
             "widget": "relationship",
             "instructions": "Optional. Choose up to four Editor's Picks. Automatic choices fill empty positions."
           },
-          "shoppingStory": {
-            "widget": "relationship",
-            "instructions": "Optional. Products come from this story's Shop the Edit."
-          },
           "travelEssentialsBackgroundImage": {
             "widget": "image",
             "instructions": "Optional. Full-bleed background for 03 - Travel Essentials."
@@ -850,10 +846,6 @@
             "widget": "shapeList",
             "instructions": "Optional. Add product image, title, and link overrides. Automatic Shop the Edit products fill empty positions."
           },
-          "categoryFeatureStories": {
-            "widget": "relationship",
-            "instructions": "Optional. Choose up to ten stories to provide the category tile images."
-          },
           "categoryTile1Category": {
             "widget": "relationship",
             "instructions": "Choose the category for tile 1."
@@ -865,6 +857,10 @@
           "categoryTile1Focus": {
             "widget": "dropdown",
             "instructions": "Choose the crop focus for tile 1."
+          },
+          "categoryTile1Description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the tile 1 title."
           },
           "categoryTile2Category": {
             "widget": "relationship",
@@ -878,6 +874,10 @@
             "widget": "dropdown",
             "instructions": "Choose the crop focus for tile 2."
           },
+          "categoryTile2Description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the tile 2 title."
+          },
           "categoryTile3Category": {
             "widget": "relationship",
             "instructions": "Choose the category for tile 3."
@@ -889,6 +889,10 @@
           "categoryTile3Focus": {
             "widget": "dropdown",
             "instructions": "Choose the crop focus for tile 3."
+          },
+          "categoryTile3Description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the tile 3 title."
           },
           "categoryTile4Category": {
             "widget": "relationship",
@@ -902,6 +906,10 @@
             "widget": "dropdown",
             "instructions": "Choose the crop focus for tile 4."
           },
+          "categoryTile4Description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the tile 4 title."
+          },
           "categoryTile5Category": {
             "widget": "relationship",
             "instructions": "Choose the category for tile 5."
@@ -913,6 +921,10 @@
           "categoryTile5Focus": {
             "widget": "dropdown",
             "instructions": "Choose the crop focus for tile 5."
+          },
+          "categoryTile5Description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the tile 5 title."
           },
           "categoryTile6Category": {
             "widget": "relationship",
@@ -926,6 +938,10 @@
             "widget": "dropdown",
             "instructions": "Choose the crop focus for tile 6."
           },
+          "categoryTile6Description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the tile 6 title."
+          },
           "categoryTile7Category": {
             "widget": "relationship",
             "instructions": "Choose the category for tile 7."
@@ -937,6 +953,10 @@
           "categoryTile7Focus": {
             "widget": "dropdown",
             "instructions": "Choose the crop focus for tile 7."
+          },
+          "categoryTile7Description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the tile 7 title."
           },
           "categoryTile8Category": {
             "widget": "relationship",
@@ -950,29 +970,9 @@
             "widget": "dropdown",
             "instructions": "Choose the crop focus for tile 8."
           },
-          "categoryTile9Category": {
-            "widget": "relationship",
-            "instructions": "Choose the category for tile 9."
-          },
-          "categoryTile9Image": {
-            "widget": "image",
-            "instructions": "Choose the image for tile 9."
-          },
-          "categoryTile9Focus": {
-            "widget": "dropdown",
-            "instructions": "Choose the crop focus for tile 9."
-          },
-          "categoryTile10Category": {
-            "widget": "relationship",
-            "instructions": "Choose the category for tile 10."
-          },
-          "categoryTile10Image": {
-            "widget": "image",
-            "instructions": "Choose the image for tile 10."
-          },
-          "categoryTile10Focus": {
-            "widget": "dropdown",
-            "instructions": "Choose the crop focus for tile 10."
+          "categoryTile8Description": {
+            "widget": "paragraphText",
+            "instructions": "Optional description shown beneath the tile 8 title."
           },
           "revolveSectionTitle": {
             "widget": "singleLineText",
@@ -1045,7 +1045,6 @@
           "heroImageFocus",
           "supportingStories",
           "editorsPicks",
-          "shoppingStory",
           "travelEssentialsBackgroundImage",
           "travelEssentialsBackgroundFocus",
           "travelEssentialsLabel",
@@ -1053,37 +1052,38 @@
           "travelEssentialsLinkText",
           "travelEssentialsLinkUrl",
           "travelEssentialsItems",
-          "categoryFeatureStories",
           "categoryTile1Image",
           "categoryTile1Focus",
           "categoryTile1Category",
+          "categoryTile1Description",
           "categoryTile2Image",
           "categoryTile2Focus",
           "categoryTile2Category",
+          "categoryTile2Description",
           "categoryTile3Image",
           "categoryTile3Focus",
           "categoryTile3Category",
+          "categoryTile3Description",
           "categoryTile4Image",
           "categoryTile4Focus",
           "categoryTile4Category",
+          "categoryTile4Description",
           "categoryTile5Image",
           "categoryTile5Focus",
           "categoryTile5Category",
+          "categoryTile5Description",
           "categoryTile6Image",
           "categoryTile6Focus",
           "categoryTile6Category",
+          "categoryTile6Description",
           "categoryTile7Image",
           "categoryTile7Focus",
           "categoryTile7Category",
+          "categoryTile7Description",
           "categoryTile8Image",
           "categoryTile8Focus",
           "categoryTile8Category",
-          "categoryTile9Image",
-          "categoryTile9Focus",
-          "categoryTile9Category",
-          "categoryTile10Image",
-          "categoryTile10Focus",
-          "categoryTile10Category",
+          "categoryTile8Description",
           "revolveSectionTitle",
           "revolveSectionLinkUrl",
           "revolveSectionEmbedHtml",
@@ -1128,6 +1128,10 @@
           },
           "location": {
             "widget": "relationship"
+          },
+          "continent": {
+            "widget": "relationship",
+            "instructions": "Optional. Use this when a story belongs to a broad region but should not have a country or destination page. Leave blank when Location already supplies the continent."
           },
           "postType": {
             "widget": "dropdown",
@@ -1202,6 +1206,7 @@
           "tout",
           "category",
           "location",
+          "continent",
           "social",
           "content",
           "contentBlocks",
@@ -1517,12 +1522,23 @@
           "title": {
             "widget": "singleLineText"
           },
+          "introText": {
+            "widget": "paragraphText",
+            "instructions": "Optional. Introductory text shown beneath the category page heading. The social description or an automatic description is used when blank."
+          },
+          "featuredStories": {
+            "widget": "relationship",
+            "instructions": "Optional. Choose up to three posts in display order: the first is the large feature and the next two appear under The Best of. Important posts are selected automatically when blank."
+          },
           "social": {
-            "widget": "shapeObject"
+            "widget": "shapeObject",
+            "instructions": "Optional search and sharing overrides."
           }
         },
         "order": [
           "title",
+          "introText",
+          "featuredStories",
           "social"
         ]
       }
@@ -1918,6 +1934,198 @@
         ]
       }
     },
+    "BestBeachesCard": {
+      "default": {
+        "properties": {
+          "story": {
+            "widget": "relationship",
+            "instructions": "Choose the full post this card links to."
+          },
+          "displayTitle": {
+            "widget": "singleLineText",
+            "instructions": "Optional shorter title used only on the Best Beaches page."
+          },
+          "image": {
+            "widget": "image",
+            "instructions": "Optional lead-photo override used only on the Best Beaches page."
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "story",
+          "displayTitle",
+          "image"
+        ]
+      }
+    },
+    "BestBeaches": {
+      "default": {
+        "properties": {
+          "heroEyebrow": {
+            "widget": "singleLineText"
+          },
+          "heroTitle": {
+            "widget": "singleLineText"
+          },
+          "heroSubtitle": {
+            "widget": "paragraphText"
+          },
+          "heroDescription": {
+            "widget": "paragraphText"
+          },
+          "heroImage": {
+            "widget": "image"
+          },
+          "introEyebrow": {
+            "widget": "singleLineText"
+          },
+          "introTitle": {
+            "widget": "paragraphText"
+          },
+          "introBody": {
+            "widget": "paragraphText"
+          },
+          "europeTitle": {
+            "widget": "singleLineText"
+          },
+          "europeDescription": {
+            "widget": "paragraphText"
+          },
+          "europeLinkText": {
+            "widget": "singleLineText"
+          },
+          "europeLinkUrl": {
+            "widget": "singleLineText"
+          },
+          "europeCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true
+          },
+          "greeceTitle": {
+            "widget": "singleLineText"
+          },
+          "greeceDescription": {
+            "widget": "paragraphText"
+          },
+          "greeceLinkText": {
+            "widget": "singleLineText"
+          },
+          "greeceLinkUrl": {
+            "widget": "singleLineText"
+          },
+          "greeceCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true
+          },
+          "hawaiiTitle": {
+            "widget": "singleLineText"
+          },
+          "hawaiiDescription": {
+            "widget": "paragraphText"
+          },
+          "hawaiiLinkText": {
+            "widget": "singleLineText"
+          },
+          "hawaiiLinkUrl": {
+            "widget": "singleLineText"
+          },
+          "hawaiiCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true
+          },
+          "northAmericaTitle": {
+            "widget": "singleLineText"
+          },
+          "northAmericaDescription": {
+            "widget": "paragraphText"
+          },
+          "northAmericaLinkText": {
+            "widget": "singleLineText"
+          },
+          "northAmericaLinkUrl": {
+            "widget": "singleLineText"
+          },
+          "northAmericaCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true
+          },
+          "featureEyebrow": {
+            "widget": "singleLineText"
+          },
+          "featureStory": {
+            "widget": "relationship"
+          },
+          "featureTitle": {
+            "widget": "singleLineText"
+          },
+          "featureDescription": {
+            "widget": "paragraphText"
+          },
+          "featureImage": {
+            "widget": "image"
+          },
+          "featureLinkText": {
+            "widget": "singleLineText"
+          },
+          "moreEyebrow": {
+            "widget": "singleLineText"
+          },
+          "moreTitle": {
+            "widget": "singleLineText"
+          },
+          "seoTitle": {
+            "widget": "singleLineText"
+          },
+          "seoDescription": {
+            "widget": "paragraphText"
+          },
+          "seoImage": {
+            "widget": "image"
+          }
+        },
+        "order": [
+          "heroEyebrow",
+          "heroTitle",
+          "heroSubtitle",
+          "heroDescription",
+          "heroImage",
+          "introEyebrow",
+          "introTitle",
+          "introBody",
+          "europeTitle",
+          "europeDescription",
+          "europeLinkText",
+          "europeLinkUrl",
+          "europeCards",
+          "greeceTitle",
+          "greeceDescription",
+          "greeceLinkText",
+          "greeceLinkUrl",
+          "greeceCards",
+          "hawaiiTitle",
+          "hawaiiDescription",
+          "hawaiiLinkText",
+          "hawaiiLinkUrl",
+          "hawaiiCards",
+          "northAmericaTitle",
+          "northAmericaDescription",
+          "northAmericaLinkText",
+          "northAmericaLinkUrl",
+          "northAmericaCards",
+          "featureEyebrow",
+          "featureStory",
+          "featureTitle",
+          "featureDescription",
+          "featureImage",
+          "featureLinkText",
+          "moreEyebrow",
+          "moreTitle",
+          "seoTitle",
+          "seoDescription",
+          "seoImage"
+        ]
+      }
+    },
     "Products": {
       "default": {
         "properties": {
@@ -1963,6 +2171,16 @@
     }
   },
   "queries": {
+    "getBestBeaches": {
+      "args": "TSGetSingletonArgs<BestBeaches>",
+      "resolver": {
+        "name": "shapedb:get",
+        "service": "shapedb",
+        "shapeName": "BestBeaches"
+      },
+      "shape": "BestBeaches",
+      "description": "Get the Best Beaches landing page"
+    },
     "getFilms": {
       "args": "TSGetSingletonArgs<Films>",
       "resolver": {
@@ -2255,6 +2473,16 @@
     }
   },
   "mutations": {
+    "updateBestBeaches": {
+      "args": "UpdateArgs<BestBeaches>",
+      "resolver": {
+        "name": "shapedb:update",
+        "service": "shapedb",
+        "shapeName": "BestBeaches"
+      },
+      "shape": "UpdateResult<BestBeaches>",
+      "description": "Update the Best Beaches landing page"
+    },
     "updateFilms": {
       "args": "UpdateArgs<Films>",
       "resolver": {
@@ -2707,6 +2935,350 @@
     }
   },
   "shapes": {
+    "BestBeachesCard": {
+      "id": "BestBeachesCardV1",
+      "name": "BestBeachesCard",
+      "title": "Best Beaches Post Card",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "story": {
+            "title": "Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:BestBeachesCard.StoryV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "displayTitle": {
+            "type": "string",
+            "title": "Short Display Title",
+            "description": "Optional. The full post title is used when blank.",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeachesCard.DisplayTitleV1"
+          },
+          "image": {
+            "title": "Lead Photo Override",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:BestBeachesCard.ImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "BestBeaches": {
+      "id": "BestBeachesPageV1",
+      "name": "BestBeaches",
+      "title": "Best Beaches Page",
+      "model": {
+        "type": "single"
+      },
+      "schema": {
+        "type": "object",
+        "properties": {
+          "heroEyebrow": {
+            "type": "string",
+            "title": "Header Label",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.HeroEyebrowV1"
+          },
+          "heroTitle": {
+            "type": "string",
+            "title": "Header Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.HeroTitleV1"
+          },
+          "heroSubtitle": {
+            "type": "string",
+            "title": "Header Subtitle",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.HeroSubtitleV1"
+          },
+          "heroDescription": {
+            "type": "string",
+            "title": "Header Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.HeroDescriptionV1"
+          },
+          "heroImage": {
+            "title": "Header Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:BestBeaches.HeroImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "introEyebrow": {
+            "type": "string",
+            "title": "Collection Label",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.IntroEyebrowV1"
+          },
+          "introTitle": {
+            "type": "string",
+            "title": "Collection Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.IntroTitleV1"
+          },
+          "introBody": {
+            "type": "string",
+            "title": "Collection Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.IntroBodyV1"
+          },
+          "europeTitle": {
+            "type": "string",
+            "title": "Europe Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.EuropeTitleV1"
+          },
+          "europeDescription": {
+            "type": "string",
+            "title": "Europe Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.EuropeDescriptionV1"
+          },
+          "europeLinkText": {
+            "type": "string",
+            "title": "Europe Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.EuropeLinkTextV1"
+          },
+          "europeLinkUrl": {
+            "type": "string",
+            "title": "Europe Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.EuropeLinkUrlV1"
+          },
+          "europeCards": {
+            "type": "array",
+            "title": "Europe Posts",
+            "items": {
+              "$ref": "#/shapes/BestBeachesCard/schema"
+            },
+            "@mapping": "shapedb:BestBeaches.EuropeCardsV1"
+          },
+          "greeceTitle": {
+            "type": "string",
+            "title": "Greece Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.GreeceTitleV1"
+          },
+          "greeceDescription": {
+            "type": "string",
+            "title": "Greece Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.GreeceDescriptionV1"
+          },
+          "greeceLinkText": {
+            "type": "string",
+            "title": "Greece Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.GreeceLinkTextV1"
+          },
+          "greeceLinkUrl": {
+            "type": "string",
+            "title": "Greece Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.GreeceLinkUrlV1"
+          },
+          "greeceCards": {
+            "type": "array",
+            "title": "Greece Posts",
+            "items": {
+              "$ref": "#/shapes/BestBeachesCard/schema"
+            },
+            "@mapping": "shapedb:BestBeaches.GreeceCardsV1"
+          },
+          "hawaiiTitle": {
+            "type": "string",
+            "title": "Hawaii Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.HawaiiTitleV1"
+          },
+          "hawaiiDescription": {
+            "type": "string",
+            "title": "Hawaii Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.HawaiiDescriptionV1"
+          },
+          "hawaiiLinkText": {
+            "type": "string",
+            "title": "Hawaii Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.HawaiiLinkTextV1"
+          },
+          "hawaiiLinkUrl": {
+            "type": "string",
+            "title": "Hawaii Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.HawaiiLinkUrlV1"
+          },
+          "hawaiiCards": {
+            "type": "array",
+            "title": "Hawaii Posts",
+            "items": {
+              "$ref": "#/shapes/BestBeachesCard/schema"
+            },
+            "@mapping": "shapedb:BestBeaches.HawaiiCardsV1"
+          },
+          "northAmericaTitle": {
+            "type": "string",
+            "title": "North America Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.NorthAmericaTitleV1"
+          },
+          "northAmericaDescription": {
+            "type": "string",
+            "title": "North America Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.NorthAmericaDescriptionV1"
+          },
+          "northAmericaLinkText": {
+            "type": "string",
+            "title": "North America Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.NorthAmericaLinkTextV1"
+          },
+          "northAmericaLinkUrl": {
+            "type": "string",
+            "title": "North America Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.NorthAmericaLinkUrlV1"
+          },
+          "northAmericaCards": {
+            "type": "array",
+            "title": "North America Posts",
+            "items": {
+              "$ref": "#/shapes/BestBeachesCard/schema"
+            },
+            "@mapping": "shapedb:BestBeaches.NorthAmericaCardsV1"
+          },
+          "featureEyebrow": {
+            "type": "string",
+            "title": "Feature Label",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.FeatureEyebrowV1"
+          },
+          "featureStory": {
+            "title": "Feature Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:BestBeaches.FeatureStoryV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "featureTitle": {
+            "type": "string",
+            "title": "Feature Display Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.FeatureTitleV1"
+          },
+          "featureDescription": {
+            "type": "string",
+            "title": "Feature Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.FeatureDescriptionV1"
+          },
+          "featureImage": {
+            "title": "Feature Image Override",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:BestBeaches.FeatureImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "featureLinkText": {
+            "type": "string",
+            "title": "Feature Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.FeatureLinkTextV1"
+          },
+          "moreEyebrow": {
+            "type": "string",
+            "title": "Ending Label",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.MoreEyebrowV1"
+          },
+          "moreTitle": {
+            "type": "string",
+            "title": "Ending Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.MoreTitleV1"
+          },
+          "seoTitle": {
+            "type": "string",
+            "title": "SEO Title",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.SeoTitleV1"
+          },
+          "seoDescription": {
+            "type": "string",
+            "title": "SEO Description",
+            "minLength": 0,
+            "@mapping": "shapedb:BestBeaches.SeoDescriptionV1"
+          },
+          "seoImage": {
+            "title": "SEO Sharing Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:BestBeaches.SeoImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
     "Films": {
       "id": "B1yt8LeNb",
       "name": "Films",
@@ -4451,23 +5023,6 @@
               "service": "shapedb"
             }
           },
-          "shoppingStory": {
-            "title": "Shopping Feature Story",
-            "description": "Optional. Products come from this story's Shop the Edit.",
-            "@mapping": "shapedb:Blog.MagazineShoppingStoryV2",
-            "@ref": "local:Story",
-            "@input": {
-              "@ref": "local:TSRelationship"
-            },
-            "@args": "TSRelationshipArgs",
-            "@resolver": {
-              "name": "shapedb:getRelated",
-              "service": "shapedb",
-              "options": {
-                "nullable": true
-              }
-            }
-          },
           "travelEssentialsBackgroundImage": {
             "title": "03 - Background Photo",
             "@mapping": "shapedb:Blog.MagazineTravelEssentialsBackgroundV1",
@@ -4581,26 +5136,6 @@
             },
             "@mapping": "shapedb:Blog.MagazineTravelEssentialsItemsV1"
           },
-          "categoryFeatureStories": {
-            "title": "Explore by Category Images",
-            "description": "Optional. Choose up to ten stories to provide tile images.",
-            "type": "array",
-            "items": {
-              "@ref": "local:Story"
-            },
-            "@mapping": "shapedb:Blog.MagazineCategoryStoriesV2",
-            "@input": {
-              "type": "array",
-              "items": {
-                "@ref": "local:TSRelationship"
-              }
-            },
-            "@args": "TSRelationshipArgs",
-            "@resolver": {
-              "name": "shapedb:getRelated",
-              "service": "shapedb"
-            }
-          },
           "categoryTile1Category": {
             "title": "04 - Tile 1 Category",
             "@mapping": "shapedb:Blog.MagazineCategoryTile1CategoryV1",
@@ -4697,6 +5232,12 @@
               }
             ],
             "@mapping": "shapedb:Blog.MagazineCategoryTile1FocusV1"
+          },
+          "categoryTile1Description": {
+            "type": "string",
+            "title": "04 - Tile 1 Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineCategoryTile1DescriptionV1"
           },
           "categoryTile2Category": {
             "title": "04 - Tile 2 Category",
@@ -4795,6 +5336,12 @@
             ],
             "@mapping": "shapedb:Blog.MagazineCategoryTile2FocusV1"
           },
+          "categoryTile2Description": {
+            "type": "string",
+            "title": "04 - Tile 2 Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineCategoryTile2DescriptionV1"
+          },
           "categoryTile3Category": {
             "title": "04 - Tile 3 Category",
             "@mapping": "shapedb:Blog.MagazineCategoryTile3CategoryV1",
@@ -4891,6 +5438,12 @@
               }
             ],
             "@mapping": "shapedb:Blog.MagazineCategoryTile3FocusV1"
+          },
+          "categoryTile3Description": {
+            "type": "string",
+            "title": "04 - Tile 3 Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineCategoryTile3DescriptionV1"
           },
           "categoryTile4Category": {
             "title": "04 - Tile 4 Category",
@@ -4989,6 +5542,12 @@
             ],
             "@mapping": "shapedb:Blog.MagazineCategoryTile4FocusV1"
           },
+          "categoryTile4Description": {
+            "type": "string",
+            "title": "04 - Tile 4 Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineCategoryTile4DescriptionV1"
+          },
           "categoryTile5Category": {
             "title": "04 - Tile 5 Category",
             "@mapping": "shapedb:Blog.MagazineCategoryTile5CategoryV1",
@@ -5085,6 +5644,12 @@
               }
             ],
             "@mapping": "shapedb:Blog.MagazineCategoryTile5FocusV1"
+          },
+          "categoryTile5Description": {
+            "type": "string",
+            "title": "04 - Tile 5 Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineCategoryTile5DescriptionV1"
           },
           "categoryTile6Category": {
             "title": "04 - Tile 6 Category",
@@ -5183,6 +5748,12 @@
             ],
             "@mapping": "shapedb:Blog.MagazineCategoryTile6FocusV1"
           },
+          "categoryTile6Description": {
+            "type": "string",
+            "title": "04 - Tile 6 Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineCategoryTile6DescriptionV1"
+          },
           "categoryTile7Category": {
             "title": "04 - Tile 7 Category",
             "@mapping": "shapedb:Blog.MagazineCategoryTile7CategoryV1",
@@ -5279,6 +5850,12 @@
               }
             ],
             "@mapping": "shapedb:Blog.MagazineCategoryTile7FocusV1"
+          },
+          "categoryTile7Description": {
+            "type": "string",
+            "title": "04 - Tile 7 Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineCategoryTile7DescriptionV1"
           },
           "categoryTile8Category": {
             "title": "04 - Tile 8 Category",
@@ -5377,199 +5954,11 @@
             ],
             "@mapping": "shapedb:Blog.MagazineCategoryTile8FocusV1"
           },
-          "categoryTile9Category": {
-            "title": "04 - Tile 9 Category",
-            "@mapping": "shapedb:Blog.MagazineCategoryTile9CategoryV1",
-            "@ref": "local:Category",
-            "@input": {
-              "@ref": "local:TSRelationship"
-            },
-            "@args": "TSRelationshipArgs",
-            "@resolver": {
-              "name": "shapedb:getRelated",
-              "service": "shapedb",
-              "options": {
-                "nullable": true
-              }
-            }
-          },
-          "categoryTile9Image": {
-            "title": "04 - Tile 9 Image",
-            "@mapping": "shapedb:Blog.MagazineCategoryTile9ImageV1",
-            "@backreference": {
-              "enabled": true
-            },
-            "@ref": "local:Asset",
-            "@input": {
-              "@ref": "local:TSRelationship"
-            },
-            "@args": "TSRelationshipArgs",
-            "@resolver": {
-              "name": "shapedb:getRelated",
-              "service": "shapedb",
-              "options": {
-                "nullable": true
-              }
-            }
-          },
-          "categoryTile9Focus": {
+          "categoryTile8Description": {
             "type": "string",
-            "title": "04 - Tile 9 Image Focus",
-            "default": "center",
-            "oneOf": [
-              {
-                "title": "Top Left",
-                "enum": [
-                  "top-left"
-                ]
-              },
-              {
-                "title": "Top",
-                "enum": [
-                  "top"
-                ]
-              },
-              {
-                "title": "Top Right",
-                "enum": [
-                  "top-right"
-                ]
-              },
-              {
-                "title": "Left",
-                "enum": [
-                  "left"
-                ]
-              },
-              {
-                "title": "Center - default",
-                "enum": [
-                  "center"
-                ]
-              },
-              {
-                "title": "Right",
-                "enum": [
-                  "right"
-                ]
-              },
-              {
-                "title": "Bottom Left",
-                "enum": [
-                  "bottom-left"
-                ]
-              },
-              {
-                "title": "Bottom",
-                "enum": [
-                  "bottom"
-                ]
-              },
-              {
-                "title": "Bottom Right",
-                "enum": [
-                  "bottom-right"
-                ]
-              }
-            ],
-            "@mapping": "shapedb:Blog.MagazineCategoryTile9FocusV1"
-          },
-          "categoryTile10Category": {
-            "title": "04 - Tile 10 Category",
-            "@mapping": "shapedb:Blog.MagazineCategoryTile10CategoryV1",
-            "@ref": "local:Category",
-            "@input": {
-              "@ref": "local:TSRelationship"
-            },
-            "@args": "TSRelationshipArgs",
-            "@resolver": {
-              "name": "shapedb:getRelated",
-              "service": "shapedb",
-              "options": {
-                "nullable": true
-              }
-            }
-          },
-          "categoryTile10Image": {
-            "title": "04 - Tile 10 Image",
-            "@mapping": "shapedb:Blog.MagazineCategoryTile10ImageV1",
-            "@backreference": {
-              "enabled": true
-            },
-            "@ref": "local:Asset",
-            "@input": {
-              "@ref": "local:TSRelationship"
-            },
-            "@args": "TSRelationshipArgs",
-            "@resolver": {
-              "name": "shapedb:getRelated",
-              "service": "shapedb",
-              "options": {
-                "nullable": true
-              }
-            }
-          },
-          "categoryTile10Focus": {
-            "type": "string",
-            "title": "04 - Tile 10 Image Focus",
-            "default": "center",
-            "oneOf": [
-              {
-                "title": "Top Left",
-                "enum": [
-                  "top-left"
-                ]
-              },
-              {
-                "title": "Top",
-                "enum": [
-                  "top"
-                ]
-              },
-              {
-                "title": "Top Right",
-                "enum": [
-                  "top-right"
-                ]
-              },
-              {
-                "title": "Left",
-                "enum": [
-                  "left"
-                ]
-              },
-              {
-                "title": "Center - default",
-                "enum": [
-                  "center"
-                ]
-              },
-              {
-                "title": "Right",
-                "enum": [
-                  "right"
-                ]
-              },
-              {
-                "title": "Bottom Left",
-                "enum": [
-                  "bottom-left"
-                ]
-              },
-              {
-                "title": "Bottom",
-                "enum": [
-                  "bottom"
-                ]
-              },
-              {
-                "title": "Bottom Right",
-                "enum": [
-                  "bottom-right"
-                ]
-              }
-            ],
-            "@mapping": "shapedb:Blog.MagazineCategoryTile10FocusV1"
+            "title": "04 - Tile 8 Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Blog.MagazineCategoryTile8DescriptionV1"
           },
           "revolveSectionTitle": {
             "type": "string",
@@ -6149,6 +6538,32 @@
               "enabled": true
             },
             "@mapping": "shapedb:Story.rydHOJqgb"
+          },
+          "continent": {
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            },
+            "type": "array",
+            "items": {
+              "@ref": "local:Continent"
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "title": "Continent / Region",
+            "description": "Optional direct region tag for stories that should appear on a continent page without creating a country Location.",
+            "@backreference": {
+              "enabled": true
+            },
+            "@mapping": "shapedb:Story.DirectContinentV1"
           },
           "postType": {
             "type": "string",
@@ -6893,6 +7308,34 @@
             "title": "Title",
             "minLength": 1,
             "@mapping": "shapedb:Category.r1qtmkcxZ"
+          },
+          "introText": {
+            "type": "string",
+            "title": "Category Page Intro Text",
+            "description": "Optional. Introductory text shown beneath the category page heading.",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryPageIntroTextV1"
+          },
+          "featuredStories": {
+            "title": "Featured Posts",
+            "description": "Optional. Choose up to three posts in display order.",
+            "type": "array",
+            "maxItems": 3,
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Category.CategoryPageFeaturedStoriesV1",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb"
+            }
           },
           "social": {
             "title": "Social",
