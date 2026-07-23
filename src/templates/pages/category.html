@@ -39,7 +39,7 @@
 {% if page.title == "Travel Guides" or page.title == "Packing Guides" or page.title == "Instagram Guides" %}
   {% set categoryHeadingSuffix = "Tips & Inspiration" %}
 {% endif %}
-{% set categoryDescription = page.social.description %}
+{% set categoryDescription = page.introText or page.social.description %}
 {% if not categoryDescription %}
   {% set categoryDescription = "Explore the best " + categoryTopic + " stories, expert tips, inspiring ideas, and practical resources from Away Lands." %}
 {% endif %}
@@ -107,8 +107,8 @@
         <span>Curated by Amy Seder</span>
       </div>
     </div>
-    {% for story in sortedStories if story.isImportant != false %}
-    {% if loop.first %}
+    {% if page.featuredStories.length %}
+    {% set story = page.featuredStories[0] %}
     <a class="category-hub__hero-story" href="{{ storyUrl(story) }}">
       <span class="category-hub__hero-image">{{ storyImage(story, "(min-width: 900px) 52vw, 100vw", true) }}</span>
       <span class="category-hub__hero-overlay">
@@ -117,8 +117,20 @@
         <span>Read the guide</span>
       </span>
     </a>
+    {% else %}
+      {% for story in sortedStories if story.isImportant != false %}
+      {% if loop.first %}
+      <a class="category-hub__hero-story" href="{{ storyUrl(story) }}">
+        <span class="category-hub__hero-image">{{ storyImage(story, "(min-width: 900px) 52vw, 100vw", true) }}</span>
+        <span class="category-hub__hero-overlay">
+          <small>Editor’s essential</small>
+          <strong>{{ story.title }}</strong>
+          <span>Read the guide</span>
+        </span>
+      </a>
+      {% endif %}
+      {% endfor %}
     {% endif %}
-    {% endfor %}
   </header>
 
   <nav class="category-hub__topics" aria-label="Explore blog categories">
@@ -130,7 +142,7 @@
     </div>
   </nav>
 
-  {% if sortedStories.length > 1 %}
+  {% if (page.featuredStories.length > 1) or (not page.featuredStories.length and sortedStories.length > 1) %}
   <section class="category-best" aria-labelledby="category-best-title">
     <header class="category-section-heading">
       <div>
@@ -141,6 +153,23 @@
     </header>
 
     <div class="category-best__grid">
+      {% if page.featuredStories.length %}
+      {% for story in page.featuredStories %}
+      {% if loop.index > 1 %}
+      <article class="category-best__card">
+        <a href="{{ storyUrl(story) }}">
+          <span class="category-best__image">{{ storyImage(story, "(min-width: 900px) 42vw, 100vw", false) }}</span>
+          <span class="category-best__copy">
+            <small>Best of {{ page.title }}</small>
+            <h3>{{ story.title }}</h3>
+            {% if story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
+            <strong>Read more</strong>
+          </span>
+        </a>
+      </article>
+      {% endif %}
+      {% endfor %}
+      {% else %}
       {% for story in sortedStories if story.isImportant != false %}
       {% if loop.index > 1 and loop.index < 4 %}
       <article class="category-best__card">
@@ -156,6 +185,7 @@
       </article>
       {% endif %}
       {% endfor %}
+      {% endif %}
     </div>
   </section>
   {% endif %}
@@ -169,6 +199,11 @@
     </header>
 
     <div class="category-latest__grid">
+      {% if page.featuredStories.length %}
+      {% for story in sortedStories %}
+        {{ latestStoryCard(story, page.title) }}
+      {% endfor %}
+      {% else %}
       {% for story in sortedStories if story.isImportant != false %}
       {% if loop.index > 3 %}
         {{ latestStoryCard(story, page.title) }}
@@ -177,13 +212,9 @@
       {% for story in sortedStories if story.isImportant == false %}
         {{ latestStoryCard(story, page.title) }}
       {% endfor %}
+      {% endif %}
     </div>
   </section>
 
-  <aside class="category-hub__footer" aria-label="About Away Lands">
-    <p>Travel deeper with Away Lands</p>
-    <h2>Beautiful places, practical details, and stories worth saving.</h2>
-    <div><a href="/blog/">Explore all stories</a><a href="/about">Meet Amy</a></div>
-  </aside>
 </div>
 {% endblock %}

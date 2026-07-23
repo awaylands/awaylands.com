@@ -6,8 +6,22 @@ query {
     items {
       _contentTypeName
       title
+      introText
+      featuredStories {
+        _id
+        _enabledAt
+        isImportant
+        title
+        slug
+        tout {
+          image { path }
+          secondaryImage { path }
+          dek
+        }
+      }
       storySet(size: 250) {
         items {
+          _id
           _enabledAt
           isImportant
           title
