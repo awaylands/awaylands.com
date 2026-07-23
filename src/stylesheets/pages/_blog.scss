@@ -715,8 +715,9 @@
 
 .bm-categories__grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.8rem, 0.9vw, 1.4rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
 }
 
 .bm-revolve {
@@ -781,6 +782,11 @@
   margin-bottom: clamp(1.4rem, 2vw, 2.8rem);
 }
 
+.bm-categories {
+  padding-right: clamp(1.5rem, 2.5vw, 4.5rem);
+  padding-left: clamp(1.5rem, 2.5vw, 4.5rem);
+}
+
 .bm-categories .bm-section-heading span {
   font-size: clamp(1.15rem, 0.95vw, 1.6rem);
 }
@@ -818,7 +824,7 @@
   position: absolute;
 }
 
-.bm-category > span:last-child {
+.bm-category__copy {
   bottom: 2.5rem;
   left: 1rem;
   position: absolute;
@@ -837,20 +843,22 @@
   text-transform: uppercase;
 }
 
-.bm-category small {
+.bm-category__description {
   color: #fff;
   display: block;
-  font-family: 'Still Old Money', Georgia, serif;
-  font-size: 2.4rem;
-  font-style: italic;
-  letter-spacing: 0.06em;
-  margin-top: 0.8rem;
+  font-family: 'Still EB Garamond', Georgia, serif;
+  font-size: clamp(1.45rem, 1.25vw, 1.8rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.25;
+  margin: 0.9rem auto 0;
+  max-width: 25rem;
 }
 
 .body--blog-magazine .bm-category:hover strong,
 .body--blog-magazine .bm-category:focus strong,
-.body--blog-magazine .bm-category:hover small,
-.body--blog-magazine .bm-category:focus small {
+.body--blog-magazine .bm-category:hover .bm-category__description,
+.body--blog-magazine .bm-category:focus .bm-category__description {
   color: var(--bm-pink) !important;
 }
 
