@@ -148,10 +148,6 @@ query {
       _contentTypeName title slug category { title }
       tout { image { path } dek }
     }
-    shoppingStory {
-      _contentTypeName title slug
-      shopEditItems { image { path } title productUrl productEmbedHtml }
-    }
     travelEssentialsBackgroundImage { path }
     travelEssentialsBackgroundFocus
     travelEssentialsLabel
@@ -159,10 +155,6 @@ query {
     travelEssentialsLinkText
     travelEssentialsLinkUrl
     travelEssentialsItems { image { path } title description productUrl productEmbedHtml }
-    categoryFeatureStories {
-      _contentTypeName title slug category { title }
-      tout { image { path } dek }
-    }
     categoryTile1Category { title }
     categoryTile1Image { path }
     categoryTile1Focus
@@ -187,12 +179,6 @@ query {
     categoryTile8Category { title }
     categoryTile8Image { path }
     categoryTile8Focus
-    categoryTile9Category { title }
-    categoryTile9Image { path }
-    categoryTile9Focus
-    categoryTile10Category { title }
-    categoryTile10Image { path }
-    categoryTile10Focus
     revolveSectionTitle
     revolveSectionLinkUrl
     revolveSectionEmbedHtml

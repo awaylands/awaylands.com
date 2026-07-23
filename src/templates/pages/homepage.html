@@ -4,41 +4,6 @@
 {% block body_class %}body--homepage{% endblock %}
 
 {% block content %}
-{% macro blogCard(story, modifier, imageSizes, isPriority) %}
-<div class="blog-card{% if modifier %} blog-card--{{ modifier }}{% endif %}">
-  <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
-    {% if story.tout and story.tout.image %}
-    <div class="blog-card__image">
-      <img srcset="{{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
-        {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-        {{ story.tout.image.path | image({w: 900, auto: 'compress,format'}) }} 900w,
-        {{ story.tout.image.path | image({w: 600, auto: 'compress,format'}) }} 600w"
-           sizes="{{ imageSizes }}"
-           src="{{ story.tout.image.path | image({w: 900, auto: 'compress,format'}) }}"
-           data-image
-           loading="{% if isPriority %}eager{% else %}lazy{% endif %}"
-           decoding="async"
-           {% if isPriority %}fetchpriority="high"{% endif %}
-           v-imageloaded
-      />
-    </div>
-    {% endif %}
-
-    <div class="blog-card__content">
-      {% if story.category.length %}
-      <div class="blog-card__eyebrow">{{ story.category[0].title }}</div>
-      {% endif %}
-
-      <h2 class="blog-card__heading">{{ story.title }}</h2>
-
-      {% if story.tout.dek %}
-      <p class="blog-card__dek">{{ story.tout.dek }}</p>
-      {% endif %}
-    </div>
-  </a>
-</div>
-{% endmacro %}
-
 <div class="hero">
   <div class="slides" {% if page.slider.interval %}data-interval="{{ page.slider.interval }}"{% endif %} v-slides>
     <div class="slides__container">
@@ -62,61 +27,6 @@
     </div>
   </div>
 </div>
-
-{# The legacy homepage blog modules are intentionally retired. The homepage
-   now moves from the opening image directly into the magazine transition. #}
-{% if false %}
-<section class="blog-featured" aria-label="Featured blog post">
-  <div class="blog-featured__header">
-    <h1 class="blog-featured__heading">Featured</h1>
-  </div>
-
-  {% if blog.featuredStory %}
-  <div class="blog-featured__pin" data-story-dedupe-featured>
-    {{ blogCard(blog.featuredStory, "pinned", "(min-width: 1200px) 40vw, (min-width: 900px) 42vw, 100vw", true) }}
-  </div>
-  {% else %}
-    {% for category in featuredCategories.items %}
-      {% if category.title == "* Most Popular Posts *" %}
-        {% for story in category.storySet.items %}
-          {% if story.title == "Best Travel Photography Cameras and Gear (From a Professional Photographer)" %}
-          <div class="blog-featured__pin" data-story-dedupe-featured>
-            {{ blogCard(story, "pinned", "(min-width: 1200px) 40vw, (min-width: 900px) 42vw, 100vw", true) }}
-          </div>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-</section>
-
-<section class="blog-category-strips" aria-label="Featured blog categories">
-  {% for section in [
-    {"title": "Most Popular Posts", "slug": "most-popular-posts", "source": "* Most Popular Posts *"},
-    {"title": "Best Beaches", "slug": "best-beaches", "source": "Best Beaches"},
-    {"title": "Packing Guides", "slug": "packing-guides", "source": "Packing Guides"},
-    {"title": "Travel Guides", "slug": "travel-guides", "source": "Travel Guides"}
-  ] %}
-    <div class="blog-category-strip" data-story-dedupe-section data-story-limit="6">
-      <div class="blog-category-strip__header">
-        <h2 class="blog-category-strip__heading">{{ section.title }}</h2>
-        <a class="blog-category-strip__link" href="/category/{{ section.slug }}">View All</a>
-      </div>
-
-      <ul class="blog-category-strip__list">
-        {% for category in featuredCategories.items %}
-          {% if category.title == section.source %}
-            {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
-              <li data-story-dedupe-item>{{ blogCard(story, "compact", "(min-width: 1200px) 24vw, (min-width: 700px) 33vw, 100vw", false) }}</li>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-  {% endfor %}
-</section>
-{% include "partials/blog-story-dedupe.html" %}
-{% endif %}
 
 <section class="homepage-blog-transition" aria-labelledby="homepage-blog-transition-title">
   <div>

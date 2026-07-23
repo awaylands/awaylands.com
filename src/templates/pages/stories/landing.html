@@ -184,20 +184,18 @@
       </header>
       <div class="bm-categories__grid">
         {% set categoryCards = [
-          {category: page.categoryTile1Category, image: page.categoryTile1Image, focus: page.categoryTile1Focus, title: "Destinations", url: "/destinations", story: page.categoryFeatureStories[0] or sortedStories[4]},
-          {category: page.categoryTile2Category, image: page.categoryTile2Image, focus: page.categoryTile2Focus, title: "Hotels", url: "/category/hotels-and-resorts", story: page.categoryFeatureStories[1] or sortedStories[6]},
-          {category: page.categoryTile3Category, image: page.categoryTile3Image, focus: page.categoryTile3Focus, title: "Style", url: "/category/style", story: page.categoryFeatureStories[2] or sortedStories[8]},
-          {category: page.categoryTile4Category, image: page.categoryTile4Image, focus: page.categoryTile4Focus, title: "Packing Guides", url: "/category/packing-guides", story: page.categoryFeatureStories[3] or sortedStories[10]},
-          {category: page.categoryTile5Category, image: page.categoryTile5Image, focus: page.categoryTile5Focus, title: "Photography", url: "/category/photography", story: page.categoryFeatureStories[4] or sortedStories[12]},
-          {category: page.categoryTile6Category, image: page.categoryTile6Image, focus: page.categoryTile6Focus, title: "Travel Guides", url: "/category/travel-guides", story: page.categoryFeatureStories[5] or sortedStories[14]},
-          {category: page.categoryTile7Category, image: page.categoryTile7Image, focus: page.categoryTile7Focus, title: "Food & Drink", url: "/category/food-and-drink", story: page.categoryFeatureStories[6] or sortedStories[16]},
-          {category: page.categoryTile8Category, image: page.categoryTile8Image, focus: page.categoryTile8Focus, title: "Things To Do", url: "/category/things-to-do", story: page.categoryFeatureStories[7] or sortedStories[18]},
-          {category: page.categoryTile9Category, image: page.categoryTile9Image, focus: page.categoryTile9Focus, title: "Travel Tips", url: "/category/travel-tips", story: page.categoryFeatureStories[8] or sortedStories[20]},
-          {category: page.categoryTile10Category, image: page.categoryTile10Image, focus: page.categoryTile10Focus, title: "Inspiration", url: "/category/inspiration", story: page.categoryFeatureStories[9] or sortedStories[22]}
+          {category: page.categoryTile1Category, image: page.categoryTile1Image, focus: page.categoryTile1Focus, title: "Packing Guides", url: "/category/packing-guides", story: sortedStories[4]},
+          {category: page.categoryTile2Category, image: page.categoryTile2Image, focus: page.categoryTile2Focus, title: "Hotels", url: "/category/hotels", story: sortedStories[6]},
+          {category: page.categoryTile3Category, image: page.categoryTile3Image, focus: page.categoryTile3Focus, title: "Travel Style", url: "/category/travel-style", story: sortedStories[8]},
+          {category: page.categoryTile4Category, image: page.categoryTile4Image, focus: page.categoryTile4Focus, title: "Travel Guides", url: "/category/travel-guides", story: sortedStories[10]},
+          {category: page.categoryTile5Category, image: page.categoryTile5Image, focus: page.categoryTile5Focus, title: "Photography", url: "/category/photography", story: sortedStories[12]},
+          {category: page.categoryTile6Category, image: page.categoryTile6Image, focus: page.categoryTile6Focus, title: "Wedding And Honeymoon", url: "/category/wedding-and-honeymoon", story: sortedStories[14]},
+          {category: page.categoryTile7Category, image: page.categoryTile7Image, focus: page.categoryTile7Focus, title: "Beauty", url: "/category/beauty", story: sortedStories[16]},
+          {category: page.categoryTile8Category, image: page.categoryTile8Image, focus: page.categoryTile8Focus, title: "Wellness", url: "/category/wellness", story: sortedStories[18]}
         ] %}
         {% for categoryCard in categoryCards %}
         <a class="bm-category" href="{% if categoryCard.category %}{{ categoryCard.category | route('category') }}{% else %}{{ categoryCard.url }}{% endif %}">
-          <span class="bm-category__image" data-focus="{{ categoryCard.focus or 'center' }}">{% if categoryCard.image %}{{ assetImage(categoryCard.image, '(min-width: 900px) 20vw, 90vw', false) }}{% else %}{{ storyImage(categoryCard.story, '(min-width: 900px) 20vw, 90vw', false) }}{% endif %}</span>
+          <span class="bm-category__image" data-focus="{{ categoryCard.focus or 'center' }}">{% if categoryCard.image %}{{ assetImage(categoryCard.image, '(min-width: 900px) 25vw, 90vw', false) }}{% else %}{{ storyImage(categoryCard.story, '(min-width: 900px) 25vw, 90vw', false) }}{% endif %}</span>
           <span><strong>{{ categoryCard.category.title or categoryCard.title }}</strong><small>View All <i>→</i></small></span>
         </a>
         {% endfor %}

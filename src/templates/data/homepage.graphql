@@ -53,7 +53,6 @@ query {
     heroImageFocus
     supportingStories { _contentTypeName title slug category { title } tout { image { path } dek } }
     editorsPicks { _contentTypeName title slug category { title } tout { image { path } dek } }
-    shoppingStory { _contentTypeName title slug shopEditItems { image { path } title productUrl productEmbedHtml } }
     travelEssentialsBackgroundImage { path }
     travelEssentialsBackgroundFocus
     travelEssentialsLabel
@@ -61,7 +60,6 @@ query {
     travelEssentialsLinkText
     travelEssentialsLinkUrl
     travelEssentialsItems { image { path } title description productUrl productEmbedHtml }
-    categoryFeatureStories { _contentTypeName title slug category { title } tout { image { path } dek } }
     categoryTile1Category { title }
     categoryTile1Image { path }
     categoryTile1Focus
@@ -86,12 +84,6 @@ query {
     categoryTile8Category { title }
     categoryTile8Image { path }
     categoryTile8Focus
-    categoryTile9Category { title }
-    categoryTile9Image { path }
-    categoryTile9Focus
-    categoryTile10Category { title }
-    categoryTile10Image { path }
-    categoryTile10Focus
     revolveSectionTitle
     revolveSectionLinkUrl
     revolveSectionEmbedHtml
@@ -107,41 +99,6 @@ query {
     rightFullBleedMobileImageOverride { path }
     rightFullBleedMobileImageFocus
     latestStories { _contentTypeName title slug category { title } tout { image { path } dek } }
-  }
-
-  recentStories: getStoryList(size: 8, sort: [{field: "_enabledAt", order: "desc"}]) {
-    items { _contentTypeName _enabledAt title slug social { title } category { title } tout { image { path } } }
-  }
-
-  shoppingStories: getStoryList(
-    size: 8,
-    where: {shopEditItems: {productUrl: {regexp: ".+"}}},
-    sort: [{field: "_enabledAt", order: "desc"}]
-  ) {
-    items { _contentTypeName title slug shopEditItems { image { path } title productUrl productEmbedHtml } }
-  }
-
-  featuredCategories: getCategoryList {
-    items {
-      title
-      storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
-        items {
-          _contentTypeName
-          _enabledAt
-          title
-          slug
-          category {
-            title
-          }
-          tout {
-            image {
-              path
-            }
-            dek
-          }
-        }
-      }
-    }
   }
 
   stories: getStoryList {
