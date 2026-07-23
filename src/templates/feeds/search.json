@@ -1,4 +1,4 @@
-  [
+    [
 {% set storyPages = [stories1.items, stories2.items, stories3.items, stories4.items] %}
 {% for stories in storyPages %}
 {% set lastPage = loop.last %}
