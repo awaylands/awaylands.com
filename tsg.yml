@@ -6,7 +6,6 @@ context:
   site: data/site.graphql
   assets: ../../static/assets/manifest.json
   favicon: ../../static/assets/favicon-mainfest.json
-  isStaging: ${env.IS_STAGING}
 
 images: &images
   default:
