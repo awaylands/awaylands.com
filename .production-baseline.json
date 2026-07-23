@@ -11,7 +11,9 @@
   },
   "assets": {
     "javascript": "javascripts/main.91618a6ec51b6585278d.js",
-    "stylesheet": "stylesheets/main.40b648f5eb8084bbffbcd7fe991ad825.css"
+    "javascriptSha256": "fc8da82fe4330cf4e2d3c30ef940d5779b183fdc5d43c827d88dfa865c6dc846",
+    "stylesheet": "stylesheets/main.40b648f5eb8084bbffbcd7fe991ad825.css",
+    "stylesheetSha256": "fb30b7e08b502998e0251629beaf4396e6d2e1752bb946b3e2fa5803e17acf18"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "50f408b7738bffed0bc8ac4991b7a854dbe702d73324324759ae3d8087e54b26",

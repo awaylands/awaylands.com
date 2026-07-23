@@ -86,4 +86,11 @@ if (
   fail('compiled assets do not match the verified production baseline.');
 }
 
+if (
+  sha256(path.join('static/assets', baseline.assets.javascript)) !== baseline.assets.javascriptSha256 ||
+  sha256(path.join('static/assets', baseline.assets.stylesheet)) !== baseline.assets.stylesheetSha256
+) {
+  fail('compiled asset contents do not match the verified production baseline.');
+}
+
 process.stdout.write(`Production baseline verified for ${baseline.siteName}.\n`);

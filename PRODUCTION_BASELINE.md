@@ -22,7 +22,9 @@ Verified baseline:
 7. Publish `www.awaylands.com` from TakeShape.
 8. Verify the homepage, blog, category, destination, and story pages.
 
-`npm run deploy` refuses to run from another branch, a commit outside the verified baseline history, a dirty worktree, the wrong TakeShape target, an exposed credential file, a stale backend schema snapshot, changed protected files, or unverified compiled assets.
+`npm run deploy` refuses to run from another branch, a commit outside the verified baseline history, a dirty worktree, the wrong TakeShape target, an exposed credential file, a stale backend schema snapshot, changed protected files, or compiled assets whose filenames or contents differ from the verified live files.
+
+The legacy Webpack build is not byte-reproducible with the current installed dependency tree. Build and test source changes in the development checkout. Only copy reviewed assets into this production worktree, then record their filenames and SHA-256 hashes after live visual verification.
 
 Older versions and the mixed work in progress state are archived under:
 
