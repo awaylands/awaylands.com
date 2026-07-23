@@ -6,8 +6,8 @@
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
   "schema": {
-    "version": 212,
-    "hash": "0d37847fae178a9c3bab931bdaa1a50523650dd4b140db1599c50d2cf0b2f4d6"
+    "version": 213,
+    "hash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0"
   },
   "assets": {
     "javascript": "javascripts/main.70e1b4c5099eb49439eb.js",
@@ -16,17 +16,18 @@
     "stylesheetSha256": "136a355dfd20778f75168b4f5cf19e5e487827aca1dfcfffe986e918fefd163d"
   },
   "sourceFiles": {
-    "src/templates/pages/stories/detail.html": "50f408b7738bffed0bc8ac4991b7a854dbe702d73324324759ae3d8087e54b26",
+    "src/templates/pages/stories/detail.html": "8bdf82317a9969698cb3ef7ae800c2289afbbb494ea9f6b2af43cd8d4630c7e1",
     "src/templates/pages/stories/landing.html": "e019f320e636958194dc28d77031de1d6df9f199df43bf2656c1184d644f9c6e",
     "src/templates/pages/category.html": "17064e433b871d4a06ea7eb11375feb2895a8329ea93f51250dd019b6861027d",
     "src/templates/pages/destinations.html": "817c84946fd878545c3382aae8fe6d7c2759d376db92f374ed46a99e637ce491",
     "src/templates/pages/film.html": "a2651aa15596f6b78f6a0c5f23a686c47bb3abf9dd3a30279985f475f6e82a1b",
     "src/templates/data/homepage.graphql": "772eaf52e0eec8ba049fcab470fdcd64b22ab1ff8c1b028555eb0ad4cac07720",
-    "src/templates/data/stories.graphql": "5d299c9d7a1146ddbd1a3e315775f80be24043c0e7f88f29dffbd566550bcde8",
+    "src/templates/data/stories.graphql": "c5c9ca859cb18d804b0973caeaab5f661ded08a747ad6d7df665eaae43946b73",
+    "src/templates/data/story-slugs.graphql": "021869b002b11f90d65228adf805529ab4f30d6d52f6524c32cd344f5db6008e",
     "src/stylesheets/pages/_blog.scss": "bd65dce620d48e3d155aab25a9957081dcb12684dddae2c505950a270ea79fd4",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
-    "_takeshape-schema-export/schema.json": "6fa771d4a8b8e212403d59392d7c5f2a0dd6d62986a97f0216671e91e580e3e7",
-    "_takeshape-schema-export/schema-inner.json": "0b52a1e03b6d97158f9078d224ac5b3111d0718a350c7d0fe55d9bc77ddb86e1",
+    "_takeshape-schema-export/schema.json": "b64807238b3b5a2c1626330b776357a3a70e896203328e257a81b0364cd77411",
+    "_takeshape-schema-export/schema-inner.json": "aa6ea7684cb25382d64b10116b2b30690d8c9d5a23d03c7b54653539a8680ffd",
     "tsg.yml": "2e7626d20f472eb490c0ca0caae901976ec305d1c0c94a9b1d4c60cb2eb0348b"
   }
 }

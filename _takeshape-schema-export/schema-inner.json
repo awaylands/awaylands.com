@@ -1636,6 +1636,10 @@
           "image": {
             "widget": "image"
           },
+          "caption": {
+            "widget": "paragraphText",
+            "instructions": "Optional. Overrides the automatic Location or Continent label on the lead image."
+          },
           "secondaryImage": {
             "widget": "image"
           },
@@ -1645,6 +1649,7 @@
         },
         "order": [
           "image",
+          "caption",
           "secondaryImage",
           "dek"
         ]
@@ -6898,6 +6903,13 @@
               "enabled": true
             },
             "@mapping": "shapedb:StoryTout.rksJXJcxZ"
+          },
+          "caption": {
+            "minLength": 0,
+            "type": "string",
+            "title": "Lead Image Caption",
+            "description": "Optional caption shown on the story lead image. When blank, the first Location or Continent is used.",
+            "@mapping": "shapedb:StoryTout.LeadImageCaptionV1"
           },
           "secondaryImage": {
             "@args": "TSRelationshipArgs",

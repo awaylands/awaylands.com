@@ -175,6 +175,7 @@ query($images: TSImagesConfig) {
         image {
           path
         }
+        caption
         secondaryImage {
           path
         }

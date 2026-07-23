@@ -302,7 +302,9 @@
           data-story-hero
         >
       </picture>
-      {% if page.location.length %}
+      {% if page.tout.caption %}
+      <figcaption><span>{{ page.tout.caption }}</span></figcaption>
+      {% elif page.location.length %}
       <figcaption><span>{{ page.location[0].title }}</span></figcaption>
       {% endif %}
     </figure>

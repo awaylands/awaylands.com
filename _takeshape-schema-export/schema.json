@@ -3,10 +3,10 @@
   "environment": "production",
   "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
   "created": "2017-03-15T23:43:16.289Z",
-  "schemaHash": "0d37847fae178a9c3bab931bdaa1a50523650dd4b140db1599c50d2cf0b2f4d6",
-  "updated": "2026-07-23T04:48:35.843Z",
-  "version": 212,
-  "versionAt": "2026-07-23T04:48:35.843Z",
+  "schemaHash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0",
+  "updated": "2026-07-23T17:19:53.763Z",
+  "version": 213,
+  "versionAt": "2026-07-23T17:19:53.763Z",
   "versionBy": "2ebbde81-64ae-42d6-85de-cf26286a4780",
   "schema": {
     "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
@@ -1136,13 +1136,13 @@
             "category": {
               "widget": "relationship"
             },
-            "location": {
-              "widget": "relationship"
-            },
-            "continent": {
-              "widget": "relationship",
-              "instructions": "Optional. Use this when a story belongs to a broad region but should not have a country or destination page. Leave blank when Location already supplies the continent."
-            },
+          "location": {
+            "widget": "relationship"
+          },
+          "continent": {
+            "widget": "relationship",
+            "instructions": "Optional. Use this when a story belongs to a broad region but should not have a country or destination page. Leave blank when Location already supplies the continent."
+          },
             "postType": {
               "widget": "dropdown",
               "instructions": "Auto is recommended. It detects quick answers, guides, reviews, and shopping posts; choose a type to override it."
@@ -1214,10 +1214,10 @@
             "publishedDate",
             "slug",
             "tout",
-            "category",
-            "location",
-            "continent",
-            "social",
+          "category",
+          "location",
+          "continent",
+          "social",
             "content",
             "contentBlocks",
             "postType",
@@ -1646,6 +1646,10 @@
             "image": {
               "widget": "image"
             },
+            "caption": {
+              "widget": "paragraphText",
+              "instructions": "Optional. Overrides the automatic Location or Continent label on the lead image."
+            },
             "secondaryImage": {
               "widget": "image"
             },
@@ -1655,6 +1659,7 @@
           },
           "order": [
             "image",
+            "caption",
             "secondaryImage",
             "dek"
           ]
@@ -1670,7 +1675,7 @@
             "description": {
               "widget": "paragraphText"
             },
-            "image": {
+          "image": {
               "widget": "image"
             }
           },
@@ -1769,7 +1774,7 @@
             "paperPostcardImage": {
               "widget": "image"
             },
-            "location": {
+          "location": {
               "widget": "singleLineText"
             },
             "dateText": {
@@ -6547,34 +6552,34 @@
               "@backreference": {
                 "enabled": true
               },
-              "@mapping": "shapedb:Story.rydHOJqgb"
+            "@mapping": "shapedb:Story.rydHOJqgb"
+          },
+          "continent": {
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
             },
-            "continent": {
-              "@args": "TSRelationshipArgs",
-              "@resolver": {
-                "name": "shapedb:getRelated",
-                "service": "shapedb",
-                "options": {
-                  "nullable": true
-                }
-              },
+            "type": "array",
+            "items": {
+              "@ref": "local:Continent"
+            },
+            "@input": {
               "type": "array",
               "items": {
-                "@ref": "local:Continent"
-              },
-              "@input": {
-                "type": "array",
-                "items": {
-                  "@ref": "local:TSRelationship"
-                }
-              },
-              "title": "Continent / Region",
-              "description": "Optional direct region tag for stories that should appear on a continent page without creating a country Location.",
-              "@backreference": {
-                "enabled": true
-              },
-              "@mapping": "shapedb:Story.DirectContinentV1"
+                "@ref": "local:TSRelationship"
+              }
             },
+            "title": "Continent / Region",
+            "description": "Optional direct region tag for stories that should appear on a continent page without creating a country Location.",
+            "@backreference": {
+              "enabled": true
+            },
+            "@mapping": "shapedb:Story.DirectContinentV1"
+          },
             "postType": {
               "type": "string",
               "title": "POST LAYOUT — Post Type",
@@ -6908,6 +6913,13 @@
                 "enabled": true
               },
               "@mapping": "shapedb:StoryTout.rksJXJcxZ"
+            },
+            "caption": {
+              "minLength": 0,
+              "type": "string",
+              "title": "Lead Image Caption",
+              "description": "Optional caption shown on the story lead image. When blank, the first Location or Continent is used.",
+              "@mapping": "shapedb:StoryTout.LeadImageCaptionV1"
             },
             "secondaryImage": {
               "@args": "TSRelationshipArgs",
