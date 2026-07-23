@@ -1,4 +1,5 @@
 {% extends "layouts/default.html" %}
+{% from "pages/stories/landing.html" import magazineHome with context %}
 
 {% block body_class %}body--homepage{% endblock %}
 
@@ -27,51 +28,14 @@
   </div>
 </div>
 
-<div class="grid">
-  <h2 class="grid__heading">Recent Entries</h2>
-
-  <div class="grid__inner">
-    <div class="grid__wrap">
-      <ul class="grid__list">
-        {% set sortedStories = stories.items | sort(true, true, "_enabledAt") %}
-
-        {% for story in sortedStories.slice(0, 6) %}
-        <li class="grid__item">
-          <div class="tout">
-            <a href="{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}">
-              <div class="tout__image">
-                <img srcset="{{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
-                  {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-                  {{ story.tout.image.path | image({w: 900, auto: 'compress,format'}) }} 900w,
-                  {{ story.tout.image.path | image({w: 820, auto: 'compress,format'}) }} 820w"
-                     sizes="(min-width: 364px), (min-width: 1200px) calc(75vw/3),(min-width: 900px) calc(50w - 50px), (min-width: 600px) calc(100vw - 80px), calc(100vw - 40px)"
-                     src="{{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }}"
-                     data-image
-                     loading="lazy"
-                     decoding="async"
-                     v-imageloaded
-                />
-              </div>
-
-              <div class="tout__content">
-                <div class="tout__rubric">
-                  <span>{{ story._enabledAt | date("MMMM D, YYYY") }}</span>
-
-                  {% for category in story.category %}
-                  <span>{{ story.category.title }}</span>
-                  {% endfor %}
-                </div>
-
-                <h2 class="tout__heading">{{ story.title }}</h2>
-
-                <p class="tout__dek">{{ story.tout.dek }}</p>
-              </div>
-            </a>
-          </div>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
+<section class="homepage-blog-transition" aria-labelledby="homepage-blog-transition-title">
+  <div>
+    <h2 id="homepage-blog-transition-title">Away Lands Blog</h2>
+    <span class="homepage-blog-transition__subtitle">Travel guides, photography tips, outfit ideas &amp; packing lists</span>
   </div>
+</section>
+
+<div class="homepage-blog-magazine">
+  {{ magazineHome(blog, stories.items, true) }}
 </div>
 {% endblock %}
