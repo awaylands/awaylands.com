@@ -147,7 +147,12 @@
   <link rel="canonical" href="https://www.awaylands.com/blog/">
   <script>window.location.replace('/blog/');</script>
   {% else %}
-  {% set storyCanonical = currentPath %}
+  {% if page.slug %}
+    {% set storyCanonical = page | route('storySlug') %}
+  {% else %}
+    {% set storyCanonical = page | route('story') %}
+  {% endif %}
+  {% set storyCanonical = storyCanonical + '/' %}
   {% set storyDescription = page.tout.dek %}
   {% if page.social.description %}{% set storyDescription = page.social.description %}{% endif %}
   {% set storyModified = page._enabledAt %}
