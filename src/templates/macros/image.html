@@ -6,7 +6,7 @@
      {% if srcset %}srcset="{% for src in srcset %}{{ comma() }} {{ keySafe | image({w: src}) }} {{ src }}w{% endfor %}"{% endif %}
      {% if sizes %}sizes="{% for size in sizes %}{{ comma() }} {{ size }}{% endfor %}"{% endif %}
      {% if class %}class="{{ class }}"{% endif %}
-     {% if alt %}alt="{{ alt }}"{% endif %}
+     alt="{{ alt | default('') | escape }}"
      loading="lazy"
      decoding="async"
      data-image

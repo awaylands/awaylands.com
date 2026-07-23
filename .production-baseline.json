@@ -16,14 +16,14 @@
     "stylesheetSha256": "136a355dfd20778f75168b4f5cf19e5e487827aca1dfcfffe986e918fefd163d"
   },
   "sourceFiles": {
-    "src/templates/pages/stories/detail.html": "66cae31a34973d5445f746ace50cf142b3bcc8fe67e08183e3b99bd3fd940921",
+    "src/templates/pages/stories/detail.html": "cd22f9dceddc6af868b6ebce29b71e310961847d547eafc99ace7527a9d20e2f",
     "src/templates/pages/stories/landing.html": "b846ced3f6c43426212ad83f4777aa4d900feac5672508927c5d6cac2256279d",
     "src/templates/pages/category.html": "17064e433b871d4a06ea7eb11375feb2895a8329ea93f51250dd019b6861027d",
     "src/templates/pages/destinations.html": "8b9055c07cea1c88a1ee143fef0b0c2d5faa26edf4ee3072a48aa5d9f5bc4d5f",
     "src/templates/pages/film.html": "a2651aa15596f6b78f6a0c5f23a686c47bb3abf9dd3a30279985f475f6e82a1b",
     "src/templates/data/homepage.graphql": "772eaf52e0eec8ba049fcab470fdcd64b22ab1ff8c1b028555eb0ad4cac07720",
     "src/templates/data/stories.graphql": "c5c9ca859cb18d804b0973caeaab5f661ded08a747ad6d7df665eaae43946b73",
-    "src/templates/data/story-slugs.graphql": "021869b002b11f90d65228adf805529ab4f30d6d52f6524c32cd344f5db6008e",
+    "src/templates/data/story-slugs.graphql": "ad322ab16e304c216c82945c78da642434c2eab5f7931ba1a8448b606cdbd578",
     "src/stylesheets/pages/_blog.scss": "bd65dce620d48e3d155aab25a9957081dcb12684dddae2c505950a270ea79fd4",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "_takeshape-schema-export/schema.json": "b64807238b3b5a2c1626330b776357a3a70e896203328e257a81b0364cd77411",

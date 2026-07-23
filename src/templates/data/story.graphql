@@ -9,7 +9,12 @@ query {
   }
   blogShopFallback: getBlog {
     travelEssentialsItems {
-      image { path }
+          image {
+            path
+            filename
+            title
+            description
+          }
       title
       productUrl
       productEmbedHtml
@@ -61,7 +66,12 @@ query {
           slug
           category { title }
           tout {
-            image { path }
+            image {
+              path
+              filename
+              title
+              description
+            }
             dek
           }
         }

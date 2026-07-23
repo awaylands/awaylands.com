@@ -26,6 +26,39 @@
 {% set storyModifiedDate = page._enabledAt %}
 {% if page._updatedAt %}{% set storyModifiedDate = page._updatedAt %}{% endif %}
 
+{% macro filenameAlt(filename, fallback) -%}
+  {%- if filename -%}
+    {{- filename
+      | replace(".jpeg", "")
+      | replace(".JPEG", "")
+      | replace(".jpg", "")
+      | replace(".JPG", "")
+      | replace(".png", "")
+      | replace(".PNG", "")
+      | replace(".webp", "")
+      | replace(".WEBP", "")
+      | replace("-Away-Lands", "")
+      | replace("Away-Lands-", "")
+      | replace("_Away_Lands", "")
+      | replace("Away_Lands_", "")
+      | replace("-00", "")
+      | replace("-01", "")
+      | replace("-02", "")
+      | replace("-03", "")
+      | replace("-04", "")
+      | replace("-05", "")
+      | replace("-06", "")
+      | replace("-07", "")
+      | replace("-08", "")
+      | replace("-09", "")
+      | replace("_", " ")
+      | replace("-", " ")
+      | capitalize -}}
+  {%- else -%}
+    {{- fallback -}}
+  {%- endif -%}
+{%- endmacro %}
+
 {% macro renderTableBlock(block) %}
   {% if block.pastedText %}
     <div class="story-table">
@@ -49,6 +82,9 @@
     {% if not imageCropPosition %}{% set imageCropPosition = "center" %}{% endif %}
     {% set imageAlt = block.altText %}
     {% if not imageAlt %}{% set imageAlt = block.caption %}{% endif %}
+    {% if not imageAlt %}{% set imageAlt = block.image.description %}{% endif %}
+    {% if not imageAlt %}{% set imageAlt = block.image.title %}{% endif %}
+    {% if not imageAlt %}{% set imageAlt = filenameAlt(block.image.filename, page.title) %}{% endif %}
 
     <figure class="story-image-block {{ imageSize }} align-{{ imageAlignment }} crop-{{ imageCropPosition }} spacing-{{ imageSpacing }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
       {% if block.linkUrl %}
@@ -75,7 +111,9 @@
         {% if galleryImage.image %}
         <figure class="story-gallery__item">
           {% if galleryImage.linkUrl %}<a href="{{ galleryImage.linkUrl | trim }}" target="_blank" rel="noopener">{% endif %}
-            {{ image(galleryImage.image.path, [480, 800, 1200], ["(min-width: 900px) 50vw", "100vw"], "", galleryImage.altText or galleryImage.caption) }}
+            {% set galleryAlt = galleryImage.altText or galleryImage.caption or galleryImage.image.description or galleryImage.image.title %}
+            {% if not galleryAlt %}{% set galleryAlt = filenameAlt(galleryImage.image.filename, page.title) %}{% endif %}
+            {{ image(galleryImage.image.path, [480, 800, 1200], ["(min-width: 900px) 50vw", "100vw"], "", galleryAlt) }}
           {% if galleryImage.linkUrl %}</a>{% endif %}
           {% if galleryImage.caption %}<figcaption>{{ galleryImage.caption }}</figcaption>{% endif %}
         </figure>

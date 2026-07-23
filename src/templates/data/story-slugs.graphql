@@ -132,7 +132,12 @@ query($images: TSImagesConfig) {
           columnCount
         }
         ... on StoryImageBlock {
-          image { path }
+          image {
+            path
+            filename
+            title
+            description
+          }
           size
           alignment
           cropPosition
@@ -148,7 +153,12 @@ query($images: TSImagesConfig) {
           size
           label
           images {
-            image { path }
+            image {
+              path
+              filename
+              title
+              description
+            }
             linkUrl
             caption
             altText
