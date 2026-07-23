@@ -8,7 +8,7 @@ Verified baseline:
 - Branch: `production-baseline`
 - Source commit: `0b4e6700f447e2315872372ca3ceee4502907991`
 - JavaScript: `main.91618a6ec51b6585278d.js`
-- Stylesheet: `main.34ba0f2b87002f59724318a81b1cfa42.css`
+- Stylesheet: `main.861bc19b5b0eb8f5e968aa0e52d93cbf.css`
 - TakeShape schema: version `212`
 
 ## Safe publishing workflow

@@ -822,13 +822,14 @@
   content: '';
   inset: 0;
   position: absolute;
+  transition: background 220ms ease;
 }
 
 .bm-category__copy {
   bottom: 2.5rem;
-  left: 1rem;
+  left: 0.4rem;
   position: absolute;
-  right: 1rem;
+  right: 0.4rem;
   text-align: center;
   z-index: 1;
 }
@@ -837,9 +838,9 @@
   color: #fff;
   display: block;
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: clamp(1.25rem, 1.15vw, 1.8rem);
+  font-size: clamp(1.35rem, 1.2vw, 1.9rem);
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -847,19 +848,26 @@
   color: #fff;
   display: block;
   font-family: 'Still EB Garamond', Georgia, serif;
-  font-size: clamp(1.45rem, 1.25vw, 1.8rem);
+  font-size: clamp(1.55rem, 1.32vw, 1.9rem);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.25;
   margin: 0.9rem auto 0;
-  max-width: 25rem;
+  max-width: none;
 }
 
+.body--blog-magazine .bm-category:hover,
+.body--blog-magazine .bm-category:focus,
 .body--blog-magazine .bm-category:hover strong,
 .body--blog-magazine .bm-category:focus strong,
 .body--blog-magazine .bm-category:hover .bm-category__description,
 .body--blog-magazine .bm-category:focus .bm-category__description {
-  color: var(--bm-pink) !important;
+  color: #fff !important;
+}
+
+.bm-category:hover:after,
+.bm-category:focus:after {
+  background: linear-gradient(0deg, rgba(7, 15, 15, 0.82), rgba(7, 15, 15, 0.18) 72%, transparent 100%);
 }
 
 .bm-category:hover img,
