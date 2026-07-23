@@ -130,10 +130,25 @@
         `;
 
 
-        const ids = this.type === 'continent' ? JSON.parse(this.subCategories).map(subCat => subCat._id) : [this.id];
-        this.variables.where =  {
-          location: {_id: {in:  ids}},
-          _status: {eq: 'enabled'}
+        if (this.type === 'continent') {
+          const locationIds = JSON.parse(this.subCategories).map(subCat => subCat._id);
+          const geographicFilters = [
+            {continent: {_id: {eq: this.id}}}
+          ];
+
+          if (locationIds.length) {
+            geographicFilters.push({location: {_id: {in: locationIds}}});
+          }
+
+          this.variables.where = {
+            OR: geographicFilters,
+            _status: {eq: 'enabled'}
+          };
+        } else {
+          this.variables.where = {
+            location: {_id: {eq: this.id}},
+            _status: {eq: 'enabled'}
+          };
         }
 
         fetch(apiEndpoint, {
