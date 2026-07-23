@@ -316,12 +316,30 @@ function normalizeInlineLinkSpaces(el) {
 
 function normalizeStoryLinks(el) {
   const links = el.querySelectorAll('a[href]');
+  const validUrlPattern = /^(?:https?:|mailto:|tel:|#|\/)/i;
+  const domainPattern = /^(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)+(?::\d+)?(?:[/?#].*)?$/i;
+  const embeddedUrlPattern = /https?:\/\/[^\s"'<>]+/i;
 
   Array.prototype.forEach.call(links, link => {
-    const href = (link.getAttribute('href') || '').trim();
+    let href = (link.getAttribute('href') || '').trim();
 
     if (!href) {
       return;
+    }
+
+    if (!validUrlPattern.test(href)) {
+      const embeddedUrl = href.match(embeddedUrlPattern);
+
+      if (embeddedUrl) {
+        href = embeddedUrl[0].replace(/&amp;/g, '&');
+      } else if (domainPattern.test(href)) {
+        href = `https://${href}`;
+      } else {
+        link.removeAttribute('href');
+        link.removeAttribute('target');
+        link.removeAttribute('rel');
+        return;
+      }
     }
 
     link.setAttribute('href', href);

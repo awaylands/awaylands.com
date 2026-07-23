@@ -10,8 +10,8 @@
     "hash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0"
   },
   "assets": {
-    "javascript": "javascripts/main.6bd6eb018c7934496285.js",
-    "javascriptSha256": "f3d39f380f59064f42cea709c2cf7b1d1c93d22cdfe90eedf2133d5a73792395",
+    "javascript": "javascripts/main.8fc7a073b52451bf41bb.js",
+    "javascriptSha256": "ad6d02abb5c7d7bc63db3f461f05abd65d563efc01d69f0d1dae841bcd41d4a3",
     "stylesheet": "stylesheets/main.ba130c0e1c8dcfb2ad0800e2a78bef96.css",
     "stylesheetSha256": "d0b6a55e9b5293e04b99b3a89395a92bee600a1a28c1ce3ad05384594d1cdb31"
   },
@@ -29,6 +29,7 @@
     "src/stylesheets/pages/_story.scss": "fd4e6c97ea2f649214f19fb937c6e893af441b271ee50618df8f9fad7b55d4e3",
     "src/templates/partials/head.html": "1aa71d5dd88f2c5779cc6303c4a49dd23e0c2347e28ef6fcc506ee6f452cde77",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
+    "src/javascripts/directives/story.js": "00459dc1ab52007305c39186aa175cdcdd4a0b7e1b11a001ab18d2c66dd9872a",
     "_takeshape-schema-export/schema.json": "b64807238b3b5a2c1626330b776357a3a70e896203328e257a81b0364cd77411",
     "_takeshape-schema-export/schema-inner.json": "aa6ea7684cb25382d64b10116b2b30690d8c9d5a23d03c7b54653539a8680ffd",
     "tsg.yml": "515663e34f66ac1a87be7c50ca686685e450a0d223faf62f423c44c88c311b79",
