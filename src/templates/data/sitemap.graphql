@@ -2,4 +2,32 @@ query {
   homepage: getHomepage {
     _updatedAt
   }
+  stories1: getStoryList(size: 250, from: 0, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      slug
+      title
+      _updatedAt
+    }
+  }
+  stories2: getStoryList(size: 250, from: 250, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      slug
+      title
+      _updatedAt
+    }
+  }
+  stories3: getStoryList(size: 250, from: 500, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      slug
+      title
+      _updatedAt
+    }
+  }
+  stories4: getStoryList(size: 250, from: 750, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      slug
+      title
+      _updatedAt
+    }
+  }
 }

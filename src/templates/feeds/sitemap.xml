@@ -3,8 +3,20 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
+{% set siteUrl = "https" + "://www.awaylands.com" %}
   <url>
-    <loc>{{ site.social.site[0].url + homepage|route('homepage') }}</loc>
+    <loc>{{ siteUrl }}/</loc>
     <lastmod>{{ homepage._updatedAt }}</lastmod>
   </url>
+{% set storyPages = [stories1.items, stories2.items, stories3.items, stories4.items] %}
+{% for stories in storyPages %}
+  {% for story in stories %}
+  {% if story.slug or story.title %}
+  <url>
+    <loc>{{ siteUrl }}{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}/</loc>
+    <lastmod>{{ story._updatedAt }}</lastmod>
+  </url>
+  {% endif %}
+  {% endfor %}
+{% endfor %}
 </urlset>
