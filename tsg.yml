@@ -168,6 +168,10 @@ routes:
     path: /category/hotels-and-resorts
     template: pages/legacy-category.html
 
+  legacyWeddingVenueSixTips:
+    path: /story/how-to-choose-the-perfect-wedding-venue-6-essential-planning-tips
+    template: pages/legacy-story.html
+
   location:
     path: /destinations/:title
     template: pages/location.html

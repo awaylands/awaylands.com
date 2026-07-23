@@ -1,0 +1,16 @@
+{% set destination = "/blog/" %}
+{% if currentPath == "/story/how-to-choose-the-perfect-wedding-venue-6-essential-planning-tips" %}{% set destination = "/story/how-to-choose-the-perfect-wedding-venue-8-essential-planning-tips" %}{% endif %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, follow">
+    <meta http-equiv="refresh" content="0; url={{ destination }}">
+    <link rel="canonical" href="https://www.awaylands.com{{ destination }}">
+    <title>Story moved | Away Lands</title>
+    <script>window.location.replace({{ destination | dump | safe }});</script>
+  </head>
+  <body>
+    <p>This story has moved. <a href="{{ destination }}">Continue to the updated story</a>.</p>
+  </body>
+</html>
