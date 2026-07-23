@@ -2,6 +2,27 @@ query {
   homepage: getHomepage {
     _updatedAt
   }
+  categories: getCategoryList {
+    items {
+      _contentTypeName
+      title
+      _updatedAt
+    }
+  }
+  locations: getLocationList {
+    items {
+      _contentTypeName
+      title
+      _updatedAt
+    }
+  }
+  continents: getContinentList {
+    items {
+      _contentTypeName
+      name
+      _updatedAt
+    }
+  }
   stories1: getStoryList(size: 250, from: 0, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       slug

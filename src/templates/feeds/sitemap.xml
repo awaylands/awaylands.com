@@ -8,6 +8,27 @@
     <loc>{{ siteUrl }}/</loc>
     <lastmod>{{ homepage._updatedAt }}</lastmod>
   </url>
+  <url><loc>{{ siteUrl }}/blog/</loc></url>
+  <url><loc>{{ siteUrl }}/destinations/</loc></url>
+  <url><loc>{{ siteUrl }}/about/</loc></url>
+{% for category in categories.items %}
+  <url>
+    <loc>{{ siteUrl }}{{ category | route('category') }}</loc>
+    <lastmod>{{ category._updatedAt }}</lastmod>
+  </url>
+{% endfor %}
+{% for location in locations.items %}
+  <url>
+    <loc>{{ siteUrl }}{{ location | route('location') }}</loc>
+    <lastmod>{{ location._updatedAt }}</lastmod>
+  </url>
+{% endfor %}
+{% for continent in continents.items %}
+  <url>
+    <loc>{{ siteUrl }}{{ continent | route('continent') }}</loc>
+    <lastmod>{{ continent._updatedAt }}</lastmod>
+  </url>
+{% endfor %}
 {% set storyPages = [stories1.items, stories2.items, stories3.items, stories4.items] %}
 {% for stories in storyPages %}
   {% for story in stories %}

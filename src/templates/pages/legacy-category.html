@@ -1,0 +1,26 @@
+{% set destination = "/blog/" %}
+{% if currentPath == "/category/health-and-fitness" %}{% set destination = "/category/wellness" %}{% endif %}
+{% if currentPath == "/category/shopping" %}{% set destination = "/category/travel-style" %}{% endif %}
+{% if currentPath == "/category/best-beaches" %}{% set destination = "/category/travel-guides" %}{% endif %}
+{% if currentPath == "/category/travel-tips" %}{% set destination = "/category/travel-guides" %}{% endif %}
+{% if currentPath == "/category/social-media-and-technology" %}{% set destination = "/category/features" %}{% endif %}
+{% if currentPath == "/category/films" %}{% set destination = "/category/features" %}{% endif %}
+{% if currentPath == "/category/style" %}{% set destination = "/category/travel-style" %}{% endif %}
+{% if currentPath == "/category/travel-adventures" %}{% set destination = "/category/travel-guides" %}{% endif %}
+{% if currentPath == "/category/los-angeles-life" %}{% set destination = "/category/travel-guides" %}{% endif %}
+{% if currentPath == "/category/instagram-guides" %}{% set destination = "/category/photography" %}{% endif %}
+{% if currentPath == "/category/hotels-and-resorts" %}{% set destination = "/category/hotels" %}{% endif %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, follow">
+    <meta http-equiv="refresh" content="0; url={{ destination }}">
+    <link rel="canonical" href="https://www.awaylands.com{{ destination }}">
+    <title>Category moved | Away Lands</title>
+    <script>window.location.replace({{ destination | dump | safe }});</script>
+  </head>
+  <body>
+    <p>This category has moved. <a href="{{ destination }}">Continue to the updated category</a>.</p>
+  </body>
+</html>

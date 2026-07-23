@@ -124,6 +124,50 @@ routes:
       data: data/categories.graphql
       itemName: page
 
+  legacyHealthAndFitness:
+    path: /category/health-and-fitness
+    template: pages/legacy-category.html
+
+  legacyShopping:
+    path: /category/shopping
+    template: pages/legacy-category.html
+
+  legacyBestBeaches:
+    path: /category/best-beaches
+    template: pages/legacy-category.html
+
+  legacyTravelTips:
+    path: /category/travel-tips
+    template: pages/legacy-category.html
+
+  legacySocialMediaAndTechnology:
+    path: /category/social-media-and-technology
+    template: pages/legacy-category.html
+
+  legacyFilms:
+    path: /category/films
+    template: pages/legacy-category.html
+
+  legacyStyle:
+    path: /category/style
+    template: pages/legacy-category.html
+
+  legacyTravelAdventures:
+    path: /category/travel-adventures
+    template: pages/legacy-category.html
+
+  legacyLosAngelesLife:
+    path: /category/los-angeles-life
+    template: pages/legacy-category.html
+
+  legacyInstagramGuides:
+    path: /category/instagram-guides
+    template: pages/legacy-category.html
+
+  legacyHotelsAndResorts:
+    path: /category/hotels-and-resorts
+    template: pages/legacy-category.html
+
   location:
     path: /destinations/:title
     template: pages/location.html

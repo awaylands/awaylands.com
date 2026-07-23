@@ -3,6 +3,20 @@
 
 {% block body_class %}body--homepage{% endblock %}
 
+{% block extra_head %}
+  <link rel="canonical" href="https://www.awaylands.com/">
+  <meta property="og:url" content="https://www.awaylands.com/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.awaylands.com/#website",
+    "url": "https://www.awaylands.com/",
+    "name": "Away Lands"
+  }
+  </script>
+{% endblock %}
+
 {% block content %}
 <div class="hero">
   <div class="slides" {% if page.slider.interval %}data-interval="{{ page.slider.interval }}"{% endif %} v-slides>
