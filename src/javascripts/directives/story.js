@@ -1753,7 +1753,7 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
   }
 
   const shopEditEnabled = storyPage.getAttribute('data-shop-edit-enabled') !== 'false';
-  const picks = shopEditEnabled ? mergedStoryPickCandidates(el, storyPage, isStyleEdit) : [];
+  const picks = shopEditEnabled ? mergedStoryPickCandidates(el, storyPage, isStyleEdit).slice(0, 4) : [];
   const picksSection = document.createElement('section');
   const picksKicker = document.createElement('p');
   const picksTitle = document.createElement('h2');
@@ -1907,69 +1907,6 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
     }
   }
   toc.appendChild(trustSection);
-
-  const relatedItems = storyPage.querySelectorAll('.story-article__modules .related-stories__list > li');
-
-  if (relatedItems.length) {
-    const relatedSection = document.createElement('section');
-    const relatedKicker = document.createElement('p');
-    const relatedTitle = document.createElement('h2');
-    const relatedList = document.createElement('ul');
-
-    relatedSection.className = 'story-rail__section story-rail__related';
-    relatedKicker.className = 'story-rail__kicker';
-    relatedKicker.textContent = (storyPage.getAttribute('data-keep-reading-kicker') || '').trim() || 'Keep reading';
-    relatedTitle.className = 'story-rail__title';
-    relatedTitle.textContent = (storyPage.getAttribute('data-keep-reading-title') || '').trim() || 'More from Away Lands';
-    relatedList.className = 'story-rail__related-list';
-
-    Array.prototype.slice.call(relatedItems, 0, 3).forEach(item => {
-      const sourceLink = item.querySelector('a[href]');
-      const sourceImage = item.querySelector('.related-stories__image img');
-      const sourceTitle = item.querySelector('.related-stories__title');
-
-      if (!sourceLink || !sourceTitle) {
-        return;
-      }
-
-      const listItem = document.createElement('li');
-      const link = document.createElement('a');
-      const title = document.createElement('span');
-
-      link.className = 'story-rail__related-link';
-      link.href = sourceLink.getAttribute('href');
-
-      if (sourceImage) {
-        const media = document.createElement('span');
-        const image = document.createElement('img');
-
-        media.className = 'story-rail__related-media';
-        image.src = sourceImage.currentSrc || sourceImage.getAttribute('src');
-        image.alt = sourceImage.getAttribute('alt') || sourceTitle.textContent.trim();
-        image.loading = 'lazy';
-        image.decoding = 'async';
-        media.appendChild(image);
-        link.appendChild(media);
-      }
-
-      title.className = 'story-rail__related-name';
-      title.textContent = cleanSidebarStoryTitle(sourceTitle);
-      link.appendChild(title);
-      listItem.appendChild(link);
-      relatedList.appendChild(listItem);
-    });
-
-    Array.prototype.slice.call(relatedItems, 0, 6).forEach(item => {
-      item.hidden = false;
-      item.style.display = 'block';
-      item.removeAttribute('aria-hidden');
-    });
-
-    relatedSection.appendChild(relatedKicker);
-    relatedSection.appendChild(relatedTitle);
-    relatedSection.appendChild(relatedList);
-    toc.appendChild(relatedSection);
-  }
 
   toc.hidden = false;
 }

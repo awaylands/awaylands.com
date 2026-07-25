@@ -1,0 +1,11 @@
+{% if page._contentTypeName == "story" %}
+<script>
+  window.$adManagementConfig = window.$adManagementConfig || {};
+  window.$adManagementConfig.web = window.$adManagementConfig.web || {};
+  window.$adManagementConfig.web.localModel = window.$adManagementConfig.web.localModel || {};
+  window.$adManagementConfig.web.localModel.content_selector = '.main .story-page .story-article__body';
+  window.$adManagementConfig.web.localModel.sidebar_atf_selector = '.story-mediavine-sidebar-atf';
+  window.$adManagementConfig.web.localModel.sidebar_btf_selector = '.story-mediavine-sidebar-btf';
+</script>
+{% endif %}
+<script type="text/javascript" async="async" data-noptimize="1" data-cfasync="false" src="https://scripts.mediavine.com/tags/away-lands.js"></script>
