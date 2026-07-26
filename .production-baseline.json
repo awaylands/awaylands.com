@@ -10,10 +10,10 @@
     "hash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0"
   },
   "assets": {
-    "javascript": "javascripts/main.7fa0069f00869e64ddf3.js",
-    "javascriptSha256": "82ea67c8370c347913d681848fbd0cfb6b73dcb25b3016471043dc377164fced",
-    "stylesheet": "stylesheets/main.a2731075db83e81df2e2cdcd67190aea.css",
-    "stylesheetSha256": "a19b252ee9b6300709f99f0de512f7e3b6458a73df3c3fcf073298da85dc7f5a"
+    "javascript": "javascripts/main.6029fec5839451a9cc5c.js",
+    "javascriptSha256": "9b66683d59fccfc37195a69d892232492f5c98d4974f74b2488e2807461bd5f8",
+    "stylesheet": "stylesheets/main.4d47a9f1a62ca64a27093d24ad61580d.css",
+    "stylesheetSha256": "815d4b75ea3459f95de9c325f7af7839950fc14ee9f4a13eea323b3c10eb1c74"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
@@ -32,9 +32,9 @@
     "src/templates/data/story-titles.graphql": "68045911bc3785654863c2078ccecf0b56746c4730be025462f1ccef1cd84087",
     "src/templates/data/story.graphql": "b7479224c0d7a8b35c7e3ae4ae9ec6478407d550e1e5504fe811913f94077ae3",
     "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",
-    "src/stylesheets/_fonts.scss": "a7fcfc2d6ca4802ca2fed1ba1b914873bd126fd33ee5fbd931a25fdd7efe56ec",
+    "src/stylesheets/_fonts.scss": "2d5120490d3777cb980ed395b7765aba4f7a598e208b8b99cdb5eb131d0becd3",
     "src/stylesheets/pages/_blog.scss": "51905c023793632981092172bce5f2d60951b558acbb47c2592d6e1efdc91f5b",
-    "src/stylesheets/pages/_story.scss": "4ac58a95885c35787afb5c4edb6747994f6e26fca9d0bb3932ab58454b788df5",
+    "src/stylesheets/pages/_story.scss": "ee14053b4824ea3c8290b0845a134c54540fa923853b008fae8ff688003546fe",
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "src/javascripts/directives/story.js": "83f92468a7a6e12d006f8998c3e09353228e29e847d0369198815b2878fae5f7",
