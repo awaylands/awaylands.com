@@ -1,18 +1,18 @@
 /*mediavine sidebar fix*/
 @media only screen and (min-width: 900px){
-    .content__section:nth-child(2) {
+    .body--story .content__section:nth-child(2) {
     max-width:calc(100% - 300px)!important;
     }
-    .content__section:nth-child(1) {
+    .body--story .content__section:nth-child(1) {
     min-width:300px!important;
     }
     }
     
     @media only screen and (min-width: 900px){
-    .landing__section:nth-child(2) {
+    .body--story .landing__section:nth-child(2) {
     max-width:calc(100% - 300px)!important;
     }
-    .landing__section:nth-child(1) {
+    .body--story .landing__section:nth-child(1) {
     min-width:300px!important;
     }
     }
