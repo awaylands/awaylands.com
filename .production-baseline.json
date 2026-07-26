@@ -16,7 +16,7 @@
     "stylesheetSha256": "e7979e88bc33dd9d3100f6b0b2efd427e963e391ec6d46866904d5a9c420183f"
   },
   "sourceFiles": {
-    "src/templates/pages/stories/detail.html": "c48e1fb2701038f6a9845a727bb698b60d411c982a55a46a43b6226fcd1d3885",
+    "src/templates/pages/stories/detail.html": "493fbe7deadec20286c11e998c678c3c2761d78e8754200d710d8744e7a6028b",
     "src/templates/pages/stories/landing.html": "b846ced3f6c43426212ad83f4777aa4d900feac5672508927c5d6cac2256279d",
     "src/templates/pages/category.html": "17064e433b871d4a06ea7eb11375feb2895a8329ea93f51250dd019b6861027d",
     "src/templates/pages/destinations.html": "8b9055c07cea1c88a1ee143fef0b0c2d5faa26edf4ee3072a48aa5d9f5bc4d5f",

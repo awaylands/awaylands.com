@@ -336,14 +336,28 @@
       <picture>
         <source
           media="(max-width: 599px)"
-          srcset="{{ page.tout.image.path | image({auto: 'compress,format', w: 720}) }}"
+          srcset="
+            {{ page.tout.image.path | image({auto: 'compress,format', w: 720}) }} 720w,
+            {{ page.tout.image.path | image({auto: 'compress,format', w: 1200}) }} 1200w
+          "
+          sizes="100vw"
         >
         <source
           media="(max-width: 1199px)"
-          srcset="{{ page.tout.image.path | image({auto: 'compress,format', w: 1200}) }}"
+          srcset="
+            {{ page.tout.image.path | image({auto: 'compress,format', w: 1200}) }} 1200w,
+            {{ page.tout.image.path | image({auto: 'compress,format', w: 2000}) }} 2000w
+          "
+          sizes="100vw"
         >
         <img
           src="{{ page.tout.image.path | image({auto: 'compress,format', w: 1800}) }}"
+          srcset="
+            {{ page.tout.image.path | image({auto: 'compress,format', w: 1800}) }} 1800w,
+            {{ page.tout.image.path | image({auto: 'compress,format', w: 2400}) }} 2400w,
+            {{ page.tout.image.path | image({auto: 'compress,format', w: 3000}) }} 3000w
+          "
+          sizes="(min-width: 1200px) 55vw, 100vw"
           alt="{{ page.title }}"
           fetchpriority="high"
           decoding="async"
