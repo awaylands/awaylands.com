@@ -839,6 +839,11 @@ body.body--story {
   margin-bottom: 2.2rem;
 }
 
+.story-article__body strong,
+.story-article__body b {
+  font-weight: 700;
+}
+
 .story-article__body > p.story-line-break {
   min-height: 1.72em;
   margin-bottom: 2.2rem;

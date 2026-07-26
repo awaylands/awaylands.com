@@ -1,6 +1,6 @@
 {
   "name": "Away Lands verified production baseline",
-  "baselineDate": "2026-07-25",
+  "baselineDate": "2026-07-26",
   "baselineCommit": "c05ff0652942484055ee91a09110f6eb47d67240",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
@@ -12,8 +12,8 @@
   "assets": {
     "javascript": "javascripts/main.19e5be1881b04a3ceebc.js",
     "javascriptSha256": "e38f7b972dd3b5edbefcde7adee1b09bc22654411055a554947d41e6f31e6ed7",
-    "stylesheet": "stylesheets/main.a5ae727995e39c324c1066919606cd43.css",
-    "stylesheetSha256": "e7979e88bc33dd9d3100f6b0b2efd427e963e391ec6d46866904d5a9c420183f"
+    "stylesheet": "stylesheets/main.c1a80015b85bb895b9f9ecd4ebdf2a1f.css",
+    "stylesheetSha256": "b4d82caa68b7da83469efabbb4beb37b944c9ca0b910cc7e5c129e06c8d97430"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "493fbe7deadec20286c11e998c678c3c2761d78e8754200d710d8744e7a6028b",
@@ -31,7 +31,7 @@
     "src/templates/data/story-slugs.graphql": "ad322ab16e304c216c82945c78da642434c2eab5f7931ba1a8448b606cdbd578",
     "src/stylesheets/_fonts.scss": "b05225055efbc331165fd91081489382024a57dc9dd1bbb1642db70f3ad4cf17",
     "src/stylesheets/pages/_blog.scss": "b49aa6f76a973a0d81d150a4a60c6ee66338054d04d7881176f9fd5009f3c9a5",
-    "src/stylesheets/pages/_story.scss": "506e422ef12b1a355c13e73f5704190dd7e945be71a32a0f5d57b283647c6c91",
+    "src/stylesheets/pages/_story.scss": "d4a193637411638549943238a3713fff927ff4aa53d2e533d1a320bd789654ae",
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "src/javascripts/directives/story.js": "c273000a87c130dbb29c4e928fad167e7a66e2bf9916b50999f839488488493b",
