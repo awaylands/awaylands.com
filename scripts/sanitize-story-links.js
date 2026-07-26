@@ -8,6 +8,9 @@ const ANCHOR_PATTERN = /<a\b([^>]*?)\bhref=(["'])(.*?)\2([^>]*)>/gi;
 const VALID_URL_PATTERN = /^(?:https?:|mailto:|tel:|#|\/)/i;
 const DOMAIN_PATTERN = /^(?:www\.)?[a-z0-9-]+(?:\.[a-z0-9-]+)+(?::\d+)?(?:[/?#].*)?$/i;
 const EMBEDDED_URL_PATTERN = /https?:\/\/[^\s"'<>]+/i;
+const DEAD_INTERNAL_PATHS = new Set([
+  '/story/traveling-with-your-dog-essential-health-tips-for-every-pet-parent'
+]);
 
 let filesChanged = 0;
 let linksRepaired = 0;
@@ -31,6 +34,11 @@ function walk(directory) {
 
 function normalizeHref(href) {
   const value = href.trim();
+  const comparableValue = value.replace(/\/$/, '');
+
+  if (DEAD_INTERNAL_PATHS.has(comparableValue)) {
+    return '';
+  }
 
   if (!value || VALID_URL_PATTERN.test(value)) {
     return value;

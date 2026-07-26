@@ -1680,7 +1680,15 @@ function fillRelatedStoryCandidates(storyPage) {
     })
     .then(stories => {
       stories
-        .filter(story => story && story.enabledAt && story.title && story.url && story.image)
+        .filter(story => (
+          story &&
+          story.status !== 'disabled' &&
+          !/traveling-with-your-dog-essential-health-tips-for-every-pet-parent\/?$/.test(story.url) &&
+          story.enabledAt &&
+          story.title &&
+          story.url &&
+          story.image
+        ))
         .sort((first, second) => new Date(second.enabledAt) - new Date(first.enabledAt))
         .some(story => {
           const url = String(story.url || '').replace(/\/$/, '');

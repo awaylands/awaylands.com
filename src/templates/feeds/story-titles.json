@@ -6,6 +6,7 @@
   {{ comma() }}{
     "title": {{ story.title | dump | safe }},
     "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %},
+    "status": {{ story._status | dump | safe }},
     "updatedAt": {{ story._updatedAt | dump | safe }},
     "enabledAt": {{ story._enabledAt | dump | safe }},
     "category": {% if story.category.length %}{{ story.category[0].title | dump | safe }}{% else %}"Away Lands"{% endif %},

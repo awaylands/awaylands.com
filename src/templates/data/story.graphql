@@ -28,9 +28,10 @@ query {
   featuredCategories: getCategoryList {
     items {
       title
-      storySet(size: 6) {
+      storySet(size: 6, onlyEnabled: true) {
         items {
           _contentTypeName
+          _status
           _enabledAt
           isImportant
           title
@@ -57,9 +58,10 @@ query {
   featuredCategoryCandidates: getCategoryList {
     items {
       title
-      storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
+      storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
         items {
           _contentTypeName
+          _status
           _enabledAt
           isImportant
           title
@@ -86,6 +88,7 @@ query {
     total
     items {
       _contentTypeName
+      _status
       _enabledAt
       isImportant
       title
@@ -98,6 +101,7 @@ query {
   archiveStories: getStoryList(size: 32, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
+      _status
       _enabledAt
       isImportant
       title

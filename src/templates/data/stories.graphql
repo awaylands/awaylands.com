@@ -43,9 +43,10 @@ query($images: TSImagesConfig) {
       categoryLabels: category { title }
       category {
         title
-        storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
+        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
           items {
             _contentTypeName
+            _status
             _enabledAt
             isImportant
             title
@@ -64,9 +65,10 @@ query($images: TSImagesConfig) {
       }
       location {
         title
-        storySet(size: 12, sort: [{field: "_enabledAt", order: "desc"}]) {
+        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
           items {
             _contentTypeName
+            _status
             _enabledAt
             isImportant
             title
@@ -155,6 +157,7 @@ query($images: TSImagesConfig) {
         }
       }
       relatedStories {
+        _status
         _enabledAt
         isImportant
         title

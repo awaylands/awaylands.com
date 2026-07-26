@@ -10,13 +10,13 @@
     "hash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0"
   },
   "assets": {
-    "javascript": "javascripts/main.19e5be1881b04a3ceebc.js",
-    "javascriptSha256": "e38f7b972dd3b5edbefcde7adee1b09bc22654411055a554947d41e6f31e6ed7",
-    "stylesheet": "stylesheets/main.c1a80015b85bb895b9f9ecd4ebdf2a1f.css",
-    "stylesheetSha256": "b4d82caa68b7da83469efabbb4beb37b944c9ca0b910cc7e5c129e06c8d97430"
+    "javascript": "javascripts/main.7fa0069f00869e64ddf3.js",
+    "javascriptSha256": "82ea67c8370c347913d681848fbd0cfb6b73dcb25b3016471043dc377164fced",
+    "stylesheet": "stylesheets/main.a2731075db83e81df2e2cdcd67190aea.css",
+    "stylesheetSha256": "a19b252ee9b6300709f99f0de512f7e3b6458a73df3c3fcf073298da85dc7f5a"
   },
   "sourceFiles": {
-    "src/templates/pages/stories/detail.html": "493fbe7deadec20286c11e998c678c3c2761d78e8754200d710d8744e7a6028b",
+    "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
     "src/templates/pages/stories/landing.html": "b846ced3f6c43426212ad83f4777aa4d900feac5672508927c5d6cac2256279d",
     "src/templates/pages/category.html": "17064e433b871d4a06ea7eb11375feb2895a8329ea93f51250dd019b6861027d",
     "src/templates/pages/destinations.html": "8b9055c07cea1c88a1ee143fef0b0c2d5faa26edf4ee3072a48aa5d9f5bc4d5f",
@@ -27,19 +27,30 @@
     "src/templates/layouts/default.html": "5cbb46ee065d7013c617938998103aae4e3d1a0f4e02ad03ea7db19fcef4bf96",
     "src/templates/partials/mediavine.html": "73eb5149ee07cb357f456e328daf582f6b7adc61892cd1457cbaeb5b881c4c3f",
     "src/templates/data/homepage.graphql": "772eaf52e0eec8ba049fcab470fdcd64b22ab1ff8c1b028555eb0ad4cac07720",
-    "src/templates/data/stories.graphql": "c5c9ca859cb18d804b0973caeaab5f661ded08a747ad6d7df665eaae43946b73",
-    "src/templates/data/story-slugs.graphql": "ad322ab16e304c216c82945c78da642434c2eab5f7931ba1a8448b606cdbd578",
-    "src/stylesheets/_fonts.scss": "b05225055efbc331165fd91081489382024a57dc9dd1bbb1642db70f3ad4cf17",
-    "src/stylesheets/pages/_blog.scss": "b49aa6f76a973a0d81d150a4a60c6ee66338054d04d7881176f9fd5009f3c9a5",
-    "src/stylesheets/pages/_story.scss": "d4a193637411638549943238a3713fff927ff4aa53d2e533d1a320bd789654ae",
+    "src/templates/data/stories.graphql": "20ec8c6be97659a44e4784c1f2d1bf635fc6d38f9fbb34a6972fd36467153abb",
+    "src/templates/data/story-slugs.graphql": "a21bbf42608d5996151b6e6f087d9adee4d8738c5513da5559af68c1c16fde17",
+    "src/templates/data/story-titles.graphql": "68045911bc3785654863c2078ccecf0b56746c4730be025462f1ccef1cd84087",
+    "src/templates/data/story.graphql": "b7479224c0d7a8b35c7e3ae4ae9ec6478407d550e1e5504fe811913f94077ae3",
+    "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",
+    "src/stylesheets/_fonts.scss": "a7fcfc2d6ca4802ca2fed1ba1b914873bd126fd33ee5fbd931a25fdd7efe56ec",
+    "src/stylesheets/pages/_blog.scss": "51905c023793632981092172bce5f2d60951b558acbb47c2592d6e1efdc91f5b",
+    "src/stylesheets/pages/_story.scss": "4ac58a95885c35787afb5c4edb6747994f6e26fca9d0bb3932ab58454b788df5",
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
-    "src/javascripts/directives/story.js": "c273000a87c130dbb29c4e928fad167e7a66e2bf9916b50999f839488488493b",
+    "src/javascripts/directives/story.js": "83f92468a7a6e12d006f8998c3e09353228e29e847d0369198815b2878fae5f7",
     "_takeshape-schema-export/schema.json": "b64807238b3b5a2c1626330b776357a3a70e896203328e257a81b0364cd77411",
     "_takeshape-schema-export/schema-inner.json": "aa6ea7684cb25382d64b10116b2b30690d8c9d5a23d03c7b54653539a8680ffd",
     "tsg.yml": "515663e34f66ac1a87be7c50ca686685e450a0d223faf62f423c44c88c311b79",
     "package.json": "4e2d211d71291bdc1dcf41f3c8bd9ad58758eb12fad7b8374fc9e443ffd8eb8d",
-    "scripts/sanitize-story-links.js": "ab9766d7b397043df6bcaf21658f041b92d7d0e7cb8812cd02e070b7200911e3",
-    "src/templates/pages/legacy-story.html": "42a8d4ebd740bae483607514ab67a8bbe0c2c1d979b4c597d7ec63c4dbc40727"
+    "scripts/sanitize-story-links.js": "cac32836e4b24239d0237c46186e8dbba3f20c631ed52d424c836d53050afa3e",
+    "src/templates/pages/legacy-story.html": "42a8d4ebd740bae483607514ab67a8bbe0c2c1d979b4c597d7ec63c4dbc40727",
+    "static/assets/fonts/MONTserrat-OFL.txt": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",
+    "static/assets/fonts/montserrat-bold-webfont.ttf": "bc6e854971cea46b463be6f9eef4d9cd52f51cfc1fc0dd90c9d3e6483dc0ec61",
+    "static/assets/fonts/montserrat-extrabold-webfont.ttf": "d3ac6a843d3ba6d5cafd44cf39e437055c8aed7e261010f595f57d3c7b3e2c1b",
+    "static/assets/fonts/montserrat-light-webfont.ttf": "853de0dd715d6681f7038cf6cd53c1695b614657cbc57c8f542fe08d5b84e006",
+    "static/assets/fonts/montserrat-medium-webfont.ttf": "dae47428bb041f9716604e0e07b5b0c8585b3bdd8183362f75c69fe7bb3cfaf4",
+    "static/assets/fonts/montserrat-regular-webfont.ttf": "3e8abe50c44c82e2242e97d1ec8c0d385c4890cdc50447bcdb8605c81a38cfb2",
+    "static/assets/fonts/still-preview/EB-GARAMOND-OFL.txt": "0985066662eb755ed3683ae5482a81a9195b49ce3f7e165cc2388b3dbece7dd7",
+    "static/assets/fonts/still-preview/eb-garamond-variable.ttf": "ef9512f92f6d579e5dc75af59a5a4b1b8b47d2eda89e00b954d44520e5369027"
   }
 }

@@ -1,9 +1,6 @@
 @font-face {
   font-family: 'Montserrat';
-  src: url('/assets/fonts/montserrat-light-webfont.woff2') format('woff2'),
-  url('/assets/fonts/montserrat-light-webfont.woff') format('woff'),
-  url('/assets/fonts/montserrat-light-webfont.ttf') format('truetype'),
-  url('/assets/fonts/montserrat-light-webfont.svg#montserratlight') format('svg');
+  src: url('/assets/fonts/montserrat-light-webfont.ttf') format('truetype');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -11,10 +8,7 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('/assets/fonts/montserrat-regular-webfont.woff2') format('woff2'),
-  url('/assets/fonts/montserrat-regular-webfont.woff') format('woff'),
-  url('/assets/fonts/montserrat-regular-webfont.ttf') format('truetype'),
-  url('/assets/fonts/montserrat-regular-webfont.svg#montserratregular') format('svg');
+  src: url('/assets/fonts/montserrat-regular-webfont.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -23,10 +17,7 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('/assets/fonts/montserrat-medium-webfont.woff2') format('woff2'),
-  url('/assets/fonts/montserrat-medium-webfont.woff') format('woff'),
-  url('/assets/fonts/montserrat-medium-webfont.ttf') format('truetype'),
-  url('/assets/fonts/montserrat-medium-webfont.svg#montserratmedium') format('svg');
+  src: url('/assets/fonts/montserrat-medium-webfont.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -35,11 +26,16 @@
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('/assets/fonts/montserrat-bold-webfont.woff2') format('woff2'),
-  url('/assets/fonts/montserrat-bold-webfont.woff') format('woff'),
-  url('/assets/fonts/montserrat-bold-webfont.ttf') format('truetype'),
-  url('/assets/fonts/montserrat-bold-webfont.svg#montserratbold') format('svg');
+  src: url('/assets/fonts/montserrat-bold-webfont.ttf') format('truetype');
   font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/assets/fonts/montserrat-extrabold-webfont.ttf') format('truetype');
+  font-weight: 800;
   font-style: normal;
   font-display: swap;
 }
@@ -50,6 +46,25 @@
   font-weight: 400;
   font-style: normal;
   font-display: swap;
+}
+
+@font-face {
+  font-family: 'Still EB Garamond';
+  src: url('/assets/fonts/still-preview/eb-garamond-variable.ttf') format('truetype');
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+p strong,
+p b,
+li strong,
+li b,
+blockquote strong,
+blockquote b,
+td strong,
+td b {
+  font-weight: 800;
 }
 
 @font-face {
