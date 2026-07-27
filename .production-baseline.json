@@ -12,8 +12,8 @@
   "assets": {
     "javascript": "javascripts/main.7fa0069f00869e64ddf3.js",
     "javascriptSha256": "82ea67c8370c347913d681848fbd0cfb6b73dcb25b3016471043dc377164fced",
-    "stylesheet": "stylesheets/main.d633cd53fab2d7c543a87b092ab88a7e.css",
-    "stylesheetSha256": "31856daa4a73ee73942239f0033b686c4bb83a24e1d2e492d14ee098996a9524"
+    "stylesheet": "stylesheets/main.12d04d1c9021144dae9e7cc82b470b70.css",
+    "stylesheetSha256": "cea45efb7c8c11dcdcc1c60132f6c53271333b0b3eb35cfd0f6f111983d6bb92"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
@@ -33,7 +33,7 @@
     "src/templates/data/story.graphql": "b7479224c0d7a8b35c7e3ae4ae9ec6478407d550e1e5504fe811913f94077ae3",
     "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",
     "src/stylesheets/_fonts.scss": "2d5120490d3777cb980ed395b7765aba4f7a598e208b8b99cdb5eb131d0becd3",
-    "src/stylesheets/pages/_blog.scss": "704b7ce8f4fbe98704dc2fa68e88ca3aa5f1dbb72e561248ec4ae6e22ebd710c",
+    "src/stylesheets/pages/_blog.scss": "1800b57e0717a0732f5b5d84ca2e92f4b893bea634bd782bd49d3499e8f0bcc2",
     "src/stylesheets/pages/_story.scss": "ee14053b4824ea3c8290b0845a134c54540fa923853b008fae8ff688003546fe",
     "src/templates/partials/head.html": "75ec6a88a7857b9d2d90b15b65d4e4299161b5c26d7c8af03307a1bf0a723056",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",

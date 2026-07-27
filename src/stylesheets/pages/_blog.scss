@@ -5138,9 +5138,9 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
     display: grid;
     grid-template-columns: minmax(10rem, 35%) minmax(0, 1fr) 2.5rem;
     height: auto !important;
-    min-height: 17rem !important;
+    min-height: 10rem !important;
     max-height: none !important;
-    padding: 1rem 0 !important;
+    padding: 0.6rem 0 !important;
   }
 
   .body--blog-magazine .bm-hero__rail {
@@ -5164,7 +5164,9 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   }
 
   .body--blog-magazine .bm-hero__rail .bm-compact-story__copy strong {
-    margin: 0.75rem 0 0.85rem;
+    font-size: clamp(1.8rem, 1.35vw, 2.5rem);
+    line-height: 0.95;
+    margin: 0.35rem 0 0.45rem;
   }
 
   .body--blog-magazine .bm-hero__rail .bm-compact-story > em,
