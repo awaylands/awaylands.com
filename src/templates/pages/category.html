@@ -3,13 +3,14 @@
 {% macro storyUrl(story) %}{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}{% endmacro %}
 
 {% macro storyImage(story, sizes, eager) %}
-  {% if story.tout.image %}
+  {% set image = story.tout.image or story.tout.secondaryImage %}
+  {% if image %}
   <img
-    src="{{ story.tout.image.path | image({w: 960, auto: 'compress,format'}) }}"
-    srcset="{{ story.tout.image.path | image({w: 480, auto: 'compress,format'}) }} 480w,
-      {{ story.tout.image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
-      {{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-      {{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w"
+    src="{{ image.path | image({w: 960, auto: 'compress,format'}) }}"
+    srcset="{{ image.path | image({w: 480, auto: 'compress,format'}) }} 480w,
+      {{ image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
+      {{ image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
+      {{ image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w"
     sizes="{{ sizes }}"
     alt="{{ story.title | escape }}"
     loading="{% if eager %}eager{% else %}lazy{% endif %}"
@@ -19,32 +20,153 @@
   {% endif %}
 {% endmacro %}
 
-{% macro latestStoryCard(story, categoryTitle) %}
-  <article class="category-story-card">
+{% macro featureCard(story, label, modifier) %}
+  <article class="category-feature-card {{ modifier }}">
     <a href="{{ storyUrl(story) }}">
-      <span class="category-story-card__image">{{ storyImage(story, "(min-width: 1200px) 25vw, (min-width: 700px) 45vw, 100vw", false) }}</span>
-      <span class="category-story-card__copy">
-        <small>{{ categoryTitle }}{% if story._enabledAt %} · {{ story._enabledAt | date("MMMM D, YYYY") }}{% endif %}</small>
-        <h3>{{ story.title }}</h3>
-        {% if story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
-        <strong>Read the story</strong>
+      <span class="category-feature-card__image">
+        {{ storyImage(story, "(min-width: 1100px) 44vw, (min-width: 700px) 50vw, 100vw", false) }}
+      </span>
+      <span class="category-feature-card__overlay">
+        <small>{{ label }}</small>
+        <strong>{{ story.title }}</strong>
+        <span aria-hidden="true">→</span>
       </span>
     </a>
   </article>
 {% endmacro %}
 
+{% macro shortlistCard(story, modifier, filterable) %}
+  <article class="category-shortlist-card {{ modifier }}"{% if filterable %} data-subcategory-story="{{ story.title | lower | escape }}" hidden{% endif %}>
+    <a href="{{ storyUrl(story) }}">
+      <span class="category-shortlist-card__image">
+        {{ storyImage(story, "(min-width: 1000px) 45vw, 100vw", false) }}
+      </span>
+      <span class="category-shortlist-card__copy">
+        {% if filterable %}<small data-subcategory-card-label>Collection</small>{% endif %}
+        <strong>{{ story.title }}</strong>
+        <i>Read the story <span aria-hidden="true">→</span></i>
+      </span>
+    </a>
+  </article>
+{% endmacro %}
+
+{% macro destinationTile(title, slug, story) %}
+  <a class="category-destination-tile" href="/destinations/{{ slug }}/">
+    <span>{{ storyImage(story, "(min-width: 1000px) 25vw, 50vw", false) }}</span>
+    <strong>{{ title }}</strong>
+    <i>View guides <span aria-hidden="true">→</span></i>
+  </a>
+{% endmacro %}
+
+{% macro productCard(product) %}
+  {% if product.productUrl %}
+  <a class="bm-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored noopener">
+    <span class="bm-product__image">{% if product.image %}<img src="{{ product.image.path | image({w: 520, h: 650, fit: 'contain', auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% endif %}</span>
+    <span class="bm-product__copy">
+      <strong>{{ product.title or "Shop This Edit" }}</strong>
+      {% if product.description %}<p>{{ product.description }}</p>{% endif %}
+    </span>
+  </a>
+  {% endif %}
+{% endmacro %}
+
+
 {% set sortedStories = page.storySet.items | sort(true, true, "_enabledAt") %}
-{% set categoryTopic = page.title | lower %}
-{% set categoryHeadingSuffix = "Guides, Tips & Inspiration" %}
-{% if page.title == "Travel Guides" or page.title == "Packing Guides" or page.title == "Instagram Guides" %}
-  {% set categoryHeadingSuffix = "Tips & Inspiration" %}
+{% set updatedStories = page.storySet.items | sort(true, true, "_updatedAt") %}
+{% if page.updatedStories.length %}
+  {% set updatedStories = page.updatedStories %}
 {% endif %}
+{% set indexStories = sortedStories %}
+{% if page.indexStories.length %}
+  {% set indexStories = page.indexStories %}
+{% endif %}
+{% set categoryTopic = page.title | lower %}
+{% set categoryHeadline = page.title + " Stories Worth Saving" %}
 {% set categoryDescription = page.introText or page.social.description %}
-{% if not categoryDescription %}
-  {% set categoryDescription = "Explore the best " + categoryTopic + " stories, expert tips, inspiring ideas, and practical resources from Away Lands." %}
+{% set pageLabel = page.pageLabel or "Away Lands Journal" %}
+{% set featuredLabel = page.featuredLabel or "Where To Begin" %}
+{% set featuredTitle = page.featuredTitle or "Start Here" %}
+{% set featuredDescription = page.featuredDescription or "A compact edit of the guides and stories to open first." %}
+{% set destinationsLabel = page.destinationsLabel or "Reader favorites" %}
+{% set destinationsTitle = page.destinationsTitle or "Most Popular Destinations" %}
+{% set destinationsDescription = page.destinationsDescription or "Start with the destinations readers return to most." %}
+{% if page.title == "Travel Guides" %}
+  {% set destinationsTitle = "Most Popular Destinations" %}
+{% endif %}
+{% set mapLabel = page.mapLabel or "Plan by place" %}
+{% set mapTitle = page.mapTitle or "Find your next escape" %}
+{% set mapDescription = page.mapDescription or "Open a region to explore destination guides, beaches, hotels, itineraries, and practical details." %}
+{% set clustersLabel = page.clustersLabel or "More to discover" %}
+{% set clustersTitle = page.clustersTitle or "Travel Guide Collections" %}
+{% set clustersDescription = page.clustersDescription or "Focused paths into Away Lands destination and planning coverage." %}
+{% set updatedLabel = page.updatedLabel or "Freshly updated" %}
+{% set updatedTitle = page.updatedTitle or "Recently Updated" %}
+{% set updatedDescription = page.updatedDescription or "Guides with newly reviewed recommendations and planning details." %}
+{% set expertiseLabel = page.expertiseLabel or "Firsthand since 2016" %}
+{% set expertiseTitle = page.expertiseTitle or "Travelled, photographed, and written from experience" %}
+{% set expertiseDescription = page.expertiseDescription or "Away Lands has published travel guides from more than 60 countries since 2016. Every guide is shaped by firsthand travel, original photography, and practical planning experience." %}
+{% set expertiseStat1Value = page.expertiseStat1Value or "60+" %}
+{% set expertiseStat1Label = page.expertiseStat1Label or "Countries visited" %}
+{% set expertiseStat2Value = page.expertiseStat2Value or "10" %}
+{% set expertiseStat2Label = page.expertiseStat2Label or "Years of full-time travel" %}
+{% set expertiseStat3Value = page.expertiseStat3Value or "100%" %}
+{% set expertiseStat3Label = page.expertiseStat3Label or "Original perspective" %}
+{% set expertiseLink1Text = page.expertiseLink1Text or "Meet Amy & Brandon" %}
+{% set expertiseLink1Url = page.expertiseLink1Url or "/about/" %}
+{% set expertiseLink2Text = page.expertiseLink2Text or "View photography" %}
+{% set expertiseLink2Url = page.expertiseLink2Url or "/still/" %}
+{% set indexLabel = page.indexLabel or "Browse the archive" %}
+{% set indexTitle = page.indexTitle or "Travel Guides Index" %}
+{% set indexDescription = page.indexDescription or "The latest 24 guides, with every major collection linked above." %}
+{% set browseLabel = page.browseLabel or "Find exactly what you need" %}
+{% set browseTitle = page.browseTitle or ("Browse " + page.title) %}
+{% set relatedLabel = page.relatedLabel or "Keep exploring" %}
+{% set relatedTitle = page.relatedTitle or "Related Collections" %}
+{% set guideLabel = "Explore by Topic" %}
+{% set guideTitle = "Where Do You Want to Begin?" %}
+{% set guideLinkText = page.guideLinkText or "View all" %}
+{% set guideLinkUrl = page.guideLinkUrl or currentPath %}
+{% set shopLabel = page.shopLabel or "Travel essentials" %}
+{% set shopTitle = page.shopTitle or "The Items Always in My Carry-On" %}
+{% set shopDescription = page.shopDescription %}
+{% if page.title == "Travel Guides" and shopDescription == "Useful products and considered recommendations for travel guides." %}
+  {% set shopDescription = "The travel essentials I pack, use, and recommend trip after trip." %}
+{% endif %}
+{% set shopLinkText = page.shopLinkText or "View recommendations" %}
+{% set shopLinkUrl = page.shopLinkUrl or "/category/travel-essentials/" %}
+{% set subcategoryParent = page.parentCategory.title or page.title %}
+{% set categoryProducts = products.travel %}
+{% set secondaryProducts = [] %}
+{% if page.title == "Photography" %}
+  {% set categoryProducts = products.photography %}
+{% elif page.title == "Beauty" %}
+  {% set categoryProducts = products.beauty %}
+{% elif page.title == "Wellness" %}
+  {% set categoryProducts = products.fitness %}
+{% elif page.title == "Home And Garden" %}
+  {% set categoryProducts = products.home %}
+  {% set secondaryProducts = products.travel %}
+{% elif page.title == "Travel Style" or page.title == "Wedding And Honeymoon" %}
+  {% set categoryProducts = products.style %}
 {% endif %}
 
-{% block body_class %}body--blog-category body--category-hub has-no-hero has-editorial-menu{% endblock %}
+{% if page.pageHeadline %}
+  {% set categoryHeadline = page.pageHeadline %}
+{% endif %}
+
+{% if not categoryDescription %}
+  {% set categoryDescription = "Firsthand " + categoryTopic + " guides, practical details, and thoughtful recommendations from more than a decade of travel." %}
+{% endif %}
+
+{% if page.heroStory %}
+  {% set heroStory = page.heroStory %}
+{% elif page.featuredStories.length %}
+  {% set heroStory = page.featuredStories[0] %}
+{% else %}
+  {% set heroStory = sortedStories[0] %}
+{% endif %}
+
+{% block body_class %}body--blog-category body--category-hub has-editorial-menu{% endblock %}
 
 {% block extra_head %}
   <link rel="canonical" href="https://www.awaylands.com{{ currentPath }}">
@@ -58,7 +180,7 @@
         "@type": "CollectionPage",
         "@id": "https://www.awaylands.com{{ currentPath }}#collection",
         "url": "https://www.awaylands.com{{ currentPath }}",
-        "name": {{ (page.title + " " + categoryHeadingSuffix) | dump | safe }},
+        "name": {{ categoryHeadline | dump | safe }},
         "description": {{ categoryDescription | dump | safe }},
         "isPartOf": {"@id": "https://www.awaylands.com/#website"},
         "about": {"@type": "Thing", "name": {{ page.title | dump | safe }}},
@@ -90,131 +212,392 @@
 {% endblock %}
 
 {% block content %}
-<div class="category-hub">
+<div class="category-hub" id="category-page-top" data-category="{{ page.title | lower | replace(' ', '-') }}">
   <nav class="category-hub__breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span aria-hidden="true">/</span>
     <a href="/blog/">Blog</a><span aria-hidden="true">/</span>
     <span aria-current="page">{{ page.title }}</span>
   </nav>
 
-  <header class="category-hub__hero">
-    <div class="category-hub__hero-copy">
-      <p class="category-hub__eyebrow">Away Lands Journal</p>
-      <h1>{{ page.title }} <em>{{ categoryHeadingSuffix }}</em></h1>
-      <p class="category-hub__intro">{{ categoryDescription }}</p>
-      <div class="category-hub__stats" aria-label="Category overview">
-        <span><strong>{{ sortedStories.length }}</strong> expert stories</span>
-        <span>Curated by Amy Seder</span>
-      </div>
+  <header class="category-magazine-hero">
+    {% if page.heroImage %}
+    <div class="category-magazine-hero__image">
+      <img
+        src="{{ page.heroImage.path | image({w: 1600, auto: 'compress,format'}) }}"
+        srcset="{{ page.heroImage.path | image({w: 640, auto: 'compress,format'}) }} 640w,
+          {{ page.heroImage.path | image({w: 1000, auto: 'compress,format'}) }} 1000w,
+          {{ page.heroImage.path | image({w: 1600, auto: 'compress,format'}) }} 1600w"
+        sizes="100vw"
+        alt=""
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      >
     </div>
-    {% if page.featuredStories.length %}
-    {% set story = page.featuredStories[0] %}
-    <a class="category-hub__hero-story" href="{{ storyUrl(story) }}">
-      <span class="category-hub__hero-image">{{ storyImage(story, "(min-width: 900px) 52vw, 100vw", true) }}</span>
-      <span class="category-hub__hero-overlay">
-        <small>Editor’s essential</small>
-        <strong>{{ story.title }}</strong>
-        <span>Read the guide</span>
-      </span>
-    </a>
-    {% else %}
-      {% for story in sortedStories if story.isImportant != false %}
-      {% if loop.first %}
-      <a class="category-hub__hero-story" href="{{ storyUrl(story) }}">
-        <span class="category-hub__hero-image">{{ storyImage(story, "(min-width: 900px) 52vw, 100vw", true) }}</span>
-        <span class="category-hub__hero-overlay">
-          <small>Editor’s essential</small>
-          <strong>{{ story.title }}</strong>
-          <span>Read the guide</span>
-        </span>
-      </a>
-      {% endif %}
-      {% endfor %}
+    {% elif heroStory %}
+    <div class="category-magazine-hero__image">
+      {{ storyImage(heroStory, "100vw", true) }}
+    </div>
     {% endif %}
+    <div class="category-magazine-hero__copy">
+      <p class="category-kicker">{{ pageLabel }}</p>
+      <h1>{{ categoryHeadline }}</h1>
+    </div>
   </header>
 
-  <nav class="category-hub__topics" aria-label="Explore blog categories">
-    <span>Explore:</span>
+  <nav class="category-hub__topics" aria-label="Browse blog categories">
+    <span>{{ page.title }}</span>
     <div>
       {% for category in blog.categories %}
-      <a href="{{ category | route('category') }}"{% if category.title == page.title %} aria-current="page"{% endif %}>{{ category.title }}</a>
+      {% if category.title != "* Most Popular Posts *" and category.title != "Features" and category.title != page.title %}
+      <a href="{{ category | route('category') }}#category-page-top">{{ category.title }}</a>
+      {% endif %}
       {% endfor %}
     </div>
   </nav>
 
-  {% if (page.featuredStories.length > 1) or (not page.featuredStories.length and sortedStories.length > 1) %}
-  <section class="category-best" aria-labelledby="category-best-title">
-    <header class="category-section-heading">
-      <div>
-        <p>Start here</p>
-        <h2 id="category-best-title">The Best of {{ page.title }}</h2>
+  <section class="category-hero-details" aria-label="{{ page.title }} introduction">
+    <div class="category-hero-details__copy">
+      <p>{{ categoryDescription }}</p>
+    </div>
+    <div class="category-hero-details__meta">
+      <span class="category-hero-details__count">{{ sortedStories.length }} firsthand stories</span>
+      <a href="{{ page.introLinkUrl or '#category-browse' }}">{{ page.introLinkText or 'Browse this page' }} <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <nav class="category-subcategory-nav" id="category-subcategories" aria-label="Browse {{ subcategoryParent }}">
+    <header>
+      <span>{{ guideLabel }}</span>
+      <strong>{{ guideTitle }}</strong>
+      <a href="{{ guideLinkUrl }}">{{ guideLinkText }}</a>
+    </header>
+    <div class="category-subcategory-nav__grid">
+      {% for card in page.guideCards %}
+      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
+      {% if card.cards and card.cards.length and card.cards[0].post %}
+        {% set cardStory = card.cards[0].post %}
+      {% endif %}
+      <a
+        class="category-subcategory-nav__trigger"
+        href="{{ card.linkUrl or storyUrl(cardStory) }}"
+        data-subcategory-trigger
+        data-subcategory-panel="category-subcategory-panel-{{ loop.index }}"
+        aria-controls="category-subcategory-panel-{{ loop.index }}"
+        aria-expanded="false"
+      >
+        <span class="category-subcategory-nav__trigger-image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 25vw, 90vw", false) }}{% endif %}</span>
+        <strong>{{ card.title or cardStory.title }}</strong>
+        <i><span>View four guides</span><b aria-hidden="true">↓</b></i>
+      </a>
+      {% endfor %}
+    </div>
+
+    {% for card in page.guideCards %}
+    <section
+      class="category-subcategory-nav__results"
+      id="category-subcategory-panel-{{ loop.index }}"
+      data-subcategory-panel
+      hidden
+    >
+      <header>
+        <p>From this collection</p>
+        <h2>{{ card.title }}</h2>
+        <a href="{{ card.linkUrl }}">{{ card.linkText or "View the full collection" }} <span aria-hidden="true">→</span></a>
+      </header>
+      <div class="category-subcategory-nav__posts">
+        {% for guideCard in card.cards %}
+        {% set guidePost = guideCard.post %}
+        {% if guidePost or guideCard.linkUrl %}
+        <article class="category-shortlist-card">
+          <a href="{{ guideCard.linkUrl or storyUrl(guidePost) }}">
+            <span class="category-shortlist-card__image">
+              {% if guideCard.image %}
+              <img src="{{ guideCard.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
+              {% else %}
+              {{ storyImage(guidePost, "(min-width: 900px) 45vw, 100vw", false) }}
+              {% endif %}
+            </span>
+            <span class="category-shortlist-card__copy">
+              <small>{{ guideCard.eyebrow or card.title }}</small>
+              <strong>{{ guideCard.title or guidePost.title }}</strong>
+              {% if guideCard.description %}<p>{{ guideCard.description }}</p>{% endif %}
+              <i>{{ guideCard.linkText or "Read the story" }} <span aria-hidden="true">→</span></i>
+            </span>
+          </a>
+        </article>
+        {% endif %}
+        {% endfor %}
       </div>
-      <p>Our most useful, inspiring, and reader-loved stories for exploring {{ page.title | lower }}.</p>
+    </section>
+    {% endfor %}
+  </nav>
+
+  <section class="category-shortlist" aria-labelledby="category-featured-title">
+    <div class="category-shortlist__background" aria-hidden="true">
+      {% set featuredBackground = page.featuredCards[0] %}
+      {% if page.featuredBackgroundImage %}<img src="{{ page.featuredBackgroundImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif featuredBackground.image %}<img src="{{ featuredBackground.image.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featuredBackground.post or page.featuredStories[0] or sortedStories[4] or heroStory, "100vw", false) }}{% endif %}
+    </div>
+    <header class="category-module-heading">
+      <p>{{ featuredLabel }}</p>
+      <h2 id="category-featured-title">{{ featuredTitle }}</h2>
+      <span>{{ featuredDescription }}</span>
     </header>
 
-    <div class="category-best__grid">
-      {% if page.featuredStories.length %}
-      {% for story in page.featuredStories %}
-      {% if loop.index > 1 %}
-      <article class="category-best__card">
-        <a href="{{ storyUrl(story) }}">
-          <span class="category-best__image">{{ storyImage(story, "(min-width: 900px) 42vw, 100vw", false) }}</span>
-          <span class="category-best__copy">
-            <small>Best of {{ page.title }}</small>
-            <h3>{{ story.title }}</h3>
-            {% if story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
-            <strong>Read more</strong>
-          </span>
+    <div class="category-shortlist__grid">
+      {% for card in page.featuredCards %}
+      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
+      <article class="category-shortlist-card category-shortlist-card--{{ loop.index }}">
+        <a href="{{ card.linkUrl or storyUrl(cardStory) }}">
+          <span class="category-shortlist-card__image">{% if card.image %}<img src="{{ card.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 1000px) 45vw, 100vw", false) }}{% endif %}</span>
+          <span class="category-shortlist-card__copy">{% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<strong>{{ card.title or cardStory.title }}</strong>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i>{{ card.linkText or "Read the story" }} <span aria-hidden="true">→</span></i></span>
         </a>
       </article>
-      {% endif %}
       {% endfor %}
-      {% else %}
-      {% for story in sortedStories if story.isImportant != false %}
-      {% if loop.index > 1 and loop.index < 4 %}
-      <article class="category-best__card">
-        <a href="{{ storyUrl(story) }}">
-          <span class="category-best__image">{{ storyImage(story, "(min-width: 900px) 42vw, 100vw", false) }}</span>
-          <span class="category-best__copy">
-            <small>Best of {{ page.title }}</small>
-            <h3>{{ story.title }}</h3>
-            {% if story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
-            <strong>Read more</strong>
-          </span>
-        </a>
-      </article>
-      {% endif %}
+    </div>
+  </section>
+
+  {% if page.title == "Beauty" %}
+  {% set beautyHeroCard = page.destinationCards[0] %}
+  {% set beautyHeroStory = page.beautyHeroPost or beautyHeroCard.post or page.destinationStories[0] or sortedStories[0] or heroStory %}
+  <section class="category-beauty-hero" aria-labelledby="category-beauty-hero-title">
+    <a href="{{ page.beautyHeroLinkUrl or beautyHeroCard.linkUrl or storyUrl(beautyHeroStory) }}">
+      <span class="category-beauty-hero__image">{% if page.beautyHeroImage %}<img src="{{ page.beautyHeroImage.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif beautyHeroCard.image %}<img src="{{ beautyHeroCard.image.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(beautyHeroStory, "100vw", false) }}{% endif %}</span>
+      <span class="category-beauty-hero__copy">
+        <small>{{ page.beautyHeroLabel or "Reader Favorites" }}</small>
+        <strong id="category-beauty-hero-title">{{ page.beautyHeroTitle or beautyHeroCard.title or beautyHeroStory.title }}</strong>
+        {% if page.beautyHeroDescription %}<span>{{ page.beautyHeroDescription }}</span>{% endif %}
+        <i>{{ page.beautyHeroLinkText or beautyHeroCard.linkText or "Read the Story" }} <span aria-hidden="true">→</span></i>
+      </span>
+    </a>
+  </section>
+  {% else %}
+  <section class="category-destinations" aria-labelledby="category-destinations-title">
+    <header class="category-module-heading">
+      <p>{{ destinationsLabel }}</p>
+      <h2 id="category-destinations-title">{{ destinationsTitle }}</h2>
+      <span>{{ destinationsDescription }}</span>
+    </header>
+    <div class="category-destinations__grid">
+      {% for card in page.destinationCards %}
+      {% set cardStory = card.post or page.destinationStories[loop.index0] or sortedStories[loop.index0] or heroStory %}
+      <a class="category-destination-tile" href="{{ card.linkUrl or storyUrl(cardStory) }}">
+        <span>{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 1000px) 25vw, 50vw", false) }}{% endif %}</span>
+        <strong>{{ card.title or cardStory.title }}</strong>
+        {% if card.description %}<p>{{ card.description }}</p>{% endif %}
+        <i>{% if page.title == "Travel Guides" %}EXPLORE MORE <span aria-hidden="true">⟶</span>{% else %}{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} <span aria-hidden="true">→</span>{% endif %}</i>
+      </a>
       {% endfor %}
-      {% endif %}
     </div>
   </section>
   {% endif %}
 
-  <section class="category-latest" aria-labelledby="category-latest-title">
-    <header class="category-section-heading category-section-heading--compact">
-      <div>
-        <p>Browse the journal</p>
-        <h2 id="category-latest-title">Latest {{ page.title }} Stories</h2>
-      </div>
-    </header>
-
-    <div class="category-latest__grid">
-      {% if page.featuredStories.length %}
-      {% for story in sortedStories %}
-        {{ latestStoryCard(story, page.title) }}
-      {% endfor %}
+  {% if page.title != "Beauty" and page.title != "Wellness" and page.title != "Home And Garden" %}
+  <section class="category-map" id="category-map" aria-label="Interactive destination map">
+    <div class="category-map__background" aria-hidden="true">
+      {% if page.mapImage %}
+      <img src="{{ page.mapImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
       {% else %}
-      {% for story in sortedStories if story.isImportant != false %}
-      {% if loop.index > 3 %}
-        {{ latestStoryCard(story, page.title) }}
-      {% endif %}
-      {% endfor %}
-      {% for story in sortedStories if story.isImportant == false %}
-        {{ latestStoryCard(story, page.title) }}
-      {% endfor %}
+      {{ storyImage(sortedStories[9] or heroStory, "100vw", false) }}
       {% endif %}
     </div>
+    <div class="category-map__intro">
+      <p>{{ mapLabel }}</p>
+      <h2>{{ mapTitle }}</h2>
+      <span>{{ mapDescription }}</span>
+    </div>
+    <div class="d3-world-map">
+      <img src="/assets/images/destinations3-world-map.png" alt="" loading="lazy" decoding="async">
+      {% for continent in continents.items %}
+        {% if continent.name == "North America" %}
+        <a class="d3-map-pin d3-map-pin--north-america{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">North America <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "South America" %}
+        <a class="d3-map-pin d3-map-pin--south-america{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">South America <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Europe" %}
+        <a class="d3-map-pin d3-map-pin--europe{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Europe <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Africa" %}
+        <a class="d3-map-pin d3-map-pin--africa{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Africa <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Asia" %}
+        <a class="d3-map-pin d3-map-pin--asia{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Asia <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Middle East" %}
+        <a class="d3-map-pin d3-map-pin--middle-east{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Middle East <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% elif continent.name == "Oceania" %}
+        <a class="d3-map-pin d3-map-pin--oceania{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Oceania <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
+        {% endif %}
+      {% endfor %}
+    </div>
   </section>
+  {% endif %}
+
+  <section class="category-clusters" aria-labelledby="category-clusters-title">
+    <header class="category-module-heading">
+      <p>{{ clustersLabel }}</p>
+      <h2 id="category-clusters-title">{{ clustersTitle }}</h2>
+      <span>{{ clustersDescription }}</span>
+    </header>
+    <div class="category-clusters__grid">
+      {% for card in page.collectionCards %}
+      {% set cardStory = card.post or page.clusterStories[loop.index0] or sortedStories[loop.index0] or heroStory %}
+      <article>
+        <a href="{{ card.linkUrl or storyUrl(cardStory) }}">
+          <span class="category-clusters__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 24vw, 100vw", false) }}{% endif %}</span>
+          {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}
+          <h3>{{ card.title or cardStory.title }}</h3>
+          {% if card.description %}<p>{{ card.description }}</p>{% endif %}
+          <i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} →</i>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  {% if page.title == "Wedding And Honeymoon" and (page.weddingFeaturePost or page.weddingFeatureImage or page.weddingFeatureTitle) %}
+  {% set weddingFeatureStory = page.weddingFeaturePost or sortedStories[0] or heroStory %}
+  <section class="category-wedding-feature" aria-labelledby="category-wedding-feature-title">
+    <a href="{{ page.weddingFeatureLinkUrl or storyUrl(weddingFeatureStory) }}">
+      <span class="category-wedding-feature__image">{% if page.weddingFeatureImage %}<img src="{{ page.weddingFeatureImage.path | image({w: 2400, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(weddingFeatureStory, "100vw", false) }}{% endif %}</span>
+      <span class="category-wedding-feature__copy">
+        <small>{{ page.weddingFeatureLabel or "Featured Story" }}</small>
+        <strong id="category-wedding-feature-title">{{ page.weddingFeatureTitle or weddingFeatureStory.title }}</strong>
+      </span>
+    </a>
+  </section>
+  {% endif %}
+
+  <section class="bm-section bm-products category-shop" aria-labelledby="category-shop-title">
+    <div class="bm-products__background">{% if page.shopImage %}<img src="{{ page.shopImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.shopCards[0].post or sortedStories[12] or heroStory, "100vw", false) }}{% endif %}</div>
+    <div class="bm-products__intro">
+      <span class="bm-kicker">{{ shopLabel }}</span>
+      <h2 id="category-shop-title">{{ shopTitle }}</h2>
+      {% if shopDescription %}<p>{{ shopDescription }}</p>{% endif %}
+      <a href="{{ shopLinkUrl }}">{{ shopLinkText }} <i>→</i></a>
+    </div>
+    <div class="bm-products__track">
+      {% for product in categoryProducts %}
+        {{ productCard(product) }}
+      {% endfor %}
+      {% for product in secondaryProducts %}
+        {{ productCard(product) }}
+      {% endfor %}
+    </div>
+    <div class="bm-products__controls" aria-label="Shopping carousel controls">
+      <button class="bm-products__control" type="button" data-product-direction="previous" aria-label="Previous products">⟵</button>
+      <button class="bm-products__control" type="button" data-product-direction="next" aria-label="Next products">⟶</button>
+    </div>
+  </section>
+
+  {% if page.title == "Hotels" and page.hotelCollectionCards.length %}
+  <section class="category-clusters category-clusters--after-shop" aria-labelledby="category-hotel-collection-title">
+    <header class="category-module-heading">
+      <p>{{ page.hotelCollectionLabel or "More to Discover" }}</p>
+      <h2 id="category-hotel-collection-title">{{ page.hotelCollectionTitle or "More Hotel Collections" }}</h2>
+      <span>{{ page.hotelCollectionDescription }}</span>
+    </header>
+    <div class="category-clusters__grid">
+      {% for card in page.hotelCollectionCards %}
+      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
+      <article>
+        <a href="{{ card.linkUrl or storyUrl(cardStory) }}">
+          <span class="category-clusters__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 24vw, 100vw", false) }}{% endif %}</span>
+          {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}
+          <h3>{{ card.title or cardStory.title }}</h3>
+          {% if card.description %}<p>{{ card.description }}</p>{% endif %}
+          <i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} →</i>
+        </a>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="category-updated" aria-labelledby="category-updated-title">
+    <div class="category-updated__background" aria-hidden="true">{% if page.updatedBackgroundImage %}<img src="{{ page.updatedBackgroundImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif page.updatedCards[0].image %}<img src="{{ page.updatedCards[0].image.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.updatedCards[0].post or updatedStories[0] or heroStory, "100vw", false) }}{% endif %}</div>
+    <header class="category-module-heading">
+      <p>{{ updatedLabel }}</p>
+      <h2 id="category-updated-title">{{ updatedTitle }}</h2>
+      <span>{{ updatedDescription }}</span>
+    </header>
+    <div class="category-updated__grid">
+      {% for card in page.updatedCards %}
+        {% set cardStory = card.post or updatedStories[loop.index0] or heroStory %}
+        <article>
+          <a href="{{ card.linkUrl or storyUrl(cardStory) }}">
+            <span>{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 25vw, 100vw", false) }}{% endif %}</span>
+            <small>{{ card.eyebrow or ("Updated " + (cardStory._updatedAt | date("MMMM D, YYYY"))) }}</small>
+            <strong>{{ card.title or cardStory.title }}</strong>
+            {% if card.description %}<p>{{ card.description }}</p>{% endif %}
+          </a>
+        </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <aside class="category-expertise category-expertise--editorial-overlay">
+    <span class="category-expertise__image">{% if page.expertiseImage %}<img src="{{ page.expertiseImage.path | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(sortedStories[16] or heroStory, "100vw", false) }}{% endif %}</span>
+    <div class="category-expertise__copy">
+      <p>{{ expertiseLabel }}</p>
+      <h2>{{ expertiseTitle }}</h2>
+      <span>{{ expertiseDescription }}</span>
+      <div class="category-expertise__stats">
+        <div><strong>{{ expertiseStat1Value }}</strong><span>{{ expertiseStat1Label }}</span></div>
+        <div><strong>{{ expertiseStat2Value }}</strong><span>{{ expertiseStat2Label }}</span></div>
+        <div><strong>{{ expertiseStat3Value }}</strong><span>{{ expertiseStat3Label }}</span></div>
+      </div>
+      <nav><a href="{{ expertiseLink1Url }}">{{ expertiseLink1Text }}</a><a href="{{ expertiseLink2Url }}">{{ expertiseLink2Text }}</a></nav>
+    </div>
+  </aside>
+
+  <section class="category-index" aria-labelledby="category-index-title">
+    <header class="category-module-heading">
+      <p>{{ indexLabel }}</p>
+      <h2 id="category-index-title">{{ indexTitle }}</h2>
+      <span>{{ indexDescription }}</span>
+    </header>
+    <ol>
+      {% for card in page.indexCards %}
+      {% set cardStory = card.post or indexStories[loop.index0] or heroStory %}
+        <li><a href="{{ card.linkUrl or storyUrl(cardStory) }}"><span>{{ loop.index }}</span><strong>{{ card.title or cardStory.title }}</strong><i aria-hidden="true">→</i></a></li>
+      {% endfor %}
+    </ol>
+  </section>
+
+  {% if not page.guideCards.length %}
+  <section class="category-browse" id="category-browse" aria-labelledby="category-browse-title">
+    <header class="category-module-heading category-module-heading--centered">
+      <p>{{ browseLabel }}</p>
+      <h2 id="category-browse-title">{{ browseTitle }}</h2>
+    </header>
+
+    <div class="category-browse__grid">
+      {% for card in page.browseCards %}
+      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
+      <a class="category-browse__panel category-browse__panel--visual" href="{{ card.linkUrl or storyUrl(cardStory) }}">
+        <span class="category-browse__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 30vw, 90vw", false) }}{% endif %}</span>
+        {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<h3>{{ card.title or cardStory.title }}</h3>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} →</i>
+      </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <aside class="category-related" aria-labelledby="category-related-title">
+    <div>
+      <p>{{ relatedLabel }}</p>
+      <h2 id="category-related-title">{{ relatedTitle }}</h2>
+    </div>
+    <nav class="category-related__tiles" aria-label="Related blog categories">
+      {% for card in page.relatedCards %}
+      {% if loop.index <= 4 %}
+        {% set cardStory = card.post or sortedStories[loop.index + 9] or heroStory %}
+        <a href="{{ card.linkUrl or storyUrl(cardStory) }}">
+          <span class="category-related__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 24vw, 50vw", false) }}{% endif %}</span>
+          {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<strong>{{ card.title or cardStory.title }}</strong>{% if card.description %}<p>{{ card.description }}</p>{% endif %}
+          <i>{{ card.linkText or "View category" }} <span aria-hidden="true">⟶</span></i>
+        </a>
+      {% endif %}
+      {% endfor %}
+    </nav>
+  </aside>
 
 </div>
 {% endblock %}

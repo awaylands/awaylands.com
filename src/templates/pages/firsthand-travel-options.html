@@ -1,0 +1,588 @@
+{% extends "layouts/default.html" %}
+
+{% block body_class %}body body--firsthand-options has-no-hero{% endblock %}
+
+{% block extra_head %}
+  <title>Firsthand Travel Section Options | Away Lands</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    .body--firsthand-options {
+      --fo-ink: #18201f;
+      --fo-teal: #124952;
+      --fo-blue: #075967;
+      --fo-coral: #d84a3a;
+      --fo-pink: #f4a39b;
+      --fo-paper: #fffdf9;
+      --fo-mist: #eef5f4;
+      padding-top: 6.4rem;
+      background: var(--fo-paper);
+      color: var(--fo-ink);
+    }
+
+    .body--firsthand-options .page-header {
+      background: rgba(255, 253, 249, 0.96);
+      box-shadow: 0 1px 0 rgba(18, 73, 82, 0.12);
+    }
+
+    .fo-page {
+      overflow: hidden;
+    }
+
+    .fo-intro {
+      max-width: 128rem;
+      margin: 0 auto;
+      padding: clamp(5rem, 8vw, 9rem) clamp(2rem, 5vw, 6rem);
+      text-align: center;
+    }
+
+    .fo-intro p,
+    .fo-label {
+      margin: 0 0 1.2rem;
+      color: var(--fo-coral);
+      font: 800 1.2rem/1.2 Montserrat, Arial, sans-serif;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .fo-intro h1 {
+      margin: 0;
+      font-family: 'Still EB Garamond', Georgia, serif;
+      font-size: clamp(4.8rem, 7vw, 9rem);
+      font-weight: 500;
+      line-height: 0.95;
+    }
+
+    .fo-intro span {
+      display: block;
+      max-width: 64rem;
+      margin: 2rem auto 0;
+      font: 400 1.6rem/1.55 Montserrat, Arial, sans-serif;
+    }
+
+    .fo-option {
+      max-width: 144rem;
+      margin: 0 auto clamp(8rem, 11vw, 14rem);
+      padding: 0 clamp(2rem, 5vw, 6rem);
+    }
+
+    .fo-option-label {
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      margin-bottom: 2rem;
+      color: var(--fo-coral);
+      font: 800 1.1rem/1.2 Montserrat, Arial, sans-serif;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .fo-option-label:after {
+      width: 5rem;
+      height: 0.2rem;
+      background: currentColor;
+      content: '';
+    }
+
+    .fo-photo {
+      display: block;
+      overflow: hidden;
+    }
+
+    .fo-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fo-copy h2 {
+      margin: 0;
+      font-family: 'Still EB Garamond', Georgia, serif;
+      font-size: clamp(4.2rem, 5.3vw, 7.4rem);
+      font-weight: 500;
+      line-height: 0.92;
+    }
+
+    .fo-copy > span {
+      display: block;
+      margin-top: 2rem;
+      font: 400 clamp(1.5rem, 1.5vw, 1.8rem)/1.55 Montserrat, Arial, sans-serif;
+    }
+
+    .fo-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem 3rem;
+      margin-top: 2.6rem;
+    }
+
+    .fo-links a {
+      border-bottom: 0.2rem solid var(--fo-pink);
+      padding-bottom: 0.5rem;
+      color: inherit;
+      font: 800 1rem/1.2 Montserrat, Arial, sans-serif;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .fo-a {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(32rem, 0.7fr);
+      min-height: 67rem;
+      background: var(--fo-teal);
+      color: #fff;
+    }
+
+    .fo-a__gallery {
+      display: grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 0.8rem;
+      padding: 0.8rem;
+    }
+
+    .fo-a__gallery .fo-photo:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .fo-a .fo-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(4rem, 6vw, 8rem);
+    }
+
+    .fo-a .fo-label {
+      color: var(--fo-pink);
+    }
+
+    .fo-b {
+      position: relative;
+      min-height: 72rem;
+      color: #fff;
+    }
+
+    .fo-b > .fo-photo,
+    .fo-b:after {
+      position: absolute;
+      inset: 0;
+    }
+
+    .fo-b:after {
+      background: linear-gradient(90deg, rgba(8, 33, 38, 0.88) 0%, rgba(8, 33, 38, 0.48) 48%, rgba(8, 33, 38, 0.04) 78%);
+      content: '';
+    }
+
+    .fo-b .fo-copy {
+      position: relative;
+      z-index: 1;
+      width: min(64rem, 80%);
+      padding: clamp(7rem, 10vw, 13rem) clamp(3rem, 7vw, 10rem);
+    }
+
+    .fo-b .fo-label {
+      color: var(--fo-pink);
+    }
+
+    .fo-b__stats {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      padding-top: 2rem;
+    }
+
+    .fo-b__stats strong {
+      display: block;
+      font: 500 3.2rem/1 'Still EB Garamond', Georgia, serif;
+    }
+
+    .fo-b__stats span {
+      font: 700 0.9rem/1.3 Montserrat, Arial, sans-serif;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .fo-option:first-of-type .fo-b {
+      min-height: 57.6rem;
+    }
+
+    .fo-option:first-of-type .fo-copy {
+      width: min(78rem, 88%);
+      padding-top: clamp(3.5rem, 4.9vw, 6.3rem);
+      padding-bottom: clamp(5rem, 7vw, 9rem);
+    }
+
+    .fo-option:first-of-type .fo-label {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      font-size: 1.3rem;
+    }
+
+    .fo-option:first-of-type .fo-label:after {
+      width: 5rem;
+      height: 0.2rem;
+      background: var(--fo-pink);
+      content: '';
+    }
+
+    .fo-option:first-of-type .fo-copy > span {
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    .fo-option:first-of-type .fo-b__stats {
+      margin-top: 7.28rem;
+      padding-top: 2.8rem;
+    }
+
+    .fo-option:first-of-type .fo-b__stats strong {
+      margin-bottom: 0.4rem;
+    }
+
+    .fo-option:first-of-type .fo-links {
+      margin-top: 3.64rem;
+    }
+
+    .fo-b--center:after {
+      background: linear-gradient(to top, rgba(8, 33, 38, 0.9) 0%, rgba(8, 33, 38, 0.24) 58%, rgba(8, 33, 38, 0.05) 100%);
+    }
+
+    .fo-b--center .fo-copy {
+      display: flex;
+      width: min(82rem, calc(100% - 4rem));
+      min-height: 72rem;
+      margin: 0 auto;
+      padding: 7rem 2rem;
+      flex-direction: column;
+      justify-content: flex-end;
+      text-align: center;
+    }
+
+    .fo-b--center .fo-links {
+      justify-content: center;
+    }
+
+    .fo-b--center .fo-b__stats {
+      width: min(64rem, 100%);
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .fo-b--panel:after {
+      background: rgba(8, 33, 38, 0.18);
+    }
+
+    .fo-b--panel .fo-copy {
+      position: absolute;
+      top: 5rem;
+      right: 5rem;
+      bottom: 5rem;
+      width: min(52rem, calc(100% - 10rem));
+      padding: clamp(4rem, 6vw, 7rem);
+      background: rgba(255, 253, 249, 0.94);
+      color: var(--fo-ink);
+    }
+
+    .fo-b--panel .fo-label {
+      color: var(--fo-coral);
+    }
+
+    .fo-b--panel .fo-b__stats {
+      border-color: rgba(18, 73, 82, 0.25);
+    }
+
+    .fo-b--band:after {
+      background: linear-gradient(to right, rgba(8, 33, 38, 0.12), rgba(8, 33, 38, 0.04));
+    }
+
+    .fo-b--band .fo-copy {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: grid;
+      width: auto;
+      padding: clamp(3rem, 5vw, 6rem) clamp(3rem, 7vw, 10rem);
+      background: rgba(18, 73, 82, 0.94);
+      grid-template-columns: minmax(0, 1.25fr) minmax(30rem, 0.75fr);
+      gap: 2rem 6rem;
+      align-items: end;
+    }
+
+    .fo-b--band .fo-label {
+      grid-column: 1 / -1;
+      margin-bottom: 0;
+    }
+
+    .fo-b--band .fo-copy > span {
+      margin: 0;
+    }
+
+    .fo-b--band .fo-links {
+      grid-column: 2;
+      grid-row: 2;
+      justify-content: flex-end;
+      margin: 0;
+    }
+
+    .fo-c {
+      background: var(--fo-mist);
+      padding: clamp(4rem, 6vw, 8rem);
+    }
+
+    .fo-c__strip {
+      display: grid;
+      grid-template-columns: 1.3fr 0.8fr 1fr;
+      gap: 1rem;
+      height: clamp(30rem, 37vw, 48rem);
+    }
+
+    .fo-c__content {
+      display: grid;
+      grid-template-columns: 0.8fr 1.4fr;
+      gap: clamp(3rem, 6vw, 9rem);
+      align-items: start;
+      margin-top: clamp(3rem, 5vw, 6rem);
+    }
+
+    .fo-c__number {
+      color: var(--fo-coral);
+      font: 500 clamp(7rem, 11vw, 15rem)/0.75 'Still EB Garamond', Georgia, serif;
+    }
+
+    .fo-c .fo-copy h2 {
+      font-size: clamp(4rem, 5vw, 6.8rem);
+    }
+
+    .fo-d {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      min-height: 70rem;
+      border: 1px solid rgba(18, 73, 82, 0.2);
+      background: #fff;
+    }
+
+    .fo-d__editorial {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: clamp(4rem, 6vw, 8rem);
+    }
+
+    .fo-d blockquote {
+      margin: 4rem 0;
+      font: 500 clamp(3.2rem, 4vw, 5.7rem)/1.05 'Still EB Garamond', Georgia, serif;
+    }
+
+    .fo-d blockquote:before {
+      display: block;
+      margin-bottom: 1rem;
+      color: var(--fo-coral);
+      content: '“';
+      font-size: 8rem;
+      line-height: 0.4;
+    }
+
+    .fo-d__visual {
+      display: grid;
+      grid-template-columns: 1fr 0.72fr;
+      grid-template-rows: 1fr 0.8fr;
+      gap: 1rem;
+      padding: 1rem;
+      background: var(--fo-pink);
+    }
+
+    .fo-d__visual .fo-photo:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .fo-d__signature {
+      color: var(--fo-blue);
+      font: 500 2.5rem/1.2 'Still EB Garamond', Georgia, serif;
+    }
+
+    @media (max-width: 800px) {
+      .body--firsthand-options {
+        padding-top: 5.6rem;
+      }
+
+      .fo-a,
+      .fo-d {
+        grid-template-columns: 1fr;
+      }
+
+      .fo-a__gallery,
+      .fo-d__visual {
+        min-height: 52rem;
+      }
+
+      .fo-b {
+        min-height: 66rem;
+      }
+
+      .fo-b:after {
+        background: linear-gradient(to top, rgba(8, 33, 38, 0.9), rgba(8, 33, 38, 0.12));
+      }
+
+      .fo-b .fo-copy {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: auto;
+        padding: 4rem 3rem;
+      }
+
+      .fo-b--center .fo-copy {
+        min-height: 66rem;
+        padding: 4rem 3rem;
+      }
+
+      .fo-b--panel .fo-copy {
+        top: auto;
+        width: auto;
+        background: rgba(255, 253, 249, 0.94);
+        color: var(--fo-ink);
+      }
+
+      .fo-b--band .fo-copy {
+        grid-template-columns: 1fr;
+      }
+
+      .fo-b--band .fo-label,
+      .fo-b--band .fo-links {
+        grid-column: 1;
+        grid-row: auto;
+      }
+
+      .fo-b--band .fo-links {
+        justify-content: flex-start;
+      }
+
+      .fo-c__strip {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .fo-c__strip .fo-photo:last-child {
+        display: none;
+      }
+
+      .fo-c__content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .fo-option {
+        padding: 0 1.5rem;
+      }
+
+      .fo-a__gallery,
+      .fo-d__visual {
+        grid-template-columns: 1fr 1fr;
+        min-height: 42rem;
+      }
+
+      .fo-a__gallery .fo-photo:first-child,
+      .fo-d__visual .fo-photo:first-child {
+        grid-column: 1 / 3;
+        grid-row: 1;
+      }
+
+      .fo-b__stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .fo-b__stats div:last-child {
+        display: none;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+{% set images = {
+  coast: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/991a326d-7eb5-4ad8-ba9f-3a100e750af1/0B4A0113.jpg",
+  portrait: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/bc9a69a2-7511-4dda-9128-eaafbf94534c/Away-Lands-Girls-Trip-Baha-Mar-Bahamas-009.jpg",
+  road: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/df38ac28-41c7-43e8-96fd-b71102b2618a/AwayLands-PhotographyPortfolio-512.jpg",
+  resort: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/4ac3a12f-3258-48b8-89a6-7a286e4ea246/Sandals-Emerald-Bay-Bahamas-Exuma-Resort-Review-Away-Lands-DJI_0879.jpg",
+  city: "decc50a7-e43f-4c99-b5e9-cc327d2e1b93/dev/4b853dfb-82c2-4b7c-adaf-7c60821a7faf/AwayLands-PhotographyPortfolio-421.jpg"
+} %}
+
+<main class="fo-page">
+  <header class="fo-intro">
+    <p>Design Study</p>
+    <h1>Cinematic Firsthand Travel</h1>
+    <span>Four variations on the full-image direction, using different placements for the story, expertise, and supporting links.</span>
+  </header>
+
+  <section class="fo-option">
+    <div class="fo-option-label">Option 2A - Left Editorial Overlay</div>
+    <div class="fo-b">
+      <span class="fo-photo"><img src="{{ images.city | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="eager"></span>
+      <div class="fo-copy">
+        <p class="fo-label">The Away Lands perspective</p>
+        <h2>We Only Recommend<br>Places We Know</h2>
+        <span>More than a decade of travel, original photography, and honest notes from the road are behind every guide.</span>
+        <div class="fo-b__stats">
+          <div><strong>60+</strong><span>Countries visited</span></div>
+          <div><strong>10</strong><span>Years of full-time travel</span></div>
+          <div><strong>100%</strong><span>Original perspective</span></div>
+        </div>
+        <nav class="fo-links"><a href="/about/">Meet Amy &amp; Brandon</a><a href="/film/">View Film Portfolio</a><a href="/still/">View photography</a></nav>
+      </div>
+    </div>
+  </section>
+
+  <section class="fo-option">
+    <div class="fo-option-label">Option 2B - Centered Cinematic</div>
+    <div class="fo-b fo-b--center">
+      <span class="fo-photo"><img src="{{ images.coast | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="lazy"></span>
+      <div class="fo-copy">
+        <p class="fo-label">Firsthand since 2016</p>
+        <h2>Travel guides built from being there</h2>
+        <span>Every guide begins with an experience, a camera, and practical notes collected on the road.</span>
+        <div class="fo-b__stats">
+          <div><strong>60+</strong><span>Countries visited</span></div>
+          <div><strong>10</strong><span>Years traveling</span></div>
+          <div><strong>100%</strong><span>Original perspective</span></div>
+        </div>
+        <nav class="fo-links"><a href="/about/">Our story</a><a href="/still/">Photography archive</a></nav>
+      </div>
+    </div>
+  </section>
+
+  <section class="fo-option">
+    <div class="fo-option-label">Option 2C - Light Editorial Panel</div>
+    <div class="fo-b fo-b--panel">
+      <span class="fo-photo"><img src="{{ images.road | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="lazy"></span>
+      <div class="fo-copy">
+        <p class="fo-label">Experience behind the guide</p>
+        <h2>Firsthand travel, clearly shared</h2>
+        <span>Away Lands brings together more than a decade of tested routes, hotel stays, original photographs, and practical planning notes.</span>
+        <div class="fo-b__stats">
+          <div><strong>60+</strong><span>Countries</span></div>
+          <div><strong>2016</strong><span>Established</span></div>
+          <div><strong>2</strong><span>Travelers</span></div>
+        </div>
+        <nav class="fo-links"><a href="/about/">Meet us</a><a href="/destinations/">Explore destinations</a></nav>
+      </div>
+    </div>
+  </section>
+
+  <section class="fo-option">
+    <div class="fo-option-label">Option 2D - Full-Width Story Band</div>
+    <div class="fo-b fo-b--band">
+      <span class="fo-photo"><img src="{{ images.resort | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="lazy"></span>
+      <div class="fo-copy">
+        <p class="fo-label">Our firsthand promise</p>
+        <h2>We go, photograph, and share what matters</h2>
+        <span>From remote islands to major cities, our recommendations come from places we have personally experienced.</span>
+        <nav class="fo-links"><a href="/about/">Read our story</a><a href="/still/">View original photography</a></nav>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}

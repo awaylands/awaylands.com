@@ -105,7 +105,7 @@
       <span class="bm-compact-story__image">{{ storyImage(story, '(min-width: 900px) 13vw, 34vw', false) }}</span>
       <span class="bm-compact-story__copy">
         {{ storyMeta(story, "Journal") }}
-        <strong>{{ story.title }}</strong>
+        <strong>{{ story.title | replace("—", " - ") }}</strong>
         <small>Read More <i>→</i></small>
       </span>
       <em>{{ number }}</em>
@@ -119,7 +119,7 @@
       <span class="bm-editor-card__image">{{ storyImage(story, '(min-width: 900px) 24vw, 88vw', false) }}</span>
       <span class="bm-editor-card__copy">
         {{ storyMeta(story, "Journal") }}
-        <strong>{{ story.title }}</strong>
+        <strong>{{ story.title | replace("—", " - ") }}</strong>
         <small>Read Article <i>→</i></small>
       </span>
     </a>
@@ -242,7 +242,7 @@
           {% if loop.index <= 5 %}
           <a class="bm-itinerary-card bm-itinerary-card--{{ loop.index }}" href="{{ storyUrl(story) }}">
             <span class="bm-itinerary-card__image">{{ storyImage(story, '(min-width: 900px) 30vw, 78vw', false) }}</span>
-            <span class="bm-itinerary-card__copy">{{ storyMeta(story, "Travel Guide") }}<strong>{{ story.title }}</strong></span>
+            <span class="bm-itinerary-card__copy">{{ storyMeta(story, "Travel Guide") }}<strong>{{ story.title | replace("—", " - ") }}</strong></span>
           </a>
           {% endif %}
           {% endfor %}
@@ -255,7 +255,7 @@
             <span class="bm-itinerary-card__image">{{ storyImage(story, '(min-width: 900px) 30vw, 78vw', false) }}</span>
             <span class="bm-itinerary-card__copy">
               {{ storyMeta(story, "Travel Guide") }}
-              <strong>{{ story.title }}</strong>
+              <strong>{{ story.title | replace("—", " - ") }}</strong>
             </span>
           </a>
           {% endif %}
@@ -296,7 +296,7 @@
         {% if loop.index <= 6 %}
         <a class="bm-latest-card" href="{{ storyUrl(story) }}">
           <span class="bm-latest-card__image">{{ storyImage(story, '(min-width: 900px) 16vw, 44vw', false) }}</span>
-          {{ storyMeta(story, "Journal") }}<strong>{{ story.title }}</strong>
+          {{ storyMeta(story, "Journal") }}<strong>{{ story.title | replace("—", " - ") }}</strong>
         </a>
         {% endif %}
         {% endfor %}
