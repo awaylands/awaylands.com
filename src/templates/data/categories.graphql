@@ -6,7 +6,53 @@ query {
     items {
       _contentTypeName
       title
+      parentCategory { _id title }
+      navigationOrder
+      pageLabel
+      pageHeadline
       introText
+      introLinkText introLinkUrl
+      heroImage { path }
+      heroStory {
+        _id
+        _enabledAt
+        isImportant
+        title
+        slug
+        tout {
+          image { path }
+          secondaryImage { path }
+          dek
+        }
+      }
+      featuredLabel
+      featuredTitle
+      featuredDescription
+      featuredBackgroundImage { path }
+      guideLabel guideTitle guideLinkText guideLinkUrl
+      guideCards {
+        image { path }
+        title description linkText linkUrl
+        cards {
+          post {
+            _id
+            title
+            slug
+            tout { image { path } secondaryImage { path } dek }
+          }
+          image { path }
+          eyebrow title description linkText linkUrl
+        }
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        post2 { _id title slug }
+        post3 { _id title slug }
+        post4 { _id title slug }
+      }
+      featuredCards {
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
       featuredStories {
         _id
         _enabledAt
@@ -19,10 +65,96 @@ query {
           dek
         }
       }
+      guideStories {
+        _id
+        _enabledAt
+        title
+        slug
+        tout { image { path } secondaryImage { path } dek }
+      }
+      destinationsLabel destinationsTitle destinationsDescription
+      destinationCards {
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
+      destinationStories { _id title slug tout { image { path } secondaryImage { path } } }
+      beautyHeroLabel beautyHeroTitle beautyHeroDescription beautyHeroLinkText beautyHeroLinkUrl
+      beautyHeroImage { path }
+      beautyHeroPost { _id title slug tout { image { path } secondaryImage { path } dek } }
+      mapLabel mapTitle mapDescription
+      mapImage { path }
+      clustersLabel clustersTitle clustersDescription
+      collectionCards {
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
+      clusterStories { _id title slug tout { image { path } secondaryImage { path } } }
+      collection1Name collection2Name collection3Name collection4Name
+      collection1Image { path }
+      collection2Image { path }
+      collection3Image { path }
+      collection4Image { path }
+      collection1Post { _id title slug tout { image { path } secondaryImage { path } } }
+      collection2Post { _id title slug tout { image { path } secondaryImage { path } } }
+      collection3Post { _id title slug tout { image { path } secondaryImage { path } } }
+      collection4Post { _id title slug tout { image { path } secondaryImage { path } } }
+      weddingFeatureLabel weddingFeatureTitle weddingFeatureLinkUrl
+      weddingFeatureImage { path }
+      weddingFeaturePost { _id title slug tout { image { path } secondaryImage { path } dek } }
+      shopLabel shopTitle shopDescription shopLinkText shopLinkUrl
+      shopImage { path }
+      shopCards {
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
+      hotelCollectionLabel hotelCollectionTitle hotelCollectionDescription
+      hotelCollectionCards {
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
+      updatedLabel updatedTitle updatedDescription
+      updatedBackgroundImage { path }
+      updatedCards {
+        post { _id _updatedAt title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
+      updatedStories { _id _updatedAt title slug tout { image { path } secondaryImage { path } dek } }
+      expertiseLabel expertiseTitle expertiseDescription
+      expertiseImage { path }
+      expertiseStat1Value expertiseStat1Label
+      expertiseStat2Value expertiseStat2Label
+      expertiseStat3Value expertiseStat3Label
+      expertiseLink1Text expertiseLink1Url
+      expertiseLink2Text expertiseLink2Url
+      indexLabel indexTitle indexDescription
+      indexCards {
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
+      indexStories { _id title slug }
+      browseLabel browseTitle
+      browseCards {
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
+      relatedLabel relatedTitle
+      relatedCards {
+        post { _id title slug tout { image { path } secondaryImage { path } dek } }
+        image { path }
+        eyebrow title description linkText linkUrl
+      }
       storySet(size: 250) {
         items {
           _id
           _enabledAt
+          _updatedAt
           isImportant
           title
           slug

@@ -1,7 +1,32 @@
 query {
+  products: getProducts {
+    travel { image { path } title description productUrl addToHomepage }
+    style { image { path } title description productUrl addToHomepage }
+    photography { image { path } title description productUrl addToHomepage }
+    beauty { image { path } title description productUrl addToHomepage }
+    fitness { image { path } title description productUrl addToHomepage }
+    home { image { path } title description productUrl addToHomepage }
+  }
   blog: getBlog {
     categories {
       title
+    }
+  }
+  continents: getContinentList {
+    items {
+      name
+      locations {
+        title
+      }
+    }
+    total
+  }
+  categoryNavigation: getCategoryList(size: 250, sort: [{field: "navigationOrder", order: "asc"}]) {
+    items {
+      _id
+      title
+      parentCategory { _id title }
+      navigationOrder
     }
   }
 }
