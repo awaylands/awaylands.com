@@ -25,6 +25,7 @@ graphql.config.json
 
 /vendor
 /build
+/static/category/
 takeshape-project.graphql
 .graphqlconfig
 .takeshaperc
