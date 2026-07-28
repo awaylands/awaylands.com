@@ -64,8 +64,8 @@ const siteConfig = fs.readFileSync(siteConfigPath, 'utf8');
 if (!/^templatePath:\s*src\/templates\s*$/m.test(siteConfig)) {
   fail('the deploy template input must be src/templates.');
 }
-if (!/^staticPath:\s*static\s*$/m.test(siteConfig)) {
-  fail('the deploy asset input must be static.');
+if (!/^staticPath:\s*build\s*$/m.test(siteConfig)) {
+  fail('the deploy asset input must be build.');
 }
 if (!/^buildPath:\s*build\s*$/m.test(siteConfig)) {
   fail('the generated build output must be build.');
@@ -93,7 +93,7 @@ Object.keys(baseline.sourceFiles).forEach(file => {
   }
 });
 
-const assetManifestPath = path.join(root, 'static/assets/manifest.json');
+const assetManifestPath = path.join(root, 'build/assets/manifest.json');
 if (!fs.existsSync(assetManifestPath)) {
   fail('compiled asset manifest is missing. Restore the verified assets before deploying.');
 }
@@ -107,8 +107,8 @@ if (
 }
 
 if (
-  sha256(path.join('static/assets', baseline.assets.javascript)) !== baseline.assets.javascriptSha256 ||
-  sha256(path.join('static/assets', baseline.assets.stylesheet)) !== baseline.assets.stylesheetSha256
+  sha256(path.join('build/assets', baseline.assets.javascript)) !== baseline.assets.javascriptSha256 ||
+  sha256(path.join('build/assets', baseline.assets.stylesheet)) !== baseline.assets.stylesheetSha256
 ) {
   fail('compiled asset contents do not match the verified production baseline.');
 }

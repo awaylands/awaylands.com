@@ -14,7 +14,7 @@ module.exports = {
     'stylesheets/main': './src/stylesheets/main.scss'
   },
   output: {
-    path: path.join(__dirname, 'static/assets'),
+    path: path.join(__dirname, 'build/assets'),
     filename: isProd ? '[name].[chunkhash].js' : '[name].js',
   },
   module: {

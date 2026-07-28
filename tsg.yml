@@ -1,11 +1,11 @@
 templatePath: src/templates
-staticPath: static
+staticPath: build
 buildPath: build
 
 context:
   site: data/site.graphql
-  assets: ../../static/assets/manifest.json
-  favicon: ../../static/assets/favicon-mainfest.json
+  assets: ../../build/assets/manifest.json
+  favicon: ../../build/assets/favicon-mainfest.json
 
 images: &images
   default:
@@ -189,4 +189,4 @@ routes:
       itemName: page
 
 deploy:
-  - ${buildPath}/static
+  - ${buildPath}
