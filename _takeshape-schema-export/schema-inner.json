@@ -1995,7 +1995,8 @@
         },
         "order": [
           "name",
-          "social"
+          "social",
+          "locations"
         ]
       }
     },
