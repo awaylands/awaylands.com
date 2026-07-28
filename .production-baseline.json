@@ -12,7 +12,7 @@
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "1805ec2826caea72dcb4bbb715fa510a65d6bddf6e27c0730ca689413f0117f5",
     "src/templates/pages/stories/landing.html": "f69a60e22252ce2cc11938b1c108903fad356378fc4e4be53679e7fa2427d1e7",
-    "src/templates/pages/category.html": "fe2a4c66969703838adf3e40bcbca70739abdc39bf0ce778ef2702477ecd6166",
+    "src/templates/pages/category.html": "07c52244c1e33a3d272064b05d30c3409e56e9f97b5d63c6dda6b4b7076a05e0",
     "src/templates/data/categories.graphql": "a0628a74cc7adc06cb4619788d2c69aca450231eb4521bbd10f7dc9505c6d538",
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
     "src/templates/pages/film.html": "7acee87765b21a103780ffe4862ccf193670ff64010e37eefd3545ed62eeda62",
@@ -31,7 +31,7 @@
     "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",
     "src/stylesheets/_fonts.scss": "2d5120490d3777cb980ed395b7765aba4f7a598e208b8b99cdb5eb131d0becd3",
     "src/stylesheets/pages/_blog.scss": "bd974e1e03d8339c81c2f436797f2166537ffd603774a826266cd4ccfd205e5b",
-    "src/stylesheets/pages/_category-redesign-final.scss": "ad0a46a9ef73f40ab92a241fee1f6fd3aca8ce94dc10ec0f32f6fdd52c6c838e",
+    "src/stylesheets/pages/_category-redesign-final.scss": "101a765e4efdc745c6be2660ecf8f3991d99e8387f2a854d6ded2b8fe3781572",
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
     "src/javascripts/components/search.js": "90439ac663ad2747efb03dfcf6f3870204ed482c6b734d39ff20495d9803cfa0",
     "src/stylesheets/pages/_editorial-menu.scss": "e5317100f1685255bc5d106ad743bf624965860f32717d3b0bdd8a04827a7437",
