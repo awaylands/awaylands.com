@@ -2052,6 +2052,7 @@ body.body--story {
   .story-cover__title {
     font-size: clamp(3.8rem, 11.5vw, 5.2rem);
     line-height: 0.96;
+    text-wrap: wrap;
   }
 
   .story-cover__dek {
