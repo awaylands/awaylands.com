@@ -167,6 +167,12 @@ function setStoryImageDimensions(image) {
     return;
   }
 
+  const heroMedia = image.closest('.story-cover__media');
+
+  if (heroMedia && image.naturalHeight / image.naturalWidth > 7 / 5) {
+    heroMedia.classList.add('story-cover__media--capped');
+  }
+
   if (!image.hasAttribute('width')) {
     image.setAttribute('width', image.naturalWidth);
   }
