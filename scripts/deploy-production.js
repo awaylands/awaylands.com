@@ -2,7 +2,6 @@ const childProcess = require('child_process');
 const crypto = require('crypto');
 const fs = require('fs');
 const https = require('https');
-const os = require('os');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
@@ -123,18 +122,18 @@ async function verifyLive(assets) {
 }
 
 function generateSite() {
-  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'awaylands-production-'));
-  const configPath = path.join(tempRoot, 'tsg.yml');
-  const generatedPath = path.join(tempRoot, 'generated');
+  const configPath = path.join(root, '.tsg-production-build.yml');
+  const generatedPath = path.join(root, '.deploy-generated');
   const config = fs.readFileSync(path.join(root, 'tsg.yml'), 'utf8')
-    .replace(/^buildPath:\s*build\s*$/m, `buildPath: ${generatedPath}`)
+    .replace(/^buildPath:\s*build\s*$/m, 'buildPath: .deploy-generated')
     .replace(/^staticPath:\s*build\s*$/m, 'staticPath: build');
   fs.writeFileSync(configPath, config);
   try {
     run(node, [takeShape, 'build', '--file', configPath]);
     copyTree(generatedPath, path.join(root, 'build'));
   } finally {
-    removeTree(tempRoot);
+    if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
+    removeTree(generatedPath);
   }
 }
 
