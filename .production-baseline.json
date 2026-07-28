@@ -54,7 +54,7 @@
     "static/assets/fonts/still-preview/EB-GARAMOND-OFL.txt": "0985066662eb755ed3683ae5482a81a9195b49ce3f7e165cc2388b3dbece7dd7",
     "static/assets/fonts/still-preview/eb-garamond-variable.ttf": "ef9512f92f6d579e5dc75af59a5a4b1b8b47d2eda89e00b954d44520e5369027",
     "src/stylesheets/pages/_destinations.scss": "a7abc33a3121adc7560712dc42750acdd7a6843e857efd4274d48035bc223f4c",
-    "scripts/deploy-production.js": "9bd7e14336295b1d7f7582481dd6fb988146979de6a9bc16c2c332b367f7877d",
+    "scripts/deploy-production.js": "84f5bc02db32b6af3580c7635b8f49bc45acd1727c8c6f8cd0084ed6588d41d7",
     "scripts/verify-production-baseline.js": "2644a376df0ad52128aed4b7a25bbae7f98bf205f56f0d8959c88c2fbc02d0a0"
   }
 }
