@@ -150,6 +150,21 @@
   {% set categoryProducts = products.style %}
 {% endif %}
 
+{# Optional category modules disappear when their editable content is empty. #}
+{% set hasGuideSection = page.guideCards.length %}
+{% set hasFeaturedSection = page.featuredCards.length or page.featuredStories.length or page.featuredBackgroundImage %}
+{% set hasWeddingFeature = page.weddingFeaturePost or page.weddingFeatureImage or page.weddingFeatureLabel or page.weddingFeatureTitle or page.weddingFeatureLinkUrl %}
+{% set hasBeautyFeature = page.beautyHeroPost or page.beautyHeroImage or page.beautyHeroLabel or page.beautyHeroTitle or page.beautyHeroDescription or page.beautyHeroLinkText or page.beautyHeroLinkUrl or page.destinationCards.length %}
+{% set hasDestinationSection = page.destinationCards.length or page.destinationStories.length or page.destinationsLabel or page.destinationsTitle or page.destinationsDescription %}
+{% set hasMapSection = page.mapImage or page.mapLabel or page.mapTitle or page.mapDescription %}
+{% set hasClusterSection = page.collectionCards.length or page.clusterStories.length or page.collection1Name or page.collection2Name or page.collection3Name or page.collection4Name or page.clustersLabel or page.clustersTitle or page.clustersDescription %}
+{% set hasShopSection = page.shopImage or page.shopCards.length or page.shopLabel or page.shopTitle or page.shopDescription or page.shopLinkText or page.shopLinkUrl %}
+{% set hasUpdatedSection = page.updatedCards.length or page.updatedStories.length or page.updatedBackgroundImage or page.updatedLabel or page.updatedTitle or page.updatedDescription %}
+{% set hasExpertiseSection = page.expertiseImage or page.expertiseLabel or page.expertiseTitle or page.expertiseDescription or page.expertiseStat1Value or page.expertiseStat2Value or page.expertiseStat3Value or page.expertiseLink1Text or page.expertiseLink2Text %}
+{% set hasIndexSection = page.indexCards.length or page.indexStories.length or page.indexLabel or page.indexTitle or page.indexDescription %}
+{% set hasBrowseSection = page.browseCards.length or page.browseLabel or page.browseTitle %}
+{% set hasRelatedSection = page.relatedCards.length or page.relatedLabel or page.relatedTitle %}
+
 {% if page.pageHeadline %}
   {% set categoryHeadline = page.pageHeadline %}
 {% endif %}
@@ -266,7 +281,7 @@
     </div>
   </section>
 
-  <nav class="category-subcategory-nav" id="category-subcategories" aria-label="Browse {{ subcategoryParent }}">
+  {% if hasGuideSection %}<nav class="category-subcategory-nav" id="category-subcategories" aria-label="Browse {{ subcategoryParent }}">
     <header>
       <span>{{ guideLabel }}</span>
       <strong>{{ guideTitle }}</strong>
@@ -331,8 +346,9 @@
       </div>
     </section>
     {% endfor %}
-  </nav>
+  </nav>{% endif %}
 
+  {% if hasFeaturedSection %}
   <section class="category-shortlist" aria-labelledby="category-featured-title">
     <div class="category-shortlist__background" aria-hidden="true">
       {% set featuredBackground = page.featuredCards[0] %}
@@ -356,8 +372,9 @@
       {% endfor %}
     </div>
   </section>
+  {% endif %}
 
-  {% if page.title == "Wedding And Honeymoon" %}
+  {% if page.title == "Wedding And Honeymoon" and hasWeddingFeature %}
   {% set weddingFeatureStory = page.weddingFeaturePost or sortedStories[0] or heroStory %}
   <section class="category-wedding-feature" aria-labelledby="category-wedding-feature-title">
     <a href="{{ page.weddingFeatureLinkUrl or 'https://www.awaylands.com/story/our-lush-tropical-wedding-at-acre-baja-in-cabo-mexico/' }}">
@@ -371,6 +388,7 @@
   {% endif %}
 
   {% if page.title == "Beauty" %}
+  {% if hasBeautyFeature %}
   {% set beautyHeroCard = page.destinationCards[0] %}
   {% set beautyHeroStory = page.beautyHeroPost or beautyHeroCard.post or page.destinationStories[0] or sortedStories[0] or heroStory %}
   <section class="category-beauty-hero" aria-labelledby="category-beauty-hero-title">
@@ -384,7 +402,9 @@
       </span>
     </a>
   </section>
+  {% endif %}
   {% else %}
+  {% if hasDestinationSection %}
   <section class="category-destinations" aria-labelledby="category-destinations-title">
     <header class="category-module-heading">
       <p>{{ destinationsLabel }}</p>
@@ -404,8 +424,9 @@
     </div>
   </section>
   {% endif %}
+  {% endif %}
 
-  {% if page.title != "Beauty" and page.title != "Wellness" and page.title != "Home And Garden" %}
+  {% if page.title != "Beauty" and page.title != "Wellness" and page.title != "Home And Garden" and hasMapSection %}
   <section class="category-map" id="category-map" aria-label="Interactive destination map">
     <div class="category-map__background" aria-hidden="true">
       {% if page.mapImage %}
@@ -442,6 +463,7 @@
   </section>
   {% endif %}
 
+  {% if hasClusterSection %}
   <section class="category-clusters" aria-labelledby="category-clusters-title">
     <header class="category-module-heading">
       <p>{{ clustersLabel }}</p>
@@ -463,8 +485,9 @@
       {% endfor %}
     </div>
   </section>
+  {% endif %}
 
-  <section class="bm-section bm-products category-shop" aria-labelledby="category-shop-title">
+  {% if hasShopSection %}<section class="bm-section bm-products category-shop" aria-labelledby="category-shop-title">
     <div class="bm-products__background">{% if page.shopImage %}<img src="{{ page.shopImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.shopCards[0].post or sortedStories[12] or heroStory, "100vw", false) }}{% endif %}</div>
     <div class="bm-products__intro">
       <span class="bm-kicker">{{ shopLabel }}</span>
@@ -484,7 +507,7 @@
       <button class="bm-products__control" type="button" data-product-direction="previous" aria-label="Previous products">⟵</button>
       <button class="bm-products__control" type="button" data-product-direction="next" aria-label="Next products">⟶</button>
     </div>
-  </section>
+  </section>{% endif %}
 
   {% if page.title == "Hotels" and page.hotelCollectionCards.length %}
   <section class="category-clusters category-clusters--after-shop" aria-labelledby="category-hotel-collection-title">
@@ -510,7 +533,7 @@
   </section>
   {% endif %}
 
-  <section class="category-updated" aria-labelledby="category-updated-title">
+  {% if hasUpdatedSection %}<section class="category-updated" aria-labelledby="category-updated-title">
     <div class="category-updated__background" aria-hidden="true">{% if page.updatedBackgroundImage %}<img src="{{ page.updatedBackgroundImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif page.updatedCards[0].image %}<img src="{{ page.updatedCards[0].image.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.updatedCards[0].post or updatedStories[0] or heroStory, "100vw", false) }}{% endif %}</div>
     <header class="category-module-heading">
       <p>{{ updatedLabel }}</p>
@@ -530,9 +553,9 @@
         </article>
       {% endfor %}
     </div>
-  </section>
+  </section>{% endif %}
 
-  <aside class="category-expertise category-expertise--editorial-overlay">
+  {% if hasExpertiseSection %}<aside class="category-expertise category-expertise--editorial-overlay">
     <span class="category-expertise__image">{% if page.expertiseImage %}<img src="{{ page.expertiseImage.path | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(sortedStories[16] or heroStory, "100vw", false) }}{% endif %}</span>
     <div class="category-expertise__copy">
       <p>{{ expertiseLabel }}</p>
@@ -545,9 +568,9 @@
       </div>
       <nav><a href="{{ expertiseLink1Url }}">{{ expertiseLink1Text }}</a><a href="{{ expertiseLink2Url }}">{{ expertiseLink2Text }}</a></nav>
     </div>
-  </aside>
+  </aside>{% endif %}
 
-  <section class="category-index" aria-labelledby="category-index-title">
+  {% if hasIndexSection %}<section class="category-index" aria-labelledby="category-index-title">
     <header class="category-module-heading">
       <p>{{ indexLabel }}</p>
       <h2 id="category-index-title">{{ indexTitle }}</h2>
@@ -559,9 +582,9 @@
         <li><a href="{{ card.linkUrl or storyUrl(cardStory) }}"><span>{{ loop.index }}</span><strong>{{ card.title or cardStory.title }}</strong><i aria-hidden="true">⟶</i></a></li>
       {% endfor %}
     </ol>
-  </section>
+  </section>{% endif %}
 
-  {% if not page.guideCards.length %}
+  {% if not hasGuideSection and hasBrowseSection %}
   <section class="category-browse" id="category-browse" aria-labelledby="category-browse-title">
     <header class="category-module-heading category-module-heading--centered">
       <p>{{ browseLabel }}</p>
@@ -580,7 +603,7 @@
   </section>
   {% endif %}
 
-  <aside class="category-related" aria-labelledby="category-related-title">
+  {% if hasRelatedSection %}<aside class="category-related" aria-labelledby="category-related-title">
     <div>
       <p>{{ relatedLabel }}</p>
       <h2 id="category-related-title">{{ relatedTitle }}</h2>
@@ -597,7 +620,7 @@
       {% endif %}
       {% endfor %}
     </nav>
-  </aside>
+  </aside>{% endif %}
 
 </div>
 {% endblock %}
