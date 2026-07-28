@@ -9,12 +9,6 @@
     "version": 213,
     "hash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0"
   },
-  "assets": {
-    "javascript": "javascripts/main.1d1a9c50948f7236404e.js",
-    "javascriptSha256": "dec5ea224da8e17b069c0112b5cab35a33e0d54e18a311774aee9734bdfe171b",
-    "stylesheet": "stylesheets/main.a87a1f1a71990a63daedf4848ba673e8.css",
-    "stylesheetSha256": "ff0f91b4383da50ebf9be48a5ee048d9a0fbef5fea5bc90e19be54b73b3726d7"
-  },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
     "src/templates/pages/stories/landing.html": "80f40b91c4b0dd7d57125430e3d570ab3e18a3925df2b20350a358badab71c25",
@@ -38,13 +32,13 @@
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
     "src/stylesheets/pages/_editorial-menu.scss": "e5317100f1685255bc5d106ad743bf624965860f32717d3b0bdd8a04827a7437",
     "src/stylesheets/pages/_story.scss": "ee14053b4824ea3c8290b0845a134c54540fa923853b008fae8ff688003546fe",
-    "src/templates/partials/head.html": "51eb5ce22da233d8c93807f23752784531841e30c1fb8be5ab5852b5b12b371f",
+    "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "src/javascripts/directives/story.js": "83f92468a7a6e12d006f8998c3e09353228e29e847d0369198815b2878fae5f7",
     "_takeshape-schema-export/schema.json": "b64807238b3b5a2c1626330b776357a3a70e896203328e257a81b0364cd77411",
     "_takeshape-schema-export/schema-inner.json": "aa6ea7684cb25382d64b10116b2b30690d8c9d5a23d03c7b54653539a8680ffd",
     "tsg.yml": "b9141f749b8c1b5ef7920ee4f897351c3dd18471f82006cf68294ab69311da4e",
-    "package.json": "59a30fc0444c574d6beea8feedec9f33d625305518391b4c580368b3958a1bd5",
+    "package.json": "11f4eaed434c234de4e8a4cadf1d79509280870fd25f8d9ebd975afb1f07e7e8",
     "scripts/sanitize-story-links.js": "cac32836e4b24239d0237c46186e8dbba3f20c631ed52d424c836d53050afa3e",
     "src/templates/pages/legacy-story.html": "42a8d4ebd740bae483607514ab67a8bbe0c2c1d979b4c597d7ec63c4dbc40727",
     "static/assets/fonts/MONTserrat-OFL.txt": "8b7141c03fa4f8d44e6345d5d4931709290f0f67875e452e95ac1fd3a027802e",

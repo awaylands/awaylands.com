@@ -1,0 +1,135 @@
+const childProcess = require('child_process');
+const crypto = require('crypto');
+const fs = require('fs');
+const https = require('https');
+const os = require('os');
+const path = require('path');
+
+const root = path.resolve(__dirname, '..');
+const node = process.execPath;
+const takeShape = path.join(root, 'node_modules/@takeshape/cli/dist/index.cjs');
+const manifestPath = path.join(root, 'build/assets/manifest.json');
+
+function run(command, args) {
+  childProcess.execFileSync(command, args, { cwd: root, stdio: 'inherit' });
+}
+
+function fail(message) {
+  throw new Error(`Deployment stopped: ${message}`);
+}
+
+function walk(dir, files = []) {
+  fs.readdirSync(dir).forEach(name => {
+    const file = path.join(dir, name);
+    if (fs.statSync(file).isDirectory()) walk(file, files);
+    else files.push(file);
+  });
+  return files;
+}
+
+function sha256(file) {
+  return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+}
+
+function getManifestAssets() {
+  if (!fs.existsSync(manifestPath)) fail('build/assets/manifest.json is missing.');
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  const css = manifest['stylesheets/main.css'];
+  const js = manifest['javascripts/main.js'];
+  if (!css || !js) fail('the build manifest is missing the main CSS or JavaScript asset.');
+  [css, js].forEach(asset => {
+    if (!/^(javascripts|stylesheets)\/main\.[^/]+\.(js|css)$/.test(asset)) {
+      fail(`manifest asset is not hashed: ${asset}`);
+    }
+    if (!fs.existsSync(path.join(root, 'build/assets', asset))) {
+      fail(`manifest asset is missing from build/assets: ${asset}`);
+    }
+  });
+  return { css, js };
+}
+
+function verifyGeneratedHtml(assets) {
+  const htmlFiles = walk(path.join(root, 'build')).filter(file => file.endsWith('.html'));
+  if (!htmlFiles.length) fail('the generated build contains no HTML pages.');
+  const cssHref = `/assets/${assets.css}`;
+  let checked = 0;
+  htmlFiles.forEach(file => {
+    const html = fs.readFileSync(file, 'utf8');
+    if (/<head\b/i.test(html)) {
+      checked += 1;
+      if (!html.includes(cssHref)) fail(`generated HTML references a stale stylesheet: ${path.relative(root, file)}`);
+    }
+  });
+  if (!checked) fail('no generated HTML documents contained a head stylesheet reference.');
+}
+
+function fetch(url) {
+  return new Promise((resolve, reject) => {
+    https.get(url, {
+      headers: {
+        'accept-encoding': 'identity',
+        'user-agent': 'awaylands-production-verifier'
+      }
+    }, response => {
+      let body = '';
+      response.setEncoding('utf8');
+      response.on('data', chunk => { body += chunk; });
+      response.on('end', () => resolve({ status: response.statusCode, body }));
+    }).on('error', reject);
+  });
+}
+
+async function verifyLive(assets) {
+  const pages = ['/', '/blog/', '/category/wedding-and-honeymoon/'];
+  const expectedCss = `/assets/${assets.css}`;
+  const localCssHash = sha256(path.join(root, 'build/assets', assets.css));
+  for (const page of pages) {
+    const result = await fetch(`https://www.awaylands.com${page}`);
+    if (result.status !== 200) fail(`${page} returned HTTP ${result.status}.`);
+    const matches = result.body.match(/\/assets\/stylesheets\/main\.[^"'\s?]+\.css(?:\?[^"'\s]*)?/g) || [];
+    if (!matches.includes(expectedCss)) {
+      const found = matches[0] || 'no stylesheet';
+      fail(`${page} serves ${found}; expected ${expectedCss}.`);
+    }
+  }
+  const css = await fetch(`https://www.awaylands.com${expectedCss}`);
+  if (css.status !== 200) fail(`${expectedCss} returned HTTP ${css.status}.`);
+  const liveCssHash = crypto.createHash('sha256').update(css.body).digest('hex');
+  if (liveCssHash !== localCssHash) {
+    fail(`${expectedCss} checksum mismatch (live ${liveCssHash}, local ${localCssHash}).`);
+  }
+  process.stdout.write(`Deployment verified live: ${assets.css}\n`);
+}
+
+function generateSite() {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'awaylands-production-'));
+  const configPath = path.join(tempRoot, 'tsg.yml');
+  const generatedPath = path.join(tempRoot, 'generated');
+  const config = fs.readFileSync(path.join(root, 'tsg.yml'), 'utf8')
+    .replace(/^buildPath:\s*build\s*$/m, `buildPath: ${generatedPath}`)
+    .replace(/^staticPath:\s*build\s*$/m, 'staticPath: build');
+  fs.writeFileSync(configPath, config);
+  try {
+    run(node, [takeShape, 'build', '--file', configPath]);
+    fs.cpSync(generatedPath, path.join(root, 'build'), { recursive: true, force: true });
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+}
+
+async function main() {
+  run('npm', ['run', 'build']);
+  const builtAssets = getManifestAssets();
+  generateSite();
+  const assets = getManifestAssets();
+  if (assets.css !== builtAssets.css || assets.js !== builtAssets.js) fail('site generation changed the compiled manifest.');
+  verifyGeneratedHtml(assets);
+  run(node, [path.join(root, 'scripts/verify-production-baseline.js')]);
+  run(node, [takeShape, 'deploy', '--file', path.join(root, 'tsg.yml')]);
+  await verifyLive(assets);
+}
+
+main().catch(error => {
+  process.stderr.write(`${error.message}\n`);
+  process.exitCode = 1;
+});

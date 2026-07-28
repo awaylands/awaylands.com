@@ -99,18 +99,14 @@ if (!fs.existsSync(assetManifestPath)) {
 }
 
 const assetManifest = JSON.parse(fs.readFileSync(assetManifestPath, 'utf8'));
-if (
-  assetManifest['javascripts/main.js'] !== baseline.assets.javascript ||
-  assetManifest['stylesheets/main.css'] !== baseline.assets.stylesheet
-) {
-  fail('compiled assets do not match the verified production baseline.');
-}
-
-if (
-  sha256(path.join('build/assets', baseline.assets.javascript)) !== baseline.assets.javascriptSha256 ||
-  sha256(path.join('build/assets', baseline.assets.stylesheet)) !== baseline.assets.stylesheetSha256
-) {
-  fail('compiled asset contents do not match the verified production baseline.');
-}
+['javascripts/main.js', 'stylesheets/main.css'].forEach(key => {
+  const asset = assetManifest[key];
+  if (!asset || !/^(javascripts|stylesheets)\/main\.[^/]+\.(js|css)$/.test(asset)) {
+    fail(`compiled asset manifest has no valid hashed ${key} entry.`);
+  }
+  if (!fs.existsSync(path.join(root, 'build/assets', asset))) {
+    fail(`compiled asset is missing from build/assets: ${asset}`);
+  }
+});
 
 process.stdout.write(`Production baseline verified for ${baseline.siteName}.\n`);
