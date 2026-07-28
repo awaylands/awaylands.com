@@ -55,6 +55,22 @@ if (takeShapeConfig.siteId !== baseline.siteId || takeShapeConfig.siteName !== b
   fail(`TakeShape must target ${baseline.siteName}.`);
 }
 
+const siteConfigPath = path.join(root, 'tsg.yml');
+if (!fs.existsSync(siteConfigPath)) {
+  fail('the TakeShape site configuration is missing.');
+}
+
+const siteConfig = fs.readFileSync(siteConfigPath, 'utf8');
+if (!/^templatePath:\s*src\/templates\s*$/m.test(siteConfig)) {
+  fail('the deploy template input must be src/templates.');
+}
+if (!/^staticPath:\s*static\s*$/m.test(siteConfig)) {
+  fail('the deploy asset input must be static.');
+}
+if (!/^buildPath:\s*build\s*$/m.test(siteConfig)) {
+  fail('the generated build output must be build.');
+}
+
 const schemaSnapshotPath = path.join(root, '_takeshape-schema-export/schema.json');
 const schemaSnapshot = JSON.parse(fs.readFileSync(schemaSnapshotPath, 'utf8'));
 if (

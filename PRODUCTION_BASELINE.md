@@ -2,6 +2,11 @@
 
 This directory is the only approved source for publishing `www.awaylands.com`.
 
+The live deploy inputs are `src/templates/` and `static/`. The `build/`
+folder is generated output for local previews; it is not the direct live
+deployment source. Production verification blocks if these folder assignments
+drift.
+
 Verified baseline:
 
 - Date: 2026-07-22
