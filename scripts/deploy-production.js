@@ -6,7 +6,10 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const bundledNode = '/Users/amyseder/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node';
-const node = fs.existsSync(bundledNode) ? bundledNode : process.execPath;
+const configuredNode = process.env.AWAYLANDS_NODE;
+const node = configuredNode && fs.existsSync(configuredNode)
+  ? configuredNode
+  : (fs.existsSync(bundledNode) ? bundledNode : process.execPath);
 const takeShape = path.join(root, 'node_modules/@takeshape/cli/dist/index.cjs');
 const manifestPath = path.join(root, 'build/assets/manifest.json');
 
@@ -49,6 +52,14 @@ function removeTree(directory) {
     else fs.unlinkSync(file);
   });
   fs.rmdirSync(directory);
+}
+
+function clearDirectory(directory) {
+  fs.readdirSync(directory).forEach(name => {
+    const file = path.join(directory, name);
+    if (fs.statSync(file).isDirectory()) removeTree(file);
+    else fs.unlinkSync(file);
+  });
 }
 
 function getManifestAssets() {
@@ -97,7 +108,7 @@ function normalizeGeneratedAssets(assets) {
 
 function fetch(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, {
+    const request = https.get(url, {
       headers: {
         'accept-encoding': 'identity',
         'user-agent': 'awaylands-production-verifier'
@@ -108,6 +119,7 @@ function fetch(url) {
       response.on('data', chunk => { body += chunk; });
       response.on('end', () => resolve({ status: response.statusCode, body }));
     }).on('error', reject);
+    request.setTimeout(20000, () => request.destroy(new Error(`Timed out fetching ${url}`)));
   });
 }
 
@@ -137,13 +149,14 @@ function generateSite() {
   const configPath = path.join(root, '.tsg-production-build.yml');
   const generatedPath = path.join(root, '.deploy-generated');
   const staticPath = path.join(root, '.deploy-static');
-  copyTree(path.join(root, 'build/assets'), path.join(staticPath, 'assets'));
   const config = fs.readFileSync(path.join(root, 'tsg.yml'), 'utf8')
     .replace(/^buildPath:\s*build\s*$/m, 'buildPath: .deploy-generated')
     .replace(/^staticPath:\s*build\s*$/m, 'staticPath: .deploy-static');
   fs.writeFileSync(configPath, config);
   try {
+    copyTree(path.join(root, 'build/assets'), path.join(staticPath, 'assets'));
     run(node, [takeShape, 'build', '--file', '.tsg-production-build.yml']);
+    clearDirectory(path.join(root, 'build'));
     copyTree(generatedPath, path.join(root, 'build'));
   } finally {
     if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
