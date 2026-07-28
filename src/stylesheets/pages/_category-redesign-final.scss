@@ -4468,6 +4468,7 @@ body.body--category-hub .category-expertise--editorial-overlay > .category-exper
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  padding-bottom: clamp(2rem, 3vw, 4rem);
 }
 
 body.body--category-hub .category-expertise--editorial-overlay .category-expertise__copy > p {
@@ -4481,6 +4482,7 @@ body.body--category-hub .category-expertise--editorial-overlay .category-experti
 
 body.body--category-hub .category-expertise--editorial-overlay .category-expertise__copy h2 {
   flex: 0 0 auto;
+  margin-top: 1.4rem;
   font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
   text-transform: capitalize;
 }
