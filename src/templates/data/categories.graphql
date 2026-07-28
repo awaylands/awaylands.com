@@ -79,9 +79,13 @@ query {
         eyebrow title description linkText linkUrl
       }
       destinationStories { _id title slug tout { image { path } secondaryImage { path } } }
-      beautyHeroLabel beautyHeroTitle beautyHeroDescription beautyHeroLinkText beautyHeroLinkUrl
-      beautyHeroImage { path }
-      beautyHeroPost { _id title slug tout { image { path } secondaryImage { path } dek } }
+      focusedHeroLabel: beautyHeroLabel
+      focusedHeroTitle: beautyHeroTitle
+      focusedHeroDescription: beautyHeroDescription
+      focusedHeroLinkText: beautyHeroLinkText
+      focusedHeroLinkUrl: beautyHeroLinkUrl
+      focusedHeroImage: beautyHeroImage { path }
+      focusedHeroPost: beautyHeroPost { _id title slug tout { image { path } secondaryImage { path } dek } }
       mapLabel mapTitle mapDescription
       mapImage { path }
       clustersLabel clustersTitle clustersDescription
