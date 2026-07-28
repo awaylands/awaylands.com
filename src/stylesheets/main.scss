@@ -15,6 +15,12 @@
 @import "mediavine";
 @import "tooltip";
 
+/* Global default link color. Component-specific hover and contrast states remain intact. */
+a,
+a:visited {
+  color: #0c889f;
+}
+
 #consumer-privacy-footer-wrapper {
   display: none !important;
 }
