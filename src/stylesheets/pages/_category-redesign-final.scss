@@ -1092,7 +1092,7 @@ body.body--category-hub .category-hub[data-category='travel-guides'] .category-d
 }
 
 .body--category-hub .category-browse__panel a:after {
-  content: '→';
+  content: '⟶';
 }
 
 .body--category-hub .category-related {
@@ -1440,7 +1440,7 @@ body.body--category-hub .category-hub[data-category='travel-guides'] .category-d
 
 .body--category-hub .category-clusters nav a:after {
   color: var(--category-coral);
-  content: '→';
+  content: '⟶';
 }
 
 .body--category-hub .category-shop {
@@ -4438,5 +4438,15 @@ body.body--category-hub .category-updated article {
 
   body.body--category-hub .category-updated article {
     padding: 0.7rem;
+  }
+}
+
+@media (max-width: 700px) {
+  body.body--category-hub .category-destination-tile strong {
+    font-size: clamp(2.8rem, 7vw, 4rem);
+  }
+
+  body.body--category-hub .category-destination-tile i {
+    font-size: 1.3rem;
   }
 }

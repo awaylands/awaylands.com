@@ -12,13 +12,13 @@
   "assets": {
     "javascript": "javascripts/main.1d1a9c50948f7236404e.js",
     "javascriptSha256": "dec5ea224da8e17b069c0112b5cab35a33e0d54e18a311774aee9734bdfe171b",
-    "stylesheet": "stylesheets/main.cb614b278828e24d0e84c03f3495710c.css",
-    "stylesheetSha256": "3bd255853c3cab736e0b4d440b3822b2a96f089d2e8a92857fa5a9c1f48679ee"
+    "stylesheet": "stylesheets/main.5d846fb3d4932b3364b29894908ca561.css",
+    "stylesheetSha256": "9262ae9f67a5794fd2c9d413c31771754b1ab3bed01463e80367710f63d03d34"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
     "src/templates/pages/stories/landing.html": "3a494662d60ea5f62d6e7fcff92b080125682ebd0407597d12d95a6bd55cb9a2",
-    "src/templates/pages/category.html": "032e7482e3f9419846dec8d031acb0c52d0b3f88d18dd3e081b89b4d2c579178",
+    "src/templates/pages/category.html": "6c0e21733d59ee60ffe768b201eb36bac64d7d1f0534a45a43e09e218ca22e18",
     "src/templates/pages/destinations.html": "8b9055c07cea1c88a1ee143fef0b0c2d5faa26edf4ee3072a48aa5d9f5bc4d5f",
     "src/templates/pages/film.html": "7acee87765b21a103780ffe4862ccf193670ff64010e37eefd3545ed62eeda62",
     "src/templates/pages/film-category.html": "35c07fb5e46a201e61947ffc5e48efb17655e4b32d98e9601b5f6832d2883651",
@@ -34,7 +34,7 @@
     "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",
     "src/stylesheets/_fonts.scss": "2d5120490d3777cb980ed395b7765aba4f7a598e208b8b99cdb5eb131d0becd3",
     "src/stylesheets/pages/_blog.scss": "ec7d2eb6f4ba165878ad53f8721000ba04a6bf398f824db75cedc0f471d251c8",
-    "src/stylesheets/pages/_category-redesign-final.scss": "624e8422bf515a9cc01f2c56580df198190124fa7cc7101d4d8b8d85da999cb4",
+    "src/stylesheets/pages/_category-redesign-final.scss": "689a18c64db81bf2aa6e91664a87f41e92fd2ffa2f60ceaf96ab834dd4e638b2",
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
     "src/stylesheets/pages/_editorial-menu.scss": "6139f8e6bddb844993b8ef4e90ea38ffa00098af627c0c80c0138fc911c1072a",
     "src/stylesheets/pages/_story.scss": "ee14053b4824ea3c8290b0845a134c54540fa923853b008fae8ff688003546fe",
