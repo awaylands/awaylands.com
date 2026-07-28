@@ -4507,3 +4507,19 @@ body.body--category-hub .category-expertise--editorial-overlay .category-experti
   flex: 0 0 auto;
   margin-bottom: 0;
 }
+
+/* Use the warmer category-card treatment across every category page. */
+body.body--category-hub .category-subcategory-nav__trigger > strong {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.2rem 4.5rem 1.2rem 1.4rem;
+  background: #eee3d4;
+  color: var(--category-deep-teal);
+}
+
+body.body--category-hub .category-subcategory-nav__trigger > i {
+  right: 1.4rem;
+  bottom: 1.4rem;
+  color: var(--category-deep-teal);
+}
