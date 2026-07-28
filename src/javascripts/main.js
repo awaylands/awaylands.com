@@ -160,6 +160,33 @@ const initBlogProductCarousel = () => {
   });
 };
 
+const initCategorySubcategories = () => {
+  const navigation = document.querySelector('.category-subcategory-nav');
+  if (!navigation) return;
+
+  const triggers = Array.from(navigation.querySelectorAll('[data-subcategory-trigger]'));
+  const panels = Array.from(navigation.querySelectorAll('[data-subcategory-panel]'));
+  if (!triggers.length || !panels.length) return;
+
+  navigation.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-subcategory-trigger]');
+    if (!trigger) return;
+    event.preventDefault();
+
+    const wasExpanded = trigger.getAttribute('aria-expanded') === 'true';
+    triggers.forEach(item => item.setAttribute('aria-expanded', 'false'));
+    panels.forEach(panel => { panel.hidden = true; });
+
+    if (wasExpanded) return;
+
+    const panel = navigation.querySelector(`#${trigger.dataset.subcategoryPanel}`);
+    if (!panel) return;
+    trigger.setAttribute('aria-expanded', 'true');
+    panel.hidden = false;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+};
+
 import Imageloaded from './directives/imageloaded';
 import Slides from './directives/slides';
 import Gallery from './directives/gallery';
@@ -180,6 +207,7 @@ export default new Vue({
     initBlogProductCarousel();
     initBlogInfiniteCarousels();
     initBlogDragCarousels();
+    initCategorySubcategories();
   },
   methods: {},
   components: {
