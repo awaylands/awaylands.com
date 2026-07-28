@@ -4779,3 +4779,38 @@ body.body--category-hub .category-subcategory-nav__description {
     font-size: 2rem;
   }
 }
+
+/* Shared category hero treatment: preserve each page's content and imagery. */
+body.body--category-hub .category-magazine-hero__copy {
+  transform: translateY(-58px);
+}
+
+body.body--category-hub .category-magazine-hero .category-kicker {
+  transform: translateY(-6px);
+}
+
+body.body--category-hub .category-magazine-hero h1 {
+  font-family: 'Still ITC Garamond Light Condensed';
+  font-size: clamp(10.08rem, 12.96vw, 18rem);
+  font-weight: 100;
+  letter-spacing: -0.025em;
+  line-height: 0.88;
+}
+
+body.body--category-hub .category-magazine-hero__image::after {
+  inset: auto 0 0;
+  height: 30%;
+  background: linear-gradient(0deg, rgba(14, 34, 37, 0.72), rgba(14, 34, 37, 0));
+}
+
+@media (max-width: 1000px) {
+  body.body--category-hub .category-magazine-hero h1 {
+    font-size: clamp(5rem, 8vw, 8rem);
+  }
+}
+
+@media (max-width: 700px) {
+  body.body--category-hub .category-magazine-hero h1 {
+    font-size: clamp(4.8rem, 16vw, 7rem);
+  }
+}
