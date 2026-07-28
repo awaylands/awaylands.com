@@ -6,7 +6,8 @@ const os = require('os');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
-const node = process.execPath;
+const bundledNode = '/Users/amyseder/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node';
+const node = fs.existsSync(bundledNode) ? bundledNode : process.execPath;
 const takeShape = path.join(root, 'node_modules/@takeshape/cli/dist/index.cjs');
 const manifestPath = path.join(root, 'build/assets/manifest.json');
 
@@ -29,6 +30,26 @@ function walk(dir, files = []) {
 
 function sha256(file) {
   return crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+}
+
+function copyTree(source, destination) {
+  fs.mkdirSync(destination, { recursive: true });
+  fs.readdirSync(source).forEach(name => {
+    const from = path.join(source, name);
+    const to = path.join(destination, name);
+    if (fs.statSync(from).isDirectory()) copyTree(from, to);
+    else fs.copyFileSync(from, to);
+  });
+}
+
+function removeTree(directory) {
+  if (!fs.existsSync(directory)) return;
+  fs.readdirSync(directory).forEach(name => {
+    const file = path.join(directory, name);
+    if (fs.statSync(file).isDirectory()) removeTree(file);
+    else fs.unlinkSync(file);
+  });
+  fs.rmdirSync(directory);
 }
 
 function getManifestAssets() {
@@ -111,9 +132,9 @@ function generateSite() {
   fs.writeFileSync(configPath, config);
   try {
     run(node, [takeShape, 'build', '--file', configPath]);
-    fs.cpSync(generatedPath, path.join(root, 'build'), { recursive: true, force: true });
+    copyTree(generatedPath, path.join(root, 'build'));
   } finally {
-    fs.rmSync(tempRoot, { recursive: true, force: true });
+    removeTree(tempRoot);
   }
 }
 
