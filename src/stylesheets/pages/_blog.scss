@@ -2091,6 +2091,21 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
     width: 100%;
   }
 
+  .bm-category__copy {
+    bottom: 2rem;
+    left: -0.2rem;
+    right: -0.2rem;
+  }
+
+  .bm-category strong {
+    font-size: clamp(1.65rem, 4.8vw, 2.15rem);
+  }
+
+  .bm-category__description {
+    width: calc(100% + 1.2rem);
+    margin: 1.5rem -0.6rem 0;
+  }
+
   .bm-products__track {
     margin-right: -2rem;
   }
