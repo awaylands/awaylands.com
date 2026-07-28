@@ -4451,6 +4451,17 @@ body.body--category-hub .category-updated article {
   }
 }
 
+/* Widen the category index and complete its table frame. */
+body.body--category-hub .category-index {
+  width: min(124.8rem, calc(100% - 4rem));
+  max-width: 124.8rem;
+}
+
+body.body--category-hub .category-index ol {
+  border-right: 1px solid var(--category-line);
+  border-left: 1px solid var(--category-line);
+}
+
 /* Final shared expertise treatment: keep the editorial image copy balanced
    from the kicker through the stats and action links on every category page. */
 body.body--category-hub .category-expertise--editorial-overlay > .category-expertise__copy {
