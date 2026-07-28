@@ -357,6 +357,19 @@
     </div>
   </section>
 
+  {% if page.title == "Wedding And Honeymoon" %}
+  {% set weddingFeatureStory = page.weddingFeaturePost or sortedStories[0] or heroStory %}
+  <section class="category-wedding-feature" aria-labelledby="category-wedding-feature-title">
+    <a href="{{ page.weddingFeatureLinkUrl or 'https://www.awaylands.com/story/our-lush-tropical-wedding-at-acre-baja-in-cabo-mexico/' }}">
+      <span class="category-wedding-feature__image">{% if page.weddingFeatureImage %}<img src="{{ page.weddingFeatureImage.path | image({w: 2400, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(weddingFeatureStory, "100vw", false) }}{% endif %}</span>
+      <span class="category-wedding-feature__copy">
+        <small>{{ page.weddingFeatureLabel or "Featured Story" }}</small>
+        <strong id="category-wedding-feature-title">{{ page.weddingFeatureTitle or weddingFeatureStory.title or "Our Lush Tropical Wedding At Acre Baja In Cabo Mexico" }}</strong>
+      </span>
+    </a>
+  </section>
+  {% endif %}
+
   {% if page.title == "Beauty" %}
   {% set beautyHeroCard = page.destinationCards[0] %}
   {% set beautyHeroStory = page.beautyHeroPost or beautyHeroCard.post or page.destinationStories[0] or sortedStories[0] or heroStory %}
@@ -450,19 +463,6 @@
       {% endfor %}
     </div>
   </section>
-
-  {% if page.title == "Wedding And Honeymoon" and (page.weddingFeaturePost or page.weddingFeatureImage or page.weddingFeatureTitle) %}
-  {% set weddingFeatureStory = page.weddingFeaturePost or sortedStories[0] or heroStory %}
-  <section class="category-wedding-feature" aria-labelledby="category-wedding-feature-title">
-    <a href="{{ page.weddingFeatureLinkUrl or storyUrl(weddingFeatureStory) }}">
-      <span class="category-wedding-feature__image">{% if page.weddingFeatureImage %}<img src="{{ page.weddingFeatureImage.path | image({w: 2400, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(weddingFeatureStory, "100vw", false) }}{% endif %}</span>
-      <span class="category-wedding-feature__copy">
-        <small>{{ page.weddingFeatureLabel or "Featured Story" }}</small>
-        <strong id="category-wedding-feature-title">{{ page.weddingFeatureTitle or weddingFeatureStory.title }}</strong>
-      </span>
-    </a>
-  </section>
-  {% endif %}
 
   <section class="bm-section bm-products category-shop" aria-labelledby="category-shop-title">
     <div class="bm-products__background">{% if page.shopImage %}<img src="{{ page.shopImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.shopCards[0].post or sortedStories[12] or heroStory, "100vw", false) }}{% endif %}</div>
