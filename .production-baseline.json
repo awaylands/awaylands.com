@@ -10,10 +10,10 @@
     "hash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0"
   },
   "assets": {
-    "javascript": "javascripts/main.5028c29465d5a650e81a.js",
-    "javascriptSha256": "8049fba68ae747396ef07497c2f81e00e267e22a8f306076c412dd1034f7fda1",
-    "stylesheet": "stylesheets/main.ca9c52638ddd6a43a35b387296a76d5a.css",
-    "stylesheetSha256": "27496ed2c6fdb5e4b1464e3a49885439625760f2fb37c2e270205b1e0723dbb4"
+    "javascript": "javascripts/main.1d1a9c50948f7236404e.js",
+    "javascriptSha256": "dec5ea224da8e17b069c0112b5cab35a33e0d54e18a311774aee9734bdfe171b",
+    "stylesheet": "stylesheets/main.a92b1911e7c0e2df77b64d4d55e93bcc.css",
+    "stylesheetSha256": "18df801b188153b6f873547623828876461d625a376e75b45175d0011650825b"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
@@ -34,6 +34,8 @@
     "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",
     "src/stylesheets/_fonts.scss": "2d5120490d3777cb980ed395b7765aba4f7a598e208b8b99cdb5eb131d0becd3",
     "src/stylesheets/pages/_blog.scss": "ee72bea473f4cfc9a153c37d6556dcc1dd13964f9188902037e66211eced9b65",
+    "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
+    "src/stylesheets/pages/_editorial-menu.scss": "6139f8e6bddb844993b8ef4e90ea38ffa00098af627c0c80c0138fc911c1072a",
     "src/stylesheets/pages/_story.scss": "ee14053b4824ea3c8290b0845a134c54540fa923853b008fae8ff688003546fe",
     "src/templates/partials/head.html": "75ec6a88a7857b9d2d90b15b65d4e4299161b5c26d7c8af03307a1bf0a723056",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",

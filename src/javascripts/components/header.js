@@ -64,6 +64,15 @@ export default {
         }
       }
 
+      if (document.body.classList.contains('body--blog-category')) {
+        const categoryLabel = document.querySelector('.category-magazine-hero .category-kicker');
+
+        if (categoryLabel) {
+          const headerHeight = this.$el ? this.$el.getBoundingClientRect().height : 0;
+          maxOffset = categoryLabel.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        }
+      }
+
       if (!this.isSticky && window.pageYOffset >= maxOffset) {
         this.isSticky = true;
       } else if (this.isSticky && window.pageYOffset < maxOffset) {
