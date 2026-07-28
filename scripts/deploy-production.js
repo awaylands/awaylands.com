@@ -124,9 +124,11 @@ async function verifyLive(assets) {
 function generateSite() {
   const configPath = path.join(root, '.tsg-production-build.yml');
   const generatedPath = path.join(root, '.deploy-generated');
+  const staticPath = path.join(root, '.deploy-static');
+  copyTree(path.join(root, 'build/assets'), path.join(staticPath, 'assets'));
   const config = fs.readFileSync(path.join(root, 'tsg.yml'), 'utf8')
     .replace(/^buildPath:\s*build\s*$/m, 'buildPath: .deploy-generated')
-    .replace(/^staticPath:\s*build\s*$/m, 'staticPath: build');
+    .replace(/^staticPath:\s*build\s*$/m, 'staticPath: .deploy-static');
   fs.writeFileSync(configPath, config);
   try {
     run(node, [takeShape, 'build', '--file', '.tsg-production-build.yml']);
@@ -134,6 +136,7 @@ function generateSite() {
   } finally {
     if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
     removeTree(generatedPath);
+    removeTree(staticPath);
   }
 }
 
