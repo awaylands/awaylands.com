@@ -4837,3 +4837,19 @@ body.body--category-hub .category-magazine-hero__image::after {
     white-space: nowrap;
   }
 }
+
+@media (max-width: 1800px) {
+  body.body--category-hub .category-hero-details {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.8rem;
+  }
+
+  body.body--category-hub .category-hero-details__copy {
+    max-width: 86rem;
+  }
+
+  body.body--category-hub .category-hero-details__meta {
+    grid-column: 1;
+    justify-content: flex-start;
+  }
+}
