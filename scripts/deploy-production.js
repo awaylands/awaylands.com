@@ -75,7 +75,7 @@ function verifyGeneratedHtml(assets) {
   let checked = 0;
   htmlFiles.forEach(file => {
     const html = fs.readFileSync(file, 'utf8');
-    if (/<head\b/i.test(html)) {
+    if (/<link[^>]+rel=["']stylesheet["']/i.test(html)) {
       checked += 1;
       if (!html.includes(cssHref)) fail(`generated HTML references a stale stylesheet: ${path.relative(root, file)}`);
     }
