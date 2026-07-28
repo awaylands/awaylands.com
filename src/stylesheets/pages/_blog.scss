@@ -5200,4 +5200,8 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
     font-size: clamp(4rem, 9vw, 6rem);
     margin-top: 0;
   }
+
+  .body--blog-magazine .bm-category__description {
+    font-size: clamp(1.9rem, 4.6vw, 2.3rem);
+  }
 }
