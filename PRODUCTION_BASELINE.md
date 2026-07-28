@@ -29,6 +29,15 @@ Verified baseline:
 
 `npm run deploy` refuses to run from another branch, a commit outside the verified baseline history, a dirty worktree, the wrong TakeShape target, an exposed credential file, a stale backend schema snapshot, changed protected files, or compiled assets whose filenames or contents differ from the verified live files.
 
+## Mediavine protection reminder
+
+Do not move, rename, duplicate, remove, defer, or restyle the Mediavine wrapper,
+the story content selector, or either sidebar target without reviewing the
+Mediavine documentation and updating the production guard. The ATF target must
+remain first in the 300px desktop sidebar. The BTF target must remain last.
+Run `npm run verify:production` before every publish. A failed Mediavine check
+is a release blocker.
+
 The legacy Webpack build is not byte-reproducible with the current installed dependency tree. Build and test source changes in the development checkout. Only copy reviewed assets into this production worktree, then record their filenames and SHA-256 hashes after live visual verification.
 
 Older versions and the mixed work in progress state are archived under:

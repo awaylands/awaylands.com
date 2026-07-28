@@ -90,6 +90,13 @@ const defaultLayout = source('src/templates/layouts/default.html');
 const storyTemplate = source('src/templates/pages/stories/detail.html');
 const mediavineStyles = source('src/stylesheets/_mediavine.scss');
 const headTemplate = source('src/templates/partials/head.html');
+const productionReminder = source('PRODUCTION_BASELINE.md');
+
+requireText(
+  productionReminder,
+  /A failed Mediavine check is a release blocker\./,
+  'the production Mediavine protection reminder is missing.'
+);
 
 requireText(
   mediavinePartial,
