@@ -160,7 +160,7 @@ async function main() {
   normalizeGeneratedAssets(assets);
   verifyGeneratedHtml(assets);
   run(node, [path.join(root, 'scripts/verify-production-baseline.js')]);
-  run(node, [takeShape, 'deploy', '--file', path.join(root, 'tsg.yml')]);
+  run(node, [takeShape, 'deploy', '--file', 'tsg.yml']);
   await verifyLive(assets);
 }
 
