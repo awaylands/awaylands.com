@@ -266,6 +266,89 @@ body:not(.gallery-page) {
   }
 }
 
+body.body--blog-category:not(.gallery-page) {
+  .page-header.is-sticky {
+    background-color: #055967;
+    border-bottom-color: transparent;
+    box-shadow: 0 0.2rem 0.8rem rgba(1, 42, 82, 0.2);
+  }
+
+  .page-header.is-sticky .logo__image {
+    display: none;
+  }
+
+  .page-header.is-sticky .logo__image--white {
+    display: block;
+  }
+
+  .page-header.is-sticky .page-nav__list > li > a,
+  .page-header.is-sticky .page-header__mobile-search {
+    color: #ffffff;
+  }
+
+  .page-header.is-sticky .page-nav__list > li > a:after {
+    background-color: #ffffff;
+  }
+
+  .page-header.is-sticky .page-nav__list > li > a.is-current {
+    color: #f8aea1;
+  }
+
+  .page-header.is-sticky .page-header__burger span,
+  .page-header.is-sticky .page-header__burger span:before,
+  .page-header.is-sticky .page-header__burger span:after {
+    background-color: #ffffff;
+  }
+
+  .page-header.is-sticky .social svg {
+    fill: #ffffff;
+  }
+
+  .page-header.is-sticky .social a:hover svg {
+    fill: #f8aea1;
+  }
+
+  .page-header.is-sticky .dropdown__list,
+  .page-header.is-sticky .subdropdown__list,
+  .page-header.is-sticky .page-nav__search-form {
+    background-color: #055967;
+    border-color: rgba(255, 255, 255, 0.34);
+  }
+
+  .page-header.is-sticky .dropdown__list li,
+  .page-header.is-sticky .subdropdown__list li {
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .page-header.is-sticky .dropdown__list a,
+  .page-header.is-sticky .subdropdown__list a,
+  .page-header.is-sticky .page-nav__search-input {
+    color: #ffffff;
+  }
+
+  .page-header.is-sticky .dropdown__list a:hover,
+  .page-header.is-sticky .dropdown__list a:focus,
+  .page-header.is-sticky .subdropdown__list a:hover,
+  .page-header.is-sticky .subdropdown__list a:focus {
+    background-color: #f8aea1;
+    color: #055967;
+  }
+
+  .page-header.is-sticky .page-nav__search-form:before {
+    border-bottom-color: #ffffff;
+  }
+
+  .page-header.is-sticky .page-nav__search-input::placeholder {
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .page-header.is-sticky .page-nav__search-button {
+    border-left-color: rgba(255, 255, 255, 0.34);
+    background-color: #ffffff;
+    color: #055967;
+  }
+}
+
 body.gallery-page {
   .mobile-nav__panel {
     background: -color(cerulean);
