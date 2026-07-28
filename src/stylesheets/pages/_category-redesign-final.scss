@@ -4186,10 +4186,12 @@ body.body--category-hub .category-beauty-hero__copy {
   z-index: 1;
   display: flex;
   min-height: clamp(34rem, 38vw, 52rem);
-  width: min(66rem, calc(100% - 4rem));
+  width: min(136rem, calc(100% - 4rem));
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(3rem, 6vw, 8rem);
+  margin-right: auto;
+  margin-left: auto;
+  padding: clamp(3rem, 5vw, 6rem) 0 clamp(4rem, 6vw, 7rem);
 }
 
 body.body--category-hub .category-beauty-hero__copy small,
@@ -4202,8 +4204,24 @@ body.body--category-hub .category-beauty-hero__copy i {
   text-transform: uppercase;
 }
 
+body.body--category-hub .category-beauty-hero__copy small {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 1.4rem;
+}
+
+body.body--category-hub .category-beauty-hero__copy small:after {
+  display: block;
+  width: clamp(5rem, 7vw, 9rem);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.78);
+  content: '';
+}
+
 body.body--category-hub .category-beauty-hero__copy strong {
   display: block;
+  max-width: 112rem;
   margin: 1.2rem 0;
   color: #fff;
   font-family: 'Still EB Garamond', Georgia, serif;
@@ -4220,6 +4238,7 @@ body.body--category-hub .category-beauty-hero__copy > span {
 }
 
 body.body--category-hub .category-beauty-hero__copy i {
+  align-self: flex-start;
   font-size: 1.1rem;
 }
 
@@ -4231,7 +4250,11 @@ body.body--category-hub .category-beauty-hero__copy i {
 
   body.body--category-hub .category-beauty-hero__copy {
     width: 100%;
-    padding: 3rem 2rem;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  body.body--category-hub .category-beauty-hero__copy strong {
+    max-width: none;
   }
 }
 

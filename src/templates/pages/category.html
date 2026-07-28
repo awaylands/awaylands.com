@@ -164,6 +164,9 @@
 {% set hasIndexSection = page.indexCards.length or page.indexStories.length or page.indexLabel or page.indexTitle or page.indexDescription %}
 {% set hasBrowseSection = page.browseCards.length or page.browseLabel or page.browseTitle %}
 {% set hasRelatedSection = page.relatedCards.length or page.relatedLabel or page.relatedTitle %}
+{% set featureHeroCard = page.featuredCards[0] %}
+{% set featureHeroStory = page.beautyHeroPost or featureHeroCard.post or page.featuredStories[0] or heroStory %}
+{% set hasFeatureHero = page.beautyHeroPost or page.beautyHeroImage or page.beautyHeroLabel or page.beautyHeroTitle or page.beautyHeroDescription or page.beautyHeroLinkText or page.beautyHeroLinkUrl or featureHeroCard.post or featureHeroCard.image or featureHeroCard.title or page.featuredStories.length %}
 
 {% if page.pageHeadline %}
   {% set categoryHeadline = page.pageHeadline %}
@@ -387,23 +390,19 @@
   </section>
   {% endif %}
 
-  {% if page.title == "Beauty" %}
-  {% if hasBeautyFeature %}
-  {% set beautyHeroCard = page.destinationCards[0] %}
-  {% set beautyHeroStory = page.beautyHeroPost or beautyHeroCard.post or page.destinationStories[0] or sortedStories[0] or heroStory %}
-  <section class="category-beauty-hero" aria-labelledby="category-beauty-hero-title">
-    <a href="{{ page.beautyHeroLinkUrl or beautyHeroCard.linkUrl or storyUrl(beautyHeroStory) }}">
-      <span class="category-beauty-hero__image">{% if page.beautyHeroImage %}<img src="{{ page.beautyHeroImage.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif beautyHeroCard.image %}<img src="{{ beautyHeroCard.image.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(beautyHeroStory, "100vw", false) }}{% endif %}</span>
+  {% if hasFeatureHero %}
+  <section class="category-beauty-hero category-featured-story" aria-labelledby="category-featured-story-title">
+    <a href="{{ page.beautyHeroLinkUrl or featureHeroCard.linkUrl or storyUrl(featureHeroStory) }}">
+      <span class="category-beauty-hero__image">{% if page.beautyHeroImage %}<img src="{{ page.beautyHeroImage.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif featureHeroCard.image %}<img src="{{ featureHeroCard.image.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featureHeroStory, "100vw", false) }}{% endif %}</span>
       <span class="category-beauty-hero__copy">
         <small>{{ page.beautyHeroLabel or "Reader Favorites" }}</small>
-        <strong id="category-beauty-hero-title">{{ page.beautyHeroTitle or beautyHeroCard.title or beautyHeroStory.title }}</strong>
+        <strong id="category-featured-story-title">{{ page.beautyHeroTitle or featureHeroCard.title or featureHeroStory.title }}</strong>
         {% if page.beautyHeroDescription %}<span>{{ page.beautyHeroDescription }}</span>{% endif %}
-        <i>{{ page.beautyHeroLinkText or beautyHeroCard.linkText or "Read the Story" }} <span aria-hidden="true">⟶</span></i>
+        <i>{{ page.beautyHeroLinkText or featureHeroCard.linkText or "Read the Story" }} <span aria-hidden="true">⟶</span></i>
       </span>
     </a>
   </section>
   {% endif %}
-  {% else %}
   {% if hasDestinationSection %}
   <section class="category-destinations" aria-labelledby="category-destinations-title">
     <header class="category-module-heading">
@@ -423,7 +422,6 @@
       {% endfor %}
     </div>
   </section>
-  {% endif %}
   {% endif %}
 
   {% if page.title != "Beauty" and page.title != "Wellness" and page.title != "Home And Garden" and hasMapSection %}
