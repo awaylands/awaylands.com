@@ -10,10 +10,10 @@
     "hash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0"
   },
   "assets": {
-    "javascript": "javascripts/main.e3bcfd10f2d19af0a295.js",
-    "javascriptSha256": "b4bd9c2796024592b2426e98a8974c5dd9cf788e63412ee0a560612a062384da",
-    "stylesheet": "stylesheets/main.5509903808c9d5ec096f95d623ae9ee9.css",
-    "stylesheetSha256": "7937da5023c15c62db30aaa23cf9d575d7d0ff3e61fbc53ccb95671cc53e79de"
+    "javascript": "javascripts/main.5028c29465d5a650e81a.js",
+    "javascriptSha256": "8049fba68ae747396ef07497c2f81e00e267e22a8f306076c412dd1034f7fda1",
+    "stylesheet": "stylesheets/main.ca9c52638ddd6a43a35b387296a76d5a.css",
+    "stylesheetSha256": "27496ed2c6fdb5e4b1464e3a49885439625760f2fb37c2e270205b1e0723dbb4"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
