@@ -4444,6 +4444,13 @@ body.body--category-hub .category-destination-tile > strong {
   grid-row: 2;
 }
 
+/* Keep expanded Popular Topics cards in a two-column grid at narrow widths. */
+@media (max-width: 700px) {
+  body.body--category-hub .category-subcategory-nav__posts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* Give the shared four-card update section more breathing room and a clearer
    frame on every category page. */
 body.body--category-hub .category-updated__grid {
