@@ -1244,6 +1244,97 @@
   transform: scaleX(1.35);
 }
 
+/* Keep the hero rail isolated from the title at every non-mobile width. */
+@media (min-width: 1300px) {
+  .body--blog-magazine .bm-hero,
+  .homepage-blog-magazine .bm-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  }
+
+  .body--blog-magazine .bm-hero__copy,
+  .homepage-blog-magazine .bm-hero__copy {
+    right: auto;
+    width: min(48vw, 70rem);
+  }
+
+  .body--blog-magazine .bm-hero__copy h1,
+  .homepage-blog-magazine .bm-hero__copy h1 {
+    max-width: 100%;
+  }
+
+  .body--blog-magazine .bm-hero__rail,
+  .homepage-blog-magazine .bm-hero__rail {
+    right: clamp(2rem, 3vw, 5rem);
+    transform: none;
+    width: clamp(54rem, 43vw, 78rem);
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story {
+    min-height: clamp(13rem, 7.6vw, 16.1rem) !important;
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story__image,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__image {
+    height: clamp(13rem, 7.6vw, 16.1rem) !important;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1299px) {
+  .body--blog-magazine .bm-hero,
+  .homepage-blog-magazine .bm-hero {
+    display: block;
+    height: auto;
+    min-height: 0;
+    padding: 1.5rem;
+  }
+
+  .body--blog-magazine .bm-hero__lead,
+  .homepage-blog-magazine .bm-hero__lead {
+    display: block;
+    min-height: clamp(58rem, 72vw, 76rem);
+    position: relative;
+  }
+
+  .body--blog-magazine .bm-hero__copy,
+  .homepage-blog-magazine .bm-hero__copy {
+    max-width: min(62rem, calc(100% - 5rem));
+    right: 2.5rem;
+  }
+
+  .body--blog-magazine .bm-hero__copy h1,
+  .homepage-blog-magazine .bm-hero__copy h1 {
+    max-width: 100%;
+  }
+
+  .body--blog-magazine .bm-hero__rail,
+  .homepage-blog-magazine .bm-hero__rail {
+    bottom: auto;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
+    margin: 3rem 1rem 0;
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    transform-origin: center;
+    width: auto;
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story {
+    min-height: 16rem !important;
+    padding: 1.5rem !important;
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story__image,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__image {
+    height: auto !important;
+    min-height: 13rem;
+  }
+}
+
 .bm-categories .bm-section-heading h2 {
   font-size: clamp(3.6rem, 4.8vw, 7.4rem);
 }

@@ -30,7 +30,7 @@
     "src/templates/data/story.graphql": "b7479224c0d7a8b35c7e3ae4ae9ec6478407d550e1e5504fe811913f94077ae3",
     "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",
     "src/stylesheets/_fonts.scss": "2d5120490d3777cb980ed395b7765aba4f7a598e208b8b99cdb5eb131d0becd3",
-    "src/stylesheets/pages/_blog.scss": "7b14d07ef9985c22eeb5bd934d2ea0d66cadbac2025a4f4f5aee791de392663a",
+    "src/stylesheets/pages/_blog.scss": "bd974e1e03d8339c81c2f436797f2166537ffd603774a826266cd4ccfd205e5b",
     "src/stylesheets/pages/_category-redesign-final.scss": "ad0a46a9ef73f40ab92a241fee1f6fd3aca8ce94dc10ec0f32f6fdd52c6c838e",
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
     "src/javascripts/components/search.js": "90439ac663ad2747efb03dfcf6f3870204ed482c6b734d39ff20495d9803cfa0",
