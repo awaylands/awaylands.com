@@ -94,7 +94,7 @@ const productionReminder = source('PRODUCTION_BASELINE.md');
 
 requireText(
   productionReminder,
-  /A failed Mediavine check is a release blocker\./,
+  /A failed Mediavine check\s+is a release blocker\./,
   'the production Mediavine protection reminder is missing.'
 );
 
