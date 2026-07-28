@@ -89,7 +89,8 @@ function normalizeGeneratedAssets(assets) {
     const original = fs.readFileSync(file, 'utf8');
     const normalized = original
       .replace(/\/assets\/stylesheets\/main\.[^"'?\s]+\.css/g, `/assets/${assets.css}`)
-      .replace(/\/assets\/javascripts\/main\.[^"'?\s]+\.js/g, `/assets/${assets.js}`);
+      .replace(/\/assets\/javascripts\/main\.[^"'?\s]+\.js/g, `/assets/${assets.js}`)
+      .replace(new RegExp(`(/assets/${assets.css.replace('.', '\\.')})\\?[^"'\\s]+`, 'g'), '$1');
     if (normalized !== original) fs.writeFileSync(file, normalized);
   });
 }
