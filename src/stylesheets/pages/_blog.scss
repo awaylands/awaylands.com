@@ -5204,4 +5204,20 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   .body--blog-magazine .bm-category__description {
     font-size: clamp(1.9rem, 4.6vw, 2.3rem);
   }
+
+  .body--blog-magazine .bm-editor-card {
+    text-align: left;
+  }
+
+  .body--blog-magazine .bm-editor-card__copy {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+  }
+
+  .body--blog-magazine .bm-editor-card__copy strong {
+    width: 100%;
+    max-width: none;
+    font-size: clamp(3rem, 8vw, 3.8rem);
+  }
 }
