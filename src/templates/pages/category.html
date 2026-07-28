@@ -125,7 +125,7 @@
 {% set relatedLabel = page.relatedLabel or "Keep exploring" %}
 {% set relatedTitle = page.relatedTitle or "Related Collections" %}
 {% set guideLabel = page.guideLabel or "Explore Essentials" %}
-{% set guideTitle = page.guideTitle or "Recommended Reading" %}
+{% set guideTitle = page.guideTitle or "Choose A Guide" %}
 {% set guideLinkText = page.guideLinkText or "View all" %}
 {% set guideLinkUrl = page.guideLinkUrl or currentPath %}
 {% set shopLabel = page.shopLabel or "Travel essentials" %}
@@ -290,7 +290,7 @@
   {% if hasGuideSection %}<nav class="category-subcategory-nav" id="category-subcategories" aria-label="Browse {{ subcategoryParent }}">
     <header>
       <span>{{ guideLabel }}</span>
-      <strong>{{ guideTitle }}</strong>
+      <strong>{{ guideTitle | replace("Choose a guide", "Choose A Guide") }}</strong>
       <a href="{{ guideLinkUrl }}">{{ guideLinkText }}</a>
     </header>
     <p class="category-subcategory-nav__description">Choose a category below to explore every guide, story, and recommendation in our curated collections</p>

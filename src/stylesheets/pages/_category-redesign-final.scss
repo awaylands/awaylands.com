@@ -2878,6 +2878,12 @@ body.body--category-hub .category-subcategory-nav__trigger:after {
   content: '';
 }
 
+/* Keep the Choose a guide imagery more visible with a shorter, lighter fade. */
+body.body--category-hub .category-subcategory-nav__trigger:after {
+  inset: 56% 0 0;
+  background: linear-gradient(to bottom, transparent, rgba(4, 28, 34, 0.56));
+}
+
 body.body--category-hub .category-subcategory-nav__trigger > strong {
   position: absolute;
   z-index: 1;
@@ -3407,9 +3413,28 @@ body.body--category-hub .category-expertise__copy nav {
 
 /* Keep collection-card links consistent with the site's utility-link style. */
 body.body--category-hub .category-clusters article > a {
+  position: relative;
   display: flex;
   height: 100%;
   flex-direction: column;
+  overflow: hidden;
+}
+
+/* Match the soft coral hover wash used by the Away Lands Edit cards. */
+body.body--category-hub .category-clusters article > a::after {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(216, 74, 58, 0.21), rgba(216, 74, 58, 0) 72%);
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+body.body--category-hub .category-clusters article > a:hover::after,
+body.body--category-hub .category-clusters article > a:focus::after {
+  opacity: 1;
 }
 
 body.body--category-hub .category-clusters article > a > i {
@@ -4256,6 +4281,42 @@ body.body--category-hub .category-beauty-hero__copy i {
   body.body--category-hub .category-beauty-hero__copy strong {
     max-width: none;
   }
+}
+
+/* Align the featured story treatment with the category page's editorial system. */
+body.body--category-hub .category-featured-story > a,
+body.body--category-hub .category-featured-story__copy {
+  min-height: clamp(40.8rem, 45.6vw, 62.4rem);
+}
+
+body.body--category-hub .category-featured-story__copy {
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: clamp(3rem, 5vw, 6rem);
+}
+
+body.body--category-hub .category-featured-story__copy small {
+  align-self: flex-start;
+  font-size: clamp(1.4rem, 0.9vw, 1.6rem);
+  letter-spacing: 0.13em;
+}
+
+body.body--category-hub .category-featured-story__copy strong {
+  max-width: 112rem;
+  margin: clamp(2rem, 4vw, 4rem) auto;
+  text-align: center;
+}
+
+body.body--category-hub .category-featured-story__copy i {
+  align-self: center;
+  font-size: clamp(1.35rem, 1.1vw, 1.8rem);
+}
+
+/* Increase the supporting links and metadata to match the editorial scale. */
+body.body--category-hub .category-hero-details__count,
+body.body--category-hub .category-hero-details__meta a,
+body.body--category-hub .category-subcategory-nav > header > a {
+  font-size: clamp(1.15rem, 1vw, 1.5rem);
 }
 
 /* Preserve readable supporting copy at medium and wide category-page widths. */
