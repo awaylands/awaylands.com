@@ -106,7 +106,7 @@
       <span class="bm-compact-story__copy">
         {{ storyMeta(story, "Journal") }}
         <strong>{{ story.title | replace("—", " - ") }}</strong>
-        <small>Read More <i>→</i></small>
+        <small>Read More <i>⟶</i></small>
       </span>
       <em>{{ number }}</em>
     </a>
@@ -120,7 +120,7 @@
       <span class="bm-editor-card__copy">
         {{ storyMeta(story, "Journal") }}
         <strong>{{ story.title | replace("—", " - ") }}</strong>
-        <small>Read Article <i>→</i></small>
+        <small>Read Article <i>⟶</i></small>
       </span>
     </a>
     {% endif %}
@@ -136,7 +136,7 @@
           {{ storyMeta(heroStory, "Travel Guide") }}
           <h1>{{ heroStory.title }}</h1>
           {% if heroStory.tout.dek %}<p>{{ heroStory.tout.dek }}</p>{% endif %}
-          <small>Read The Story <i>→</i></small>
+          <small>Read The Story <i>⟶</i></small>
         </span>
       </a>
       <div class="bm-hero__rail">
@@ -150,7 +150,7 @@
     <section class="bm-section bm-editors" data-bm-row="02" aria-labelledby="bm-editors-title">
       <header class="bm-section-heading">
         <div><span>02</span><h2 id="bm-editors-title">Editor’s Picks</h2></div>
-        <a href="/search/">View All Stories <i>→</i></a>
+        <a href="/search/">View All Stories <i>⟶</i></a>
       </header>
       <div class="bm-editors__grid">
         {{ editorialCard(editor1, "") }}
@@ -178,7 +178,7 @@
       <div class="bm-products__intro">
         <span class="bm-kicker">{{ page.travelEssentialsLabel or "03 - Travel Essentials" }}</span>
         <h2 id="bm-products-title">{{ page.travelEssentialsTitle or "Curated Pieces I Never Travel Without" }}</h2>
-        <a href="{{ page.travelEssentialsLinkUrl or '/category/packing-guides' }}">{{ page.travelEssentialsLinkText or "Shop The Edit" }} <i>→</i></a>
+        <a href="{{ page.travelEssentialsLinkUrl or '/category/packing-guides' }}">{{ page.travelEssentialsLinkText or "Shop The Edit" }} <i>⟶</i></a>
       </div>
       <div class="bm-products__track">
         {{ homepageProductCards(products.travel) }}
@@ -219,7 +219,7 @@
     <section class="bm-section bm-revolve" data-bm-row="05" aria-labelledby="bm-revolve-title">
       <header class="bm-section-heading">
         <div><span>05</span><h2 id="bm-revolve-title">{{ page.revolveSectionTitle or "What To Wear on Vacation" }}</h2></div>
-        <a href="{{ page.revolveSectionLinkUrl or 'https://rvlv.me/uhvh4d' }}" target="_blank" rel="sponsored noopener">Shop The Collection <i>→</i></a>
+        <a href="{{ page.revolveSectionLinkUrl or 'https://rvlv.me/uhvh4d' }}" target="_blank" rel="sponsored noopener">Shop The Collection <i>⟶</i></a>
       </header>
       <div class="bm-revolve__embed">
         {% if page.revolveSectionEmbedHtml %}
@@ -234,7 +234,7 @@
       <header class="bm-itineraries__heading">
         <div><span>06</span><h2 id="bm-itineraries-title">Featured Itineraries</h2></div>
         <p>Amazing Trips Planned For You</p>
-        <a href="/category/travel-guides">View All Guides <i>→</i></a>
+        <a href="/category/travel-guides">View All Guides <i>⟶</i></a>
       </header>
       <div class="bm-itineraries__grid">
         {% if page.featuredItineraries.length %}
@@ -265,10 +265,10 @@
         {% endif %}
       </div>
       <footer class="bm-itineraries__footer">
-        <a class="bm-itineraries__journal" href="/category/travel-guides">Explore The Journal <i>→</i></a>
+        <a class="bm-itineraries__journal" href="/category/travel-guides">Explore The Journal <i>⟶</i></a>
         <div class="bm-itineraries__controls" aria-label="Itinerary carousel controls">
           <button class="bm-itineraries__control" type="button" data-itinerary-direction="previous" aria-label="Previous itineraries">←</button>
-          <button class="bm-itineraries__control" type="button" data-itinerary-direction="next" aria-label="Next itineraries">→</button>
+          <button class="bm-itineraries__control" type="button" data-itinerary-direction="next" aria-label="Next itineraries">⟶</button>
         </div>
       </footer>
     </section>
@@ -277,7 +277,7 @@
       <a href="{{ storyUrl(leftFeatureStory) }}">
         <span class="bm-feature__image" data-focus="{{ page.leftFullBleedImageFocus or 'center' }}" data-mobile-focus="{{ page.leftFullBleedMobileImageFocus or page.leftFullBleedImageFocus or 'center' }}">{% if page.leftFullBleedMobileImageOverride %}<picture><source media="(max-width: 799px)" srcset="{{ page.leftFullBleedMobileImageOverride.path | image({w: 1200, auto: 'compress,format'}) }} 1200w, {{ page.leftFullBleedMobileImageOverride.path | image({w: 800, auto: 'compress,format'}) }} 800w, {{ page.leftFullBleedMobileImageOverride.path | image({w: 480, auto: 'compress,format'}) }} 480w">{% if page.leftFullBleedImageOverride %}{{ assetImage(page.leftFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(leftFeatureStory, '100vw', false) }}{% endif %}</picture>{% elif page.leftFullBleedImageOverride %}{{ assetImage(page.leftFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(leftFeatureStory, '100vw', false) }}{% endif %}</span>
         <span class="bm-feature__shade"></span>
-        <span class="bm-feature__copy"><span class="bm-kicker">07 - Featured Story</span><h2>{{ leftFeatureStory.title }}</h2>{% if leftFeatureStory.tout.dek %}<p>{{ leftFeatureStory.tout.dek }}</p>{% endif %}<small>Read The Guide <i>→</i></small></span>
+        <span class="bm-feature__copy"><span class="bm-kicker">07 - Featured Story</span><h2>{{ leftFeatureStory.title }}</h2>{% if leftFeatureStory.tout.dek %}<p>{{ leftFeatureStory.tout.dek }}</p>{% endif %}<small>Read The Guide <i>⟶</i></small></span>
       </a>
     </section>
 
@@ -285,12 +285,12 @@
       <a href="{{ storyUrl(rightFeatureStory) }}">
         <span class="bm-feature__image" data-focus="{{ page.rightFullBleedImageFocus or 'center' }}" data-mobile-focus="{{ page.rightFullBleedMobileImageFocus or page.rightFullBleedImageFocus or 'center' }}">{% if page.rightFullBleedMobileImageOverride %}<picture><source media="(max-width: 799px)" srcset="{{ page.rightFullBleedMobileImageOverride.path | image({w: 1200, auto: 'compress,format'}) }} 1200w, {{ page.rightFullBleedMobileImageOverride.path | image({w: 800, auto: 'compress,format'}) }} 800w, {{ page.rightFullBleedMobileImageOverride.path | image({w: 480, auto: 'compress,format'}) }} 480w">{% if page.rightFullBleedImageOverride %}{{ assetImage(page.rightFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(rightFeatureStory, '100vw', false) }}{% endif %}</picture>{% elif page.rightFullBleedImageOverride %}{{ assetImage(page.rightFullBleedImageOverride, '100vw', false) }}{% else %}{{ storyImage(rightFeatureStory, '100vw', false) }}{% endif %}</span>
         <span class="bm-feature__shade"></span>
-        <span class="bm-feature__copy"><span class="bm-kicker">08 - Featured Story</span><h2>{{ rightFeatureStory.title }}</h2>{% if rightFeatureStory.tout.dek %}<p>{{ rightFeatureStory.tout.dek }}</p>{% endif %}<small>Read The Guide <i>→</i></small></span>
+        <span class="bm-feature__copy"><span class="bm-kicker">08 - Featured Story</span><h2>{{ rightFeatureStory.title }}</h2>{% if rightFeatureStory.tout.dek %}<p>{{ rightFeatureStory.tout.dek }}</p>{% endif %}<small>Read The Guide <i>⟶</i></small></span>
       </a>
     </section>
 
     <section class="bm-section bm-latest" data-bm-row="09" aria-labelledby="bm-latest-title">
-      <header class="bm-section-heading"><div><span>09</span><h2 id="bm-latest-title">Latest Stories</h2></div><a href="/blog/page-2">View The Archive <i>→</i></a></header>
+      <header class="bm-section-heading"><div><span>09</span><h2 id="bm-latest-title">Latest Stories</h2></div><a href="/blog/page-2">View The Archive <i>⟶</i></a></header>
       <div class="bm-latest__grid">
         {% for story in sortedStories %}
         {% if loop.index <= 6 %}

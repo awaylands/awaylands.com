@@ -13,11 +13,11 @@
     "javascript": "javascripts/main.1d1a9c50948f7236404e.js",
     "javascriptSha256": "dec5ea224da8e17b069c0112b5cab35a33e0d54e18a311774aee9734bdfe171b",
     "stylesheet": "stylesheets/main.a87a1f1a71990a63daedf4848ba673e8.css",
-    "stylesheetSha256": "71a7c1367e6c0455cb44a032d2affac780b4b523ac18c7d9b95d914855a01516"
+    "stylesheetSha256": "9834ee20784f1a259039f9519efa083131fe4b702083f665d66739da5ff5baf8"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
-    "src/templates/pages/stories/landing.html": "3a494662d60ea5f62d6e7fcff92b080125682ebd0407597d12d95a6bd55cb9a2",
+    "src/templates/pages/stories/landing.html": "44cc0a041d00a324435a967ad4f31236b67ecb50760da57a95d622113739bea1",
     "src/templates/pages/category.html": "6c0e21733d59ee60ffe768b201eb36bac64d7d1f0534a45a43e09e218ca22e18",
     "src/templates/pages/destinations.html": "8b9055c07cea1c88a1ee143fef0b0c2d5faa26edf4ee3072a48aa5d9f5bc4d5f",
     "src/templates/pages/film.html": "7acee87765b21a103780ffe4862ccf193670ff64010e37eefd3545ed62eeda62",
@@ -54,6 +54,7 @@
     "static/assets/fonts/montserrat-medium-webfont.ttf": "dae47428bb041f9716604e0e07b5b0c8585b3bdd8183362f75c69fe7bb3cfaf4",
     "static/assets/fonts/montserrat-regular-webfont.ttf": "3e8abe50c44c82e2242e97d1ec8c0d385c4890cdc50447bcdb8605c81a38cfb2",
     "static/assets/fonts/still-preview/EB-GARAMOND-OFL.txt": "0985066662eb755ed3683ae5482a81a9195b49ce3f7e165cc2388b3dbece7dd7",
-    "static/assets/fonts/still-preview/eb-garamond-variable.ttf": "ef9512f92f6d579e5dc75af59a5a4b1b8b47d2eda89e00b954d44520e5369027"
+    "static/assets/fonts/still-preview/eb-garamond-variable.ttf": "ef9512f92f6d579e5dc75af59a5a4b1b8b47d2eda89e00b954d44520e5369027",
+    "src/stylesheets/pages/_destinations.scss": "78df6e1997766e807b783444c2b19df4e422943e283b797c0fa9513f2ef9ee48"
   }
 }
