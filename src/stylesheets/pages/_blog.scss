@@ -5185,6 +5185,7 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
     grid-template-rows: repeat(4, minmax(0, 1fr));
     row-gap: 1rem;
     top: auto;
+    transform-origin: bottom right;
   }
 
   .body--blog-magazine .bm-hero__rail .bm-compact-story__image,
