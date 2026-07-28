@@ -1226,6 +1226,24 @@
   }
 }
 
+/* Give every editorial arrow a stronger, longer visual weight. */
+.blog-magazine i {
+  display: inline-block;
+  font-size: 1.35em;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 0.8;
+  transform: scaleX(1.4);
+  transform-origin: left center;
+}
+
+.blog-magazine .bm-products__control,
+.blog-magazine .bm-itineraries__control {
+  font-size: 1.35em;
+  font-weight: 900;
+  transform: scaleX(1.35);
+}
+
 .bm-categories .bm-section-heading h2 {
   font-size: clamp(3.6rem, 4.8vw, 7.4rem);
 }

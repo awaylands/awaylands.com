@@ -12,7 +12,7 @@
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "1805ec2826caea72dcb4bbb715fa510a65d6bddf6e27c0730ca689413f0117f5",
     "src/templates/pages/stories/landing.html": "f69a60e22252ce2cc11938b1c108903fad356378fc4e4be53679e7fa2427d1e7",
-    "src/templates/pages/category.html": "24b67ec6a5c79e426b7793dcf6cc6e366ededcb599e54c44fa18c2ff9aa9569c",
+    "src/templates/pages/category.html": "fe2a4c66969703838adf3e40bcbca70739abdc39bf0ce778ef2702477ecd6166",
     "src/templates/data/categories.graphql": "a0628a74cc7adc06cb4619788d2c69aca450231eb4521bbd10f7dc9505c6d538",
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
     "src/templates/pages/film.html": "7acee87765b21a103780ffe4862ccf193670ff64010e37eefd3545ed62eeda62",
@@ -30,8 +30,8 @@
     "src/templates/data/story.graphql": "b7479224c0d7a8b35c7e3ae4ae9ec6478407d550e1e5504fe811913f94077ae3",
     "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",
     "src/stylesheets/_fonts.scss": "2d5120490d3777cb980ed395b7765aba4f7a598e208b8b99cdb5eb131d0becd3",
-    "src/stylesheets/pages/_blog.scss": "43091389df47c29a635ca0321a692a1b0296eb63ea565f6a4eacae61a6879e35",
-    "src/stylesheets/pages/_category-redesign-final.scss": "e7bb11f88e9c5ffd2daef2a2bf310097a02fd2656844f0d7862898b2601d5e10",
+    "src/stylesheets/pages/_blog.scss": "f4ebf6ee59031d78f6e737a707076010e0b23800c5fb03ad7465e7b1d6a9bf33",
+    "src/stylesheets/pages/_category-redesign-final.scss": "ad0a46a9ef73f40ab92a241fee1f6fd3aca8ce94dc10ec0f32f6fdd52c6c838e",
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
     "src/javascripts/components/search.js": "90439ac663ad2747efb03dfcf6f3870204ed482c6b734d39ff20495d9803cfa0",
     "src/stylesheets/pages/_editorial-menu.scss": "e5317100f1685255bc5d106ad743bf624965860f32717d3b0bdd8a04827a7437",
@@ -53,7 +53,7 @@
     "static/assets/fonts/montserrat-regular-webfont.ttf": "3e8abe50c44c82e2242e97d1ec8c0d385c4890cdc50447bcdb8605c81a38cfb2",
     "static/assets/fonts/still-preview/EB-GARAMOND-OFL.txt": "0985066662eb755ed3683ae5482a81a9195b49ce3f7e165cc2388b3dbece7dd7",
     "static/assets/fonts/still-preview/eb-garamond-variable.ttf": "ef9512f92f6d579e5dc75af59a5a4b1b8b47d2eda89e00b954d44520e5369027",
-    "src/stylesheets/pages/_destinations.scss": "78df6e1997766e807b783444c2b19df4e422943e283b797c0fa9513f2ef9ee48",
+    "src/stylesheets/pages/_destinations.scss": "a7abc33a3121adc7560712dc42750acdd7a6843e857efd4274d48035bc223f4c",
     "scripts/deploy-production.js": "9bd7e14336295b1d7f7582481dd6fb988146979de6a9bc16c2c332b367f7877d",
     "scripts/verify-production-baseline.js": "2644a376df0ad52128aed4b7a25bbae7f98bf205f56f0d8959c88c2fbc02d0a0"
   }

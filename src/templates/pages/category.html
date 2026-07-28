@@ -467,7 +467,7 @@
           {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}
           <h3>{{ card.title or cardStory.title }}</h3>
           {% if card.description %}<p>{{ card.description }}</p>{% endif %}
-          <i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} ⟶</i>
+          <i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} <span aria-hidden="true">⟶</span></i>
         </a>
       </article>
       {% endfor %}
@@ -513,7 +513,7 @@
           {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}
           <h3>{{ card.title or cardStory.title }}</h3>
           {% if card.description %}<p>{{ card.description }}</p>{% endif %}
-          <i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} ⟶</i>
+          <i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} <span aria-hidden="true">⟶</span></i>
         </a>
       </article>
       {% endfor %}
@@ -584,7 +584,7 @@
       {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
       <a class="category-browse__panel category-browse__panel--visual" href="{{ card.linkUrl or storyUrl(cardStory) }}">
         <span class="category-browse__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 30vw, 90vw", false) }}{% endif %}</span>
-        {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<h3>{{ card.title or cardStory.title }}</h3>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} ⟶</i>
+        {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<h3>{{ card.title or cardStory.title }}</h3>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} <span aria-hidden="true">⟶</span></i>
       </a>
       {% endfor %}
     </div>

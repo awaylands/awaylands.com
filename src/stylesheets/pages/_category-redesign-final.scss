@@ -4593,6 +4593,45 @@ body.body--category-hub .category-subcategory-nav__trigger > i {
   color: #fff;
 }
 
+/* Make category arrows visibly substantial at every display size. */
+body.body--category-hub .category-subcategory-nav__trigger > i b {
+  display: inline-block;
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 0.8;
+  transform: scale(1.25, 1.15);
+  transform-origin: center;
+}
+
+body.body--category-hub .category-subcategory-nav__grid > a i span[aria-hidden='true'],
+body.body--category-hub .category-shortlist-card__copy i span[aria-hidden='true'],
+body.body--category-hub .category-featured__copy i span[aria-hidden='true'],
+body.body--category-hub .category-browse__panel i span[aria-hidden='true'],
+body.body--category-hub .category-related__tiles i span[aria-hidden='true'],
+body.body--category-hub .category-index i[aria-hidden='true'] {
+  display: inline-block;
+  font-size: 1.35em;
+  font-weight: 900;
+  line-height: 0.8;
+  transform: scaleX(1.4);
+  transform-origin: left center;
+}
+
+body.body--category-hub .category-browse__panel a:after,
+body.body--category-hub .category-clusters nav a:after {
+  display: inline-block;
+  font-size: 1.35em;
+  font-weight: 900;
+  line-height: 0.8;
+  transform: scaleX(1.4);
+  transform-origin: right center;
+}
+
+body.body--category-hub .category-related__tiles i span[aria-hidden='true'] {
+  font-size: 1.55em;
+  transform: scaleX(1.45);
+}
+
 /* Refine the narrow category composition without changing desktop layouts. */
 @media (max-width: 700px) {
   body.body--category-hub .category-updated small {
