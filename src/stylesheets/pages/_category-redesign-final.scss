@@ -4385,6 +4385,30 @@ body.body--category-hub .category-destination-tile i {
   font-size: 1.1rem;
 }
 
+/* Keep category destination titles wide while shortening their teal bars. */
+body.body--category-hub .category-destination-tile {
+  position: relative;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+}
+
+body.body--category-hub .category-destination-tile strong {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 0.4rem 1.4rem 1.8rem;
+}
+
+body.body--category-hub .category-destination-tile i {
+  position: absolute;
+  right: 1.4rem;
+  bottom: 0.45rem;
+  padding: 0;
+}
+
+body.body--category-hub .category-hub[data-category='hotels'] .category-destination-tile {
+  grid-template-rows: auto auto;
+}
+
 /* Give the shared four-card update section more breathing room and a clearer
    frame on every category page. */
 body.body--category-hub .category-updated__grid {
