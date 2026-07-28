@@ -4419,6 +4419,20 @@ body.body--category-hub .category-hub[data-category='hotels'] .category-destinat
   grid-template-rows: auto auto;
 }
 
+/* Keep story links on the photo instead of inside the title bar. */
+body.body--category-hub .category-destination-tile > i {
+  position: static;
+  z-index: 3;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  justify-self: end;
+  margin: 0 1.4rem 1.4rem;
+  padding: 0;
+  background: transparent;
+  color: #fff;
+}
+
 /* Give the shared four-card update section more breathing room and a clearer
    frame on every category page. */
 body.body--category-hub .category-updated__grid {
