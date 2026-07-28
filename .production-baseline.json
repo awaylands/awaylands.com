@@ -12,7 +12,7 @@
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "1805ec2826caea72dcb4bbb715fa510a65d6bddf6e27c0730ca689413f0117f5",
     "src/templates/pages/stories/landing.html": "f69a60e22252ce2cc11938b1c108903fad356378fc4e4be53679e7fa2427d1e7",
-    "src/templates/pages/category.html": "44ee800eef29965d1f1ee92d0b07a32a075a23bc7fbba6e434b0948d0a2b8cb1",
+    "src/templates/pages/category.html": "95d9e5c2ceb0ed9301aabec07310521f4416ee1fca1f7e3c2479a17fbad49734",
     "src/templates/data/categories.graphql": "a0628a74cc7adc06cb4619788d2c69aca450231eb4521bbd10f7dc9505c6d538",
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
     "src/templates/pages/film.html": "7acee87765b21a103780ffe4862ccf193670ff64010e37eefd3545ed62eeda62",

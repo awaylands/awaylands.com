@@ -124,8 +124,8 @@
 {% set browseTitle = page.browseTitle or ("Browse " + page.title) %}
 {% set relatedLabel = page.relatedLabel or "Keep exploring" %}
 {% set relatedTitle = page.relatedTitle or "Related Collections" %}
-{% set guideLabel = "Explore by Topic" %}
-{% set guideTitle = "Where Do You Want to Begin?" %}
+{% set guideLabel = page.guideLabel or "Explore Essentials" %}
+{% set guideTitle = page.guideTitle or "Recommended Reading" %}
 {% set guideLinkText = page.guideLinkText or "View all" %}
 {% set guideLinkUrl = page.guideLinkUrl or currentPath %}
 {% set shopLabel = page.shopLabel or "Travel essentials" %}
