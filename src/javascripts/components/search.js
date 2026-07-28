@@ -38,15 +38,30 @@ function textFromStory(story) {
   ].join(' '));
 }
 
+function scoreCategory(category, terms) {
+  const title = normalize(category.title);
+  let score = 0;
+
+  terms.forEach(term => {
+    if (title === term) {
+      score += 1200;
+    } else if (title.indexOf(term) !== -1) {
+      score += 1000;
+    }
+  });
+
+  return score;
+}
+
 function createSearchFields(story) {
   return [
-    { label: 'title', text: story.title || '' },
-    { label: 'description', text: story.dek || '' },
-    { label: 'location', text: story.location || '' },
-    { label: 'category', text: story.category || '' },
-    { label: 'post', text: plainText(story.content) },
-    { label: 'post', text: plainText((story.mainBlocks || []).join(' ')) },
-    { label: 'post', text: plainText((story.blocks || []).join(' ')) },
+    {label: 'title', text: story.title || ''},
+    {label: 'description', text: story.dek || ''},
+    {label: 'location', text: story.location || ''},
+    {label: 'category', text: story.category || ''},
+    {label: 'post', text: plainText(story.content)},
+    {label: 'post', text: plainText((story.mainBlocks || []).join(' '))},
+    {label: 'post', text: plainText((story.blocks || []).join(' '))},
     {label: 'post', text: plainText((story.extraContentBlocks || []).join(' '))},
     {label: 'post', text: plainText((story.extraHtmlBlocks || []).join(' '))},
     {label: 'post', text: plainText((story.extraTableBlocks || []).join(' '))}
@@ -168,7 +183,7 @@ function renderResults(elements, results, terms) {
     const rubric = document.createElement('div');
     const title = document.createElement('h2');
     const dek = document.createElement('p');
-    const snippet = createSnippet(story, terms);
+    const snippet = story.type === 'category' ? null : createSnippet(story, terms);
 
     item.className = 'search-results__item';
     link.className = 'search-result';
@@ -178,7 +193,7 @@ function renderResults(elements, results, terms) {
     dek.className = 'search-result__dek';
 
     link.href = story.url;
-    rubric.textContent = createRubric(story);
+    rubric.textContent = story.type === 'category' ? 'Category page' : createRubric(story);
     title.textContent = story.title;
     dek.textContent = story.dek || '';
 
@@ -227,14 +242,20 @@ function updateSearch(elements, stories) {
 
   const terms = query.split(' ').filter(term => term.length > 1);
   const results = stories
-    .map(story => addScore(story, scoreStory(story, terms)))
+    .map(story => addScore(
+      story,
+      story.type === 'category' ? scoreCategory(story, terms) :
+        scoreStory(story, terms)
+    ))
     .filter(story => story.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, MAX_RESULTS);
 
-  elements.status.textContent = results.length
-    ? `${results.length} result${results.length === 1 ? '' : 's'} for "${elements.input.value}"`
-    : `No results for "${elements.input.value}"`;
+  if (results.length) {
+    elements.status.textContent = `${results.length} result${results.length === 1 ? '' : 's'} for "${elements.input.value}"`;
+  } else {
+    elements.status.textContent = `No results for "${elements.input.value}"`;
+  }
 
   renderResults(elements, results, terms);
 }

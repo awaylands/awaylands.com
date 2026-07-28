@@ -1,4 +1,15 @@
       [
+{% for category in categories.items %}
+  {
+    "type": "category",
+    "title": {{ category.title | dump | safe }},
+    "url": {{ (category | route('category')) | dump | safe }},
+    "category": "Category page",
+    "location": "",
+    "dek": "",
+    "image": ""
+  },
+{% endfor %}
 {% set storyPages = [stories1.items, stories2.items, stories3.items, stories4.items] %}
 {% for stories in storyPages %}
 {% set lastPage = loop.last %}
@@ -61,5 +72,5 @@
     ]
   }{% if not loop.last or not lastPage %},{% endif %}
 {% endfor %}
-{% endfor %}
-]
+      {% endfor %}
+      ]

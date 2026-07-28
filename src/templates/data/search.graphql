@@ -1,4 +1,9 @@
 query($images: TSImagesConfig) {
+  categories: getCategoryList {
+    items {
+      title
+    }
+  }
   stories1: getStoryList(size: 250, from: 0, sort: [{field: "_enabledAt", order: "desc"}]) {
     items { ...SearchStoryFields }
   }
