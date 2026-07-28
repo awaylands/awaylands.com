@@ -124,11 +124,12 @@ function fetch(url) {
 }
 
 async function verifyLive(assets) {
-  const pages = ['/', '/blog/', '/category/wedding-and-honeymoon/'];
+  const cacheBust = `codexverify=${Date.now()}`;
+  const pages = ['/', '/blog/', '/category/home-and-garden/', '/category/travel-style/', '/category/wedding-and-honeymoon/'];
   const expectedCss = `/assets/${assets.css}`;
   const localCssHash = sha256(path.join(root, 'build/assets', assets.css));
   for (const page of pages) {
-    const result = await fetch(`https://www.awaylands.com${page}`);
+    const result = await fetch(`https://www.awaylands.com${page}?${cacheBust}`);
     if (result.status !== 200) fail(`${page} returned HTTP ${result.status}.`);
     const matches = result.body.match(/\/assets\/stylesheets\/main\.[^"'\s?]+\.css(?:\?[^"'\s]*)?/g) || [];
     if (!matches.includes(expectedCss)) {
@@ -136,7 +137,7 @@ async function verifyLive(assets) {
       fail(`${page} serves ${found}; expected ${expectedCss}.`);
     }
   }
-  const css = await fetch(`https://www.awaylands.com${expectedCss}`);
+  const css = await fetch(`https://www.awaylands.com${expectedCss}?${cacheBust}`);
   if (css.status !== 200) fail(`${expectedCss} returned HTTP ${css.status}.`);
   const liveCssHash = crypto.createHash('sha256').update(css.body).digest('hex');
   if (liveCssHash !== localCssHash) {
