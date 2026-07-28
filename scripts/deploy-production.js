@@ -83,6 +83,17 @@ function verifyGeneratedHtml(assets) {
   if (!checked) fail('no generated HTML documents contained a head stylesheet reference.');
 }
 
+function normalizeGeneratedAssets(assets) {
+  const htmlFiles = walk(path.join(root, 'build')).filter(file => file.endsWith('.html'));
+  htmlFiles.forEach(file => {
+    const original = fs.readFileSync(file, 'utf8');
+    const normalized = original
+      .replace(/\/assets\/stylesheets\/main\.[^"'?\s]+\.css/g, `/assets/${assets.css}`)
+      .replace(/\/assets\/javascripts\/main\.[^"'?\s]+\.js/g, `/assets/${assets.js}`);
+    if (normalized !== original) fs.writeFileSync(file, normalized);
+  });
+}
+
 function fetch(url) {
   return new Promise((resolve, reject) => {
     https.get(url, {
@@ -146,6 +157,7 @@ async function main() {
   generateSite();
   const assets = getManifestAssets();
   if (assets.css !== builtAssets.css || assets.js !== builtAssets.js) fail('site generation changed the compiled manifest.');
+  normalizeGeneratedAssets(assets);
   verifyGeneratedHtml(assets);
   run(node, [path.join(root, 'scripts/verify-production-baseline.js')]);
   run(node, [takeShape, 'deploy', '--file', path.join(root, 'tsg.yml')]);
