@@ -313,7 +313,7 @@
 
     {% for card in page.guideCards %}
     <section
-      class="category-subcategory-nav__results"
+      class="category-subcategory-nav__results{% if card.cards.length == 2 %} category-subcategory-nav__results--two-posts{% endif %}"
       id="category-subcategory-panel-{{ loop.index }}"
       data-subcategory-panel
       hidden

@@ -4474,6 +4474,15 @@ body.body--category-hub .category-destination-tile > strong {
   }
 }
 
+/* Keep two selected Start Here posts side by side as tall editorial cards. */
+body.body--category-hub .category-subcategory-nav__results--two-posts .category-subcategory-nav__posts {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.body--category-hub .category-subcategory-nav__results--two-posts .category-shortlist-card__image {
+  aspect-ratio: 3 / 4;
+}
+
 /* Give the shared four-card update section more breathing room and a clearer
    frame on every category page. */
 body.body--category-hub .category-updated__grid {
