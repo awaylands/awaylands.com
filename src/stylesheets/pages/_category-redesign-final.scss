@@ -4385,6 +4385,16 @@ body.body--category-hub .category-destination-tile i {
   font-size: 1.1rem;
 }
 
+@media (max-width: 700px) {
+  body.body--category-hub .category-shortlist > .category-module-heading > span {
+    font-size: clamp(1.8rem, 4.5vw, 2.4rem);
+  }
+
+  body.body--category-hub .category-shortlist .category-shortlist-card__copy strong {
+    font-size: clamp(2.5rem, 6.5vw, 3.6rem);
+  }
+}
+
 /* Keep category destination titles wide while shortening their teal bars. */
 body.body--category-hub .category-destination-tile {
   position: relative;
