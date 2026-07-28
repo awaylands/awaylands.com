@@ -1520,25 +1520,441 @@
       "default": {
         "properties": {
           "title": {
-            "widget": "singleLineText"
+            "widget": "singleLineText",
+            "title": "Page Title",
+            "instructions": "This must exactly match the title shown on the category page."
+          },
+          "pageLabel": {
+            "widget": "singleLineText",
+            "title": "Hero - Kicker"
+          },
+          "pageHeadline": {
+            "widget": "singleLineText",
+            "title": "Hero - Page Title (H1)",
+            "instructions": "The visible page title. Use the same wording as Page Title."
           },
           "introText": {
             "widget": "paragraphText",
-            "instructions": "Optional. Introductory text shown beneath the category page heading. The social description or an automatic description is used when blank."
+            "title": "Introduction - Text"
           },
-          "featuredStories": {
+          "heroImage": {
+            "widget": "image",
+            "title": "Hero - Image"
+          },
+          "heroStory": {
             "widget": "relationship",
-            "instructions": "Optional. Choose up to three posts in display order: the first is the large feature and the next two appear under The Best of. Important posts are selected automatically when blank."
+            "title": "Hero - Fallback Post"
+          },
+          "featuredLabel": {
+            "widget": "singleLineText",
+            "title": "Start Here - Kicker"
+          },
+          "featuredTitle": {
+            "widget": "singleLineText",
+            "title": "Start Here - Section Title"
+          },
+          "featuredDescription": {
+            "widget": "paragraphText",
+            "title": "Start Here - Intro Text"
+          },
+          "destinationsLabel": {
+            "widget": "singleLineText",
+            "title": "Popular Topics - Kicker"
+          },
+          "destinationsTitle": {
+            "widget": "singleLineText",
+            "title": "Popular Topics - Section Title"
+          },
+          "destinationsDescription": {
+            "widget": "paragraphText",
+            "title": "Popular Topics - Intro Text"
+          },
+          "mapLabel": {
+            "widget": "singleLineText",
+            "title": "Travel Map - Kicker"
+          },
+          "mapTitle": {
+            "widget": "singleLineText",
+            "title": "Travel Map - Section Title"
+          },
+          "mapDescription": {
+            "widget": "paragraphText",
+            "title": "Travel Map - Intro Text"
+          },
+          "mapImage": {
+            "widget": "image",
+            "title": "Travel Map - Background Image"
+          },
+          "clustersLabel": {
+            "widget": "singleLineText",
+            "title": "More Collections - Kicker"
+          },
+          "clustersTitle": {
+            "widget": "singleLineText",
+            "title": "More Collections - Section Title"
+          },
+          "clustersDescription": {
+            "widget": "paragraphText",
+            "title": "More Collections - Intro Text"
+          },
+          "updatedLabel": {
+            "widget": "singleLineText",
+            "title": "Recently Updated - Label"
+          },
+          "updatedTitle": {
+            "widget": "singleLineText",
+            "title": "Recently Updated - Title"
+          },
+          "updatedDescription": {
+            "widget": "paragraphText",
+            "title": "Recently Updated - Description"
+          },
+          "expertiseLabel": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Kicker"
+          },
+          "expertiseTitle": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Section Title"
+          },
+          "expertiseDescription": {
+            "widget": "paragraphText",
+            "title": "Firsthand Experience - Text"
+          },
+          "expertiseImage": {
+            "widget": "image",
+            "title": "Firsthand Experience - Background Image"
+          },
+          "indexLabel": {
+            "widget": "singleLineText",
+            "title": "Page Index - Kicker"
+          },
+          "indexTitle": {
+            "widget": "singleLineText",
+            "title": "Page Index - Section Title"
+          },
+          "indexDescription": {
+            "widget": "paragraphText",
+            "title": "Page Index - Intro Text"
+          },
+          "browseLabel": {
+            "widget": "singleLineText",
+            "title": "Browse More - Kicker"
+          },
+          "browseTitle": {
+            "widget": "singleLineText",
+            "title": "Browse More - Section Title"
+          },
+          "relatedLabel": {
+            "widget": "singleLineText",
+            "title": "Related Categories - Kicker"
+          },
+          "relatedTitle": {
+            "widget": "singleLineText",
+            "title": "Related Categories - Section Title"
           },
           "social": {
             "widget": "shapeObject",
-            "instructions": "Optional search and sharing overrides."
+            "title": "SEO - Search and Sharing"
+          },
+          "parentCategory": {
+            "widget": "relationship",
+            "title": "Parent Category",
+            "instructions": "Select the main category that contains this subcategory. Leave blank for a main category page."
+          },
+          "navigationOrder": {
+            "widget": "number",
+            "title": "Subcategory Display Order",
+            "instructions": "Controls the order of subcategories on the parent page. Lower numbers appear first."
+          },
+          "guideCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Subcategories - Pages and Featured Cards",
+            "instructions": "Add every subcategory page here. Each entry includes its page image, description, link, and up to four featured cards."
+          },
+          "featuredCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Start Here - Image, Text, and Link Cards"
+          },
+          "destinationCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Popular Topics - Image, Text, and Link Cards"
+          },
+          "collectionCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "More Collections - Image, Text, and Link Cards"
+          },
+          "updatedCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Recently Updated - Image, Text, and Link Cards"
+          },
+          "indexCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Page Index - Links"
+          },
+          "browseCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Browse More - Image, Text, and Link Cards"
+          },
+          "relatedCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Related Categories - Image, Text, and Link Cards"
+          },
+          "shopCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Shopping - Image, Text, and Link Cards"
+          },
+          "introLinkText": {
+            "widget": "singleLineText",
+            "title": "Introduction - Link Text"
+          },
+          "introLinkUrl": {
+            "widget": "singleLineText",
+            "title": "Introduction - Link URL"
+          },
+          "guideLabel": {
+            "widget": "singleLineText",
+            "title": "Subcategories - Kicker"
+          },
+          "guideTitle": {
+            "widget": "singleLineText",
+            "title": "Subcategories - Section Title"
+          },
+          "guideLinkText": {
+            "widget": "singleLineText",
+            "title": "Subcategories - Header Link Text"
+          },
+          "guideLinkUrl": {
+            "widget": "singleLineText",
+            "title": "Subcategories - Header Link URL"
+          },
+          "shopLabel": {
+            "widget": "singleLineText",
+            "title": "Shopping - Kicker"
+          },
+          "shopTitle": {
+            "widget": "singleLineText",
+            "title": "Shopping - Section Title"
+          },
+          "shopDescription": {
+            "widget": "paragraphText",
+            "title": "Shopping - Intro Text"
+          },
+          "shopLinkText": {
+            "widget": "singleLineText",
+            "title": "Shopping - Header Link Text"
+          },
+          "shopLinkUrl": {
+            "widget": "singleLineText",
+            "title": "Shopping - Header Link URL"
+          },
+          "shopImage": {
+            "widget": "image",
+            "title": "Shopping - Background Image"
+          },
+          "expertiseStat1Value": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Statistic 1 Value"
+          },
+          "expertiseStat1Label": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Statistic 1 Label"
+          },
+          "expertiseStat2Value": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Statistic 2 Value"
+          },
+          "expertiseStat2Label": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Statistic 2 Label"
+          },
+          "expertiseStat3Value": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Statistic 3 Value"
+          },
+          "expertiseStat3Label": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Statistic 3 Label"
+          },
+          "expertiseLink1Text": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Link 1 Text"
+          },
+          "expertiseLink1Url": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Link 1 URL"
+          },
+          "expertiseLink2Text": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Link 2 Text"
+          },
+          "expertiseLink2Url": {
+            "widget": "singleLineText",
+            "title": "Firsthand Experience - Link 2 URL"
+          },
+          "featuredBackgroundImage": {
+            "widget": "image",
+            "title": "Start Here - Background Image"
+          },
+          "updatedBackgroundImage": {
+            "widget": "image",
+            "title": "Recently Updated - Background Image"
+          },
+          "hotelCollectionCards": {
+            "widget": "shapeList",
+            "collapseByDefault": true,
+            "title": "Hotels Only - Additional Collection - Image, Text, and Link Cards"
+          },
+          "hotelCollectionLabel": {
+            "widget": "singleLineText",
+            "title": "Hotels Only - Additional Collection - Kicker"
+          },
+          "hotelCollectionTitle": {
+            "widget": "singleLineText",
+            "title": "Hotels Only - Additional Collection - Section Title"
+          },
+          "hotelCollectionDescription": {
+            "widget": "paragraphText",
+            "title": "Hotels Only - Additional Collection - Intro Text"
+          },
+          "beautyHeroLabel": {
+            "widget": "singleLineText",
+            "title": "Focused Hero - Kicker"
+          },
+          "beautyHeroTitle": {
+            "widget": "singleLineText",
+            "title": "Focused Hero - Title"
+          },
+          "beautyHeroDescription": {
+            "widget": "paragraphText",
+            "title": "Focused Hero - Text"
+          },
+          "beautyHeroLinkText": {
+            "widget": "singleLineText",
+            "title": "Focused Hero - Link Text"
+          },
+          "beautyHeroLinkUrl": {
+            "widget": "singleLineText",
+            "title": "Focused Hero - Link URL"
+          },
+          "beautyHeroImage": {
+            "widget": "image",
+            "title": "Focused Hero - Image"
+          },
+          "beautyHeroPost": {
+            "widget": "relationship",
+            "title": "Focused Hero - Linked Post"
+          },
+          "weddingFeatureLabel": {
+            "widget": "singleLineText",
+            "title": "Wedding Only - Featured Article - Kicker"
+          },
+          "weddingFeatureTitle": {
+            "widget": "singleLineText",
+            "title": "Wedding Only - Featured Article - Title Override"
+          },
+          "weddingFeatureLinkUrl": {
+            "widget": "singleLineText",
+            "title": "Wedding Only - Featured Article - Link URL"
+          },
+          "weddingFeatureImage": {
+            "widget": "image",
+            "title": "Wedding Only - Featured Article - Image"
+          },
+          "weddingFeaturePost": {
+            "widget": "relationship",
+            "title": "Wedding Only - Featured Article - Linked Post"
           }
         },
         "order": [
           "title",
+          "parentCategory",
+          "navigationOrder",
+          "pageLabel",
+          "pageHeadline",
+          "heroImage",
+          "heroStory",
           "introText",
-          "featuredStories",
+          "introLinkText",
+          "introLinkUrl",
+          "guideLabel",
+          "guideTitle",
+          "guideLinkText",
+          "guideLinkUrl",
+          "guideCards",
+          "featuredLabel",
+          "featuredTitle",
+          "featuredDescription",
+          "featuredBackgroundImage",
+          "featuredCards",
+          "destinationsLabel",
+          "destinationsTitle",
+          "destinationsDescription",
+          "destinationCards",
+          "beautyHeroLabel",
+          "beautyHeroTitle",
+          "beautyHeroDescription",
+          "beautyHeroImage",
+          "beautyHeroPost",
+          "beautyHeroLinkText",
+          "beautyHeroLinkUrl",
+          "mapLabel",
+          "mapTitle",
+          "mapDescription",
+          "mapImage",
+          "clustersLabel",
+          "clustersTitle",
+          "clustersDescription",
+          "collectionCards",
+          "shopLabel",
+          "shopTitle",
+          "shopDescription",
+          "shopImage",
+          "shopLinkText",
+          "shopLinkUrl",
+          "shopCards",
+          "hotelCollectionLabel",
+          "hotelCollectionTitle",
+          "hotelCollectionDescription",
+          "hotelCollectionCards",
+          "updatedLabel",
+          "updatedTitle",
+          "updatedDescription",
+          "updatedBackgroundImage",
+          "updatedCards",
+          "expertiseLabel",
+          "expertiseTitle",
+          "expertiseDescription",
+          "expertiseImage",
+          "expertiseStat1Value",
+          "expertiseStat1Label",
+          "expertiseStat2Value",
+          "expertiseStat2Label",
+          "expertiseStat3Value",
+          "expertiseStat3Label",
+          "expertiseLink1Text",
+          "expertiseLink1Url",
+          "expertiseLink2Text",
+          "expertiseLink2Url",
+          "indexLabel",
+          "indexTitle",
+          "indexDescription",
+          "indexCards",
+          "browseLabel",
+          "browseTitle",
+          "browseCards",
+          "relatedLabel",
+          "relatedTitle",
+          "relatedCards",
           "social"
         ]
       }
@@ -2171,6 +2587,123 @@
           "home",
           "wedding",
           "fitness"
+        ]
+      }
+    },
+    "CategoryPageCard": {
+      "default": {
+        "properties": {
+          "post": {
+            "widget": "relationship",
+            "instructions": "Optional. Choose a post to use its title, image, text, and URL as defaults.",
+            "title": "Linked Post"
+          },
+          "image": {
+            "widget": "image",
+            "instructions": "Optional. Overrides the selected post image.",
+            "title": "Card Image"
+          },
+          "eyebrow": {
+            "widget": "singleLineText",
+            "instructions": "Optional short label shown above the card title.",
+            "title": "Card Label"
+          },
+          "title": {
+            "widget": "singleLineText",
+            "instructions": "Card title. Leave blank to use the selected post title.",
+            "title": "Card Title"
+          },
+          "description": {
+            "widget": "paragraphText",
+            "instructions": "Card text. Leave blank to use the selected post description.",
+            "title": "Card Text"
+          },
+          "linkText": {
+            "widget": "singleLineText",
+            "instructions": "Visible link wording, such as Read the guide.",
+            "title": "Link Text"
+          },
+          "linkUrl": {
+            "widget": "singleLineText",
+            "instructions": "Optional. Overrides the selected post URL.",
+            "title": "Link URL"
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "post",
+          "image",
+          "eyebrow",
+          "title",
+          "description",
+          "linkText",
+          "linkUrl"
+        ]
+      }
+    },
+    "CategoryGuideCard": {
+      "default": {
+        "properties": {
+          "image": {
+            "widget": "image",
+            "title": "Subcategory Image",
+            "instructions": "Main image for this subcategory."
+          },
+          "title": {
+            "widget": "singleLineText",
+            "title": "Subcategory Page Title",
+            "instructions": "Use the exact title shown on the linked subcategory page."
+          },
+          "description": {
+            "widget": "paragraphText",
+            "title": "Subcategory Description",
+            "instructions": "Short explanation of what readers will find on this page."
+          },
+          "linkText": {
+            "widget": "singleLineText",
+            "title": "Subcategory Link Text",
+            "instructions": "Visible link wording, such as Explore Road Trips."
+          },
+          "linkUrl": {
+            "widget": "singleLineText",
+            "title": "Subcategory Page URL",
+            "instructions": "Link to the matching subcategory page."
+          },
+          "cards": {
+            "widget": "shapeList",
+            "title": "Four Featured Cards",
+            "instructions": "Add up to four cards. Every card can have its own image, text, and link.",
+            "collapseByDefault": true
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "title",
+          "linkUrl",
+          "description",
+          "image",
+          "linkText",
+          "cards"
+        ]
+      }
+    },
+    "CategoryIndexCard": {
+      "default": {
+        "properties": {
+          "title": {
+            "widget": "singleLineText",
+            "hidden": true
+          },
+          "post": {
+            "widget": "relationship",
+            "title": "Linked Post",
+            "instructions": "Choose the post to include in the page index."
+          }
+        },
+        "widget": "repeater",
+        "order": [
+          "title",
+          "post"
         ]
       }
     }
@@ -3003,7 +3536,7 @@
             "type": "string",
             "title": "Header Label",
             "minLength": 0,
-            "@mapping": "shapedb:BestBeaches.HeroEyebrowV1"
+            "@mapping": "shapedb:BestBeaches.HeroLabelV1"
           },
           "heroTitle": {
             "type": "string",
@@ -3043,7 +3576,7 @@
             "type": "string",
             "title": "Collection Label",
             "minLength": 0,
-            "@mapping": "shapedb:BestBeaches.IntroEyebrowV1"
+            "@mapping": "shapedb:BestBeaches.IntroLabelV1"
           },
           "introTitle": {
             "type": "string",
@@ -3189,7 +3722,7 @@
             "type": "string",
             "title": "Feature Label",
             "minLength": 0,
-            "@mapping": "shapedb:BestBeaches.FeatureEyebrowV1"
+            "@mapping": "shapedb:BestBeaches.FeatureLabelV1"
           },
           "featureStory": {
             "title": "Feature Post",
@@ -3245,7 +3778,7 @@
             "type": "string",
             "title": "Ending Label",
             "minLength": 0,
-            "@mapping": "shapedb:BestBeaches.MoreEyebrowV1"
+            "@mapping": "shapedb:BestBeaches.MoreLabelV1"
           },
           "moreTitle": {
             "type": "string",
@@ -7317,22 +7850,89 @@
         "properties": {
           "title": {
             "type": "string",
-            "title": "Title",
+            "title": "Page Title",
             "minLength": 1,
             "@mapping": "shapedb:Category.r1qtmkcxZ"
           },
+          "pageLabel": {
+            "type": "string",
+            "title": "Hero - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryPageLabelV2"
+          },
+          "pageHeadline": {
+            "type": "string",
+            "title": "Hero - Page Title (H1)",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryPageHeadlineV2"
+          },
           "introText": {
             "type": "string",
-            "title": "Category Page Intro Text",
-            "description": "Optional. Introductory text shown beneath the category page heading.",
+            "title": "Introduction - Text",
             "minLength": 0,
             "@mapping": "shapedb:Category.CategoryPageIntroTextV1"
           },
+          "heroImage": {
+            "title": "Hero - Image",
+            "@mapping": "shapedb:Category.CategoryPageHeroImageV2",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "heroStory": {
+            "title": "Hero - Fallback Post",
+            "@mapping": "shapedb:Category.CategoryPageHeroStoryV2",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Story",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "featuredLabel": {
+            "type": "string",
+            "title": "Start Here - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryFeaturedLabelV2"
+          },
+          "featuredTitle": {
+            "type": "string",
+            "title": "Start Here - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryFeaturedTitleV2"
+          },
+          "featuredDescription": {
+            "type": "string",
+            "title": "Start Here - Intro Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryFeaturedDescriptionV2"
+          },
           "featuredStories": {
             "title": "Featured Posts",
-            "description": "Optional. Choose up to three posts in display order.",
+            "description": "Optional. Add and order the featured posts.",
             "type": "array",
-            "maxItems": 3,
+            "maxItems": 12,
             "items": {
               "@ref": "local:Story"
             },
@@ -7349,10 +7949,936 @@
               "service": "shapedb"
             }
           },
+          "guideStories": {
+            "title": "Choose a Guide",
+            "description": "Add and order the posts shown in Choose a guide.",
+            "type": "array",
+            "maxItems": 12,
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Category.CategoryGuideStoriesV1",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb"
+            }
+          },
+          "archiveLabel": {
+            "type": "string",
+            "title": "Archive Section Label",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryArchiveLabelV2"
+          },
+          "archiveTitle": {
+            "type": "string",
+            "title": "Archive Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryArchiveTitleV2"
+          },
+          "archiveDescription": {
+            "type": "string",
+            "title": "Archive Section Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.CategoryArchiveDescriptionV2"
+          },
+          "archiveStories": {
+            "title": "Archive Posts",
+            "description": "Optional ordered posts for the category archive.",
+            "type": "array",
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Category.CategoryArchiveStoriesV2",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb"
+            }
+          },
+          "destinationsLabel": {
+            "type": "string",
+            "title": "Popular Topics - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.DestinationsLabelV1"
+          },
+          "destinationsTitle": {
+            "type": "string",
+            "title": "Popular Topics - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.DestinationsTitleV1"
+          },
+          "destinationsDescription": {
+            "type": "string",
+            "title": "Popular Topics - Intro Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.DestinationsDescriptionV1"
+          },
+          "destinationStories": {
+            "title": "Destination Posts",
+            "type": "array",
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Category.DestinationStoriesV1",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb"
+            }
+          },
+          "mapLabel": {
+            "type": "string",
+            "title": "Travel Map - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.MapLabelV1"
+          },
+          "mapTitle": {
+            "type": "string",
+            "title": "Travel Map - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.MapTitleV1"
+          },
+          "mapDescription": {
+            "type": "string",
+            "title": "Travel Map - Intro Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.MapDescriptionV1"
+          },
+          "mapImage": {
+            "title": "Travel Map - Background Image",
+            "@mapping": "shapedb:Category.MapImageV1",
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "clustersLabel": {
+            "type": "string",
+            "title": "More Collections - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ClustersLabelV1"
+          },
+          "clustersTitle": {
+            "type": "string",
+            "title": "More Collections - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ClustersTitleV1"
+          },
+          "clustersDescription": {
+            "type": "string",
+            "title": "More Collections - Intro Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ClustersDescriptionV1"
+          },
+          "clusterStories": {
+            "title": "Travel Guide Collections",
+            "description": "Choose the four posts used in the collection cards, in order.",
+            "type": "array",
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Category.ClusterStoriesV1",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb"
+            }
+          },
+          "collection1Name": {
+            "type": "string",
+            "title": "Collection 1 Name",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.Collection1NameV1"
+          },
+          "collection1Image": {
+            "title": "Collection 1 Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.Collection1ImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "collection1Post": {
+            "title": "Collection 1 Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:Category.Collection1PostV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "collection2Name": {
+            "type": "string",
+            "title": "Collection 2 Name",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.Collection2NameV1"
+          },
+          "collection2Image": {
+            "title": "Collection 2 Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.Collection2ImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "collection2Post": {
+            "title": "Collection 2 Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:Category.Collection2PostV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "collection3Name": {
+            "type": "string",
+            "title": "Collection 3 Name",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.Collection3NameV1"
+          },
+          "collection3Image": {
+            "title": "Collection 3 Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.Collection3ImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "collection3Post": {
+            "title": "Collection 3 Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:Category.Collection3PostV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "collection4Name": {
+            "type": "string",
+            "title": "Collection 4 Name",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.Collection4NameV1"
+          },
+          "collection4Image": {
+            "title": "Collection 4 Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.Collection4ImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "collection4Post": {
+            "title": "Collection 4 Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:Category.Collection4PostV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "updatedLabel": {
+            "type": "string",
+            "title": "Recently Updated - Label",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.UpdatedLabelV1"
+          },
+          "updatedTitle": {
+            "type": "string",
+            "title": "Recently Updated - Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.UpdatedTitleV1"
+          },
+          "updatedDescription": {
+            "type": "string",
+            "title": "Recently Updated - Description",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.UpdatedDescriptionV1"
+          },
+          "updatedStories": {
+            "title": "Updated Posts",
+            "type": "array",
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Category.UpdatedStoriesV1",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb"
+            }
+          },
+          "expertiseLabel": {
+            "type": "string",
+            "title": "Firsthand Experience - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseLabelV1"
+          },
+          "expertiseTitle": {
+            "type": "string",
+            "title": "Firsthand Experience - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseTitleV1"
+          },
+          "expertiseDescription": {
+            "type": "string",
+            "title": "Firsthand Experience - Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseDescriptionV1"
+          },
+          "expertiseImage": {
+            "title": "Firsthand Experience - Background Image",
+            "@mapping": "shapedb:Category.ExpertiseImageV1",
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "expertiseDetailImage": {
+            "title": "Firsthand Experience - Image 2",
+            "@mapping": "shapedb:Category.ExpertiseDetailImageV1",
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "indexLabel": {
+            "type": "string",
+            "title": "Page Index - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.IndexLabelV1"
+          },
+          "indexTitle": {
+            "type": "string",
+            "title": "Page Index - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.IndexTitleV1"
+          },
+          "indexDescription": {
+            "type": "string",
+            "title": "Page Index - Intro Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.IndexDescriptionV1"
+          },
+          "indexStories": {
+            "title": "Index Posts",
+            "type": "array",
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Category.IndexStoriesV1",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb"
+            }
+          },
+          "browseLabel": {
+            "type": "string",
+            "title": "Browse More - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.BrowseLabelV1"
+          },
+          "browseTitle": {
+            "type": "string",
+            "title": "Browse More - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.BrowseTitleV1"
+          },
+          "relatedLabel": {
+            "type": "string",
+            "title": "Related Categories - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.RelatedLabelV1"
+          },
+          "relatedTitle": {
+            "type": "string",
+            "title": "Related Categories - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.RelatedTitleV1"
+          },
           "social": {
-            "title": "Social",
+            "title": "SEO - Search and Sharing",
             "@mapping": "shapedb:Category.B1wXxP2Z-",
             "$ref": "#/shapes/CategorySocial/schema"
+          },
+          "parentCategory": {
+            "title": "Parent Category",
+            "@mapping": "shapedb:Category.ParentCategoryV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Category",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "navigationOrder": {
+            "type": "integer",
+            "title": "Subcategory Display Order",
+            "default": 0,
+            "@mapping": "shapedb:Category.NavigationOrderV1"
+          },
+          "guideCards": {
+            "type": "array",
+            "title": "Subcategories - Pages and Featured Cards",
+            "maxItems": 12,
+            "items": {
+              "$ref": "#/shapes/CategoryGuideCard/schema"
+            },
+            "@mapping": "shapedb:Category.GuideCardsV1"
+          },
+          "featuredCards": {
+            "type": "array",
+            "title": "Start Here - Image, Text, and Link Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.FeaturedCardsV1"
+          },
+          "archiveCards": {
+            "type": "array",
+            "title": "Latest Story Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.ArchiveCardsV1"
+          },
+          "destinationCards": {
+            "type": "array",
+            "title": "Popular Topics - Image, Text, and Link Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.DestinationCardsV1"
+          },
+          "collectionCards": {
+            "type": "array",
+            "title": "More Collections - Image, Text, and Link Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.CollectionCardsV1"
+          },
+          "updatedCards": {
+            "type": "array",
+            "title": "Recently Updated - Image, Text, and Link Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.UpdatedCardsV1"
+          },
+          "indexCards": {
+            "type": "array",
+            "title": "Page Index - Links",
+            "items": {
+              "$ref": "#/shapes/CategoryIndexCard/schema"
+            },
+            "@mapping": "shapedb:Category.IndexCardsV1"
+          },
+          "browseCards": {
+            "type": "array",
+            "title": "Browse More - Image, Text, and Link Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.BrowseCardsV1"
+          },
+          "relatedCards": {
+            "type": "array",
+            "title": "Related Categories - Image, Text, and Link Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.RelatedCardsV1"
+          },
+          "shopCards": {
+            "type": "array",
+            "title": "Shopping - Image, Text, and Link Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.ShopCardsV1"
+          },
+          "introLinkText": {
+            "type": "string",
+            "title": "Introduction - Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.IntroLinkTextV1"
+          },
+          "introLinkUrl": {
+            "type": "string",
+            "title": "Introduction - Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.IntroLinkUrlV1"
+          },
+          "guideLabel": {
+            "type": "string",
+            "title": "Subcategories - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.GuideLabelV1"
+          },
+          "guideTitle": {
+            "type": "string",
+            "title": "Subcategories - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.GuideTitleV1"
+          },
+          "guideLinkText": {
+            "type": "string",
+            "title": "Subcategories - Header Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.GuideLinkTextV1"
+          },
+          "guideLinkUrl": {
+            "type": "string",
+            "title": "Subcategories - Header Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.GuideLinkUrlV1"
+          },
+          "shopLabel": {
+            "type": "string",
+            "title": "Shopping - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ShopLabelV1"
+          },
+          "shopTitle": {
+            "type": "string",
+            "title": "Shopping - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ShopTitleV1"
+          },
+          "shopDescription": {
+            "type": "string",
+            "title": "Shopping - Intro Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ShopDescriptionV1"
+          },
+          "shopLinkText": {
+            "type": "string",
+            "title": "Shopping - Header Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ShopLinkTextV1"
+          },
+          "shopLinkUrl": {
+            "type": "string",
+            "title": "Shopping - Header Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ShopLinkUrlV1"
+          },
+          "shopImage": {
+            "title": "Shopping - Background Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.ShopImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "expertiseImageCount": {
+            "type": "integer",
+            "title": "Firsthand Experience - Number of Images",
+            "minimum": 2,
+            "maximum": 4,
+            "default": 3,
+            "@mapping": "shapedb:Category.ExpertiseImageCountV1"
+          },
+          "expertiseImage3": {
+            "title": "Firsthand Experience - Image 3",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.ExpertiseImage3V1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "expertiseImage4": {
+            "title": "Firsthand Experience - Image 4",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.ExpertiseImage4V1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "expertiseStat1Value": {
+            "type": "string",
+            "title": "Firsthand Experience - Statistic 1 Value",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseStat1ValueV1"
+          },
+          "expertiseStat1Label": {
+            "type": "string",
+            "title": "Firsthand Experience - Statistic 1 Label",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseStat1LabelV1"
+          },
+          "expertiseStat2Value": {
+            "type": "string",
+            "title": "Firsthand Experience - Statistic 2 Value",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseStat2ValueV1"
+          },
+          "expertiseStat2Label": {
+            "type": "string",
+            "title": "Firsthand Experience - Statistic 2 Label",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseStat2LabelV1"
+          },
+          "expertiseStat3Value": {
+            "type": "string",
+            "title": "Firsthand Experience - Statistic 3 Value",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseStat3ValueV1"
+          },
+          "expertiseStat3Label": {
+            "type": "string",
+            "title": "Firsthand Experience - Statistic 3 Label",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseStat3LabelV1"
+          },
+          "expertiseLink1Text": {
+            "type": "string",
+            "title": "Firsthand Experience - Link 1 Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseLink1TextV1"
+          },
+          "expertiseLink1Url": {
+            "type": "string",
+            "title": "Firsthand Experience - Link 1 URL",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseLink1UrlV1"
+          },
+          "expertiseLink2Text": {
+            "type": "string",
+            "title": "Firsthand Experience - Link 2 Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseLink2TextV1"
+          },
+          "expertiseLink2Url": {
+            "type": "string",
+            "title": "Firsthand Experience - Link 2 URL",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.ExpertiseLink2UrlV1"
+          },
+          "featuredBackgroundImage": {
+            "title": "Start Here - Background Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.FeaturedBackgroundImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "updatedBackgroundImage": {
+            "title": "Recently Updated - Background Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.UpdatedBackgroundImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "hotelCollectionCards": {
+            "type": "array",
+            "title": "Hotels Only - Additional Collection - Image, Text, and Link Cards",
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:Category.HotelCollectionCardsV1"
+          },
+          "hotelCollectionLabel": {
+            "type": "string",
+            "title": "Hotels Only - Additional Collection - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.HotelCollectionLabelV1"
+          },
+          "hotelCollectionTitle": {
+            "type": "string",
+            "title": "Hotels Only - Additional Collection - Section Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.HotelCollectionTitleV1"
+          },
+          "hotelCollectionDescription": {
+            "type": "string",
+            "title": "Hotels Only - Additional Collection - Intro Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.HotelCollectionDescriptionV1"
+          },
+          "beautyHeroLabel": {
+            "type": "string",
+            "title": "Beauty Only - Focused Hero - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.BeautyHeroLabelV1"
+          },
+          "beautyHeroTitle": {
+            "type": "string",
+            "title": "Beauty Only - Focused Hero - Title",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.BeautyHeroTitleV1"
+          },
+          "beautyHeroDescription": {
+            "type": "string",
+            "title": "Beauty Only - Focused Hero - Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.BeautyHeroDescriptionV1"
+          },
+          "beautyHeroLinkText": {
+            "type": "string",
+            "title": "Beauty Only - Focused Hero - Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.BeautyHeroLinkTextV1"
+          },
+          "beautyHeroLinkUrl": {
+            "type": "string",
+            "title": "Beauty Only - Focused Hero - Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.BeautyHeroLinkUrlV1"
+          },
+          "beautyHeroImage": {
+            "title": "Beauty Only - Focused Hero - Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.BeautyHeroImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "beautyHeroPost": {
+            "title": "Beauty Only - Focused Hero - Linked Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:Category.BeautyHeroPostV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "weddingFeatureLabel": {
+            "type": "string",
+            "title": "Wedding Only - Featured Article - Kicker",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.WeddingFeatureLabelV1"
+          },
+          "weddingFeatureTitle": {
+            "type": "string",
+            "title": "Wedding Only - Featured Article - Title Override",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.WeddingFeatureTitleV1"
+          },
+          "weddingFeatureLinkUrl": {
+            "type": "string",
+            "title": "Wedding Only - Featured Article - Link URL",
+            "minLength": 0,
+            "@mapping": "shapedb:Category.WeddingFeatureLinkUrlV1"
+          },
+          "weddingFeatureImage": {
+            "title": "Wedding Only - Featured Article - Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:Category.WeddingFeatureImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "weddingFeaturePost": {
+            "title": "Wedding Only - Featured Article - Linked Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:Category.WeddingFeaturePostV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
           }
         },
         "required": [
@@ -8728,6 +10254,273 @@
               "$ref": "#/shapes/StoryShopEditItem/schema"
             },
             "@mapping": "shapedb:Products.FitnessV1"
+          }
+        }
+      }
+    },
+    "CategoryPageCard": {
+      "id": "CategoryPageCardV1",
+      "name": "CategoryPageCard",
+      "title": "Editable Image, Text, and Link Card",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "post": {
+            "title": "Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:CategoryPageCard.PostV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "image": {
+            "title": "Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:CategoryPageCard.ImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "eyebrow": {
+            "type": "string",
+            "title": "Label",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.EyebrowV1"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.TitleV1"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.DescriptionV1"
+          },
+          "linkText": {
+            "type": "string",
+            "title": "Link Label",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.LinkTextV1"
+          },
+          "linkUrl": {
+            "type": "string",
+            "title": "Link",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.LinkUrlV1"
+          }
+        }
+      }
+    },
+    "CategoryGuideCard": {
+      "id": "CategoryGuideCardV1",
+      "name": "CategoryGuideCard",
+      "title": "Subcategory and Four Featured Cards",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "image": {
+            "title": "Subcategory Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:CategoryGuideCard.GuideImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "title": {
+            "type": "string",
+            "title": "Subcategory Page Title",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryGuideCard.TitleV1"
+          },
+          "description": {
+            "type": "string",
+            "title": "Subcategory Description",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryGuideCard.DescriptionV1"
+          },
+          "linkText": {
+            "type": "string",
+            "title": "Subcategory Link Text",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryGuideCard.LinkTextV1"
+          },
+          "linkUrl": {
+            "type": "string",
+            "title": "Subcategory Page URL",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryGuideCard.LinkUrlV1"
+          },
+          "cards": {
+            "type": "array",
+            "title": "Four Featured Cards",
+            "maxItems": 4,
+            "items": {
+              "$ref": "#/shapes/CategoryPageCard/schema"
+            },
+            "@mapping": "shapedb:CategoryGuideCard.CardsV1"
+          },
+          "post": {
+            "title": "Post 1",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:CategoryGuideCard.GuidePost1V1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "post2": {
+            "title": "Post 2",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:CategoryGuideCard.GuidePost2V1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "post3": {
+            "title": "Post 3",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:CategoryGuideCard.GuidePost3V1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "post4": {
+            "title": "Post 4",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:CategoryGuideCard.GuidePost4V1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          }
+        }
+      }
+    },
+    "CategoryIndexCard": {
+      "id": "CategoryIndexCardV1",
+      "name": "CategoryIndexCard",
+      "title": "Page Index Link",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "post": {
+            "title": "Post",
+            "@ref": "local:Story",
+            "@mapping": "shapedb:CategoryPageCard.PostV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "image": {
+            "title": "Image",
+            "@ref": "local:Asset",
+            "@mapping": "shapedb:CategoryPageCard.ImageV1",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "eyebrow": {
+            "type": "string",
+            "title": "Label",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.EyebrowV1"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.TitleV1"
+          },
+          "description": {
+            "type": "string",
+            "title": "Description",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.DescriptionV1"
+          },
+          "linkText": {
+            "type": "string",
+            "title": "Link Label",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.LinkTextV1"
+          },
+          "linkUrl": {
+            "type": "string",
+            "title": "Link",
+            "minLength": 0,
+            "@mapping": "shapedb:CategoryPageCard.LinkUrlV1"
           }
         }
       }

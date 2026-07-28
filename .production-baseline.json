@@ -6,8 +6,8 @@
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
   "schema": {
-    "version": 213,
-    "hash": "f5f2445806cbb9f57dffe43b143d9bbab5d2655270e69261e645b9d180ba6ae0"
+    "version": 238,
+    "hash": "bea343db1666484231bef7e771f817a0c20d912939c91e30111fe8097d3881b5"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "e783239ea67ac6f8597536e155877596ce41b00144dac4f994bc769e13441981",
@@ -36,8 +36,8 @@
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "src/javascripts/directives/story.js": "83f92468a7a6e12d006f8998c3e09353228e29e847d0369198815b2878fae5f7",
-    "_takeshape-schema-export/schema.json": "b64807238b3b5a2c1626330b776357a3a70e896203328e257a81b0364cd77411",
-    "_takeshape-schema-export/schema-inner.json": "aa6ea7684cb25382d64b10116b2b30690d8c9d5a23d03c7b54653539a8680ffd",
+    "_takeshape-schema-export/schema.json": "8e23645ad23b897c9df6f6dced1d3ea9e344a10e5cec63496df10e1de347b5f9",
+    "_takeshape-schema-export/schema-inner.json": "1b79b8252266be20e7099576124c9efad269f0738f8bb977f9e96d86343dd24d",
     "tsg.yml": "b9141f749b8c1b5ef7920ee4f897351c3dd18471f82006cf68294ab69311da4e",
     "package.json": "11f4eaed434c234de4e8a4cadf1d79509280870fd25f8d9ebd975afb1f07e7e8",
     "scripts/sanitize-story-links.js": "cac32836e4b24239d0237c46186e8dbba3f20c631ed52d424c836d53050afa3e",
