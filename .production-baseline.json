@@ -25,7 +25,7 @@
     "src/templates/data/stories.graphql": "20ec8c6be97659a44e4784c1f2d1bf635fc6d38f9fbb34a6972fd36467153abb",
     "src/templates/data/story-slugs.graphql": "a21bbf42608d5996151b6e6f087d9adee4d8738c5513da5559af68c1c16fde17",
     "src/templates/data/story-titles.graphql": "68045911bc3785654863c2078ccecf0b56746c4730be025462f1ccef1cd84087",
-    "src/templates/data/search.graphql": "e01bc13dc55622dcbe9e4b14fb3ecbda5d6aa2b12bbd1764ce2e3565f9c6a9af",
+    "src/templates/data/search.graphql": "052802a76996edfa11417bc47d0a6165e8452faecdb6cad696795965ebd60084",
     "src/templates/feeds/search.json": "8f4ef7e371684abb287ce1e16eab3978a99639df13d2a5fa7fe6d85c3fa883b3",
     "src/templates/data/story.graphql": "b7479224c0d7a8b35c7e3ae4ae9ec6478407d550e1e5504fe811913f94077ae3",
     "src/templates/feeds/story-titles.json": "5d4bac57a967514aaddcb94cee226283e1d7b4cec854dfc751e35b933f0882ff",

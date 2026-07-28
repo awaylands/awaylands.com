@@ -1,5 +1,5 @@
 query($images: TSImagesConfig) {
-  categories: getCategoryList {
+  categories: getCategoryList(size: 250, from: 0, sort: [{field: "navigationOrder", order: "asc"}]) {
     items {
       title
     }
