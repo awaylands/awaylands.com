@@ -85,6 +85,7 @@
       <a class="d3-hero-card{% if cardIndex == 0 %} is-active{% endif %}" data-d3-card data-d3-index="{{ cardIndex }}" href="{{ postcardUrl }}">
         <span class="d3-hero-card__bg">
           <img srcset="{{ mainImage | image({w: 2600, auto: 'compress,format'}) }} 2600w,
+                       {{ mainImage | image({w: 2880, auto: 'compress,format'}) }} 2880w,
                        {{ mainImage | image({w: 1800, auto: 'compress,format'}) }} 1800w,
                        {{ mainImage | image({w: 1000, auto: 'compress,format'}) }} 1000w"
                sizes="100vw"
@@ -191,6 +192,7 @@
 
   <section class="d3-featured-destination" aria-label="Featured destination">
     <img srcset="{{ featuredImage | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+                 {{ featuredImage | image({w: 2880, auto: 'compress,format'}) }} 2880w,
                  {{ featuredImage | image({w: 1600, auto: 'compress,format'}) }} 1600w,
                  {{ featuredImage | image({w: 900, auto: 'compress,format'}) }} 900w"
          sizes="100vw"
@@ -272,6 +274,7 @@
 
   <section class="d3-ending-panel" aria-label="Choose travel mood">
     <img srcset="{{ endingImage | image({w: 2200, auto: 'compress,format'}) }} 2200w,
+                 {{ endingImage | image({w: 2880, auto: 'compress,format'}) }} 2880w,
                  {{ endingImage | image({w: 1400, auto: 'compress,format'}) }} 1400w,
                  {{ endingImage | image({w: 900, auto: 'compress,format'}) }} 900w"
          sizes="100vw"

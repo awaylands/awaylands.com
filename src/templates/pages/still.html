@@ -17,6 +17,7 @@
       {% if heroImage %}
         <img class="still-index__hero-image"
              srcset="{{ heroImage | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+                     {{ heroImage | image({w: 2880, auto: 'compress,format'}) }} 2880w,
                      {{ heroImage | image({w: 1600, auto: 'compress,format'}) }} 1600w,
                      {{ heroImage | image({w: 1000, auto: 'compress,format'}) }} 1000w"
              sizes="100vw"

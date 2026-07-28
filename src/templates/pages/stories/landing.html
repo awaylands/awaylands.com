@@ -64,6 +64,8 @@
     {% if imageStory and imageStory.tout and imageStory.tout.image %}
     <img
       srcset="{{ imageStory.tout.image.path | image({w: 1800, auto: 'compress,format'}) }} 1800w,
+              {{ imageStory.tout.image.path | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+              {{ imageStory.tout.image.path | image({w: 2880, auto: 'compress,format'}) }} 2880w,
               {{ imageStory.tout.image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
               {{ imageStory.tout.image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
               {{ imageStory.tout.image.path | image({w: 480, auto: 'compress,format'}) }} 480w"
@@ -81,6 +83,7 @@
     {% if asset and asset.path %}
     <img
       srcset="{{ asset.path | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+              {{ asset.path | image({w: 2880, auto: 'compress,format'}) }} 2880w,
               {{ asset.path | image({w: 1800, auto: 'compress,format'}) }} 1800w,
               {{ asset.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
               {{ asset.path | image({w: 800, auto: 'compress,format'}) }} 800w,

@@ -10,7 +10,9 @@
     srcset="{{ image.path | image({w: 480, auto: 'compress,format'}) }} 480w,
       {{ image.path | image({w: 800, auto: 'compress,format'}) }} 800w,
       {{ image.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
-      {{ image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w"
+      {{ image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+      {{ image.path | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+      {{ image.path | image({w: 2880, auto: 'compress,format'}) }} 2880w"
     sizes="{{ sizes }}"
     alt="{{ story.title | escape }}"
     loading="{% if eager %}eager{% else %}lazy{% endif %}"
@@ -240,10 +242,12 @@
     {% if page.heroImage %}
     <div class="category-magazine-hero__image">
       <img
-        src="{{ page.heroImage.path | image({w: 1600, auto: 'compress,format'}) }}"
+        src="{{ page.heroImage.path | image({w: 2400, auto: 'compress,format'}) }}"
         srcset="{{ page.heroImage.path | image({w: 640, auto: 'compress,format'}) }} 640w,
           {{ page.heroImage.path | image({w: 1000, auto: 'compress,format'}) }} 1000w,
-          {{ page.heroImage.path | image({w: 1600, auto: 'compress,format'}) }} 1600w"
+          {{ page.heroImage.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+          {{ page.heroImage.path | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+          {{ page.heroImage.path | image({w: 2880, auto: 'compress,format'}) }} 2880w"
         sizes="100vw"
         alt=""
         loading="eager"
@@ -354,7 +358,7 @@
   <section class="category-shortlist" aria-labelledby="category-featured-title">
     <div class="category-shortlist__background" aria-hidden="true">
       {% set featuredBackground = page.featuredCards[0] %}
-      {% if page.featuredBackgroundImage %}<img src="{{ page.featuredBackgroundImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif featuredBackground.image %}<img src="{{ featuredBackground.image.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featuredBackground.post or page.featuredStories[0] or sortedStories[4] or heroStory, "100vw", false) }}{% endif %}
+      {% if page.featuredBackgroundImage %}<img src="{{ page.featuredBackgroundImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif featuredBackground.image %}<img src="{{ featuredBackground.image.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featuredBackground.post or page.featuredStories[0] or sortedStories[4] or heroStory, "100vw", false) }}{% endif %}
     </div>
     <header class="category-module-heading">
       <p>{{ featuredLabel }}</p>
@@ -379,7 +383,7 @@
   {% if hasFeatureHero %}
   <section class="category-beauty-hero category-featured-story" aria-labelledby="category-featured-story-title">
     <a href="{{ page.focusedHeroLinkUrl or page.weddingFeatureLinkUrl or featureHeroCard.linkUrl or storyUrl(featureHeroStory) }}">
-      <span class="category-beauty-hero__image">{% if page.focusedHeroImage %}<img src="{{ page.focusedHeroImage.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif page.weddingFeatureImage %}<img src="{{ page.weddingFeatureImage.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif featureHeroCard.image %}<img src="{{ featureHeroCard.image.path | image({w: 2000, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featureHeroStory, "100vw", false) }}{% endif %}</span>
+      <span class="category-beauty-hero__image">{% if page.focusedHeroImage %}<img src="{{ page.focusedHeroImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif page.weddingFeatureImage %}<img src="{{ page.weddingFeatureImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif featureHeroCard.image %}<img src="{{ featureHeroCard.image.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featureHeroStory, "100vw", false) }}{% endif %}</span>
       <span class="category-beauty-hero__copy">
         <small>{{ page.focusedHeroLabel or page.weddingFeatureLabel or "Reader Favorites" }}</small>
         <strong id="category-featured-story-title">{{ page.focusedHeroTitle or page.weddingFeatureTitle or featureHeroCard.title or featureHeroStory.title }}</strong>
@@ -414,7 +418,7 @@
   <section class="category-map" id="category-map" aria-label="Interactive destination map">
     <div class="category-map__background" aria-hidden="true">
       {% if page.mapImage %}
-      <img src="{{ page.mapImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
+      <img src="{{ page.mapImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
       {% else %}
       {{ storyImage(sortedStories[9] or heroStory, "100vw", false) }}
       {% endif %}
@@ -472,7 +476,7 @@
   {% endif %}
 
   {% if hasShopSection %}<section class="bm-section bm-products category-shop" aria-labelledby="category-shop-title">
-    <div class="bm-products__background">{% if page.shopImage %}<img src="{{ page.shopImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.shopCards[0].post or sortedStories[12] or heroStory, "100vw", false) }}{% endif %}</div>
+    <div class="bm-products__background">{% if page.shopImage %}<img src="{{ page.shopImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.shopCards[0].post or sortedStories[12] or heroStory, "100vw", false) }}{% endif %}</div>
     <div class="bm-products__intro">
       <span class="bm-kicker">{{ shopLabel }}</span>
       <h2 id="category-shop-title">{{ shopTitle }}</h2>
@@ -518,7 +522,7 @@
   {% endif %}
 
   {% if hasUpdatedSection %}<section class="category-updated" aria-labelledby="category-updated-title">
-    <div class="category-updated__background" aria-hidden="true">{% if page.updatedBackgroundImage %}<img src="{{ page.updatedBackgroundImage.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif page.updatedCards[0].image %}<img src="{{ page.updatedCards[0].image.path | image({w: 1800, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.updatedCards[0].post or updatedStories[0] or heroStory, "100vw", false) }}{% endif %}</div>
+    <div class="category-updated__background" aria-hidden="true">{% if page.updatedBackgroundImage %}<img src="{{ page.updatedBackgroundImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif page.updatedCards[0].image %}<img src="{{ page.updatedCards[0].image.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.updatedCards[0].post or updatedStories[0] or heroStory, "100vw", false) }}{% endif %}</div>
     <header class="category-module-heading">
       <p>{{ updatedLabel }}</p>
       <h2 id="category-updated-title">{{ updatedTitle }}</h2>
@@ -540,7 +544,7 @@
   </section>{% endif %}
 
   {% if hasExpertiseSection %}<aside class="category-expertise category-expertise--editorial-overlay">
-    <span class="category-expertise__image">{% if page.expertiseImage %}<img src="{{ page.expertiseImage.path | image({w: 2200, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(sortedStories[16] or heroStory, "100vw", false) }}{% endif %}</span>
+    <span class="category-expertise__image">{% if page.expertiseImage %}<img src="{{ page.expertiseImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(sortedStories[16] or heroStory, "100vw", false) }}{% endif %}</span>
     <div class="category-expertise__copy">
       <p>{{ expertiseLabel }}</p>
       <h2>{{ expertiseTitle }}</h2>
