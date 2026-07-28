@@ -4012,7 +4012,7 @@ body.body--category-hub .category-expertise__stats span {
 
 body.body--category-hub .category-expertise--editorial-overlay .category-expertise__copy nav {
   justify-content: flex-start;
-  margin-top: 2.6rem;
+  margin-top: 5.2rem;
   gap: 1.5rem 3rem;
 }
 
@@ -4631,6 +4631,6 @@ body.body--category-hub .category-subcategory-nav__trigger > i {
   }
 
   body.body--category-hub .category-expertise--editorial-overlay .category-expertise__copy nav {
-    margin-top: clamp(2.5rem, 8vw, 4rem);
+    margin-top: clamp(5rem, 16vw, 8rem);
   }
 }
