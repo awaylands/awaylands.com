@@ -129,7 +129,7 @@ function generateSite() {
     .replace(/^staticPath:\s*build\s*$/m, 'staticPath: build');
   fs.writeFileSync(configPath, config);
   try {
-    run(node, [takeShape, 'build', '--file', configPath]);
+    run(node, [takeShape, 'build', '--file', '.tsg-production-build.yml']);
     copyTree(generatedPath, path.join(root, 'build'));
   } finally {
     if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
