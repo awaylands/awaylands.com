@@ -4559,3 +4559,46 @@ body.body--category-hub .category-subcategory-nav__trigger > i {
   bottom: 0.8rem;
   color: #fff;
 }
+
+/* Refine the narrow category composition without changing desktop layouts. */
+@media (max-width: 700px) {
+  body.body--category-hub .category-updated small {
+    bottom: 7.2rem;
+    font-size: clamp(1.05rem, 3.2vw, 1.3rem);
+  }
+
+  body.body--category-hub .category-updated strong {
+    right: 1.2rem;
+    bottom: 0.9rem;
+    left: 1.2rem;
+    max-height: 7.4rem;
+    font-size: clamp(2.35rem, 6.4vw, 3.4rem);
+    line-height: 1.06;
+  }
+
+  body.body--category-hub .category-expertise--editorial-overlay > .category-expertise__copy {
+    padding-top: 6.8rem;
+    padding-bottom: 4.8rem;
+  }
+
+  body.body--category-hub .category-expertise--editorial-overlay .category-expertise__copy h2 {
+    margin-top: 1.8rem;
+    margin-bottom: 1.4rem;
+    font-size: clamp(4.8rem, 12vw, 7rem);
+    line-height: 1.02;
+  }
+
+  body.body--category-hub .category-expertise--editorial-overlay .category-expertise__copy > span {
+    font-size: clamp(1.55rem, 4.2vw, 2rem);
+    line-height: 1.48;
+  }
+
+  body.body--category-hub .category-expertise--editorial-overlay .category-expertise__stats {
+    margin-top: auto;
+    padding-top: 2rem;
+  }
+
+  body.body--category-hub .category-expertise--editorial-overlay .category-expertise__copy nav {
+    margin-top: clamp(2.5rem, 8vw, 4rem);
+  }
+}
