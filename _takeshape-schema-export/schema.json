@@ -3,10 +3,10 @@
   "environment": "production",
   "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
   "created": "2017-03-15T23:43:16.289Z",
-  "schemaHash": "bea343db1666484231bef7e771f817a0c20d912939c91e30111fe8097d3881b5",
-  "updated": "2026-07-28T10:33:51.287Z",
-  "version": 238,
-  "versionAt": "2026-07-28T10:33:51.287Z",
+  "schemaHash": "087907c6b3d5c7c269b665777225eee2db54f01ffd3da3e31e897cfd44112fcb",
+  "updated": "2026-07-28T22:22:54.054Z",
+  "version": 239,
+  "versionAt": "2026-07-28T22:22:54.054Z",
   "versionBy": "2ebbde81-64ae-42d6-85de-cf26286a4780",
   "schema": {
     "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
@@ -2005,7 +2005,8 @@
           },
           "order": [
             "name",
-            "social"
+            "social",
+            "locations"
           ]
         }
       },
