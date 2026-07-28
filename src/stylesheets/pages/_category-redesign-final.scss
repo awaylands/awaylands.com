@@ -4433,6 +4433,17 @@ body.body--category-hub .category-destination-tile > i {
   color: #fff;
 }
 
+/* Preserve the original photo-first card order; only the story link overlays the photo. */
+body.body--category-hub .category-destination-tile > span {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+body.body--category-hub .category-destination-tile > strong {
+  grid-column: 1;
+  grid-row: 2;
+}
+
 /* Give the shared four-card update section more breathing room and a clearer
    frame on every category page. */
 body.body--category-hub .category-updated__grid {
