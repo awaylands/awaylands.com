@@ -4782,7 +4782,10 @@ body.body--category-hub .category-subcategory-nav__description {
 
 /* Shared category hero treatment: preserve each page's content and imagery. */
 body.body--category-hub .category-magazine-hero__copy {
-  transform: translateY(-58px);
+  align-items: center;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%, -58px);
 }
 
 body.body--category-hub .category-magazine-hero .category-kicker {
@@ -4790,11 +4793,14 @@ body.body--category-hub .category-magazine-hero .category-kicker {
 }
 
 body.body--category-hub .category-magazine-hero h1 {
+  margin-right: auto;
+  margin-left: auto;
   font-family: 'Still ITC Garamond Light Condensed';
   font-size: clamp(10.08rem, 12.96vw, 18rem);
   font-weight: 100;
   letter-spacing: -0.025em;
   line-height: 0.88;
+  text-align: center;
 }
 
 body.body--category-hub .category-magazine-hero__image::after {
@@ -4812,5 +4818,22 @@ body.body--category-hub .category-magazine-hero__image::after {
 @media (max-width: 700px) {
   body.body--category-hub .category-magazine-hero h1 {
     font-size: clamp(4.8rem, 16vw, 7rem);
+  }
+}
+
+@media (max-width: 1200px) {
+  body.body--category-hub .category-magazine-hero__copy {
+    left: 50%;
+    width: calc(100% - 4rem);
+    transform: translate(-50%, -58px);
+  }
+
+  body.body--category-hub .category-magazine-hero h1 {
+    max-width: none;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: clamp(7rem, 10vw, 12rem);
+    text-align: center;
+    white-space: nowrap;
   }
 }
