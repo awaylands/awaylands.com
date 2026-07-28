@@ -71,6 +71,10 @@ if (!/^buildPath:\s*build\s*$/m.test(siteConfig)) {
   fail('the generated build output must be build.');
 }
 
+if (!fs.existsSync(path.join(root, 'build'))) {
+  fail('the generated build output is missing. Run the site generator before deploying.');
+}
+
 const schemaSnapshotPath = path.join(root, '_takeshape-schema-export/schema.json');
 const schemaSnapshot = JSON.parse(fs.readFileSync(schemaSnapshotPath, 'utf8'));
 if (
