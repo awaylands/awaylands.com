@@ -5181,3 +5181,23 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
     transform: none;
   }
 }
+
+@media (max-width: 799px) {
+  .body--blog-magazine .page-header .logo {
+    width: 24rem;
+  }
+
+  .body--blog-magazine .bm-hero__copy {
+    top: 8rem;
+  }
+
+  .body--blog-magazine .bm-hero__copy .bm-kicker {
+    margin-bottom: 1.4rem;
+  }
+
+  .body--blog-magazine .bm-hero__copy h1 {
+    max-width: none;
+    font-size: clamp(4rem, 9vw, 6rem);
+    margin-top: 0;
+  }
+}
