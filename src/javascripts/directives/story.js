@@ -169,8 +169,20 @@ function setStoryImageDimensions(image) {
 
   const heroMedia = image.closest('.story-cover__media');
 
-  if (heroMedia && image.naturalHeight / image.naturalWidth > 7 / 5) {
-    heroMedia.classList.add('story-cover__media--capped');
+  if (heroMedia) {
+    const heightToWidth = image.naturalHeight / image.naturalWidth;
+    const widthToHeight = image.naturalWidth / image.naturalHeight;
+
+    heroMedia.classList.remove(
+      'story-cover__media--portrait-capped',
+      'story-cover__media--landscape-capped'
+    );
+
+    if (heightToWidth > 7 / 5) {
+      heroMedia.classList.add('story-cover__media--portrait-capped');
+    } else if (widthToHeight > 5 / 4) {
+      heroMedia.classList.add('story-cover__media--landscape-capped');
+    }
   }
 
   if (!image.hasAttribute('width')) {

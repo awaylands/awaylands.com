@@ -239,7 +239,6 @@ body.body--story {
   position: relative;
   overflow: hidden;
   align-self: start;
-  aspect-ratio: 5 / 7;
   min-height: 0;
   margin: 0;
   background: var(--story-cream);
@@ -249,23 +248,37 @@ body.body--story {
 .story-cover__media img {
   display: block;
   width: 100%;
+  height: auto;
+}
+
+.story-cover__media--portrait-capped,
+.story-cover__media--landscape-capped,
+.story-cover__media--portrait-capped img,
+.story-cover__media--landscape-capped img {
+  min-height: 0;
+}
+
+.story-cover__media--portrait-capped {
+  align-self: start;
+  aspect-ratio: 5 / 7;
+}
+
+.story-cover__media--landscape-capped {
+  align-self: start;
+  aspect-ratio: 5 / 4;
+}
+
+.story-cover__media--portrait-capped picture,
+.story-cover__media--landscape-capped picture,
+.story-cover__media--portrait-capped img,
+.story-cover__media--landscape-capped img {
   height: 100%;
 }
 
-.story-cover__media img {
-  min-height: 0;
+.story-cover__media--portrait-capped img,
+.story-cover__media--landscape-capped img {
   object-fit: cover;
   object-position: center center;
-}
-
-.story-cover__media--capped,
-.story-cover__media--capped img {
-  min-height: 0;
-}
-
-.story-cover__media--capped {
-  align-self: start;
-  aspect-ratio: 5 / 7;
 }
 
 .story-image-block,
