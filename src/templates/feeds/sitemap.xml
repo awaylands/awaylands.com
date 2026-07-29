@@ -12,10 +12,12 @@
   <url><loc>{{ siteUrl }}/destinations/</loc></url>
   <url><loc>{{ siteUrl }}/about/</loc></url>
 {% for category in categories.items %}
+  {% if category.title != "* Most Popular Posts *" %}
   <url>
     <loc>{{ siteUrl }}{{ category | route('category') }}/</loc>
     <lastmod>{{ category._updatedAt }}</lastmod>
   </url>
+  {% endif %}
 {% endfor %}
 {% for location in locations.items %}
   <url>

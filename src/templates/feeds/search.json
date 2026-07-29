@@ -1,5 +1,6 @@
       [
 {% for category in categories.items %}
+  {% if category.title != "* Most Popular Posts *" %}
   {
     "type": "category",
     "title": {{ category.title | dump | safe }},
@@ -9,6 +10,7 @@
     "dek": "",
     "image": ""
   },
+  {% endif %}
 {% endfor %}
 {% set storyPages = [stories1.items, stories2.items, stories3.items, stories4.items] %}
 {% for stories in storyPages %}

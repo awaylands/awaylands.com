@@ -21,8 +21,10 @@
   <li><span class="separator"></span></li>
   <li><a href="/search/">Search</a></li>
   {% for category in categories.categories %}
+  {% if category.title != "* Most Popular Posts *" %}
   <li><span class="separator"></span></li>
   <li><a href="{{ category | route('category') }}">{{ category.title | replace('Posts *', 'Posts *') }}</a></li>
+  {% endif %}
   {% endfor %}
 {% endblock %}
 
