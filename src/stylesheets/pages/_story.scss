@@ -1465,6 +1465,25 @@ body.body--story {
   color: var(--story-orange);
 }
 
+/* Image-caption links use a distinct white treatment with the site's small coral arrow. */
+.story-article__body figcaption a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.story-article__body figcaption a::after {
+  display: inline-block;
+  margin-left: 0.35em;
+  color: var(--story-orange);
+  content: '⟶';
+  font-size: 0.8em;
+}
+
+.story-article__body figcaption a:hover,
+.story-article__body figcaption a:focus-visible {
+  color: #fff;
+}
+
 .story-product-figure.story-figure--caption-overlay {
   border-bottom: 0;
   padding-bottom: 0 !important;

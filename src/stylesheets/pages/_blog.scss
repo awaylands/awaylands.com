@@ -3544,6 +3544,12 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   padding-top: clamp(6rem, 9vw, 12rem);
 }
 
+/* Give the final category module breathing room and a light editorial divider before the footer. */
+.category-latest {
+  border-bottom: 1px solid var(--category-line);
+  padding-bottom: clamp(8rem, 10vw, 14rem);
+}
+
 .category-section-heading {
   display: grid;
   gap: 2rem;
