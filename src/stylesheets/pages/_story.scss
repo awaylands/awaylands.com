@@ -238,7 +238,9 @@ body.body--story {
 .story-cover__media {
   position: relative;
   overflow: hidden;
-  min-height: 42rem;
+  align-self: start;
+  aspect-ratio: 5 / 7;
+  min-height: 0;
   margin: 0;
   background: var(--story-cream);
 }
@@ -251,7 +253,7 @@ body.body--story {
 }
 
 .story-cover__media img {
-  min-height: 42rem;
+  min-height: 0;
   object-fit: cover;
   object-position: center center;
 }
