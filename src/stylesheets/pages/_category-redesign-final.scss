@@ -306,6 +306,21 @@ body.body--category-hub .category-hub[data-category='travel-guides'] .category-d
   text-transform: uppercase;
 }
 
+/* Explore-more links sit at the lower-right edge of the destination image. */
+body.body--category-hub .category-destination-tile {
+  position: relative;
+}
+
+body.body--category-hub .category-destination-tile i {
+  position: absolute;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 2;
+  padding: 0;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
 .body--category-hub .category-hub__topics {
   position: relative;
   z-index: 2;
