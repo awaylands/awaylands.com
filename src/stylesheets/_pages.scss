@@ -8,3 +8,18 @@
 @import "pages/about";
 @import "pages/story";
 @import "pages/editorial-menu";
+
+/* Keep post titles consistently readable even when source content casing varies. */
+.story-cover__title,
+.related-stories__title,
+.bm-hero__copy h1,
+.bm-compact-story__copy strong,
+.bm-editor-card__copy strong,
+.bm-itinerary-card__copy strong,
+.bm-feature__copy h2,
+.category-feature-card__overlay strong,
+.category-shortlist-card__copy strong,
+.search-result__title,
+.listing__heading {
+  text-transform: capitalize;
+}
