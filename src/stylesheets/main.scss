@@ -27,6 +27,11 @@ a:visited {
   color: #0c889f;
 }
 
+.main a:not(.bm-category):not(.bm-feature > a):not(.bm-hero__lead):not(.category-feature-card > a):not(.category-beauty-hero a):not(.category-magazine-hero__story):not(.category-hub__hero-story):hover,
+.main a:not(.bm-category):not(.bm-feature > a):not(.bm-hero__lead):not(.category-feature-card > a):not(.category-beauty-hero a):not(.category-magazine-hero__story):not(.category-hub__hero-story):focus-visible {
+  color: #d84a3a;
+}
+
 #consumer-privacy-footer-wrapper {
   display: none !important;
 }
