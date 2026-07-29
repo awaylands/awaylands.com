@@ -388,7 +388,7 @@
       <span class="category-beauty-hero__copy">
         <small>{{ page.focusedHeroLabel or page.weddingFeatureLabel or "Reader Favorites" }}</small>
         <strong id="category-featured-story-title">{{ page.focusedHeroTitle or page.weddingFeatureTitle or featureHeroCard.title or featureHeroStory.title }}</strong>
-        {% if page.focusedHeroDescription %}<span>{{ page.focusedHeroDescription }}</span>{% endif %}
+        {% if page.focusedHeroDescription or featureHeroStory.tout.dek %}<span class="category-beauty-hero__description">{{ page.focusedHeroDescription or featureHeroStory.tout.dek }}</span>{% endif %}
         <i>{{ page.focusedHeroLinkText or featureHeroCard.linkText or "Read the Story" }} <span aria-hidden="true">⟶</span></i>
       </span>
     </a>
@@ -612,8 +612,9 @@
   </aside>{% endif %}
 
   <section class="category-latest category-latest--six" aria-labelledby="category-latest-title">
-    <header class="category-section-heading category-section-heading--compact">
-      <div><span class="category-kicker">09</span><h2 id="category-latest-title">Latest Stories</h2></div>
+    <header class="category-module-heading">
+      <p>The Newest</p>
+      <h2 id="category-latest-title">Latest Stories</h2>
     </header>
     <div class="category-latest__grid">
       {% for story in sortedStories %}

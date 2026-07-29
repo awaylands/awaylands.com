@@ -4228,10 +4228,10 @@ body.body--category-hub .category-beauty-hero__copy {
   min-height: clamp(34rem, 38vw, 52rem);
   width: min(136rem, calc(100% - 4rem));
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   margin-right: auto;
   margin-left: auto;
-  padding: clamp(3rem, 5vw, 6rem) 0 clamp(4rem, 6vw, 7rem);
+  padding: clamp(5rem, 8vw, 9rem) 0 clamp(4rem, 6vw, 7rem);
 }
 
 body.body--category-hub .category-beauty-hero__copy small,
@@ -4240,7 +4240,7 @@ body.body--category-hub .category-beauty-hero__copy i {
   font-family: Montserrat, Arial, sans-serif;
   font-style: normal;
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
@@ -4271,15 +4271,19 @@ body.body--category-hub .category-beauty-hero__copy strong {
 }
 
 body.body--category-hub .category-beauty-hero__copy > span {
-  max-width: 48rem;
-  margin-bottom: 1.8rem;
+  display: block;
+  max-width: 56rem;
+  margin: 0 0 1.8rem;
+  color: #fff;
+  font-family: 'Still EB Garamond', Georgia, serif;
   font-size: clamp(1.6rem, 1.6vw, 2rem);
   line-height: 1.4;
 }
 
 body.body--category-hub .category-beauty-hero__copy i {
+  margin-top: auto;
   align-self: flex-start;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 @media (max-width: 700px) {

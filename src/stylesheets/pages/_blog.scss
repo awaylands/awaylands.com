@@ -5,7 +5,7 @@
   --editorial-ink: #18201f;
   --editorial-blue: #166e78;
   --editorial-menu: #055967;
-  --editorial-link: #1179a5;
+  --editorial-link: #0c889f;
   --editorial-orange: #d84a3a;
   --editorial-paper: #f9f7f3;
 
@@ -3671,7 +3671,13 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
 }
 
 .category-latest--six .category-story-card__copy h3 {
+  color: var(--category-ink);
   font-size: clamp(2rem, 1.7vw, 3rem);
+}
+
+.category-latest--six .category-story-card a:hover h3,
+.category-latest--six .category-story-card a:focus h3 {
+  color: var(--category-ink);
 }
 
 .category-story-card__image {
