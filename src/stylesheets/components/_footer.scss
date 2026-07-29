@@ -4,7 +4,7 @@
   margin-top: 6.4rem;
   padding: 0;
   background: #055967;
-  color: #f5ece5;
+  color: #ffffff;
   font-family: 'Still EB Garamond', Georgia, serif;
 
   a {
@@ -21,7 +21,7 @@
 
   &__eyebrow,
   &__nav-heading {
-    color: #f5ece5;
+    color: #ffffff;
     font-family: Montserrat, Helvetica, sans-serif;
     font-size: 0.95rem;
     font-weight: 700;
@@ -57,7 +57,7 @@
     p {
       max-width: 35rem;
       margin-top: 1rem;
-      color: rgba(245, 236, 229, 0.82);
+      color: #ffffff;
       font-size: 1.4rem;
       line-height: 1.4;
     }
@@ -86,7 +86,7 @@
 
   &__nav-heading {
     margin-bottom: 0.8rem;
-    color: #f5ece5;
+    color: #ffffff;
   }
 
   &__nav-column,
@@ -199,7 +199,7 @@
     justify-content: space-between;
     gap: 1.2rem 2.4rem;
     padding-top: 1.6rem;
-    color: rgba(245, 236, 229, 0.76);
+    color: #ffffff;
     font-family: Montserrat, Helvetica, sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
@@ -300,7 +300,7 @@
   &__heading {
     display: block;
     margin-bottom: 0.2rem;
-    color: rgba(245, 236, 229, 0.72);
+    color: #ffffff;
     font-family: Montserrat, Helvetica, sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
@@ -468,4 +468,18 @@ body {
       grid-template-columns: repeat(6, minmax(0, 1fr));
     }
   }
+}
+
+/* Footer copy stays white even if the global link color changes later. */
+.page-footer,
+.page-footer p,
+.page-footer span,
+.page-footer h2,
+.page-footer h3,
+.page-footer a,
+.page-footer a:visited,
+.page-footer a:hover,
+.page-footer a:focus,
+.page-footer a:active {
+  color: #ffffff !important;
 }
