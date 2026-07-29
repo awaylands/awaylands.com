@@ -10,6 +10,8 @@
     "updatedAt": {{ story._updatedAt | dump | safe }},
     "enabledAt": {{ story._enabledAt | dump | safe }},
     "category": {% if story.category.length %}{{ story.category[0].title | dump | safe }}{% else %}"Away Lands"{% endif %},
+    "location": {% if story.location.length %}{{ story.location[0].title | dump | safe }}{% else %}""{% endif %},
+    "continent": {% if story.continent.length %}{{ story.continent[0].name | dump | safe }}{% else %}""{% endif %},
     "socialTitle": {% if story.social.title %}{{ story.social.title | dump | safe }}{% else %}""{% endif %},
     "image": {% if story.tout.image.path %}{{ (story.tout.image.path | image({w: 960, auto: 'compress,format'})) | dump | safe }}{% else %}""{% endif %}
   }

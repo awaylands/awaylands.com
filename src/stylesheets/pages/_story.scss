@@ -1189,6 +1189,31 @@ body.body--story {
   text-transform: uppercase;
 }
 
+.story-cover__see-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1.4rem;
+  margin-top: 2.4rem;
+  color: var(--story-muted);
+  font-family: Montserrat, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.story-cover__see-more a {
+  color: var(--story-link);
+  text-decoration: none;
+}
+
+.story-cover__see-more a + a:before {
+  content: '/';
+  margin-right: 1.4rem;
+  color: var(--story-orange);
+}
+
 .story-category-nav a {
   color: var(--story-orange);
   text-decoration: none;

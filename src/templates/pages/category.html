@@ -611,5 +611,26 @@
     </nav>
   </aside>{% endif %}
 
+  <section class="category-latest category-latest--six" aria-labelledby="category-latest-title">
+    <header class="category-section-heading category-section-heading--compact">
+      <div><span class="category-kicker">09</span><h2 id="category-latest-title">Latest Stories</h2></div>
+    </header>
+    <div class="category-latest__grid">
+      {% for story in sortedStories %}
+      {% if loop.index <= 6 %}
+      <article class="category-story-card">
+        <a href="{{ storyUrl(story) }}">
+          <span class="category-story-card__image">{{ storyImage(story, '(min-width: 1200px) 16vw, (min-width: 700px) 33vw, 50vw', false) }}</span>
+          <span class="category-story-card__copy">
+            {% if story.category.length %}<small>{{ story.category[0].title }}</small>{% endif %}
+            <h3>{{ story.title }}</h3>
+          </span>
+        </a>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+
 </div>
 {% endblock %}

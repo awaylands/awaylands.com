@@ -98,6 +98,17 @@ query {
       tout { image { path } }
     }
   }
+  fallbackAutoStories: getStoryList(size: 100, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      _status
+      _enabledAt
+      title
+      slug
+      social { title }
+      category { title }
+      tout { image { path } }
+    }
+  }
   archiveStories: getStoryList(size: 32, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName

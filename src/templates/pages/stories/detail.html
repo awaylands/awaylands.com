@@ -259,6 +259,9 @@
   data-story-page
   data-story-type="{{ storyType }}"
   data-page-layout="{{ pageLayout }}"
+  data-story-category="{% if page.category.length %}{{ page.category[0].title | escape }}{% endif %}"
+  data-story-location="{% if page.location.length %}{{ page.location[0].title | escape }}{% endif %}"
+  data-story-continent="{% if page.continent.length %}{{ page.continent[0].name | escape }}{% endif %}"
   {% if page.atAGlance and page.atAGlance.kicker %}data-at-a-glance-kicker="{{ page.atAGlance.kicker | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.title %}data-at-a-glance-title="{{ page.atAGlance.title | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.summary %}data-at-a-glance-summary="{{ page.atAGlance.summary | escape }}"{% endif %}
@@ -338,6 +341,15 @@
         <time class="story-cover__updated" datetime="{{ storyModifiedDate }}">Updated {{ storyModifiedDate | date("MMMM D, YYYY") }}</time>
         {% endif %}
       </div>
+
+      {% if page.category.length or page.location.length or page.continent.length %}
+      <nav class="story-cover__see-more" aria-label="See more Away Lands guides">
+        <span>See more in</span>
+        {% for category in page.category %}<a href="{{ category | route('category') }}">{{ category.title }}</a>{% endfor %}
+        {% if page.location.length %}<a href="{{ page.location[0] | route('location') }}">{{ page.location[0].title }}</a>{% endif %}
+        {% if page.continent.length %}<a href="{{ page.continent[0] | route('continent') }}">{{ page.continent[0].name }}</a>{% endif %}
+      </nav>
+      {% endif %}
 
     </div>
 
@@ -464,21 +476,6 @@
         <strong><a href="/about">Amy Seder</a></strong>
       </footer>
 
-      {% if page.category.length or page.location.length or page.continent.length %}
-      <nav class="story-category-nav" aria-label="Explore related Away Lands guides">
-        <span>Explore more in</span>
-        {% for category in page.category %}
-        <a href="{{ category | route('category') }}">{{ category.title }}</a>
-        {% endfor %}
-        {% if page.location.length %}
-        <a href="{{ page.location[0] | route('location') }}">{{ page.location[0].title }}</a>
-        {% endif %}
-        {% if page.continent.length %}
-        <a href="{{ page.continent[0] | route('continent') }}">{{ page.continent[0].name }}</a>
-        {% endif %}
-      </nav>
-      {% endif %}
-
     </div>
   </div>
 
@@ -502,35 +499,9 @@
             {% endif %}
             {% endfor %}
 
-            {% if shouldAutofillRelatedStories %}
-              {% for category in featuredCategories.items %}
-              {% if category.title == "* Most Popular Posts *" %}
-                {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
-                {% set matchesCategory = page.category.length and story.category.length and story.category[0].title == page.category[0].title %}
-                {% set matchesLocation = page.location.length and story.location.length and story.location[0].title == page.location[0].title %}
-                {% if (story.isImportant != false or not hasImportantAutoPosts) and story.title != page.title and (matchesCategory or matchesLocation) %}
-                  {{ renderRelatedStory(story) }}
-                {% endif %}
-                {% endfor %}
-                {# While no posts are curated, fill any remaining slots from the
-                   complete Most Popular set after the relevant matches above. #}
-                {% if not hasImportantAutoPosts %}
-                  {% for story in category.storySet.items | sort(true, true, "_enabledAt") %}
-                    {% if story.title != page.title %}
-                      {{ renderRelatedStory(story) }}
-                    {% endif %}
-                  {% endfor %}
-                {% endif %}
-              {% endif %}
-              {% endfor %}
-            {% endif %}
-
             {% if page.location.length %}
               {% for story in page.location[0].storySet.items %}
-              {% if story.isImportant != false and story.title != page.title
-                and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
-                and (page.relatedStories.length < 2 or story.title != page.relatedStories[1].title)
-                and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
+              {% if story.title != page.title %}
                 {{ renderRelatedStory(story) }}
               {% endif %}
               {% endfor %}
@@ -538,19 +509,22 @@
 
             {% if page.category.length %}
               {% for story in page.category[0].storySet.items %}
-              {% if story.isImportant != false and story.title != page.title
-                and (not page.relatedStories.length or story.title != page.relatedStories[0].title)
-                and (page.relatedStories.length < 2 or story.title != page.relatedStories[1].title)
-                and (page.relatedStories.length < 3 or story.title != page.relatedStories[2].title) %}
+              {% if story.title != page.title %}
                 {{ renderRelatedStory(story) }}
               {% endif %}
+              {% endfor %}
+            {% endif %}
+
+            {% if page.continent.length %}
+              {% for story in page.continent[0].storySet.items %}
+              {% if story.title != page.title %}{{ renderRelatedStory(story) }}{% endif %}
               {% endfor %}
             {% endif %}
 
             {# Once posts are checked Important, use that complete curated set as
                the universal fallback. Until then the Most Popular collection
                above remains the automatic source. #}
-            {% for story in importantAutoStories.items %}
+            {% for story in fallbackAutoStories.items %}
               {% if story.title != page.title %}
                 {{ renderRelatedStory(story) }}
               {% endif %}

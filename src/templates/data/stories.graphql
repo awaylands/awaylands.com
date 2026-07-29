@@ -85,6 +85,22 @@ query($images: TSImagesConfig) {
           }
         }
       }
+      continent {
+        name
+        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+          items {
+            _contentTypeName
+            _status
+            _enabledAt
+            isImportant
+            title
+            slug
+            category { title }
+            social { title }
+            tout { image { path } }
+          }
+        }
+      }
       contentHtml(images: $images)
       extraContentBlocks {
         contentHtml(images: $images)

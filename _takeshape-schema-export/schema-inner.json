@@ -1547,15 +1547,15 @@
           },
           "featuredLabel": {
             "widget": "singleLineText",
-            "title": "Start Here - Kicker"
+            "title": "Recommended Reading - Kicker"
           },
           "featuredTitle": {
             "widget": "singleLineText",
-            "title": "Start Here - Section Title"
+            "title": "Recommended Reading - Section Title"
           },
           "featuredDescription": {
             "widget": "paragraphText",
-            "title": "Start Here - Intro Text"
+            "title": "Recommended Reading - Intro Text"
           },
           "destinationsLabel": {
             "widget": "singleLineText",
@@ -1676,7 +1676,7 @@
           "featuredCards": {
             "widget": "shapeList",
             "collapseByDefault": true,
-            "title": "Start Here - Image, Text, and Link Cards"
+            "title": "Recommended Reading - Image, Text, and Link Cards"
           },
           "destinationCards": {
             "widget": "shapeList",
@@ -1803,7 +1803,7 @@
           },
           "featuredBackgroundImage": {
             "widget": "image",
-            "title": "Start Here - Background Image"
+            "title": "Recommended Reading - Background Image"
           },
           "updatedBackgroundImage": {
             "widget": "image",
@@ -7913,19 +7913,19 @@
           },
           "featuredLabel": {
             "type": "string",
-            "title": "Start Here - Kicker",
+            "title": "Recommended Reading - Kicker",
             "minLength": 0,
             "@mapping": "shapedb:Category.CategoryFeaturedLabelV2"
           },
           "featuredTitle": {
             "type": "string",
-            "title": "Start Here - Section Title",
+            "title": "Recommended Reading - Section Title",
             "minLength": 0,
             "@mapping": "shapedb:Category.CategoryFeaturedTitleV2"
           },
           "featuredDescription": {
             "type": "string",
-            "title": "Start Here - Intro Text",
+            "title": "Recommended Reading - Intro Text",
             "minLength": 0,
             "@mapping": "shapedb:Category.CategoryFeaturedDescriptionV2"
           },
@@ -8459,7 +8459,7 @@
           },
           "featuredCards": {
             "type": "array",
-            "title": "Start Here - Image, Text, and Link Cards",
+            "title": "Recommended Reading - Image, Text, and Link Cards",
             "items": {
               "$ref": "#/shapes/CategoryPageCard/schema"
             },
@@ -8712,7 +8712,7 @@
             "@mapping": "shapedb:Category.ExpertiseLink2UrlV1"
           },
           "featuredBackgroundImage": {
-            "title": "Start Here - Background Image",
+            "title": "Recommended Reading - Background Image",
             "@ref": "local:Asset",
             "@mapping": "shapedb:Category.FeaturedBackgroundImageV1",
             "@input": {

@@ -1676,6 +1676,19 @@ function fillRelatedStoryCandidates(storyPage) {
   }
 
   const currentPath = window.location.pathname.replace(/\/$/, '').toLowerCase();
+  const currentCategory = (storyPage.getAttribute('data-story-category') || '').toLowerCase();
+  const currentLocation = (storyPage.getAttribute('data-story-location') || '').toLowerCase();
+  const currentContinent = (storyPage.getAttribute('data-story-continent') || '').toLowerCase();
+
+  const relatedPriority = story => {
+    const category = String(story.category || '').toLowerCase();
+    const location = String(story.location || '').toLowerCase();
+    const continent = String(story.continent || '').toLowerCase();
+    if (currentLocation && location === currentLocation) return 0;
+    if (currentCategory && category === currentCategory) return 1;
+    if (currentContinent && continent === currentContinent) return 2;
+    return 3;
+  };
 
   storyPage._relatedStoryFallbackPromise = fetch('/story-titles.json')
     .then(response => {
@@ -1695,7 +1708,7 @@ function fillRelatedStoryCandidates(storyPage) {
           story.url &&
           story.image
         ))
-        .sort((first, second) => new Date(second.enabledAt) - new Date(first.enabledAt))
+        .sort((first, second) => relatedPriority(first) - relatedPriority(second) || new Date(second.enabledAt) - new Date(first.enabledAt))
         .some(story => {
           const url = String(story.url || '').replace(/\/$/, '');
           const key = url.toLowerCase();

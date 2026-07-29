@@ -3665,6 +3665,15 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   gap: 4.5rem 2rem;
 }
 
+.category-latest--six .category-latest__grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 2rem;
+}
+
+.category-latest--six .category-story-card__copy h3 {
+  font-size: clamp(2rem, 1.7vw, 3rem);
+}
+
 .category-story-card__image {
   aspect-ratio: 4 / 5;
 }
@@ -3766,6 +3775,11 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   .category-best__grid,
   .category-latest__grid {
     gap: 3rem;
+  }
+
+  .category-latest--six .category-latest__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem 1.4rem;
   }
 
   .category-story-card > a {
