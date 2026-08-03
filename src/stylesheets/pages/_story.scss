@@ -1238,6 +1238,8 @@ body.body--story {
   width: 100%;
   max-width: none;
   height: auto;
+  aspect-ratio: auto;
+  object-fit: contain;
   margin: 0;
 }
 
@@ -1275,6 +1277,7 @@ body.body--story {
 .story-gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   gap: 1rem;
   max-width: 105rem;
   margin: 0 auto 5.4rem;
@@ -1380,15 +1383,16 @@ body.body--story {
 .story-gallery figure.large {
   width: auto !important;
   max-width: none;
-  height: 100%;
+  height: auto;
   margin: 0 !important;
 }
 
 .story-gallery figure img {
   width: 100%;
-  height: 100%;
-  min-height: 32rem;
-  object-fit: cover;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: auto;
+  object-fit: contain;
 }
 
 .story-gallery--products figure,
@@ -2269,7 +2273,7 @@ body.body--story {
   }
 
   .story-gallery figure img {
-    min-height: 22rem;
+    min-height: 0;
   }
 
   .story-gallery--medium-pair figure img,
