@@ -123,7 +123,7 @@
   {% endif %}
 {% endmacro %}
 
-{% macro renderRelatedStory(story) %}
+{% macro renderRelatedStory(story, isManual) %}
   {% if story.slug %}
     {% set relatedStoryPath = story | route('storySlug') %}
   {% else %}
@@ -133,7 +133,10 @@
     and story.slug != "traveling-with-your-dog-essential-health-tips-for-every-pet-parent"
     and story.title != "Traveling with Your Dog: Essential Health Tips for Every Pet Parent"
     and relatedStoryPath != "/story/traveling-with-your-dog-essential-health-tips-for-every-pet-parent" %}
-  <li data-related-important="{% if story.isImportant == true %}true{% else %}false{% endif %}">
+  <li
+    data-related-important="{% if story.isImportant == true %}true{% else %}false{% endif %}"
+    data-related-manual="{% if isManual %}true{% else %}false{% endif %}"
+  >
     <a href="{{ relatedStoryPath }}">
       <div class="related-stories__image">
         {{ image(story.tout.image.path, [480, 720, 960], ["(min-width: 900px) 30vw", "100vw"], "", story.title) }}
@@ -262,6 +265,9 @@
   data-story-category="{% if page.category.length %}{{ page.category[0].title | escape }}{% endif %}"
   data-story-location="{% if page.location.length %}{{ page.location[0].title | escape }}{% endif %}"
   data-story-continent="{% if page.continent.length %}{{ page.continent[0].name | escape }}{% endif %}"
+  data-story-categories="{% for category in page.category %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}"
+  data-story-locations="{% for location in page.location %}{% if not loop.first %}|{% endif %}{{ location.title | escape }}{% endfor %}"
+  data-story-continents="{% for continent in page.continent %}{% if not loop.first %}|{% endif %}{{ continent.name | escape }}{% endfor %}"
   {% if page.atAGlance and page.atAGlance.kicker %}data-at-a-glance-kicker="{{ page.atAGlance.kicker | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.title %}data-at-a-glance-title="{{ page.atAGlance.title | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.summary %}data-at-a-glance-summary="{{ page.atAGlance.summary | escape }}"{% endif %}
@@ -481,7 +487,7 @@
 
       <div class="story-article__modules">
         {% set hasManualRelatedStories = page.relatedStories.length %}
-        {% set shouldAutofillRelatedStories = page.relatedStories.length < 6 %}
+        {% set shouldAutofillRelatedStories = page.relatedStories.length < 3 %}
         {% set hasAutoRelatedStories = shouldAutofillRelatedStories %}
         {% set hasImportantAutoPosts = importantAutoStories.total > 0 %}
 
@@ -495,7 +501,7 @@
               and story.slug != "traveling-with-your-dog-essential-health-tips-for-every-pet-parent"
               and story.title != "Traveling with Your Dog: Essential Health Tips for Every Pet Parent"
               and story.title != page.title %}
-              {{ renderRelatedStory(story) }}
+              {{ renderRelatedStory(story, true) }}
             {% endif %}
             {% endfor %}
 

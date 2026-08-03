@@ -1668,17 +1668,22 @@ function finalizeRelatedStories(storyPage) {
     return;
   }
 
-  items.sort((first, second) => (
-    Number(second.getAttribute('data-related-important') === 'true') -
-    Number(first.getAttribute('data-related-important') === 'true')
-  ));
+  items.sort((first, second) => {
+    const firstIsManual = first.getAttribute('data-related-manual') === 'true';
+    const secondIsManual = second.getAttribute('data-related-manual') === 'true';
+    const manualDifference = Number(secondIsManual) - Number(firstIsManual);
+    const importantDifference = Number(second.getAttribute('data-related-important') === 'true') -
+      Number(first.getAttribute('data-related-important') === 'true');
+    const originalOrder = items.indexOf(first) - items.indexOf(second);
+    return manualDifference || (firstIsManual && secondIsManual ? originalOrder : importantDifference || originalOrder);
+  });
   items.forEach(item => list.appendChild(item));
 
   Array.prototype.forEach.call(items, item => {
     const link = item.querySelector('a[href]');
     const key = link && (link.getAttribute('href') || link.textContent || '').trim().toLowerCase();
 
-    if (!key || used[key] || kept >= 6) {
+    if (!key || used[key] || kept >= 3) {
       item.parentNode.removeChild(item);
       return;
     }
@@ -1706,27 +1711,91 @@ function fillRelatedStoryCandidates(storyPage) {
     return Promise.resolve();
   }
 
-  const existingUrls = {};
-  Array.prototype.forEach.call(list.querySelectorAll('a[href]'), link => {
-    existingUrls[(link.getAttribute('href') || '').trim().toLowerCase()] = true;
-  });
+  const currentPath = window.location.pathname.replace(/\/$/, '').toLowerCase();
+  const manualItems = Array.prototype.slice.call(list.querySelectorAll('[data-related-manual="true"]'));
+  const manualUrls = manualItems.reduce((urls, item) => {
+    const link = item.querySelector('a[href]');
+    const url = link && String(link.getAttribute('href') || '').replace(/\/$/, '').toLowerCase();
+    if (url) {
+      urls[url] = true;
+    }
+    return urls;
+  }, {});
+  const remainingSlots = Math.max(0, 3 - manualItems.length);
 
-  if (Object.keys(existingUrls).length >= 6) {
+  if (!remainingSlots) {
+    while (list.firstChild) {
+      list.removeChild(list.firstChild);
+    }
+    manualItems.slice(0, 3).forEach(item => list.appendChild(item));
     return Promise.resolve();
   }
 
-  const currentPath = window.location.pathname.replace(/\/$/, '').toLowerCase();
-  const currentCategory = (storyPage.getAttribute('data-story-category') || '').toLowerCase();
-  const currentLocation = (storyPage.getAttribute('data-story-location') || '').toLowerCase();
-  const currentContinent = (storyPage.getAttribute('data-story-continent') || '').toLowerCase();
+  const normalizedTags = (value, fallback) => (value || fallback || '')
+    .split('|')
+    .map(tag => tag.trim().toLowerCase())
+    .filter(Boolean);
+  const currentCategories = normalizedTags(
+    storyPage.getAttribute('data-story-categories'),
+    storyPage.getAttribute('data-story-category')
+  );
+  const currentLocations = normalizedTags(
+    storyPage.getAttribute('data-story-locations'),
+    storyPage.getAttribute('data-story-location')
+  );
+  const currentContinents = normalizedTags(
+    storyPage.getAttribute('data-story-continents'),
+    storyPage.getAttribute('data-story-continent')
+  );
+
+  const storyTags = (story, pluralKey, singularKey) => {
+    const values = Array.isArray(story[pluralKey]) ? story[pluralKey] : [story[singularKey]];
+    return values.map(value => String(value || '').trim().toLowerCase()).filter(Boolean);
+  };
+
+  const sharesTag = (currentTags, storyTagList) => currentTags.some(tag => storyTagList.indexOf(tag) !== -1);
 
   const relatedPriority = story => {
-    const category = String(story.category || '').toLowerCase();
-    const location = String(story.location || '').toLowerCase();
-    const continent = String(story.continent || '').toLowerCase();
-    if (currentLocation && location === currentLocation) return 0;
-    if (currentCategory && category === currentCategory) return 1;
-    if (currentContinent && continent === currentContinent) return 2;
+    const sameCategory = sharesTag(currentCategories, storyTags(story, 'categories', 'category'));
+    const sameLocation = sharesTag(currentLocations, storyTags(story, 'locations', 'location'));
+    const sameContinent = sharesTag(currentContinents, storyTags(story, 'continents', 'continent'));
+
+    if (story.isImportant === true && sameLocation) {
+      return 1;
+    }
+    if (story.isImportant === true && sameCategory) {
+      return 2;
+    }
+    if (story.isImportant === true && sameContinent) {
+      return 3;
+    }
+    if (sameLocation) {
+      return 4;
+    }
+    if (sameContinent) {
+      return 5;
+    }
+    if (sameCategory) {
+      return 6;
+    }
+    return 7;
+  };
+
+  const locationTopicPriority = story => {
+    const title = String(story.title || '').toLowerCase();
+    const category = storyTags(story, 'categories', 'category').join(' ');
+    if (/pack(?:ing)?|what to (?:pack|wear)|outfit|wardrobe/.test(`${title} ${category}`)) {
+      return 0;
+    }
+    if (/travel guide|complete guide|guide to|itinerary|things to do|where to stay/.test(title)) {
+      return 1;
+    }
+    if (/beach/.test(`${title} ${category}`)) {
+      return 2;
+    }
+    if (/travel guide/.test(category)) {
+      return 1;
+    }
     return 3;
   };
 
@@ -1738,7 +1807,7 @@ function fillRelatedStoryCandidates(storyPage) {
       return response.json();
     })
     .then(stories => {
-      stories
+      const selectedStories = stories
         .filter(story => (
           story &&
           story.status !== 'disabled' &&
@@ -1746,70 +1815,78 @@ function fillRelatedStoryCandidates(storyPage) {
           story.enabledAt &&
           story.title &&
           story.url &&
-          story.image
+          story.image &&
+          relatedPriority(story) <= 6
         ))
         .sort((first, second) => {
-          const importantDifference = Number(second.isImportant === true) - Number(first.isImportant === true);
-          return importantDifference || relatedPriority(first) - relatedPriority(second) || new Date(second.enabledAt) - new Date(first.enabledAt);
+          const priorityDifference = relatedPriority(first) - relatedPriority(second);
+          const topicDifference = relatedPriority(first) === 1 && relatedPriority(second) === 1 ?
+            locationTopicPriority(first) - locationTopicPriority(second) :
+            0;
+          return priorityDifference || topicDifference || new Date(second.enabledAt) - new Date(first.enabledAt);
         })
-        .some(story => {
-          const url = String(story.url || '').replace(/\/$/, '');
-          const key = url.toLowerCase();
+        .filter(story => {
+          const url = String(story.url || '').replace(/\/$/, '').toLowerCase();
+          return url !== currentPath && !manualUrls[url];
+        })
+        .slice(0, remainingSlots);
 
-          if (!key || key === currentPath || existingUrls[key]) {
-            return false;
-          }
+      while (list.firstChild) {
+        list.removeChild(list.firstChild);
+      }
+      manualItems.forEach(item => list.appendChild(item));
 
-          const item = document.createElement('li');
-          const link = document.createElement('a');
-          const media = document.createElement('div');
-          const image = document.createElement('img');
-          const copy = document.createElement('div');
-          const category = document.createElement('p');
-          const meta = document.createElement('p');
-          const readMore = document.createElement('span');
-          const date = document.createElement('time');
-          const title = document.createElement('h3');
+      selectedStories.forEach(story => {
+        const url = String(story.url || '').replace(/\/$/, '');
 
-          item.setAttribute('data-related-important', story.isImportant === true ? 'true' : 'false');
-          link.href = url;
-          media.className = 'related-stories__image';
-          image.src = story.image;
-          image.alt = story.title;
-          image.loading = 'lazy';
-          image.decoding = 'async';
-          copy.className = 'related-stories__copy';
-          category.className = 'related-stories__category';
-          category.textContent = story.category || 'Away Lands';
-          meta.className = 'related-stories__meta';
-          readMore.textContent = 'Read More';
-          date.className = 'related-stories__date';
-          date.dateTime = story.enabledAt;
-          date.textContent = new Date(story.enabledAt).toLocaleDateString('en-US', {
-            month: 'long',
-            day: 'numeric',
-            year: 'numeric'
-          });
-          title.className = 'related-stories__title';
-          title.textContent = story.title;
-          if (story.socialTitle) {
-            title.setAttribute('data-sidebar-title', story.socialTitle);
-          }
+        const item = document.createElement('li');
+        const link = document.createElement('a');
+        const media = document.createElement('div');
+        const image = document.createElement('img');
+        const copy = document.createElement('div');
+        const category = document.createElement('p');
+        const meta = document.createElement('p');
+        const readMore = document.createElement('span');
+        const date = document.createElement('time');
+        const title = document.createElement('h3');
 
-          media.appendChild(image);
-          copy.appendChild(category);
-          copy.appendChild(title);
-          meta.appendChild(readMore);
-          meta.appendChild(date);
-          copy.appendChild(meta);
-          link.appendChild(media);
-          link.appendChild(copy);
-          item.appendChild(link);
-          list.appendChild(item);
-          existingUrls[key] = true;
-
-          return Object.keys(existingUrls).length >= 6;
+        item.setAttribute('data-related-important', story.isImportant === true ? 'true' : 'false');
+        item.setAttribute('data-related-manual', 'false');
+        link.href = url;
+        media.className = 'related-stories__image';
+        image.src = story.image;
+        image.alt = story.title;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        copy.className = 'related-stories__copy';
+        category.className = 'related-stories__category';
+        category.textContent = story.category || 'Away Lands';
+        meta.className = 'related-stories__meta';
+        readMore.textContent = 'Read More';
+        date.className = 'related-stories__date';
+        date.dateTime = story.enabledAt;
+        date.textContent = new Date(story.enabledAt).toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
         });
+        title.className = 'related-stories__title';
+        title.textContent = story.title;
+        if (story.socialTitle) {
+          title.setAttribute('data-sidebar-title', story.socialTitle);
+        }
+
+        media.appendChild(image);
+        copy.appendChild(category);
+        copy.appendChild(title);
+        meta.appendChild(readMore);
+        meta.appendChild(date);
+        copy.appendChild(meta);
+        link.appendChild(media);
+        link.appendChild(copy);
+        item.appendChild(link);
+        list.appendChild(item);
+      });
     })
     .catch(() => undefined);
 
