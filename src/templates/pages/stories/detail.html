@@ -133,7 +133,7 @@
     and story.slug != "traveling-with-your-dog-essential-health-tips-for-every-pet-parent"
     and story.title != "Traveling with Your Dog: Essential Health Tips for Every Pet Parent"
     and relatedStoryPath != "/story/traveling-with-your-dog-essential-health-tips-for-every-pet-parent" %}
-  <li>
+  <li data-related-important="{% if story.isImportant == true %}true{% else %}false{% endif %}">
     <a href="{{ relatedStoryPath }}">
       <div class="related-stories__image">
         {{ image(story.tout.image.path, [480, 720, 960], ["(min-width: 900px) 30vw", "100vw"], "", story.title) }}

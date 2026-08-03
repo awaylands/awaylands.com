@@ -8,6 +8,7 @@
   --story-deep-blue: #0e4855;
   --story-orange: #d84a3a;
   --story-yellow: #fffbd8;
+  --story-shell-max: 100%;
 
   padding-top: 6rem;
   background: var(--story-paper);
@@ -143,7 +144,7 @@ body.body--story {
 
 .story-cover {
   display: grid;
-  max-width: 168rem;
+  max-width: var(--story-shell-max);
   margin: 0 auto;
   padding: 1.2rem 2rem 2.4rem;
 }
@@ -340,7 +341,7 @@ body.body--story {
 .story-rule {
   display: flex;
   justify-content: space-between;
-  max-width: 168rem;
+  max-width: var(--story-shell-max);
   margin: 0 auto;
   border-top: 1px solid rgba(22, 110, 120, 0.2);
   border-bottom: 1px solid rgba(22, 110, 120, 0.2);
@@ -358,7 +359,7 @@ body.body--story {
 .story-layout {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  max-width: 158rem;
+  max-width: var(--story-shell-max);
   margin: 0 auto;
   padding: 4rem 2rem 9rem;
 }
@@ -1996,10 +1997,14 @@ body.body--story {
 }
 
 @include for-tablet-landscape-up {
+  .body--story {
+    --story-shell-max: min(144rem, calc(100% - 12rem));
+  }
+
   .story-cover {
     grid-template-columns: minmax(38rem, 1fr) minmax(0, 1fr);
     gap: 1.2rem;
-    min-height: 64rem;
+    align-items: center;
     padding-top: 2rem;
     padding-bottom: 3.2rem;
   }
@@ -2018,6 +2023,10 @@ body.body--story {
 
   .story-page--style-shopping .story-cover {
     grid-template-columns: minmax(46rem, 1.08fr) minmax(0, 0.92fr);
+  }
+
+  .story-cover__media {
+    align-self: center;
   }
 
   .story-page--style-shopping .story-cover__title {

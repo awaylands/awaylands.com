@@ -105,23 +105,13 @@ requireText(
 );
 requireText(
   mediavinePartial,
-  /sidebar_atf_selector\s*=\s*'\.story-mediavine-sidebar'/,
+  /sidebar_atf_selector\s*=\s*'\.story-mediavine-sidebar-atf'/,
   'Mediavine ATF sidebar selector is missing or changed.'
 );
 requireText(
   mediavinePartial,
-  /sidebar_atf_position\s*=\s*'afterbegin'/,
-  'Mediavine ATF sidebar position is not configured at the top.'
-);
-requireText(
-  mediavinePartial,
-  /sidebar_btf_selector\s*=\s*'\.story-mediavine-sidebar'/,
+  /sidebar_btf_selector\s*=\s*'\.story-mediavine-sidebar-btf'/,
   'Mediavine BTF sidebar selector is missing or changed.'
-);
-requireText(
-  mediavinePartial,
-  /sidebar_btf_position\s*=\s*'beforeend'/,
-  'Mediavine BTF sidebar position is not configured at the bottom.'
 );
 if ((mediavinePartial.match(/scripts\.mediavine\.com\/tags\/away-lands\.js/g) || []).length !== 1) {
   fail('the Mediavine wrapper must appear exactly once in its partial.');
@@ -160,7 +150,7 @@ const storyPages = fs.readdirSync(storyBuildRoot)
   .filter(file => fs.existsSync(file));
 storyPages.forEach(file => {
   const html = fs.readFileSync(file, 'utf8');
-  if (!/story-page/.test(html)) {
+  if (!/<div class="story-article__body"/.test(html)) {
     return;
   }
   if ((html.match(/scripts\.mediavine\.com\/tags\/away-lands\.js/g) || []).length !== 1) {
@@ -171,8 +161,10 @@ storyPages.forEach(file => {
       fail(`story page is missing the Mediavine ${key}: ${path.relative(root, file)}.`);
     }
   });
-  if (html.indexOf('story-mediavine-sidebar-atf') > html.indexOf('data-story-toc') ||
-      html.indexOf('story-mediavine-sidebar-btf') < html.indexOf('data-story-toc')) {
+  const renderedAtf = html.indexOf('<div class="story-mediavine-sidebar-atf"');
+  const renderedToc = html.indexOf('data-story-toc');
+  const renderedBtf = html.indexOf('<div class="story-mediavine-sidebar-btf"');
+  if (renderedAtf < 0 || renderedToc < 0 || renderedBtf < 0 || renderedAtf > renderedToc || renderedBtf < renderedToc) {
     fail(`story sidebar target order is broken: ${path.relative(root, file)}.`);
   }
 });

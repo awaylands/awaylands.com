@@ -1642,9 +1642,20 @@ function finalizeRelatedStories(storyPage) {
     return;
   }
 
-  const items = storyPage.querySelectorAll('.story-article__modules .related-stories__list > li');
+  const list = storyPage.querySelector('.story-article__modules .related-stories__list');
+  const items = list && Array.prototype.slice.call(list.children);
   const used = {};
   let kept = 0;
+
+  if (!items) {
+    return;
+  }
+
+  items.sort((first, second) => (
+    Number(second.getAttribute('data-related-important') === 'true') -
+    Number(first.getAttribute('data-related-important') === 'true')
+  ));
+  items.forEach(item => list.appendChild(item));
 
   Array.prototype.forEach.call(items, item => {
     const link = item.querySelector('a[href]');
@@ -1720,7 +1731,10 @@ function fillRelatedStoryCandidates(storyPage) {
           story.url &&
           story.image
         ))
-        .sort((first, second) => relatedPriority(first) - relatedPriority(second) || new Date(second.enabledAt) - new Date(first.enabledAt))
+        .sort((first, second) => {
+          const importantDifference = Number(second.isImportant === true) - Number(first.isImportant === true);
+          return importantDifference || relatedPriority(first) - relatedPriority(second) || new Date(second.enabledAt) - new Date(first.enabledAt);
+        })
         .some(story => {
           const url = String(story.url || '').replace(/\/$/, '');
           const key = url.toLowerCase();
@@ -1740,6 +1754,7 @@ function fillRelatedStoryCandidates(storyPage) {
           const date = document.createElement('time');
           const title = document.createElement('h3');
 
+          item.setAttribute('data-related-important', story.isImportant === true ? 'true' : 'false');
           link.href = url;
           media.className = 'related-stories__image';
           image.src = story.image;
