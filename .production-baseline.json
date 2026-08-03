@@ -38,7 +38,7 @@
     "src/stylesheets/pages/_story.scss": "6afe31e9fcb7c48a48496cd7e5fca3700c5d0f04fe0f8eeb2d4295c8f7448c61",
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
-    "src/javascripts/directives/story.js": "c479fb2166bad9b1bc2527d9e3ac86c7b446976bcf6567600ce078f59bfd6cd1",
+    "src/javascripts/directives/story.js": "8512cfa6755684f5d01cfa7e2b651ecbe098a5e24b81623d45ec84d6286272f5",
     "_takeshape-schema-export/schema.json": "98b863091432870d4dfe3e0a6f8b678fd40b2cdacdd8a3192b7af236611de234",
     "_takeshape-schema-export/schema-inner.json": "1096ceb86d7c663abed0bb0a412424c830b665a2028a5f1c2ba5407314057bde",
     "tsg.yml": "b9141f749b8c1b5ef7920ee4f897351c3dd18471f82006cf68294ab69311da4e",

@@ -407,7 +407,17 @@ function linkImagesFromLinkedCaptions(el) {
 
 function optimizeStoryImages(el) {
   const images = el.querySelectorAll('img');
-  const hasStoryHero = Boolean(document.querySelector('[data-story-hero]'));
+  const storyHero = document.querySelector('[data-story-hero]');
+  const hasStoryHero = Boolean(storyHero);
+
+  if (storyHero) {
+    if (storyHero.complete) {
+      setStoryImageDimensions(storyHero);
+    } else if (!storyHero.hasAttribute('data-dimension-listener')) {
+      storyHero.setAttribute('data-dimension-listener', 'true');
+      storyHero.addEventListener('load', () => setStoryImageDimensions(storyHero), {once: true});
+    }
+  }
 
   Array.prototype.forEach.call(images, (image, index) => {
     prepareStoryImage(image, index, hasStoryHero);
