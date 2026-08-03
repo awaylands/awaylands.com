@@ -35,7 +35,7 @@
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
     "src/javascripts/components/search.js": "90439ac663ad2747efb03dfcf6f3870204ed482c6b734d39ff20495d9803cfa0",
     "src/stylesheets/pages/_editorial-menu.scss": "e5317100f1685255bc5d106ad743bf624965860f32717d3b0bdd8a04827a7437",
-    "src/stylesheets/pages/_story.scss": "65323701da385e71befb7cbd3c110b3365b63fc1175316a084fd10a534fe8b76",
+    "src/stylesheets/pages/_story.scss": "6afe31e9fcb7c48a48496cd7e5fca3700c5d0f04fe0f8eeb2d4295c8f7448c61",
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "src/javascripts/directives/story.js": "c479fb2166bad9b1bc2527d9e3ac86c7b446976bcf6567600ce078f59bfd6cd1",
