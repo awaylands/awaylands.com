@@ -2031,7 +2031,11 @@ body.body--story {
 
   .story-cover.story-cover--landscape-hero {
     grid-template-columns: minmax(38rem, 1fr) minmax(0, 1fr);
-    max-width: calc(100% - 12rem);
+    max-width: min(192rem, calc(100% - 12rem));
+  }
+
+  .story-cover--landscape-hero .story-cover__copy {
+    align-self: stretch;
   }
 
   .story-cover__media {
