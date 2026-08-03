@@ -170,6 +170,7 @@ function setStoryImageDimensions(image) {
   const heroMedia = image.closest('.story-cover__media');
 
   if (heroMedia) {
+    const heroCover = heroMedia.closest('.story-cover');
     const heightToWidth = image.naturalHeight / image.naturalWidth;
     const widthToHeight = image.naturalWidth / image.naturalHeight;
 
@@ -177,11 +178,17 @@ function setStoryImageDimensions(image) {
       'story-cover__media--portrait-capped',
       'story-cover__media--landscape-capped'
     );
+    if (heroCover) {
+      heroCover.classList.remove('story-cover--landscape-hero');
+    }
 
     if (heightToWidth > 7 / 5) {
       heroMedia.classList.add('story-cover__media--portrait-capped');
     } else if (widthToHeight > 5 / 4) {
       heroMedia.classList.add('story-cover__media--landscape-capped');
+      if (heroCover) {
+        heroCover.classList.add('story-cover--landscape-hero');
+      }
     }
   }
 

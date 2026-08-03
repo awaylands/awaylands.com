@@ -2029,6 +2029,11 @@ body.body--story {
     grid-template-columns: minmax(46rem, 1.08fr) minmax(0, 0.92fr);
   }
 
+  .story-cover.story-cover--landscape-hero {
+    grid-template-columns: minmax(38rem, 1fr) minmax(0, 1fr);
+    max-width: calc(100% - 12rem);
+  }
+
   .story-cover__media {
     align-self: center;
   }
