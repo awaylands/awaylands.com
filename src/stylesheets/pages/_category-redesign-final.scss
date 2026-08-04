@@ -3409,7 +3409,18 @@ body.body--category-hub .category-hub__topics > span {
 
 /* Give the longest primary category label enough room before mobile wrapping. */
 @media (min-width: 701px) {
+  body.body--category-hub .category-hub__topics > div {
+    display: flex;
+    overflow-x: auto;
+  }
+
+  body.body--category-hub .category-hub__topics > div a {
+    flex: 1 0 12rem;
+    min-width: 12rem;
+  }
+
   body.body--category-hub .category-hub__topics a[href^='/category/home-and-garden'] {
+    flex-basis: 20rem;
     min-width: 20rem;
     white-space: nowrap;
   }
