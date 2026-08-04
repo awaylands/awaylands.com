@@ -29,7 +29,7 @@
     <div class="destination-archive__title-row"><h1>{{ destinationTitle }} Archive</h1><div class="destination-archive__post-count">{{ archiveTotal }} Posts</div></div>
     <div class="destination-archive__explore"><strong>Explore More Destinations:</strong><span class="destination-archive__explore-links">{% for destination in archiveExploreLocations %}<a href="{{ locationUrl(destination) }}">{{ destination.title or "" }}</a>{% endfor %}</span></div>
   </header>
-  <div class="destination-archive__listing">
+  <div class="destination-archive__listing destination-guides__grid">
     {% if isContinentArchive %}
     {% for story in archivePosts %}
       {{ archiveCard(story, destinationTitle) }}
