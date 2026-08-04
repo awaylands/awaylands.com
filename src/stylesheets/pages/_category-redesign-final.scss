@@ -4334,7 +4334,8 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy {
 }
 
 body.body--category-hub .category-featured-story .category-beauty-hero__copy {
-  align-items: center;
+  width: min(160rem, calc(100vw - clamp(8rem, 8vw, 12rem)));
+  align-items: flex-start;
   justify-content: flex-start;
   padding-top: clamp(3rem, 5vw, 6rem);
 }
@@ -4346,14 +4347,32 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy sma
 }
 
 body.body--category-hub .category-featured-story .category-beauty-hero__copy strong {
+  width: calc(100% - 43.2rem);
   max-width: 112rem;
-  margin: clamp(2rem, 4vw, 4rem) auto;
-  text-align: center;
+  margin: clamp(2rem, 4vw, 4rem) 0 clamp(2rem, 4vw, 4rem) 43.2rem;
+  text-align: left;
+}
+
+body.body--category-hub .category-featured-story .category-beauty-hero__description,
+body.body--category-hub .category-featured-story .category-beauty-hero__copy i {
+  margin-left: 43.2rem;
 }
 
 body.body--category-hub .category-featured-story .category-beauty-hero__copy i {
-  align-self: center;
+  align-self: flex-start;
   font-size: clamp(1.35rem, 1.1vw, 1.8rem);
+}
+
+@media (max-width: 900px) {
+  body.body--category-hub .category-featured-story .category-beauty-hero__copy strong {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  body.body--category-hub .category-featured-story .category-beauty-hero__description,
+  body.body--category-hub .category-featured-story .category-beauty-hero__copy i {
+    margin-left: 0;
+  }
 }
 
 /* Increase the supporting links and metadata to match the editorial scale. */
@@ -4916,7 +4935,8 @@ body.body--category-hub .category-destinations .category-destination-tile > stro
 
 /* Increase the Reader Favorites label-to-title rhythm by 50 percent. */
 body.body--category-hub .category-featured-story .category-beauty-hero__copy strong {
-  margin: clamp(3rem, 6vw, 6rem) auto clamp(2rem, 4vw, 4rem);
+  margin-top: clamp(3rem, 6vw, 6rem);
+  margin-bottom: clamp(2rem, 4vw, 4rem);
 }
 
 @media (max-width: 900px) {
