@@ -2126,6 +2126,20 @@ body.body--story {
   }
 }
 
+// Match the desktop story cover to the full article + sidebar footprint.
+// Above the former 144rem cap, 70% of each added pixel goes to the copy
+// column and 30% goes to the image column.
+@media (min-width: 1560px) {
+  .story-cover,
+  .story-page--style-shopping .story-cover,
+  .story-cover.story-cover--landscape-hero {
+    max-width: min(200rem, calc(100% - 12rem));
+    grid-template-columns:
+      minmax(38rem, calc(70% - 28.6rem))
+      minmax(0, calc(30% + 27.4rem));
+  }
+}
+
 @include for-phone-only {
   .story-cover {
     padding-right: 1.4rem;
