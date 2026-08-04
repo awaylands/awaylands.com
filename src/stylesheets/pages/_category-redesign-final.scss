@@ -3407,6 +3407,14 @@ body.body--category-hub .category-hub__topics > span {
   text-align: center;
 }
 
+/* Give the longest primary category label enough room before mobile wrapping. */
+@media (min-width: 701px) {
+  body.body--category-hub .category-hub__topics a[href^='/category/home-and-garden'] {
+    min-width: 20rem;
+    white-space: nowrap;
+  }
+}
+
 /* Keep the expertise collage authoritative after legacy refinements above. */
 body.body--category-hub .category-expertise {
   display: block;
