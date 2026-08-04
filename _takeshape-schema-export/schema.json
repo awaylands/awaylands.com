@@ -3,10 +3,10 @@
   "environment": "production",
   "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
   "created": "2017-03-15T23:43:16.289Z",
-  "schemaHash": "c22c4cec83e83ed21c48563b741a33243eea74c69bc65d6a1ad458351aadbff5",
-  "updated": "2026-08-04T14:42:45.595Z",
-  "version": 246,
-  "versionAt": "2026-08-04T14:42:45.595Z",
+  "schemaHash": "b62f76f4bf32a088f52a0331d98ff795a0b6d52861c3c7544c254ad3cf1477a7",
+  "updated": "2026-08-04T20:09:44.108Z",
+  "version": 247,
+  "versionAt": "2026-08-04T20:09:44.108Z",
   "versionBy": "2ebbde81-64ae-42d6-85de-cf26286a4780",
   "schema": {
     "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
@@ -1975,26 +1975,6 @@
             "beautyHeroPost": {
               "widget": "relationship",
               "title": "Focused Hero - Linked Post"
-            },
-            "weddingFeatureLabel": {
-              "widget": "singleLineText",
-              "title": "Wedding Only - Featured Article - Kicker"
-            },
-            "weddingFeatureTitle": {
-              "widget": "singleLineText",
-              "title": "Wedding Only - Featured Article - Title Override"
-            },
-            "weddingFeatureLinkUrl": {
-              "widget": "singleLineText",
-              "title": "Wedding Only - Featured Article - Link URL"
-            },
-            "weddingFeatureImage": {
-              "widget": "image",
-              "title": "Wedding Only - Featured Article - Image"
-            },
-            "weddingFeaturePost": {
-              "widget": "relationship",
-              "title": "Wedding Only - Featured Article - Linked Post"
             }
           },
           "order": [
@@ -9313,36 +9293,36 @@
             },
             "beautyHeroLabel": {
               "type": "string",
-              "title": "Beauty Only - Focused Hero - Kicker",
+              "title": "Focused Hero - Kicker",
               "minLength": 0,
               "@mapping": "shapedb:Category.BeautyHeroLabelV1"
             },
             "beautyHeroTitle": {
               "type": "string",
-              "title": "Beauty Only - Focused Hero - Title",
+              "title": "Focused Hero - Title",
               "minLength": 0,
               "@mapping": "shapedb:Category.BeautyHeroTitleV1"
             },
             "beautyHeroDescription": {
               "type": "string",
-              "title": "Beauty Only - Focused Hero - Text",
+              "title": "Focused Hero - Text",
               "minLength": 0,
               "@mapping": "shapedb:Category.BeautyHeroDescriptionV1"
             },
             "beautyHeroLinkText": {
               "type": "string",
-              "title": "Beauty Only - Focused Hero - Link Text",
+              "title": "Focused Hero - Link Text",
               "minLength": 0,
               "@mapping": "shapedb:Category.BeautyHeroLinkTextV1"
             },
             "beautyHeroLinkUrl": {
               "type": "string",
-              "title": "Beauty Only - Focused Hero - Link URL",
+              "title": "Focused Hero - Link URL",
               "minLength": 0,
               "@mapping": "shapedb:Category.BeautyHeroLinkUrlV1"
             },
             "beautyHeroImage": {
-              "title": "Beauty Only - Focused Hero - Image",
+              "title": "Focused Hero - Image",
               "@ref": "local:Asset",
               "@mapping": "shapedb:Category.BeautyHeroImageV1",
               "@input": {
@@ -9358,7 +9338,7 @@
               }
             },
             "beautyHeroPost": {
-              "title": "Beauty Only - Focused Hero - Linked Post",
+              "title": "Focused Hero - Linked Post",
               "@ref": "local:Story",
               "@mapping": "shapedb:Category.BeautyHeroPostV1",
               "@input": {

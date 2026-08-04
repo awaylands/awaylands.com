@@ -165,9 +165,8 @@
 {% set hasIndexSection = page.indexCards.length or page.indexStories.length or page.indexLabel or page.indexTitle or page.indexDescription %}
 {% set hasBrowseSection = page.browseCards.length or page.browseLabel or page.browseTitle %}
 {% set hasRelatedSection = page.relatedCards.length or page.relatedLabel or page.relatedTitle %}
-{% set featureHeroCard = page.featuredCards[0] %}
-{% set featureHeroStory = page.focusedHeroPost or page.weddingFeaturePost or featureHeroCard.post or page.featuredStories[0] or heroStory %}
-{% set hasFeatureHero = page.focusedHeroPost or page.focusedHeroImage or page.focusedHeroLabel or page.focusedHeroTitle or page.focusedHeroDescription or page.focusedHeroLinkText or page.focusedHeroLinkUrl or page.weddingFeaturePost or page.weddingFeatureImage or page.weddingFeatureLabel or page.weddingFeatureTitle or page.weddingFeatureLinkUrl or featureHeroCard.post or featureHeroCard.image or featureHeroCard.title or page.featuredStories.length %}
+{% set featureHeroStory = page.focusedHeroPost or heroStory %}
+{% set hasFeatureHero = page.focusedHeroPost or page.focusedHeroImage or page.focusedHeroLabel or page.focusedHeroTitle or page.focusedHeroDescription or page.focusedHeroLinkText or page.focusedHeroLinkUrl %}
 
 {% if page.pageHeadline %}
   {% set categoryHeadline = page.pageHeadline %}
@@ -383,13 +382,13 @@
 
   {% if hasFeatureHero %}
   <section class="category-beauty-hero category-featured-story" aria-labelledby="category-featured-story-title">
-    <a href="{{ page.focusedHeroLinkUrl or page.weddingFeatureLinkUrl or featureHeroCard.linkUrl or storyUrl(featureHeroStory) }}">
-      <span class="category-beauty-hero__image">{% if page.focusedHeroImage %}<img src="{{ page.focusedHeroImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif page.weddingFeatureImage %}<img src="{{ page.weddingFeatureImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif featureHeroCard.image %}<img src="{{ featureHeroCard.image.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featureHeroStory, "100vw", false) }}{% endif %}</span>
+    <a href="{{ page.focusedHeroLinkUrl or storyUrl(featureHeroStory) }}">
+      <span class="category-beauty-hero__image">{% if page.focusedHeroImage %}<img src="{{ page.focusedHeroImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featureHeroStory, "100vw", false) }}{% endif %}</span>
       <span class="category-beauty-hero__copy">
-        <small>{{ page.focusedHeroLabel or page.weddingFeatureLabel or "Reader Favorites" }}</small>
-        <strong id="category-featured-story-title">{{ page.focusedHeroTitle or page.weddingFeatureTitle or featureHeroCard.title or featureHeroStory.title }}</strong>
+        {% if page.focusedHeroLabel %}<small>{{ page.focusedHeroLabel }}</small>{% endif %}
+        {% if page.focusedHeroTitle or featureHeroStory.title %}<strong id="category-featured-story-title">{{ page.focusedHeroTitle or featureHeroStory.title }}</strong>{% endif %}
         {% if page.focusedHeroDescription or featureHeroStory.tout.dek %}<span class="category-beauty-hero__description">{{ page.focusedHeroDescription or featureHeroStory.tout.dek }}</span>{% endif %}
-        <i>{{ page.focusedHeroLinkText or featureHeroCard.linkText or "Read the Story" }} <span aria-hidden="true">⟶</span></i>
+        {% if page.focusedHeroLinkText or featureHeroStory %}<i>{{ page.focusedHeroLinkText or "Read the Story" }} <span aria-hidden="true">⟶</span></i>{% endif %}
       </span>
     </a>
   </section>

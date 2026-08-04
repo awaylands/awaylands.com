@@ -46,3 +46,4 @@ takeshape-project.graphql
 .takeshaperc
 .amazon-creators.env
 /tools/amazon-creators-sdk/
+/.migration-backups/
