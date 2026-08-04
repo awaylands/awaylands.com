@@ -10,7 +10,7 @@
     "hash": "b62f76f4bf32a088f52a0331d98ff795a0b6d52861c3c7544c254ad3cf1477a7"
   },
   "sourceFiles": {
-    "src/templates/pages/stories/detail.html": "137282db619fb4cb45d3c67824185728cf4a0946e7b10d9648136a0be4138a4c",
+    "src/templates/pages/stories/detail.html": "8e131920105b793fcef56e4a33dbe806ce5d436289a4e19fb912592910ce951e",
     "src/templates/pages/stories/landing.html": "4461a155ee4e29f6c81d2c20be9e17a195fbdd5e351ff452310d0b85bc19333d",
     "src/templates/pages/category.html": "1ba8c28991297fc7b7718526a082d6ecdeef01ad67b07cb99679440b36fdef02",
     "src/templates/data/categories.graphql": "a0628a74cc7adc06cb4619788d2c69aca450231eb4521bbd10f7dc9505c6d538",
@@ -38,7 +38,7 @@
     "src/stylesheets/pages/_story.scss": "7b46e84980d8e8927eb54de8f2b97679054d50618499548b70e9ee429bdedded",
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
-    "src/javascripts/directives/story.js": "b8ae5982f20446971baae37f2e2e3afaa72e862172b68537e296f1759f21239b",
+    "src/javascripts/directives/story.js": "efbaf764cdba71f8458b2f8fdf85d891c9da2ab442c9a081f346ef78d8d16cfa",
     "_takeshape-schema-export/schema.json": "c8a3f64067205089ae7c39568708ebba16e995557f76f7df70b820290d210212",
     "_takeshape-schema-export/schema-inner.json": "651176e677a0dab065e71d2eb455e95cdd0f44ab7d701b685e5ef9d1b233343f",
     "tsg.yml": "a14e5dc79738243345fe6519dc56d30bc98cfbf6f8e0a61f0fe67ab14c26b919",

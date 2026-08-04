@@ -1683,7 +1683,7 @@ function finalizeRelatedStories(storyPage) {
     const link = item.querySelector('a[href]');
     const key = link && (link.getAttribute('href') || link.textContent || '').trim().toLowerCase();
 
-    if (!key || used[key] || kept >= 3) {
+    if (!key || used[key] || kept >= 6) {
       item.parentNode.removeChild(item);
       return;
     }
@@ -1721,13 +1721,13 @@ function fillRelatedStoryCandidates(storyPage) {
     }
     return urls;
   }, {});
-  const remainingSlots = Math.max(0, 3 - manualItems.length);
+  const remainingSlots = Math.max(0, 6 - manualItems.length);
 
   if (!remainingSlots) {
     while (list.firstChild) {
       list.removeChild(list.firstChild);
     }
-    manualItems.slice(0, 3).forEach(item => list.appendChild(item));
+    manualItems.slice(0, 6).forEach(item => list.appendChild(item));
     return Promise.resolve();
   }
 
