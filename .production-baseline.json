@@ -58,6 +58,6 @@
     "scripts/verify-production-baseline.js": "537ab24ac5aa2acbcd35dbac34a70258e8293346012db6cdf5867349a48d2218",
     "src/templates/pages/location.html": "68e061b541ebe38f117ec31eb2eb15ddce45813f2ae9a05b368c9f0d49ce7a58",
     "src/templates/data/locations.graphql": "6cd1de6cf4b2daf4a2faded3db3e973662cc2dcf99b2f23f9b76ad275b06cd80",
-    "src/stylesheets/pages/_destination-detail.scss": "90a7d582976520bcdf3678efaaa115d58b3511285fb068dcce2c3de5b724eefb"
+    "src/stylesheets/pages/_destination-detail.scss": "9d3d93370e4f9ea933f18de89f3654a720f61784ae2585effe6f55138d5519c0"
   }
 }

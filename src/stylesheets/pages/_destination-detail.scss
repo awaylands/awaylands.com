@@ -214,6 +214,10 @@ body.body--destination-detail:not(.gallery-page) {
   text-transform: uppercase;
 }
 
+.body--destination-detail:not(.body--continent-detail) .destination-hero__breadcrumbs {
+  font-size: 1.3rem;
+}
+
 .destination-hero__breadcrumbs a {
   border-bottom: 1px solid transparent;
 }
@@ -1971,6 +1975,10 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
     gap: 0.5rem 0.8rem;
     margin-bottom: 2.2rem;
     max-width: 100%;
+  }
+
+  .body--destination-detail:not(.body--continent-detail) .destination-hero__breadcrumbs {
+    font-size: clamp(0.9rem, 2.7vw, 1.1rem);
   }
 
   .destination-hero h1 {
