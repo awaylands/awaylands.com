@@ -3,10 +3,10 @@
   "environment": "production",
   "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
   "created": "2017-03-15T23:43:16.289Z",
-  "schemaHash": "b62f76f4bf32a088f52a0331d98ff795a0b6d52861c3c7544c254ad3cf1477a7",
-  "updated": "2026-08-04T20:09:44.108Z",
-  "version": 247,
-  "versionAt": "2026-08-04T20:09:44.108Z",
+  "schemaHash": "9656a9e0373e719a4e6fa1b531d4a2b6d14c90485c9c02424c18c2f426997583",
+  "updated": "2026-08-04T20:59:51.730Z",
+  "version": 248,
+  "versionAt": "2026-08-04T20:59:51.730Z",
   "versionBy": "2ebbde81-64ae-42d6-85de-cf26286a4780",
   "schema": {
     "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
@@ -605,6 +605,27 @@
               "title": "05 — Editor’s Picks — Post 2 Photo Override",
               "instructions": "Optional. Replaces the second post’s automatic image."
             },
+            "destinationMostRequestedLabel": {
+              "widget": "singleLineText",
+              "title": "06 — Most Requested — Label",
+              "instructions": "Optional. Leave this entire section blank to keep it OFF. Once active, leave this label blank to use “Most Requested”."
+            },
+            "destinationMostRequestedTitle": {
+              "widget": "singleLineText",
+              "title": "06 — Most Requested — Headline",
+              "instructions": "Optional. Leave this entire section blank to keep it OFF."
+            },
+            "destinationMostRequestedDescription": {
+              "widget": "paragraphText",
+              "title": "06 — Most Requested — Description",
+              "instructions": "Optional. Leave this entire section blank to keep it OFF."
+            },
+            "destinationMostRequestedStories": {
+              "widget": "relationship",
+              "title": "06 — Most Requested — Four Story Cards",
+              "instructions": "Optional. Choose and reorder up to four stories. Leave all Most Requested fields blank to keep the section OFF.",
+              "collapseByDefault": true
+            },
             "destinationFeatureStoryImage": {
               "widget": "image",
               "title": "06 — Featured Guide — Photo Override",
@@ -647,12 +668,16 @@
             "destinationLanguages",
             "destinationEnglishNote",
             "destinationBestPairedWith",
-            "destinationContinueHeading",
-            "destinationRelatedDestinations",
             "destinationEditorsPicksHeading",
             "destinationFeaturedStories",
             "destinationFeaturedOneImage",
             "destinationFeaturedTwoImage",
+            "destinationMostRequestedLabel",
+            "destinationMostRequestedTitle",
+            "destinationMostRequestedDescription",
+            "destinationMostRequestedStories",
+            "destinationContinueHeading",
+            "destinationRelatedDestinations",
             "destinationFeaturedGuideLabel",
             "destinationFeatureStory",
             "destinationFeatureStoryImage",
@@ -5376,6 +5401,54 @@
               "@ref": "local:Asset",
               "@input": {
                 "@ref": "local:TSRelationship"
+              },
+              "@args": "TSRelationshipArgs",
+              "@resolver": {
+                "name": "shapedb:getRelated",
+                "service": "shapedb",
+                "options": {
+                  "nullable": true
+                }
+              }
+            },
+            "destinationMostRequestedLabel": {
+              "type": "string",
+              "title": "Most Requested Label",
+              "description": "Optional. Leave every Most Requested field blank to keep the section OFF. When the section is active, a blank label displays “Most Requested”.",
+              "minLength": 0,
+              "@mapping": "shapedb:Location.DestinationMostRequestedLabelV1"
+            },
+            "destinationMostRequestedTitle": {
+              "type": "string",
+              "title": "Most Requested Headline",
+              "description": "Optional headline shown above the four selected story cards.",
+              "minLength": 0,
+              "@mapping": "shapedb:Location.DestinationMostRequestedTitleV1"
+            },
+            "destinationMostRequestedDescription": {
+              "type": "string",
+              "title": "Most Requested Description",
+              "description": "Optional introduction shown beneath the Most Requested headline.",
+              "minLength": 0,
+              "@mapping": "shapedb:Location.DestinationMostRequestedDescriptionV1"
+            },
+            "destinationMostRequestedStories": {
+              "type": "array",
+              "title": "Most Requested Story Cards",
+              "description": "Optional. Choose and reorder up to four stories. Leave all Most Requested fields blank to keep the section OFF.",
+              "maxItems": 4,
+              "items": {
+                "@ref": "local:Story"
+              },
+              "@mapping": "shapedb:Location.DestinationMostRequestedStoriesV1",
+              "@backreference": {
+                "enabled": true
+              },
+              "@input": {
+                "type": "array",
+                "items": {
+                  "@ref": "local:TSRelationship"
+                }
               },
               "@args": "TSRelationshipArgs",
               "@resolver": {

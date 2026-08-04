@@ -6,8 +6,8 @@
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
   "schema": {
-    "version": 247,
-    "hash": "b62f76f4bf32a088f52a0331d98ff795a0b6d52861c3c7544c254ad3cf1477a7"
+    "version": 248,
+    "hash": "9656a9e0373e719a4e6fa1b531d4a2b6d14c90485c9c02424c18c2f426997583"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "8e131920105b793fcef56e4a33dbe806ce5d436289a4e19fb912592910ce951e",
@@ -39,8 +39,8 @@
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "src/javascripts/directives/story.js": "efbaf764cdba71f8458b2f8fdf85d891c9da2ab442c9a081f346ef78d8d16cfa",
-    "_takeshape-schema-export/schema.json": "c8a3f64067205089ae7c39568708ebba16e995557f76f7df70b820290d210212",
-    "_takeshape-schema-export/schema-inner.json": "651176e677a0dab065e71d2eb455e95cdd0f44ab7d701b685e5ef9d1b233343f",
+    "_takeshape-schema-export/schema.json": "52f468570e98b5d02902f7c4e583605ea195310bd5e610612313982d2a20f246",
+    "_takeshape-schema-export/schema-inner.json": "1e469079f8d19d5cf3ed28ef91fbb608930b24f0bd7554fa067368b2754dd857",
     "tsg.yml": "a14e5dc79738243345fe6519dc56d30bc98cfbf6f8e0a61f0fe67ab14c26b919",
     "package.json": "7487ce25f7a22c08fb2f5f8c17de4bd38b769342c9ad35d0ed9f62d2bbc8fda7",
     "scripts/sanitize-story-links.js": "cac32836e4b24239d0237c46186e8dbba3f20c631ed52d424c836d53050afa3e",
@@ -56,7 +56,8 @@
     "src/stylesheets/pages/_destinations.scss": "a7abc33a3121adc7560712dc42750acdd7a6843e857efd4274d48035bc223f4c",
     "scripts/deploy-production.js": "f1b099f4b89ddda88504a03058c2310c54633491a5c561236b941fde082df891",
     "scripts/verify-production-baseline.js": "537ab24ac5aa2acbcd35dbac34a70258e8293346012db6cdf5867349a48d2218",
-    "src/templates/pages/location.html": "7f6954b0610413167a68e969dd670954afc378535974655a2ef2bcf9455a945c",
+    "src/templates/pages/location.html": "68e061b541ebe38f117ec31eb2eb15ddce45813f2ae9a05b368c9f0d49ce7a58",
+    "src/templates/data/locations.graphql": "6cd1de6cf4b2daf4a2faded3db3e973662cc2dcf99b2f23f9b76ad275b06cd80",
     "src/stylesheets/pages/_destination-detail.scss": "90a7d582976520bcdf3678efaaa115d58b3511285fb068dcce2c3de5b724eefb"
   }
 }

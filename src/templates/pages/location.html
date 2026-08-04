@@ -774,6 +774,40 @@
   </section>
   {% endif %}
 
+  {# Destination Most Requested is intentionally opt-in. New and existing
+     locations keep every field blank, so this block renders nothing until an
+     editor adds at least one field or story in TakeShape. #}
+  {% if not isContinentPage and (page.destinationMostRequestedLabel or page.destinationMostRequestedTitle or page.destinationMostRequestedDescription or (page.destinationMostRequestedStories and page.destinationMostRequestedStories.length)) %}
+  <section class="continent-most-requested destination-most-requested" aria-label="{{ page.destinationMostRequestedLabel or "Most Requested" }}">
+    <header class="continent-most-requested__heading">
+      <p>{{ page.destinationMostRequestedLabel or "Most Requested" }}</p>
+      {% if page.destinationMostRequestedTitle or page.destinationMostRequestedDescription %}
+      <div>
+        {% if page.destinationMostRequestedTitle %}<h2>{{ page.destinationMostRequestedTitle }}</h2>{% endif %}
+        {% if page.destinationMostRequestedDescription %}<span>{{ page.destinationMostRequestedDescription }}</span>{% endif %}
+      </div>
+      {% endif %}
+    </header>
+    {% if page.destinationMostRequestedStories and page.destinationMostRequestedStories.length %}
+    <div class="continent-most-requested__grid">
+      {% for requestedStory in page.destinationMostRequestedStories %}
+      {% if loop.index <= 4 %}
+      <article class="continent-most-requested__card">
+        <a href="{{ storyUrl(requestedStory) }}">
+          <span class="continent-most-requested__image">{{ storyImage(requestedStory, "(min-width: 1000px) 24vw, (min-width: 700px) 48vw, 100vw", false) }}</span>
+          <span class="continent-most-requested__copy">
+            <h3>{{ requestedStory.title }}</h3>
+            <i>Read the Story <b aria-hidden="true">→</b></i>
+          </span>
+        </a>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  {% endif %}
+
   {% if destinationContinent and not isContinentPage and (page.destinationContinueHeading or (page.destinationRelatedDestinations and page.destinationRelatedDestinations.length)) %}
   <section class="destination-nearby" aria-labelledby="destination-nearby-title">
     <header class="destination-band-heading">

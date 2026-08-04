@@ -34,6 +34,14 @@ query DestinationDetailPages($images: TSImagesConfig) {
       }
       destinationFeaturedOneImage { path }
       destinationFeaturedTwoImage { path }
+      destinationMostRequestedLabel
+      destinationMostRequestedTitle
+      destinationMostRequestedDescription
+      destinationMostRequestedStories {
+        _id _contentTypeName _enabledAt isImportant title slug
+        category { title }
+        tout { image { path } dek }
+      }
       destinationFeaturedGuideLabel
       destinationFeatureStory {
         _id _contentTypeName _enabledAt isImportant title slug
