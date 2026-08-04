@@ -4878,3 +4878,34 @@ body.body--category-hub .category-magazine-hero__image::after {
     justify-content: flex-start;
   }
 }
+
+/* Make the category Featured Story as visually substantial as its destination
+ * counterpart at narrow widths. */
+@media (max-width: 1100px) {
+  body.body--category-hub .category-featured-story > a,
+  body.body--category-hub .category-featured-story__copy {
+    min-height: clamp(66rem, 82vh, 78rem);
+  }
+}
+
+/* Reader Favorites titles stay restrained at every width, including the
+ * mobile breakpoint that previously enlarged them. */
+body.body--category-hub .category-destinations .category-destination-tile > strong {
+  font-size: clamp(1.8rem, 1.2vw, 2.1rem);
+  line-height: 1.05;
+}
+
+/* Increase the Reader Favorites label-to-title rhythm by 50 percent. */
+body.body--category-hub .category-featured-story__copy strong {
+  margin: clamp(3rem, 6vw, 6rem) auto clamp(2rem, 4vw, 4rem);
+}
+
+@media (max-width: 900px) {
+  body.body--category-hub .category-destinations > .category-module-heading {
+    row-gap: 1.2rem;
+  }
+
+  body.body--category-hub .category-destinations .category-destination-tile > strong {
+    font-size: clamp(2rem, 5vw, 2.6rem);
+  }
+}

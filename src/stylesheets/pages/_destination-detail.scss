@@ -2409,3 +2409,12 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
     gap: 1.4rem;
   }
 }
+
+/* Give the shared Featured Guide a stronger visual presence on tablets and
+ * phones without changing its established desktop scale. */
+@media (max-width: 1100px) {
+  .body--destination-detail .destination-spotlight,
+  .body--destination-detail .destination-spotlight__copy {
+    min-height: clamp(66rem, 82vh, 78rem);
+  }
+}
