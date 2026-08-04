@@ -1406,11 +1406,11 @@ body.body--destination-detail:not(.gallery-page) {
 }
 
 .destination-archive__breadcrumbs a {
-  color: var(--destination-teal);
+  color: #0c889f;
 }
 
 .destination-archive__breadcrumbs > span[aria-hidden="true"] {
-  color: var(--destination-orange);
+  color: var(--destination-ink);
 }
 
 .destination-archive__breadcrumbs a:hover,
@@ -1448,7 +1448,7 @@ body.body--destination-detail:not(.gallery-page) {
 }
 
 .destination-archive__post-count:before {
-  color: var(--destination-orange);
+  color: var(--destination-ink);
   content: "•";
   margin-right: 0.8rem;
 }
@@ -1474,11 +1474,11 @@ body.body--destination-detail:not(.gallery-page) {
 }
 
 .destination-archive__explore-links a {
-  color: var(--destination-teal);
+  color: #0c889f;
 }
 
 .destination-archive__explore-links a:not(:last-child):after {
-  color: var(--destination-orange);
+  color: var(--destination-ink);
   content: "•";
   margin-left: 1.2rem;
 }
