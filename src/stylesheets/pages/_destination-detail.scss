@@ -2207,7 +2207,7 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
  * on both country and continent destination pages. */
 .body--destination-detail .destination-spotlight {
   aspect-ratio: auto;
-  min-height: clamp(34rem, 38vw, 52rem);
+  min-height: clamp(40.8rem, 45.6vw, 62.4rem);
 }
 
 .body--destination-detail .destination-spotlight:after {
@@ -2220,7 +2220,7 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
   flex-direction: column;
   inset: auto;
   justify-content: flex-end;
-  min-height: clamp(34rem, 38vw, 52rem);
+  min-height: clamp(40.8rem, 45.6vw, 62.4rem);
   padding: clamp(3rem, 6vw, 8rem);
   position: relative;
   width: min(78rem, calc(100% - 4rem));
@@ -2283,7 +2283,7 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
 @media (max-width: 700px) {
   .body--destination-detail .destination-spotlight,
   .body--destination-detail .destination-spotlight__copy {
-    min-height: 46rem;
+    min-height: 55.2rem;
   }
 
   .body--destination-detail .destination-spotlight__copy {
