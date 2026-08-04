@@ -1478,14 +1478,14 @@ body.body--destination-detail:not(.gallery-page) {
 }
 
 .destination-archive__explore-links a:not(:last-child):after {
-  color: var(--destination-ink);
+  color: #18201f;
   content: "•";
   margin-left: 1.2rem;
 }
 
 .destination-archive__explore-links a:hover,
 .destination-archive__explore-links a:focus {
-  color: var(--destination-orange);
+  color: #d84a3a;
 }
 
 .destination-archive__listing {
