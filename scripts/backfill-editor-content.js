@@ -133,7 +133,7 @@ function fillCard(card, fallback, defaultLinkText) {
   const selected = card.post || fallback;
   return {
     post: rel(selected), image: rel(card.image || storyImage(selected)), eyebrow: card.eyebrow || '',
-    title: choose(card.title, selected && selected.title, ''), description: choose(card.description, selected && selected.tout && selected.tout.dek, ''),
+    title: choose(card.title, selected && selected.title, ''), description: card.description || '',
     linkText: choose(card.linkText, defaultLinkText, ''), linkUrl: choose(card.linkUrl, storyUrl(selected), '')
   };
 }
