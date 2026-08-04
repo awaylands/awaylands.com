@@ -196,6 +196,18 @@
   }
 }
 
+@media (max-width: 360px) {
+  .page-header {
+    .logo {
+      width: 15rem;
+    }
+
+    &__burger {
+      margin-left: 1rem;
+    }
+  }
+}
+
 .page-nav {
   display: none;
   margin-left: 4rem;
