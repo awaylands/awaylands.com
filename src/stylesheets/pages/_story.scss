@@ -2126,14 +2126,25 @@ body.body--story {
   }
 }
 
-// Match the desktop story cover to the full article + sidebar footprint.
-// Above the former 144rem cap, 70% of each added pixel goes to the copy
-// column and 30% goes to the image column.
+// Match the two-column story cover to the full article + sidebar footprint.
+// The former shell kept a 12rem outer gutter until its 144rem cap. Allocate
+// 70% of that recovered width to copy and 30% to media, then continue that
+// same split as the cover grows beyond the old cap.
+@media (min-width: 900px) {
+  .story-cover,
+  .story-page--style-shopping .story-cover,
+  .story-cover.story-cover--landscape-hero {
+    max-width: min(200rem, 100%);
+    grid-template-columns:
+      minmax(38rem, calc(50% + 1.8rem))
+      minmax(0, calc(50% - 3rem));
+  }
+}
+
 @media (min-width: 1560px) {
   .story-cover,
   .story-page--style-shopping .story-cover,
   .story-cover.story-cover--landscape-hero {
-    max-width: min(200rem, calc(100% - 12rem));
     grid-template-columns:
       minmax(38rem, calc(70% - 28.6rem))
       minmax(0, calc(30% + 27.4rem));
