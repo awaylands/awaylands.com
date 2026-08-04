@@ -2203,18 +2203,19 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
   }
 }
 
-/* Match the stable full-image editorial feature used on the Travel Guides pages. */
-.body--continent-detail .destination-spotlight {
+/* Match the stable full-image editorial feature used on the Travel Guides pages
+ * on both country and continent destination pages. */
+.body--destination-detail .destination-spotlight {
   aspect-ratio: auto;
   min-height: clamp(34rem, 38vw, 52rem);
 }
 
-.body--continent-detail .destination-spotlight:after {
+.body--destination-detail .destination-spotlight:after {
   background: linear-gradient(90deg, rgba(8, 33, 38, 0.72), rgba(8, 33, 38, 0.08) 72%);
   inset: 0;
 }
 
-.body--continent-detail .destination-spotlight__copy {
+.body--destination-detail .destination-spotlight__copy {
   display: flex;
   flex-direction: column;
   inset: auto;
@@ -2225,9 +2226,9 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
   width: min(78rem, calc(100% - 4rem));
 }
 
-.body--continent-detail .destination-spotlight__copy .destination-detail__eyebrow,
-.body--continent-detail .destination-spotlight__copy h3,
-.body--continent-detail .destination-spotlight__details {
+.body--destination-detail .destination-spotlight__copy .destination-detail__eyebrow,
+.body--destination-detail .destination-spotlight__copy h3,
+.body--destination-detail .destination-spotlight__details {
   bottom: auto;
   left: auto;
   max-width: none;
@@ -2237,8 +2238,11 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
   transform: none;
 }
 
-.body--continent-detail .destination-spotlight__copy .destination-detail__eyebrow {
+.body--destination-detail .destination-spotlight__copy .destination-detail__eyebrow {
+  align-items: center;
   color: #fff;
+  display: flex;
+  flex-wrap: wrap;
   font-family: Montserrat, Helvetica, sans-serif;
   font-size: 1.1rem;
   font-weight: 800;
@@ -2246,43 +2250,52 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
   margin: 0;
 }
 
-.body--continent-detail .destination-spotlight__copy h3 {
+.body--destination-detail .destination-spotlight__copy .destination-detail__eyebrow:after {
+  background: var(--destination-orange);
+  content: "";
+  flex: 0 0 3.2rem;
+  height: 2px;
+  margin-left: 1.2rem;
+  width: 3.2rem;
+}
+
+.body--destination-detail .destination-spotlight__copy h3 {
   font-size: clamp(4rem, 5.5vw, 7rem);
   line-height: 0.94;
   margin: 1.2rem 0;
 }
 
-.body--continent-detail .destination-spotlight__details {
+.body--destination-detail .destination-spotlight__details {
   margin: 0;
 }
 
-.body--continent-detail .destination-spotlight__details > p {
+.body--destination-detail .destination-spotlight__details > p {
   font-size: clamp(1.6rem, 1.6vw, 2rem);
   line-height: 1.4;
   margin: 0 0 1.8rem;
   max-width: 58rem;
 }
 
-.body--continent-detail .destination-spotlight__copy .destination-detail__text-link {
+.body--destination-detail .destination-spotlight__copy .destination-detail__text-link {
   font-size: 1.1rem;
 }
 
 @media (max-width: 700px) {
-  .body--continent-detail .destination-spotlight,
-  .body--continent-detail .destination-spotlight__copy {
+  .body--destination-detail .destination-spotlight,
+  .body--destination-detail .destination-spotlight__copy {
     min-height: 46rem;
   }
 
-  .body--continent-detail .destination-spotlight__copy {
+  .body--destination-detail .destination-spotlight__copy {
     padding: 3rem 2rem;
     width: 100%;
   }
 
-  .body--continent-detail .destination-spotlight__copy h3 {
+  .body--destination-detail .destination-spotlight__copy h3 {
     font-size: clamp(3.8rem, 11vw, 5.2rem);
   }
 
-  .body--continent-detail .destination-spotlight__details > p {
+  .body--destination-detail .destination-spotlight__details > p {
     -webkit-line-clamp: 5;
   }
 }
