@@ -1,7 +1,7 @@
 {% extends "layouts/default.html" %}
 {% set destinationTitle = page.title or page.name or "" %}
 {% include "data/destination-facts.html" %}
-{% set isContinentPage = page._contentTypeName == "continent" %}
+{% set isContinentPage = page._contentTypeName == "continent" or page._contentTypeName == "Continent" or page.locations or page.continentGeographyCards or page.continentSeasonCards %}
 {# Resolve the editorial defaults by iterating the authored fact map. The
    template runtime does not reliably support dynamic object-key lookup. #}
 {% set automaticFacts = {} %}
