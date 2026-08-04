@@ -118,7 +118,7 @@ const inventoryQuery = `query EditorBackfillInventory {
 const categoryDefaults = {
   pageLabel: 'Away Lands Journal', featuredLabel: 'Explore Essentials', featuredTitle: 'Recommended Reading', featuredDescription: 'A compact edit of the guides and stories to open first.',
   destinationsLabel: 'Reader favorites', destinationsTitle: 'Most Popular Destinations', destinationsDescription: 'Start with the destinations readers return to most.',
-  mapLabel: 'Plan by place', mapTitle: 'Find your next escape', mapDescription: 'Open a region to explore destination guides, beaches, hotels, itineraries, and practical details.',
+  mapLabel: 'Plan by place', mapTitle: 'Find Your Next Escape', mapDescription: 'Open a region to explore destination guides, beaches, hotels, itineraries, and practical details.',
   clustersLabel: 'More to discover', clustersTitle: 'Travel Guide Collections', clustersDescription: 'Focused paths into Away Lands destination and planning coverage.',
   updatedLabel: 'Freshly updated', updatedTitle: 'Recently Updated', updatedDescription: 'Guides with newly reviewed recommendations and planning details.',
   expertiseLabel: 'Firsthand since 2016', expertiseTitle: 'Travelled, photographed, and written from experience', expertiseDescription: 'Away Lands has published travel guides from more than 60 countries since 2016. Every guide is shaped by firsthand travel, original photography, and practical planning experience.',

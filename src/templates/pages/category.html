@@ -96,7 +96,7 @@
   {% set destinationsTitle = "Most Popular Destinations" %}
 {% endif %}
 {% set mapLabel = page.mapLabel or "Plan by place" %}
-{% set mapTitle = page.mapTitle or "Find your next escape" %}
+{% set mapTitle = page.mapTitle or "Find Your Next Escape" %}
 {% set mapDescription = page.mapDescription or "Open a region to explore destination guides, beaches, hotels, itineraries, and practical details." %}
 {% set clustersLabel = page.clustersLabel or "More to discover" %}
 {% set clustersTitle = page.clustersTitle or "Travel Guide Collections" %}
@@ -105,7 +105,7 @@
 {% set updatedTitle = page.updatedTitle or "Recently Updated" %}
 {% set updatedDescription = page.updatedDescription or "Guides with newly reviewed recommendations and planning details." %}
 {% set expertiseLabel = page.expertiseLabel or "Firsthand since 2016" %}
-{% set expertiseTitle = page.expertiseTitle or "Travelled, photographed, and written from experience" %}
+{% set expertiseTitle = page.expertiseTitle or "Traveled, Photographed, And Written From Experience" %}
 {% set expertiseDescription = page.expertiseDescription or "Away Lands has published travel guides from more than 60 countries since 2016. Every guide is shaped by firsthand travel, original photography, and practical planning experience." %}
 {% set expertiseStat1Value = page.expertiseStat1Value or "60+" %}
 {% set expertiseStat1Label = page.expertiseStat1Label or "Countries visited" %}
@@ -425,7 +425,7 @@
     </div>
     <div class="category-map__intro">
       <p>{{ mapLabel }}</p>
-      <h2>{{ mapTitle }}</h2>
+      <h2>{{ mapTitle | title }}</h2>
       <span>{{ mapDescription }}</span>
     </div>
     <div class="d3-world-map">
@@ -547,7 +547,7 @@
     <span class="category-expertise__image">{% if page.expertiseImage %}<img src="{{ page.expertiseImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(sortedStories[16] or heroStory, "100vw", false) }}{% endif %}</span>
     <div class="category-expertise__copy">
       <p>{{ expertiseLabel }}</p>
-      <h2>{{ expertiseTitle }}</h2>
+      <h2>{{ expertiseTitle | title }}</h2>
       <span>{{ expertiseDescription }}</span>
       <div class="category-expertise__stats">
         <div><strong>{{ expertiseStat1Value }}</strong><span>{{ expertiseStat1Label }}</span></div>
