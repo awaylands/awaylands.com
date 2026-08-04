@@ -1,0 +1,49 @@
+{% extends "layouts/default.html" %}
+{% set destinationTitle = page.title or page.name or "Destination" %}
+{% set isContinentArchive = page._contentTypeName == "continent" %}
+{% set archivePosts = page.storySet.items if page.storySet else [] %}
+{% set archiveDirectTotal = page.storySet.total if page.storySet else archivePosts.length %}
+{% set archiveCountryTotal = 0 %}
+{% if isContinentArchive %}
+  {% for destination in (page.locations or []) %}
+    {% set archiveCountryTotal = archiveCountryTotal + (destination.storySet.total if destination.storySet else 0) %}
+  {% endfor %}
+{% endif %}
+{% set archiveTotal = archiveDirectTotal + archiveCountryTotal %}
+{% set archiveExploreLocations = page.locations or (page.continentSet.items[0].locations if page.continentSet and page.continentSet.items else []) %}
+{% macro storyUrl(story) %}{% if story and story.slug %}{{ story | route('storySlug') }}{% elif story and story.title %}{{ story | route('story') }}{% else %}#{% endif %}{% endmacro %}
+{% macro locationUrl(location) %}{% if location %}{{ location | route('location') }}{% else %}#{% endif %}{% endmacro %}
+{% macro archiveCard(story, label) %}
+      <article class="destination-guide-card">
+        <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">
+          {% if story and story.tout and story.tout.image and story.tout.image.path %}<img src="{{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="{{ story.title or 'Travel guide' }}" loading="lazy">{% endif %}
+        </a>
+        <div class="destination-guide-card__copy"><p class="destination-detail__eyebrow">{{ label }}</p><h2><a href="{{ storyUrl(story) }}">{{ story.title or "Travel guide" }}</a></h2>{% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}</div>
+      </article>
+{% endmacro %}
+{% block body_class %}body body--destination-archive{% endblock %}
+{% block content %}
+<section class="destination-archive">
+  <header class="destination-archive__header">
+    <div class="destination-archive__breadcrumbs"><a href="/destinations">Destinations</a><span aria-hidden="true">›</span><span>{{ destinationTitle }}</span><span aria-hidden="true">›</span><span>Archive</span></div>
+    <div class="destination-archive__title-row"><h1>{{ destinationTitle }} Archive</h1><div class="destination-archive__post-count">{{ archiveTotal }} Posts</div></div>
+    <div class="destination-archive__explore"><strong>Explore More Destinations:</strong><span class="destination-archive__explore-links">{% for destination in archiveExploreLocations %}<a href="{{ locationUrl(destination) }}">{{ destination.title or "" }}</a>{% endfor %}</span></div>
+  </header>
+  <div class="destination-archive__listing">
+    {% if isContinentArchive %}
+    {% for story in archivePosts %}
+      {{ archiveCard(story, destinationTitle) }}
+    {% endfor %}
+    {% for destination in (page.locations or []) %}
+      {% for story in (destination.storySet.items if destination.storySet else []) %}
+      {{ archiveCard(story, destination.title or destinationTitle) }}
+      {% endfor %}
+    {% endfor %}
+    {% else %}
+    {% for story in archivePosts %}
+      {{ archiveCard(story, destinationTitle) }}
+    {% endfor %}
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

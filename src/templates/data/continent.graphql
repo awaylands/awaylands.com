@@ -1,11 +1,197 @@
-query {
-  continents: getContinentList {
+query ContinentDestinationDetailContext($images: TSImagesConfig) {
+  continents: getContinentList(size: 50, onlyEnabled: true) {
     items {
+      _id
+      _contentTypeName
       name
+      social { title description image { path } }
+      destinationHeroImage { path }
+      destinationBlurb
+      continentGeographyHeading
+      continentGeographyCards
+      continentSeasonsHeading
+      continentSeasonCards
+      continentMapHeading
+      continentMapBackgroundImage { path }
+      continentContinueDestinations {
+        _id _contentTypeName title image { path } destinationHeroImage { path }
+        storySet(size: 1, onlyEnabled: true) {
+          total
+          items { tout { image { path } } }
+        }
+      }
+      continentMostRequestedLabel
+      destinationContinueHeading
+      destinationEditorsPicksHeading
+      destinationFeaturedStories {
+        _id _contentTypeName _enabledAt isImportant title slug
+        category { title }
+        tout { image { path } dek }
+      }
+      destinationFeaturedOneImage { path }
+      destinationFeaturedTwoImage { path }
+      destinationFeaturedGuideLabel
+      destinationFeatureStory {
+        _id _contentTypeName _enabledAt isImportant title slug
+        category { title }
+        tout { image { path } dek }
+      }
+      destinationFeatureStoryImage { path }
+      destinationGuidesHeading
+      destinationGuideStories {
+        _id _contentTypeName _enabledAt isImportant title slug
+        category { title }
+        tout { image { path } dek }
+      }
+      continentMostRequestedDestination {
+        _id _contentTypeName title destinationBlurb
+        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+          total
+          items {
+            _id _contentTypeName _enabledAt isImportant title slug
+            category { title }
+            tout { image { path } dek }
+          }
+        }
+      }
+      continentMostRequestedTitle
+      continentMostRequestedDescription
+      continentMostRequestedStories {
+        _id _contentTypeName _enabledAt isImportant title slug
+        category { title }
+        tout { image { path } dek }
+      }
       locations {
+        _id
+        _contentTypeName
         title
+        image { path }
+      destinationHeroImage { path }
+        destinationBlurb
+        destinationBestTime
+        destinationTimeZone
+        destinationCurrency
+        destinationLanguages
+        destinationEnglishNote
+        destinationBestPairedWith { _id _contentTypeName title }
+        destinationFeaturedStories {
+          _id _contentTypeName _enabledAt isImportant title slug
+          category { title }
+          tout { image { path } dek }
+        }
+        destinationFeatureStory {
+          _id _contentTypeName _enabledAt isImportant title slug
+          category { title }
+          tout { image { path } dek }
+        }
+        destinationRelatedDestinations { _id _contentTypeName title image { path } }
+        storySet(size: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+          total
+          items {
+            _id
+            _contentTypeName
+            _enabledAt
+            isImportant
+            title
+            slug
+            category { title }
+            tout { image { path } dek }
+            contentHtml(images: $images)
+            extraContentBlocks { contentHtml(images: $images) }
+            extraHtmlBlocks { html }
+            mainHtmlBlock1
+            mainContentBlock1Html(images: $images)
+            additionalMainBlocks {
+              mainHtmlBlock2
+              mainContentBlock2Html(images: $images)
+              mainHtmlBlock3
+              mainContentBlock3Html(images: $images)
+              mainHtmlBlock4
+              mainContentBlock4Html(images: $images)
+              mainHtmlBlock5
+              mainContentBlock5Html(images: $images)
+              mainHtmlBlock6
+              mainContentBlock6Html(images: $images)
+            }
+            mainHtmlBlock2
+            mainContentBlock2Html(images: $images)
+            mainHtmlBlock3
+            mainContentBlock3Html(images: $images)
+            mainHtmlBlock4
+            mainContentBlock4Html(images: $images)
+            mainHtmlBlock5
+            mainContentBlock5Html(images: $images)
+            mainHtmlBlock6
+            mainContentBlock6Html(images: $images)
+            contentBlocks {
+              __typename
+              ... on ContentBlock { contentHtml(images: $images) }
+              ... on HtmlBlock { html }
+              ... on StoryImageBlock { image { path } }
+              ... on StoryGalleryBlock { images { image { path } } }
+            }
+          }
+        }
+        guideStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}) {
+          total
+        }
+        originalPhotoStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {eq: "Photography"}}}) {
+          total
+        }
+      }
+      storySet(size: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+        total
+        items {
+          _id
+          _contentTypeName
+          _enabledAt
+          isImportant
+          title
+          slug
+          category { title }
+          tout { image { path } dek }
+          contentHtml(images: $images)
+          extraContentBlocks { contentHtml(images: $images) }
+          extraHtmlBlocks { html }
+          mainHtmlBlock1
+          mainContentBlock1Html(images: $images)
+          additionalMainBlocks {
+            mainHtmlBlock2
+            mainContentBlock2Html(images: $images)
+            mainHtmlBlock3
+            mainContentBlock3Html(images: $images)
+            mainHtmlBlock4
+            mainContentBlock4Html(images: $images)
+            mainHtmlBlock5
+            mainContentBlock5Html(images: $images)
+            mainHtmlBlock6
+            mainContentBlock6Html(images: $images)
+          }
+          mainHtmlBlock2
+          mainContentBlock2Html(images: $images)
+          mainHtmlBlock3
+          mainContentBlock3Html(images: $images)
+          mainHtmlBlock4
+          mainContentBlock4Html(images: $images)
+          mainHtmlBlock5
+          mainContentBlock5Html(images: $images)
+          mainHtmlBlock6
+          mainContentBlock6Html(images: $images)
+          contentBlocks {
+            __typename
+            ... on ContentBlock { contentHtml(images: $images) }
+            ... on HtmlBlock { html }
+            ... on StoryImageBlock { image { path } }
+            ... on StoryGalleryBlock { images { image { path } } }
+          }
+        }
+      }
+      guideStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}) {
+        total
+      }
+      originalPhotoStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {eq: "Photography"}}}) {
+        total
       }
     }
-    total
   }
 }

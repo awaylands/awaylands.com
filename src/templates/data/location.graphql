@@ -1,11 +1,76 @@
-query {
-    continents: getContinentList {
-      items {
-        name
-        locations {
-          title
+query DestinationDetailContext {
+  franceOutfit: getStory(_id: "06621abf-16d7-4f2a-b6db-4c8df53ce6fa") {
+    _id
+    _contentTypeName
+    _enabledAt
+    isImportant
+    title
+    slug
+    category { title }
+    tout { image { path } dek }
+  }
+  franceBeaches: getStory(_id: "07ace99c-1e4d-4a7d-b4da-46c6b99b2a32") {
+    _id
+    _contentTypeName
+    _enabledAt
+    isImportant
+    title
+    slug
+    category { title }
+    tout { image { path } dek }
+  }
+  franceFeature: getStory(_id: "0c212cc6-243e-4daa-8202-eb76c0b0a04e") {
+    _id
+    _contentTypeName
+    _enabledAt
+    isImportant
+    title
+    slug
+    category { title }
+    tout { image { path } dek }
+  }
+  continents: getContinentList(size: 50, onlyEnabled: true) {
+    items {
+      _id
+      _contentTypeName
+      name
+      locations {
+        _id
+        _contentTypeName
+        title
+        image { path }
+        destinationHeroImage { path }
+        destinationBlurb
+        destinationBestTime
+        destinationTimeZone
+        destinationCurrency
+        destinationLanguages
+        destinationEnglishNote
+      destinationBestPairedWith { _id _contentTypeName title }
+      destinationFeaturedStories {
+        _id _contentTypeName _enabledAt isImportant title slug
+        category { title }
+        tout { image { path } dek }
+      }
+      destinationFeatureStory {
+        _id _contentTypeName _enabledAt isImportant title slug
+        category { title }
+        tout { image { path } dek }
+      }
+          destinationRelatedDestinations { _id _contentTypeName title image { path } }
+      storySet(size: 1, onlyEnabled: true) {
+          total
+          items {
+            tout { image { path } }
+          }
         }
       }
-      total
+      guideStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}) {
+        total
+      }
+      originalPhotoStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {eq: "Photography"}}}) {
+        total
+      }
     }
+  }
 }

@@ -180,9 +180,25 @@ routes:
       data: data/locations.graphql
       itemName: page
 
+  locationArchive:
+    path: /destinations/:title/archive
+    template: pages/location-archive.html
+    context: data/location.graphql
+    paginate:
+      data: data/locations.graphql
+      itemName: page
+
   continent:
     path: /continent/:name
-    template: pages/continent.html
+    template: pages/location.html
+    context: data/continent.graphql
+    paginate:
+      data: data/continents.graphql
+      itemName: page
+
+  continentArchive:
+    path: /continent/:name/archive
+    template: pages/location-archive.html
     context: data/continent.graphql
     paginate:
       data: data/continents.graphql

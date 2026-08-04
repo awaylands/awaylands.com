@@ -6,8 +6,8 @@
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
   "schema": {
-    "version": 240,
-    "hash": "2448f2e2ba16b4bf733c169763c3d901088a2ec383e8afc43d136d13d3d98645"
+    "version": 246,
+    "hash": "c22c4cec83e83ed21c48563b741a33243eea74c69bc65d6a1ad458351aadbff5"
   },
   "sourceFiles": {
     "src/templates/pages/stories/detail.html": "137282db619fb4cb45d3c67824185728cf4a0946e7b10d9648136a0be4138a4c",
@@ -39,9 +39,9 @@
     "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
     "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
     "src/javascripts/directives/story.js": "b8ae5982f20446971baae37f2e2e3afaa72e862172b68537e296f1759f21239b",
-    "_takeshape-schema-export/schema.json": "98b863091432870d4dfe3e0a6f8b678fd40b2cdacdd8a3192b7af236611de234",
-    "_takeshape-schema-export/schema-inner.json": "1096ceb86d7c663abed0bb0a412424c830b665a2028a5f1c2ba5407314057bde",
-    "tsg.yml": "b9141f749b8c1b5ef7920ee4f897351c3dd18471f82006cf68294ab69311da4e",
+    "_takeshape-schema-export/schema.json": "bb92beb7958ec811ef472384f68acfb5f6bf4ae7bf5f9fd90064d9ffd85cc629",
+    "_takeshape-schema-export/schema-inner.json": "1d8fd88cb649d37524b576cf4ee0edb477791d228033702e55210230888cf879",
+    "tsg.yml": "a14e5dc79738243345fe6519dc56d30bc98cfbf6f8e0a61f0fe67ab14c26b919",
     "package.json": "7487ce25f7a22c08fb2f5f8c17de4bd38b769342c9ad35d0ed9f62d2bbc8fda7",
     "scripts/sanitize-story-links.js": "cac32836e4b24239d0237c46186e8dbba3f20c631ed52d424c836d53050afa3e",
     "src/templates/pages/legacy-story.html": "42a8d4ebd740bae483607514ab67a8bbe0c2c1d979b4c597d7ec63c4dbc40727",
@@ -54,7 +54,7 @@
     "static/assets/fonts/still-preview/EB-GARAMOND-OFL.txt": "0985066662eb755ed3683ae5482a81a9195b49ce3f7e165cc2388b3dbece7dd7",
     "static/assets/fonts/still-preview/eb-garamond-variable.ttf": "ef9512f92f6d579e5dc75af59a5a4b1b8b47d2eda89e00b954d44520e5369027",
     "src/stylesheets/pages/_destinations.scss": "a7abc33a3121adc7560712dc42750acdd7a6843e857efd4274d48035bc223f4c",
-    "scripts/deploy-production.js": "84f5bc02db32b6af3580c7635b8f49bc45acd1727c8c6f8cd0084ed6588d41d7",
+    "scripts/deploy-production.js": "f1b099f4b89ddda88504a03058c2310c54633491a5c561236b941fde082df891",
     "scripts/verify-production-baseline.js": "537ab24ac5aa2acbcd35dbac34a70258e8293346012db6cdf5867349a48d2218"
   }
 }

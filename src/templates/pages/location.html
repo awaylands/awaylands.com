@@ -1,44 +1,950 @@
-{% extends "layouts/landing.html" %}
+{% extends "layouts/default.html" %}
+{% set destinationTitle = page.title or page.name or "" %}
+{% include "data/destination-facts.html" %}
+{% set isContinentPage = page._contentTypeName == "continent" %}
+{# Resolve the editorial defaults by iterating the authored fact map. The
+   template runtime does not reliably support dynamic object-key lookup. #}
+{% set automaticFacts = {} %}
+{% for factTitle, factValues in destinationAutofill %}
+  {% if factTitle == destinationTitle %}{% set automaticFacts = factValues %}{% endif %}
+{% endfor %}
+{% set automaticBlurb = "" %}
+{% if destinationTitle == "Monaco" %}{% set automaticFacts = {"blurb":"This compact French Riviera principality pairs Belle Époque architecture, Mediterranean views, and glamorous Monte Carlo with surprisingly accessible free and budget-friendly experiences.","bestTime":"Apr - Jun and Sep - Oct bring mild Riviera weather. Jul - Aug is hottest; Nov - Mar is cooler and wetter.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"French","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Italy","url":"/destinations/italy"},{"title":"France","url":"/destinations/france"},{"title":"Austria","url":"/destinations/austria"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "New Zealand" %}{% set automaticFacts = {"blurb":"New Zealand spans the North and South Islands, with dramatic coastlines, alpine landscapes, and rewarding self-drive routes. Our guides cover first-time road trips and Waiheke Island wineries, beaches, and scenic stops.","bestTime":"Dec - Mar is warmest for beaches and hikes; Jun - Aug is ski season. Spring and autumn bring changeable weather.","timeZone":"Multiple time zones|UTC+12 to UTC+13:45, depending on region and season","currency":"New Zealand dollar (NZD)","languages":"English, Māori, New Zealand Sign Language","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"Australia","url":"/destinations/australia"}],"related":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"Australia","url":"/destinations/australia"}]} %}{% endif %}
+{% if destinationTitle == "Australia" %}{% set automaticFacts = {"blurb":"Australia rewards repeat trips with subtropical Brisbane, underrated New South Wales road trips, far-reaching coastlines, and romantic escapes suited to couples and honeymoon travel.","bestTime":"Sep - Nov and Mar - May suit many regions. The tropical north is driest May - Oct; southern summer runs Dec - Feb.","timeZone":"Multiple time zones|UTC offsets vary by region","currency":"Australian dollar (AUD)","languages":"English","englishNote":"English is widely spoken nationwide.","paired":[{"title":"New Zealand","url":"/destinations/new-zealand"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"}],"related":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"New Zealand","url":"/destinations/new-zealand"}]} %}{% endif %}
+{% if destinationTitle == "Japan" %}{% set automaticFacts = {"blurb":"Japan blends precise modern cities with deep tradition and four distinct seasons. Start with Tokyo logistics, reliable eSIM planning, and a winter packing guide for cold weather and snow.","bestTime":"Mar - May brings cherry blossoms and mild weather; Oct - Nov brings autumn color. Jun - Jul is rainy season in much of Japan.","timeZone":"Japan Standard Time|UTC+9","currency":"Japanese yen (JPY)","languages":"Japanese","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"South Korea","url":"/destinations/south-korea"},{"title":"Taiwan","url":"/destinations/taiwan"},{"title":"China","url":"/destinations/china"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"}]} %}{% endif %}
+{% if destinationTitle == "Costa Rica" %}{% set automaticFacts = {"blurb":"Costa Rica protects an extraordinary share of its rainforests, volcanoes, and wildlife-rich coastlines. Our practical coverage begins with rental-car insurance, driving conditions, and local road rules.","bestTime":"Dec - Apr is the Pacific dry season. May - Nov is greener and wetter; the Caribbean has its driest stretch around Feb - Apr.","timeZone":"Central Standard Time|UTC-6","currency":"Costa Rican colón (CRC)","languages":"Spanish","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Panama","url":"/destinations/panama"},{"title":"Belize","url":"/destinations/belize"},{"title":"Jamaica","url":"/destinations/jamaica"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "North Ireland" %}{% set automaticFacts = {"blurb":"Explore Northern Ireland through firsthand guides, practical planning, memorable places to stay, and original photography.","bestTime":"May - Sep has the longest daylight and mildest temperatures. Oct - Mar is colder, windier, and wetter.","timeZone":"Greenwich Mean Time|UTC+0 · UTC+1 in summer","currency":"Pound Sterling (GBP)","languages":"English; Irish and Ulster Scots are also recognized.","englishNote":"English is widely spoken nationwide.","paired":[{"title":"England","url":"/destinations/england"},{"title":"Ireland","url":"/destinations/ireland"},{"title":"The Netherlands","url":"/destinations/the-netherlands"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Dominica" %}{% set automaticFacts = {"blurb":"Dominica is the Caribbean’s volcanic Nature Island, known for rainforest trails, waterfalls, hot springs, and a rugged coastline. Our coverage also explains its citizenship-by-investment option.","bestTime":"Jan - Apr is drier for hiking and beaches. Jun - Nov is wetter and overlaps the Caribbean hurricane season.","timeZone":"Atlantic Standard Time|UTC-4","currency":"Eastern Caribbean dollar (XCD)","languages":"English","englishNote":"English is widely spoken nationwide.","paired":[{"title":"St Kitts and Nevis","url":"/destinations/st-kitts-and-nevis"},{"title":"Barbados","url":"/destinations/barbados"},{"title":"Saint Martin","url":"/destinations/saint-martin"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Malta" %}{% set automaticFacts = {"blurb":"Malta combines honey-colored cities, clear Mediterranean coves, and centuries of layered history. Explore Gozo tours, private boat days, standout photo spots, and a complete seven-day itinerary.","bestTime":"Apr - Jun and Sep - Oct bring warm sea weather without peak summer heat. Jul - Aug is hot and dry; winter is mild but wetter.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"English, Maltese","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Albania","url":"/destinations/albania"},{"title":"Greece","url":"/destinations/greece"},{"title":"Italy","url":"/destinations/italy"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Portugal" %}{% set automaticFacts = {"blurb":"Portugal stretches from historic cities to surf towns and the golden coves of the Algarve. Our guides spotlight beautiful beaches, Mediterranean beach towns, and where to stay across Portugal and Spain.","bestTime":"May - Jun and Sep - Oct are warm and sunny. The Algarve stays beach-friendly through summer; northern winters are wetter.","timeZone":"Multiple time zones|UTC-1 to UTC+1, depending on region and season","currency":"Euro (EUR)","languages":"Portuguese","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Spain","url":"/destinations/spain"},{"title":"France","url":"/destinations/france"},{"title":"Monaco","url":"/destinations/monaco"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Albania" %}{% set automaticFacts = {"blurb":"Albania brings together the Albanian Riviera, mountain landscapes, Ottoman-era towns, and an increasingly easy road-trip circuit. Start with our two-week itinerary and Tirana Airport car-rental guide.","bestTime":"May - Jun and Sep - Oct suit the coast and road trips. Jul - Aug is hottest; mountain snow lingers into spring.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Albanian lek (ALL)","languages":"Albanian","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Montenegro","url":"/destinations/montenegro"},{"title":"Greece","url":"/destinations/greece"},{"title":"Croatia","url":"/destinations/croatia"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Montenegro" %}{% set automaticFacts = {"blurb":"Montenegro compresses Adriatic beaches, the mountain-ringed Bay of Kotor, and atmospheric towns such as Perast into a small, scenic country ideal for a coastal road trip.","bestTime":"May - Jun and Sep - Oct bring warm Adriatic weather. Jul - Aug is hot; winter is best for snow in the mountains.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"Montenegrin","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Albania","url":"/destinations/albania"},{"title":"Croatia","url":"/destinations/croatia"},{"title":"Greece","url":"/destinations/greece"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Saint Martin" %}{% set automaticFacts = {"blurb":"Saint Martin shares one Caribbean island with Dutch Sint Maarten, creating a distinctive mix of French beaches, food, nightlife, and cross-island culture. Our guide also covers the SXM Festival.","bestTime":"Dec - Apr is the driest beach season. Aug - Oct is hottest and overlaps the Caribbean hurricane season.","timeZone":"Atlantic Standard Time|UTC-4","currency":"Euro (EUR)","languages":"French","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"St Kitts and Nevis","url":"/destinations/st-kitts-and-nevis"},{"title":"Dominica","url":"/destinations/dominica"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Greece" %}{% set automaticFacts = {"blurb":"Greece pairs ancient history with clear-water island escapes and a deeply regional food culture. Our guides go beyond the classics to the beaches of Milos, Mykonos, and underrated Karpathos.","bestTime":"May - Jun brings wildflowers and warm seas; Sep - Oct keeps the water warm. Nov - Mar is the off-season, with cooler weather and many island closures.","timeZone":"Eastern European Time|UTC+2 · UTC+3 in summer","currency":"Euro (EUR)","languages":"Greek","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Albania","url":"/destinations/albania"},{"title":"Montenegro","url":"/destinations/montenegro"},{"title":"Malta","url":"/destinations/malta"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"},{"title":"Portugal","url":"/destinations/portugal"}]} %}{% endif %}
+{% if destinationTitle == "St Kitts and Nevis" %}{% set automaticFacts = {"blurb":"St Kitts and Nevis combines volcanic peaks, calm Caribbean beaches, plantation history, and relaxed resort stays. Our coverage includes the Park Hyatt at Christophe Harbour and regional citizenship options.","bestTime":"Dec - Apr is drier and breezier. Jun - Nov is warmer, wetter, and overlaps the Caribbean hurricane season.","timeZone":"Atlantic Standard Time|UTC-4","currency":"Eastern Caribbean dollar (XCD)","languages":"English","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Saint Martin","url":"/destinations/saint-martin"},{"title":"Dominica","url":"/destinations/dominica"},{"title":"Barbados","url":"/destinations/barbados"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Ireland" %}{% set automaticFacts = {"blurb":"Ireland’s Atlantic coast, green countryside, historic towns, and legendary hospitality make it a natural road-trip destination. Our guides highlight unusual beaches and lesser-known places beyond the standard route.","bestTime":"May - Sep brings the longest daylight and mildest weather. Oct - Mar is cooler, wetter, and best for cozy city breaks.","timeZone":"Greenwich Mean Time / Irish Time|UTC+0 · UTC+1 in summer","currency":"Euro (EUR)","languages":"English, Irish","englishNote":"English is widely spoken nationwide.","paired":[{"title":"England","url":"/destinations/england"},{"title":"North Ireland","url":"/destinations/north-ireland"},{"title":"The Netherlands","url":"/destinations/the-netherlands"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Uruguay" %}{% set automaticFacts = {"blurb":"Uruguay is one of South America’s most relaxed destinations, with Atlantic beaches, wine country, and historic Colonia del Sacramento. It also makes an easy day trip from Buenos Aires.","bestTime":"Dec - Mar is beach season and warmest. Mar - Apr and Oct - Nov are mild for wine country and cities.","timeZone":"Uruguay Standard Time|UTC-3","currency":"Uruguayan peso (UYU)","languages":"Spanish","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Argentina","url":"/destinations/argentina"}],"related":[{"title":"Argentina","url":"/destinations/argentina"}]} %}{% endif %}
+{% if destinationTitle == "Oman" %}{% set automaticFacts = {"blurb":"Oman is made for road trips, with desert camps, dramatic wadis, mountain roads, and a long Arabian Sea coast. Explore Wadi Shab, the Daymaniyat Islands, and our complete seven-day itinerary.","bestTime":"Oct - Apr is cooler for deserts, wadis, and Muscat. May - Sep is very hot; Salalah turns green during the Jul - Sep khareef.","timeZone":"Gulf Standard Time|UTC+4","currency":"Omani rial (OMR)","languages":"Arabic","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"United Arab Emirates","url":"/destinations/united-arab-emirates"}],"related":[{"title":"United Arab Emirates","url":"/destinations/united-arab-emirates"}]} %}{% endif %}
+{% if destinationTitle == "French Polynesia" %}{% set automaticFacts = {"blurb":"French Polynesia spreads more than 100 islands across the South Pacific. Our guides compare Tahiti, Moorea, Bora Bora, and Taha’a, with advice for lagoons, overwater stays, and budget-conscious island hopping.","bestTime":"May - Oct is the drier, cooler season. Nov - Apr is warmer, more humid, and brings more tropical rain.","timeZone":"Multiple time zones|UTC-10 to UTC-9, depending on region and season","currency":"CFP franc (XPF)","languages":"French","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"New Zealand","url":"/destinations/new-zealand"}],"related":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"New Zealand","url":"/destinations/new-zealand"},{"title":"Australia","url":"/destinations/australia"}]} %}{% endif %}
+{% if destinationTitle == "Argentina" %}{% set automaticFacts = {"blurb":"Argentina stretches from cosmopolitan Buenos Aires to wine country, high desert, and Patagonia. Our firsthand coverage centers on living locally, Spanish-language travel, and the best photo spots in Buenos Aires.","bestTime":"Oct - Apr suits Patagonia and wine country; Dec - Feb is warmest. May - Sep is best for skiing in the Andes.","timeZone":"Multiple time zones|UTC offsets vary by region","currency":"Argentine peso (ARS)","languages":"Guaraní, Spanish","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Uruguay","url":"/destinations/uruguay"}],"related":[{"title":"Uruguay","url":"/destinations/uruguay"}]} %}{% endif %}
+{% if destinationTitle == "Poland" %}{% set automaticFacts = {"blurb":"Poland combines beautifully rebuilt cities, medieval squares, mountain regions, and excellent-value travel. Our guides explore Krakow and southern Poland’s castles, plus practical advice for teaching English and living abroad.","bestTime":"May - Sep brings warm city weather and long days. Dec - Feb is cold and snowy; Sep - Oct brings autumn color.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Polish złoty (PLN)","languages":"Polish","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Austria","url":"/destinations/austria"},{"title":"Germany","url":"/destinations/germany"},{"title":"Croatia","url":"/destinations/croatia"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Austria" %}{% set automaticFacts = {"blurb":"Austria pairs imperial Vienna with alpine scenery, lakes, and the Danube Valley. Plan a road trip, find Vienna’s best photo locations, and explore beyond Melk Abbey along the river.","bestTime":"May - Sep suits lakes and hiking; Dec - Mar is ski season. Spring and autumn are cooler with alpine weather changes.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"Austro-Bavarian German","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Croatia","url":"/destinations/croatia"},{"title":"Italy","url":"/destinations/italy"},{"title":"Germany","url":"/destinations/germany"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "South Korea" %}{% set automaticFacts = {"blurb":"South Korea moves easily between design-forward Seoul, historic palaces, mountain landscapes, and a rich café and food culture. Our seasonal guide maps Seoul’s best places for autumn foliage.","bestTime":"Apr - May brings spring blossoms; Oct - Nov brings foliage and crisp weather. Jul - Aug is hot, humid, and rainy.","timeZone":"Korean Standard Time|UTC+9","currency":"South Korean won (KRW)","languages":"Korean","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Japan","url":"/destinations/japan"},{"title":"Taiwan","url":"/destinations/taiwan"},{"title":"China","url":"/destinations/china"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"}]} %}{% endif %}
+{% if destinationTitle == "Ethiopia" %}{% set automaticFacts = {"blurb":"Ethiopia has one of Africa’s oldest cultural histories and is the birthplace of coffee. Our Addis Ababa coverage focuses on modern hospitality, local culture, and the capital’s distinct sense of place.","bestTime":"Oct - Feb is driest for highlands and historic routes. Jun - Sep is the main rainy season, especially in the north and west.","timeZone":"East Africa Time|UTC+3","currency":"Ethiopian birr (ETB)","languages":"Amharic","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"South Africa","url":"/destinations/south-africa"},{"title":"Morocco","url":"/destinations/morocco"}],"related":[{"title":"South Africa","url":"/destinations/south-africa"},{"title":"Morocco","url":"/destinations/morocco"}]} %}{% endif %}
+{% if destinationTitle == "South Africa" %}{% set automaticFacts = {"blurb":"South Africa combines Cape Town, the scenic Garden Route, celebrated wine country, and wildlife reserves. Our guides cover romantic safari stays, coastal road trips, and standout hotels including La Residence.","bestTime":"Nov - Mar is warmest in Cape Town and along the coast. May - Sep is dry safari season in Kruger; the Cape is wetter in winter.","timeZone":"South Africa Standard Time|UTC+2","currency":"South African rand (ZAR)","languages":"Afrikaans, English, Southern Ndebele, Northern Sotho, Southern Sotho, Swazi, Tswana, Tsonga, Venda, Xhosa, Zulu","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Ethiopia","url":"/destinations/ethiopia"},{"title":"Morocco","url":"/destinations/morocco"}],"related":[{"title":"Morocco","url":"/destinations/morocco"},{"title":"Ethiopia","url":"/destinations/ethiopia"}]} %}{% endif %}
+{% if destinationTitle == "Barbados" %}{% set automaticFacts = {"blurb":"Barbados blends calm Caribbean beaches, lively Bajan culture, rum traditions, and a wilder Atlantic coast. Our coverage includes all-inclusive resort stays and practical hurricane-season planning.","bestTime":"Dec - Apr is drier and sunnier. Jun - Nov is warmer and wetter, with the highest hurricane risk from Aug - Oct.","timeZone":"Atlantic Standard Time|UTC-4","currency":"Barbadian dollar (BBD)","languages":"English","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Dominica","url":"/destinations/dominica"},{"title":"St Kitts and Nevis","url":"/destinations/st-kitts-and-nevis"},{"title":"Saint Martin","url":"/destinations/saint-martin"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Mexico" %}{% set automaticFacts = {"blurb":"Mexico’s regional variety runs from Baja wine country and Los Cabos to Guadalajara, Tulum, and the Yucatán. Explore beaches, food, Día de los Muertos traditions, road trips, and resort stays.","bestTime":"Nov - Apr is driest in many regions. May - Oct brings summer rain; Caribbean coasts are hottest and hurricane-prone Aug - Oct.","timeZone":"Multiple time zones|UTC offsets vary by region","currency":"Mexican peso (MXN)","languages":"Spanish","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Belize","url":"/destinations/belize"},{"title":"California","url":"/destinations/california"},{"title":"Hawaii","url":"/destinations/hawaii"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"}]} %}{% endif %}
+{% if destinationTitle == "China" %}{% set automaticFacts = {"blurb":"China’s immense scale includes ancient water towns, fast-changing megacities, and deeply regional cultures. Our guide visits Zhujiajiao’s canals as an atmospheric day trip from Shanghai.","bestTime":"Apr - May and Sep - Oct bring milder weather in many regions. Summers are hot and wet; northern winters are cold and dry.","timeZone":"Multiple time zones|UTC+6 to UTC+8, depending on region and season","currency":"Chinese yuan (CNY)","languages":"Chinese","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Taiwan","url":"/destinations/taiwan"},{"title":"South Korea","url":"/destinations/south-korea"},{"title":"Vietnam","url":"/destinations/vietnam"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"}]} %}{% endif %}
+{% if destinationTitle == "United Arab Emirates" %}{% set automaticFacts = {"blurb":"The United Arab Emirates pairs Dubai’s ambitious skyline and beaches with Abu Dhabi’s culture and desert landscapes. Our guides cover road trips, yacht days, cafés, photo spots, and luxury travel logistics.","bestTime":"Nov - Mar is coolest for cities and desert trips. Jun - Sep is intensely hot and humid along the coast.","timeZone":"Gulf Standard Time|UTC+4","currency":"United Arab Emirates dirham (AED)","languages":"Arabic","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Oman","url":"/destinations/oman"}],"related":[{"title":"Oman","url":"/destinations/oman"}]} %}{% endif %}
+{% if destinationTitle == "Canada" %}{% set automaticFacts = {"blurb":"Canada’s vast landscapes reward road trips, from the Rocky Mountains and Whistler to Nova Scotia and Lake Ontario. Our guides cover campervans, fall color, coastal weekends, and city-to-nature escapes.","bestTime":"Jun - Sep is warmest for road trips and hiking. Dec - Mar is ski season; autumn color peaks Sep - Oct depending on region.","timeZone":"Multiple time zones|UTC offsets vary by region","currency":"Canadian dollar (CAD)","languages":"English, French","englishNote":"English is widely spoken nationwide.","paired":[{"title":"California","url":"/destinations/california"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"United States","url":"/destinations/united-states"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"}]} %}{% endif %}
+{% if destinationTitle == "Turks and Caicos" %}{% set automaticFacts = {"blurb":"Turks and Caicos is defined by luminous water, powder-soft beaches, and easy boat days across its low-lying islands. Our guides cover packing, photography, and elevated Caribbean stays.","bestTime":"Dec - Apr is dry and breezy for beaches. Jun - Nov is warmer and wetter, with hurricane risk highest Aug - Oct.","timeZone":"Time zones vary by region|Check the local UTC offset","currency":"Check current local currency guidance.","languages":"Languages vary by region.","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Cook Islands" %}{% set automaticFacts = {"blurb":"The Cook Islands offer South Pacific lagoons and a relaxed Polynesian pace without the scale of a large resort destination. Start with our practical guides to Rarotonga and Aitutaki.","bestTime":"May - Oct is drier and cooler. Nov - Apr is hotter, more humid, and has more tropical rain.","timeZone":"Cook Islands Standard Time|UTC-10","currency":"Cook Islands dollar (CKD), New Zealand dollar (NZD)","languages":"English, Cook Islands Māori","englishNote":"English is widely spoken nationwide.","paired":[{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"New Zealand","url":"/destinations/new-zealand"}],"related":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"New Zealand","url":"/destinations/new-zealand"},{"title":"Australia","url":"/destinations/australia"}]} %}{% endif %}
+{% if destinationTitle == "Panama" %}{% set automaticFacts = {"blurb":"Panama is the land bridge between Central and South America, joining Caribbean islands, Pacific beaches, cloud forest, and the engineering landmark of the Panama Canal.","bestTime":"Dec - Apr is the Pacific dry season. May - Nov is greener and rainier; Caribbean rainfall varies by coast.","timeZone":"Eastern Standard Time|UTC-5","currency":"Panamanian balboa (PAB), United States dollar (USD)","languages":"Spanish","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Costa Rica","url":"/destinations/costa-rica"},{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Belize","url":"/destinations/belize"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Hawaii" %}{% set automaticFacts = {"blurb":"Hawaii’s volcanic islands each have a distinct landscape and beach culture. Compare the best beaches on Kauai, Oahu, Maui, and the Big Island, then plan island choice, packing, hotels, and affordable adventures.","bestTime":"Apr - May and Sep - Oct are warm and relatively dry. Nov - Mar brings larger surf and wetter conditions on many islands.","timeZone":"Hawaii Standard Time|UTC-10 · no daylight saving time","currency":"United States Dollar (USD)","languages":"English and Hawaiian","englishNote":"English is widely spoken nationwide.","paired":[{"title":"California","url":"/destinations/california"},{"title":"United States","url":"/destinations/united-states"},{"title":"Mexico","url":"/destinations/mexico"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"}]} %}{% endif %}
+{% if destinationTitle == "Fiji" %}{% set automaticFacts = {"blurb":"Fiji’s hundreds of islands combine reef-lined beaches, welcoming villages, and world-class resort stays. Our guides cover Savasi, Castaway Island, family resorts, and the best activities beyond the beach.","bestTime":"May - Oct is drier and cooler. Nov - Apr is hotter, humid, and wetter, with cyclone risk highest Jan - Mar.","timeZone":"Fiji Standard Time|UTC+12","currency":"Fijian dollar (FJD)","languages":"English, Fijian, Fiji Hindi","englishNote":"English is widely spoken nationwide.","paired":[{"title":"New Zealand","url":"/destinations/new-zealand"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"Australia","url":"/destinations/australia"}],"related":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"New Zealand","url":"/destinations/new-zealand"},{"title":"Australia","url":"/destinations/australia"}]} %}{% endif %}
+{% if destinationTitle == "Belize" %}{% set automaticFacts = {"blurb":"Belize brings together the world’s second-largest barrier reef, Caribbean cayes, rainforest, and Maya sites. Our coverage includes wildlife, honeymoon travel, and the private-island experience at Cayo Espanto.","bestTime":"Late Nov - Apr is the dry season. Jun - Nov is wetter and hotter, with hurricane risk highest Aug - Oct.","timeZone":"Central Standard Time|UTC-6","currency":"Belize dollar (BZD)","languages":"Belizean Creole, English, Spanish","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Costa Rica","url":"/destinations/costa-rica"},{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Panama","url":"/destinations/panama"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Bahamas" %}{% set automaticFacts = {"blurb":"The Bahamas is an archipelago of clear shallows, white-sand beaches, and distinct island personalities. Our guides cover Exuma, Baha Mar, cruises, and what to pack for a tropical resort trip.","bestTime":"Nov - Apr is driest and mildest. Jun - Nov is hotter and wetter, with hurricane risk highest Aug - Oct.","timeZone":"Eastern Time|UTC-5 · UTC-4 in summer","currency":"Bahamian dollar (BSD), United States dollar (USD)","languages":"English","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"},{"title":"Saint Martin","url":"/destinations/saint-martin"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "England" %}{% set automaticFacts = {"blurb":"England layers historic cities, country estates, dramatic northern coastlines, and an extensive rail network into an easy-to-combine itinerary. Explore London photo spots, Manchester, Durham, Northumberland, and UK road-trip planning.","bestTime":"May - Sep has the longest daylight and mildest weather. Oct - Mar is cooler and wetter, with festive December city breaks.","timeZone":"Greenwich Mean Time|UTC+0 · UTC+1 in summer","currency":"Pound Sterling (GBP)","languages":"English","englishNote":"English is widely spoken nationwide.","paired":[{"title":"North Ireland","url":"/destinations/north-ireland"},{"title":"Ireland","url":"/destinations/ireland"},{"title":"The Netherlands","url":"/destinations/the-netherlands"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"Croatia","url":"/destinations/croatia"},{"title":"Portugal","url":"/destinations/portugal"}]} %}{% endif %}
+{% if destinationTitle == "Jamaica" %}{% set automaticFacts = {"blurb":"Jamaica combines mountain interiors, celebrated music and food, and beaches ranging from Negril to the South Coast. Our guides cover river rafting, diving, overwater stays, and resort reviews.","bestTime":"Dec - Apr is driest for beaches. May - Jun and Sep - Nov are wetter; hurricane risk is highest Aug - Oct.","timeZone":"Eastern Standard Time|UTC-5","currency":"Jamaican dollar (JMD)","languages":"English, Jamaican Patois","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Bahamas","url":"/destinations/bahamas"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"},{"title":"Panama","url":"/destinations/panama"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"}]} %}{% endif %}
+{% if destinationTitle == "India" %}{% set automaticFacts = {"blurb":"India’s scale and cultural variety reward focused regional trips. Our guides move from Old and New Delhi photo spots to Mumbai hotels and a wedding in the Himalayan foothills of Dehradun.","bestTime":"Oct - Mar is cooler and drier across much of India. Jun - Sep is monsoon season; Himalayan trekking is best Apr - Jun and Sep - Oct.","timeZone":"India Standard Time|UTC+5:30","currency":"Indian rupee (INR)","languages":"English, Hindi, Tamil","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Thailand","url":"/destinations/thailand"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"}]} %}{% endif %}
+{% if destinationTitle == "test location" %}{% set automaticFacts = {"blurb":"Explore test location through firsthand travel guides, practical planning advice, memorable places to stay, and original photography.","bestTime":"Timing varies by region and trip style. Check local seasonal conditions before booking.","timeZone":"Time zones vary by region|Check the local UTC offset","currency":"Check current local currency guidance.","languages":"Languages vary by region.","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[],"related":[]} %}{% endif %}
+{% if destinationTitle == "Germany" %}{% set automaticFacts = {"blurb":"Germany pairs modern cities and medieval towns with forest and alpine landscapes. Our guides focus on Munich photo spots, Oktoberfest planning, and scenic hikes in the German Alps.","bestTime":"May - Sep brings warm weather and outdoor festivals. Sep - Oct is harvest and Oktoberfest season; Dec - Feb is cold with Christmas markets.","timeZone":"Central European Time|UTC+1 to UTC+2, depending on region and season","currency":"Euro (EUR)","languages":"German","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"The Netherlands","url":"/destinations/the-netherlands"},{"title":"Austria","url":"/destinations/austria"},{"title":"France","url":"/destinations/france"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Italy" %}{% set automaticFacts = {"blurb":"Italy’s regions feel like separate journeys, from Rome and Florence to Puglia, Sardinia, Cinque Terre, and the Amalfi Coast. Our guides cover beaches, road trips, packing, food, and exceptional coastal stays.","bestTime":"Apr - Jun and Sep - Oct bring mild weather across much of Italy. Jul - Aug is hottest; the Alps are best for skiing Dec - Mar.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"Italian","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Croatia","url":"/destinations/croatia"},{"title":"Monaco","url":"/destinations/monaco"},{"title":"Austria","url":"/destinations/austria"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"},{"title":"Portugal","url":"/destinations/portugal"}]} %}{% endif %}
+{% if destinationTitle == "Croatia" %}{% set automaticFacts = {"blurb":"Croatia’s Adriatic coast is lined with clear coves, historic stone towns, and hundreds of islands. Our guides cover cruising, Mediterranean beach towns, and a cinematic route through the country.","bestTime":"May - Jun and Sep - Oct bring warm Adriatic weather. Jul - Aug is hottest; inland winters are cold and sometimes snowy.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"Croatian","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Austria","url":"/destinations/austria"},{"title":"Italy","url":"/destinations/italy"},{"title":"Montenegro","url":"/destinations/montenegro"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Portugal","url":"/destinations/portugal"}]} %}{% endif %}
+{% if destinationTitle == "France" %}{% set automaticFacts = {"blurb":"From Paris and the Loire Valley to Provence, the Alps, and the French Riviera, France brings together historic cities, celebrated food and wine, Mediterranean beaches, and remarkably varied landscapes.","bestTime":"Apr - Jun brings spring blooms; Sep - Oct is grape harvest and mild weather. Jul - Aug is hottest, especially in the south.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"French","englishNote":"English is common in cities and major tourist areas.","paired":[{"title":"Monaco","url":"/destinations/monaco"},{"title":"Spain","url":"/destinations/spain"},{"title":"Italy","url":"/destinations/italy"}],"related":[{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"},{"title":"Portugal","url":"/destinations/portugal"}]} %}{% endif %}
+{% if destinationTitle == "The Netherlands" %}{% set automaticFacts = {"blurb":"The Netherlands balances canal cities, bold design, cycling culture, and compact train travel. Our Amsterdam guides focus on distinctive hotels, art-filled stays, cocktails, and efficient 24-hour itineraries.","bestTime":"Apr - May is tulip season; Jun - Sep brings the warmest weather. Oct - Mar is cooler, windier, and wetter.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"Dutch","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Germany","url":"/destinations/germany"},{"title":"England","url":"/destinations/england"},{"title":"North Ireland","url":"/destinations/north-ireland"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "California" %}{% set automaticFacts = {"blurb":"California’s landscapes shift from Los Angeles beaches and Big Sur cliffs to desert art, Lake Tahoe, wine country, and redwood coast. Our local guides cover road trips, photo spots, camping, and weekend escapes.","bestTime":"Apr - Jun and Sep - Nov are mild statewide. Jul - Sep is best for the north coast; winter is best for desert landscapes.","timeZone":"Pacific Time|UTC-8 · UTC-7 in summer","currency":"United States Dollar (USD)","languages":"English; Spanish is also widely spoken.","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"United States","url":"/destinations/united-states"},{"title":"Mexico","url":"/destinations/mexico"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"}]} %}{% endif %}
+{% if destinationTitle == "Dominican Republic" %}{% set automaticFacts = {"blurb":"The Dominican Republic extends far beyond its resorts, with lively cities, mountain interiors, food traditions, and long Caribbean and Atlantic coastlines. Our guides cover Punta Cana, local culture, beaches, and packing.","bestTime":"Dec - Apr is generally drier for beaches. May - Nov is hotter and wetter, with hurricane risk highest Aug - Oct.","timeZone":"Atlantic Standard Time|UTC-4","currency":"Dominican peso (DOP)","languages":"Spanish","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Saint Martin","url":"/destinations/saint-martin"},{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Bahamas","url":"/destinations/bahamas"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Taiwan" %}{% set automaticFacts = {"blurb":"Taiwan combines Taipei’s night markets and design-forward city life with hot springs, mountains, and a dramatic coastline. Our guides cover where to stay, food, city views, and practical Southeast Asia trip planning.","bestTime":"Oct - Apr is cooler and drier in the north. May - Sep is hot and humid; typhoon risk is highest Jul - Sep.","timeZone":"Taiwan Standard Time|UTC+8","currency":"New Taiwan dollar (TWD)","languages":"Chinese","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Vietnam","url":"/destinations/vietnam"},{"title":"South Korea","url":"/destinations/south-korea"},{"title":"China","url":"/destinations/china"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"}]} %}{% endif %}
+{% if destinationTitle == "United States" %}{% set automaticFacts = {"blurb":"The United States spans desert road trips, mountain parks, beach towns, and culture-rich cities. Our guides cover New York, New Orleans, Miami, Las Vegas, Alaska, the Southwest, and routes across the country.","bestTime":"Seasonality varies widely: spring and fall suit many cities and parks; summer suits northern parks; winter is best for snow sports and deserts.","timeZone":"Multiple time zones|UTC offsets vary by region","currency":"United States dollar (USD)","languages":"English","englishNote":"English is widely spoken nationwide.","paired":[{"title":"California","url":"/destinations/california"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Mexico","url":"/destinations/mexico"}],"related":[{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"},{"title":"Dominican Republic","url":"/destinations/dominican-republic"}]} %}{% endif %}
+{% if destinationTitle == "Vietnam" %}{% set automaticFacts = {"blurb":"Vietnam stretches from Hanoi’s winter streets to tropical beaches, limestone landscapes, and energetic food cities. Start with our first-timer guide, visa planning, and a complete ten-day itinerary.","bestTime":"Nov - Apr is driest in the south; Mar - May is hot. Central Vietnam is wettest Sep - Dec, while the north is coolest Dec - Feb.","timeZone":"Indochina Time|UTC+7","currency":"Vietnamese đồng (VND)","languages":"Vietnamese","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Cambodia","url":"/destinations/cambodia"},{"title":"Thailand","url":"/destinations/thailand"},{"title":"Taiwan","url":"/destinations/taiwan"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"}]} %}{% endif %}
+{% if destinationTitle == "Thailand" %}{% set automaticFacts = {"blurb":"Thailand pairs Bangkok’s food and city energy with northern culture and island escapes. Our guides cover Koh Mak, Koh Phi Phi, motorbike planning, wildlife, luxury hotels, and Southeast Asia itineraries.","bestTime":"Nov - Feb is coolest and driest in much of Thailand. Mar - May is hottest; May - Oct is rainy season, varying by coast.","timeZone":"Indochina Time|UTC+7","currency":"Thai baht (THB)","languages":"Thai","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Cambodia","url":"/destinations/cambodia"},{"title":"Vietnam","url":"/destinations/vietnam"},{"title":"Singapore","url":"/destinations/singapore"}],"related":[{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"},{"title":"India","url":"/destinations/india"}]} %}{% endif %}
+{% if destinationTitle == "Sri Lanka" %}{% set automaticFacts = {"blurb":"Sri Lanka fits wildlife parks, tea country, ancient cities, and a palm-lined coast into a compact island. Our guides cover wildlife tours, beaches, hotels, and a complete country itinerary.","bestTime":"Dec - Apr is driest on the south and west coasts; May - Sep is best for the east coast. Monsoons arrive at different times by region.","timeZone":"India Standard Time|UTC+5:30","currency":"Sri Lankan rupee (LKR)","languages":"Sinhala, Tamil","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Maldives","url":"/destinations/maldives"},{"title":"India","url":"/destinations/india"},{"title":"Thailand","url":"/destinations/thailand"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Singapore","url":"/destinations/singapore"},{"title":"India","url":"/destinations/india"}]} %}{% endif %}
+{% if destinationTitle == "Spain" %}{% set automaticFacts = {"blurb":"Spain’s regional identities stretch from Barcelona and Seville to Ibiza’s coves and mountain ski towns. Our guides cover beaches, sustainable travel, digital-nomad planning, and Mediterranean summer escapes.","bestTime":"Apr - Jun and Sep - Oct bring mild weather. Jul - Aug is hottest inland; ski season runs Dec - Mar in the Pyrenees and Sierra Nevada.","timeZone":"Multiple time zones|UTC+0 to UTC+2, depending on region and season","currency":"Euro (EUR)","languages":"Spanish","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Portugal","url":"/destinations/portugal"},{"title":"France","url":"/destinations/france"},{"title":"Monaco","url":"/destinations/monaco"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"},{"title":"Portugal","url":"/destinations/portugal"}]} %}{% endif %}
+{% if destinationTitle == "Singapore" %}{% set automaticFacts = {"blurb":"Singapore is a compact city-state where hawker food, lush gardens, modern architecture, and excellent transit make short visits easy. Our guides cover connectivity, ferry routes, hotels, and city style.","bestTime":"Warm and humid year-round. Feb - Apr is typically driest; Nov - Jan sees the Northeast Monsoon and heavier rain.","timeZone":"Singapore Standard Time|UTC+8","currency":"Singapore dollar (SGD)","languages":"English, Malay, Tamil, Chinese","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Cambodia","url":"/destinations/cambodia"},{"title":"Thailand","url":"/destinations/thailand"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"India","url":"/destinations/india"}]} %}{% endif %}
+{% if destinationTitle == "Morocco" %}{% set automaticFacts = {"blurb":"Morocco links imperial cities, Atlantic towns, mountain passes, and the Sahara. Follow our complete route through Marrakesh and Fes to Merzouga, with desert planning and photography along the way.","bestTime":"Mar - May and Sep - Nov bring milder weather. Summer is hottest inland and in the desert; Atlas snow lasts through winter.","timeZone":"GMT+01:00|UTC+1","currency":"Moroccan dirham (MAD)","languages":"Arabic, Berber","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Ethiopia","url":"/destinations/ethiopia"},{"title":"South Africa","url":"/destinations/south-africa"}],"related":[{"title":"South Africa","url":"/destinations/south-africa"},{"title":"Ethiopia","url":"/destinations/ethiopia"}]} %}{% endif %}
+{% if destinationTitle == "Maldives" %}{% set automaticFacts = {"blurb":"The Maldives spreads coral atolls and house reefs across the Indian Ocean. Our guides cover night diving at Maaya Thila, resort reviews, overwater luxury, and the experiences worth leaving the villa for.","bestTime":"Nov - Apr is drier and sunnier. May - Oct brings the southwest monsoon, more rain, and stronger surf.","timeZone":"Maldives Time|UTC+5","currency":"Maldivian rufiyaa (MVR)","languages":"Maldivian","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"India","url":"/destinations/india"},{"title":"Thailand","url":"/destinations/thailand"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"},{"title":"India","url":"/destinations/india"}]} %}{% endif %}
+{% if destinationTitle == "Malaysia" %}{% set automaticFacts = {"blurb":"Malaysia brings together Kuala Lumpur, diverse food cultures, tropical islands, and the rainforests of Borneo. Our guides explore Kota Kinabalu, Sabah wildlife, city hotels, and wellness above the skyline.","bestTime":"Weather varies by coast: the west coast is drier Dec - Feb, while the east coast is drier Mar - Oct. Highlands stay cooler year-round.","timeZone":"Malaysia Time|UTC+8","currency":"Malaysian ringgit (MYR)","languages":"English, Malay","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Singapore","url":"/destinations/singapore"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Cambodia","url":"/destinations/cambodia"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"},{"title":"India","url":"/destinations/india"}]} %}{% endif %}
+{% if destinationTitle == "Indonesia" %}{% set automaticFacts = {"blurb":"Indonesia’s thousands of islands hold distinct cultures and landscapes. Our coverage centers on Bali’s villas, temples, jungles, and waterfalls, with practical motorbike advice and side trips toward Lombok.","bestTime":"May - Sep is dry season across much of Indonesia. Nov - Mar is wetter; conditions vary significantly between islands.","timeZone":"Multiple time zones|UTC offsets vary by region","currency":"Indonesian rupiah (IDR)","languages":"Indonesian","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Singapore","url":"/destinations/singapore"},{"title":"Cambodia","url":"/destinations/cambodia"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"},{"title":"India","url":"/destinations/india"}]} %}{% endif %}
+{% if destinationTitle == "Cambodia" %}{% set automaticFacts = {"blurb":"Cambodia’s Khmer history is anchored by Angkor Wat, while Phnom Penh, countryside villages, and Tonlé Sap add essential context. Our guides cover temples, sunrise photography, Siem Reap, and rural travel.","bestTime":"Nov - Feb is coolest and driest. Mar - May is hottest; May - Oct is rainy season, turning landscapes lush.","timeZone":"Indochina Time|UTC+7","currency":"Cambodian riel (KHR), United States dollar (USD)","languages":"Khmer","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Vietnam","url":"/destinations/vietnam"},{"title":"Thailand","url":"/destinations/thailand"},{"title":"Singapore","url":"/destinations/singapore"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"}]} %}{% endif %}
+{% if destinationTitle == "South America" %}{% set automaticFacts = {"blurb":"From the Andes and Amazon to Atlantic beaches, explore South America through city guides, coastlines, wildlife, and firsthand travel stories.","bestTime":"Dec - Mar suits Patagonia and southern beaches; May - Sep is generally drier in the Andes and Amazon.","timeZone":"Multiple time zones|UTC-5 to UTC-3 across the mainland","currency":"Brazilian real, Argentine peso, Chilean peso, and Peruvian sol.","languages":"Spanish, Portuguese, English, and Indigenous languages","englishNote":"English is most common in major hotels and tour hubs.","paired":[{"title":"Argentina","url":"/destinations/argentina"},{"title":"Uruguay","url":"/destinations/uruguay"}],"related":[{"title":"Argentina","url":"/destinations/argentina"},{"title":"Uruguay","url":"/destinations/uruguay"}]} %}{% endif %}
+{% if destinationTitle == "Oceania" %}{% set automaticFacts = {"blurb":"From Polynesian lagoons to Australian coastlines and New Zealand peaks, explore Oceania through island guides, road trips, beaches, and original photography.","bestTime":"Apr - Oct is generally drier across many tropical islands; Dec - Mar is summer in Australia and New Zealand.","timeZone":"Multiple time zones|UTC-10 to UTC+14 across the region","currency":"Australian dollar, New Zealand dollar, and local island currencies.","languages":"English, French, Maori, and Polynesian languages","englishNote":"English is official or widely used in many destinations.","paired":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Fiji","url":"/destinations/fiji"}],"related":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"New Zealand","url":"/destinations/new-zealand"},{"title":"Australia","url":"/destinations/australia"}]} %}{% endif %}
+{% if destinationTitle == "North America" %}{% set automaticFacts = {"blurb":"From Arctic landscapes and national parks to Caribbean beaches and city breaks, explore North America through practical guides and original photography.","bestTime":"May - Oct suits most northern parks; Dec - Apr is peak season for many Caribbean destinations.","timeZone":"Multiple time zones|UTC-10 to UTC-3 across the region","currency":"United States dollar, Canadian dollar, and Mexican peso.","languages":"English, Spanish, French, and Indigenous languages","englishNote":"English is widely spoken across the United States, Canada, and Caribbean hubs.","paired":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"}],"related":[{"title":"United States","url":"/destinations/united-states"},{"title":"California","url":"/destinations/california"},{"title":"Mexico","url":"/destinations/mexico"},{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"Canada","url":"/destinations/canada"},{"title":"Jamaica","url":"/destinations/jamaica"}]} %}{% endif %}
+{% if destinationTitle == "Middle East" %}{% set automaticFacts = {"blurb":"From Gulf skylines and desert camps to ancient trade routes and mountain oases, explore the Middle East through practical, place-led guides.","bestTime":"Oct - Apr brings milder daytime temperatures; summer is extremely hot across much of the region.","timeZone":"Multiple time zones|UTC+2 to UTC+4 across key destinations","currency":"Dirham, rial, dinar, shekel, and other national currencies.","languages":"Arabic, Hebrew, Persian, Turkish, and English","englishNote":"English is common in hotels, airports, and major tourist areas.","paired":[{"title":"United Arab Emirates","url":"/destinations/united-arab-emirates"},{"title":"Oman","url":"/destinations/oman"}],"related":[{"title":"United Arab Emirates","url":"/destinations/united-arab-emirates"},{"title":"Oman","url":"/destinations/oman"}]} %}{% endif %}
+{% if destinationTitle == "Europe" %}{% set automaticFacts = {"blurb":"From Mediterranean islands and Riviera beaches to alpine villages and storied capitals, explore Europe through city guides, road trips, and coastal escapes.","bestTime":"May - Jun and Sep - Oct bring mild weather; Jul - Aug is peak summer across much of Europe.","timeZone":"Multiple time zones|UTC-1 to UTC+4 across the region","currency":"Euro across much of the EU; national currencies elsewhere.","languages":"English plus hundreds of national and regional languages","englishNote":"English is widely spoken in tourist centers and transport hubs.","paired":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
+{% if destinationTitle == "Asia" %}{% set automaticFacts = {"blurb":"From Himalayan trails and temple cities to tropical islands and megacities, explore Asia through food, culture, beaches, and firsthand guides.","bestTime":"Oct - Apr is drier across much of South and Southeast Asia; monsoon timing varies by coast.","timeZone":"Multiple time zones|UTC+5 to UTC+12 across key destinations","currency":"Yen, yuan, baht, rupee, won, rupiah, and local currencies.","languages":"Mandarin, Hindi, Japanese, Arabic, English, and hundreds more","englishNote":"English is strongest in major cities, hotels, and organized tours.","paired":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"}],"related":[{"title":"Thailand","url":"/destinations/thailand"},{"title":"Indonesia","url":"/destinations/indonesia"},{"title":"Maldives","url":"/destinations/maldives"},{"title":"Malaysia","url":"/destinations/malaysia"},{"title":"Sri Lanka","url":"/destinations/sri-lanka"},{"title":"Singapore","url":"/destinations/singapore"}]} %}{% endif %}
+{% if destinationTitle == "Africa" %}{% set automaticFacts = {"blurb":"From Sahara dunes and East African wildlife to Cape Town coastlines and Indian Ocean islands, explore Africa through safari, culture, and coastal guides.","bestTime":"Jun - Oct is dry season in many safari regions; Nov - Mar brings greener landscapes and summer wildlife viewing.","timeZone":"Multiple time zones|UTC-1 to UTC+4 across the continent","currency":"Rand, dirham, shilling, franc, and other national currencies.","languages":"English, French, Arabic, Swahili, Portuguese, and local languages","englishNote":"English is widely used in tourism across many countries.","paired":[{"title":"South Africa","url":"/destinations/south-africa"},{"title":"Morocco","url":"/destinations/morocco"},{"title":"Ethiopia","url":"/destinations/ethiopia"}],"related":[{"title":"South Africa","url":"/destinations/south-africa"},{"title":"Morocco","url":"/destinations/morocco"},{"title":"Ethiopia","url":"/destinations/ethiopia"}]} %}{% endif %}
+{% if destinationTitle == "Germany" %}{% set automaticBlurb = "Germany pairs modern cities and medieval towns with forest and alpine landscapes. Our guides focus on Munich photo spots, Oktoberfest planning, and scenic hikes in the German Alps." %}{% endif %}
+{% if destinationTitle == "Albania" %}{% set automaticBlurb = "Albania brings together the Albanian Riviera, mountain landscapes, Ottoman-era towns, and an increasingly easy road-trip circuit. Start with our two-week itinerary and Tirana Airport car-rental guide." %}{% endif %}
+{% if destinationTitle == "Greece" %}{% set automaticBlurb = "Greece pairs ancient history with clear-water island escapes and a deeply regional food culture. Our guides go beyond the classics to the beaches of Milos, Mykonos, and underrated Karpathos." %}{% endif %}
+{% if destinationTitle == "Italy" %}{% set automaticBlurb = "Italy’s regions feel like separate journeys, from Rome and Florence to Puglia, Sardinia, Cinque Terre, and the Amalfi Coast. Our guides cover beaches, road trips, packing, food, and exceptional coastal stays." %}{% endif %}
+{% if destinationTitle == "France" %}{% set automaticBlurb = "From Paris and the Loire Valley to Provence, the Alps, and the French Riviera, France brings together historic cities, celebrated food and wine, Mediterranean beaches, and remarkably varied landscapes." %}{% endif %}
+{% if destinationTitle == "Spain" %}{% set automaticBlurb = "Spain’s regional identities stretch from Barcelona and Seville to Ibiza’s coves and mountain ski towns. Our guides cover beaches, sustainable travel, digital-nomad planning, and Mediterranean summer escapes." %}{% endif %}
+{% if destinationTitle == "Portugal" %}{% set automaticBlurb = "Portugal stretches from historic cities to surf towns and the golden coves of the Algarve. Our guides spotlight beautiful beaches, Mediterranean beach towns, and where to stay across Portugal and Spain." %}{% endif %}
+{% if destinationTitle == "Croatia" %}{% set automaticBlurb = "Croatia’s Adriatic coast is lined with clear coves, historic stone towns, and hundreds of islands. Our guides cover cruising, Mediterranean beach towns, and a cinematic route through the country." %}{% endif %}
+{% if destinationTitle == "Montenegro" %}{% set automaticBlurb = "Montenegro compresses Adriatic beaches, the mountain-ringed Bay of Kotor, and atmospheric towns such as Perast into a small, scenic country ideal for a coastal road trip." %}{% endif %}
+{% if destinationTitle == "Austria" %}{% set automaticBlurb = "Austria pairs imperial Vienna with alpine scenery, lakes, and the Danube Valley. Plan a road trip, find Vienna’s best photo locations, and explore beyond Melk Abbey along the river." %}{% endif %}
+{% if destinationTitle == "The Netherlands" %}{% set automaticBlurb = "The Netherlands balances canal cities, bold design, cycling culture, and compact train travel. Our Amsterdam guides focus on distinctive hotels, art-filled stays, cocktails, and efficient 24-hour itineraries." %}{% endif %}
+{% if destinationTitle == "Ireland" %}{% set automaticBlurb = "Ireland’s Atlantic coast, green countryside, historic towns, and legendary hospitality make it a natural road-trip destination. Our guides highlight unusual beaches and lesser-known places beyond the standard route." %}{% endif %}
+{% if destinationTitle == "England" %}{% set automaticBlurb = "England layers historic cities, country estates, dramatic northern coastlines, and an extensive rail network into an easy-to-combine itinerary. Explore London photo spots, Manchester, Durham, Northumberland, and UK road-trip planning." %}{% endif %}
+{% if destinationTitle == "Poland" %}{% set automaticBlurb = "Poland combines beautifully rebuilt cities, medieval squares, mountain regions, and excellent-value travel. Our guides explore Krakow and southern Poland’s castles, plus practical advice for teaching English and living abroad." %}{% endif %}
+{% if destinationTitle == "Malta" %}{% set automaticBlurb = "Malta combines honey-colored cities, clear Mediterranean coves, and centuries of layered history. Explore Gozo tours, private boat days, standout photo spots, and a complete seven-day itinerary." %}{% endif %}
+{% if destinationTitle == "Monaco" %}{% set automaticBlurb = "This compact French Riviera principality pairs Belle Époque architecture, Mediterranean views, and glamorous Monte Carlo with surprisingly accessible free and budget-friendly experiences." %}{% endif %}
+{% if destinationTitle == "South Africa" %}{% set automaticBlurb = "South Africa combines Cape Town, the scenic Garden Route, celebrated wine country, and wildlife reserves. Our guides cover romantic safari stays, coastal road trips, and standout hotels including La Residence." %}{% endif %}
+{% if destinationTitle == "Morocco" %}{% set automaticBlurb = "Morocco links imperial cities, Atlantic towns, mountain passes, and the Sahara. Follow our complete route through Marrakesh and Fes to Merzouga, with desert planning and photography along the way." %}{% endif %}
+{% if destinationTitle == "Ethiopia" %}{% set automaticBlurb = "Ethiopia has one of Africa’s oldest cultural histories and is the birthplace of coffee. Our Addis Ababa coverage focuses on modern hospitality, local culture, and the capital’s distinct sense of place." %}{% endif %}
+{% if destinationTitle == "Oman" %}{% set automaticBlurb = "Oman is made for road trips, with desert camps, dramatic wadis, mountain roads, and a long Arabian Sea coast. Explore Wadi Shab, the Daymaniyat Islands, and our complete seven-day itinerary." %}{% endif %}
+{% if destinationTitle == "United Arab Emirates" %}{% set automaticBlurb = "The United Arab Emirates pairs Dubai’s ambitious skyline and beaches with Abu Dhabi’s culture and desert landscapes. Our guides cover road trips, yacht days, cafés, photo spots, and luxury travel logistics." %}{% endif %}
+{% if destinationTitle == "India" %}{% set automaticBlurb = "India’s scale and cultural variety reward focused regional trips. Our guides move from Old and New Delhi photo spots to Mumbai hotels and a wedding in the Himalayan foothills of Dehradun." %}{% endif %}
+{% if destinationTitle == "Japan" %}{% set automaticBlurb = "Japan blends precise modern cities with deep tradition and four distinct seasons. Start with Tokyo logistics, reliable eSIM planning, and a winter packing guide for cold weather and snow." %}{% endif %}
+{% if destinationTitle == "South Korea" %}{% set automaticBlurb = "South Korea moves easily between design-forward Seoul, historic palaces, mountain landscapes, and a rich café and food culture. Our seasonal guide maps Seoul’s best places for autumn foliage." %}{% endif %}
+{% if destinationTitle == "China" %}{% set automaticBlurb = "China’s immense scale includes ancient water towns, fast-changing megacities, and deeply regional cultures. Our guide visits Zhujiajiao’s canals as an atmospheric day trip from Shanghai." %}{% endif %}
+{% if destinationTitle == "Thailand" %}{% set automaticBlurb = "Thailand pairs Bangkok’s food and city energy with northern culture and island escapes. Our guides cover Koh Mak, Koh Phi Phi, motorbike planning, wildlife, luxury hotels, and Southeast Asia itineraries." %}{% endif %}
+{% if destinationTitle == "Vietnam" %}{% set automaticBlurb = "Vietnam stretches from Hanoi’s winter streets to tropical beaches, limestone landscapes, and energetic food cities. Start with our first-timer guide, visa planning, and a complete ten-day itinerary." %}{% endif %}
+{% if destinationTitle == "Cambodia" %}{% set automaticBlurb = "Cambodia’s Khmer history is anchored by Angkor Wat, while Phnom Penh, countryside villages, and Tonlé Sap add essential context. Our guides cover temples, sunrise photography, Siem Reap, and rural travel." %}{% endif %}
+{% if destinationTitle == "Indonesia" %}{% set automaticBlurb = "Indonesia’s thousands of islands hold distinct cultures and landscapes. Our coverage centers on Bali’s villas, temples, jungles, and waterfalls, with practical motorbike advice and side trips toward Lombok." %}{% endif %}
+{% if destinationTitle == "Malaysia" %}{% set automaticBlurb = "Malaysia brings together Kuala Lumpur, diverse food cultures, tropical islands, and the rainforests of Borneo. Our guides explore Kota Kinabalu, Sabah wildlife, city hotels, and wellness above the skyline." %}{% endif %}
+{% if destinationTitle == "Singapore" %}{% set automaticBlurb = "Singapore is a compact city-state where hawker food, lush gardens, modern architecture, and excellent transit make short visits easy. Our guides cover connectivity, ferry routes, hotels, and city style." %}{% endif %}
+{% if destinationTitle == "Sri Lanka" %}{% set automaticBlurb = "Sri Lanka fits wildlife parks, tea country, ancient cities, and a palm-lined coast into a compact island. Our guides cover wildlife tours, beaches, hotels, and a complete country itinerary." %}{% endif %}
+{% if destinationTitle == "Maldives" %}{% set automaticBlurb = "The Maldives spreads coral atolls and house reefs across the Indian Ocean. Our guides cover night diving at Maaya Thila, resort reviews, overwater luxury, and the experiences worth leaving the villa for." %}{% endif %}
+{% if destinationTitle == "Australia" %}{% set automaticBlurb = "Australia rewards repeat trips with subtropical Brisbane, underrated New South Wales road trips, far-reaching coastlines, and romantic escapes suited to couples and honeymoon travel." %}{% endif %}
+{% if destinationTitle == "New Zealand" %}{% set automaticBlurb = "New Zealand spans the North and South Islands, with dramatic coastlines, alpine landscapes, and rewarding self-drive routes. Our guides cover first-time road trips and Waiheke Island wineries, beaches, and scenic stops." %}{% endif %}
+{% if destinationTitle == "Fiji" %}{% set automaticBlurb = "Fiji’s hundreds of islands combine reef-lined beaches, welcoming villages, and world-class resort stays. Our guides cover Savasi, Castaway Island, family resorts, and the best activities beyond the beach." %}{% endif %}
+{% if destinationTitle == "French Polynesia" %}{% set automaticBlurb = "French Polynesia spreads more than 100 islands across the South Pacific. Our guides compare Tahiti, Moorea, Bora Bora, and Taha’a, with advice for lagoons, overwater stays, and budget-conscious island hopping." %}{% endif %}
+{% if destinationTitle == "Cook Islands" %}{% set automaticBlurb = "The Cook Islands offer South Pacific lagoons and a relaxed Polynesian pace without the scale of a large resort destination. Start with our practical guides to Rarotonga and Aitutaki." %}{% endif %}
+{% if destinationTitle == "Hawaii" %}{% set automaticBlurb = "Hawaii’s volcanic islands each have a distinct landscape and beach culture. Compare the best beaches on Kauai, Oahu, Maui, and the Big Island, then plan island choice, packing, hotels, and affordable adventures." %}{% endif %}
+{% if destinationTitle == "Mexico" %}{% set automaticBlurb = "Mexico’s regional variety runs from Baja wine country and Los Cabos to Guadalajara, Tulum, and the Yucatán. Explore beaches, food, Día de los Muertos traditions, road trips, and resort stays." %}{% endif %}
+{% if destinationTitle == "Costa Rica" %}{% set automaticBlurb = "Costa Rica protects an extraordinary share of its rainforests, volcanoes, and wildlife-rich coastlines. Our practical coverage begins with rental-car insurance, driving conditions, and local road rules." %}{% endif %}
+{% if destinationTitle == "North Ireland" %}{% set automaticBlurb = "Explore Northern Ireland through firsthand guides, practical planning, memorable places to stay, and original photography." %}{% endif %}
+{% if destinationTitle == "Dominica" %}{% set automaticBlurb = "Dominica is the Caribbean’s volcanic Nature Island, known for rainforest trails, waterfalls, hot springs, and a rugged coastline. Our coverage also explains its citizenship-by-investment option." %}{% endif %}
+{% if destinationTitle == "Saint Martin" %}{% set automaticBlurb = "Saint Martin shares one Caribbean island with Dutch Sint Maarten, creating a distinctive mix of French beaches, food, nightlife, and cross-island culture. Our guide also covers the SXM Festival." %}{% endif %}
+{% if destinationTitle == "St Kitts and Nevis" %}{% set automaticBlurb = "St Kitts and Nevis combines volcanic peaks, calm Caribbean beaches, plantation history, and relaxed resort stays. Our coverage includes the Park Hyatt at Christophe Harbour and regional citizenship options." %}{% endif %}
+{% if destinationTitle == "Uruguay" %}{% set automaticBlurb = "Uruguay is one of South America’s most relaxed destinations, with Atlantic beaches, wine country, and historic Colonia del Sacramento. It also makes an easy day trip from Buenos Aires." %}{% endif %}
+{% if destinationTitle == "Argentina" %}{% set automaticBlurb = "Argentina stretches from cosmopolitan Buenos Aires to wine country, high desert, and Patagonia. Our firsthand coverage centers on living locally, Spanish-language travel, and the best photo spots in Buenos Aires." %}{% endif %}
+{% if destinationTitle == "Barbados" %}{% set automaticBlurb = "Barbados blends calm Caribbean beaches, lively Bajan culture, rum traditions, and a wilder Atlantic coast. Our coverage includes all-inclusive resort stays and practical hurricane-season planning." %}{% endif %}
+{% if destinationTitle == "Canada" %}{% set automaticBlurb = "Canada’s vast landscapes reward road trips, from the Rocky Mountains and Whistler to Nova Scotia and Lake Ontario. Our guides cover campervans, fall color, coastal weekends, and city-to-nature escapes." %}{% endif %}
+{% if destinationTitle == "Turks and Caicos" %}{% set automaticBlurb = "Turks and Caicos is defined by luminous water, powder-soft beaches, and easy boat days across its low-lying islands. Our guides cover packing, photography, and elevated Caribbean stays." %}{% endif %}
+{% if destinationTitle == "Bahamas" %}{% set automaticBlurb = "The Bahamas is an archipelago of clear shallows, white-sand beaches, and distinct island personalities. Our guides cover Exuma, Baha Mar, cruises, and what to pack for a tropical resort trip." %}{% endif %}
+{% if destinationTitle == "Jamaica" %}{% set automaticBlurb = "Jamaica combines mountain interiors, celebrated music and food, and beaches ranging from Negril to the South Coast. Our guides cover river rafting, diving, overwater stays, and resort reviews." %}{% endif %}
+{% if destinationTitle == "California" %}{% set automaticBlurb = "California’s landscapes shift from Los Angeles beaches and Big Sur cliffs to desert art, Lake Tahoe, wine country, and redwood coast. Our local guides cover road trips, photo spots, camping, and weekend escapes." %}{% endif %}
+{% if destinationTitle == "Dominican Republic" %}{% set automaticBlurb = "The Dominican Republic extends far beyond its resorts, with lively cities, mountain interiors, food traditions, and long Caribbean and Atlantic coastlines. Our guides cover Punta Cana, local culture, beaches, and packing." %}{% endif %}
+{% if destinationTitle == "Taiwan" %}{% set automaticBlurb = "Taiwan combines Taipei’s night markets and design-forward city life with hot springs, mountains, and a dramatic coastline. Our guides cover where to stay, food, city views, and practical Southeast Asia trip planning." %}{% endif %}
+{% if destinationTitle == "Panama" %}{% set automaticBlurb = "Panama is the land bridge between Central and South America, joining Caribbean islands, Pacific beaches, cloud forest, and the engineering landmark of the Panama Canal." %}{% endif %}
+{% if destinationTitle == "Belize" %}{% set automaticBlurb = "Belize brings together the world’s second-largest barrier reef, Caribbean cayes, rainforest, and Maya sites. Our coverage includes wildlife, honeymoon travel, and the private-island experience at Cayo Espanto." %}{% endif %}
+{% if destinationTitle == "United States" %}{% set automaticBlurb = "The United States spans desert road trips, mountain parks, beach towns, and culture-rich cities. Our guides cover New York, New Orleans, Miami, Las Vegas, Alaska, the Southwest, and routes across the country." %}{% endif %}
+{% if destinationTitle == "India" %}{% set automaticFacts = {"blurb":"India’s scale and cultural variety reward focused regional trips. Our guides move from Old and New Delhi photo spots to Mumbai hotels and a wedding in the Himalayan foothills of Dehradun.","bestTime":"Oct - Mar is cooler and drier across much of India. Jun - Sep is monsoon season; Himalayan trekking is best Apr - Jun and Sep - Oct.","timeZone":"India Standard Time|UTC+5:30","currency":"Indian rupee (INR)","languages":"English, Hindi, Tamil","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Sri Lanka"},{"title":"Maldives"},{"title":"Thailand"}],"related":[]} %}{% endif %}
+{% set destinationStories = page.storySet.items if page.storySet else [] %}
+{% set directPostCount = page.storySet.total if page.storySet else destinationStories.length %}
+{% set countryPostCount = 0 %}
+{% set countryGuideCount = 0 %}
+{% set countryOriginalPhotoCount = 0 %}
+{% if isContinentPage %}
+  {% for destination in (page.locations or []) %}
+    {% set countryPostCount = countryPostCount + (destination.storySet.total if destination.storySet else 0) %}
+    {% set countryGuideCount = countryGuideCount + (destination.guideStories.total if destination.guideStories else 0) %}
+    {% set countryOriginalPhotoCount = countryOriginalPhotoCount + (destination.originalPhotoStories.total if destination.originalPhotoStories else 0) %}
+  {% endfor %}
+{% endif %}
+{% set postCount = directPostCount + countryPostCount %}
+{% set guideCount = (page.guideStories.total if page.guideStories else 0) + countryGuideCount %}
+{% set importantStories = page.importantStories.items if page.importantStories else [] %}
+{% set preferredStories = page.preferredStories.items if page.preferredStories else [] %}
+{% set franceFeaturedOne = franceOutfit if destinationTitle == "France" else null %}
+{% set franceFeaturedTwo = franceBeaches if destinationTitle == "France" else null %}
+{% set franceSpotlight = franceFeature if destinationTitle == "France" else null %}
+{% set destinationFeaturedStories = page.destinationFeaturedStories or [] %}
+{% set featuredOneImageOverride = page.destinationFeaturedOneImage %}
+{% set featuredTwoImageOverride = page.destinationFeaturedTwoImage %}
+{% set featureStoryImageOverride = page.destinationFeatureStoryImage %}
+{% set featuredOne = destinationFeaturedStories[0] or franceFeaturedOne or importantStories[0] or preferredStories[0] or destinationStories[0] %}
+{% set featuredTwo = destinationFeaturedStories[1] or franceFeaturedTwo or importantStories[1] or preferredStories[1] or destinationStories[1] %}
+{% set featureStory = page.destinationFeatureStory or franceSpotlight or importantStories[2] or preferredStories[2] or destinationStories[2] %}
+{% set destinationBlurb = page.destinationBlurb or automaticBlurb or automaticFacts.blurb or page.social.description or "Explore this destination through our travel guides, destination notes, and firsthand stories." %}
+{% set destinationBestTime = page.destinationBestTime or automaticFacts.bestTime or "Seasonality varies by destination. Check each guide for the best local timing." %}
+{% set destinationTimeZone = page.destinationTimeZone or automaticFacts.timeZone or "Multiple time zones|UTC offsets vary by region" %}
+{% set destinationCurrency = page.destinationCurrency or automaticFacts.currency or "Varies by destination" %}
+{% set destinationLanguages = page.destinationLanguages or automaticFacts.languages or "Varies by destination" %}
+{% set destinationEnglishNote = page.destinationEnglishNote or automaticFacts.englishNote or "English availability varies by destination." %}
+{% set automaticPaired = automaticFacts.paired if automaticFacts.paired and automaticFacts.paired.length else [] %}
+{% set automaticRelated = automaticFacts.related if automaticFacts.related and automaticFacts.related.length else [] %}
+{% set pairedDestinations = page.destinationBestPairedWith if page.destinationBestPairedWith and page.destinationBestPairedWith.length else (automaticPaired if automaticPaired.length else (page.destinationRelatedDestinations or [])) %}
+{% set destinationContinent = page if isContinentPage else (page.continentSet.items[0] if page.continentSet and page.continentSet.items else {}) %}
+{% if not pairedDestinations.length and destinationContinent and destinationContinent.locations %}
+  {% set pairedDestinations = destinationContinent.locations %}
+{% endif %}
 
-{% block body_class %}body--landing body--destination-detail has-no-hero{% endblock %}
+{% set continentMostRequestedDefault = "" %}
+{% set continentMostRequestedDestination = {} %}
+{% set continentMostRequestedDestinationTitle = "" %}
+{% set continentMostRequestedStories = [] %}
+{% set continentMostRequestedTitle = "" %}
+{% set continentMostRequestedDescription = "" %}
+{% if isContinentPage %}
+  {% if destinationTitle == "Europe" %}{% set continentMostRequestedDefault = "Greece" %}
+  {% elif destinationTitle == "North America" %}{% set continentMostRequestedDefault = "California" %}
+  {% elif destinationTitle == "Oceania" %}{% set continentMostRequestedDefault = "French Polynesia" %}
+  {% elif destinationTitle == "Asia" %}{% set continentMostRequestedDefault = "Thailand" %}
+  {% elif destinationTitle == "South America" %}{% set continentMostRequestedDefault = "Argentina" %}
+  {% elif destinationTitle == "Africa" %}{% set continentMostRequestedDefault = "South Africa" %}
+  {% elif destinationTitle == "Middle East" %}{% set continentMostRequestedDefault = "Oman" %}
+  {% endif %}
+  {% set continentMostRequestedDestination = page.continentMostRequestedDestination or {} %}
+  {% if not continentMostRequestedDestination.title and continentMostRequestedDefault %}
+    {% for requestedDestinationOption in (page.locations or []) %}
+      {% if requestedDestinationOption.title == continentMostRequestedDefault %}
+        {% set continentMostRequestedDestination = requestedDestinationOption %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  {% set continentMostRequestedDestinationTitle = continentMostRequestedDestination.title or continentMostRequestedDefault %}
+  {% set continentMostRequestedStories = page.continentMostRequestedStories if page.continentMostRequestedStories and page.continentMostRequestedStories.length else (continentMostRequestedDestination.storySet.items if continentMostRequestedDestination.storySet else []) %}
+  {% set continentMostRequestedTitle = page.continentMostRequestedTitle or ("The Best of " + continentMostRequestedDestinationTitle) %}
+  {% set continentMostRequestedDescription = page.continentMostRequestedDescription or continentMostRequestedDestination.destinationBlurb or ("Start with four of our most requested " + continentMostRequestedDestinationTitle + " travel stories.") %}
+{% endif %}
+
+{% set continentName = destinationContinent.name or "More Destinations" %}
+{% set exploreGroupName = continentName %}
+{% set specialExploreTitles = [] %}
+{% if destinationTitle == "Hawaii" %}
+  {% set exploreGroupName = "the Pacific" %}
+  {% set specialExploreTitles = ["California", "Mexico", "French Polynesia", "Cook Islands", "Fiji", "New Zealand"] %}
+{% elif continentName == "South America" %}
+  {% set exploreGroupName = "South and Central America" %}
+  {% set specialExploreTitles = ["Argentina", "Uruguay", "Panama", "Costa Rica", "Belize", "Mexico"] %}
+{% elif continentName == "Africa" %}
+  {% set exploreGroupName = "Africa and the Middle East" %}
+  {% set specialExploreTitles = ["Ethiopia", "Morocco", "South Africa", "Maldives", "Oman", "United Arab Emirates"] %}
+{% elif continentName == "Middle East" %}
+  {% set exploreGroupName = "Middle East and Africa" %}
+  {% set specialExploreTitles = ["Oman", "United Arab Emirates", "Ethiopia", "Morocco", "South Africa"] %}
+{% endif %}
+{% set destinationHero = page.destinationHeroImage or page.image or (page.social.image if page.social else null) %}
+{% if destinationTitle == "France" and not page.destinationHeroImage %}
+  {% set destinationHeroPath = "/assets/images/france-lavender.jpg" %}
+{% elif destinationHero and destinationHero.path %}
+  {% set destinationHeroPath = destinationHero.path %}
+{% elif featuredOne and featuredOne.tout and featuredOne.tout.image and featuredOne.tout.image.path %}
+  {% set destinationHeroPath = featuredOne.tout.image.path %}
+{% endif %}
+
+{% macro storyUrl(story) %}{% if story and story.slug %}{{ story | route('storySlug') }}{% elif story and story.title %}{{ story | route('story') }}{% else %}#{% endif %}{% endmacro %}
+{% macro locationUrl(location) %}{% if location %}{{ location | route('location') }}{% else %}#{% endif %}{% endmacro %}
+{% macro continentUrl(continent) %}/continent/{{ (continent.name or continent.title or "") | lower | replace(" ", "-") }}{% endmacro %}
+
+{% macro originalPhotoMarkersFromHtml(html) -%}
+  {%- set safeHtml = html or "" -%}
+  {%- if safeHtml is string and safeHtml -%}
+    {%- set imageFragments = safeHtml.split("<img") -%}
+    {%- for imageFragment in imageFragments -%}
+      {%- if not loop.first -%}
+        {%- set imageTag = ((imageFragment.split(">") | first) or "") -%}
+        {%- set imageContext = imageFragments[loop.index0 - 1].slice(-500) + imageTag -%}
+        {%- set isProductImage = "rewardstyle" in imageContext or "rstyle.me" in imageContext or "shopstyle" in imageContext or "shopltk" in imageContext or "ltkcdn" in imageContext or "liketk" in imageContext or "on.ltk.com" in imageContext or "amazon." in imageContext or "amzn.to" in imageContext or "revolve.com" in imageContext or "rvlv.me" in imageContext or "skimresources" in imageContext or "product-image" in imageContext or "shop-the-edit" in imageContext or "tracking" in imageContext or "pixel" in imageContext -%}
+        {%- if not isProductImage -%}x{%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endmacro %}
+
+{% macro storyOriginalPhotoMarkers(story) -%}
+  {%- if story -%}
+  {%- if story.tout and story.tout.image -%}x{%- endif -%}
+  {{- originalPhotoMarkersFromHtml(story.contentHtml) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainHtmlBlock1) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainContentBlock1Html) -}}
+  {%- if story.additionalMainBlocks -%}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainHtmlBlock2) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainContentBlock2Html) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainHtmlBlock3) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainContentBlock3Html) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainHtmlBlock4) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainContentBlock4Html) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainHtmlBlock5) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainContentBlock5Html) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainHtmlBlock6) -}}
+    {{- originalPhotoMarkersFromHtml(story.additionalMainBlocks.mainContentBlock6Html) -}}
+  {%- endif -%}
+  {{- originalPhotoMarkersFromHtml(story.mainHtmlBlock2) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainContentBlock2Html) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainHtmlBlock3) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainContentBlock3Html) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainHtmlBlock4) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainContentBlock4Html) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainHtmlBlock5) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainContentBlock5Html) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainHtmlBlock6) -}}
+  {{- originalPhotoMarkersFromHtml(story.mainContentBlock6Html) -}}
+  {%- for block in story.extraContentBlocks -%}
+    {{- originalPhotoMarkersFromHtml(block.contentHtml) -}}
+  {%- endfor -%}
+  {%- for block in story.extraHtmlBlocks -%}
+    {{- originalPhotoMarkersFromHtml(block.html) -}}
+  {%- endfor -%}
+  {%- for block in story.contentBlocks -%}
+    {%- if block.__typename == "ContentBlock" -%}
+      {{- originalPhotoMarkersFromHtml(block.contentHtml) -}}
+    {%- elif block.__typename == "HtmlBlock" -%}
+      {{- originalPhotoMarkersFromHtml(block.html) -}}
+    {%- elif block.__typename == "StoryImageBlock" and block.image -%}
+      x
+    {%- elif block.__typename == "StoryGalleryBlock" -%}
+      {%- for galleryImage in block.images -%}
+        {%- if galleryImage.image -%}x{%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- endif -%}
+{%- endmacro %}
+
+{% macro destinationOriginalPhotoMarkers(stories) -%}
+  {%- for story in stories -%}
+    {{- storyOriginalPhotoMarkers(story) -}}
+  {%- endfor -%}
+{%- endmacro %}
+
+{% macro continentOriginalPhotoMarkers(continent) -%}
+  {{- destinationOriginalPhotoMarkers(continent.storySet.items if continent.storySet else []) -}}
+  {%- for photoDestination in (continent.locations or []) -%}
+    {{- destinationOriginalPhotoMarkers(photoDestination.storySet.items if photoDestination.storySet else []) -}}
+  {%- endfor -%}
+{%- endmacro %}
+
+{# Count every editorial image in every post represented on the destination,
+   instead of limiting the statistic to posts filed in the Photography category. #}
+{% if isContinentPage %}
+  {% set originalPhotoCount = (continentOriginalPhotoMarkers(page) | trim).length %}
+{% else %}
+  {% set originalPhotoCount = (destinationOriginalPhotoMarkers(destinationStories) | trim).length %}
+{% endif %}
+
+{% macro storyImage(story, sizes, eager) %}
+  {% if story and story.tout and story.tout.image and story.tout.image.path %}
+  <img
+    srcset="{{ story.tout.image.path | image({w: 3840, auto: 'compress,format'}) }} 3840w,
+            {{ story.tout.image.path | image({w: 2560, auto: 'compress,format'}) }} 2560w,
+            {{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+            {{ story.tout.image.path | image({w: 1000, auto: 'compress,format'}) }} 1000w,
+            {{ story.tout.image.path | image({w: 640, auto: 'compress,format'}) }} 640w"
+    sizes="{{ sizes }}"
+    src="{{ story.tout.image.path | image({w: 1600, auto: 'compress,format'}) }}"
+    alt="{{ story.title or "" }}"
+    loading="{% if eager %}eager{% else %}lazy{% endif %}"
+    decoding="async"
+    {% if eager %}fetchpriority="high"{% endif %}
+  >
+  {% endif %}
+{% endmacro %}
+
+{% macro featuredStory(story, reverse, imageOverride) %}
+  {% if story %}
+  <article class="destination-featured-story{% if reverse %} destination-featured-story--reverse{% endif %}">
+    <a class="destination-featured-story__image" href="{{ storyUrl(story) }}">
+      {% if imageOverride and imageOverride.path %}
+      <img srcset="{{ imageOverride.path | image({w: 3840, auto: 'compress,format'}) }} 3840w,
+                   {{ imageOverride.path | image({w: 2560, auto: 'compress,format'}) }} 2560w,
+                   {{ imageOverride.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+                   {{ imageOverride.path | image({w: 1000, auto: 'compress,format'}) }} 1000w,
+                   {{ imageOverride.path | image({w: 640, auto: 'compress,format'}) }} 640w"
+           sizes="(min-width: 900px) 50vw, 100vw"
+           src="{{ imageOverride.path | image({w: 1600, auto: 'compress,format'}) }}"
+           alt="{{ story.title or '' }}"
+           loading="lazy"
+           decoding="async">
+      {% else %}
+      {{ storyImage(story, "(min-width: 900px) 50vw, 100vw", false) }}
+      {% endif %}
+    </a>
+    <div class="destination-featured-story__copy">
+      <p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% else %}Travel Guide{% endif %}</p>
+      <h3><a href="{{ storyUrl(story) }}">{{ story.title or "" }}</a></h3>
+      {% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
+      <a class="destination-detail__text-link" href="{{ storyUrl(story) }}">Read the guide <span aria-hidden="true">→</span></a>
+    </div>
+  </article>
+  {% endif %}
+{% endmacro %}
+
+{% macro destinationCard(destination) %}
+{% set cardTitle = destination.title or destination.name or destination.destinationName or destination.destinationTitle or destination.country or "Destination" %}
+{% set cardStory = destination.storySet.items[0] if destination.storySet and destination.storySet.items else null %}
+{% set cardStoryImage = cardStory.tout.image if cardStory and cardStory.tout and cardStory.tout.image else null %}
+  {% set cardImage = destination.destinationHeroImage or destination.image or cardStoryImage %}
+  <a class="destination-nearby-card" href="{{ locationUrl(destination) }}" aria-label="{{ cardTitle }}">
+    <span class="destination-nearby-card__image">
+      {% if cardImage and cardImage.path %}
+      <img src="{{ cardImage.path | image({w: 900, auto: 'compress,format'}) }}" alt="{{ cardTitle }}" loading="lazy" decoding="async">
+      {% endif %}
+    </span>
+      <strong>{{ cardTitle }}</strong>
+    {% set destinationPostCount = destination.storySet.total if destination.storySet else 0 %}
+    <small>{{ destinationPostCount }} post{% if destinationPostCount != 1 %}s{% endif %}</small>
+  </a>
+{% endmacro %}
+
+{% macro factIcon(type) %}
+  <span class="destination-fact__icon destination-fact__icon--{{ type }}" aria-hidden="true"><i></i></span>
+{% endmacro %}
+
+{% block body_class %}body--destination-detail{% if isContinentPage %} body--continent-detail{% endif %}{% endblock %}
 
 {% block extra_head %}
   <link rel="canonical" href="https://www.awaylands.com{{ currentPath }}">
   <meta property="og:url" content="https://www.awaylands.com{{ currentPath }}">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "url": "https://www.awaylands.com{{ currentPath }}",
-    "name": {{ (page.title + " Travel Guide") | dump | safe }},
-    "isPartOf": {"@id": "https://www.awaylands.com/#website"}
-  }
-  </script>
+  <meta property="og:type" content="website">
 {% endblock %}
 
-{% block filters %}
-  <li><a href="/destinations">Featured</a></li>
-  <li><span class="separator"></span></li>
+{% block content %}
+<article class="destination-detail">
+  <header class="destination-hero">
+    <div class="destination-hero__media">
+      {% if destinationHeroPath %}
+      <img src="{% if destinationHeroPath == '/assets/images/france-lavender.jpg' %}{{ destinationHeroPath }}{% else %}{{ destinationHeroPath | image({w: 2400, auto: 'compress,format'}) }}{% endif %}" alt="{{ destinationTitle }}" loading="eager" decoding="async" fetchpriority="high">
+      {% endif %}
+    </div>
+    <div class="destination-hero__shade"></div>
+    <div class="destination-hero__copy">
+      <nav class="destination-hero__breadcrumbs" aria-label="Breadcrumb">
+        <a href="/destinations">Destinations</a>
+        {% if destinationContinent and not isContinentPage %}
+        <span aria-hidden="true">›</span>
+        <a href="{{ continentUrl(destinationContinent) }}">{{ destinationContinent.name }}</a>
+        {% endif %}
+        <span aria-hidden="true">›</span>
+        <span>{{ destinationTitle }}</span>
+      </nav>
+          <h1 class="destination-hero__title{% if destinationTitle.length > 14 %} destination-hero__title--long{% endif %}">{{ destinationTitle }}</h1>
+    </div>
+    <div class="destination-hero__stats" aria-label="{{ destinationTitle }} content totals">
+      <a href="{% if isContinentPage %}#destination-guides{% else %}{{ locationUrl(page) }}/archive{% endif %}"><i class="destination-stat-icon destination-stat-icon--pin" aria-hidden="true"></i><strong>{{ postCount }}</strong> Post{% if postCount != 1 %}s{% endif %}</a>
+      <a href="#destination-guides"><i class="destination-stat-icon destination-stat-icon--guide" aria-hidden="true"></i><strong>{{ guideCount }}</strong> Guide{% if guideCount != 1 %}s{% endif %}</a>
+      <a href="/category/photography/"><i class="destination-stat-icon destination-stat-icon--camera" aria-hidden="true"></i><strong>{{ originalPhotoCount }}</strong> Original Photos</a>
+    </div>
+  </header>
 
-  {% for continent in continents.items | reverse %}
-  <li>
-    <a href="{{ continent | route('continent') }}/#" {% if continent.name == page.name %}class="is-current"{% endif %}>{{ continent.name }}</a>
+  {% set continentGeographyFacts = [] %}
+  {% set continentSeasonFacts = [] %}
+  {% if destinationTitle == "Africa" %}
+    {% set continentGeographyFacts = [
+      {"title":"Main Regions","value":"North, West, Central, East and Southern Africa"},
+      {"title":"Landscapes","value":"Sahara dunes, savannas, rainforests, highlands and rift valleys"},
+      {"title":"Climate Zones","value":"Mediterranean, desert, tropical, equatorial and subtropical"},
+      {"title":"Time Zone Span","value":"UTC-1 to UTC+4 across the continent"},
+      {"title":"Oceans and Seas","value":"Atlantic, Indian, Mediterranean and Red Sea coasts"}
+    ] %}
+    {% set continentSeasonFacts = [
+      {"title":"North Africa","value":"Mar - May and Sep - Nov","note":"Milder temperatures for cities and desert routes."},
+      {"title":"West Africa","value":"Nov - Feb","note":"Generally drier with lower humidity."},
+      {"title":"Central Africa","value":"Jun - Sep and Dec - Feb","note":"Dry windows vary north and south of the equator."},
+      {"title":"East Africa","value":"Jun - Oct and Jan - Feb","note":"Popular safari and trekking periods."},
+      {"title":"Southern Africa","value":"May - Sep","note":"Dry-season wildlife viewing in many areas."}
+    ] %}
+  {% elif destinationTitle == "Asia" %}
+    {% set continentGeographyFacts = [
+      {"title":"Main Regions","value":"East, Southeast, South, Central and West Asia"},
+      {"title":"Landscapes","value":"Himalayas, deserts, rainforests, steppes and archipelagos"},
+      {"title":"Climate Zones","value":"Arctic, continental, desert, monsoon and tropical"},
+      {"title":"Time Zone Span","value":"UTC+2 to UTC+12 across key regions"},
+      {"title":"Oceans and Seas","value":"Pacific, Indian, Arctic and Mediterranean basins"}
+    ] %}
+    {% set continentSeasonFacts = [
+      {"title":"East Asia","value":"Mar - May and Sep - Nov","note":"Generally mild in many destinations."},
+      {"title":"Southeast Asia","value":"Nov - Feb","note":"Monsoon timing varies by coast."},
+      {"title":"South Asia","value":"Oct - Mar","note":"Mountain and monsoon windows differ."},
+      {"title":"Central Asia","value":"Apr - Jun and Sep - Oct","note":"Comfortable for cities and overland routes."},
+      {"title":"West Asia","value":"Oct - Apr","note":"Typically milder than summer."}
+    ] %}
+  {% elif destinationTitle == "Europe" %}
+    {% set continentGeographyFacts = [
+      {"title":"Main Regions","value":"Northern, Western, Central, Southern and Eastern Europe"},
+      {"title":"Landscapes","value":"Alpine ranges, plains, forests, islands and Mediterranean coasts"},
+      {"title":"Climate Zones","value":"Arctic, oceanic, continental and Mediterranean"},
+      {"title":"Time Zone Span","value":"UTC-1 to UTC+4 across the region"},
+      {"title":"Oceans and Seas","value":"Atlantic, Arctic, Mediterranean, Baltic and Black Sea"}
+    ] %}
+    {% set continentSeasonFacts = [
+      {"title":"Northern Europe","value":"Jun - Aug","note":"Longest days and mildest weather."},
+      {"title":"Western Europe","value":"Apr - Jun and Sep - Oct","note":"Mild weather outside peak summer."},
+      {"title":"Central Europe","value":"May - Jun and Sep","note":"Comfortable for cities and mountain regions."},
+      {"title":"Southern Europe","value":"May - Jun and Sep - Oct","note":"Warm coasts with fewer peak-season crowds."},
+      {"title":"Eastern Europe","value":"May - Jun and Sep","note":"Mild days across many inland destinations."}
+    ] %}
+  {% elif destinationTitle == "Middle East" %}
+    {% set continentGeographyFacts = [
+      {"title":"Main Regions","value":"Arabian Peninsula, Levant, Anatolia, Mesopotamia and Iran"},
+      {"title":"Landscapes","value":"Deserts, wadis, mountain ranges, oases and long coastlines"},
+      {"title":"Climate Zones","value":"Arid, semi-arid, Mediterranean and highland"},
+      {"title":"Time Zone Span","value":"UTC+2 to UTC+4:30 across the region"},
+      {"title":"Oceans and Seas","value":"Mediterranean, Red, Arabian, Caspian and Persian Gulf"}
+    ] %}
+    {% set continentSeasonFacts = [
+      {"title":"Arabian Gulf","value":"Nov - Mar","note":"Milder days for cities and desert trips."},
+      {"title":"Levant","value":"Mar - May and Sep - Nov","note":"Comfortable for cities and historic sites."},
+      {"title":"Turkey","value":"Apr - Jun and Sep - Oct","note":"Good for coasts, cities and interior routes."},
+      {"title":"Jordan and Israel","value":"Mar - May and Oct - Nov","note":"Mild windows for desert and cultural travel."},
+      {"title":"Oman","value":"Oct - Apr","note":"Cooler for wadis, mountains and the coast."}
+    ] %}
+  {% elif destinationTitle == "North America" %}
+    {% set continentGeographyFacts = [
+      {"title":"Main Regions","value":"Canada, United States, Mexico, Central America and Caribbean"},
+      {"title":"Landscapes","value":"Arctic tundra, mountains, deserts, rainforests and islands"},
+      {"title":"Climate Zones","value":"Arctic, continental, desert, subtropical and tropical"},
+      {"title":"Time Zone Span","value":"UTC-10 to UTC-3 across the region"},
+      {"title":"Oceans and Seas","value":"Pacific, Atlantic, Arctic, Caribbean and Gulf of Mexico"}
+    ] %}
+    {% set continentSeasonFacts = [
+      {"title":"Canada and Alaska","value":"Jun - Sep","note":"Warmest period for parks and road trips."},
+      {"title":"United States","value":"Apr - Jun and Sep - Oct","note":"Broad shoulder-season window across many regions."},
+      {"title":"Mexico","value":"Nov - Apr","note":"Drier across many beach and cultural destinations."},
+      {"title":"Central America","value":"Dec - Apr","note":"Dry season in many Pacific-side destinations."},
+      {"title":"Caribbean","value":"Dec - Apr","note":"Drier weather outside hurricane season."}
+    ] %}
+  {% elif destinationTitle == "Oceania" %}
+    {% set continentGeographyFacts = [
+      {"title":"Main Regions","value":"Australia, New Zealand, Melanesia, Micronesia and Polynesia"},
+      {"title":"Landscapes","value":"Coral islands, deserts, rainforests, volcanoes and alpine peaks"},
+      {"title":"Climate Zones","value":"Tropical, desert, temperate, oceanic and alpine"},
+      {"title":"Time Zone Span","value":"UTC-11 to UTC+14 across the Pacific"},
+      {"title":"Oceans and Seas","value":"Pacific, Indian, Coral, Tasman and Arafura seas"}
+    ] %}
+    {% set continentSeasonFacts = [
+      {"title":"Australia","value":"Mar - May and Sep - Nov","note":"Comfortable shoulder seasons in many regions."},
+      {"title":"New Zealand","value":"Dec - Mar","note":"Warmest period for road trips and hiking."},
+      {"title":"Melanesia","value":"May - Oct","note":"Drier across many island destinations."},
+      {"title":"Micronesia","value":"Dec - Apr","note":"Often the drier travel window."},
+      {"title":"Polynesia","value":"May - Oct","note":"Generally cooler and less humid."}
+    ] %}
+  {% elif destinationTitle == "South America" %}
+    {% set continentGeographyFacts = [
+      {"title":"Main Regions","value":"Andean states, Amazon basin, Guianas, Brazil and Southern Cone"},
+      {"title":"Landscapes","value":"Andes, Amazon rainforest, deserts, wetlands and pampas"},
+      {"title":"Climate Zones","value":"Equatorial, tropical, desert, temperate and alpine"},
+      {"title":"Time Zone Span","value":"UTC-5 to UTC-2 across the mainland and islands"},
+      {"title":"Oceans and Seas","value":"Pacific, Atlantic and Caribbean coasts"}
+    ] %}
+    {% set continentSeasonFacts = [
+      {"title":"Andes","value":"May - Sep","note":"Drier for highland routes in many areas."},
+      {"title":"Amazon Basin","value":"Jun - Sep","note":"Lower rainfall in much of the southern basin."},
+      {"title":"Brazilian Coast","value":"Sep - Nov and Mar - May","note":"Warm shoulder-season travel in many cities."},
+      {"title":"Southern Cone","value":"Oct - Apr","note":"Spring through early autumn for city trips."},
+      {"title":"Patagonia","value":"Nov - Mar","note":"Longest days and most accessible trails."}
+    ] %}
+  {% endif %}
 
-    {% if continent.locations.length %}
-    <div class="dropdown dropdown--features">
-      <ul class="dropdown__list">
-        {% for location in continent.locations %}
-        <li><a href="{{ location | route('location') }}">{{ location.title }}</a></li>
+  {% if isContinentPage and ((page.continentGeographyCards and page.continentSeasonCards) or (continentGeographyFacts.length and continentSeasonFacts.length)) %}
+  <section class="continent-facts-overview" aria-label="{{ destinationTitle }} geography and regional travel seasons">
+    <div class="continent-facts-overview__intro">
+      <p class="destination-detail__eyebrow">Destinations › {{ destinationTitle }}</p>
+      <h2>{{ destinationTitle }}</h2>
+      <p>{{ destinationBlurb }}</p>
+      <a class="destination-detail__text-link" href="#destination-guides">Explore {{ destinationTitle }} Guides <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="continent-facts-overview__information">
+      <section class="continent-facts-overview__row" aria-labelledby="continent-geography-title">
+        <h2 id="continent-geography-title">{{ page.continentGeographyHeading or "Regions and Geography" }}</h2>
+        <div class="continent-facts-overview__row-scroll">
+          <div class="continent-facts-overview__grid">
+            {% if page.continentGeographyCards %}
+            {% for factLine in page.continentGeographyCards.split("\n") %}
+            {% set factParts = factLine.split("|") %}
+            {% if factParts[0] and factParts[1] %}
+            <div class="continent-fact-card">
+              <span class="continent-fact-card__icon continent-fact-card__icon--{{ loop.index }}" aria-hidden="true"></span>
+              <h3>{{ factParts[0] | trim }}</h3>
+              <p>{{ factParts[1] | trim }}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            {% for fact in continentGeographyFacts %}
+            <div class="continent-fact-card">
+              <span class="continent-fact-card__icon continent-fact-card__icon--{{ loop.index }}" aria-hidden="true"></span>
+              <h3>{{ fact.title }}</h3>
+              <p>{{ fact.value }}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </section>
+      <section class="continent-facts-overview__row continent-facts-overview__row--seasons" aria-labelledby="continent-seasons-title">
+        <h2 id="continent-seasons-title">{{ page.continentSeasonsHeading or "Travel Seasons by Region" }}</h2>
+        <div class="continent-facts-overview__row-scroll">
+          <div class="continent-facts-overview__grid">
+            {% if page.continentSeasonCards %}
+            {% for factLine in page.continentSeasonCards.split("\n") %}
+            {% set factParts = factLine.split("|") %}
+            {% if factParts[0] and factParts[1] %}
+            <div class="continent-fact-card">
+              <span class="continent-fact-card__icon continent-fact-card__icon--season" aria-hidden="true"></span>
+              <h3>{{ factParts[0] | trim }}</h3>
+              <p>{{ factParts[1] | trim }}</p>
+              {% if factParts[2] %}<p class="continent-fact-card__note">{{ factParts[2] | trim }}</p>{% endif %}
+            </div>
+            {% endif %}
+            {% endfor %}
+            {% else %}
+            {% for fact in continentSeasonFacts %}
+            <div class="continent-fact-card">
+              <span class="continent-fact-card__icon continent-fact-card__icon--season" aria-hidden="true"></span>
+              <h3>{{ fact.title }}</h3>
+              <p>{{ fact.value }}</p>
+              {% if fact.note %}<p class="continent-fact-card__note">{{ fact.note }}</p>{% endif %}
+            </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </div>
+  </section>
+  {% elif destinationBlurb or destinationBestTime or destinationTimeZone or destinationCurrency or destinationLanguages or destinationEnglishNote or pairedDestinations.length %}
+  <section class="destination-facts" aria-label="About {{ destinationTitle }}">
+    {% if destinationBlurb %}
+    <div class="destination-facts__intro">
+      <p>{{ destinationBlurb }}</p>
+      <a class="destination-detail__text-link" href="#destination-guides">About {{ destinationTitle }} <span aria-hidden="true">→</span></a>
+    </div>
+    {% endif %}
+    {% if destinationBestTime %}
+    <div class="destination-fact">
+      {{ factIcon("calendar") }}
+      <h2>Best Time to Visit</h2>
+      <p>{{ destinationBestTime }}</p>
+    </div>
+    {% endif %}
+    {% if destinationTimeZone %}
+    <div class="destination-fact">
+      {{ factIcon("clock") }}
+      <h2>Time Zone</h2>
+      {% if "|" in destinationTimeZone %}
+      {% set destinationTimeZoneParts = (destinationTimeZone or "").split("|") %}
+      <p class="destination-fact__timezone-name">{{ destinationTimeZoneParts[0] }}</p>
+      <p class="destination-fact__timezone-offset">{{ destinationTimeZoneParts[1] }}</p>
+      {% else %}
+      <p class="destination-fact__timezone-name">{{ destinationTimeZone }}</p>
+      {% endif %}
+    </div>
+    {% endif %}
+    {% if destinationCurrency %}
+    <div class="destination-fact">
+      {{ factIcon("currency") }}
+      <h2>Currency</h2>
+      <p>{{ destinationCurrency }}</p>
+    </div>
+    {% endif %}
+    {% if destinationLanguages or destinationEnglishNote %}
+    <div class="destination-fact">
+      {{ factIcon("language") }}
+      <h2>Languages</h2>
+      {% if destinationLanguages %}<p>{{ destinationLanguages }}</p>{% endif %}
+      {% if destinationEnglishNote %}<p class="destination-fact__note">{{ destinationEnglishNote }}</p>{% endif %}
+    </div>
+    {% endif %}
+    {% if pairedDestinations.length %}
+    <div class="destination-fact destination-fact--paired">
+      {{ factIcon("paired") }}
+      <h2>Best Paired With</h2>
+      <ul class="destination-fact__paired-list">
+        {% for paired in pairedDestinations %}
+              {% if loop.index <= 3 %}<li><a href="{{ locationUrl(paired) }}">{{ paired.title or paired.name or "" }}</a></li>{% endif %}
         {% endfor %}
       </ul>
     </div>
     {% endif %}
-  </li>
-  {% endfor %}
-{% endblock %}
+  </section>
+  {% endif %}
 
-{% block listings %}
-<listings heading="{{ page.title }}" pagination-length="250" id="{{ page._id }}" type="location">
-  <h1 class="listings__heading">{{ page.title }}</h1>
-</listings>
+  {% set continentMapPath = "" %}
+  {% if destinationTitle == "North America" %}{% set continentMapPath = "/assets/images/destination-map-north-america.jpg" %}
+  {% elif destinationTitle == "Africa" %}{% set continentMapPath = "/assets/images/destination-map-africa.jpg" %}
+  {% elif destinationTitle == "Oceania" %}{% set continentMapPath = "/assets/images/destination-map-oceania.jpg" %}
+  {% elif destinationTitle == "Asia" %}{% set continentMapPath = "/assets/images/destination-map-asia.jpg" %}
+  {% elif destinationTitle == "Europe" %}{% set continentMapPath = "/assets/images/destination-map-europe.jpg" %}
+  {% endif %}
+  {% if isContinentPage and continentMapPath %}
+  {% set mapBoxImage = page.continentMapBackgroundImage.path if page.continentMapBackgroundImage and page.continentMapBackgroundImage.path else (page.social.image.path if page.social and page.social.image and page.social.image.path else destinationHeroPath) %}
+  {% if not mapBoxImage and page.destinationFeaturedStories and page.destinationFeaturedStories[0] and page.destinationFeaturedStories[0].tout and page.destinationFeaturedStories[0].tout.image %}{% set mapBoxImage = page.destinationFeaturedStories[0].tout.image.path %}{% endif %}
+  {% if not mapBoxImage and destinationStories and destinationStories[0] and destinationStories[0].tout and destinationStories[0].tout.image %}{% set mapBoxImage = destinationStories[0].tout.image.path %}{% endif %}
+  {# This runtime scopes assignments inside loops, so use the first populated
+     related destination directly instead of trying to set mapBoxImage in a loop. #}
+  {% if not mapBoxImage and page.locations and page.locations[0] and page.locations[0].storySet and page.locations[0].storySet.items and page.locations[0].storySet.items[0] and page.locations[0].storySet.items[0].tout and page.locations[0].storySet.items[0].tout.image %}{% set mapBoxImage = page.locations[0].storySet.items[0].tout.image.path %}{% endif %}
+  {% if not mapBoxImage %}{% set mapBoxImage = "/assets/images/france-lavender.jpg" %}{% endif %}
+  {% set mapBoxImageSrc = mapBoxImage if mapBoxImage == "/assets/images/france-lavender.jpg" else (mapBoxImage | image({w: 2400, auto: 'compress,format'})) %}
+  <section class="continent-map continent-map--{{ destinationTitle | lower | replace(" ", "-") }}" style="background-image: url('{{ mapBoxImageSrc }}');" aria-labelledby="continent-map-title">
+    <div class="continent-map__heading">
+      <p id="continent-map-title">{{ page.continentMapHeading or "Explore the Map" }}</p>
+    </div>
+    <div class="continent-map__canvas">
+      <img class="continent-map__background" src="{{ continentMapPath }}" alt="{{ destinationTitle }} destination map" loading="lazy" decoding="async">
+      <div class="continent-map__wash" aria-hidden="true"></div>
+      {% for destination in (page.locations or []) %}
+        {% set mapLeft = "50%" %}{% set mapTop = "50%" %}
+        {% if destination.title == "Canada" %}{% set mapLeft = "56%" %}{% set mapTop = "21%" %}
+        {% elif destination.title == "United States" %}{% set mapLeft = "53%" %}{% set mapTop = "39%" %}
+        {% elif destination.title == "California" %}{% set mapLeft = "37%" %}{% set mapTop = "45%" %}
+        {% elif destination.title == "Mexico" %}{% set mapLeft = "46%" %}{% set mapTop = "61%" %}
+        {% elif destination.title == "Costa Rica" %}{% set mapLeft = "60%" %}{% set mapTop = "78%" %}
+        {% elif destination.title == "Panama" %}{% set mapLeft = "60%" %}{% set mapTop = "87%" %}
+        {% elif destination.title == "Belize" %}{% set mapLeft = "52%" %}{% set mapTop = "72%" %}
+        {% elif destination.title == "Cuba" %}{% set mapLeft = "63%" %}{% set mapTop = "67%" %}
+        {% elif destination.title == "Jamaica" %}{% set mapLeft = "63%" %}{% set mapTop = "77%" %}
+        {% elif destination.title == "Dominican Republic" %}{% set mapLeft = "66%" %}{% set mapTop = "69%" %}
+        {% elif destination.title == "Bahamas" %}{% set mapLeft = "65%" %}{% set mapTop = "57%" %}
+        {% elif destination.title == "Barbados" %}{% set mapLeft = "83%" %}{% set mapTop = "90%" %}
+        {% elif destination.title == "Hawaii" and destinationTitle == "North America" %}{% set mapLeft = "12%" %}{% set mapTop = "65%" %}
+        {% elif destination.title == "Dominica" %}{% set mapLeft = "82%" %}{% set mapTop = "82%" %}
+        {% elif destination.title == "Saint Martin" %}{% set mapLeft = "82%" %}{% set mapTop = "68%" %}
+        {% elif destination.title == "St Kitts and Nevis" %}{% set mapLeft = "81%" %}{% set mapTop = "75%" %}
+        {% elif destination.title == "Turks and Caicos" %}{% set mapLeft = "82%" %}{% set mapTop = "61%" %}
+        {% elif destination.title == "South Africa" %}{% set mapLeft = "48%" %}{% set mapTop = "82%" %}
+        {% elif destination.title == "Morocco" %}{% set mapLeft = "29%" %}{% set mapTop = "19%" %}
+        {% elif destination.title == "Ethiopia" %}{% set mapLeft = "57%" %}{% set mapTop = "36%" %}
+        {% elif destination.title == "Australia" %}{% set mapLeft = "31%" %}{% set mapTop = "55%" %}
+        {% elif destination.title == "New Zealand" %}{% set mapLeft = "57%" %}{% set mapTop = "70%" %}
+        {% elif destination.title == "Fiji" %}{% set mapLeft = "67%" %}{% set mapTop = "45%" %}
+        {% elif destination.title == "French Polynesia" %}{% set mapLeft = "82%" %}{% set mapTop = "38%" %}
+        {% elif destination.title == "Cook Islands" %}{% set mapLeft = "82%" %}{% set mapTop = "58%" %}
+        {% elif destination.title == "Hawaii" %}{% set mapLeft = "82%" %}{% set mapTop = "18%" %}
+        {% elif destination.title == "India" %}{% set mapLeft = "40%" %}{% set mapTop = "53%" %}
+        {% elif destination.title == "China" %}{% set mapLeft = "58%" %}{% set mapTop = "35%" %}
+        {% elif destination.title == "Japan" %}{% set mapLeft = "84%" %}{% set mapTop = "31%" %}
+        {% elif destination.title == "South Korea" %}{% set mapLeft = "76%" %}{% set mapTop = "39%" %}
+        {% elif destination.title == "Taiwan" %}{% set mapLeft = "71%" %}{% set mapTop = "49%" %}
+        {% elif destination.title == "Maldives" %}{% set mapLeft = "28.5%" %}{% set mapTop = "74%" %}
+        {% elif destination.title == "Thailand" %}{% set mapLeft = "51%" %}{% set mapTop = "61%" %}
+        {% elif destination.title == "Vietnam" %}{% set mapLeft = "63%" %}{% set mapTop = "58%" %}
+        {% elif destination.title == "Cambodia" %}{% set mapLeft = "56%" %}{% set mapTop = "67%" %}
+        {% elif destination.title == "Indonesia" %}{% set mapLeft = "63%" %}{% set mapTop = "89%" %}
+        {% elif destination.title == "Malaysia" %}{% set mapLeft = "51%" %}{% set mapTop = "74%" %}
+        {% elif destination.title == "Singapore" %}{% set mapLeft = "52%" %}{% set mapTop = "83%" %}
+        {% elif destination.title == "Sri Lanka" %}{% set mapLeft = "38%" %}{% set mapTop = "71%" %}
+        {% elif destination.title == "Ireland" %}{% set mapLeft = "21%" %}{% set mapTop = "22%" %}
+        {% elif destination.title == "North Ireland" %}{% set mapLeft = "24%" %}{% set mapTop = "14%" %}
+        {% elif destination.title == "England" %}{% set mapLeft = "30%" %}{% set mapTop = "29%" %}
+        {% elif destination.title == "Portugal" %}{% set mapLeft = "18%" %}{% set mapTop = "68%" %}
+        {% elif destination.title == "Spain" %}{% set mapLeft = "28%" %}{% set mapTop = "78%" %}
+        {% elif destination.title == "France" %}{% set mapLeft = "38%" %}{% set mapTop = "43%" %}
+        {% elif destination.title == "The Netherlands" %}{% set mapLeft = "44%" %}{% set mapTop = "24%" %}
+        {% elif destination.title == "Germany" %}{% set mapLeft = "50%" %}{% set mapTop = "34%" %}
+        {% elif destination.title == "Austria" %}{% set mapLeft = "52%" %}{% set mapTop = "46%" %}
+        {% elif destination.title == "Poland" %}{% set mapLeft = "66%" %}{% set mapTop = "23%" %}
+        {% elif destination.title == "Croatia" %}{% set mapLeft = "61%" %}{% set mapTop = "55%" %}
+        {% elif destination.title == "Italy" %}{% set mapLeft = "55%" %}{% set mapTop = "66%" %}
+        {% elif destination.title == "Monaco" %}{% set mapLeft = "43%" %}{% set mapTop = "57%" %}
+        {% elif destination.title == "Montenegro" %}{% set mapLeft = "67%" %}{% set mapTop = "61%" %}
+        {% elif destination.title == "Albania" %}{% set mapLeft = "69%" %}{% set mapTop = "70%" %}
+        {% elif destination.title == "Greece" %}{% set mapLeft = "78%" %}{% set mapTop = "80%" %}
+        {% elif destination.title == "Malta" %}{% set mapLeft = "52%" %}{% set mapTop = "83%" %}
+        {% endif %}
+        <a class="continent-map__marker" style="left: {{ mapLeft }}; top: {{ mapTop }}" href="/destinations/{{ destination.title | lower | replace(" ", "-") }}" aria-label="{{ destination.title }} - {{ destination.storySet.total if destination.storySet else 0 }} posts"><span>{{ destination.title }}</span>{% if destination.storySet and destination.storySet.total %}<small>{{ destination.storySet.total }}</small>{% endif %}</a>
+      {% endfor %}
+      {% if destinationTitle == "Asia" %}
+        {% for mapContinent in (continents.items or []) %}
+          {% if mapContinent.name == "Middle East" %}
+            {% for destination in (mapContinent.locations or []) %}
+              {% if destination.title == "United Arab Emirates" %}
+                <a class="continent-map__marker" style="left: 16%; top: 47%" href="/destinations/united-arab-emirates" aria-label="United Arab Emirates - {{ destination.storySet.total if destination.storySet else 0 }} posts"><span>United Arab Emirates</span>{% if destination.storySet and destination.storySet.total %}<small>{{ destination.storySet.total }}</small>{% endif %}</a>
+              {% elif destination.title == "Oman" %}
+                <a class="continent-map__marker" style="left: 22%; top: 55%" href="/destinations/oman" aria-label="Oman - {{ destination.storySet.total if destination.storySet else 0 }} posts"><span>Oman</span>{% if destination.storySet and destination.storySet.total %}<small>{{ destination.storySet.total }}</small>{% endif %}</a>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if isContinentPage and continentMostRequestedDestinationTitle and continentMostRequestedStories.length %}
+  <section class="continent-most-requested" aria-labelledby="continent-most-requested-title">
+    <header class="continent-most-requested__heading">
+      <p>{{ page.continentMostRequestedLabel or "Most Requested" }}</p>
+      <div>
+        <h2 id="continent-most-requested-title">{{ continentMostRequestedTitle }}</h2>
+        <span>{{ continentMostRequestedDescription }}</span>
+      </div>
+    </header>
+    <div class="continent-most-requested__grid">
+      {% for requestedStory in continentMostRequestedStories %}
+      {% if loop.index <= 4 %}
+      <article class="continent-most-requested__card">
+        <a href="{{ storyUrl(requestedStory) }}">
+          <span class="continent-most-requested__image">{{ storyImage(requestedStory, "(min-width: 1000px) 24vw, (min-width: 700px) 48vw, 100vw", false) }}</span>
+          <span class="continent-most-requested__copy">
+            <h3>{{ requestedStory.title }}</h3>
+            <i>Read the Story <b aria-hidden="true">→</b></i>
+          </span>
+        </a>
+      </article>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if isContinentPage and destinationContinent and ((page.continentContinueDestinations and page.continentContinueDestinations.length) or specialExploreTitles.length or (destinationContinent.locations and destinationContinent.locations.length)) %}
+  <section class="destination-nearby" aria-labelledby="destination-nearby-title">
+    <header class="destination-band-heading">
+      <h2 id="destination-nearby-title">{{ page.destinationContinueHeading or ("Continue Exploring " + exploreGroupName) }}</h2>
+        <a href="{{ continentUrl(destinationContinent) }}">View All {{ continentName }} Destinations <span aria-hidden="true">→</span></a>
+    </header>
+    <div class="destination-nearby__grid">
+      {% if page.continentContinueDestinations and page.continentContinueDestinations.length %}
+      {% for destination in page.continentContinueDestinations %}
+        {{ destinationCard(destination) }}
+      {% endfor %}
+      {% elif specialExploreTitles.length %}
+      {% for relatedTitle in specialExploreTitles %}
+        {% for exploreContinent in continents.items %}
+          {% for destination in exploreContinent.locations %}
+            {% if destination.title == relatedTitle %}{{ destinationCard(destination) }}{% endif %}
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+      {% else %}
+      {% for destination in destinationContinent.locations %}
+        {{ destinationCard(destination) }}
+      {% endfor %}
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if featuredOne or featuredTwo %}
+  <section class="destination-featured" aria-labelledby="destination-featured-title">
+    <header class="destination-section-title">
+      <h2 id="destination-featured-title">{{ page.destinationEditorsPicksHeading or "Editor’s Picks" }}</h2>
+    </header>
+{{ featuredStory(featuredOne, false, featuredOneImageOverride) }}
+{{ featuredStory(featuredTwo, true, featuredTwoImageOverride) }}
+  </section>
+  {% endif %}
+
+  {% if destinationContinent and not isContinentPage and ((page.destinationRelatedDestinations and page.destinationRelatedDestinations.length) or automaticRelated.length or (destinationContinent.locations and destinationContinent.locations.length)) %}
+  <section class="destination-nearby" aria-labelledby="destination-nearby-title">
+    <header class="destination-band-heading">
+      <h2 id="destination-nearby-title">{{ page.destinationContinueHeading or ("Continue Exploring " + exploreGroupName) }}</h2>
+      <a href="{{ continentUrl(destinationContinent) }}">View All {{ continentName }} Destinations <span aria-hidden="true">→</span></a>
+    </header>
+    <div class="destination-nearby__grid">
+      {% if specialExploreTitles.length %}
+        {% for relatedTitle in specialExploreTitles %}
+          {% for exploreContinent in continents.items %}
+            {% for destination in exploreContinent.locations %}
+              {% if destination.title == relatedTitle and destination._id != page._id %}{{ destinationCard(destination) }}{% endif %}
+            {% endfor %}
+          {% endfor %}
+        {% endfor %}
+      {% elif page.destinationRelatedDestinations and page.destinationRelatedDestinations.length %}
+        {% for destination in page.destinationRelatedDestinations %}
+          {{ destinationCard(destination) }}
+        {% endfor %}
+      {% elif automaticFacts.related.length %}
+        {% for related in automaticFacts.related %}
+          {% for exploreContinent in continents.items %}
+            {% for destination in exploreContinent.locations %}
+              {% if destination.title == related.title %}{{ destinationCard(destination) }}{% endif %}
+            {% endfor %}
+          {% endfor %}
+        {% endfor %}
+      {% else %}
+        {% for destination in destinationContinent.locations %}
+          {% if destination._id != page._id and loop.index <= 7 %}{{ destinationCard(destination) }}{% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if featureStory %}
+  <section class="destination-spotlight" aria-label="Featured {{ destinationTitle }} story">
+    <div class="destination-spotlight__copy">
+      <p class="destination-detail__eyebrow">{{ page.destinationFeaturedGuideLabel or "Featured Guide" }}</p>
+      <h3><a href="{{ storyUrl(featureStory) }}">{{ featureStory.title or "" }}</a></h3>
+      <div class="destination-spotlight__details">
+        {% if featureStory.tout and featureStory.tout.dek %}<p>{{ featureStory.tout.dek }}</p>{% endif %}
+        <a class="destination-detail__text-link" href="{{ storyUrl(featureStory) }}">Read the guide <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <a class="destination-spotlight__image" href="{{ storyUrl(featureStory) }}">
+          {% if featureStoryImageOverride and featureStoryImageOverride.path %}
+          <img srcset="{{ featureStoryImageOverride.path | image({w: 3840, auto: 'compress,format'}) }} 3840w,
+                       {{ featureStoryImageOverride.path | image({w: 2560, auto: 'compress,format'}) }} 2560w,
+                       {{ featureStoryImageOverride.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+                       {{ featureStoryImageOverride.path | image({w: 1000, auto: 'compress,format'}) }} 1000w,
+                       {{ featureStoryImageOverride.path | image({w: 640, auto: 'compress,format'}) }} 640w"
+               sizes="100vw"
+               src="{{ featureStoryImageOverride.path | image({w: 1600, auto: 'compress,format'}) }}"
+               alt="{{ featureStory.title or '' }}"
+               loading="lazy"
+               decoding="async">
+          {% else %}
+          {{ storyImage(featureStory, "100vw", false) }}
+          {% endif %}
+    </a>
+  </section>
+  {% endif %}
+
+  {% if (page.destinationGuideStories and page.destinationGuideStories.length) or (destinationStories and destinationStories.length) or (isContinentPage and countryPostCount > 0) %}
+  <section class="destination-guides" id="destination-guides" aria-labelledby="destination-guides-title">
+    <header class="destination-band-heading">
+      <h2 id="destination-guides-title">{{ page.destinationGuidesHeading or (destinationTitle + " Guides") }}</h2>
+      <a href="{% if isContinentPage %}{{ continentUrl(page) }}/archive{% else %}{{ locationUrl(page) }}/archive{% endif %}">View All {{ postCount }} Posts <span aria-hidden="true">→</span></a>
+    </header>
+    <div class="destination-guides__grid">
+      {% if page.destinationGuideStories and page.destinationGuideStories.length %}
+      {% for story in page.destinationGuideStories %}
+        <article class="destination-guide-card">
+          <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">{{ storyImage(story, "(min-width: 1100px) 25vw, (min-width: 650px) 50vw, 100vw", false) }}</a>
+          <div class="destination-guide-card__copy"><p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% else %}{{ destinationTitle }}{% endif %}</p><h3><a href="{{ storyUrl(story) }}">{{ story.title or "" }}</a></h3>{% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}</div>
+        </article>
+      {% endfor %}
+      {% elif isContinentPage %}
+      {% set visiblePostCount = 0 %}
+      {% for story in destinationStories %}
+        {% if visiblePostCount < 12 %}
+        <article class="destination-guide-card">
+          <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">{{ storyImage(story, "(min-width: 1100px) 25vw, (min-width: 650px) 50vw, 100vw", false) }}</a>
+          <div class="destination-guide-card__copy"><p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% else %}{{ destinationTitle }}{% endif %}</p><h3><a href="{{ storyUrl(story) }}">{{ story.title or "" }}</a></h3>{% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}</div>
+        </article>
+        {% set visiblePostCount = visiblePostCount + 1 %}
+        {% endif %}
+      {% endfor %}
+      {% for destination in (page.locations or []) %}
+        {% for story in (destination.storySet.items if destination.storySet else []) %}
+        {% if visiblePostCount < 12 %}
+        <article class="destination-guide-card">
+          <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">{{ storyImage(story, "(min-width: 1100px) 25vw, (min-width: 650px) 50vw, 100vw", false) }}</a>
+          <div class="destination-guide-card__copy"><p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% else %}{{ destination.title or destinationTitle }}{% endif %}</p><h3><a href="{{ storyUrl(story) }}">{{ story.title or "" }}</a></h3>{% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}</div>
+        </article>
+        {% set visiblePostCount = visiblePostCount + 1 %}
+        {% endif %}
+        {% endfor %}
+      {% endfor %}
+      {% else %}
+      {% set archivePostCount = 0 %}
+      {% for story in destinationStories %}
+        {% if archivePostCount < 12 %}
+        <article class="destination-guide-card">
+          <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">
+            {{ storyImage(story, "(min-width: 1100px) 25vw, (min-width: 650px) 50vw, 100vw", false) }}
+          </a>
+          <div class="destination-guide-card__copy">
+            <p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% else %}{{ destinationTitle }}{% endif %}</p>
+            <h3><a href="{{ storyUrl(story) }}">{{ story.title or "" }}</a></h3>
+            {% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
+          </div>
+        </article>
+        {% set archivePostCount = archivePostCount + 1 %}
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+    <div class="destination-guides__view-all">
+      <a href="{% if isContinentPage %}{{ continentUrl(page) }}/archive{% else %}{{ locationUrl(page) }}/archive{% endif %}">View All {{ postCount }} Posts <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+  {% endif %}
+</article>
 {% endblock %}

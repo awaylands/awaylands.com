@@ -531,11 +531,123 @@
           },
           "social": {
             "widget": "shapeObject"
+          },
+          "destinationHeroImage": {
+            "widget": "image",
+            "title": "01 — Hero — Image",
+            "instructions": "Main full-width image."
+          },
+          "destinationBlurb": {
+            "widget": "paragraphText",
+            "title": "02 — Overview — Introduction",
+            "instructions": "Introduction shown beneath the hero."
+          },
+          "destinationBestTime": {
+            "widget": "paragraphText",
+            "title": "02 — Facts — Best Time to Visit"
+          },
+          "destinationTimeZone": {
+            "widget": "paragraphText",
+            "title": "02 — Facts — Time Zone"
+          },
+          "destinationCurrency": {
+            "widget": "singleLineText",
+            "title": "02 — Facts — Currency"
+          },
+          "destinationLanguages": {
+            "widget": "paragraphText",
+            "title": "02 — Facts — Languages"
+          },
+          "destinationBestPairedWith": {
+            "widget": "relationship",
+            "title": "02 — Facts — Best Paired With",
+            "instructions": "Choose and reorder up to three destinations.",
+            "collapseByDefault": true
+          },
+          "destinationFeaturedStories": {
+            "widget": "relationship",
+            "title": "05 — Editor’s Picks — Two Posts",
+            "instructions": "Choose and reorder up to two posts.",
+            "collapseByDefault": true
+          },
+          "destinationFeatureStory": {
+            "widget": "relationship",
+            "title": "06 — Featured Guide — Post",
+            "instructions": "Choose the large full-width featured post."
+          },
+          "destinationRelatedDestinations": {
+            "widget": "relationship",
+            "title": "04 — Continue Exploring — Six Destinations",
+            "instructions": "Choose and reorder up to six destination cards.",
+            "collapseByDefault": true
+          },
+          "destinationEnglishNote": {
+            "widget": "singleLineText",
+            "title": "02 — Facts — English Availability"
+          },
+          "destinationFeaturedOneImage": {
+            "widget": "image",
+            "title": "05 — Editor’s Picks — Post 1 Photo Override",
+            "instructions": "Optional. Replaces the first post’s automatic image."
+          },
+          "destinationFeaturedTwoImage": {
+            "widget": "image",
+            "title": "05 — Editor’s Picks — Post 2 Photo Override",
+            "instructions": "Optional. Replaces the second post’s automatic image."
+          },
+          "destinationFeatureStoryImage": {
+            "widget": "image",
+            "title": "06 — Featured Guide — Photo Override",
+            "instructions": "Optional. Replaces the selected post’s automatic image."
+          },
+          "destinationContinueHeading": {
+            "widget": "singleLineText",
+            "title": "04 — Continue Exploring — Heading",
+            "instructions": "Leave blank to use the automatic heading."
+          },
+          "destinationEditorsPicksHeading": {
+            "widget": "singleLineText",
+            "title": "05 — Editor’s Picks — Heading",
+            "instructions": "Leave blank to use “Editor’s Picks”."
+          },
+          "destinationFeaturedGuideLabel": {
+            "widget": "singleLineText",
+            "title": "06 — Featured Guide — Label",
+            "instructions": "Leave blank to use “Featured Guide”."
+          },
+          "destinationGuidesHeading": {
+            "widget": "singleLineText",
+            "title": "07 — Guides — Heading",
+            "instructions": "Leave blank to use the automatic destination or continent heading."
+          },
+          "destinationGuideStories": {
+            "widget": "relationship",
+            "title": "07 — Guides — Up to 12 Cards",
+            "instructions": "Optional curated order. When blank, the newest related posts appear automatically.",
+            "collapseByDefault": true
           }
         },
         "order": [
           "title",
-          "image",
+          "destinationHeroImage",
+          "destinationBlurb",
+          "destinationBestTime",
+          "destinationTimeZone",
+          "destinationCurrency",
+          "destinationLanguages",
+          "destinationEnglishNote",
+          "destinationBestPairedWith",
+          "destinationContinueHeading",
+          "destinationRelatedDestinations",
+          "destinationEditorsPicksHeading",
+          "destinationFeaturedStories",
+          "destinationFeaturedOneImage",
+          "destinationFeaturedTwoImage",
+          "destinationFeaturedGuideLabel",
+          "destinationFeatureStory",
+          "destinationFeatureStoryImage",
+          "destinationGuidesHeading",
+          "destinationGuideStories",
           "social"
         ]
       }
@@ -1990,13 +2102,164 @@
             "widget": "shapeObject"
           },
           "locations": {
-            "widget": "relationship"
+            "widget": "relationship",
+            "title": "03 — Explore the Map — Destinations",
+            "instructions": "Controls the illustrated map labels. Drag to reorder.",
+            "collapseByDefault": true
+          },
+          "destinationHeroImage": {
+            "widget": "image",
+            "title": "01 — Hero — Image",
+            "instructions": "Main full-width image."
+          },
+          "destinationBlurb": {
+            "widget": "paragraphText",
+            "title": "02 — Overview — Introduction",
+            "instructions": "Introduction shown beneath the hero."
+          },
+          "destinationFeaturedStories": {
+            "widget": "relationship",
+            "title": "05 — Editor’s Picks — Two Posts",
+            "instructions": "Choose and reorder up to two posts.",
+            "collapseByDefault": true
+          },
+          "destinationFeatureStory": {
+            "widget": "relationship",
+            "title": "06 — Featured Guide — Post",
+            "instructions": "Choose the large full-width featured post."
+          },
+          "destinationFeaturedOneImage": {
+            "widget": "image",
+            "title": "05 — Editor’s Picks — Post 1 Photo Override",
+            "instructions": "Optional. Replaces the first post’s automatic image."
+          },
+          "destinationFeaturedTwoImage": {
+            "widget": "image",
+            "title": "05 — Editor’s Picks — Post 2 Photo Override",
+            "instructions": "Optional. Replaces the second post’s automatic image."
+          },
+          "destinationFeatureStoryImage": {
+            "widget": "image",
+            "title": "06 — Featured Guide — Photo Override",
+            "instructions": "Optional. Replaces the selected post’s automatic image."
+          },
+          "continentMostRequestedDestination": {
+            "widget": "relationship",
+            "title": "04 — Most Requested — Destination",
+            "instructions": "Used for the automatic headline, introduction, and card fallback."
+          },
+          "continentMostRequestedTitle": {
+            "widget": "singleLineText",
+            "title": "04 — Most Requested — Headline",
+            "instructions": "Leave blank to use the automatic destination headline."
+          },
+          "continentMostRequestedDescription": {
+            "widget": "paragraphText",
+            "title": "04 — Most Requested — Description",
+            "instructions": "Leave blank to use the selected destination introduction."
+          },
+          "continentMostRequestedStories": {
+            "widget": "relationship",
+            "title": "04 — Most Requested — Four Story Cards",
+            "instructions": "Choose and reorder up to four stories.",
+            "collapseByDefault": true
+          },
+          "destinationContinueHeading": {
+            "widget": "singleLineText",
+            "title": "04 — Continue Exploring — Heading",
+            "instructions": "Leave blank to use the automatic heading."
+          },
+          "destinationEditorsPicksHeading": {
+            "widget": "singleLineText",
+            "title": "05 — Editor’s Picks — Heading",
+            "instructions": "Leave blank to use “Editor’s Picks”."
+          },
+          "destinationFeaturedGuideLabel": {
+            "widget": "singleLineText",
+            "title": "06 — Featured Guide — Label",
+            "instructions": "Leave blank to use “Featured Guide”."
+          },
+          "destinationGuidesHeading": {
+            "widget": "singleLineText",
+            "title": "07 — Guides — Heading",
+            "instructions": "Leave blank to use the automatic destination or continent heading."
+          },
+          "destinationGuideStories": {
+            "widget": "relationship",
+            "title": "07 — Guides — Up to 12 Cards",
+            "instructions": "Optional curated order. When blank, the newest related posts appear automatically.",
+            "collapseByDefault": true
+          },
+          "continentGeographyHeading": {
+            "widget": "singleLineText",
+            "title": "02 — Overview — Geography Heading",
+            "instructions": "Leave blank to use “Regions and Geography”."
+          },
+          "continentGeographyCards": {
+            "widget": "paragraphText",
+            "title": "02 — Overview — Five Geography Cards",
+            "instructions": "One card per line: Title | Description."
+          },
+          "continentSeasonsHeading": {
+            "widget": "singleLineText",
+            "title": "02 — Overview — Travel Seasons Heading",
+            "instructions": "Leave blank to use “Travel Seasons by Region”."
+          },
+          "continentSeasonCards": {
+            "widget": "paragraphText",
+            "title": "02 — Overview — Five Travel Season Cards",
+            "instructions": "One card per line: Region | Travel window | Note."
+          },
+          "continentMapHeading": {
+            "widget": "singleLineText",
+            "title": "03 — Explore the Map — Heading",
+            "instructions": "Leave blank to use “Explore the Map”."
+          },
+          "continentMapBackgroundImage": {
+            "widget": "image",
+            "title": "03 — Explore the Map — Background Photo",
+            "instructions": "Changes the full-width photo behind the illustrated map and labels."
+          },
+          "continentMostRequestedLabel": {
+            "widget": "singleLineText",
+            "title": "04 — Most Requested — Label",
+            "instructions": "Leave blank to use “Most Requested”."
+          },
+          "continentContinueDestinations": {
+            "widget": "relationship",
+            "title": "04 — Continue Exploring — Destinations",
+            "instructions": "Optional curated card order. Leave blank to use the automatic regional selection.",
+            "collapseByDefault": true
           }
         },
         "order": [
           "name",
-          "social",
-          "locations"
+          "destinationHeroImage",
+          "destinationBlurb",
+          "continentGeographyHeading",
+          "continentGeographyCards",
+          "continentSeasonsHeading",
+          "continentSeasonCards",
+          "continentMapHeading",
+          "continentMapBackgroundImage",
+          "locations",
+          "continentMostRequestedLabel",
+          "continentMostRequestedDestination",
+          "continentMostRequestedTitle",
+          "continentMostRequestedDescription",
+          "continentMostRequestedStories",
+          "destinationContinueHeading",
+          "continentContinueDestinations",
+          "destinationEditorsPicksHeading",
+          "destinationFeaturedStories",
+          "destinationFeaturedOneImage",
+          "destinationFeaturedTwoImage",
+          "destinationFeaturedGuideLabel",
+          "destinationFeatureStory",
+          "destinationFeatureStoryImage",
+          "destinationGuidesHeading",
+          "destinationGuideStories",
+          "social"
         ]
       }
     },
@@ -4936,6 +5199,275 @@
             "title": "Social",
             "@mapping": "shapedb:Location.rkcGZw3ZZ",
             "$ref": "#/shapes/LocationSocial/schema"
+          },
+          "destinationHeroImage": {
+            "title": "Hero Image",
+            "@mapping": "shapedb:Location.DestinationHeroImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationBlurb": {
+            "type": "string",
+            "title": "Introduction",
+            "description": "Editorial introduction shown in the overview section.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationBlurbV1"
+          },
+          "destinationBestTime": {
+            "type": "string",
+            "title": "Best Time to Visit",
+            "description": "Recommended travel window and a short reason.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationBestTimeV1"
+          },
+          "destinationTimeZone": {
+            "type": "string",
+            "title": "Time Zone",
+            "description": "Primary time zone or a concise note when the destination spans several zones.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationTimeZoneV1"
+          },
+          "destinationCurrency": {
+            "type": "string",
+            "title": "Currency",
+            "description": "Currency name and ISO code.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationCurrencyV1"
+          },
+          "destinationLanguages": {
+            "type": "string",
+            "title": "Languages",
+            "description": "Official or primary languages useful to travelers.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationLanguagesV1"
+          },
+          "destinationBestPairedWith": {
+            "type": "array",
+            "title": "Best Paired With",
+            "maxItems": 3,
+            "items": {
+              "@ref": "local:Location"
+            },
+            "@mapping": "shapedb:Location.DestinationBestPairedWithV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationFeaturedStories": {
+            "type": "array",
+            "title": "Editor’s Picks Posts",
+            "maxItems": 2,
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Location.DestinationFeaturedStoriesV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationFeatureStory": {
+            "title": "Featured Guide Post",
+            "@mapping": "shapedb:Location.DestinationFeatureStoryV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Story",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationRelatedDestinations": {
+            "type": "array",
+            "title": "Continue Exploring Destinations",
+            "maxItems": 6,
+            "items": {
+              "@ref": "local:Location"
+            },
+            "@mapping": "shapedb:Location.DestinationRelatedDestinationsV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationEnglishNote": {
+            "type": "string",
+            "title": "English Availability",
+            "description": "A concise note describing how commonly travelers can use English.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationEnglishNoteV1"
+          },
+          "destinationFeaturedOneImage": {
+            "title": "Editor’s Pick 1 Photo Override",
+            "@mapping": "shapedb:Location.DestinationFeaturedOneImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationFeaturedTwoImage": {
+            "title": "Editor’s Pick 2 Photo Override",
+            "@mapping": "shapedb:Location.DestinationFeaturedTwoImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationFeatureStoryImage": {
+            "title": "Featured Guide Photo Override",
+            "@mapping": "shapedb:Location.DestinationFeatureStoryImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationContinueHeading": {
+            "type": "string",
+            "title": "Continue Exploring Heading",
+            "description": "Optional override for the Continue Exploring section title.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationContinueHeadingV1"
+          },
+          "destinationEditorsPicksHeading": {
+            "type": "string",
+            "title": "Editor’s Picks Heading",
+            "description": "Optional override for the Editor’s Picks section title.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationEditorsPicksHeadingV1"
+          },
+          "destinationFeaturedGuideLabel": {
+            "type": "string",
+            "title": "Featured Guide Label",
+            "description": "Optional override for the small Featured Guide label.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationFeaturedGuideLabelV1"
+          },
+          "destinationGuidesHeading": {
+            "type": "string",
+            "title": "Guides Heading",
+            "description": "Optional override for the final Guides section title.",
+            "minLength": 0,
+            "@mapping": "shapedb:Location.DestinationGuidesHeadingV1"
+          },
+          "destinationGuideStories": {
+            "type": "array",
+            "title": "Guide Cards",
+            "maxItems": 12,
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Location.DestinationGuideStoriesV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
           }
         },
         "required": [
@@ -8959,6 +9491,334 @@
               "enabled": true
             },
             "type": "array",
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationHeroImage": {
+            "title": "Hero Image",
+            "@mapping": "shapedb:Continent.DestinationHeroImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationBlurb": {
+            "type": "string",
+            "title": "Introduction",
+            "description": "Editorial introduction shown in the overview section.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.DestinationBlurbV1"
+          },
+          "destinationFeaturedStories": {
+            "type": "array",
+            "title": "Editor’s Picks Posts",
+            "maxItems": 2,
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Continent.DestinationFeaturedStoriesV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationFeatureStory": {
+            "title": "Featured Guide Post",
+            "@mapping": "shapedb:Continent.DestinationFeatureStoryV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Story",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationFeaturedOneImage": {
+            "title": "Editor’s Pick 1 Photo Override",
+            "@mapping": "shapedb:Continent.DestinationFeaturedOneImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationFeaturedTwoImage": {
+            "title": "Editor’s Pick 2 Photo Override",
+            "@mapping": "shapedb:Continent.DestinationFeaturedTwoImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationFeatureStoryImage": {
+            "title": "Featured Guide Photo Override",
+            "@mapping": "shapedb:Continent.DestinationFeatureStoryImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "continentMostRequestedDestination": {
+            "title": "Most Requested Destination",
+            "@mapping": "shapedb:Continent.ContinentMostRequestedDestinationV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Location",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "continentMostRequestedTitle": {
+            "type": "string",
+            "title": "Most Requested Headline",
+            "description": "Headline shown above the four Most Requested story cards.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.ContinentMostRequestedTitleV1"
+          },
+          "continentMostRequestedDescription": {
+            "type": "string",
+            "title": "Most Requested Description",
+            "description": "Short introduction shown beneath the Most Requested headline.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.ContinentMostRequestedDescriptionV1"
+          },
+          "continentMostRequestedStories": {
+            "type": "array",
+            "title": "Most Requested Story Cards",
+            "maxItems": 4,
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Continent.ContinentMostRequestedStoriesV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "destinationContinueHeading": {
+            "type": "string",
+            "title": "Continue Exploring Heading",
+            "description": "Optional override for the Continue Exploring section title.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.DestinationContinueHeadingV1"
+          },
+          "destinationEditorsPicksHeading": {
+            "type": "string",
+            "title": "Editor’s Picks Heading",
+            "description": "Optional override for the Editor’s Picks section title.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.DestinationEditorsPicksHeadingV1"
+          },
+          "destinationFeaturedGuideLabel": {
+            "type": "string",
+            "title": "Featured Guide Label",
+            "description": "Optional override for the small Featured Guide label.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.DestinationFeaturedGuideLabelV1"
+          },
+          "destinationGuidesHeading": {
+            "type": "string",
+            "title": "Guides Heading",
+            "description": "Optional override for the final Guides section title.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.DestinationGuidesHeadingV1"
+          },
+          "destinationGuideStories": {
+            "type": "array",
+            "title": "Guide Cards",
+            "maxItems": 12,
+            "items": {
+              "@ref": "local:Story"
+            },
+            "@mapping": "shapedb:Continent.DestinationGuideStoriesV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@input": {
+              "type": "array",
+              "items": {
+                "@ref": "local:TSRelationship"
+              }
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "continentGeographyHeading": {
+            "type": "string",
+            "title": "Geography Heading",
+            "description": "Optional override for “Regions and Geography”.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.ContinentGeographyHeadingV1"
+          },
+          "continentGeographyCards": {
+            "type": "string",
+            "title": "Geography Cards",
+            "description": "One card per line: Title | Description. Keep five lines.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.ContinentGeographyCardsV1"
+          },
+          "continentSeasonsHeading": {
+            "type": "string",
+            "title": "Travel Seasons Heading",
+            "description": "Optional override for “Travel Seasons by Region”.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.ContinentSeasonsHeadingV1"
+          },
+          "continentSeasonCards": {
+            "type": "string",
+            "title": "Travel Season Cards",
+            "description": "One card per line: Region | Travel window | Note. Keep five lines.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.ContinentSeasonCardsV1"
+          },
+          "continentMapHeading": {
+            "type": "string",
+            "title": "Map Heading",
+            "description": "Optional override for “Explore the Map”.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.ContinentMapHeadingV1"
+          },
+          "continentMapBackgroundImage": {
+            "title": "Map Background Photo",
+            "@mapping": "shapedb:Continent.ContinentMapBackgroundImageV1",
+            "@backreference": {
+              "enabled": true
+            },
+            "@ref": "local:Asset",
+            "@input": {
+              "@ref": "local:TSRelationship"
+            },
+            "@args": "TSRelationshipArgs",
+            "@resolver": {
+              "name": "shapedb:getRelated",
+              "service": "shapedb",
+              "options": {
+                "nullable": true
+              }
+            }
+          },
+          "continentMostRequestedLabel": {
+            "type": "string",
+            "title": "Most Requested Label",
+            "description": "Optional override for the small Most Requested section label.",
+            "minLength": 0,
+            "@mapping": "shapedb:Continent.ContinentMostRequestedLabelV1"
+          },
+          "continentContinueDestinations": {
+            "type": "array",
+            "title": "Continue Exploring Destinations",
+            "maxItems": 12,
+            "items": {
+              "@ref": "local:Location"
+            },
+            "@mapping": "shapedb:Continent.ContinentContinueDestinationsV1",
+            "@backreference": {
+              "enabled": true
+            },
             "@input": {
               "type": "array",
               "items": {
