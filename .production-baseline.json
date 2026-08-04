@@ -56,6 +56,7 @@
     "src/stylesheets/pages/_destinations.scss": "a7abc33a3121adc7560712dc42750acdd7a6843e857efd4274d48035bc223f4c",
     "scripts/deploy-production.js": "f1b099f4b89ddda88504a03058c2310c54633491a5c561236b941fde082df891",
     "scripts/verify-production-baseline.js": "537ab24ac5aa2acbcd35dbac34a70258e8293346012db6cdf5867349a48d2218",
-    "src/templates/pages/location.html": "7f6954b0610413167a68e969dd670954afc378535974655a2ef2bcf9455a945c"
+    "src/templates/pages/location.html": "7f6954b0610413167a68e969dd670954afc378535974655a2ef2bcf9455a945c",
+    "src/stylesheets/pages/_destination-detail.scss": "90a7d582976520bcdf3678efaaa115d58b3511285fb068dcce2c3de5b724eefb"
   }
 }

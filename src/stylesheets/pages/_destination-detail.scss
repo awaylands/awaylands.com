@@ -171,8 +171,8 @@ body.body--destination-detail:not(.gallery-page) {
 
 .destination-hero {
   color: #fff;
-  height: min(73vw, 88rem);
-  min-height: 66rem;
+  height: min(87.6vw, 105.6rem);
+  min-height: 79.2rem;
   position: relative;
 }
 
@@ -1781,7 +1781,7 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
   }
 
   .destination-hero {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 5 / 6;
     height: auto;
     min-height: 0;
   }
