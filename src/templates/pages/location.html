@@ -790,21 +790,34 @@
         <a href="{{ continentUrl(destinationContinent) }}">View All {{ continentName }} Destinations <span aria-hidden="true">→</span></a>
     </header>
     <div class="destination-nearby__grid">
+      {% set renderedNearbyTitles = "|" %}
       {% if page.continentContinueDestinations and page.continentContinueDestinations.length %}
       {% for destination in page.continentContinueDestinations %}
-        {{ destinationCard(destination) }}
+        {% set destinationMarker = "|" + destination.title + "|" %}
+        {% if destinationMarker not in renderedNearbyTitles %}
+          {{ destinationCard(destination) }}
+          {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
+        {% endif %}
       {% endfor %}
       {% elif specialExploreTitles.length %}
       {% for relatedTitle in specialExploreTitles %}
         {% for exploreContinent in continents.items %}
           {% for destination in exploreContinent.locations %}
-            {% if destination.title == relatedTitle %}{{ destinationCard(destination) }}{% endif %}
+            {% set destinationMarker = "|" + destination.title + "|" %}
+            {% if destination.title == relatedTitle and destinationMarker not in renderedNearbyTitles %}
+              {{ destinationCard(destination) }}
+              {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
+            {% endif %}
           {% endfor %}
         {% endfor %}
       {% endfor %}
       {% else %}
       {% for destination in destinationContinent.locations %}
-        {{ destinationCard(destination) }}
+        {% set destinationMarker = "|" + destination.title + "|" %}
+        {% if destinationMarker not in renderedNearbyTitles %}
+          {{ destinationCard(destination) }}
+          {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
+        {% endif %}
       {% endfor %}
       {% endif %}
     </div>
@@ -828,29 +841,46 @@
       <a href="{{ continentUrl(destinationContinent) }}">View All {{ continentName }} Destinations <span aria-hidden="true">→</span></a>
     </header>
     <div class="destination-nearby__grid">
+      {% set renderedNearbyTitles = "|" %}
       {% if specialExploreTitles.length %}
         {% for relatedTitle in specialExploreTitles %}
           {% for exploreContinent in continents.items %}
             {% for destination in exploreContinent.locations %}
-              {% if destination.title == relatedTitle and destination._id != page._id %}{{ destinationCard(destination) }}{% endif %}
+              {% set destinationMarker = "|" + destination.title + "|" %}
+              {% if destination.title == relatedTitle and destination._id != page._id and destinationMarker not in renderedNearbyTitles %}
+                {{ destinationCard(destination) }}
+                {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
+              {% endif %}
             {% endfor %}
           {% endfor %}
         {% endfor %}
       {% elif page.destinationRelatedDestinations and page.destinationRelatedDestinations.length %}
         {% for destination in page.destinationRelatedDestinations %}
-          {{ destinationCard(destination) }}
+          {% set destinationMarker = "|" + destination.title + "|" %}
+          {% if destinationMarker not in renderedNearbyTitles %}
+            {{ destinationCard(destination) }}
+            {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
+          {% endif %}
         {% endfor %}
       {% elif automaticFacts.related.length %}
         {% for related in automaticFacts.related %}
           {% for exploreContinent in continents.items %}
             {% for destination in exploreContinent.locations %}
-              {% if destination.title == related.title %}{{ destinationCard(destination) }}{% endif %}
+              {% set destinationMarker = "|" + destination.title + "|" %}
+              {% if destination.title == related.title and destinationMarker not in renderedNearbyTitles %}
+                {{ destinationCard(destination) }}
+                {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
+              {% endif %}
             {% endfor %}
           {% endfor %}
         {% endfor %}
       {% else %}
         {% for destination in destinationContinent.locations %}
-          {% if destination._id != page._id and loop.index <= 7 %}{{ destinationCard(destination) }}{% endif %}
+          {% set destinationMarker = "|" + destination.title + "|" %}
+          {% if destination._id != page._id and loop.index <= 7 and destinationMarker not in renderedNearbyTitles %}
+            {{ destinationCard(destination) }}
+            {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
+          {% endif %}
         {% endfor %}
       {% endif %}
     </div>
