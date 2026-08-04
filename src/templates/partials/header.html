@@ -1,4 +1,6 @@
 {% set social = site.navigation.social %}
+{% set mobileBlogCategories = ["Travel Guides", "Packing Guides", "Photography", "Travel Style", "Beauty"] %}
+{% set mobileContinents = ["Europe", "North America", "South America", "Asia", "Oceania", "Africa", "Middle East"] %}
 
 <pageheader inline-template>
   <div>
@@ -140,6 +142,27 @@
                 {% if itemName == "blog" or itemName == "destinations" %}
                 <li class="mobile-nav__item">
                   <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank" rel="noopener"{% endif %}>{{ item.text | replace('Posts *', 'Posts *') }}</a>
+                  {% if itemName == "blog" %}
+                  <ul class="mobile-nav__sublist" aria-label="Popular blog categories">
+                    {% for categoryTitle in mobileBlogCategories %}
+                      {% for child in item.children %}
+                        {% if child.title == categoryTitle %}
+                        <li><a class="mobile-nav__sublink" href="{{ child | route(child._contentTypeName) }}">{{ child.title }}</a></li>
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </ul>
+                  {% elif itemName == "destinations" %}
+                  <ul class="mobile-nav__sublist" aria-label="Destination continents">
+                    {% for continentName in mobileContinents %}
+                      {% for child in item.children %}
+                        {% if child.name == continentName %}
+                        <li><a class="mobile-nav__sublink" href="{{ child | route(child._contentTypeName) }}">{{ child.name }}</a></li>
+                        {% endif %}
+                      {% endfor %}
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
                 </li>
                 {% endif %}
               {% endfor %}
