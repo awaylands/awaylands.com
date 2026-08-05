@@ -1926,6 +1926,17 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   line-height: 0.98;
 }
 
+.blog-archive .bm-editor-card__dek {
+  color: var(--bm-ink);
+  display: -webkit-box;
+  font-size: 1.55rem;
+  line-height: 1.45;
+  margin: 0 0 1.4rem;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
 @media (min-width: 1200px) {
   .bm-hero__copy {
     max-width: 94rem;

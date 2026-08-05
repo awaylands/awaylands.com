@@ -120,11 +120,13 @@
 
   {% macro editorialCard(story, className) %}
     {% if story %}
+    {% set archiveDek = story.tout.dek or story.social.description %}
     <a class="bm-editor-card {{ className }}" href="{{ storyUrl(story) }}">
       <span class="bm-editor-card__image">{{ storyImage(story, '(min-width: 900px) 24vw, 88vw', false) }}</span>
       <span class="bm-editor-card__copy">
         {{ storyMeta(story, "Journal") }}
         <strong>{{ story.title | replace("—", " - ") }}</strong>
+        {% if not isEmbedded and pagination.currentPage != 1 and archiveDek %}<p class="bm-editor-card__dek">{{ archiveDek }}</p>{% endif %}
         <small>Read Article <i>⟶</i></small>
       </span>
     </a>
