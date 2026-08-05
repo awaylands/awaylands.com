@@ -716,6 +716,27 @@
   </section>
   {% endif %}
 
+  {% if isContinentPage and destinationContinent and (page.destinationContinueHeading or (page.continentContinueDestinations and page.continentContinueDestinations.length)) %}
+  <section class="destination-nearby" aria-labelledby="destination-nearby-title">
+    <header class="destination-band-heading">
+      <h2 id="destination-nearby-title">{{ "Explore " + exploreGroupName }}</h2>
+        <a href="{{ continentUrl(destinationContinent) }}">View All {{ continentName }} Destinations <span aria-hidden="true">→</span></a>
+    </header>
+    <div class="destination-nearby__grid">
+      {% set renderedNearbyTitles = "|" %}
+      {% if page.continentContinueDestinations and page.continentContinueDestinations.length %}
+      {% for destination in page.continentContinueDestinations %}
+        {% set destinationMarker = "|" + destination.title + "|" %}
+        {% if destinationMarker not in renderedNearbyTitles %}
+          {{ destinationCard(destination) }}
+          {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
+        {% endif %}
+      {% endfor %}
+      {% endif %}
+    </div>
+  </section>
+  {% endif %}
+
   {% if isContinentPage and (page.continentMostRequestedLabel or page.continentMostRequestedDestination or page.continentMostRequestedTitle or page.continentMostRequestedDescription or (page.continentMostRequestedStories and page.continentMostRequestedStories.length)) %}
   <section class="continent-most-requested" aria-labelledby="continent-most-requested-title">
     <header class="continent-most-requested__heading">
@@ -739,27 +760,6 @@
       </article>
       {% endif %}
       {% endfor %}
-    </div>
-  </section>
-  {% endif %}
-
-  {% if isContinentPage and destinationContinent and (page.destinationContinueHeading or (page.continentContinueDestinations and page.continentContinueDestinations.length)) %}
-  <section class="destination-nearby" aria-labelledby="destination-nearby-title">
-    <header class="destination-band-heading">
-      <h2 id="destination-nearby-title">{{ page.destinationContinueHeading or ("Continue Exploring " + exploreGroupName) }}</h2>
-        <a href="{{ continentUrl(destinationContinent) }}">View All {{ continentName }} Destinations <span aria-hidden="true">→</span></a>
-    </header>
-    <div class="destination-nearby__grid">
-      {% set renderedNearbyTitles = "|" %}
-      {% if page.continentContinueDestinations and page.continentContinueDestinations.length %}
-      {% for destination in page.continentContinueDestinations %}
-        {% set destinationMarker = "|" + destination.title + "|" %}
-        {% if destinationMarker not in renderedNearbyTitles %}
-          {{ destinationCard(destination) }}
-          {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
-        {% endif %}
-      {% endfor %}
-      {% endif %}
     </div>
   </section>
   {% endif %}
