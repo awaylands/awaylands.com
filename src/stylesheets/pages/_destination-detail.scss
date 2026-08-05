@@ -2426,3 +2426,34 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
     min-height: clamp(66rem, 82vh, 78rem);
   }
 }
+
+/* Mobile continent clarity: leave the next fact card visibly peeking into the
+ * viewport and keep all three hero totals on one deliberate line. */
+@media (max-width: 600px) {
+  .body--continent-detail .continent-facts-overview__grid {
+    grid-template-columns: repeat(5, 42vw);
+    min-width: max-content;
+  }
+
+  .body--continent-detail .destination-hero__stats {
+    display: grid;
+    gap: 0.4rem;
+    grid-template-columns: repeat(3, max-content);
+    justify-content: space-between;
+    padding-right: 1.8rem;
+    padding-left: 1.8rem;
+  }
+
+  .body--continent-detail .destination-hero__stats > a {
+    gap: 0.3rem;
+    font-size: clamp(0.58rem, 1.7vw, 0.7rem);
+    letter-spacing: 0.045em;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .body--continent-detail .destination-hero__stats .destination-stat-icon {
+    margin-right: 0;
+    transform: scale(0.7);
+  }
+}
