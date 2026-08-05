@@ -36,6 +36,8 @@
     "build:webpack:dev": "webpack --display-error-details -d",
     "build": "npm-run-all --serial clean build:images build:webpack",
     "still:grid": "node scripts/still-grid-organizer.js",
+    "slugs:dry-run": "node scripts/fill-story-slugs.js",
+    "slugs:fill": "node scripts/fill-story-slugs.js --apply",
     "verify:production": "node scripts/verify-production-baseline.js",
     "deploy:production": "node scripts/deploy-production.js",
     "deploy": "npm run deploy:production",
