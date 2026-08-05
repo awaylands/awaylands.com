@@ -2445,15 +2445,15 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
   }
 
   .body--continent-detail .destination-hero__stats > a {
-    gap: 0.3rem;
-    font-size: clamp(0.58rem, 1.7vw, 0.7rem);
-    letter-spacing: 0.045em;
+    gap: 0.25rem;
+    font-size: clamp(0.82rem, 2.3vw, 0.95rem);
+    letter-spacing: 0.035em;
     line-height: 1;
     white-space: nowrap;
   }
 
   .body--continent-detail .destination-hero__stats .destination-stat-icon {
     margin-right: 0;
-    transform: scale(0.7);
+    transform: scale(0.78);
   }
 }
