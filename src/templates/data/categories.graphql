@@ -104,18 +104,9 @@ query {
       collection2Post { _id title slug tout { image { path } secondaryImage { path } } }
       collection3Post { _id title slug tout { image { path } secondaryImage { path } } }
       collection4Post { _id title slug tout { image { path } secondaryImage { path } } }
-      weddingFeatureLabel weddingFeatureTitle weddingFeatureLinkUrl
-      weddingFeatureImage { path }
-      weddingFeaturePost { _id title slug tout { image { path } secondaryImage { path } dek } }
       shopLabel shopTitle shopDescription shopLinkText shopLinkUrl
       shopImage { path }
       shopCards {
-        post { _id title slug tout { image { path } secondaryImage { path } dek } }
-        image { path }
-        eyebrow title description linkText linkUrl
-      }
-      hotelCollectionLabel hotelCollectionTitle hotelCollectionDescription
-      hotelCollectionCards {
         post { _id title slug tout { image { path } secondaryImage { path } dek } }
         image { path }
         eyebrow title description linkText linkUrl

@@ -79,7 +79,6 @@ const inventoryQuery = `query EditorBackfillInventory {
     featuredStories { ${story} } featuredCards { ${pageCard} }
     destinationsLabel destinationsTitle destinationsDescription destinationStories { ${story} } destinationCards { ${pageCard} }
     beautyHeroLabel beautyHeroTitle beautyHeroDescription beautyHeroLinkText beautyHeroLinkUrl beautyHeroImage { ${asset} } beautyHeroPost { ${story} }
-    weddingFeatureLabel weddingFeatureTitle weddingFeatureLinkUrl weddingFeatureImage { ${asset} } weddingFeaturePost { ${story} }
     mapLabel mapTitle mapDescription mapImage { ${asset} }
     clustersLabel clustersTitle clustersDescription clusterStories { ${story} } collectionCards { ${pageCard} }
     shopLabel shopTitle shopDescription shopLinkText shopLinkUrl shopImage { ${asset} } shopCards { ${pageCard} }
@@ -175,13 +174,13 @@ function categoryInput(page) {
   for (const [field, fallbacks, linkText] of cardSets) if (page[field].length) input[field] = page[field].map((card, index) => fillCard(card, fallbacks[index] || hero, linkText));
 
   const firstCard = page.featuredCards[0] || {};
-  const focusedStory = page.beautyHeroPost || page.weddingFeaturePost || firstCard.post || page.featuredStories[0] || hero;
-  const focusedActive = Boolean(page.beautyHeroPost || page.beautyHeroImage || page.beautyHeroLabel || page.beautyHeroTitle || page.beautyHeroDescription || page.beautyHeroLinkText || page.beautyHeroLinkUrl || page.weddingFeaturePost || page.weddingFeatureImage || page.weddingFeatureLabel || page.weddingFeatureTitle || page.weddingFeatureLinkUrl || firstCard.post || firstCard.image || firstCard.title || page.featuredStories.length);
+  const focusedStory = page.beautyHeroPost || firstCard.post || page.featuredStories[0] || hero;
+  const focusedActive = Boolean(page.beautyHeroPost || page.beautyHeroImage || page.beautyHeroLabel || page.beautyHeroTitle || page.beautyHeroDescription || page.beautyHeroLinkText || page.beautyHeroLinkUrl || firstCard.post || firstCard.image || firstCard.title || page.featuredStories.length);
   if (focusedActive) {
-    put('beautyHeroPost', rel(focusedStory)); put('beautyHeroImage', rel(page.beautyHeroImage || page.weddingFeatureImage || firstCard.image || storyImage(focusedStory)));
-    put('beautyHeroLabel', choose(page.weddingFeatureLabel, 'Reader Favorites')); put('beautyHeroTitle', choose(page.weddingFeatureTitle, firstCard.title, focusedStory && focusedStory.title));
+    put('beautyHeroPost', rel(focusedStory)); put('beautyHeroImage', rel(page.beautyHeroImage || firstCard.image || storyImage(focusedStory)));
+    put('beautyHeroLabel', 'Reader Favorites'); put('beautyHeroTitle', choose(firstCard.title, focusedStory && focusedStory.title));
     put('beautyHeroDescription', choose(focusedStory && focusedStory.tout && focusedStory.tout.dek, ''));
-    put('beautyHeroLinkText', choose(firstCard.linkText, 'Read the Story')); put('beautyHeroLinkUrl', choose(page.weddingFeatureLinkUrl, firstCard.linkUrl, storyUrl(focusedStory)));
+    put('beautyHeroLinkText', choose(firstCard.linkText, 'Read the Story')); put('beautyHeroLinkUrl', choose(firstCard.linkUrl, storyUrl(focusedStory)));
   }
   return input;
 }

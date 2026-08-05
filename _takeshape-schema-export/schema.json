@@ -3,10 +3,10 @@
   "environment": "production",
   "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
   "created": "2017-03-15T23:43:16.289Z",
-  "schemaHash": "9656a9e0373e719a4e6fa1b531d4a2b6d14c90485c9c02424c18c2f426997583",
-  "updated": "2026-08-04T20:59:51.730Z",
-  "version": 248,
-  "versionAt": "2026-08-04T20:59:51.730Z",
+  "schemaHash": "7ab1d547bc6b4624be3f5106d023a69f949b850260b1f35d3ad47d46b557c0d4",
+  "updated": "2026-08-05T00:32:13.763Z",
+  "version": 249,
+  "versionAt": "2026-08-05T00:32:13.763Z",
   "versionBy": "2ebbde81-64ae-42d6-85de-cf26286a4780",
   "schema": {
     "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
@@ -1956,23 +1956,6 @@
               "widget": "image",
               "title": "Recently Updated - Background Image"
             },
-            "hotelCollectionCards": {
-              "widget": "shapeList",
-              "collapseByDefault": true,
-              "title": "Hotels Only - Additional Collection - Image, Text, and Link Cards"
-            },
-            "hotelCollectionLabel": {
-              "widget": "singleLineText",
-              "title": "Hotels Only - Additional Collection - Kicker"
-            },
-            "hotelCollectionTitle": {
-              "widget": "singleLineText",
-              "title": "Hotels Only - Additional Collection - Section Title"
-            },
-            "hotelCollectionDescription": {
-              "widget": "paragraphText",
-              "title": "Hotels Only - Additional Collection - Intro Text"
-            },
             "beautyHeroLabel": {
               "widget": "singleLineText",
               "title": "Focused Hero - Kicker"
@@ -2049,10 +2032,6 @@
             "shopLinkText",
             "shopLinkUrl",
             "shopCards",
-            "hotelCollectionLabel",
-            "hotelCollectionTitle",
-            "hotelCollectionDescription",
-            "hotelCollectionCards",
             "updatedLabel",
             "updatedTitle",
             "updatedDescription",
@@ -9338,32 +9317,6 @@
                 }
               }
             },
-            "hotelCollectionCards": {
-              "type": "array",
-              "title": "Hotels Only - Additional Collection - Image, Text, and Link Cards",
-              "items": {
-                "$ref": "#/shapes/CategoryPageCard/schema"
-              },
-              "@mapping": "shapedb:Category.HotelCollectionCardsV1"
-            },
-            "hotelCollectionLabel": {
-              "type": "string",
-              "title": "Hotels Only - Additional Collection - Kicker",
-              "minLength": 0,
-              "@mapping": "shapedb:Category.HotelCollectionLabelV1"
-            },
-            "hotelCollectionTitle": {
-              "type": "string",
-              "title": "Hotels Only - Additional Collection - Section Title",
-              "minLength": 0,
-              "@mapping": "shapedb:Category.HotelCollectionTitleV1"
-            },
-            "hotelCollectionDescription": {
-              "type": "string",
-              "title": "Hotels Only - Additional Collection - Intro Text",
-              "minLength": 0,
-              "@mapping": "shapedb:Category.HotelCollectionDescriptionV1"
-            },
             "beautyHeroLabel": {
               "type": "string",
               "title": "Focused Hero - Kicker",
@@ -9414,56 +9367,6 @@
               "title": "Focused Hero - Linked Post",
               "@ref": "local:Story",
               "@mapping": "shapedb:Category.BeautyHeroPostV1",
-              "@input": {
-                "@ref": "local:TSRelationship"
-              },
-              "@args": "TSRelationshipArgs",
-              "@resolver": {
-                "name": "shapedb:getRelated",
-                "service": "shapedb",
-                "options": {
-                  "nullable": true
-                }
-              }
-            },
-            "weddingFeatureLabel": {
-              "type": "string",
-              "title": "Wedding Only - Featured Article - Kicker",
-              "minLength": 0,
-              "@mapping": "shapedb:Category.WeddingFeatureLabelV1"
-            },
-            "weddingFeatureTitle": {
-              "type": "string",
-              "title": "Wedding Only - Featured Article - Title Override",
-              "minLength": 0,
-              "@mapping": "shapedb:Category.WeddingFeatureTitleV1"
-            },
-            "weddingFeatureLinkUrl": {
-              "type": "string",
-              "title": "Wedding Only - Featured Article - Link URL",
-              "minLength": 0,
-              "@mapping": "shapedb:Category.WeddingFeatureLinkUrlV1"
-            },
-            "weddingFeatureImage": {
-              "title": "Wedding Only - Featured Article - Image",
-              "@ref": "local:Asset",
-              "@mapping": "shapedb:Category.WeddingFeatureImageV1",
-              "@input": {
-                "@ref": "local:TSRelationship"
-              },
-              "@args": "TSRelationshipArgs",
-              "@resolver": {
-                "name": "shapedb:getRelated",
-                "service": "shapedb",
-                "options": {
-                  "nullable": true
-                }
-              }
-            },
-            "weddingFeaturePost": {
-              "title": "Wedding Only - Featured Article - Linked Post",
-              "@ref": "local:Story",
-              "@mapping": "shapedb:Category.WeddingFeaturePostV1",
               "@input": {
                 "@ref": "local:TSRelationship"
               },

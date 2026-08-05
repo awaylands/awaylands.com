@@ -210,6 +210,28 @@ Object.keys(baseline.sourceFiles).forEach(file => {
   }
 });
 
+const protectedSourcePatterns = [
+  'src/templates/**',
+  'src/stylesheets/**',
+  'src/javascripts/**',
+  'scripts/**',
+  'static/assets/fonts/**',
+  '_takeshape-schema-export/**',
+  'package.json',
+  'package-lock.json',
+  'tsg.yml',
+  'webpack.config.js'
+];
+const protectedSourceFiles = childProcess.execFileSync('git', ['ls-files'].concat(protectedSourcePatterns), {
+  cwd: root,
+  encoding: 'utf8'
+}).trim().split('\n').filter(Boolean);
+protectedSourceFiles.forEach(file => {
+  if (!Object.prototype.hasOwnProperty.call(baseline.sourceFiles, file)) {
+    fail(`production source is not protected by the baseline manifest: ${file}.`);
+  }
+});
+
 const assetManifestPath = path.join(root, 'build/assets/manifest.json');
 if (!fs.existsSync(assetManifestPath)) {
   fail('compiled asset manifest is missing. Restore the verified assets before deploying.');
@@ -223,6 +245,41 @@ const assetManifest = JSON.parse(fs.readFileSync(assetManifestPath, 'utf8'));
   }
   if (!fs.existsSync(path.join(root, 'build/assets', asset))) {
     fail(`compiled asset is missing from build/assets: ${asset}`);
+  }
+});
+
+const expectedCss = `/assets/${assetManifest['stylesheets/main.css']}`;
+const expectedJs = `/assets/${assetManifest['javascripts/main.js']}`;
+const generatedHtml = [];
+(function collectHtml(directory) {
+  fs.readdirSync(directory, { withFileTypes: true }).forEach(entry => {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) {
+      collectHtml(file);
+    } else if (entry.name.endsWith('.html')) {
+      generatedHtml.push(file);
+    }
+  });
+}(path.join(root, 'build')));
+if (!generatedHtml.length) {
+  fail('the generated build contains no HTML pages.');
+}
+generatedHtml.forEach(file => {
+  const html = fs.readFileSync(file, 'utf8');
+  const isRedirect = /<meta[^>]+http-equiv=["']refresh["']/i.test(html);
+  const cssReferences = html.match(/\/assets\/stylesheets\/main\.[^"'\s?]+\.css/g) || [];
+  const jsReferences = html.match(/\/assets\/javascripts\/main\.[^"'\s?]+\.js/g) || [];
+  if (isRedirect) {
+    if (cssReferences.length || jsReferences.length) {
+      fail(`redirect page unexpectedly loads application assets: ${path.relative(root, file)}.`);
+    }
+    return;
+  }
+  if (cssReferences.length !== 1 || cssReferences[0] !== expectedCss) {
+    fail(`generated page does not reference exactly the current stylesheet: ${path.relative(root, file)}.`);
+  }
+  if (jsReferences.length !== 1 || jsReferences[0] !== expectedJs) {
+    fail(`generated page does not reference exactly the current JavaScript bundle: ${path.relative(root, file)}.`);
   }
 });
 

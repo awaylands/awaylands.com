@@ -497,30 +497,6 @@
     </div>
   </section>{% endif %}
 
-  {% if page.title == "Hotels" and page.hotelCollectionCards.length %}
-  <section class="category-clusters category-clusters--after-shop" aria-labelledby="category-hotel-collection-title">
-    <header class="category-module-heading">
-      <p>{{ page.hotelCollectionLabel or "More to Discover" }}</p>
-      <h2 id="category-hotel-collection-title">{{ page.hotelCollectionTitle or "More Hotel Collections" }}</h2>
-      <span>{{ page.hotelCollectionDescription }}</span>
-    </header>
-    <div class="category-clusters__grid">
-      {% for card in page.hotelCollectionCards %}
-      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
-      <article>
-        <a href="{{ card.linkUrl or storyUrl(cardStory) }}">
-          <span class="category-clusters__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 24vw, 100vw", false) }}{% endif %}</span>
-          {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}
-          <h3>{{ card.title or cardStory.title }}</h3>
-          {% if card.description %}<p>{{ card.description }}</p>{% endif %}
-          <i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} <span aria-hidden="true">⟶</span></i>
-        </a>
-      </article>
-      {% endfor %}
-    </div>
-  </section>
-  {% endif %}
-
   {% if hasUpdatedSection %}<section class="category-updated" aria-labelledby="category-updated-title">
     <div class="category-updated__background" aria-hidden="true">{% if page.updatedBackgroundImage %}<img src="{{ page.updatedBackgroundImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif page.updatedCards[0].image %}<img src="{{ page.updatedCards[0].image.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.updatedCards[0].post or updatedStories[0] or heroStory, "100vw", false) }}{% endif %}</div>
     <header class="category-module-heading">

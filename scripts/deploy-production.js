@@ -83,13 +83,20 @@ function verifyGeneratedHtml(assets) {
   const htmlFiles = walk(path.join(root, 'build')).filter(file => file.endsWith('.html'));
   if (!htmlFiles.length) fail('the generated build contains no HTML pages.');
   const cssHref = `/assets/${assets.css}`;
+  const jsSrc = `/assets/${assets.js}`;
   let checked = 0;
   htmlFiles.forEach(file => {
     const html = fs.readFileSync(file, 'utf8');
-    if (/<link[^>]+rel=["']stylesheet["']/i.test(html)) {
-      checked += 1;
-      if (!html.includes(cssHref)) fail(`generated HTML references a stale stylesheet: ${path.relative(root, file)}`);
+    const isRedirect = /<meta[^>]+http-equiv=["']refresh["']/i.test(html);
+    const cssReferences = html.match(/\/assets\/stylesheets\/main\.[^"'\s?]+\.css/g) || [];
+    const jsReferences = html.match(/\/assets\/javascripts\/main\.[^"'\s?]+\.js/g) || [];
+    if (isRedirect) {
+      if (cssReferences.length || jsReferences.length) fail(`redirect unexpectedly loads application assets: ${path.relative(root, file)}`);
+      return;
     }
+    checked += 1;
+    if (cssReferences.length !== 1 || cssReferences[0] !== cssHref) fail(`generated HTML references a stale or duplicate stylesheet: ${path.relative(root, file)}`);
+    if (jsReferences.length !== 1 || jsReferences[0] !== jsSrc) fail(`generated HTML references stale or duplicate JavaScript: ${path.relative(root, file)}`);
   });
   if (!checked) fail('no generated HTML documents contained a head stylesheet reference.');
 }
@@ -125,9 +132,22 @@ function fetch(url) {
 
 async function verifyLive(assets) {
   const cacheBust = `codexverify=${Date.now()}`;
-  const pages = ['/', '/blog/', '/category/home-and-garden/', '/category/travel-style/', '/category/wedding-and-honeymoon/'];
+  const pages = [
+    '/',
+    '/blog/',
+    '/category/home-and-garden/',
+    '/category/travel-style/',
+    '/category/wedding-and-honeymoon/',
+    '/destinations/thailand/',
+    '/continent/asia/',
+    '/destinations/greece/archive/',
+    '/film/',
+    '/still/'
+  ];
   const expectedCss = `/assets/${assets.css}`;
+  const expectedJs = `/assets/${assets.js}`;
   const localCssHash = sha256(path.join(root, 'build/assets', assets.css));
+  const localJsHash = sha256(path.join(root, 'build/assets', assets.js));
   for (const page of pages) {
     const result = await fetch(`https://www.awaylands.com${page}?${cacheBust}`);
     if (result.status !== 200) fail(`${page} returned HTTP ${result.status}.`);
@@ -136,12 +156,23 @@ async function verifyLive(assets) {
       const found = matches[0] || 'no stylesheet';
       fail(`${page} serves ${found}; expected ${expectedCss}.`);
     }
+    const jsMatches = result.body.match(/\/assets\/javascripts\/main\.[^"'\s?]+\.js(?:\?[^"'\s]*)?/g) || [];
+    if (!jsMatches.includes(expectedJs)) {
+      const found = jsMatches[0] || 'no JavaScript bundle';
+      fail(`${page} serves ${found}; expected ${expectedJs}.`);
+    }
   }
   const css = await fetch(`https://www.awaylands.com${expectedCss}?${cacheBust}`);
   if (css.status !== 200) fail(`${expectedCss} returned HTTP ${css.status}.`);
   const liveCssHash = crypto.createHash('sha256').update(css.body).digest('hex');
   if (liveCssHash !== localCssHash) {
     fail(`${expectedCss} checksum mismatch (live ${liveCssHash}, local ${localCssHash}).`);
+  }
+  const js = await fetch(`https://www.awaylands.com${expectedJs}?${cacheBust}`);
+  if (js.status !== 200) fail(`${expectedJs} returned HTTP ${js.status}.`);
+  const liveJsHash = crypto.createHash('sha256').update(js.body).digest('hex');
+  if (liveJsHash !== localJsHash) {
+    fail(`${expectedJs} checksum mismatch (live ${liveJsHash}, local ${localJsHash}).`);
   }
   process.stdout.write(`Deployment verified live: ${assets.css}\n`);
 }

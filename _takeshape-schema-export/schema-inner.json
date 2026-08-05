@@ -1946,23 +1946,6 @@
             "widget": "image",
             "title": "Recently Updated - Background Image"
           },
-          "hotelCollectionCards": {
-            "widget": "shapeList",
-            "collapseByDefault": true,
-            "title": "Hotels Only - Additional Collection - Image, Text, and Link Cards"
-          },
-          "hotelCollectionLabel": {
-            "widget": "singleLineText",
-            "title": "Hotels Only - Additional Collection - Kicker"
-          },
-          "hotelCollectionTitle": {
-            "widget": "singleLineText",
-            "title": "Hotels Only - Additional Collection - Section Title"
-          },
-          "hotelCollectionDescription": {
-            "widget": "paragraphText",
-            "title": "Hotels Only - Additional Collection - Intro Text"
-          },
           "beautyHeroLabel": {
             "widget": "singleLineText",
             "title": "Focused Hero - Kicker"
@@ -2039,10 +2022,6 @@
           "shopLinkText",
           "shopLinkUrl",
           "shopCards",
-          "hotelCollectionLabel",
-          "hotelCollectionTitle",
-          "hotelCollectionDescription",
-          "hotelCollectionCards",
           "updatedLabel",
           "updatedTitle",
           "updatedDescription",
@@ -9328,32 +9307,6 @@
               }
             }
           },
-          "hotelCollectionCards": {
-            "type": "array",
-            "title": "Hotels Only - Additional Collection - Image, Text, and Link Cards",
-            "items": {
-              "$ref": "#/shapes/CategoryPageCard/schema"
-            },
-            "@mapping": "shapedb:Category.HotelCollectionCardsV1"
-          },
-          "hotelCollectionLabel": {
-            "type": "string",
-            "title": "Hotels Only - Additional Collection - Kicker",
-            "minLength": 0,
-            "@mapping": "shapedb:Category.HotelCollectionLabelV1"
-          },
-          "hotelCollectionTitle": {
-            "type": "string",
-            "title": "Hotels Only - Additional Collection - Section Title",
-            "minLength": 0,
-            "@mapping": "shapedb:Category.HotelCollectionTitleV1"
-          },
-          "hotelCollectionDescription": {
-            "type": "string",
-            "title": "Hotels Only - Additional Collection - Intro Text",
-            "minLength": 0,
-            "@mapping": "shapedb:Category.HotelCollectionDescriptionV1"
-          },
           "beautyHeroLabel": {
             "type": "string",
             "title": "Focused Hero - Kicker",
@@ -9404,56 +9357,6 @@
             "title": "Focused Hero - Linked Post",
             "@ref": "local:Story",
             "@mapping": "shapedb:Category.BeautyHeroPostV1",
-            "@input": {
-              "@ref": "local:TSRelationship"
-            },
-            "@args": "TSRelationshipArgs",
-            "@resolver": {
-              "name": "shapedb:getRelated",
-              "service": "shapedb",
-              "options": {
-                "nullable": true
-              }
-            }
-          },
-          "weddingFeatureLabel": {
-            "type": "string",
-            "title": "Wedding Only - Featured Article - Kicker",
-            "minLength": 0,
-            "@mapping": "shapedb:Category.WeddingFeatureLabelV1"
-          },
-          "weddingFeatureTitle": {
-            "type": "string",
-            "title": "Wedding Only - Featured Article - Title Override",
-            "minLength": 0,
-            "@mapping": "shapedb:Category.WeddingFeatureTitleV1"
-          },
-          "weddingFeatureLinkUrl": {
-            "type": "string",
-            "title": "Wedding Only - Featured Article - Link URL",
-            "minLength": 0,
-            "@mapping": "shapedb:Category.WeddingFeatureLinkUrlV1"
-          },
-          "weddingFeatureImage": {
-            "title": "Wedding Only - Featured Article - Image",
-            "@ref": "local:Asset",
-            "@mapping": "shapedb:Category.WeddingFeatureImageV1",
-            "@input": {
-              "@ref": "local:TSRelationship"
-            },
-            "@args": "TSRelationshipArgs",
-            "@resolver": {
-              "name": "shapedb:getRelated",
-              "service": "shapedb",
-              "options": {
-                "nullable": true
-              }
-            }
-          },
-          "weddingFeaturePost": {
-            "title": "Wedding Only - Featured Article - Linked Post",
-            "@ref": "local:Story",
-            "@mapping": "shapedb:Category.WeddingFeaturePostV1",
             "@input": {
               "@ref": "local:TSRelationship"
             },
