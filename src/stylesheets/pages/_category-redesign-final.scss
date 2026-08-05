@@ -4949,12 +4949,13 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy str
   }
 }
 
-/* Mobile category repair: stack Latest Stories, return the collection prompt
- * to the viewport, and fit the entire interactive map inside the page. */
+/* Mobile category repair: keep Latest Stories readable in a compact two-column
+ * grid, return the collection prompt to the viewport, and fit the entire
+ * interactive map inside the page. */
 @media (max-width: 700px) {
   body.body--category-hub .category-latest--six .category-latest__grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 3.2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem 1.4rem;
   }
 
   body.body--category-hub .category-latest .category-story-card > a {
@@ -4962,7 +4963,7 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy str
   }
 
   body.body--category-hub .category-latest .category-story-card__image {
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4 / 5;
     width: 100%;
   }
 
@@ -4977,8 +4978,8 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy str
   }
 
   body.body--category-hub .category-latest--six .category-story-card__copy h3 {
-    font-size: clamp(2.8rem, 8vw, 3.6rem);
-    line-height: 1.02;
+    font-size: clamp(2rem, 5.6vw, 2.7rem);
+    line-height: 1.06;
   }
 
   body.body--category-hub .category-subcategory-nav__description {
@@ -5002,4 +5003,92 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy str
     right: 2%;
     left: auto;
   }
+}
+
+/* Recently Updated keeps its desktop image-overlay treatment, but becomes a
+ * legible photo-and-copy stack on phones so long headlines cannot escape or
+ * be cropped by the landscape image frame. */
+@media (max-width: 700px) {
+  body.body--category-hub .category-updated__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.4rem;
+  }
+
+  body.body--category-hub .category-updated article {
+    padding: 0.55rem;
+    background: rgba(255, 253, 249, 0.96);
+  }
+
+  body.body--category-hub .category-updated article a {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    overflow: visible;
+    color: var(--category-ink);
+  }
+
+  body.body--category-hub .category-updated article a:after {
+    display: none;
+  }
+
+  body.body--category-hub .category-updated article a > span {
+    aspect-ratio: 4 / 3;
+  }
+
+  body.body--category-hub .category-updated small,
+  body.body--category-hub .category-updated strong {
+    position: static;
+    display: block;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    max-height: none;
+    overflow: visible;
+  }
+
+  body.body--category-hub .category-updated small {
+    margin: 1.4rem 1.2rem 0;
+    color: var(--category-coral);
+    font-size: clamp(1rem, 3vw, 1.25rem);
+  }
+
+  body.body--category-hub .category-updated strong {
+    margin: 0.7rem 1.2rem 1.4rem;
+    color: var(--category-ink);
+    font-size: clamp(2.4rem, 6.8vw, 3.2rem);
+    line-height: 1.06;
+  }
+}
+
+/* The archive call-to-action closes every category landing page beneath the
+ * six newest stories and uses the same blue/coral link language as the rest
+ * of the editorial site. */
+body.body--category-hub .category-latest__archive-link {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(4rem, 6vw, 7rem);
+}
+
+body.body--category-hub .category-latest__archive-link a {
+  display: inline-flex;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 0.2rem solid var(--category-blue);
+  padding: 0.9rem 0;
+  color: var(--category-blue);
+  font: 800 clamp(1.25rem, 1.25vw, 1.7rem)/1.2 Montserrat, Arial, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: border-color 180ms ease, color 180ms ease;
+}
+
+body.body--category-hub .category-latest__archive-link a span {
+  color: var(--category-coral);
+  font-size: 1.5em;
+  line-height: 0.7;
+}
+
+body.body--category-hub .category-latest__archive-link a:hover,
+body.body--category-hub .category-latest__archive-link a:focus {
+  border-color: var(--category-coral);
+  color: var(--category-coral);
 }

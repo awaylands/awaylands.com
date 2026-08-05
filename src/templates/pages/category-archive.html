@@ -1,0 +1,37 @@
+{% extends "layouts/default.html" %}
+
+{% set categoryTitle = page.title or "Category" %}
+{% set archivePosts = page.storySet.items if page.storySet else [] %}
+{% set archiveTotal = page.storySet.total if page.storySet else archivePosts.length %}
+
+{% macro storyUrl(story) %}{% if story and story.slug %}{{ story | route('storySlug') }}{% elif story and story.title %}{{ story | route('story') }}{% else %}#{% endif %}{% endmacro %}
+{% macro categoryUrl(category) %}{% if category %}{{ category | route('category') }}{% else %}#{% endif %}{% endmacro %}
+{% macro archiveCard(story, label) %}
+  <article class="destination-guide-card">
+    <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">
+      {% if story and story.tout and story.tout.image and story.tout.image.path %}<img src="{{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="{{ story.title or 'Story' }}" loading="lazy">{% endif %}
+    </a>
+    <div class="destination-guide-card__copy">
+      <p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% else %}{{ label }}{% endif %}</p>
+      <h2><a href="{{ storyUrl(story) }}">{{ story.title or "Story" }}</a></h2>
+      {% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}
+    </div>
+  </article>
+{% endmacro %}
+
+{% block body_class %}body body--destination-archive body--category-archive{% endblock %}
+
+{% block content %}
+<section class="destination-archive category-archive">
+  <header class="destination-archive__header">
+    <div class="destination-archive__breadcrumbs"><a href="/blog/">Blog</a><span aria-hidden="true">›</span><span>{{ categoryTitle }}</span><span aria-hidden="true">›</span><span>Archive</span></div>
+    <div class="destination-archive__title-row"><h1>{{ categoryTitle }} Archive</h1><div class="destination-archive__post-count">{{ archiveTotal }} Posts</div></div>
+    <div class="destination-archive__explore"><strong>Explore More Categories:</strong><span class="destination-archive__explore-links">{% for category in categoryNavigation.items %}{% if category.title != categoryTitle and category.title != "* Most Popular Posts *" and category.title != "Most Popular Posts" %}<a href="{{ categoryUrl(category) }}">{{ category.title }}</a>{% endif %}{% endfor %}</span></div>
+  </header>
+  <div class="destination-archive__listing destination-guides__grid">
+    {% for story in archivePosts %}
+      {{ archiveCard(story, categoryTitle) }}
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

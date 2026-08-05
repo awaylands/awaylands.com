@@ -146,6 +146,7 @@ query {
         eyebrow title description linkText linkUrl
       }
       storySet(size: 250) {
+        total
         items {
           _id
           _enabledAt

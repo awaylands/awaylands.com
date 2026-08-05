@@ -2,7 +2,7 @@ query {
   homepage: getHomepage {
     _updatedAt
   }
-  categories: getCategoryList {
+  categories: getCategoryList(size: 250) {
     items {
       _contentTypeName
       title

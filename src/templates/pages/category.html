@@ -74,6 +74,7 @@
 
 
 {% set sortedStories = page.storySet.items | sort(true, true, "_enabledAt") %}
+{% set categoryStoryTotal = page.storySet.total or page.storySet.items.length %}
 {% set updatedStories = page.storySet.items | sort(true, true, "_updatedAt") %}
 {% if page.updatedStories.length %}
   {% set updatedStories = page.updatedStories %}
@@ -605,6 +606,9 @@
       </article>
       {% endif %}
       {% endfor %}
+    </div>
+    <div class="category-latest__archive-link">
+      <a href="{{ page | route('categoryArchive') }}">View All {{ categoryStoryTotal }} Posts <span aria-hidden="true">›</span></a>
     </div>
   </section>
 

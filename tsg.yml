@@ -124,6 +124,14 @@ routes:
       data: data/categories.graphql
       itemName: page
 
+  categoryArchive:
+    path: /category/:title/archive
+    template: pages/category-archive.html
+    context: data/category.graphql
+    paginate:
+      data: data/categories.graphql
+      itemName: page
+
   legacyHealthAndFitness:
     path: /category/health-and-fitness
     template: pages/legacy-category.html
