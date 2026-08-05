@@ -24,7 +24,11 @@ so it is a complete rollback point for both the backend schema and its content.
   guarded production deployment
 - Credentials: none included (the archive contains only `pattern.yaml`,
   `schema.json`, and `data.jsonl`)
-- SHA-256: `8a23d71c1c91d90801aae6cb9b7f5170dfd2ff6a2feba8a1a6ab27cee4e845e4`
+- SHA-256: `9f0f26c14dd4e0a3a03e8dd5908baabc16d006e2640212a49fcae535238d06c7`
+
+This refreshed post-clean archive also includes the approved repair of 322
+previously blank Story slug fields and the Home & Garden category mappings to
+Pets and Outdoor Living.
 
 Use the first archive to roll back the schema cleanup. Use the post-clean
 archive to restore the exact backend state verified and deployed on 2026-08-04.
