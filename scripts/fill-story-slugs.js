@@ -74,13 +74,14 @@ async function updateStorySlug(story, slug) {
 
 (async () => {
   const stories = await loadStories();
-  const planned = stories.filter(story => !story.slug).map(story => ({
+  const planned = stories.map(story => ({
     story,
-    slug: slugify(story.title)
-  }));
+    slug: slugify(story.slug || story.title)
+  })).filter(item => item.story.slug !== item.slug);
+  const missing = stories.filter(story => !story.slug).length;
   const owners = new Map();
   stories.forEach(story => {
-    const slug = story.slug || slugify(story.title);
+    const slug = slugify(story.slug || story.title);
     if (!owners.has(slug)) owners.set(slug, []);
     owners.get(slug).push(story.title);
   });
@@ -89,7 +90,7 @@ async function updateStorySlug(story, slug) {
   if (collisions.length || invalid.length) {
     throw new Error(`Slug repair blocked: ${collisions.length} collisions and ${invalid.length} empty derived slugs.`);
   }
-  process.stdout.write(`${JSON.stringify({ mode: apply ? 'apply' : 'dry-run', total: stories.length, missing: planned.length, collisions: 0 }, null, 2)}\n`);
+  process.stdout.write(`${JSON.stringify({ mode: apply ? 'apply' : 'dry-run', total: stories.length, missing, nonCanonical: planned.length - missing, updates: planned.length, collisions: 0 }, null, 2)}\n`);
   if (!apply) return;
   for (let index = 0; index < planned.length; index += 1) {
     const item = planned[index];
