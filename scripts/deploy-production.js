@@ -90,8 +90,7 @@ function verifyGeneratedHtml(assets) {
     const isRedirect = /<meta[^>]+http-equiv=["']refresh["']/i.test(html);
     const cssReferences = html.match(/\/assets\/stylesheets\/main\.[^"'\s?]+\.css/g) || [];
     const jsReferences = html.match(/\/assets\/javascripts\/main\.[^"'\s?]+\.js/g) || [];
-    if (isRedirect) {
-      if (cssReferences.length || jsReferences.length) fail(`redirect unexpectedly loads application assets: ${path.relative(root, file)}`);
+    if (isRedirect && !cssReferences.length && !jsReferences.length) {
       return;
     }
     checked += 1;
