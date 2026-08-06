@@ -1281,6 +1281,45 @@
   }
 }
 
+@media (min-width: 1300px) {
+  .homepage-blog-magazine .bm-hero__rail {
+    top: clamp(4rem, 4vw, 7rem);
+    bottom: auto;
+    width: min(43vw, 70rem);
+    padding: 1.4rem 1.8rem;
+    row-gap: 0;
+    transform: none;
+    transform-origin: top right;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story:first-child,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story:last-child {
+    grid-template-columns: minmax(10rem, 33%) 2.2rem minmax(0, 1fr);
+    min-height: clamp(11.5rem, 6.5vw, 13.5rem) !important;
+    padding: 0.8rem 0;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__image {
+    height: clamp(11.5rem, 6.5vw, 13.5rem) !important;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__copy {
+    padding: 0 0.8rem;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__copy strong {
+    margin: 1rem 0 0.8rem;
+    font-size: clamp(2.3rem, 1.55vw, 3rem);
+    line-height: 0.98;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__copy small,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story .bm-kicker {
+    font-size: 1.15rem;
+  }
+}
+
 @media (min-width: 800px) and (max-width: 1299px) {
   .body--blog-magazine .bm-hero,
   .homepage-blog-magazine .bm-hero {
