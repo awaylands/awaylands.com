@@ -182,7 +182,7 @@ function setStoryImageDimensions(image) {
       heroCover.classList.remove('story-cover--landscape-hero');
     }
 
-    if (heightToWidth > 7 / 5) {
+    if (heightToWidth >= (7 / 5) - 0.01) {
       heroMedia.classList.add('story-cover__media--portrait-capped');
       if (heroCover) {
         heroCover.classList.add('story-cover--portrait-hero');
@@ -2231,6 +2231,16 @@ function prepareStory(el) {
   observeStoryEnhancements(el);
 }
 
+function imageAspectRatio(figure) {
+  const image = figure.querySelector('img');
+
+  if (!image || !image.naturalWidth || !image.naturalHeight) {
+    return null;
+  }
+
+  return image.naturalWidth / image.naturalHeight;
+}
+
 function resetMediumFigureLayout(figures) {
   Array.prototype.forEach.call(figures, figure => {
     figure.style.width = '';
@@ -2243,6 +2253,31 @@ function alignPairedMediumFigures(el) {
   const figures = el.querySelectorAll('figure.medium');
 
   resetMediumFigureLayout(figures);
+
+  for (let index = 0; index < figures.length; index += 1) {
+    const figure = figures[index];
+    const next = figure.nextElementSibling;
+
+    if (!next || !next.classList.contains('medium')) {
+      continue;
+    }
+
+    const firstRatio = imageAspectRatio(figure);
+    const secondRatio = imageAspectRatio(next);
+
+    if (!firstRatio || !secondRatio) {
+      continue;
+    }
+
+    const totalRatio = firstRatio + secondRatio;
+    const firstWidth = (firstRatio / totalRatio) * 100;
+    const secondWidth = (secondRatio / totalRatio) * 100;
+
+    figure.style.setProperty('--story-pair-width', `${firstWidth}%`);
+    next.style.setProperty('--story-pair-width', `${secondWidth}%`);
+    next.style.marginTop = window.getComputedStyle(figure).marginTop;
+    index += 1;
+  }
 }
 
 function lightboxStoryImages(el) {

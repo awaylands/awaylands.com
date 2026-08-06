@@ -1315,12 +1315,16 @@ body.body--story {
 }
 
 .story-gallery--medium-pair {
-  display: grid;
+  --story-pair-gap-offset: 0.5rem;
+
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .story-gallery--medium-pair figure,
 .story-gallery--medium-pair figure.medium {
-  width: auto !important;
+  flex: 0 0 calc(50% - var(--story-pair-gap-offset));
+  flex-basis: calc(var(--story-pair-width) - var(--story-pair-gap-offset));
 }
 
 .story-gallery.story-gallery--portrait-pair,
@@ -2152,13 +2156,14 @@ body.body--story {
 
 @media (min-width: 900px) and (max-width: 1399px) {
   .story-cover.story-cover--portrait-hero {
-    grid-template-columns: minmax(0, 0.92fr) minmax(34rem, 1.08fr);
+    grid-template-columns: minmax(26rem, 0.78fr) minmax(34rem, 1.22fr);
     grid-template-rows: auto auto auto 1fr;
-    column-gap: clamp(3rem, 5vw, 7rem);
+    column-gap: clamp(1.4rem, 2vw, 2.4rem);
     row-gap: 0;
     align-items: start;
     border-top: 2px solid rgba(22, 110, 120, 0.24);
-    padding-top: clamp(3.6rem, 5vw, 6rem);
+    padding-top: clamp(2.2rem, 2.8vw, 3.2rem);
+    padding-bottom: 1.6rem;
   }
 
   .story-cover--portrait-hero .story-cover__copy,
@@ -2169,7 +2174,7 @@ body.body--story {
   .story-cover--portrait-hero .story-cover__eyebrow {
     grid-row: 1;
     grid-column: 1 / -1;
-    margin-bottom: 2rem;
+    margin-bottom: 1.2rem;
   }
 
   .story-cover--portrait-hero .story-cover__title {
@@ -2177,8 +2182,8 @@ body.body--story {
     grid-column: 1 / -1;
     width: 100%;
     max-width: none;
-    margin-bottom: clamp(4rem, 5vw, 6.5rem);
-    font-size: clamp(7.4rem, 7vw, 9.2rem);
+    margin-bottom: clamp(1.4rem, 1.6vw, 2rem);
+    font-size: clamp(7.8rem, 7.4vw, 10rem);
   }
 
   .story-cover--portrait-hero .story-cover__details {
@@ -2189,7 +2194,7 @@ body.body--story {
   }
 
   .story-cover--portrait-hero .story-cover__dek {
-    max-width: 66rem;
+    max-width: 48rem;
     margin-top: 0;
     font-size: 1.95rem;
     line-height: 1.48;
@@ -2203,12 +2208,13 @@ body.body--story {
     width: 300px;
     min-width: 300px;
     min-height: 250px;
-    margin: clamp(5rem, 7vw, 9rem) auto 0;
+    margin: clamp(1.8rem, 2.4vw, 3rem) auto 0;
   }
 
   .story-cover--portrait-hero .story-cover__media--portrait-capped {
     grid-row: 3 / 5;
     grid-column: 2;
+    align-self: start;
     justify-self: stretch;
     width: 100%;
     max-height: none;
@@ -2217,25 +2223,29 @@ body.body--story {
 
 @media (min-width: 1400px) {
   .story-cover.story-cover--portrait-hero {
-    grid-template-columns: minmax(0, 0.96fr) minmax(42rem, 1.04fr);
-    gap: clamp(2rem, 3vw, 4.8rem);
+    width: calc(100% - clamp(12rem, 10vw, 20rem));
+    max-width: 142rem;
+    margin-right: auto;
+    margin-left: auto;
+    grid-template-columns: minmax(48rem, 0.9fr) minmax(50rem, 1.1fr);
+    gap: clamp(1.4rem, 1.6vw, 2.4rem);
     align-items: start;
   }
 
   .story-cover--portrait-hero .story-cover__copy {
     align-self: stretch;
     justify-content: flex-start;
-    padding: clamp(3.2rem, 3vw, 4.8rem) clamp(2.4rem, 3vw, 4.4rem);
+    padding: clamp(2.4rem, 2.2vw, 3.2rem) clamp(1rem, 1.4vw, 2rem) clamp(2.4rem, 2.2vw, 3.2rem) 0;
   }
 
   .story-cover--portrait-hero .story-cover__title {
     width: 100%;
-    font-size: clamp(6.8rem, 4vw, 7.6rem);
-    line-height: 0.94;
+    font-size: clamp(8.4rem, 5.3vw, 10.4rem);
+    line-height: 0.92;
   }
 
   .story-cover--portrait-hero .story-cover__dek {
-    max-width: 66rem;
+    max-width: 54rem;
     font-size: 1.95rem;
     line-height: 1.48;
   }
@@ -2252,12 +2262,15 @@ body.body--story {
     width: 300px;
     min-width: 300px;
     min-height: 250px;
-    margin: auto auto 0;
+    margin: clamp(1.8rem, 2.4vw, 3rem) auto 0;
   }
 
   .story-cover--portrait-hero .story-cover__media--portrait-capped {
+    align-self: start;
     width: 100%;
+    max-width: none;
     max-height: none;
+    justify-self: end;
   }
 }
 
@@ -2392,6 +2405,10 @@ body.body--story {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 0.5rem;
     margin: 4rem auto;
+  }
+
+  .story-gallery--medium-pair {
+    --story-pair-gap-offset: 0.25rem;
   }
 
   .story-gallery[data-count='3'] figure:first-child {
