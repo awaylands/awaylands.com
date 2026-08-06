@@ -135,7 +135,8 @@
 {% if destinationTitle == "United States" %}{% set automaticBlurb = "The United States spans desert road trips, mountain parks, beach towns, and culture-rich cities. Our guides cover New York, New Orleans, Miami, Las Vegas, Alaska, the Southwest, and routes across the country." %}{% endif %}
 {% if destinationTitle == "India" %}{% set automaticFacts = {"blurb":"India’s scale and cultural variety reward focused regional trips. Our guides move from Old and New Delhi photo spots to Mumbai hotels and a wedding in the Himalayan foothills of Dehradun.","bestTime":"Oct - Mar is cooler and drier across much of India. Jun - Sep is monsoon season; Himalayan trekking is best Apr - Jun and Sep - Oct.","timeZone":"India Standard Time|UTC+5:30","currency":"Indian rupee (INR)","languages":"English, Hindi, Tamil","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Sri Lanka"},{"title":"Maldives"},{"title":"Thailand"}],"related":[]} %}{% endif %}
 {% set destinationStories = page.storySet.items if page.storySet else [] %}
-{% set destinationGuideSectionStories = (page.destinationGuideStories or []) if isContinentPage else destinationStories %}
+{% set destinationRecentStories = page.recentStories.items if page.recentStories else destinationStories %}
+{% set destinationGuideSectionStories = (page.destinationGuideStories or []) if isContinentPage else destinationRecentStories %}
 {% set directPostCount = page.storySet.total if page.storySet else destinationStories.length %}
 {% set countryPostCount = 0 %}
 {% set countryGuideCount = 0 %}
