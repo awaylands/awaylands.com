@@ -120,13 +120,11 @@
 
   {% macro editorialCard(story, className) %}
     {% if story %}
-    {% set archiveDek = story.tout.dek or story.social.description %}
     <a class="bm-editor-card {{ className }}" href="{{ storyUrl(story) }}">
       <span class="bm-editor-card__image">{{ storyImage(story, '(min-width: 900px) 24vw, 88vw', false) }}</span>
       <span class="bm-editor-card__copy">
         {{ storyMeta(story, "Journal") }}
         <strong>{{ story.title | replace("—", " - ") }}</strong>
-        {% if not isEmbedded and pagination.currentPage != 1 and archiveDek %}<p class="bm-editor-card__dek">{{ archiveDek }}</p>{% endif %}
         <small>Read Article <i>⟶</i></small>
       </span>
     </a>
@@ -298,14 +296,9 @@
 
     <section class="bm-section bm-latest" data-bm-row="09" aria-labelledby="bm-latest-title">
       <header class="bm-section-heading"><div><span>09</span><h2 id="bm-latest-title">Latest Stories</h2></div><a href="/blog/page-2">View The Archive <i>⟶</i></a></header>
-      <div class="bm-latest__grid">
+      <div class="bm-latest__archive blog-archive__grid">
         {% for story in sortedStories %}
-        {% if loop.index <= 6 %}
-        <a class="bm-latest-card" href="{{ storyUrl(story) }}">
-          <span class="bm-latest-card__image">{{ storyImage(story, '(min-width: 900px) 16vw, 44vw', false) }}</span>
-          {{ storyMeta(story, "Journal") }}<strong>{{ story.title | replace("—", " - ") }}</strong>
-        </a>
-        {% endif %}
+        {{ editorialCard(story, "") }}
         {% endfor %}
       </div>
     </section>

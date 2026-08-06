@@ -109,7 +109,7 @@ query {
     latestStories { _contentTypeName title slug category { title } tout { image { path } dek } }
   }
 
-  stories: getStoryList {
+  stories: getStoryList(size: 32, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _enabledAt
       title
