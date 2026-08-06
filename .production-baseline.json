@@ -1,6 +1,6 @@
 {
   "name": "Away Lands verified production baseline",
-  "baselineDate": "2026-08-04",
+  "baselineDate": "2026-08-06",
   "baselineCommit": "c05ff0652942484055ee91a09110f6eb47d67240",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
@@ -113,7 +113,7 @@
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
     "src/stylesheets/pages/_landing.scss": "36ceb3dc78ac6a60eca9c0acb2ca55bb164596ca9bad3f0456a75bc05f184b13",
     "src/stylesheets/pages/_still.scss": "492fcd4e33c9823a12576a785decc82d09bc4cbe2c23bd40cf5f6f5bffdf45c3",
-    "src/stylesheets/pages/_story.scss": "7b46e84980d8e8927eb54de8f2b97679054d50618499548b70e9ee429bdedded",
+    "src/stylesheets/pages/_story.scss": "d601209602dc9b7275a7c6edd33bf16f6d99782d6816440a30bbf2a958dd4ea5",
     "src/templates/data/about.graphql": "9a8fbd058a95c2a75313c7adbafc108e255ddd876280583e1ca8cbb426a3f03a",
     "src/templates/data/ads.graphql": "7e1bbbc2f7240dab51417e430973aeca501df1af78ae4622b4ea370a0768e472",
     "src/templates/data/categories.graphql": "244fd7767c2689f51ea80d792a6e9268a09d293944d5fa062e215fcac3a37551",

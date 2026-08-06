@@ -2006,7 +2006,7 @@ body.body--story {
   }
 
   .story-cover {
-    grid-template-columns: minmax(38rem, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.15fr) minmax(32rem, 0.85fr);
     gap: 1.2rem;
     align-items: center;
     padding-top: 2rem;
@@ -2016,13 +2016,19 @@ body.body--story {
   .story-cover__copy {
     border-top: 2px solid rgba(22, 110, 120, 0.24);
     border-bottom: 2px solid rgba(22, 110, 120, 0.24);
-    padding: 5rem 4vw 5rem 0;
+    padding: 3rem 3vw 3rem 0;
   }
 
   .story-cover__title {
     width: min(100%, 112rem);
-    font-size: clamp(6rem, 6.4vw, 10.8rem);
+    font-size: clamp(4rem, 4.2vw, 5.2rem);
     line-height: 0.95;
+  }
+
+  .story-cover__dek {
+    max-width: 64rem;
+    font-size: 1.8rem;
+    line-height: 1.42;
   }
 
   .story-page--style-shopping .story-cover {
