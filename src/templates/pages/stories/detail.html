@@ -334,28 +334,32 @@
         {% if page.location.length %}<span><a href="{{ page.location[0] | route('location') }}" style="color: inherit; text-decoration: none;">{{ page.location[0].title }}</a></span>{% endif %}
       </div>
 
-      <h1 class="story-cover__title">{{ page.title }}</h1>
+      <div class="story-cover__info">
+        <h1 class="story-cover__title">{{ page.title }}</h1>
 
-      {% if page.tout.dek %}
-      <p class="story-cover__dek">{{ page.tout.dek }}</p>
-      {% endif %}
-
-      <div class="story-cover__meta">
-        <span>By <a href="/about">Amy Seder</a></span>
-        <time datetime="{{ storyPublishedDate }}">Published {{ storyPublishedDate | date("MMMM D, YYYY") }}</time>
-        {% if storyModifiedDate and storyModifiedDate != storyPublishedDate %}
-        <time class="story-cover__updated" datetime="{{ storyModifiedDate }}">Updated {{ storyModifiedDate | date("MMMM D, YYYY") }}</time>
+        <div class="story-cover__details">
+        {% if page.tout.dek %}
+        <p class="story-cover__dek">{{ page.tout.dek }}</p>
         {% endif %}
-      </div>
 
-      {% if page.category.length or page.location.length or page.continent.length %}
-      <nav class="story-cover__see-more" aria-label="See more Away Lands guides">
-        <span>See more in</span>
-        {% for category in page.category %}<a href="{{ category | route('category') }}">{{ category.title }}</a>{% endfor %}
-        {% if page.location.length %}<a href="{{ page.location[0] | route('location') }}">{{ page.location[0].title }}</a>{% endif %}
-        {% if page.continent.length %}<a href="{{ page.continent[0] | route('continent') }}">{{ page.continent[0].name }}</a>{% endif %}
-      </nav>
-      {% endif %}
+        <div class="story-cover__meta">
+          <span>By <a href="/about">Amy Seder</a></span>
+          <time datetime="{{ storyPublishedDate }}">Published {{ storyPublishedDate | date("MMMM D, YYYY") }}</time>
+          {% if storyModifiedDate and storyModifiedDate != storyPublishedDate %}
+          <time class="story-cover__updated" datetime="{{ storyModifiedDate }}">Updated {{ storyModifiedDate | date("MMMM D, YYYY") }}</time>
+          {% endif %}
+        </div>
+
+        {% if page.category.length or page.location.length or page.continent.length %}
+        <nav class="story-cover__see-more" aria-label="See more Away Lands guides">
+          <span>See more in</span>
+          {% for category in page.category %}<a href="{{ category | route('category') }}">{{ category.title }}</a>{% endfor %}
+          {% if page.location.length %}<a href="{{ page.location[0] | route('location') }}">{{ page.location[0].title }}</a>{% endif %}
+          {% if page.continent.length %}<a href="{{ page.continent[0] | route('continent') }}">{{ page.continent[0].name }}</a>{% endif %}
+        </nav>
+        {% endif %}
+        </div>
+      </div>
 
     </div>
 

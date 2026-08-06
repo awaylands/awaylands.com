@@ -2150,6 +2150,117 @@ body.body--story {
   }
 }
 
+@media (min-width: 900px) and (max-width: 1399px) {
+  .story-cover.story-cover--portrait-hero {
+    grid-template-columns: minmax(0, 0.92fr) minmax(34rem, 1.08fr);
+    grid-template-rows: auto auto auto 1fr;
+    column-gap: clamp(3rem, 5vw, 7rem);
+    row-gap: 0;
+    align-items: start;
+    border-top: 2px solid rgba(22, 110, 120, 0.24);
+    padding-top: clamp(3.6rem, 5vw, 6rem);
+  }
+
+  .story-cover--portrait-hero .story-cover__copy,
+  .story-cover--portrait-hero .story-cover__info {
+    display: contents;
+  }
+
+  .story-cover--portrait-hero .story-cover__eyebrow {
+    grid-row: 1;
+    grid-column: 1 / -1;
+    margin-bottom: 2rem;
+  }
+
+  .story-cover--portrait-hero .story-cover__title {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: none;
+    margin-bottom: clamp(4rem, 5vw, 6.5rem);
+    font-size: clamp(7.4rem, 7vw, 9.2rem);
+  }
+
+  .story-cover--portrait-hero .story-cover__details {
+    grid-row: 3;
+    grid-column: 1;
+    align-self: start;
+    min-width: 0;
+  }
+
+  .story-cover--portrait-hero .story-cover__dek {
+    max-width: 66rem;
+    margin-top: 0;
+    font-size: 1.95rem;
+    line-height: 1.48;
+  }
+
+  .story-cover--portrait-hero .story-mediavine-sidebar-atf {
+    grid-row: 4;
+    grid-column: 1;
+    align-self: start;
+    justify-self: center;
+    width: 300px;
+    min-width: 300px;
+    min-height: 250px;
+    margin: clamp(5rem, 7vw, 9rem) auto 0;
+  }
+
+  .story-cover--portrait-hero .story-cover__media--portrait-capped {
+    grid-row: 3 / 5;
+    grid-column: 2;
+    justify-self: stretch;
+    width: 100%;
+    max-height: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  .story-cover.story-cover--portrait-hero {
+    grid-template-columns: minmax(0, 0.96fr) minmax(42rem, 1.04fr);
+    gap: clamp(2rem, 3vw, 4.8rem);
+    align-items: start;
+  }
+
+  .story-cover--portrait-hero .story-cover__copy {
+    align-self: stretch;
+    justify-content: flex-start;
+    padding: clamp(3.2rem, 3vw, 4.8rem) clamp(2.4rem, 3vw, 4.4rem);
+  }
+
+  .story-cover--portrait-hero .story-cover__title {
+    width: 100%;
+    font-size: clamp(6.8rem, 4vw, 7.6rem);
+    line-height: 0.94;
+  }
+
+  .story-cover--portrait-hero .story-cover__dek {
+    max-width: 66rem;
+    font-size: 1.95rem;
+    line-height: 1.48;
+  }
+
+  .story-cover--portrait-hero .story-cover__meta {
+    margin-top: 2.6rem;
+  }
+
+  .story-cover--portrait-hero .story-cover__see-more {
+    margin-bottom: 0;
+  }
+
+  .story-cover--portrait-hero .story-mediavine-sidebar-atf {
+    width: 300px;
+    min-width: 300px;
+    min-height: 250px;
+    margin: auto auto 0;
+  }
+
+  .story-cover--portrait-hero .story-cover__media--portrait-capped {
+    width: 100%;
+    max-height: none;
+  }
+}
+
 @include for-phone-only {
   .story-cover {
     padding-right: 1.4rem;
