@@ -135,6 +135,7 @@
 {% if destinationTitle == "United States" %}{% set automaticBlurb = "The United States spans desert road trips, mountain parks, beach towns, and culture-rich cities. Our guides cover New York, New Orleans, Miami, Las Vegas, Alaska, the Southwest, and routes across the country." %}{% endif %}
 {% if destinationTitle == "India" %}{% set automaticFacts = {"blurb":"India’s scale and cultural variety reward focused regional trips. Our guides move from Old and New Delhi photo spots to Mumbai hotels and a wedding in the Himalayan foothills of Dehradun.","bestTime":"Oct - Mar is cooler and drier across much of India. Jun - Sep is monsoon season; Himalayan trekking is best Apr - Jun and Sep - Oct.","timeZone":"India Standard Time|UTC+5:30","currency":"Indian rupee (INR)","languages":"English, Hindi, Tamil","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Sri Lanka"},{"title":"Maldives"},{"title":"Thailand"}],"related":[]} %}{% endif %}
 {% set destinationStories = page.storySet.items if page.storySet else [] %}
+{% set destinationGuideSectionStories = (page.destinationGuideStories or []) if isContinentPage else destinationStories %}
 {% set directPostCount = page.storySet.total if page.storySet else destinationStories.length %}
 {% set countryPostCount = 0 %}
 {% set countryGuideCount = 0 %}
@@ -858,19 +859,21 @@
   </section>
   {% endif %}
 
-  {% if page.destinationGuidesHeading or (page.destinationGuideStories and page.destinationGuideStories.length) %}
+  {% if page.destinationGuidesHeading or destinationGuideSectionStories.length %}
   <section class="destination-guides" id="destination-guides" aria-labelledby="destination-guides-title">
     <header class="destination-band-heading">
       <h2 id="destination-guides-title">{{ page.destinationGuidesHeading or (destinationTitle + " Guides") }}</h2>
       <a href="{% if isContinentPage %}{{ continentUrl(page) }}/archive{% else %}{{ locationUrl(page) }}/archive{% endif %}">View All {{ postCount }} Posts <span aria-hidden="true">→</span></a>
     </header>
     <div class="destination-guides__grid">
-      {% if page.destinationGuideStories and page.destinationGuideStories.length %}
-      {% for story in page.destinationGuideStories %}
+      {% if destinationGuideSectionStories.length %}
+      {% for story in destinationGuideSectionStories %}
+        {% if loop.index <= 6 %}
         <article class="destination-guide-card">
           <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">{{ storyImage(story, "(min-width: 1100px) 25vw, (min-width: 650px) 50vw, 100vw", false) }}</a>
           <div class="destination-guide-card__copy"><p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% else %}{{ destinationTitle }}{% endif %}</p><h3><a href="{{ storyUrl(story) }}">{{ story.title or "" }}</a></h3>{% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}</div>
         </article>
+        {% endif %}
       {% endfor %}
       {% endif %}
     </div>
