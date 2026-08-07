@@ -75,9 +75,20 @@
 {% endmacro %}
 
 
-{% set sortedStories = page.storySet.items | sort(true, true, "_enabledAt") %}
-{% set categoryStoryTotal = page.storySet.total or page.storySet.items.length %}
-{% set updatedStories = page.storySet.items | sort(true, true, "_updatedAt") %}
+{% set isSubcategory = page.parentCategory and page.parentCategory.title != page.title %}
+{% set exactCategoryStories = [] %}
+{% for story in page.storySet.items %}
+  {% if not isSubcategory %}
+    {% set ignored = exactCategoryStories.push(story) %}
+  {% else %}
+    {% for storyCategory in story.category %}
+      {% if storyCategory._id == page._id %}{% set ignored = exactCategoryStories.push(story) %}{% endif %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+{% set sortedStories = exactCategoryStories | sort(true, true, "_enabledAt") %}
+{% set categoryStoryTotal = sortedStories.length %}
+{% set updatedStories = exactCategoryStories | sort(true, true, "_updatedAt") %}
 {% if page.updatedStories.length %}
   {% set updatedStories = page.updatedStories %}
 {% endif %}
@@ -140,7 +151,6 @@
 {% set shopLinkText = page.shopLinkText or "View recommendations" %}
 {% set shopLinkUrl = page.shopLinkUrl or "/category/packing-guides/travel-essentials/" %}
 {% set subcategoryParent = page.parentCategory.title or page.title %}
-{% set isSubcategory = page.parentCategory and page.parentCategory.title != page.title %}
 {% set categoryProducts = products.travel %}
 {% set secondaryProducts = [] %}
 {% if page.title == "Photography" %}
@@ -180,7 +190,9 @@
   {% set categoryDescription = "Firsthand " + categoryTopic + " guides, practical details, and thoughtful recommendations from more than a decade of travel." %}
 {% endif %}
 
-{% if page.heroStory %}
+{% if isSubcategory %}
+  {% set heroStory = sortedStories[0] %}
+{% elif page.heroStory %}
   {% set heroStory = page.heroStory %}
 {% elif page.featuredStories.length %}
   {% set heroStory = page.featuredStories[0] %}
@@ -245,7 +257,7 @@
   </nav>
 
   <header class="category-magazine-hero">
-    {% if page.heroImage %}
+    {% if page.heroImage and not isSubcategory %}
     <div class="category-magazine-hero__image">
       <img
         src="{{ page.heroImage.path | image({w: 2400, auto: 'compress,format'}) }}"

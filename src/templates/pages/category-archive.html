@@ -1,8 +1,20 @@
 {% extends "layouts/default.html" %}
 
 {% set categoryTitle = page.title or "Category" %}
-{% set archivePosts = page.storySet.items if page.storySet else [] %}
-{% set archiveTotal = page.storySet.total if page.storySet else archivePosts.length %}
+{% set isSubcategory = page.parentCategory and page.parentCategory.title != page.title %}
+{% set archivePosts = [] %}
+{% if page.storySet %}
+  {% for story in page.storySet.items %}
+    {% if not isSubcategory %}
+      {% set ignored = archivePosts.push(story) %}
+    {% else %}
+      {% for storyCategory in story.category %}
+        {% if storyCategory._id == page._id %}{% set ignored = archivePosts.push(story) %}{% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% set archiveTotal = archivePosts.length %}
 
 {% macro storyUrl(story) %}{% if story and story.slug %}{{ story | route('storySlug') }}{% elif story and story.title %}{{ story | route('story') }}{% else %}#{% endif %}{% endmacro %}
 {% macro categoryUrl(category) %}{% if not category %}#{% elif category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}{% endmacro %}

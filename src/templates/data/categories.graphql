@@ -4,6 +4,7 @@ query($where: TSWhereCategoryInput) {
   }
   getCategoryList(where: $where) {
     items {
+      _id
       _contentTypeName
       title
       parentCategory { _id title }
@@ -164,6 +165,7 @@ query($where: TSWhereCategoryInput) {
             dek
           }
           category {
+            _id
             title
           }
         }
