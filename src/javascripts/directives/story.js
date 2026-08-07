@@ -176,14 +176,21 @@ function setStoryImageDimensions(image) {
 
     heroMedia.classList.remove(
       'story-cover__media--portrait-capped',
+      'story-cover__media--portrait-natural',
       'story-cover__media--landscape-capped'
     );
     if (heroCover) {
-      heroCover.classList.remove('story-cover--landscape-hero');
+      heroCover.classList.remove('story-cover--portrait-hero', 'story-cover--landscape-hero');
     }
 
     if (heightToWidth >= (7 / 5) - 0.01) {
       heroMedia.classList.add('story-cover__media--portrait-capped');
+      if (heroCover) {
+        heroCover.classList.add('story-cover--portrait-hero');
+        positionStoryPortraitAtf(heroCover);
+      }
+    } else if (heightToWidth >= (5 / 4) - 0.01) {
+      heroMedia.classList.add('story-cover__media--portrait-natural');
       if (heroCover) {
         heroCover.classList.add('story-cover--portrait-hero');
         positionStoryPortraitAtf(heroCover);

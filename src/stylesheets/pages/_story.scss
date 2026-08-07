@@ -253,8 +253,10 @@ body.body--story {
 }
 
 .story-cover__media--portrait-capped,
+.story-cover__media--portrait-natural,
 .story-cover__media--landscape-capped,
 .story-cover__media--portrait-capped img,
+.story-cover__media--portrait-natural img,
 .story-cover__media--landscape-capped img {
   min-height: 0;
 }
@@ -267,6 +269,16 @@ body.body--story {
 .story-cover__media--landscape-capped {
   align-self: start;
   aspect-ratio: 1 / 1;
+}
+
+.story-cover__media--portrait-natural {
+  align-self: start;
+}
+
+.story-cover__media--portrait-natural picture,
+.story-cover__media--portrait-natural img {
+  height: auto;
+  object-fit: contain;
 }
 
 .story-cover__media--portrait-capped picture,
@@ -2211,7 +2223,8 @@ body.body--story {
     margin: clamp(1.8rem, 2.4vw, 3rem) auto 0;
   }
 
-  .story-cover--portrait-hero .story-cover__media--portrait-capped {
+  .story-cover--portrait-hero .story-cover__media--portrait-capped,
+  .story-cover--portrait-hero .story-cover__media--portrait-natural {
     grid-row: 3 / 5;
     grid-column: 2;
     align-self: start;
@@ -2265,7 +2278,8 @@ body.body--story {
     margin: clamp(1.8rem, 2.4vw, 3rem) auto 0;
   }
 
-  .story-cover--portrait-hero .story-cover__media--portrait-capped {
+  .story-cover--portrait-hero .story-cover__media--portrait-capped,
+  .story-cover--portrait-hero .story-cover__media--portrait-natural {
     align-self: start;
     width: 100%;
     max-width: none;
