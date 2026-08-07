@@ -14,7 +14,7 @@
     "_takeshape-schema-export/schema.json": "e965386b94cb534e2f66aed0b0c1290cfdd9efa6b0a7ae0b939ca238b6df4889",
     "package-lock.json": "9f4b756c5584db5c528cd652cea4fed7398fea2c0b34123ae30c3d98847c7d68",
     "package.json": "590892575f5106e18bb34f348303b6bb2285ceac34d34a6c5a1488433a4fde5e",
-    "scripts/backfill-editor-content.js": "985e33a95d65f6168c19a911d2bb1d13d1d0ef03d2f6f47c8cc5ae6f3033c30f",
+    "scripts/backfill-editor-content.js": "f50f96b614b0b84885c0ae9fca00a935e0a92b0f7a0cd328d99897a95b4992f0",
     "scripts/copy-static-assets.js": "7fd93fc98bd0a5bb7ca7de5f78d825c9afe63c726751cef9257194969152e3d9",
     "scripts/deploy-production.js": "2d967daec8f694ba94d4eab263331a7156c9e812d65a854a058726ed4ba85c2f",
     "scripts/fill-story-slugs.js": "61a93c493cd05854fd6ad2406d1d8b929df0affd1a50c38bd114ab364607b633",
