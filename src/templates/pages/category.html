@@ -140,6 +140,7 @@
 {% set shopLinkText = page.shopLinkText or "View recommendations" %}
 {% set shopLinkUrl = page.shopLinkUrl or "/category/packing-guides/travel-essentials/" %}
 {% set subcategoryParent = page.parentCategory.title or page.title %}
+{% set isSubcategory = page.parentCategory and page.parentCategory.title != page.title %}
 {% set categoryProducts = products.travel %}
 {% set secondaryProducts = [] %}
 {% if page.title == "Photography" %}
@@ -187,7 +188,7 @@
   {% set heroStory = sortedStories[0] %}
 {% endif %}
 
-{% block body_class %}body--blog-category body--category-hub has-editorial-menu{% endblock %}
+{% block body_class %}body--blog-category body--category-hub{% if isSubcategory %} body--subcategory{% endif %} has-editorial-menu{% endblock %}
 
 {% block extra_head %}
   <link rel="canonical" href="https://www.awaylands.com{{ currentPath }}">
@@ -292,6 +293,7 @@
     </div>
   </section>
 
+  {% if not isSubcategory %}
   {% if hasGuideSection %}<nav class="category-subcategory-nav" id="category-subcategories" aria-label="Browse {{ subcategoryParent }}">
     <header>
       <span>{{ guideLabel }}</span>
@@ -591,6 +593,7 @@
       {% endfor %}
     </nav>
   </aside>{% endif %}
+  {% endif %}
 
   <section class="category-latest category-latest--compact" aria-labelledby="category-latest-title">
     <header class="category-module-heading">

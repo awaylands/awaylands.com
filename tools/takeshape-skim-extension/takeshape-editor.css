@@ -1643,3 +1643,7 @@ body.awaylands-story-list-importance .awaylands-story-importance-control.is-erro
 @keyframes awaylands-importance-spin {
   to { transform: rotate(360deg); }
 }
+tr.awaylands-category-row-hidden,
+.awaylands-subcategory-field-hidden {
+  display: none !important;
+}

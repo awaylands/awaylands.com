@@ -2,6 +2,7 @@
   'use strict';
 
   const CHANNEL = 'awaylands-story-importance';
+  const SUBCATEGORY_CHANNEL = 'awaylands-subcategory-editor';
   const nativeFetch = window.fetch.bind(window);
   const nativeXhrOpen = window.XMLHttpRequest && window.XMLHttpRequest.prototype.open;
   const nativeXhrSetRequestHeader = window.XMLHttpRequest && window.XMLHttpRequest.prototype.setRequestHeader;
@@ -104,6 +105,16 @@
     return data.updateStory.result;
   }
 
+  async function listCategories() {
+    const data = await graphql(`query AwaylandsSubcategoryEditorList {
+      getCategoryList(size: 250, onlyEnabled: false) {
+        items { _id title parentCategory { _id title } }
+      }
+    }`);
+
+    return data.getCategoryList && data.getCategoryList.items || [];
+  }
+
   window.addEventListener('message', event => {
     const message = event.data;
     if (event.source !== window || !message || message.channel !== CHANNEL || message.direction !== 'request') return;
@@ -126,6 +137,27 @@
         direction: 'response',
         requestId: message.requestId,
         type: message.type,
+        error: error.message || String(error)
+      }, window.location.origin);
+    });
+  });
+
+  window.addEventListener('message', event => {
+    const message = event.data;
+    if (event.source !== window || !message || message.channel !== SUBCATEGORY_CHANNEL || message.direction !== 'request') return;
+
+    listCategories().then(result => {
+      window.postMessage({
+        channel: SUBCATEGORY_CHANNEL,
+        direction: 'response',
+        requestId: message.requestId,
+        result
+      }, window.location.origin);
+    }).catch(error => {
+      window.postMessage({
+        channel: SUBCATEGORY_CHANNEL,
+        direction: 'response',
+        requestId: message.requestId,
         error: error.message || String(error)
       }, window.location.origin);
     });

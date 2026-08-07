@@ -15,6 +15,8 @@
   const HTML_INSERT_DIALOG_CLASS = 'awaylands-inline-html-dialog';
   const INLINE_HTML_MARKER_PREFIX = 'AWAYLANDS_HTML';
   const IMPORTANCE_CHANNEL = 'awaylands-story-importance';
+  const SUBCATEGORY_CHANNEL = 'awaylands-subcategory-editor';
+  const CATEGORY_MODE_KEY = 'awaylands-category-editor-mode';
   const pendingRevolveFrames = [];
   let storyTitleIndex = null;
   let storyTitleRequest = null;
@@ -27,6 +29,9 @@
   let importanceRequestId = 0;
   let importanceStoriesByTitle = null;
   let importanceListRequest = null;
+  let categoryListRequest = null;
+  let categoryListCache = null;
+  let categoryRequestId = 0;
 
   function isStoryEditorPath() {
     return /\/project\/[^/]+\/branch\/[^/]+\/data\/Story(?:\/|$)/i.test(window.location.pathname);
@@ -34,6 +39,156 @@
 
   function isStoryListPath() {
     return /\/project\/[^/]+\/branch\/[^/]+\/data\/Story\/?$/i.test(window.location.pathname);
+  }
+
+  function isCategoryPath() {
+    return /\/project\/[^/]+\/branch\/[^/]+\/data\/Category(?:\/|$)/i.test(window.location.pathname);
+  }
+
+  function isCategoryListPath() {
+    return /\/project\/[^/]+\/branch\/[^/]+\/data\/Category\/?$/i.test(window.location.pathname);
+  }
+
+  function categoryMode() {
+    if (window.location.hash === '#awaylands-subcategories' || window.location.hash === '#awaylands-subcategory-editor') {
+      window.sessionStorage.setItem(CATEGORY_MODE_KEY, 'subcategory');
+      return 'subcategory';
+    }
+    return window.sessionStorage.getItem(CATEGORY_MODE_KEY) === 'subcategory' ? 'subcategory' : 'category';
+  }
+
+  function subcategoryBridgeRequest() {
+    if (categoryListCache) return Promise.resolve(categoryListCache);
+    if (categoryListRequest) return categoryListRequest;
+    const requestId = `subcategory-${Date.now()}-${categoryRequestId += 1}`;
+
+    categoryListRequest = new Promise((resolve, reject) => {
+      const timeout = window.setTimeout(() => reject(new Error('TakeShape did not return the category list.')), 30000);
+      const onMessage = event => {
+        const message = event.data;
+        if (event.source !== window || !message || message.channel !== SUBCATEGORY_CHANNEL || message.direction !== 'response' || message.requestId !== requestId) return;
+        window.clearTimeout(timeout);
+        window.removeEventListener('message', onMessage);
+        if (message.error) reject(new Error(message.error));
+        else {
+          categoryListCache = message.result || [];
+          resolve(categoryListCache);
+        }
+      };
+
+      window.addEventListener('message', onMessage);
+      window.postMessage({channel: SUBCATEGORY_CHANNEL, direction: 'request', requestId}, window.location.origin);
+    }).finally(() => { categoryListRequest = null; });
+
+    return categoryListRequest;
+  }
+
+  function replaceExactText(root, before, after) {
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      if (node.nodeValue.trim() === before) {
+        node.nodeValue = node.nodeValue.replace(before, after);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function installSubcategoryNavigation() {
+    const categoryLink = Array.from(document.querySelectorAll('nav a')).find(link => /\/data\/Category\/?$/.test(link.pathname));
+    const continentLink = Array.from(document.querySelectorAll('nav a')).find(link => /\/data\/Continent\/?$/.test(link.pathname));
+    const categoryItem = categoryLink && categoryLink.closest('li');
+    const continentItem = continentLink && continentLink.closest('li');
+
+    if (!categoryLink || !categoryItem || !continentItem) return;
+
+    if (!categoryLink.hasAttribute('data-awaylands-category-mode')) {
+      categoryLink.setAttribute('data-awaylands-category-mode', 'true');
+      categoryLink.addEventListener('click', () => window.sessionStorage.setItem(CATEGORY_MODE_KEY, 'category'));
+    }
+
+    let subcategoryItem = document.querySelector('.awaylands-subcategory-nav-item');
+    if (!subcategoryItem) {
+      subcategoryItem = categoryItem.cloneNode(true);
+      subcategoryItem.classList.add('awaylands-subcategory-nav-item');
+      const subcategoryLink = subcategoryItem.querySelector('a');
+      const previewButton = subcategoryItem.querySelector('button');
+
+      if (previewButton) previewButton.remove();
+      subcategoryLink.href = `${categoryLink.href}#awaylands-subcategories`;
+      subcategoryLink.removeAttribute('aria-current');
+      replaceExactText(subcategoryLink, 'Category', 'Sub Category');
+      subcategoryLink.addEventListener('click', () => window.sessionStorage.setItem(CATEGORY_MODE_KEY, 'subcategory'));
+      continentItem.parentElement.insertBefore(subcategoryItem, continentItem);
+    }
+
+    const subcategoryLink = subcategoryItem.querySelector('a');
+    const subcategoryActive = isCategoryPath() && categoryMode() === 'subcategory';
+    subcategoryLink.classList.toggle('active', subcategoryActive);
+    subcategoryLink.toggleAttribute('aria-current', subcategoryActive);
+    if (isCategoryPath()) categoryLink.toggleAttribute('aria-current', !subcategoryActive);
+  }
+
+  function renderCategoryRows(categories) {
+    if (!isCategoryListPath()) return;
+    const mode = categoryMode();
+    const byTitle = new Map(categories.map(category => [category.title, category]));
+
+    document.querySelectorAll('tbody tr').forEach(row => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length < 3) return;
+      const originalTitle = cells[2].dataset.awaylandsCategoryTitle || cells[2].textContent.trim();
+      const category = byTitle.get(originalTitle);
+      if (!category) return;
+      cells[2].dataset.awaylandsCategoryTitle = originalTitle;
+      const isSubcategory = category.parentCategory && category.parentCategory.title !== category.title;
+
+      row.hidden = mode === 'subcategory' ? !isSubcategory : isSubcategory;
+      row.classList.toggle('awaylands-category-row-hidden', row.hidden);
+      cells[2].textContent = mode === 'subcategory' && isSubcategory
+        ? `${category.parentCategory.title} - ${category.title}`
+        : category.title;
+    });
+
+    const heading = Array.from(document.querySelectorAll('h1, h2, h3')).find(item => /^category$/i.test(item.textContent.trim()) || /^sub category$/i.test(item.textContent.trim()));
+    if (heading) heading.textContent = mode === 'subcategory' ? 'Sub Category' : 'Category';
+    const createLink = Array.from(document.querySelectorAll('a')).find(link => /\/data\/Category\/create\/?$/.test(link.pathname));
+    if (createLink) {
+      createLink.href = mode === 'subcategory' ? `${createLink.origin}${createLink.pathname}#awaylands-subcategory-editor` : `${createLink.origin}${createLink.pathname}`;
+      replaceExactText(createLink, mode === 'subcategory' ? 'New Category' : 'New Sub Category', mode === 'subcategory' ? 'New Sub Category' : 'New Category');
+    }
+  }
+
+  function simplifySubcategoryForm() {
+    if (!isCategoryPath() || isCategoryListPath() || categoryMode() !== 'subcategory') return;
+    const allowed = new Set([
+      'page title', 'parent category', 'subcategory display order', 'hero - kicker',
+      'hero - page title (h1)', 'hero - image', 'hero - fallback post',
+      'introduction - text', 'introduction - link text', 'introduction - link url',
+      'seo - search and sharing'
+    ]);
+
+    document.querySelectorAll('label').forEach(label => {
+      const field = label.closest('[data-testid^="contentForm-"]') || label.closest('.MuiFormControl-root') || label.parentElement;
+      if (!field) return;
+      field.classList.toggle('awaylands-subcategory-field-hidden', !allowed.has(normalizedText(label).toLowerCase()));
+    });
+
+    Array.from(document.querySelectorAll('h1, h2, h3')).forEach(heading => {
+      const text = normalizedText(heading);
+      if (/^(edit|new) category$/i.test(text)) heading.textContent = text.replace(/category/i, 'Sub Category');
+    });
+  }
+
+  function enhanceCategoryEditor() {
+    installSubcategoryNavigation();
+    if (!isCategoryPath()) return;
+    if (isCategoryListPath()) {
+      subcategoryBridgeRequest().then(renderCategoryRows).catch(() => {});
+    } else {
+      simplifySubcategoryForm();
+    }
   }
 
   function importanceBridgeRequest(type, story) {
@@ -2765,6 +2920,8 @@
     if (!document.body) {
       return;
     }
+
+    runEnhancement('subcategory editor', enhanceCategoryEditor);
 
     if (isStoryListPath()) {
       runEnhancement('story importance list', addStoryImportanceColumn);

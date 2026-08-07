@@ -1,6 +1,8 @@
 # Away Lands TakeShape Editor Styling
 
-This Chrome extension makes the TakeShape story editor and Story list easier to use. It runs on TakeShape Story list, create, and edit pages. It does not change saved content unless you use a normal TakeShape field, the Story-list Important checkbox, or a save action.
+This Chrome extension makes the TakeShape story editor, Story list, and category editors easier to use. It does not change saved content unless you use a normal TakeShape field, the Story-list Important checkbox, or a save action.
+
+Category and Sub Category now appear as separate sidebar entries. Category shows only main category pages. Sub Category shows child pages as “Main Category - Subcategory” and opens a simplified editor for fields used by automatically populated subcategory pages.
 
 ## Editor improvements
 

@@ -3411,19 +3411,37 @@ body.body--category-hub .category-hub__topics > span {
 @media (min-width: 701px) {
   body.body--category-hub .category-hub__topics > div {
     display: flex;
+    flex-wrap: nowrap;
     overflow-x: auto;
   }
 
   body.body--category-hub .category-hub__topics > div a {
-    flex: 1 0 12rem;
-    min-width: 12rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding-right: 0.7rem;
+    padding-left: 0.7rem;
+    white-space: nowrap;
   }
 
   body.body--category-hub .category-hub__topics a[href^='/category/home-and-garden'] {
-    flex-basis: 20rem;
-    min-width: 20rem;
+    flex-basis: auto;
+    min-width: 0;
     white-space: nowrap;
   }
+}
+
+/* Subcategory pages keep the category visual language but rely entirely on
+ * their automatic story relationship instead of parent-page editorial modules. */
+body.body--subcategory .category-magazine-hero {
+  min-height: clamp(48rem, 64vh, 68rem);
+}
+
+body.body--subcategory .category-magazine-hero h1 {
+  font-size: clamp(5.8rem, 8vw, 11rem);
+}
+
+body.body--subcategory .category-latest {
+  padding-top: clamp(4rem, 6vw, 7rem);
 }
 
 /* Keep the expertise collage authoritative after legacy refinements above. */
