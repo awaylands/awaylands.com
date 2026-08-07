@@ -5165,6 +5165,16 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
       font-size: 1.2rem;
     }
   }
+
+  &--text-only {
+    grid-template-columns: minmax(0, 1fr);
+
+    @include for-tablet-landscape-up {
+      .search-result__title {
+        white-space: nowrap;
+      }
+    }
+  }
 }
 
 .related-stories {

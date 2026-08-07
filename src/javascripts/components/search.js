@@ -187,6 +187,9 @@ function renderResults(elements, results, terms) {
 
     item.className = 'search-results__item';
     link.className = 'search-result';
+    if (!story.image) {
+      link.className += ' search-result--text-only';
+    }
     content.className = 'search-result__content';
     rubric.className = 'search-result__rubric';
     title.className = 'search-result__title';
