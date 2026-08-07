@@ -2211,54 +2211,6 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
   }
 }
 
-/* Keep destination Latest Stories compact while retaining the full archive. */
-.body--destination-detail .destination-guides__grid {
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-}
-
-.body--destination-detail .destination-guides .destination-guide-card__copy {
-  padding-top: 1.4rem;
-}
-
-.body--destination-detail .destination-guides .destination-guide-card__copy h3 {
-  font-size: clamp(1.8rem, 1.25vw, 2.25rem);
-  line-height: 1.04;
-  margin: 0.9rem 0 0;
-}
-
-.body--destination-detail .destination-guides .destination-guide-card__copy > p:not(.destination-detail__eyebrow) {
-  display: none;
-}
-
-@media (min-width: 1000px) and (max-width: 1399px) {
-  .body--destination-detail .destination-guides__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 700px) and (max-width: 999px) {
-  .body--destination-detail .destination-guides__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 699px) {
-  .body--destination-detail .destination-guides__grid {
-    gap: 2.4rem 1.2rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding-right: 2rem;
-    padding-left: 2rem;
-  }
-
-  .body--destination-detail .destination-guides .destination-guide-card:nth-child(n + 5) {
-    display: none;
-  }
-
-  .body--destination-detail .destination-guides .destination-guide-card__copy h3 {
-    font-size: clamp(1.9rem, 5vw, 2.5rem);
-  }
-}
-
 /* Match the stable full-image editorial feature used on the Travel Guides pages
  * on both country and continent destination pages. */
 .body--destination-detail .destination-spotlight {

@@ -5453,7 +5453,7 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
 /* Keep the automatic Latest Stories module compact and consistent on the
  * homepage and blog landing page. */
 .bm-latest-card strong {
-  font-size: clamp(1.8rem, 1.25vw, 2.25rem);
+  font-size: clamp(2.2rem, 1.45vw, 2.65rem);
   line-height: 1.04;
 }
 
@@ -5492,6 +5492,6 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   }
 
   .bm-latest-card strong {
-    font-size: clamp(1.9rem, 5vw, 2.5rem);
+    font-size: clamp(2.2rem, 5.4vw, 2.8rem);
   }
 }
