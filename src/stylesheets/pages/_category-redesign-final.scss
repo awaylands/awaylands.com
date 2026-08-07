@@ -4953,7 +4953,7 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy str
  * grid, return the collection prompt to the viewport, and fit the entire
  * interactive map inside the page. */
 @media (max-width: 700px) {
-  body.body--category-hub .category-latest--six .category-latest__grid {
+  body.body--category-hub .category-latest--compact .category-latest__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 3rem 1.4rem;
   }
@@ -4977,7 +4977,7 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy str
     margin-bottom: 0.7rem;
   }
 
-  body.body--category-hub .category-latest--six .category-story-card__copy h3 {
+  body.body--category-hub .category-latest--compact .category-story-card__copy h3 {
     font-size: clamp(2rem, 5.6vw, 2.7rem);
     line-height: 1.06;
   }
@@ -5060,7 +5060,7 @@ body.body--category-hub .category-featured-story .category-beauty-hero__copy str
 }
 
 /* The archive call-to-action closes every category landing page beneath the
- * six newest stories and uses the same blue/coral link language as the rest
+ * newest stories and uses the same blue/coral link language as the rest
  * of the editorial site. */
 body.body--category-hub .category-latest__archive-link {
   display: flex;
@@ -5091,4 +5091,43 @@ body.body--category-hub .category-latest__archive-link a:hover,
 body.body--category-hub .category-latest__archive-link a:focus {
   border-color: var(--category-coral);
   color: var(--category-coral);
+}
+
+/* Use the same compact Latest Stories rhythm on every category landing page. */
+body.body--category-hub .category-latest--compact .category-story-card__copy h3 {
+  font-size: clamp(1.8rem, 1.25vw, 2.25rem);
+  line-height: 1.04;
+}
+
+@media (min-width: 1400px) {
+  body.body--category-hub .category-latest--compact .category-latest__grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1399px) {
+  body.body--category-hub .category-latest--compact .category-latest__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 700px) and (max-width: 999px) {
+  body.body--category-hub .category-latest--compact .category-latest__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 699px) {
+  body.body--category-hub .category-latest--compact .category-latest__grid {
+    gap: 2.4rem 1.2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.body--category-hub .category-latest--compact .category-story-card:nth-child(n + 5) {
+    display: none;
+  }
+
+  body.body--category-hub .category-latest--compact .category-story-card__copy h3 {
+    font-size: clamp(1.9rem, 5vw, 2.5rem);
+  }
 }

@@ -296,9 +296,14 @@
 
     <section class="bm-section bm-latest" data-bm-row="09" aria-labelledby="bm-latest-title">
       <header class="bm-section-heading"><div><span>09</span><h2 id="bm-latest-title">Latest Stories</h2></div><a href="/blog/page-2">View The Archive <i>⟶</i></a></header>
-      <div class="bm-latest__archive blog-archive__grid">
+      <div class="bm-latest__grid">
         {% for story in sortedStories %}
-        {{ editorialCard(story, "") }}
+        {% if loop.index <= 12 %}
+        <a class="bm-latest-card" href="{{ storyUrl(story) }}">
+          <span class="bm-latest-card__image">{{ storyImage(story, '(min-width: 900px) 16vw, 44vw', false) }}</span>
+          {{ storyMeta(story, "Journal") }}<strong>{{ story.title | replace("—", " - ") }}</strong>
+        </a>
+        {% endif %}
         {% endfor %}
       </div>
     </section>
@@ -308,11 +313,7 @@
   <main class="blog-archive">
     <header><h1>Post Archive</h1></header>
     <div class="blog-archive__grid">
-      {% if pagination.currentPage == 2 %}
-        {% for story in archiveStories.items %}{{ editorialCard(story, "") }}{% endfor %}
-      {% else %}
-        {% for story in sortedStories %}{{ editorialCard(story, "") }}{% endfor %}
-      {% endif %}
+      {% for story in sortedStories %}{{ editorialCard(story, "") }}{% endfor %}
     </div>
   </main>
   {% endif %}

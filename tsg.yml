@@ -61,7 +61,7 @@ routes:
     template: pages/stories/detail.html
     context: data/story.graphql
     paginate:
-      pageSize: 32
+      pageSize: 12
       firstPage: /blog/
       path: /blog/page-:num
       template: pages/stories/landing.html

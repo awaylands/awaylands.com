@@ -587,14 +587,14 @@
     </nav>
   </aside>{% endif %}
 
-  <section class="category-latest category-latest--six" aria-labelledby="category-latest-title">
+  <section class="category-latest category-latest--compact" aria-labelledby="category-latest-title">
     <header class="category-module-heading">
       <p>The Newest</p>
       <h2 id="category-latest-title">Latest Stories</h2>
     </header>
     <div class="category-latest__grid">
       {% for story in sortedStories %}
-      {% if loop.index <= 6 %}
+      {% if loop.index <= 12 %}
       <article class="category-story-card">
         <a href="{{ storyUrl(story) }}">
           <span class="category-story-card__image">{{ storyImage(story, '(min-width: 1200px) 16vw, (min-width: 700px) 33vw, 50vw', false) }}</span>

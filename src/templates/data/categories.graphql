@@ -145,7 +145,7 @@ query {
         image { path }
         eyebrow title description linkText linkUrl
       }
-      storySet(size: 250) {
+      storySet(size: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
         total
         items {
           _id

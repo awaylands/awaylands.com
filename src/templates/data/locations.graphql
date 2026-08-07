@@ -55,13 +55,6 @@ query DestinationDetailPages($images: TSImagesConfig) {
         category { title }
         tout { image { path } dek }
       }
-      recentStories: storySet(size: 6, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
-        items {
-          _id _contentTypeName _enabledAt isImportant title slug
-          category { title }
-          tout { image { path } dek }
-        }
-      }
       continentSet(size: 1, onlyEnabled: true) {
         items {
           _id
