@@ -2,6 +2,7 @@ query($images: TSImagesConfig) {
   categories: getCategoryList(size: 250, from: 0, sort: [{field: "navigationOrder", order: "asc"}]) {
     items {
       title
+      parentCategory { title }
     }
   }
   stories1: getStoryList(size: 250, from: 0, sort: [{field: "_enabledAt", order: "desc"}]) {

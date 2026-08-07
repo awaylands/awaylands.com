@@ -23,7 +23,7 @@
   {% for category in categories.categories %}
   {% if category.title != "* Most Popular Posts *" %}
   <li><span class="separator"></span></li>
-  <li><a href="{{ category | route('category') }}">{{ category.title | replace('Posts *', 'Posts *') }}</a></li>
+  <li><a href="{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}">{{ category.title | replace('Posts *', 'Posts *') }}</a></li>
   {% endif %}
   {% endfor %}
 {% endblock %}
@@ -213,7 +213,7 @@
           {category: page.categoryTile8Category, image: page.categoryTile8Image, focus: page.categoryTile8Focus, description: page.categoryTile8Description or "Wellness routines, fitness, and restorative travel.", title: "Wellness", url: "/category/wellness", story: sortedStories[18]}
         ] %}
         {% for categoryCard in categoryCards %}
-        <a class="bm-category" href="{% if categoryCard.category %}{{ categoryCard.category | route('category') }}{% else %}{{ categoryCard.url }}{% endif %}">
+        <a class="bm-category" href="{% if categoryCard.category and categoryCard.category.parentCategory and categoryCard.category.parentCategory.title != categoryCard.category.title %}{{ categoryCard.category | route('subcategory') }}{% elif categoryCard.category %}{{ categoryCard.category | route('category') }}{% else %}{{ categoryCard.url }}{% endif %}">
           <span class="bm-category__image" data-focus="{{ categoryCard.focus or 'center' }}">{% if categoryCard.image %}{{ assetImage(categoryCard.image, '(min-width: 900px) 25vw, 90vw', false) }}{% else %}{{ storyImage(categoryCard.story, '(min-width: 900px) 25vw, 90vw', false) }}{% endif %}</span>
           <span class="bm-category__copy"><strong>{{ categoryCard.category.title or categoryCard.title }}</strong><span class="bm-category__description">{{ categoryCard.description }}</span></span>
         </a>

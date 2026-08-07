@@ -6,6 +6,7 @@ query {
     items {
       _contentTypeName
       title
+      parentCategory { title }
       _updatedAt
     }
   }

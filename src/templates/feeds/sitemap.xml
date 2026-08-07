@@ -4,6 +4,8 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
 {% set siteUrl = "https" + "://www.awaylands.com" %}
+{% macro categoryUrl(category) %}{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}{% endmacro %}
+{% macro categoryArchiveUrl(category) %}{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategoryArchive') }}{% else %}{{ category | route('categoryArchive') }}{% endif %}{% endmacro %}
   <url>
     <loc>{{ siteUrl }}/</loc>
     <lastmod>{{ homepage._updatedAt }}</lastmod>
@@ -14,11 +16,11 @@
 {% for category in categories.items %}
   {% if category.title != "* Most Popular Posts *" and category.title != "Most Popular Posts" %}
   <url>
-    <loc>{{ siteUrl }}{{ category | route('category') }}/</loc>
+    <loc>{{ siteUrl }}{{ categoryUrl(category) }}/</loc>
     <lastmod>{{ category._updatedAt }}</lastmod>
   </url>
   <url>
-    <loc>{{ siteUrl }}{{ category | route('categoryArchive') }}/</loc>
+    <loc>{{ siteUrl }}{{ categoryArchiveUrl(category) }}/</loc>
     <lastmod>{{ category._updatedAt }}</lastmod>
   </url>
   {% endif %}

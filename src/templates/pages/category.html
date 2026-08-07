@@ -1,6 +1,8 @@
 {% extends "layouts/default.html" %}
 
 {% macro storyUrl(story) %}{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}{% endmacro %}
+{% macro categoryUrl(category) %}{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}{% endmacro %}
+{% macro categoryArchiveUrl(category) %}{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategoryArchive') }}{% else %}{{ category | route('categoryArchive') }}{% endif %}{% endmacro %}
 
 {% macro storyImage(story, sizes, eager) %}
   {% set image = story.tout.image or story.tout.secondaryImage %}
@@ -136,7 +138,7 @@
   {% set shopDescription = "The travel essentials I pack, use, and recommend trip after trip." %}
 {% endif %}
 {% set shopLinkText = page.shopLinkText or "View recommendations" %}
-{% set shopLinkUrl = page.shopLinkUrl or "/category/travel-essentials/" %}
+{% set shopLinkUrl = page.shopLinkUrl or "/category/packing-guides/travel-essentials/" %}
 {% set subcategoryParent = page.parentCategory.title or page.title %}
 {% set categoryProducts = products.travel %}
 {% set secondaryProducts = [] %}
@@ -209,8 +211,10 @@
         "@type": "BreadcrumbList",
         "itemListElement": [
           {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.awaylands.com/"},
-          {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.awaylands.com/blog/"},
-          {"@type": "ListItem", "position": 3, "name": {{ page.title | dump | safe }}, "item": "https://www.awaylands.com{{ currentPath }}"}
+          {"@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.awaylands.com/blog/"}{% if page.parentCategory and page.parentCategory.title != page.title %},
+          {"@type": "ListItem", "position": 3, "name": {{ page.parentCategory.title | dump | safe }}, "item": "https://www.awaylands.com{{ page.parentCategory | route('category') }}"},
+          {"@type": "ListItem", "position": 4, "name": {{ page.title | dump | safe }}, "item": "https://www.awaylands.com{{ currentPath }}"}{% else %},
+          {"@type": "ListItem", "position": 3, "name": {{ page.title | dump | safe }}, "item": "https://www.awaylands.com{{ currentPath }}"}{% endif %}
         ]
       },
       {
@@ -235,6 +239,7 @@
   <nav class="category-hub__breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span aria-hidden="true">/</span>
     <a href="/blog/">Blog</a><span aria-hidden="true">/</span>
+    {% if page.parentCategory and page.parentCategory.title != page.title %}<a href="{{ page.parentCategory | route('category') }}">{{ page.parentCategory.title }}</a><span aria-hidden="true">/</span>{% endif %}
     <span aria-current="page">{{ page.title }}</span>
   </nav>
 
@@ -271,7 +276,7 @@
     <div>
       {% for category in blog.categories %}
       {% if category.title != "* Most Popular Posts *" and category.title != "Features" and category.title != page.title %}
-      <a href="{{ category | route('category') }}#category-page-top">{{ category.title }}</a>
+      <a href="{{ categoryUrl(category) }}#category-page-top">{{ category.title }}</a>
       {% endif %}
       {% endfor %}
     </div>
@@ -608,7 +613,7 @@
       {% endfor %}
     </div>
     <div class="category-latest__archive-link">
-      <a href="{{ page | route('categoryArchive') }}">View All {{ categoryStoryTotal }} Posts <span aria-hidden="true">›</span></a>
+      <a href="{{ categoryArchiveUrl(page) }}">View All {{ categoryStoryTotal }} Posts <span aria-hidden="true">›</span></a>
     </div>
   </section>
 

@@ -74,6 +74,7 @@ fragment StillCategoryLinks on StillCategory {
 fragment CategoryLinks on Category {
   title
   _contentTypeName
+  parentCategory { title }
 }
 
 fragment ContinentLinks on Continent {

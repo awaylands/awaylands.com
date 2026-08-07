@@ -1,8 +1,8 @@
-query {
+query($where: TSWhereCategoryInput) {
   blog: getBlog {
     categories { title }
   }
-  getCategoryList {
+  getCategoryList(where: $where) {
     items {
       _contentTypeName
       title

@@ -4,7 +4,7 @@
   {
     "type": "category",
     "title": {{ category.title | dump | safe }},
-    "url": {{ (category | route('category')) | dump | safe }},
+    "url": {% if category.parentCategory and category.parentCategory.title != category.title %}{{ (category | route('subcategory')) | dump | safe }}{% else %}{{ (category | route('category')) | dump | safe }}{% endif %},
     "category": "Category page",
     "location": "",
     "dek": "",

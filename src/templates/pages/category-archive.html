@@ -5,7 +5,7 @@
 {% set archiveTotal = page.storySet.total if page.storySet else archivePosts.length %}
 
 {% macro storyUrl(story) %}{% if story and story.slug %}{{ story | route('storySlug') }}{% elif story and story.title %}{{ story | route('story') }}{% else %}#{% endif %}{% endmacro %}
-{% macro categoryUrl(category) %}{% if category %}{{ category | route('category') }}{% else %}#{% endif %}{% endmacro %}
+{% macro categoryUrl(category) %}{% if not category %}#{% elif category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}{% endmacro %}
 {% macro archiveCard(story, label) %}
   <article class="destination-guide-card">
     <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">
@@ -24,7 +24,7 @@
 {% block content %}
 <section class="destination-archive category-archive">
   <header class="destination-archive__header">
-    <div class="destination-archive__breadcrumbs"><a href="/blog/">Blog</a><span aria-hidden="true">›</span><span>{{ categoryTitle }}</span><span aria-hidden="true">›</span><span>Archive</span></div>
+    <div class="destination-archive__breadcrumbs"><a href="/">Home</a><span aria-hidden="true">›</span><a href="/blog/">Blog</a><span aria-hidden="true">›</span>{% if page.parentCategory and page.parentCategory.title != page.title %}<a href="{{ page.parentCategory | route('category') }}">{{ page.parentCategory.title }}</a><span aria-hidden="true">›</span>{% endif %}<span>{{ categoryTitle }}</span><span aria-hidden="true">›</span><span>Archive</span></div>
     <div class="destination-archive__title-row"><h1>{{ categoryTitle }} Archive</h1><div class="destination-archive__post-count">{{ archiveTotal }} Posts</div></div>
     <div class="destination-archive__explore"><strong>Explore More Categories:</strong><span class="destination-archive__explore-links">{% for category in categoryNavigation.items %}{% if category.title != categoryTitle and category.title != "* Most Popular Posts *" and category.title != "Most Popular Posts" %}<a href="{{ categoryUrl(category) }}">{{ category.title }}</a>{% endif %}{% endfor %}</span></div>
   </header>

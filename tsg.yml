@@ -121,7 +121,26 @@ routes:
     template: pages/category.html
     context: data/category.graphql
     paginate:
-      data: data/categories.graphql
+      data:
+        query: data/categories.graphql
+        variables:
+          where:
+            _id:
+              in: ["72e3d920-3bfc-4329-aa12-f5333173752b", "72d10adf-51dd-4c2f-bf6c-f6dbdc6d14e1", "272af0cf-ef31-451b-a570-6f2434700fdb", "5e637310-8209-404b-9b22-0061282a6bc5", "8df2e9cd-9144-4493-9257-0bb8811941b0", "b334dc54-a972-42d7-8011-30fefc05e635", "3d8b535b-d722-4e06-a43a-69384aa81ebe", "c74f43a5-a70d-4fbf-9867-4931eaf050ec", "cf3e39d5-ef51-461c-bed1-abf92de772b1", "05094f08-be26-4d22-9869-c67aff57261a"]
+      itemName: page
+
+  subcategory:
+    path: /category/:parentCategory.title/:title
+    template: pages/category.html
+    context: data/category.graphql
+    paginate:
+      data:
+        query: data/categories.graphql
+        variables:
+          where:
+            NOT:
+              _id:
+                in: ["75008b77-af8a-4623-a3f0-b692fa87fb0e", "72e3d920-3bfc-4329-aa12-f5333173752b", "72d10adf-51dd-4c2f-bf6c-f6dbdc6d14e1", "272af0cf-ef31-451b-a570-6f2434700fdb", "5e637310-8209-404b-9b22-0061282a6bc5", "8df2e9cd-9144-4493-9257-0bb8811941b0", "b334dc54-a972-42d7-8011-30fefc05e635", "3d8b535b-d722-4e06-a43a-69384aa81ebe", "c74f43a5-a70d-4fbf-9867-4931eaf050ec", "cf3e39d5-ef51-461c-bed1-abf92de772b1", "05094f08-be26-4d22-9869-c67aff57261a"]
       itemName: page
 
   categoryArchive:
@@ -129,7 +148,26 @@ routes:
     template: pages/category-archive.html
     context: data/category.graphql
     paginate:
-      data: data/categories.graphql
+      data:
+        query: data/categories.graphql
+        variables:
+          where:
+            _id:
+              in: ["72e3d920-3bfc-4329-aa12-f5333173752b", "72d10adf-51dd-4c2f-bf6c-f6dbdc6d14e1", "272af0cf-ef31-451b-a570-6f2434700fdb", "5e637310-8209-404b-9b22-0061282a6bc5", "8df2e9cd-9144-4493-9257-0bb8811941b0", "b334dc54-a972-42d7-8011-30fefc05e635", "3d8b535b-d722-4e06-a43a-69384aa81ebe", "c74f43a5-a70d-4fbf-9867-4931eaf050ec", "cf3e39d5-ef51-461c-bed1-abf92de772b1", "05094f08-be26-4d22-9869-c67aff57261a"]
+      itemName: page
+
+  subcategoryArchive:
+    path: /category/:parentCategory.title/:title/archive
+    template: pages/category-archive.html
+    context: data/category.graphql
+    paginate:
+      data:
+        query: data/categories.graphql
+        variables:
+          where:
+            NOT:
+              _id:
+                in: ["75008b77-af8a-4623-a3f0-b692fa87fb0e", "72e3d920-3bfc-4329-aa12-f5333173752b", "72d10adf-51dd-4c2f-bf6c-f6dbdc6d14e1", "272af0cf-ef31-451b-a570-6f2434700fdb", "5e637310-8209-404b-9b22-0061282a6bc5", "8df2e9cd-9144-4493-9257-0bb8811941b0", "b334dc54-a972-42d7-8011-30fefc05e635", "3d8b535b-d722-4e06-a43a-69384aa81ebe", "c74f43a5-a70d-4fbf-9867-4931eaf050ec", "cf3e39d5-ef51-461c-bed1-abf92de772b1", "05094f08-be26-4d22-9869-c67aff57261a"]
       itemName: page
 
   legacyHealthAndFitness:

@@ -125,7 +125,7 @@ const categoryDefaults = {
   expertiseLink1Text: 'Meet Amy & Brandon', expertiseLink1Url: '/about/', expertiseLink2Text: 'View photography', expertiseLink2Url: '/still/',
   indexLabel: 'Browse the archive', indexTitle: 'Travel Guides Index', indexDescription: 'The latest 24 guides, with every major collection linked above.',
   browseLabel: 'Find exactly what you need', relatedLabel: 'Keep exploring', relatedTitle: 'Related Collections',
-  shopLabel: 'Travel essentials', shopTitle: 'The Items Always in My Carry-On', shopLinkText: 'View recommendations', shopLinkUrl: '/category/travel-essentials/'
+  shopLabel: 'Travel essentials', shopTitle: 'The Items Always in My Carry-On', shopLinkText: 'View recommendations', shopLinkUrl: '/category/packing-guides/travel-essentials/'
 };
 
 function fillCard(card, fallback, defaultLinkText) {

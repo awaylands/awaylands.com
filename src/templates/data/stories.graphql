@@ -43,6 +43,7 @@ query($images: TSImagesConfig) {
       categoryLabels: category { title }
       category {
         title
+        parentCategory { title }
         storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
           items {
             _contentTypeName
