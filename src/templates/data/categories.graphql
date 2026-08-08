@@ -160,6 +160,27 @@ query($where: TSWhereCategoryInput) {
         image { path }
         eyebrow title description linkText linkUrl
       }
+      mainCategoryTag {
+        title
+        storySet(size: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+          total
+          items {
+            _id
+            _enabledAt
+            _updatedAt
+            isImportant
+            title
+            slug
+            tout {
+              image { path }
+              secondaryImage { path }
+              dek
+            }
+            category { _id title }
+            mainCategory { _id title }
+          }
+        }
+      }
       storySet(size: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
         total
         items {
@@ -182,6 +203,7 @@ query($where: TSWhereCategoryInput) {
             _id
             title
           }
+          mainCategory { _id title }
         }
       }
       social {

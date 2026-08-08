@@ -1271,7 +1271,9 @@
               "widget": "shapeObject"
             },
             "category": {
-              "widget": "relationship"
+              "widget": "relationship",
+              "title": "Sub Category",
+              "instructions": "Choose any specific subcategories for this post."
             },
             "location": {
               "widget": "relationship"
@@ -1343,6 +1345,11 @@
             },
             "additionalMainBlocks": {
               "widget": "shapeObject"
+            },
+            "mainCategory": {
+              "widget": "relationship",
+              "title": "Category",
+              "instructions": "Choose the main category or categories for this post."
             }
           },
           "order": [
@@ -1351,6 +1358,7 @@
             "publishedDate",
             "slug",
             "tout",
+            "mainCategory",
             "category",
             "location",
             "continent",
@@ -1983,11 +1991,17 @@
             "beautyHeroPost": {
               "widget": "relationship",
               "title": "Focused Hero - Linked Post"
+            },
+            "mainCategoryTag": {
+              "widget": "relationship",
+              "title": "Native Main Category Tag",
+              "instructions": "Connect a main category page to its native Story editor tag. Leave blank on subcategory pages."
             }
           },
           "order": [
             "title",
             "parentCategory",
+            "mainCategoryTag",
             "navigationOrder",
             "pageLabel",
             "pageHeadline",
@@ -2964,6 +2978,19 @@
             "post"
           ]
         }
+      },
+      "MainCategory": {
+        "default": {
+          "properties": {
+            "title": {
+              "widget": "singleLineText"
+            }
+          },
+          "order": [
+            "title"
+          ],
+          "widget": "object"
+        }
       }
     },
     "queries": {
@@ -3266,6 +3293,26 @@
         },
         "shape": "Products",
         "description": "Get the Products library"
+      },
+      "getMainCategory": {
+        "args": "TSGetArgs<MainCategory>",
+        "resolver": {
+          "name": "shapedb:get",
+          "service": "shapedb",
+          "shapeName": "MainCategory"
+        },
+        "shape": "MainCategory",
+        "description": "Get MainCategory"
+      },
+      "getMainCategoryList": {
+        "args": "TSListArgs<MainCategory>",
+        "resolver": {
+          "name": "shapedb:list",
+          "service": "shapedb",
+          "shapeName": "MainCategory"
+        },
+        "shape": "PaginatedList<MainCategory>",
+        "description": "Returns a list MainCategory in natural order."
       }
     },
     "mutations": {
@@ -3728,6 +3775,46 @@
         },
         "shape": "UpdateResult<Products>",
         "description": "Update Products"
+      },
+      "updateMainCategory": {
+        "args": "UpdateArgs<MainCategory>",
+        "resolver": {
+          "name": "shapedb:update",
+          "service": "shapedb",
+          "shapeName": "MainCategory"
+        },
+        "shape": "UpdateResult<MainCategory>",
+        "description": "Update MainCategory"
+      },
+      "createMainCategory": {
+        "args": "CreateArgs<MainCategory>",
+        "resolver": {
+          "name": "shapedb:create",
+          "service": "shapedb",
+          "shapeName": "MainCategory"
+        },
+        "shape": "CreateResult<MainCategory>",
+        "description": "Create MainCategory"
+      },
+      "duplicateMainCategory": {
+        "args": "DuplicateArgs<MainCategory>",
+        "resolver": {
+          "name": "shapedb:duplicate",
+          "service": "shapedb",
+          "shapeName": "MainCategory"
+        },
+        "shape": "DuplicateResult<MainCategory>",
+        "description": "Duplicate MainCategory"
+      },
+      "deleteMainCategory": {
+        "args": "DeleteArgs<MainCategory>",
+        "resolver": {
+          "name": "shapedb:delete",
+          "service": "shapedb",
+          "shapeName": "MainCategory"
+        },
+        "shape": "DeleteResult<MainCategory>",
+        "description": "Delete MainCategory"
       }
     },
     "shapes": {
@@ -7936,6 +8023,31 @@
             "additionalMainBlocks": {
               "@ref": "local:StoryAdditionalBlocks",
               "title": "Additional Content / HTML Blocks"
+            },
+            "mainCategory": {
+              "title": "Category",
+              "type": "array",
+              "items": {
+                "@ref": "local:MainCategory"
+              },
+              "@input": {
+                "type": "array",
+                "items": {
+                  "@ref": "local:TSRelationship"
+                }
+              },
+              "@args": "TSRelationshipArgs",
+              "@resolver": {
+                "name": "shapedb:getRelated",
+                "service": "shapedb",
+                "options": {
+                  "nullable": true
+                }
+              },
+              "@mapping": "shapedb:Story.MainCategoryV1",
+              "@backreference": {
+                "enabled": true
+              }
             }
           },
           "required": [
@@ -9378,6 +9490,22 @@
                   "nullable": true
                 }
               }
+            },
+            "mainCategoryTag": {
+              "title": "Native Main Category Tag",
+              "@ref": "local:MainCategory",
+              "@input": {
+                "@ref": "local:TSRelationship"
+              },
+              "@args": "TSRelationshipArgs",
+              "@resolver": {
+                "name": "shapedb:getRelated",
+                "service": "shapedb",
+                "options": {
+                  "nullable": true
+                }
+              },
+              "@mapping": "shapedb:Category.MainCategoryTagV1"
             }
           },
           "required": [
@@ -11350,6 +11478,29 @@
               "@mapping": "shapedb:CategoryPageCard.LinkUrlV1"
             }
           }
+        }
+      },
+      "MainCategory": {
+        "id": "AwayLandsMainCategoryV1",
+        "name": "MainCategory",
+        "title": "Main Category",
+        "workflow": "default",
+        "model": {
+          "type": "taxonomy"
+        },
+        "schema": {
+          "type": "object",
+          "properties": {
+            "title": {
+              "type": "string",
+              "title": "Category Name",
+              "minLength": 1,
+              "@mapping": "shapedb:MainCategory.TitleV1"
+            }
+          },
+          "required": [
+            "title"
+          ]
         }
       }
     },

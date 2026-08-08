@@ -77,15 +77,30 @@
 
 {% set isSubcategory = page.parentCategory and page.parentCategory.title != page.title %}
 {% set exactCategoryStories = [] %}
+{% set exactCategoryStoryIds = [] %}
 {% for story in page.storySet.items %}
   {% if not isSubcategory %}
-    {% set ignored = exactCategoryStories.push(story) %}
+    {% if story._id not in exactCategoryStoryIds %}
+      {% set ignored = exactCategoryStories.push(story) %}
+      {% set ignored = exactCategoryStoryIds.push(story._id) %}
+    {% endif %}
   {% else %}
     {% for storyCategory in story.category %}
-      {% if storyCategory._id == page._id %}{% set ignored = exactCategoryStories.push(story) %}{% endif %}
+      {% if storyCategory._id == page._id and story._id not in exactCategoryStoryIds %}
+        {% set ignored = exactCategoryStories.push(story) %}
+        {% set ignored = exactCategoryStoryIds.push(story._id) %}
+      {% endif %}
     {% endfor %}
   {% endif %}
 {% endfor %}
+{% if not isSubcategory and page.mainCategoryTag %}
+  {% for story in page.mainCategoryTag.storySet.items %}
+    {% if story._id not in exactCategoryStoryIds %}
+      {% set ignored = exactCategoryStories.push(story) %}
+      {% set ignored = exactCategoryStoryIds.push(story._id) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
 {% set sortedStories = exactCategoryStories | sort(true, true, "_enabledAt") %}
 {% set categoryStoryTotal = sortedStories.length %}
 {% set updatedStories = exactCategoryStories | sort(true, true, "_updatedAt") %}
