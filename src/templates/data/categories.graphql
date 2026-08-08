@@ -7,7 +7,21 @@ query($where: TSWhereCategoryInput) {
       _id
       _contentTypeName
       title
-      parentCategory { _id title }
+      parentCategory {
+        _id
+        title
+        guideCards {
+          title
+          linkUrl
+          post { _id title slug tout { image { path } secondaryImage { path } dek } }
+          post2 { _id title slug tout { image { path } secondaryImage { path } dek } }
+          post3 { _id title slug tout { image { path } secondaryImage { path } dek } }
+          post4 { _id title slug tout { image { path } secondaryImage { path } dek } }
+          cards {
+            post { _id title slug tout { image { path } secondaryImage { path } dek } }
+          }
+        }
+      }
       navigationOrder
       pageLabel
       pageHeadline

@@ -89,6 +89,42 @@
 {% set sortedStories = exactCategoryStories | sort(true, true, "_enabledAt") %}
 {% set categoryStoryTotal = sortedStories.length %}
 {% set updatedStories = exactCategoryStories | sort(true, true, "_updatedAt") %}
+{% set subcategoryFeaturedStories = [] %}
+{% set subcategoryFeaturedIds = [] %}
+{% if isSubcategory %}
+  {% for parentGuideCard in page.parentCategory.guideCards %}
+    {% if parentGuideCard.title | lower == page.title | lower %}
+      {% for curatedCard in parentGuideCard.cards %}
+        {% set curatedStory = curatedCard.post %}
+        {% for story in sortedStories %}
+          {% if curatedStory and story._id == curatedStory._id and story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 %}
+            {% set ignored = subcategoryFeaturedStories.push(story) %}
+            {% set ignored = subcategoryFeaturedIds.push(story._id) %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+      {% set legacyFeaturedStories = [parentGuideCard.post, parentGuideCard.post2, parentGuideCard.post3, parentGuideCard.post4] %}
+      {% for curatedStory in legacyFeaturedStories %}
+        {% for story in sortedStories %}
+          {% if curatedStory and story._id == curatedStory._id and story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 %}
+            {% set ignored = subcategoryFeaturedStories.push(story) %}
+            {% set ignored = subcategoryFeaturedIds.push(story._id) %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endif %}
+  {% endfor %}
+  {% for story in sortedStories %}
+    {% if story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 %}
+      {% set ignored = subcategoryFeaturedStories.push(story) %}
+      {% set ignored = subcategoryFeaturedIds.push(story._id) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% set subcategoryGridStories = [] %}
+{% for story in sortedStories %}
+  {% if story._id not in subcategoryFeaturedIds %}{% set ignored = subcategoryGridStories.push(story) %}{% endif %}
+{% endfor %}
 {% if page.updatedStories.length %}
   {% set updatedStories = page.updatedStories %}
 {% endif %}
@@ -304,6 +340,20 @@
       <a href="{{ page.introLinkUrl or '#category-browse' }}">{{ page.introLinkText or 'Browse this page' }} <span aria-hidden="true">⟶</span></a>
     </div>
   </section>
+
+  {% if isSubcategory and subcategoryFeaturedStories.length %}
+  <section class="subcategory-featured" aria-labelledby="subcategory-featured-title">
+    <header class="category-module-heading">
+      <p>Featured</p>
+      <h2 id="subcategory-featured-title">Start Here</h2>
+    </header>
+    <div class="subcategory-featured__grid">
+      {% for story in subcategoryFeaturedStories %}
+        {{ featureCard(story, page.title, "subcategory-featured__card") }}
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
 
   {% if not isSubcategory %}
   {% if hasGuideSection %}<nav class="category-subcategory-nav" id="category-subcategories" aria-label="Browse {{ subcategoryParent }}">
@@ -607,19 +657,21 @@
   </aside>{% endif %}
   {% endif %}
 
-  <section class="category-latest category-latest--compact" aria-labelledby="category-latest-title">
+  <section class="category-latest {% if isSubcategory %}category-latest--subcategory-large{% else %}category-latest--compact{% endif %}" aria-labelledby="category-latest-title">
     <header class="category-module-heading">
-      <p>The Newest</p>
-      <h2 id="category-latest-title">Latest Stories</h2>
+      <p>{% if isSubcategory %}The Collection{% else %}The Newest{% endif %}</p>
+      <h2 id="category-latest-title">{% if isSubcategory %}More {{ page.title }} Stories{% else %}Latest Stories{% endif %}</h2>
     </header>
     <div class="category-latest__grid">
-      {% for story in sortedStories %}
-      {% if loop.index <= 12 %}
+      {% set latestStories = subcategoryGridStories if isSubcategory else sortedStories %}
+      {% set latestLimit = 10 if isSubcategory else 12 %}
+      {% for story in latestStories %}
+      {% if loop.index <= latestLimit %}
       <article class="category-story-card">
         <a href="{{ storyUrl(story) }}">
-          <span class="category-story-card__image">{{ storyImage(story, '(min-width: 1200px) 16vw, (min-width: 700px) 33vw, 50vw', false) }}</span>
+          <span class="category-story-card__image">{{ storyImage(story, '(min-width: 1200px) 25vw, (min-width: 700px) 33vw, 50vw', false) }}</span>
           <span class="category-story-card__copy">
-            {% if story.category.length %}<small>{{ story.category[0].title }}</small>{% endif %}
+            {% if isSubcategory %}<small>{{ page.title }}</small>{% elif story.category.length %}<small>{{ story.category[0].title }}</small>{% endif %}
             <h3>{{ story.title }}</h3>
           </span>
         </a>
