@@ -3459,6 +3459,46 @@ body.body--subcategory .subcategory-featured__grid .category-feature-card--1 .ca
   aspect-ratio: 4 / 3;
 }
 
+body.body--subcategory .subcategory-featured__grid .category-feature-card > a {
+  position: relative;
+  overflow: hidden;
+}
+
+body.body--subcategory .subcategory-featured__grid .category-feature-card__overlay {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  padding: clamp(2.4rem, 3.5vw, 5rem);
+  background: linear-gradient(180deg, rgba(12, 30, 32, 0) 0%, rgba(12, 30, 32, 0.84) 58%, rgba(12, 30, 32, 0.96) 100%);
+  color: #fff;
+}
+
+body.body--subcategory .subcategory-featured__grid .category-feature-card__overlay small {
+  display: block;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+body.body--subcategory .subcategory-featured__grid .category-feature-card__overlay strong {
+  display: block;
+  width: 100%;
+  color: #fff;
+  font-size: clamp(4rem, 4.2vw, 6.8rem);
+  line-height: 0.94;
+}
+
+body.body--subcategory .subcategory-featured__grid .category-feature-card__overlay > span {
+  position: absolute;
+  right: clamp(2rem, 3vw, 4rem);
+  bottom: clamp(1.7rem, 2.4vw, 3rem);
+  color: #fff;
+  font-size: 2.6rem;
+}
+
 body.body--subcategory .category-latest--subcategory-large .category-latest__grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(3rem, 4vw, 5rem) clamp(1.8rem, 2.5vw, 3.2rem);
@@ -3485,6 +3525,23 @@ body.body--subcategory .category-latest--subcategory-large .category-story-card_
   body.body--subcategory .subcategory-featured__grid .category-feature-card__image,
   body.body--subcategory .subcategory-featured__grid .category-feature-card--1 .category-feature-card__image {
     aspect-ratio: 4 / 5;
+  }
+
+  body.body--subcategory .subcategory-featured__grid .category-feature-card__overlay {
+    padding: 1.8rem 1.5rem;
+  }
+
+  body.body--subcategory .subcategory-featured__grid .category-feature-card__overlay small {
+    margin-bottom: 0.6rem;
+  }
+
+  body.body--subcategory .subcategory-featured__grid .category-feature-card__overlay strong {
+    font-size: clamp(2.5rem, 7vw, 3.4rem);
+    line-height: 0.96;
+  }
+
+  body.body--subcategory .subcategory-featured__grid .category-feature-card__overlay > span {
+    display: none;
   }
 
   body.body--subcategory .category-latest--subcategory-large .category-story-card__copy h3 {
