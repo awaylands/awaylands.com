@@ -39,12 +39,59 @@
     }
   }
 
+  function expandCategoryRequestBody(body) {
+    if (typeof body !== 'string' || !body.trim()) return body;
+
+    try {
+      const parsed = JSON.parse(body);
+      const operations = Array.isArray(parsed) ? parsed : [parsed];
+      let changed = false;
+
+      operations.forEach(operation => {
+        if (!operation || typeof operation.query !== 'string') return;
+
+        const variablesText = JSON.stringify(operation.variables || {});
+        const isCategoryRequest = /\b(?:getCategoryList|searchCategoryIndex)\b/.test(operation.query) ||
+          (/\btaxonomySuggest\b/.test(operation.query) && /(?:\bCategory\b|SyRoPJ5eW)/.test(variablesText));
+
+        if (!isCategoryRequest) return;
+
+        const expandSizes = value => {
+          if (!value || typeof value !== 'object') return;
+          Object.keys(value).forEach(key => {
+            if (/^(?:size|limit|first)$/.test(key) && typeof value[key] === 'number' && value[key] < 250) {
+              value[key] = 250;
+              changed = true;
+            } else {
+              expandSizes(value[key]);
+            }
+          });
+        };
+
+        expandSizes(operation.variables);
+        const expandedQuery = operation.query.replace(/\b(size|limit|first)\s*:\s*(\d+)/g, (match, key, count) => {
+          if (Number(count) >= 250) return match;
+          changed = true;
+          return `${key}: 250`;
+        });
+        operation.query = expandedQuery;
+      });
+
+      return changed ? JSON.stringify(parsed) : body;
+    } catch (error) {
+      return body;
+    }
+  }
+
   window.fetch = function (input, init) {
     const url = typeof input === 'string' ? input : input && input.url;
 
     if (isProjectGraphql(url)) {
       rememberHeaders(input && input.headers);
       rememberHeaders(init && init.headers);
+      if (init && init.body) {
+        init = Object.assign({}, init, {body: expandCategoryRequestBody(init.body)});
+      }
     }
     return nativeFetch(input, init);
   };
@@ -58,9 +105,9 @@
       if (this.__awaylandsGraphqlRequest) this.__awaylandsGraphqlRequest.headers[name] = value;
       return nativeXhrSetRequestHeader.apply(this, arguments);
     };
-    window.XMLHttpRequest.prototype.send = function () {
+    window.XMLHttpRequest.prototype.send = function (body) {
       if (this.__awaylandsGraphqlRequest) rememberHeaders(this.__awaylandsGraphqlRequest.headers);
-      return nativeXhrSend.apply(this, arguments);
+      return nativeXhrSend.call(this, this.__awaylandsGraphqlRequest ? expandCategoryRequestBody(body) : body);
     };
   }
 
