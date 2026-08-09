@@ -822,9 +822,9 @@ body.body--story {
   margin: 0 auto;
   color: var(--story-ink);
   font-family: 'Still EB Garamond', Georgia, serif;
-  font-size: 1.9rem;
+  font-size: 2rem;
   letter-spacing: 0;
-  line-height: 1.72;
+  line-height: 1.58;
 }
 
 .story-article__body:after {
@@ -844,7 +844,7 @@ body.body--story {
 .story-article__body > blockquote,
 .story-article__body > hr,
 .story-article__body > .story-table {
-  max-width: 105rem;
+  max-width: 88rem;
   margin-right: auto;
   margin-left: auto;
 }
@@ -868,14 +868,14 @@ body.body--story {
 .story-article__body li,
 .story-article__body blockquote {
   font-family: 'Still EB Garamond', Georgia, serif;
-  font-size: 1.9rem;
+  font-size: 2rem;
   letter-spacing: 0;
-  line-height: 1.72;
+  line-height: 1.58;
 }
 
 .story-article__body > p {
   margin-top: 0;
-  margin-bottom: 2.2rem;
+  margin-bottom: 1.35rem;
 }
 
 .story-article__body strong,
@@ -884,8 +884,8 @@ body.body--story {
 }
 
 .story-article__body > p.story-line-break {
-  min-height: 1.72em;
-  margin-bottom: 2.2rem;
+  min-height: 0.55em;
+  margin-bottom: 0.55rem;
 }
 
 .story-article__body > p.is-promoted-summary {
@@ -921,13 +921,13 @@ body.body--story {
 .story-article__body h2 {
   position: relative;
   scroll-margin-top: 12rem;
-  margin-top: 6.2rem;
-  margin-bottom: 1.9rem;
+  margin-top: 4.4rem;
+  margin-bottom: 1.4rem;
   border-top: 1px solid rgba(22, 110, 120, 0.24);
-  padding-top: 1.6rem;
+  padding-top: 1.3rem;
   font-weight: 700;
   font-size: clamp(3.5rem, 4.3vw, 5rem);
-  line-height: 0.9;
+  line-height: 0.96;
 }
 
 .story-article__body h1 {
@@ -952,12 +952,12 @@ body.body--story {
 }
 
 .story-article__body h3 {
-  margin-top: 3.8rem;
-  margin-bottom: 1.2rem;
+  margin-top: 2.9rem;
+  margin-bottom: 0.9rem;
   color: var(--story-ink);
   font-size: clamp(2.7rem, 2.8vw, 3.6rem);
   font-weight: 600;
-  line-height: 0.94;
+  line-height: 1;
 }
 
 .story-article__body h4 {
@@ -1011,8 +1011,8 @@ body.body--story {
 
 .story-article__body ul,
 .story-article__body ol {
-  margin-top: 2.4rem;
-  margin-bottom: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
   padding-left: 2.2rem;
 }
 
@@ -1037,7 +1037,7 @@ body.body--story {
   float: none;
   width: auto;
   max-width: 105rem;
-  margin: 0 auto 4.8rem calc(50% - 52.5rem);
+  margin: 0 auto 3.6rem calc(50% - 52.5rem);
   padding: 0;
   cursor: zoom-in;
 }
@@ -1621,15 +1621,15 @@ body.body--story {
 
 .story-article__body blockquote,
 .story-article__body > blockquote {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 3.6rem;
+  margin-bottom: 3.6rem;
   border: 0;
   border-left: 3px solid var(--story-orange);
   padding: 1.4rem 0 1.4rem 3rem;
   color: var(--story-deep-blue);
   font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
-  font-size: 3.2rem;
-  line-height: 1.18;
+  font-size: 2rem;
+  line-height: 1.58;
 }
 
 .story-article__body > blockquote:before {
@@ -1637,8 +1637,8 @@ body.body--story {
 }
 
 .story-article__body aside {
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 3.6rem;
+  margin-bottom: 3.6rem;
   border-top: 1px solid rgba(22, 110, 120, 0.24);
   border-bottom: 1px solid rgba(22, 110, 120, 0.24);
   padding: 2.8rem 0;
