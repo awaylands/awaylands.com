@@ -191,7 +191,7 @@ body.body--story {
   margin: 0;
   color: var(--story-ink);
   font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
-  font-size: clamp(4rem, 10.4vw, 7.5rem);
+  font-size: clamp(4.5rem, 11.2vw, 8.5rem);
   font-weight: 300;
   letter-spacing: 0.005em;
   line-height: 0.94;
@@ -2037,7 +2037,7 @@ body.body--story {
 
   .story-cover__title {
     width: min(100%, 112rem);
-    font-size: clamp(4rem, 4.2vw, 5.2rem);
+    font-size: clamp(4.6rem, 4.8vw, 6.2rem);
     line-height: 0.95;
   }
 
@@ -2065,7 +2065,7 @@ body.body--story {
   }
 
   .story-page--style-shopping .story-cover__title {
-    font-size: clamp(5.2rem, 4.8vw, 7.8rem);
+    font-size: clamp(5.8rem, 5.4vw, 8.6rem);
   }
 
   .story-layout {
@@ -2195,7 +2195,7 @@ body.body--story {
     width: 100%;
     max-width: none;
     margin-bottom: clamp(1.4rem, 1.6vw, 2rem);
-    font-size: clamp(7.8rem, 7.4vw, 10rem);
+    font-size: clamp(8.6rem, 8.1vw, 11rem);
   }
 
   .story-cover--portrait-hero .story-cover__details {
@@ -2253,7 +2253,7 @@ body.body--story {
 
   .story-cover--portrait-hero .story-cover__title {
     width: 100%;
-    font-size: clamp(8.4rem, 5.3vw, 10.4rem);
+    font-size: clamp(9.2rem, 5.9vw, 11.4rem);
     line-height: 0.92;
   }
 
@@ -2299,7 +2299,7 @@ body.body--story {
   }
 
   .story-cover__title {
-    font-size: clamp(3.8rem, 11.5vw, 5.2rem);
+    font-size: clamp(4.2rem, 12.3vw, 5.8rem);
     line-height: 0.96;
     text-wrap: wrap;
   }
