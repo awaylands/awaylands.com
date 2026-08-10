@@ -293,13 +293,18 @@
   {# Test the complete category relationship so multi-category stories merge
      every relevant Products collection instead of using only category[0]. #}
   {% set categoryData = page.categoryLabels | dump %}
-  {% set useTravelProducts = 'Travel Guides' in categoryData or 'Travel Tips' in categoryData or 'Best Beaches' in categoryData or 'Hotels and Resorts' in categoryData or 'Travel Adventures' in categoryData or 'Packing Guides' in categoryData or 'Los Angeles Life' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData %}
-  {% set useBeautyProducts = 'Beauty' in categoryData or 'Wedding and Honeymoon' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData %}
-  {% set useStyleProducts = 'Style' in categoryData or 'Packing Guides' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData %}
-  {% set usePhotographyProducts = 'Photography' in categoryData or 'Films' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData %}
-  {% set useFitnessProducts = 'Health and Fitness' in categoryData or 'Health & Fitness' in categoryData %}
-  {% set useHomeProducts = 'Home and Garden' in categoryData or 'Home & Garden' in categoryData %}
-  {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts or useFitnessProducts or useHomeProducts %}
+  {% set isPackingGuide = 'Packing Guides' in categoryData %}
+  {% set isHomeStory = 'Home And Garden' in categoryData or 'Home and Garden' in categoryData or 'Home & Garden' in categoryData %}
+  {% set isWeddingStory = 'Wedding And Honeymoon' in categoryData or 'Wedding and Honeymoon' in categoryData %}
+  {% set hasExclusiveProductMapping = isPackingGuide or isHomeStory or isWeddingStory %}
+  {% set useTravelProducts = isPackingGuide or (not hasExclusiveProductMapping and ('Travel Guides' in categoryData or 'Travel Tips' in categoryData or 'Best Beaches' in categoryData or 'Hotels and Resorts' in categoryData or 'Travel Adventures' in categoryData or 'Los Angeles Life' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData)) %}
+  {% set useBeautyProducts = isPackingGuide or (not hasExclusiveProductMapping and ('Beauty' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData)) %}
+  {% set useStyleProducts = isPackingGuide or (not hasExclusiveProductMapping and ('Style' in categoryData or 'Travel Style' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData)) %}
+  {% set usePhotographyProducts = not hasExclusiveProductMapping and ('Photography' in categoryData or 'Films' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData) %}
+  {% set useFitnessProducts = not hasExclusiveProductMapping and ('Health and Fitness' in categoryData or 'Health & Fitness' in categoryData) %}
+  {% set useHomeProducts = isHomeStory %}
+  {% set useWeddingProducts = isWeddingStory %}
+  {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts or useFitnessProducts or useHomeProducts or useWeddingProducts %}
   {% if page.shopEditItems.length or hasCategoryProducts or blogShopFallback.travelEssentialsItems.length %}
   <div data-story-shop-items hidden>
     {% macro shopItem(item, isAutomatic) %}
@@ -323,6 +328,7 @@
       {% if usePhotographyProducts %}{% for item in products.photography %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
       {% if useFitnessProducts %}{% for item in products.fitness %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
       {% if useHomeProducts %}{% for item in products.home %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
+      {% if useWeddingProducts %}{% for item in products.wedding %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
     {% else %}
       {% for item in blogShopFallback.travelEssentialsItems %}{{ shopItem(item, true) }}{% endfor %}
     {% endif %}

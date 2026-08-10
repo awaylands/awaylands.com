@@ -201,16 +201,22 @@
 {% set subcategoryParent = page.parentCategory.title or page.title %}
 {% set categoryProducts = products.travel %}
 {% set secondaryProducts = [] %}
-{% if page.title == "Photography" %}
+{% set tertiaryProducts = [] %}
+{% if subcategoryParent == "Photography" %}
   {% set categoryProducts = products.photography %}
-{% elif page.title == "Beauty" %}
+{% elif subcategoryParent == "Beauty" %}
   {% set categoryProducts = products.beauty %}
-{% elif page.title == "Wellness" %}
+{% elif subcategoryParent == "Wellness" %}
   {% set categoryProducts = products.fitness %}
-{% elif page.title == "Home And Garden" %}
+{% elif subcategoryParent == "Home And Garden" %}
   {% set categoryProducts = products.home %}
-  {% set secondaryProducts = products.travel %}
-{% elif page.title == "Travel Style" or page.title == "Wedding And Honeymoon" %}
+{% elif subcategoryParent == "Wedding And Honeymoon" %}
+  {% set categoryProducts = products.wedding %}
+{% elif subcategoryParent == "Packing Guides" %}
+  {% set categoryProducts = products.travel %}
+  {% set secondaryProducts = products.style %}
+  {% set tertiaryProducts = products.beauty %}
+{% elif subcategoryParent == "Travel Style" %}
   {% set categoryProducts = products.style %}
 {% endif %}
 
@@ -570,6 +576,9 @@
         {{ productCard(product) }}
       {% endfor %}
       {% for product in secondaryProducts %}
+        {{ productCard(product) }}
+      {% endfor %}
+      {% for product in tertiaryProducts %}
         {{ productCard(product) }}
       {% endfor %}
     </div>

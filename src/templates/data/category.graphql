@@ -6,6 +6,7 @@ query {
     beauty { image { path } title description productUrl addToHomepage }
     fitness { image { path } title description productUrl addToHomepage }
     home { image { path } title description productUrl addToHomepage }
+    wedding { image { path } title description productUrl addToHomepage }
   }
   blog: getBlog {
     categories {
