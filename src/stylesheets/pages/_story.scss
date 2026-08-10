@@ -2171,7 +2171,8 @@ body.body--story {
 // Extra-narrow headers: the eyebrow and title use the complete stage width,
 // while the dek/meta/related links stay beside a large, unshrunk hero image.
 @media (min-width: 700px) and (max-width: 1099px) {
-  .story-cover.story-cover--portrait-hero {
+  .story-cover.story-cover--portrait-hero,
+  .story-cover.story-cover--landscape-hero {
     grid-template-columns: minmax(26rem, 0.88fr) minmax(0, 1.12fr);
     grid-template-rows: auto auto auto 1fr;
     column-gap: clamp(2rem, 4vw, 4rem);
@@ -2183,17 +2184,21 @@ body.body--story {
   }
 
   .story-cover--portrait-hero .story-cover__copy,
-  .story-cover--portrait-hero .story-cover__info {
+  .story-cover--portrait-hero .story-cover__info,
+  .story-cover--landscape-hero .story-cover__copy,
+  .story-cover--landscape-hero .story-cover__info {
     display: contents;
   }
 
-  .story-cover--portrait-hero .story-cover__eyebrow {
+  .story-cover--portrait-hero .story-cover__eyebrow,
+  .story-cover--landscape-hero .story-cover__eyebrow {
     grid-row: 1;
     grid-column: 1 / -1;
     margin-bottom: 1.2rem;
   }
 
-  .story-cover--portrait-hero .story-cover__title {
+  .story-cover--portrait-hero .story-cover__title,
+  .story-cover--landscape-hero .story-cover__title {
     grid-row: 2;
     grid-column: 1 / -1;
     width: 100%;
@@ -2204,14 +2209,16 @@ body.body--story {
     text-wrap: wrap;
   }
 
-  .story-cover--portrait-hero .story-cover__details {
+  .story-cover--portrait-hero .story-cover__details,
+  .story-cover--landscape-hero .story-cover__details {
     grid-row: 3;
     grid-column: 1;
     align-self: start;
     min-width: 0;
   }
 
-  .story-cover--portrait-hero .story-cover__dek {
+  .story-cover--portrait-hero .story-cover__dek,
+  .story-cover--landscape-hero .story-cover__dek {
     max-width: 52rem;
     margin-top: 0;
     font-size: 1.95rem;
@@ -2230,7 +2237,8 @@ body.body--story {
   }
 
   .story-cover--portrait-hero .story-cover__media--portrait-capped,
-  .story-cover--portrait-hero .story-cover__media--portrait-natural {
+  .story-cover--portrait-hero .story-cover__media--portrait-natural,
+  .story-cover--landscape-hero .story-cover__media--landscape-capped {
     grid-row: 3 / 5;
     grid-column: 2;
     align-self: start;
@@ -2242,7 +2250,8 @@ body.body--story {
 
 // Narrow desktop: 5x7 and square heroes use the approved A ratio; 4x5 uses B.
 @media (min-width: 1100px) and (max-width: 1499px) {
-  .story-cover.story-cover--portrait-hero {
+  .story-cover.story-cover--portrait-hero,
+  .story-cover.story-cover--landscape-hero {
     width: calc(100% - 8rem);
     max-width: 146rem;
     margin-right: auto;
@@ -2257,13 +2266,15 @@ body.body--story {
     grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.48fr);
   }
 
-  .story-cover--portrait-hero .story-cover__copy {
+  .story-cover--portrait-hero .story-cover__copy,
+  .story-cover--landscape-hero .story-cover__copy {
     align-self: stretch;
     justify-content: flex-start;
     padding: clamp(2.4rem, 2.2vw, 3.2rem) clamp(1rem, 1.4vw, 2rem) clamp(2.4rem, 2.2vw, 3.2rem) 0;
   }
 
-  .story-cover--portrait-hero .story-cover__title {
+  .story-cover--portrait-hero .story-cover__title,
+  .story-cover--landscape-hero .story-cover__title {
     width: 100%;
     font-size: clamp(8.8rem, 7.4vw, 10.2rem);
     line-height: 0.92;
@@ -2273,7 +2284,8 @@ body.body--story {
     font-size: clamp(9.4rem, 7.8vw, 10.8rem);
   }
 
-  .story-cover--portrait-hero .story-cover__dek {
+  .story-cover--portrait-hero .story-cover__dek,
+  .story-cover--landscape-hero .story-cover__dek {
     max-width: 54rem;
     font-size: 1.95rem;
     line-height: 1.48;
@@ -2295,7 +2307,8 @@ body.body--story {
   }
 
   .story-cover--portrait-hero .story-cover__media--portrait-capped,
-  .story-cover--portrait-hero .story-cover__media--portrait-natural {
+  .story-cover--portrait-hero .story-cover__media--portrait-natural,
+  .story-cover--landscape-hero .story-cover__media--landscape-capped {
     align-self: start;
     width: 100%;
     max-width: none;
@@ -2318,6 +2331,7 @@ body.body--story {
 // Full desktop: approved B proportions for 5x7, 4x5, and square headers.
 @media (min-width: 1500px) {
   .story-cover.story-cover--portrait-hero,
+  .story-cover.story-cover--landscape-hero,
   .story-cover:not(.story-cover--portrait-hero):not(.story-cover--landscape-hero) {
     width: calc(100% - 8rem);
     max-width: 154rem;
@@ -2328,20 +2342,23 @@ body.body--story {
     align-items: start;
   }
 
-  .story-cover--portrait-hero .story-cover__copy {
+  .story-cover--portrait-hero .story-cover__copy,
+  .story-cover--landscape-hero .story-cover__copy {
     align-self: stretch;
     justify-content: flex-start;
     padding: clamp(2.4rem, 2.2vw, 3.2rem) clamp(1rem, 1.4vw, 2rem) clamp(2.4rem, 2.2vw, 3.2rem) 0;
   }
 
   .story-cover--portrait-hero .story-cover__title,
+  .story-cover--landscape-hero .story-cover__title,
   .story-cover:not(.story-cover--portrait-hero):not(.story-cover--landscape-hero) .story-cover__title {
     width: 100%;
     font-size: clamp(9.4rem, 6.45vw, 10.8rem);
     line-height: 0.92;
   }
 
-  .story-cover--portrait-hero .story-cover__dek {
+  .story-cover--portrait-hero .story-cover__dek,
+  .story-cover--landscape-hero .story-cover__dek {
     max-width: 60rem;
     font-size: 1.95rem;
     line-height: 1.48;
@@ -2363,7 +2380,8 @@ body.body--story {
   }
 
   .story-cover--portrait-hero .story-cover__media--portrait-capped,
-  .story-cover--portrait-hero .story-cover__media--portrait-natural {
+  .story-cover--portrait-hero .story-cover__media--portrait-natural,
+  .story-cover--landscape-hero .story-cover__media--landscape-capped {
     align-self: start;
     width: 100%;
     max-width: none;
