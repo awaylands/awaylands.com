@@ -679,7 +679,7 @@
     </header>
     <div class="category-latest__grid">
       {% set latestStories = subcategoryGridStories if isSubcategory else sortedStories %}
-      {% set latestLimit = 10 if isSubcategory else 12 %}
+      {% set latestLimit = 12 %}
       {% for story in latestStories %}
       {% if loop.index <= latestLimit %}
       <article class="category-story-card">
