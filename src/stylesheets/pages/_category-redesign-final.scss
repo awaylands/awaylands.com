@@ -2859,6 +2859,7 @@ body.body--category-hub .category-subcategory-nav__grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.8rem;
+  container-type: inline-size;
 }
 
 body.body--category-hub .category-subcategory-nav__trigger {
@@ -2949,6 +2950,23 @@ body.body--category-hub .category-subcategory-nav__trigger[aria-expanded='true']
 body.body--category-hub .category-subcategory-nav__trigger[aria-expanded='true'] > i b {
   display: inline-block;
   transform: rotate(180deg);
+}
+
+/* Photography adds one destination-guide banner below its four standard cards. */
+body.body--category-hub .category-subcategory-nav__trigger.category-subcategory-nav__trigger--photo-destinations {
+  grid-column: 1 / -1;
+  height: calc((100cqw - 2.4rem) / 4);
+  aspect-ratio: auto;
+}
+
+body.body--category-hub .category-subcategory-nav__trigger-image--photo-destinations {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+body.body--category-hub .category-subcategory-nav__trigger-image--photo-destinations img {
+  min-width: 0;
+  object-fit: cover;
 }
 
 body.body--category-hub .category-subcategory-nav__results {
@@ -3147,6 +3165,12 @@ body.body--category-hub .category-expertise__copy nav {
 
   body.body--category-hub .category-subcategory-nav__trigger {
     aspect-ratio: 4 / 3;
+  }
+
+  body.body--category-hub .category-subcategory-nav__trigger.category-subcategory-nav__trigger--photo-destinations {
+    grid-column: span 2;
+    height: calc((100cqw - 0.8rem) / 2);
+    aspect-ratio: auto;
   }
 
   body.body--category-hub .category-subcategory-nav__results > header {
