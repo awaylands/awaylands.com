@@ -104,23 +104,6 @@
 {% set sortedStories = exactCategoryStories | sort(true, true, "_enabledAt") %}
 {% set categoryStoryTotal = sortedStories.length %}
 {% set updatedStories = exactCategoryStories | sort(true, true, "_updatedAt") %}
-{% set photographyDestinationStories = [] %}
-{% if not isSubcategory and page.title == "Photography" %}
-  {% set photographyDestinationTitles = [
-    "Malta Photo Guide",
-    "Kauai Photo Guide",
-    "Los Angeles Photo Guide",
-    "Las Vegas Photo Guide"
-  ] %}
-  {% for destinationTitle in photographyDestinationTitles %}
-    {% for destinationCard in page.collectionCards %}
-      {% set destinationStory = destinationCard.post or page.clusterStories[loop.index0] %}
-      {% if destinationStory and destinationTitle in destinationStory.title %}
-        {% set ignored = photographyDestinationStories.push(destinationStory) %}
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
-{% endif %}
 {% set subcategoryFeaturedStories = [] %}
 {% set subcategoryFeaturedIds = [] %}
 {% if isSubcategory %}
@@ -401,40 +384,33 @@
     <div class="category-subcategory-nav__grid">
       {% for card in page.guideCards %}
       {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
+      {% set isPhotoDestinationCard = page.title == "Photography" and card.linkUrl == "/category/travel-guides/best-photo-spots/" %}
       {% if card.cards and card.cards.length and card.cards[0].post %}
         {% set cardStory = card.cards[0].post %}
       {% endif %}
       <a
-        class="category-subcategory-nav__trigger"
+        class="category-subcategory-nav__trigger{% if isPhotoDestinationCard %} category-subcategory-nav__trigger--photo-destinations{% endif %}"
         href="{{ card.linkUrl or storyUrl(cardStory) }}"
         data-subcategory-trigger
         data-subcategory-panel="category-subcategory-panel-{{ loop.index }}"
         aria-controls="category-subcategory-panel-{{ loop.index }}"
         aria-expanded="false"
       >
-        <span class="category-subcategory-nav__trigger-image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 25vw, 90vw", false) }}{% endif %}</span>
+        <span class="category-subcategory-nav__trigger-image{% if isPhotoDestinationCard %} category-subcategory-nav__trigger-image--photo-destinations{% endif %}">
+          {% if isPhotoDestinationCard %}
+            {% for guideCard in card.cards %}
+              {% if guideCard.image %}<img src="{{ guideCard.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(guideCard.post, "(min-width: 900px) 25vw, 50vw", false) }}{% endif %}
+            {% endfor %}
+          {% elif card.image %}
+            <img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
+          {% else %}
+            {{ storyImage(cardStory, "(min-width: 900px) 25vw, 90vw", false) }}
+          {% endif %}
+        </span>
         <strong>{{ card.title or cardStory.title }}</strong>
         <i><span>View four guides</span><b aria-hidden="true">↓</b></i>
       </a>
       {% endfor %}
-      {% if page.title == "Photography" and photographyDestinationStories.length %}
-      <a
-        class="category-subcategory-nav__trigger category-subcategory-nav__trigger--photo-destinations"
-        href="/category/travel-guides/best-photo-spots/"
-        data-subcategory-trigger
-        data-subcategory-panel="category-subcategory-panel-photo-destinations"
-        aria-controls="category-subcategory-panel-photo-destinations"
-        aria-expanded="false"
-      >
-        <span class="category-subcategory-nav__trigger-image category-subcategory-nav__trigger-image--photo-destinations">
-          {% for destinationStory in photographyDestinationStories %}
-            {{ storyImage(destinationStory, "(min-width: 900px) 25vw, 50vw", false) }}
-          {% endfor %}
-        </span>
-        <strong>Photo Guides By Destination</strong>
-        <i><span>View four guides</span><b aria-hidden="true">↓</b></i>
-      </a>
-      {% endif %}
     </div>
 
     {% for card in page.guideCards %}
@@ -475,37 +451,6 @@
       </div>
     </section>
     {% endfor %}
-
-    {% if page.title == "Photography" and photographyDestinationStories.length %}
-    <section
-      class="category-subcategory-nav__results"
-      id="category-subcategory-panel-photo-destinations"
-      data-subcategory-panel
-      hidden
-    >
-      <header>
-        <p>From this collection</p>
-        <h2>Photo Guides By Destination</h2>
-        <a href="/category/travel-guides/best-photo-spots/">View the full collection <span aria-hidden="true">⟶</span></a>
-      </header>
-      <div class="category-subcategory-nav__posts">
-        {% for destinationStory in photographyDestinationStories %}
-        <article class="category-shortlist-card">
-          <a href="{{ storyUrl(destinationStory) }}">
-            <span class="category-shortlist-card__image">
-              {{ storyImage(destinationStory, "(min-width: 900px) 45vw, 100vw", false) }}
-            </span>
-            <span class="category-shortlist-card__copy">
-              <small>Photo Guides By Destination</small>
-              <strong>{{ destinationStory.title }}</strong>
-              <i>Read the story <span aria-hidden="true">⟶</span></i>
-            </span>
-          </a>
-        </article>
-        {% endfor %}
-      </div>
-    </section>
-    {% endif %}
   </nav>{% endif %}
 
   {% if hasFeaturedSection %}
