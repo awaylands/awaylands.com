@@ -818,7 +818,7 @@ body.body--story {
 }
 
 .story-article__body {
-  max-width: 155rem;
+  max-width: 124rem;
   margin: 0 auto;
   color: var(--story-ink);
   font-family: 'Still EB Garamond', Georgia, serif;
@@ -2100,14 +2100,14 @@ body.body--story {
   .story-page--standard .story-article,
   .story-page--quick-answer .story-article {
     width: 100%;
-    max-width: 155rem;
+    max-width: 124rem;
     margin: 0 auto;
   }
 
   .story-page--advanced .story-layout {
     grid-template-columns: minmax(0, 1fr) 29rem;
     gap: clamp(5rem, 5vw, 8rem);
-    max-width: 200rem;
+    max-width: 176rem;
   }
 
   .story-page--advanced .story-article {
