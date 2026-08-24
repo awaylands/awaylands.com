@@ -12,8 +12,8 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.a1880d5962a66c788c0c.js",
-      "hash": "2fce425ed9d56b4aa4f7d78d4e5a69d4c2d974a9cbfa4bcfc20102cbf071c238"
+      "path": "javascripts/main.39c3e8e74ee40ce37b4b.js",
+      "hash": "2e73b06e7a7e36df19c455854282463c5d6a3ad1f7fa61dadd0e6c5e055b0253"
     },
     "stylesheets/main.css": {
       "path": "stylesheets/main.6f02b198a3c03437ef8170783a688c85.css",
@@ -53,12 +53,12 @@
     "src/images/destinations3-world-map.png": "27af02850e7a9635aeaade63ab4cd50dca15c2e8e832d1e9421c5102d42d32e2",
     "src/images/featured-thumbtack-brass.png": "21fa1efeaf902a01b2ed8ef42400f78b41e5974f7fa1b00f619f1c8ecceaa57b",
     "src/images/france-lavender-optimized.jpg": "560850f25471996f20ddb7ebc8ca658bfab207a2c75c7573402800730273094c",
-    "src/images/instagram-footer-new-zealand.jpg": "8346d8e066c65381da537c916c05e66ba81264b5848bb2fcec087346afa1c169",
-    "src/images/instagram-footer-pomeranian.jpg": "c8793ec3d16ed1869461433a523178ae66dd73d95c3337d1f722cc256c12d51f",
-    "src/images/instagram-footer-sicily-email.jpg": "b86dedd25933c5fa08445541e468b24af552381bd6297c6deb1bf04131171794",
-    "src/images/instagram-footer-sicily-photo-dump.jpg": "1e6bb82cedc3e946d5e93b7bd08e371aa39fa9ef340ed2857675981cccc9e508",
-    "src/images/instagram-footer-snow-monkeys.jpg": "ea2605f04774544a5e293a0672a39267b908fde247c393d759e0a11f18e6ae06",
-    "src/images/instagram-footer-south-of-france.jpg": "bf171d23d82b83c48b1a3775bf0e5de01e1d753999a6db8f341641abda158d1f",
+    "src/images/instagram-footer-new-zealand-full.jpg": "8346d8e066c65381da537c916c05e66ba81264b5848bb2fcec087346afa1c169",
+    "src/images/instagram-footer-pomeranian-full.jpg": "c8793ec3d16ed1869461433a523178ae66dd73d95c3337d1f722cc256c12d51f",
+    "src/images/instagram-footer-sicily-email-full.jpg": "b86dedd25933c5fa08445541e468b24af552381bd6297c6deb1bf04131171794",
+    "src/images/instagram-footer-sicily-photo-dump-full.jpg": "1e6bb82cedc3e946d5e93b7bd08e371aa39fa9ef340ed2857675981cccc9e508",
+    "src/images/instagram-footer-snow-monkeys-full.jpg": "ea2605f04774544a5e293a0672a39267b908fde247c393d759e0a11f18e6ae06",
+    "src/images/instagram-footer-south-of-france-full.jpg": "bf171d23d82b83c48b1a3775bf0e5de01e1d753999a6db8f341641abda158d1f",
     "src/images/loader.png": "dca58d2b607c3c62008c2a2a7360f9dae54554dbfd66dee08bd1cf39b25e5558",
     "src/images/logo_color.png": "03d255be8112960f2b1c629b583ef2a6b421926cfcbc3572e0766809c5838677",
     "src/images/logo_white.png": "162f770826a39c0853eebe579998698ee251de3b85aa5e1844c974fcfe6a4a7d",
@@ -70,7 +70,7 @@
     "src/javascripts/components/destinations3-postcards.js": "91bfca851357545ae2e1f0b352bf90c023e11147f961c8ded40ef4c4886ec0dd",
     "src/javascripts/components/film-gallery.js": "2221dec47730cf078f0f9428710a674b5c806ef2f22d30b31391f55e64a75b2b",
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
-    "src/javascripts/components/insta-feed.vue": "82a96900ea507a8ed2c8d901e67ca4aaeda7d18ded951e3aa1c08dca68164db4",
+    "src/javascripts/components/insta-feed.vue": "5d074ec70c914832b28dd285e2f6ef309891cf513a8781fd0871fbeb253e7b98",
     "src/javascripts/components/insta-post.vue": "74ced308eb1c967ccd91968c0d6ae4a62c3c59ffc07c0aa64f739437516a719f",
     "src/javascripts/components/instagram.js": "b9e6bf417d3dac14502962448dd1ccd446b88af9db889aa87428e79a214119f1",
     "src/javascripts/components/listings.vue": "aa4c841a22061ecf3d6090b253c10450779eb4fae09e2d229182acd9f4b97471",

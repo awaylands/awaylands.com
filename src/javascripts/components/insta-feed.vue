@@ -23,32 +23,32 @@
   const FALLBACK_POSTS = [
     {
       caption: 'Sicily week one photo dump',
-      media_url: '/assets/images/instagram-footer-sicily-photo-dump.jpg',
+      media_url: '/assets/images/instagram-footer-sicily-photo-dump-full.jpg',
       permalink: 'https://www.instagram.com/p/DaWRaFQDCTI/',
     },
     {
       caption: 'Driving around Sicily',
-      media_url: '/assets/images/instagram-footer-sicily-email.jpg',
+      media_url: '/assets/images/instagram-footer-sicily-email-full.jpg',
       permalink: 'https://www.instagram.com/p/DaL4m70Dasu/',
     },
     {
       caption: 'Wilson\u2019s Creek, New Zealand',
-      media_url: '/assets/images/instagram-footer-new-zealand.jpg',
+      media_url: '/assets/images/instagram-footer-new-zealand-full.jpg',
       permalink: 'https://www.instagram.com/p/DZd33rkmu8j/',
     },
     {
       caption: 'A swim in the Mediterranean in the South of France',
-      media_url: '/assets/images/instagram-footer-south-of-france.jpg',
+      media_url: '/assets/images/instagram-footer-south-of-france-full.jpg',
       permalink: 'https://www.instagram.com/p/DZOfBBuFPtV/',
     },
     {
       caption: 'Snow monkeys in Japan',
-      media_url: '/assets/images/instagram-footer-snow-monkeys.jpg',
+      media_url: '/assets/images/instagram-footer-snow-monkeys-full.jpg',
       permalink: 'https://www.instagram.com/p/DZJj0gOFIWL/',
     },
     {
       caption: 'Amy and her Pomeranian',
-      media_url: '/assets/images/instagram-footer-pomeranian.jpg',
+      media_url: '/assets/images/instagram-footer-pomeranian-full.jpg',
       permalink: 'https://www.instagram.com/p/DZDbvfymNZ1/',
     },
   ];
