@@ -16,8 +16,8 @@
       "hash": "e2af05bde3dcac9d2902e9d9a735f239e1705c1cc68459e187732d8bcce49b48"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.7aafeafc40fe69c549378722b1189be5.css",
-      "hash": "2346d7cb4cd13b5b62f19fdf66f792797cc2dfe946ebb20456fed6fe89650e61"
+      "path": "stylesheets/main.9c6b38d7209b70f6298506b90c36ee4c.css",
+      "hash": "7d64a548d74e5f9d526321de2c621a2eead5dd2d59510ec1693458195f70eb66"
     }
   },
   "sourceFiles": {
@@ -52,13 +52,13 @@
     "src/images/destination-map-oceania.jpg": "9b62799ea9b3530ef51547bd7bb396f974876f3245cc6576d51a01fb27f5839f",
     "src/images/destinations3-world-map.png": "27af02850e7a9635aeaade63ab4cd50dca15c2e8e832d1e9421c5102d42d32e2",
     "src/images/featured-thumbtack-brass.png": "21fa1efeaf902a01b2ed8ef42400f78b41e5974f7fa1b00f619f1c8ecceaa57b",
-    "src/images/france-lavender.jpg": "560850f25471996f20ddb7ebc8ca658bfab207a2c75c7573402800730273094c",
+    "src/images/france-lavender-optimized.jpg": "560850f25471996f20ddb7ebc8ca658bfab207a2c75c7573402800730273094c",
     "src/images/loader.png": "dca58d2b607c3c62008c2a2a7360f9dae54554dbfd66dee08bd1cf39b25e5558",
     "src/images/logo_color.png": "03d255be8112960f2b1c629b583ef2a6b421926cfcbc3572e0766809c5838677",
     "src/images/logo_white.png": "162f770826a39c0853eebe579998698ee251de3b85aa5e1844c974fcfe6a4a7d",
     "src/images/papertexture1.jpeg": "1e107a0ffc4b28b87b6100e0b0dabbbd07d34640e395bfda95924fcdfa332a48",
     "src/images/papertexture2.jpg": "75038ddc7ed275769ae4030e6b664c0f51330facb0f40da2df30ba97bd20e934",
-    "src/images/postcard006.png": "3069417d078597248026a6184ffe6ee63064e99c537b45567b1a19a57e9ed1b1",
+    "src/images/postcard006-optimized.png": "3069417d078597248026a6184ffe6ee63064e99c537b45567b1a19a57e9ed1b1",
     "src/javascripts/.eslintrc": "28d46fa1c9560add2cf99c77dda1b133919be394b4739d4a9c073b5023493e7b",
     "src/javascripts/components.js": "6a28a269ccb044a12d632e60ffd678a37dbe97ef7d3f025029278fa63c670964",
     "src/javascripts/components/destinations3-postcards.js": "91bfca851357545ae2e1f0b352bf90c023e11147f961c8ded40ef4c4886ec0dd",
@@ -137,7 +137,7 @@
     "src/stylesheets/pages/_category-redesign-final.scss": "cdddfc6b11422905b47b56586f6106276b1719fe7ff5cff2bf937839808e791f",
     "src/stylesheets/pages/_destination-detail.scss": "55e5e927b8e7a1bb0deb4bef1ef108f5b61df88ca6f68e195525bf52059f117c",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
-    "src/stylesheets/pages/_destinations.scss": "a7abc33a3121adc7560712dc42750acdd7a6843e857efd4274d48035bc223f4c",
+    "src/stylesheets/pages/_destinations.scss": "7aa87187de874d7191aedc2a4463101b9398b00d85b4dbb28ad52365654f440e",
     "src/stylesheets/pages/_editorial-menu.scss": "e5317100f1685255bc5d106ad743bf624965860f32717d3b0bdd8a04827a7437",
     "src/stylesheets/pages/_film-portfolio.scss": "b0b344b7ee05dd7d1a98add6ad4b3e5824d3270da1485fb373f0ada78d595990",
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
@@ -190,7 +190,7 @@
     "src/templates/pages/legacy-category.html": "7f9271e578afe7771a4db40f31db94f84547e19b9b3a5cc873b98d5e5eb6a07d",
     "src/templates/pages/legacy-story.html": "42a8d4ebd740bae483607514ab67a8bbe0c2c1d979b4c597d7ec63c4dbc40727",
     "src/templates/pages/location-archive.html": "b9dfe4f49a88f9859e53498a2c9f626a45710fb81311298cda14eaa1cc50412f",
-    "src/templates/pages/location.html": "fc69f4d9732f1599623acf990444dd5f68ae26b91abfb45c0101368b6fec91a7",
+    "src/templates/pages/location.html": "a3be2c1990202cf6834dcc427d90e9722302119f546105de3d957b2be5ead6b9",
     "src/templates/pages/privacy.html": "b9b902d2a588d3bb6ea50dc4c1b62738b0d356fb92203c452c58cafac0bbe89b",
     "src/templates/pages/search.html": "1bd3d4db82c6e692722d58f78ef3028b0b6ba7f7cda017bd401cc9956814934b",
     "src/templates/pages/still-category.html": "70862b64f00d86b502461f5d7695a34a717f11f109eafb9e5c23ec96668717d8",

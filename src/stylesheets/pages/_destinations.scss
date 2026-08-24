@@ -1333,18 +1333,18 @@
   transform: translate(-50%, -50%) rotate(-1.2deg);
   width: min(104rem, 76vw);
   z-index: 4;
-  -webkit-mask-image: url('/assets/images/postcard006.png');
+  -webkit-mask-image: url('/assets/images/postcard006-optimized.png');
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
-  mask-image: url('/assets/images/postcard006.png');
+  mask-image: url('/assets/images/postcard006-optimized.png');
   mask-position: center;
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
 }
 
 .pd-header-postcard__frame:after {
-  background: url('/assets/images/postcard006.png');
+  background: url('/assets/images/postcard006-optimized.png');
   background-position: center;
   background-size: 100% 100%;
   content: '';

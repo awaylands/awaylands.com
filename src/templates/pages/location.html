@@ -204,7 +204,7 @@
 {% endif %}
 {% set destinationHero = page.destinationHeroImage or page.image or (page.social.image if page.social else null) %}
 {% if destinationTitle == "France" and not page.destinationHeroImage %}
-  {% set destinationHeroPath = "/assets/images/france-lavender.jpg" %}
+  {% set destinationHeroPath = "/assets/images/france-lavender-optimized.jpg" %}
 {% elif destinationHero and destinationHero.path %}
   {% set destinationHeroPath = destinationHero.path %}
 {% elif featuredOne and featuredOne.tout and featuredOne.tout.image and featuredOne.tout.image.path %}
@@ -382,7 +382,7 @@
   <header class="destination-hero">
     <div class="destination-hero__media">
       {% if destinationHeroPath %}
-      <img src="{% if destinationHeroPath == '/assets/images/france-lavender.jpg' %}{{ destinationHeroPath }}{% else %}{{ destinationHeroPath | image({w: 2400, auto: 'compress,format'}) }}{% endif %}" alt="{{ destinationTitle }}" loading="eager" decoding="async" fetchpriority="high">
+      <img src="{% if destinationHeroPath == '/assets/images/france-lavender-optimized.jpg' %}{{ destinationHeroPath }}{% else %}{{ destinationHeroPath | image({w: 2400, auto: 'compress,format'}) }}{% endif %}" alt="{{ destinationTitle }}" loading="eager" decoding="async" fetchpriority="high">
       {% endif %}
     </div>
     <div class="destination-hero__shade"></div>
@@ -631,8 +631,8 @@
   {# This runtime scopes assignments inside loops, so use the first populated
      related destination directly instead of trying to set mapBoxImage in a loop. #}
   {% if not mapBoxImage and page.locations and page.locations[0] and page.locations[0].storySet and page.locations[0].storySet.items and page.locations[0].storySet.items[0] and page.locations[0].storySet.items[0].tout and page.locations[0].storySet.items[0].tout.image %}{% set mapBoxImage = page.locations[0].storySet.items[0].tout.image.path %}{% endif %}
-  {% if not mapBoxImage %}{% set mapBoxImage = "/assets/images/france-lavender.jpg" %}{% endif %}
-  {% set mapBoxImageSrc = mapBoxImage if mapBoxImage == "/assets/images/france-lavender.jpg" else (mapBoxImage | image({w: 2400, auto: 'compress,format'})) %}
+  {% if not mapBoxImage %}{% set mapBoxImage = "/assets/images/france-lavender-optimized.jpg" %}{% endif %}
+  {% set mapBoxImageSrc = mapBoxImage if mapBoxImage == "/assets/images/france-lavender-optimized.jpg" else (mapBoxImage | image({w: 2400, auto: 'compress,format'})) %}
   <section class="continent-map continent-map--{{ destinationTitle | lower | replace(" ", "-") }}" style="background-image: url('{{ mapBoxImageSrc }}');" aria-labelledby="continent-map-title">
     <div class="continent-map__heading">
       <p id="continent-map-title">{{ page.continentMapHeading or "Explore the Map" }}</p>
