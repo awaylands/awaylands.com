@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import 'whatwg-fetch';
   import InstaPost from './insta-post.vue';
 
   const INSTA_POSTS = 'INSTA_POSTS';
@@ -50,9 +50,16 @@
         this.posts = (JSON.parse(localStorage.getItem(INSTA_POSTS)) || []).slice(0, INSTA_POST_LIMIT);
       },
       getPostsFromApi() {
-        axios.get(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,timestamp,media_type&access_token=${AMY_ACCESS_TOKEN}`)
-          .then((res) => {
-            this.posts = res.data.data
+        fetch(`https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,timestamp,media_type&access_token=${AMY_ACCESS_TOKEN}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`Instagram request failed with status ${response.status}`);
+            }
+
+            return response.json();
+          })
+          .then((data) => {
+            this.posts = data.data
               .filter(post => post.media_type !== 'VIDEO')
               .slice(0, INSTA_POST_LIMIT);
 

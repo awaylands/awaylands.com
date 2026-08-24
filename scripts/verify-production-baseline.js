@@ -214,6 +214,7 @@ const protectedSourcePatterns = [
   'src/templates/**',
   'src/stylesheets/**',
   'src/javascripts/**',
+  'src/images/**',
   'scripts/**',
   'static/assets/fonts/**',
   '_takeshape-schema-export/**',
@@ -240,11 +241,18 @@ if (!fs.existsSync(assetManifestPath)) {
 const assetManifest = JSON.parse(fs.readFileSync(assetManifestPath, 'utf8'));
 ['javascripts/main.js', 'stylesheets/main.css'].forEach(key => {
   const asset = assetManifest[key];
+  const expectedAsset = baseline.compiledAssets[key];
   if (!asset || !/^(javascripts|stylesheets)\/main\.[^/]+\.(js|css)$/.test(asset)) {
     fail(`compiled asset manifest has no valid hashed ${key} entry.`);
   }
+  if (!expectedAsset || asset !== expectedAsset.path) {
+    fail(`compiled ${key} does not match the protected release asset.`);
+  }
   if (!fs.existsSync(path.join(root, 'build/assets', asset))) {
     fail(`compiled asset is missing from build/assets: ${asset}`);
+  }
+  if (sha256(path.join('build/assets', asset)) !== expectedAsset.hash) {
+    fail(`compiled asset checksum does not match the protected release: ${asset}`);
   }
 });
 
@@ -263,6 +271,9 @@ const generatedHtml = [];
 }(path.join(root, 'build')));
 if (!generatedHtml.length) {
   fail('the generated build contains no HTML pages.');
+}
+if (generatedHtml.length < baseline.minimumGeneratedPages) {
+  fail(`the generated build contains only ${generatedHtml.length} HTML pages; expected at least ${baseline.minimumGeneratedPages}.`);
 }
 generatedHtml.forEach(file => {
   const html = fs.readFileSync(file, 'utf8');

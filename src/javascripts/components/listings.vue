@@ -48,8 +48,6 @@
   import {apiEndpoint, bearerToken} from '../utils/config';
   import {buildSrcset} from '../utils/format';
 
-  var moment = require('moment');
-
   import {getImageUrl, route as createRoute} from 'takeshape-routing';
   import config from '../../../tsg.yml';
 
@@ -165,8 +163,6 @@
 
             for (const story of stories.items) {
               story.path = story.slug ? route('storySlug', story) : route(story._contentTypeName, story);
-              story.date = moment(story._enabledAt).format('MMMM Do, YYYY');
-
               if (story.tout && story.tout.image) {
                 story.image = getImageUrl(story.tout.image.path);
                 story.imageSrcset = buildSrcset(story.image, ['600','900','1200','1600'])

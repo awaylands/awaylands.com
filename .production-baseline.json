@@ -1,6 +1,6 @@
 {
   "name": "Away Lands verified production baseline",
-  "baselineDate": "2026-08-06",
+  "baselineDate": "2026-08-24",
   "baselineCommit": "c05ff0652942484055ee91a09110f6eb47d67240",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
@@ -8,6 +8,17 @@
   "schema": {
     "version": 249,
     "hash": "7ab1d547bc6b4624be3f5106d023a69f949b850260b1f35d3ad47d46b557c0d4"
+  },
+  "minimumGeneratedPages": 2000,
+  "compiledAssets": {
+    "javascripts/main.js": {
+      "path": "javascripts/main.2551d13a041bcc3547ed.js",
+      "hash": "e2af05bde3dcac9d2902e9d9a735f239e1705c1cc68459e187732d8bcce49b48"
+    },
+    "stylesheets/main.css": {
+      "path": "stylesheets/main.7aafeafc40fe69c549378722b1189be5.css",
+      "hash": "2346d7cb4cd13b5b62f19fdf66f792797cc2dfe946ebb20456fed6fe89650e61"
+    }
   },
   "sourceFiles": {
     "_takeshape-schema-export/schema-inner.json": "32d6a796baa4e21b886e820048d9baf72ced126de767e939ef3ba56aab6c7be2",
@@ -30,16 +41,33 @@
     "scripts/story-importer-server.js": "b12846072e8c7aa293c83ffd4c46588e83e3817ec917db9aaa515622d637c49b",
     "scripts/story-importer.html": "acae0967046e3484e5cdc35422d5095d5a1fa5ca456ff476b98a36638577fec5",
     "scripts/story-preview-server.js": "2b46f4049ac4c0226e44ea225b4fa3f66256c416da0a0e9863da1cdc6e61adb5",
-    "scripts/verify-production-baseline.js": "fa7b54bf009b7dd0fd72b9bb3f7becbf4b1633536941a096ed2d982cb7a3d30e",
+    "scripts/verify-production-baseline.js": "dfd5844e28dfcd70f7e399cc0b647d4a0bf69f08eeeb7bd0a3f2efdc118b6c7b",
+    "src/images/arrow-left.png": "600b78654c7c0c301c26fe14eba108880417efc270a690298fcb184b650e8d38",
+    "src/images/arrow-right.png": "c0ba2dba01823e25d995f9f54cc23af9393fbe04d2d97b5568786a45197853f1",
+    "src/images/default-favicon.png": "b1e66734e36025531a6fe0b323f171069253111c463c10907805f5a8d3bc8431",
+    "src/images/destination-map-africa.jpg": "45079bdcfc3ecd51c2efddc75bd342f8eef82491566c075ef3ae0b1dec0fb7ac",
+    "src/images/destination-map-asia.jpg": "85fd1aebcc5af0cd7eb30475357778376ddcd6d855d0f471703efd439d48ec20",
+    "src/images/destination-map-europe.jpg": "8a2adee2f73cdc517aea055e7bd88f37bfd2e1a5c78df06ec7b1bf768c6efeec",
+    "src/images/destination-map-north-america.jpg": "bf1d1b881e2ef75abbbccb4383805e19ceaba8f490ccb27e50fe131bce6f0fd1",
+    "src/images/destination-map-oceania.jpg": "9b62799ea9b3530ef51547bd7bb396f974876f3245cc6576d51a01fb27f5839f",
+    "src/images/destinations3-world-map.png": "27af02850e7a9635aeaade63ab4cd50dca15c2e8e832d1e9421c5102d42d32e2",
+    "src/images/featured-thumbtack-brass.png": "21fa1efeaf902a01b2ed8ef42400f78b41e5974f7fa1b00f619f1c8ecceaa57b",
+    "src/images/france-lavender.jpg": "560850f25471996f20ddb7ebc8ca658bfab207a2c75c7573402800730273094c",
+    "src/images/loader.png": "dca58d2b607c3c62008c2a2a7360f9dae54554dbfd66dee08bd1cf39b25e5558",
+    "src/images/logo_color.png": "03d255be8112960f2b1c629b583ef2a6b421926cfcbc3572e0766809c5838677",
+    "src/images/logo_white.png": "162f770826a39c0853eebe579998698ee251de3b85aa5e1844c974fcfe6a4a7d",
+    "src/images/papertexture1.jpeg": "1e107a0ffc4b28b87b6100e0b0dabbbd07d34640e395bfda95924fcdfa332a48",
+    "src/images/papertexture2.jpg": "75038ddc7ed275769ae4030e6b664c0f51330facb0f40da2df30ba97bd20e934",
+    "src/images/postcard006.png": "3069417d078597248026a6184ffe6ee63064e99c537b45567b1a19a57e9ed1b1",
     "src/javascripts/.eslintrc": "28d46fa1c9560add2cf99c77dda1b133919be394b4739d4a9c073b5023493e7b",
     "src/javascripts/components.js": "6a28a269ccb044a12d632e60ffd678a37dbe97ef7d3f025029278fa63c670964",
     "src/javascripts/components/destinations3-postcards.js": "91bfca851357545ae2e1f0b352bf90c023e11147f961c8ded40ef4c4886ec0dd",
     "src/javascripts/components/film-gallery.js": "2221dec47730cf078f0f9428710a674b5c806ef2f22d30b31391f55e64a75b2b",
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
-    "src/javascripts/components/insta-feed.vue": "b0e9387b52d793792bc98c229f23ecad1a24f625a87b01696301ac744ea9496f",
+    "src/javascripts/components/insta-feed.vue": "30db00dc01ff079ddc8f791e90550a4e1bf9cf963e09ccfe6b818efff7750614",
     "src/javascripts/components/insta-post.vue": "861c018e0bb4d7f594e435f722d00e8263fbe191f44f93f7dcff8bf2ebe4dd14",
     "src/javascripts/components/instagram.js": "b9e6bf417d3dac14502962448dd1ccd446b88af9db889aa87428e79a214119f1",
-    "src/javascripts/components/listings.vue": "f4818970d1fe290a3c9eac1e91521d75e6698822767597ebebd292f768edb0b5",
+    "src/javascripts/components/listings.vue": "aa4c841a22061ecf3d6090b253c10450779eb4fae09e2d229182acd9f4b97471",
     "src/javascripts/components/search.js": "513270569f059c445f4ff668b0fa7cd30aa71fd01cc7fb91b9139993a1bf4c8a",
     "src/javascripts/directives/gallery.js": "a04aed930ed597050c78001c0f8b78cd249630c458352bad8206d9cc79647d74",
     "src/javascripts/directives/imageloaded.js": "dd1ae7a025f507c6939c704c58db40020e041508a364fcf2f7ad2fe812aa5b5d",
@@ -171,7 +199,7 @@
     "src/templates/pages/stories/landing.html": "f793e24b1600629fc4e0abbb4d7236fe90b6279dd083748bb977aea453d81b60",
     "src/templates/partials/blog-story-dedupe.html": "499f8c98a7317ec0c65183000b24771c398d6b29818dbb07ec099b7d66cfe33d",
     "src/templates/partials/footer.html": "09b1ae68112872bc254e3b861be60abd15028fca6ad8a9a3b76fc1d2aa90a076",
-    "src/templates/partials/head.html": "5e241beca1f62123e1ae89b61a4f1eb5587ff47c111602af19e3b87559919c62",
+    "src/templates/partials/head.html": "d4f239c66c8b016d2e523d2e02056f6358e76813b9c27c5d8ea47e2bb1bca327",
     "src/templates/partials/header.html": "e8d4c08989f92a629fd41e2efb913a097630bf0d907a8405ab77dfffde6b406a",
     "src/templates/partials/mediavine.html": "73eb5149ee07cb357f456e328daf582f6b7adc61892cd1457cbaeb5b881c4c3f",
     "src/templates/partials/pagination.html": "ee819de9eaad71b1efaca8046c01988ca3de26684435025ab8df18bea0b7023e",
