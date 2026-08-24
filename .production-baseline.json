@@ -9,7 +9,7 @@
     "version": 249,
     "hash": "7ab1d547bc6b4624be3f5106d023a69f949b850260b1f35d3ad47d46b557c0d4"
   },
-  "minimumGeneratedPages": 2000,
+  "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
       "path": "javascripts/main.2551d13a041bcc3547ed.js",
