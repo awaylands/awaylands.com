@@ -1,7 +1,7 @@
 {
   "name": "Away Lands verified production baseline",
   "baselineDate": "2026-08-24",
-  "baselineCommit": "55d416c8145bc9209775ed620713b69b898a5726",
+  "baselineCommit": "8b4dfe1e776032824770a4b5f9787db53fceb866",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
