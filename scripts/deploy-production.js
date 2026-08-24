@@ -129,7 +129,7 @@ function fetch(url) {
   });
 }
 
-async function verifyLive(assets) {
+async function verifyLiveOnce(assets) {
   const cacheBust = `codexverify=${Date.now()}`;
   const pages = [
     '/',
@@ -174,6 +174,31 @@ async function verifyLive(assets) {
     fail(`${expectedJs} checksum mismatch (live ${liveJsHash}, local ${localJsHash}).`);
   }
   process.stdout.write(`Deployment verified live: ${assets.css}\n`);
+}
+
+function wait(milliseconds) {
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+}
+
+async function verifyLive(assets) {
+  const maximumAttempts = 20;
+  let lastError;
+
+  for (let attempt = 1; attempt <= maximumAttempts; attempt += 1) {
+    try {
+      await verifyLiveOnce(assets);
+      return;
+    } catch (error) {
+      lastError = error;
+      if (attempt === maximumAttempts) {
+        break;
+      }
+      process.stdout.write(`Live verification attempt ${attempt} is waiting for origin publication.\n`);
+      await wait(15000);
+    }
+  }
+
+  throw lastError;
 }
 
 function generateSite() {
