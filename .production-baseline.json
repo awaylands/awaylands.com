@@ -12,8 +12,8 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.2551d13a041bcc3547ed.js",
-      "hash": "e2af05bde3dcac9d2902e9d9a735f239e1705c1cc68459e187732d8bcce49b48"
+      "path": "javascripts/main.a1880d5962a66c788c0c.js",
+      "hash": "2fce425ed9d56b4aa4f7d78d4e5a69d4c2d974a9cbfa4bcfc20102cbf071c238"
     },
     "stylesheets/main.css": {
       "path": "stylesheets/main.9c6b38d7209b70f6298506b90c36ee4c.css",
@@ -53,6 +53,12 @@
     "src/images/destinations3-world-map.png": "27af02850e7a9635aeaade63ab4cd50dca15c2e8e832d1e9421c5102d42d32e2",
     "src/images/featured-thumbtack-brass.png": "21fa1efeaf902a01b2ed8ef42400f78b41e5974f7fa1b00f619f1c8ecceaa57b",
     "src/images/france-lavender-optimized.jpg": "560850f25471996f20ddb7ebc8ca658bfab207a2c75c7573402800730273094c",
+    "src/images/instagram-footer-new-zealand.jpg": "4dde1af058616e4abcce95fff220f2ad89e86c4acd9dc450b0e0e381caa57ee9",
+    "src/images/instagram-footer-pomeranian.jpg": "e619ebfb6a081f54b2342bd2df9b64274d9803e074b31731a0a8bcd0b5760090",
+    "src/images/instagram-footer-sicily-email.jpg": "91d322c0e59c544f3f237f08c50c6671662b46c875ed32a230587b44c91bb3d1",
+    "src/images/instagram-footer-sicily-photo-dump.jpg": "657f0ec480a121d952b2d7ae0fee670a4da1706142134167f4156ab0d04de9f7",
+    "src/images/instagram-footer-snow-monkeys.jpg": "708a6b41d85c99d866e1cb5a9475a760a69ed13713d836f3d2258ebcb66384ae",
+    "src/images/instagram-footer-south-of-france.jpg": "9665bea90c5d96ac0084eb6556653605a843b25e8d8681f720f559994f6fdf66",
     "src/images/loader.png": "dca58d2b607c3c62008c2a2a7360f9dae54554dbfd66dee08bd1cf39b25e5558",
     "src/images/logo_color.png": "03d255be8112960f2b1c629b583ef2a6b421926cfcbc3572e0766809c5838677",
     "src/images/logo_white.png": "162f770826a39c0853eebe579998698ee251de3b85aa5e1844c974fcfe6a4a7d",
@@ -64,8 +70,8 @@
     "src/javascripts/components/destinations3-postcards.js": "91bfca851357545ae2e1f0b352bf90c023e11147f961c8ded40ef4c4886ec0dd",
     "src/javascripts/components/film-gallery.js": "2221dec47730cf078f0f9428710a674b5c806ef2f22d30b31391f55e64a75b2b",
     "src/javascripts/components/header.js": "d8aed48212c899bce06f39fb2c132cc92e0559c60c2b14c356410472605dd216",
-    "src/javascripts/components/insta-feed.vue": "30db00dc01ff079ddc8f791e90550a4e1bf9cf963e09ccfe6b818efff7750614",
-    "src/javascripts/components/insta-post.vue": "861c018e0bb4d7f594e435f722d00e8263fbe191f44f93f7dcff8bf2ebe4dd14",
+    "src/javascripts/components/insta-feed.vue": "82a96900ea507a8ed2c8d901e67ca4aaeda7d18ded951e3aa1c08dca68164db4",
+    "src/javascripts/components/insta-post.vue": "74ced308eb1c967ccd91968c0d6ae4a62c3c59ffc07c0aa64f739437516a719f",
     "src/javascripts/components/instagram.js": "b9e6bf417d3dac14502962448dd1ccd446b88af9db889aa87428e79a214119f1",
     "src/javascripts/components/listings.vue": "aa4c841a22061ecf3d6090b253c10450779eb4fae09e2d229182acd9f4b97471",
     "src/javascripts/components/search.js": "513270569f059c445f4ff668b0fa7cd30aa71fd01cc7fb91b9139993a1bf4c8a",

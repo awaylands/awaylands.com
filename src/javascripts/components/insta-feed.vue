@@ -1,6 +1,11 @@
 <template>
  <div class="footer-insta-grid">
-   <insta-post v-for="(post, index) of posts" :key="index" :post="post"></insta-post>
+   <insta-post
+     v-for="(post, index) of posts"
+     :key="index"
+     :post="post"
+     @image-error="useFallbackPosts">
+   </insta-post>
   </div>
 </template>
 
@@ -15,19 +20,54 @@
 
   const UPDATE_INSTA_SECOND_TIME = 3600; // Every 1 hour
   const INSTA_POST_LIMIT = 6;
+  const FALLBACK_POSTS = [
+    {
+      caption: 'Sicily week one photo dump',
+      media_url: '/assets/images/instagram-footer-sicily-photo-dump.jpg',
+      permalink: 'https://www.instagram.com/p/DaWRaFQDCTI/',
+    },
+    {
+      caption: 'Driving around Sicily',
+      media_url: '/assets/images/instagram-footer-sicily-email.jpg',
+      permalink: 'https://www.instagram.com/p/DaL4m70Dasu/',
+    },
+    {
+      caption: 'Wilson\u2019s Creek, New Zealand',
+      media_url: '/assets/images/instagram-footer-new-zealand.jpg',
+      permalink: 'https://www.instagram.com/p/DZd33rkmu8j/',
+    },
+    {
+      caption: 'A swim in the Mediterranean in the South of France',
+      media_url: '/assets/images/instagram-footer-south-of-france.jpg',
+      permalink: 'https://www.instagram.com/p/DZOfBBuFPtV/',
+    },
+    {
+      caption: 'Snow monkeys in Japan',
+      media_url: '/assets/images/instagram-footer-snow-monkeys.jpg',
+      permalink: 'https://www.instagram.com/p/DZJj0gOFIWL/',
+    },
+    {
+      caption: 'Amy and her Pomeranian',
+      media_url: '/assets/images/instagram-footer-pomeranian.jpg',
+      permalink: 'https://www.instagram.com/p/DZDbvfymNZ1/',
+    },
+  ];
 
   export default {
     name: 'InstaFeed',
     components: { InstaPost },
     data() {
       return {
-        posts: [],
+        posts: FALLBACK_POSTS.slice(),
       };
     },
     mounted() {
       this.getPosts();
     },
     methods: {
+      useFallbackPosts() {
+        this.posts = FALLBACK_POSTS.slice();
+      },
       getPosts() {
         const lastUpdateTime = localStorage.getItem(INSTA_LAST_UPDATE_TIME) || null;
         const cachedPosts = JSON.parse(localStorage.getItem(INSTA_POSTS)) || [];
@@ -68,10 +108,7 @@
           })
           .catch((err) => {
             console.error(err);
-
-            if (this.posts.length === 0) {
-              this.getPostsFromLocalStorage();
-            }
+            this.useFallbackPosts();
           });
       },
     },

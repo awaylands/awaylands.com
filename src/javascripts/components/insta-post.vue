@@ -6,7 +6,8 @@
         :alt="caption"
         loading="lazy"
         decoding="async"
-        @load="imgLoaded = true">
+        @load="imgLoaded = true"
+        @error="$emit('image-error')">
     </a>
   </div>
 </template>
