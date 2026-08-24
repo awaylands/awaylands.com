@@ -728,7 +728,7 @@ body.body--destination-detail:not(.gallery-page) {
 .continent-most-requested__heading h2 {
   color: var(--destination-ink);
   font-family: "Still ITC Garamond Light Condensed", "Still EB Garamond", Georgia, serif;
-  font-size: clamp(4.2rem, 5vw, 7.2rem);
+  font-size: clamp(4.8rem, 5vw, 7.2rem);
   font-weight: 300;
   letter-spacing: -0.025em;
   line-height: 0.95;
@@ -788,11 +788,23 @@ body.body--destination-detail:not(.gallery-page) {
 
 .continent-most-requested__copy h3 {
   color: var(--destination-ink);
-  font-family: "Still EB Garamond", Georgia, serif;
-  font-size: clamp(2.1rem, 2vw, 2.7rem);
+  font-family: "Still ITC Garamond Light Condensed", "Still EB Garamond", Georgia, serif;
+  font-size: clamp(2.3rem, 2vw, 2.7rem);
+  font-weight: 300;
   line-height: 1.08;
   margin: 0;
   text-transform: none;
+}
+
+// Destination collection titles use the approved display face and typography
+// from the section title above, at a card-appropriate size.
+.body--destination-detail .destination-most-requested .continent-most-requested__copy h3 {
+  font-family: "Still ITC Garamond Light Condensed", "Still EB Garamond", Georgia, serif;
+  font-size: clamp(2.2rem, 1.55vw, 2.3rem);
+  font-kerning: normal;
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
 }
 
 .continent-most-requested__copy i {
@@ -1253,7 +1265,7 @@ body.body--destination-detail:not(.gallery-page) {
   bottom: 2.7rem;
   color: #fff;
   font-family: "Still ITC Garamond Light Condensed", "Still EB Garamond", Georgia, serif;
-  font-size: clamp(3rem, 3vw, 4.8rem);
+  font-size: clamp(3.6rem, 3vw, 4.8rem);
   font-weight: 300;
   left: 1.4rem;
   line-height: 0.9;
@@ -2208,6 +2220,60 @@ body.body--destination-archive:not(.gallery-page) .page-header:not(.is-sticky) .
 
   .destination-guide-card__copy h3 {
     font-size: 4rem;
+  }
+}
+
+/* Country destination fact layout only. Continent pages also carry the
+   body--continent-detail class and are intentionally excluded. */
+@media (min-width: 1181px) {
+  .body--destination-detail:not(.body--continent-detail) .destination-facts {
+    grid-template-columns:
+      minmax(31rem, 2.35fr)
+      minmax(12.5rem, 1.248fr)
+      repeat(3, minmax(12.5rem, 0.864fr))
+      minmax(12.5rem, 0.96fr);
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1180px) {
+  .body--destination-detail:not(.body--continent-detail) .destination-facts {
+    grid-template-columns: minmax(0, 1.3fr) repeat(3, minmax(0, 0.9fr)) minmax(0, 1fr);
+  }
+}
+
+.body--destination-detail:not(.body--continent-detail) .destination-facts > div {
+  padding-left: clamp(1.53rem, 2.04vw, 3.06rem);
+  padding-right: clamp(1.53rem, 2.04vw, 3.06rem);
+}
+
+@media (max-width: 1000px) {
+  .body--destination-detail:not(.body--continent-detail) .destination-facts > div {
+    padding-left: clamp(1.36rem, 2.55vw, 2.04rem);
+    padding-right: clamp(1.36rem, 2.55vw, 2.04rem);
+  }
+}
+
+@media (max-width: 850px) {
+  .body--destination-detail:not(.body--continent-detail) .destination-facts > div {
+    padding-left: 1.53rem;
+    padding-right: 1.53rem;
+  }
+
+  .continent-most-requested__heading h2 {
+    font-size: clamp(5.2rem, 12vw, 6.4rem);
+  }
+
+  .continent-most-requested__copy h3,
+  .body--destination-detail .destination-most-requested .continent-most-requested__copy h3 {
+    font-size: clamp(2.6rem, 4vw, 3rem);
+  }
+
+  .body--destination-detail:not(.body--continent-detail) .destination-most-requested .continent-most-requested__copy h3 {
+    font-size: clamp(3.2rem, 6vw, 3.8rem);
+  }
+
+  .destination-nearby-card strong {
+    font-size: clamp(4.8rem, 9vw, 5.6rem);
   }
 }
 
