@@ -187,6 +187,94 @@ const initCategorySubcategories = () => {
   });
 };
 
+const initCategoryNavPreview = () => {
+  const preview = document.querySelector('[data-category-nav-preview]');
+  if (!preview) return;
+
+  preview.addEventListener('click', event => {
+    const button = event.target.closest('[data-category-nav-select]');
+    if (!button) return;
+    const selected = button.dataset.categoryNavSelect;
+
+    preview.querySelectorAll('[data-category-nav-select]').forEach(item => {
+      item.classList.toggle('is-active', item === button);
+    });
+    preview.querySelectorAll('[data-category-nav-option]').forEach(option => {
+      const active = option.dataset.categoryNavOption === selected;
+      option.hidden = !active;
+      option.classList.toggle('is-active', active);
+    });
+  });
+
+  preview.addEventListener('change', event => {
+    if (!event.target.matches('[data-category-nav-option="3"] select')) return;
+    if (event.target.value) window.location.href = event.target.value;
+  });
+};
+
+const initCategoryArchivePagination = () => {
+  const listing = document.querySelector('[data-category-archive-page-size]');
+  const navigation = document.querySelector('[data-category-archive-pagination]');
+  if (!listing || !navigation) return;
+
+  const cards = Array.from(listing.querySelectorAll('[data-category-archive-card]'));
+  const pageSize = Number(listing.dataset.categoryArchivePageSize) || 12;
+  const totalPages = Math.max(1, Math.ceil(cards.length / pageSize));
+  const parameters = new URLSearchParams(window.location.search);
+  const requestedPage = Number(parameters.get('archive-page')) || 1;
+  const currentPage = Math.min(Math.max(requestedPage, 1), totalPages);
+  const start = (currentPage - 1) * pageSize;
+  const end = start + pageSize;
+
+  cards.forEach((card, index) => {
+    card.hidden = index < start || index >= end;
+  });
+
+  if (totalPages <= 1) {
+    navigation.hidden = true;
+    return;
+  }
+
+  const pageHref = page => {
+    const nextParameters = new URLSearchParams(window.location.search);
+    if (page === 1) nextParameters.delete('archive-page');
+    else nextParameters.set('archive-page', page);
+    const query = nextParameters.toString();
+    return `${window.location.pathname}${query ? `?${query}` : ''}#all-stories`;
+  };
+
+  const addLink = (label, page, options = {}) => {
+    const link = document.createElement(options.disabled ? 'span' : 'a');
+    link.textContent = label;
+    if (!options.disabled) link.href = pageHref(page);
+    if (options.current) {
+      link.className = 'is-current';
+      link.setAttribute('aria-current', 'page');
+    }
+    if (options.disabled) link.className = 'is-disabled';
+    navigation.appendChild(link);
+  };
+
+  addLink('Previous', currentPage - 1, { disabled: currentPage === 1 });
+
+  const visiblePages = [1, currentPage - 1, currentPage, currentPage + 1, totalPages]
+    .filter(page => page >= 1 && page <= totalPages)
+    .filter((page, index, pages) => pages.indexOf(page) === index)
+    .sort((a, b) => a - b);
+
+  visiblePages.forEach((page, index) => {
+    if (index && page - visiblePages[index - 1] > 1) {
+      const separator = document.createElement('span');
+      separator.className = 'destination-archive__pagination-ellipsis';
+      separator.textContent = '…';
+      navigation.appendChild(separator);
+    }
+    addLink(String(page), page, { current: page === currentPage });
+  });
+
+  addLink('Next', currentPage + 1, { disabled: currentPage === totalPages });
+};
+
 import Imageloaded from './directives/imageloaded';
 import Slides from './directives/slides';
 import Gallery from './directives/gallery';
@@ -208,6 +296,8 @@ export default new Vue({
     initBlogInfiniteCarousels();
     initBlogDragCarousels();
     initCategorySubcategories();
+    initCategoryNavPreview();
+    initCategoryArchivePagination();
   },
   methods: {},
   components: {

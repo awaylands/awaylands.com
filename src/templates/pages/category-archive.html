@@ -15,11 +15,15 @@
   {% endfor %}
 {% endif %}
 {% set archiveTotal = archivePosts.length %}
+{% set mainCategories = [] %}
+{% for category in categoryNavigation.items %}
+  {% if (not category.parentCategory or category.parentCategory.title == category.title) and category.title != "* Most Popular Posts *" and category.title != "Most Popular Posts" %}{% set ignored = mainCategories.push(category) %}{% endif %}
+{% endfor %}
 
 {% macro storyUrl(story) %}{% if story and story.slug %}{{ story | route('storySlug') }}{% elif story and story.title %}{{ story | route('story') }}{% else %}#{% endif %}{% endmacro %}
 {% macro categoryUrl(category) %}{% if not category %}#{% elif category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}{% endmacro %}
 {% macro archiveCard(story, label) %}
-  <article class="destination-guide-card">
+  <article class="destination-guide-card" data-category-archive-card>
     <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">
       {% if story and story.tout and story.tout.image and story.tout.image.path %}<img src="{{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="{{ story.title or 'Story' }}" loading="lazy">{% endif %}
     </a>
@@ -30,20 +34,32 @@
     </div>
   </article>
 {% endmacro %}
-
 {% block body_class %}body body--destination-archive body--category-archive{% endblock %}
 
 {% block content %}
 <section class="destination-archive category-archive">
   <header class="destination-archive__header">
-    <div class="destination-archive__breadcrumbs"><a href="/">Home</a><span aria-hidden="true">›</span><a href="/blog/">Blog</a><span aria-hidden="true">›</span>{% if page.parentCategory and page.parentCategory.title != page.title %}<a href="{{ page.parentCategory | route('category') }}">{{ page.parentCategory.title }}</a><span aria-hidden="true">›</span>{% endif %}<span>{{ categoryTitle }}</span><span aria-hidden="true">›</span><span>Archive</span></div>
+    <div class="destination-archive__breadcrumbs"><a href="/">Home</a><span aria-hidden="true">›</span><a href="/blog/">Blog</a><span aria-hidden="true">›</span>{% if page.parentCategory and page.parentCategory.title != page.title %}<a href="{{ page.parentCategory | route('category') }}">{{ page.parentCategory.title }}</a><span aria-hidden="true">›</span>{% endif %}<a href="{{ categoryUrl(page) }}">{{ categoryTitle }}</a><span aria-hidden="true">›</span><span>Archive</span></div>
     <div class="destination-archive__title-row"><h1>{{ categoryTitle }} Archive</h1><div class="destination-archive__post-count">{{ archiveTotal }} Posts</div></div>
-    <div class="destination-archive__explore"><strong>Explore More Categories:</strong><span class="destination-archive__explore-links">{% for category in categoryNavigation.items %}{% if category.title != categoryTitle and category.title != "* Most Popular Posts *" and category.title != "Most Popular Posts" %}<a href="{{ categoryUrl(category) }}">{{ category.title }}</a>{% endif %}{% endfor %}</span></div>
   </header>
-  <div class="destination-archive__listing destination-guides__grid">
-    {% for story in archivePosts %}
-      {{ archiveCard(story, categoryTitle) }}
-    {% endfor %}
+
+  <section class="category-nav-preview category-nav-preview--selected">
+    <nav class="category-nav-option category-nav-option--main-cards" aria-label="Main category navigation">
+      <div class="category-nav-option__heading"><strong>Browse All Categories</strong></div>
+      <div class="category-nav-main-cards">
+        {% for category in mainCategories %}
+          {% if (not category.parentCategory or category.parentCategory.title == category.title) and category.title != "* Most Popular Posts *" and category.title != "Most Popular Posts" %}
+            <a href="{{ categoryUrl(category) }}"{% if category.title == categoryTitle %} class="is-current"{% endif %}><span>{% if loop.index < 10 %}0{% endif %}{{ loop.index }}</span><strong>{{ category.title }}</strong><i>{% if category.title == categoryTitle %}Current category{% else %}Explore category{% endif %} ⟶</i></a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </nav>
+  </section>
+
+  <header class="category-archive__all-heading" id="all-stories"><span>All Stories</span><h2>More from {{ categoryTitle }}</h2></header>
+  <div class="destination-archive__listing destination-guides__grid" data-category-archive-page-size="12">
+    {% for story in archivePosts %}{{ archiveCard(story, categoryTitle) }}{% endfor %}
   </div>
+  <nav class="destination-archive__pagination" data-category-archive-pagination aria-label="Archive pages"></nav>
 </section>
 {% endblock %}

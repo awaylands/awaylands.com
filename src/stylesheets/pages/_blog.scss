@@ -5620,9 +5620,17 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
     height: auto;
     margin: 0;
     overflow: hidden;
-    row-gap: 0;
-    top: 0;
+    padding: 0.6rem 1rem;
+    row-gap: 0.35rem;
     transform: none;
+  }
+
+  .body--blog-magazine .bm-hero__rail {
+    top: clamp(31rem, 23.4vw, 38.65rem);
+  }
+
+  .homepage-blog-magazine .bm-hero__rail {
+    top: clamp(18rem, 13.25vw, 22rem);
   }
 
   .body--blog-magazine .bm-hero__rail .bm-compact-story,
@@ -5631,10 +5639,11 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   .homepage-blog-magazine .bm-hero__rail .bm-compact-story,
   .homepage-blog-magazine .bm-hero__rail .bm-compact-story:first-child,
   .homepage-blog-magazine .bm-hero__rail .bm-compact-story:last-child {
-    grid-template-columns: clamp(14rem, 12vw, 19rem) 2.5rem minmax(0, 1fr);
+    grid-template-columns: 14.5rem 2.5rem minmax(0, 1fr);
     height: auto !important;
     min-height: 0 !important;
     overflow: hidden;
+    padding: 0.35rem 0 !important;
   }
 
   .body--blog-magazine .bm-hero__rail .bm-compact-story__image,
@@ -5643,6 +5652,7 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
     aspect-ratio: 1 / 1;
     height: auto !important;
     min-height: 0;
+    min-width: 0;
     width: 100%;
   }
 }
