@@ -766,8 +766,8 @@
 .bm-hero__copy p {
   color: #fff;
   font-family: 'Still EB Garamond', Georgia, serif;
-  font-size: clamp(1.7rem, 1.35vw, 2.2rem);
-  line-height: 1.6;
+  font-size: clamp(1.9rem, 1.5vw, 2.4rem);
+  line-height: 1.4;
   margin-bottom: 2.6rem;
   max-width: 52rem;
 }
@@ -5513,6 +5513,99 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   aspect-ratio: 1 / 1;
   height: auto !important;
   min-height: 0;
+}
+
+/* Let the two-column supporting-story layout size itself from its content. */
+@media (min-width: 800px) and (max-width: 1299px) {
+  .homepage-blog-magazine .bm-hero__rail {
+    align-content: start;
+    bottom: auto;
+    grid-template-rows: repeat(2, auto);
+    row-gap: 0;
+    transform-origin: center;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story:first-child,
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story:last-child {
+    align-items: start;
+    grid-template-columns: minmax(0, 34%) 2.5rem minmax(0, 1fr);
+    min-height: 0 !important;
+    overflow: visible;
+    padding: 1.5rem !important;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__image {
+    align-self: start;
+    aspect-ratio: 1 / 1;
+    height: auto !important;
+    width: 100%;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__copy {
+    align-self: start;
+    padding: 0 0 0 1rem;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__copy strong {
+    -webkit-box-orient: initial;
+    -webkit-line-clamp: initial;
+    display: block;
+    font-size: clamp(2.2rem, 2.35vw, 2.8rem);
+    line-height: 1.05;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .homepage-blog-magazine .bm-hero__rail .bm-compact-story__copy small {
+    margin-top: 0;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 999px) {
+  .body--blog-magazine .bm-hero__rail {
+    align-content: start;
+    bottom: auto;
+    grid-template-rows: repeat(2, auto);
+    row-gap: 0;
+    transform-origin: center;
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story,
+  .body--blog-magazine .bm-hero__rail .bm-compact-story:first-child,
+  .body--blog-magazine .bm-hero__rail .bm-compact-story:last-child {
+    align-items: start;
+    grid-template-columns: minmax(0, 34%) 2.5rem minmax(0, 1fr);
+    min-height: 0 !important;
+    overflow: visible;
+    padding: 1.5rem !important;
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story__image {
+    align-self: start;
+    aspect-ratio: 1 / 1;
+    height: auto !important;
+    width: 100%;
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story__copy {
+    align-self: start;
+    padding: 0 0 0 1rem;
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story__copy strong {
+    -webkit-box-orient: initial;
+    -webkit-line-clamp: initial;
+    display: block;
+    font-size: clamp(2.2rem, 2.35vw, 2.8rem);
+    line-height: 1.05;
+    max-height: none;
+    overflow: visible;
+  }
+
+  .body--blog-magazine .bm-hero__rail .bm-compact-story__copy small {
+    margin-top: 0;
+  }
 }
 
 /* Pin the four supporting stories to the desktop hero. */
