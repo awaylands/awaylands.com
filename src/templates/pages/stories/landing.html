@@ -132,6 +132,13 @@
     {% endif %}
   {% endmacro %}
 
+  {% macro archiveChunk(stories, chunkOffset, archiveStart, archiveEnd) %}
+    {% for story in stories %}
+      {% set archiveIndex = chunkOffset + loop.index0 %}
+      {% if archiveIndex >= archiveStart and archiveIndex < archiveEnd %}{{ editorialCard(story, "", true) }}{% endif %}
+    {% endfor %}
+  {% endmacro %}
+
   {% if isEmbedded or pagination.currentPage == 1 %}
   <main class="blog-magazine" data-story-dedupe-recent>
     <section class="bm-section bm-hero" data-bm-row="01" aria-label="Featured stories">
@@ -310,16 +317,17 @@
     </section>
 
   </main>
-  {% if not isEmbedded %}
-  <template data-blog-archive-first-batch>
-    {% for story in sortedStories %}{{ editorialCard(story, "", true) }}{% endfor %}
-  </template>
-  {% endif %}
   {% else %}
   <main class="blog-archive">
     <header><h1>Post Archive</h1></header>
     <div class="blog-archive__grid">
-      {% for story in sortedStories %}{{ editorialCard(story, "", true) }}{% endfor %}
+      {% set archiveStart = (pagination.currentPage - 2) * 12 %}
+      {% set archiveEnd = archiveStart + 12 %}
+      {% if pagination.currentPage == pagination.totalPages %}{% set archiveEnd = 1000 %}{% endif %}
+      {{ archiveChunk(archiveStories1.items, 0, archiveStart, archiveEnd) }}
+      {{ archiveChunk(archiveStories2.items, 250, archiveStart, archiveEnd) }}
+      {{ archiveChunk(archiveStories3.items, 500, archiveStart, archiveEnd) }}
+      {{ archiveChunk(archiveStories4.items, 750, archiveStart, archiveEnd) }}
     </div>
   </main>
   {% endif %}

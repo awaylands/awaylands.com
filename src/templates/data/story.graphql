@@ -111,7 +111,46 @@ query {
       tout { image { path } }
     }
   }
-  archiveStories: getStoryList(size: 32, sort: [{field: "_enabledAt", order: "desc"}]) {
+  archiveStories1: getStoryList(size: 250, from: 0, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      _contentTypeName
+      _status
+      _enabledAt
+      isImportant
+      title
+      slug
+      social { title description }
+      category { title }
+      tout { image { path } dek }
+    }
+  }
+  archiveStories2: getStoryList(size: 250, from: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      _contentTypeName
+      _status
+      _enabledAt
+      isImportant
+      title
+      slug
+      social { title description }
+      category { title }
+      tout { image { path } dek }
+    }
+  }
+  archiveStories3: getStoryList(size: 250, from: 500, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      _contentTypeName
+      _status
+      _enabledAt
+      isImportant
+      title
+      slug
+      social { title description }
+      category { title }
+      tout { image { path } dek }
+    }
+  }
+  archiveStories4: getStoryList(size: 250, from: 750, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
       _status
