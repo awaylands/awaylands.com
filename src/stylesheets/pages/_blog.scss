@@ -939,6 +939,7 @@
 }
 
 .bm-editor-card__copy strong {
+  font-size: clamp(2.7rem, 1.7vw, 3.2rem);
   margin-top: 1.38rem;
 }
 
@@ -1663,7 +1664,7 @@
 .bm-itinerary-card__copy strong {
   display: block;
   font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
-  font-size: clamp(1.8rem, 1.8vw, 3.2rem);
+  font-size: clamp(2.7rem, 1.8vw, 3.2rem);
   font-weight: 300;
   line-height: 1;
   margin-top: 1.4rem;
@@ -5463,7 +5464,7 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
 /* Keep the automatic Latest Stories module compact and consistent on the
  * homepage and blog landing page. */
 .bm-latest-card strong {
-  font-size: clamp(2.2rem, 1.45vw, 2.65rem);
+  font-size: clamp(2.7rem, 1.45vw, 3rem);
   line-height: 1.04;
 }
 
