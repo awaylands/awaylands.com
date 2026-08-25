@@ -16,19 +16,20 @@
       "hash": "2e73b06e7a7e36df19c455854282463c5d6a3ad1f7fa61dadd0e6c5e055b0253"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.fdc6833b997f60a7fc67a80e9230ce82.css",
-      "hash": "675e0418fb7e312c417154224e62ff0e59dcaa2f0c844b23cfc0bda8b2e41e69"
+      "path": "stylesheets/main.38cc73a374f9f93a838412b5adbc1c92.css",
+      "hash": "296db57d7277b3efe22e859bdc7a85f21468f0c37a334b24bd7374af9c635352"
     }
   },
   "sourceFiles": {
     "_takeshape-schema-export/schema-inner.json": "32d6a796baa4e21b886e820048d9baf72ced126de767e939ef3ba56aab6c7be2",
     "_takeshape-schema-export/schema.json": "ddcdd6619d463972922cf3db5946bb355d2bad9d0d7135e77955f3a48ffbc867",
     "package-lock.json": "9f4b756c5584db5c528cd652cea4fed7398fea2c0b34123ae30c3d98847c7d68",
-    "package.json": "590892575f5106e18bb34f348303b6bb2285ceac34d34a6c5a1488433a4fde5e",
+    "package.json": "e0ee7b17ab1ade6a813da7c678b4129cde6cc1c29e8994d8977a9a481863fca9",
+    "scripts/align-blog-archive-pagination.js": "633a495d8fa82ab166290e00ccbd60705be46601bf417f7ace17b702196444b3",
     "scripts/add-native-main-categories.js": "174c4648c601e85de19622f1d2ea86055c75f9e507bd8e08643b0ec1961efc58",
     "scripts/backfill-editor-content.js": "f50f96b614b0b84885c0ae9fca00a935e0a92b0f7a0cd328d99897a95b4992f0",
     "scripts/copy-static-assets.js": "7fd93fc98bd0a5bb7ca7de5f78d825c9afe63c726751cef9257194969152e3d9",
-    "scripts/deploy-production.js": "f891227c864052e8e93f465c5e20d3afc9ebba41e9128007a7eebe7674a4a645",
+    "scripts/deploy-production.js": "50a5422caf9b07f0ec83fbba1a97fcbabc80f918283fa6740047fa0c8d31660c",
     "scripts/fill-story-slugs.js": "61a93c493cd05854fd6ad2406d1d8b929df0affd1a50c38bd114ab364607b633",
     "scripts/generate-destination-route-aliases.js": "feb40b5a3ac285a13e078669de841f93d8a0ee547b2d9d4d44cfaafaac530531",
     "scripts/localize-google-doc-images.js": "edeea87c04efae35a40c8bfa4987c156a6d342802bc1dedf8a2aab3f319be070",
@@ -139,7 +140,7 @@
     "src/stylesheets/mixins/_responsive-embed.scss": "317f0bc6d3fb6479f227853be2bc7f8a99203bcdddd7146f72d64dee62104c51",
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
-    "src/stylesheets/pages/_blog.scss": "ffa9ef6ca744d7a4ff425016317085c6ff5de0aaacafe95256f2c4501169bef6",
+    "src/stylesheets/pages/_blog.scss": "0271150d559b9e637d14b58f92c4ae1cf05b71303c1d33612c8258da51aad223",
     "src/stylesheets/pages/_category-redesign-final.scss": "cdddfc6b11422905b47b56586f6106276b1719fe7ff5cff2bf937839808e791f",
     "src/stylesheets/pages/_destination-detail.scss": "55e5e927b8e7a1bb0deb4bef1ef108f5b61df88ca6f68e195525bf52059f117c",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
@@ -202,7 +203,7 @@
     "src/templates/pages/still-category.html": "70862b64f00d86b502461f5d7695a34a717f11f109eafb9e5c23ec96668717d8",
     "src/templates/pages/still.html": "2f1bd358063259027b3c600b09315e6095ebde72722811b0947be7d36a716d07",
     "src/templates/pages/stories/detail.html": "ee98d356e9163ea80eaa0945503d9fd4af94c626239d65e7bec04cae4313f380",
-    "src/templates/pages/stories/landing.html": "f793e24b1600629fc4e0abbb4d7236fe90b6279dd083748bb977aea453d81b60",
+    "src/templates/pages/stories/landing.html": "192534c65a00a7c7bb68c5f50f01c4cbc5aa13d2aa8d245806c2882fab3c03d9",
     "src/templates/partials/blog-story-dedupe.html": "499f8c98a7317ec0c65183000b24771c398d6b29818dbb07ec099b7d66cfe33d",
     "src/templates/partials/footer.html": "09b1ae68112872bc254e3b861be60abd15028fca6ad8a9a3b76fc1d2aa90a076",
     "src/templates/partials/head.html": "d4f239c66c8b016d2e523d2e02056f6358e76813b9c27c5d8ea47e2bb1bca327",

@@ -118,13 +118,14 @@
     {% endif %}
   {% endmacro %}
 
-  {% macro editorialCard(story, className) %}
+  {% macro editorialCard(story, className, showDek) %}
     {% if story %}
     <a class="bm-editor-card {{ className }}" href="{{ storyUrl(story) }}">
       <span class="bm-editor-card__image">{{ storyImage(story, '(min-width: 900px) 24vw, 88vw', false) }}</span>
       <span class="bm-editor-card__copy">
         {{ storyMeta(story, "Journal") }}
         <strong>{{ story.title | replace("—", " - ") }}</strong>
+        {% if showDek and story.tout.dek %}<p class="bm-editor-card__dek">{{ story.tout.dek }}</p>{% endif %}
         <small>Read Article <i>⟶</i></small>
       </span>
     </a>
@@ -309,11 +310,16 @@
     </section>
 
   </main>
+  {% if not isEmbedded %}
+  <template data-blog-archive-first-batch>
+    {% for story in sortedStories %}{{ editorialCard(story, "", true) }}{% endfor %}
+  </template>
+  {% endif %}
   {% else %}
   <main class="blog-archive">
     <header><h1>Post Archive</h1></header>
     <div class="blog-archive__grid">
-      {% for story in sortedStories %}{{ editorialCard(story, "") }}{% endfor %}
+      {% for story in sortedStories %}{{ editorialCard(story, "", true) }}{% endfor %}
     </div>
   </main>
   {% endif %}

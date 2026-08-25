@@ -215,6 +215,7 @@ function generateSite() {
     clearDirectory(path.join(root, 'build'));
     copyTree(generatedPath, path.join(root, 'build'));
     run(node, [path.join(root, 'scripts/generate-destination-route-aliases.js')]);
+    run(node, [path.join(root, 'scripts/align-blog-archive-pagination.js')]);
   } finally {
     if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
     removeTree(generatedPath);
