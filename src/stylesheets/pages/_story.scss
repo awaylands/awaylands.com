@@ -2252,7 +2252,7 @@ body.body--story {
 @media (min-width: 1100px) and (max-width: 1499px) {
   .story-cover.story-cover--portrait-hero,
   .story-cover.story-cover--landscape-hero {
-    width: calc(100% - 8rem);
+    width: 100%;
     max-width: 146rem;
     margin-right: auto;
     margin-left: auto;
@@ -2333,13 +2333,20 @@ body.body--story {
   .story-cover.story-cover--portrait-hero,
   .story-cover.story-cover--landscape-hero,
   .story-cover:not(.story-cover--portrait-hero):not(.story-cover--landscape-hero) {
-    width: calc(100% - 8rem);
-    max-width: 154rem;
+    width: 100%;
+    max-width: 144rem;
     margin-right: auto;
     margin-left: auto;
     grid-template-columns: minmax(0, 0.52fr) minmax(0, 0.48fr);
     gap: clamp(2.4rem, 3vw, 5rem);
     align-items: start;
+  }
+
+  .story-page--advanced .story-cover.story-cover--portrait-hero,
+  .story-page--advanced .story-cover.story-cover--landscape-hero,
+  .story-page--advanced .story-cover:not(.story-cover--portrait-hero):not(.story-cover--landscape-hero) {
+    width: 100%;
+    max-width: 176rem;
   }
 
   .story-cover--portrait-hero .story-cover__copy,
@@ -2387,6 +2394,46 @@ body.body--story {
     max-width: none;
     max-height: none;
     justify-self: end;
+  }
+}
+
+@media (min-width: 1800px) {
+  .story-article__body > p,
+  .story-article__body > ul,
+  .story-article__body > ol,
+  .story-article__body > h1,
+  .story-article__body > h2,
+  .story-article__body > h3,
+  .story-article__body > h4,
+  .story-article__body > aside,
+  .story-article__body > blockquote,
+  .story-article__body > hr,
+  .story-article__body > .story-table,
+  .story-article__body > table,
+  .story-article__body > .table,
+  .story-article__body > .table-responsive,
+  .story-article__body > div > table {
+    width: 115.5rem;
+    max-width: none;
+    margin-right: 0;
+    margin-left: 9.5rem;
+  }
+
+  .story-article__body figure.default,
+  .story-article__body figure.text {
+    width: 115.5rem;
+    max-width: 115.5rem;
+    margin-left: 9.5rem;
+  }
+}
+
+@media (min-width: 1760px) {
+  .story-page--advanced .story-cover.story-cover--portrait-hero,
+  .story-page--advanced .story-cover.story-cover--landscape-hero,
+  .story-page--advanced .story-cover:not(.story-cover--portrait-hero):not(.story-cover--landscape-hero) {
+    max-width: 158.5rem;
+    margin-right: auto;
+    margin-left: calc(50% - 74.5rem);
   }
 }
 

@@ -1596,7 +1596,8 @@ function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
     (isStyleEdit ? 'The edit, quickly' : 'The guide, quickly');
   title.id = 'story-overview-title';
   title.className = 'story-overview__title';
-  title.textContent = (storyPage.getAttribute('data-at-a-glance-title') || '').trim() || 'At a glance';
+  const overviewTitle = (storyPage.getAttribute('data-at-a-glance-title') || '').trim();
+  title.textContent = !overviewTitle || /^at a glance$/i.test(overviewTitle) ? 'At A Glance' : overviewTitle;
   summary.className = 'story-overview__summary';
   summary.textContent = manualSummary || conciseStoryExcerpt(source.textContent);
   links.className = 'story-overview__links';
@@ -2047,7 +2048,7 @@ function buildAdvancedStoryRail(el, storyPage, isStyleEdit) {
   utilityLabel.className = 'story-rail__utility-label';
   utilityLabel.textContent = 'Jump to';
   overviewLink.href = '#story-overview-title';
-  overviewLink.textContent = 'At a glance';
+  overviewLink.textContent = 'At A Glance';
   picksLink.href = '#story-rail-picks';
   picksLink.textContent = picksHeading;
   utility.appendChild(utilityLabel);
