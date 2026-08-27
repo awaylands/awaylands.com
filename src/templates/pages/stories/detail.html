@@ -361,7 +361,21 @@
         {% if page.category.length or page.location.length or page.continent.length %}
         <nav class="story-cover__see-more" aria-label="See more Away Lands guides">
           <span>See more in</span>
-          {% for category in page.category %}<a href="{{ categoryUrl(category) }}">{{ category.title }}</a>{% endfor %}
+          {% for category in page.category %}
+            {% set previousCategory = false %}
+            {% set nextCategory = false %}
+            {% if not loop.first %}{% set previousCategory = page.category[loop.index0 - 1] %}{% endif %}
+            {% if not loop.last %}{% set nextCategory = page.category[loop.index] %}{% endif %}
+            {% set categoryIsAdjacentParent = false %}
+            {% if previousCategory and previousCategory.parentCategory and previousCategory.parentCategory.title == category.title %}{% set categoryIsAdjacentParent = true %}{% endif %}
+            {% if nextCategory and nextCategory.parentCategory and nextCategory.parentCategory.title == category.title %}{% set categoryIsAdjacentParent = true %}{% endif %}
+            {% if category.parentCategory and category.parentCategory.title != category.title %}
+              <a href="{{ category.parentCategory | route('category') }}">{{ category.parentCategory.title }}</a>
+              <a href="{{ categoryUrl(category) }}">{{ category.title }}</a>
+            {% elif not categoryIsAdjacentParent %}
+              <a href="{{ categoryUrl(category) }}">{{ category.title }}</a>
+            {% endif %}
+          {% endfor %}
           {% if page.location.length %}<a href="{{ page.location[0] | route('location') }}">{{ page.location[0].title }}</a>{% endif %}
           {% if page.continent.length %}<a href="{{ page.continent[0] | route('continent') }}">{{ page.continent[0].name }}</a>{% endif %}
         </nav>
