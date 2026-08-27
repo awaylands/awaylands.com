@@ -145,7 +145,7 @@
   {% set indexStories = page.indexStories %}
 {% endif %}
 {% set categoryTopic = page.title | lower %}
-{% set categoryHeadline = page.title + " Stories Worth Saving" %}
+{% set categoryHeadline = page.title if isSubcategory else page.title + " Stories Worth Saving" %}
 {% set categoryDescription = page.introText or page.social.description %}
 {% set pageLabel = page.pageLabel or "Away Lands Journal" %}
 {% set featuredLabel = "Explore Essentials" %}
@@ -236,7 +236,7 @@
 {% set featureHeroStory = page.focusedHeroPost or heroStory %}
 {% set hasFeatureHero = page.focusedHeroPost or page.focusedHeroImage or page.focusedHeroLabel or page.focusedHeroTitle or page.focusedHeroDescription or page.focusedHeroLinkText or page.focusedHeroLinkUrl %}
 
-{% if page.pageHeadline %}
+{% if page.pageHeadline and not isSubcategory %}
   {% set categoryHeadline = page.pageHeadline %}
 {% endif %}
 
@@ -333,7 +333,7 @@
     </div>
     {% endif %}
     <div class="category-magazine-hero__copy">
-      <p class="category-kicker">{{ pageLabel }}</p>
+      <p class="category-kicker">{% if isSubcategory %}<a href="{{ page.parentCategory | route('category') }}">{{ page.parentCategory.title }}</a>{% else %}{{ pageLabel }}{% endif %}</p>
       <h1>{{ categoryHeadline }}</h1>
     </div>
   </header>
