@@ -12,12 +12,12 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.e0a2d9fe269f4bf63fc1.js",
-      "hash": "f55d8adf609a607996eb9c91881ed0ef4bed77916c80c3406398549d5469067e"
+      "path": "javascripts/main.aac7055fa9d7dd93d2e8.js",
+      "hash": "72020d29ab366fd05b9501eabaed4221b5c82fbccbda451c1b1d53b829d5cdc4"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.8fb4227504a2c9d62caf85bc5a122bc3.css",
-      "hash": "f5ba02735ba4e8e3ab13bb1c7d94bf4883c4fcba8717edc7571d94520e6c415f"
+      "path": "stylesheets/main.c66da2021545707b44bb693915261f4c.css",
+      "hash": "637edadfaa4e200d204472b6819b33d7e93f60c27621dead13331dc339bef723"
     }
   },
   "sourceFiles": {
@@ -78,7 +78,7 @@
     "src/javascripts/directives/gallery.js": "a04aed930ed597050c78001c0f8b78cd249630c458352bad8206d9cc79647d74",
     "src/javascripts/directives/imageloaded.js": "dd1ae7a025f507c6939c704c58db40020e041508a364fcf2f7ad2fe812aa5b5d",
     "src/javascripts/directives/slides.js": "acdade07f3ab4cc92f85833b8f613c17b2968746389bca0a07ff8ef44d3ede42",
-    "src/javascripts/directives/story.js": "cc3485644e7ba60b033f7597789bc6411981831784674617ace404a313bfde05",
+    "src/javascripts/directives/story.js": "7b1a45265645faeeb10ddcb41bc358b9019214457ef8a2f0fe72eec22dc9e956",
     "src/javascripts/luminous/Lightbox.js": "ee6264aa4526246f563d0809abca7e4bb97318422ce3228199bf2df021b950a8",
     "src/javascripts/luminous/Luminous.js": "e7c6e96b7b829fda5d18ce99668f8c45b33734410b32ec0bcb734cab6d4d0f1b",
     "src/javascripts/luminous/LuminousGallery.js": "c8ca258e473396e00300716c5f32fb421c840214c4754d684b2016f2abb1d8b4",
@@ -149,7 +149,7 @@
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
     "src/stylesheets/pages/_landing.scss": "36ceb3dc78ac6a60eca9c0acb2ca55bb164596ca9bad3f0456a75bc05f184b13",
     "src/stylesheets/pages/_still.scss": "492fcd4e33c9823a12576a785decc82d09bc4cbe2c23bd40cf5f6f5bffdf45c3",
-    "src/stylesheets/pages/_story.scss": "dda877382fb70e9626fbb059e673d237aaeaa6244fb2b2c348961c3cbd1df9b2",
+    "src/stylesheets/pages/_story.scss": "6e0f59537142cf300aff54b37b55c39717d95d57d554d927f65aa46bce90ac21",
     "src/templates/data/about.graphql": "9a8fbd058a95c2a75313c7adbafc108e255ddd876280583e1ca8cbb426a3f03a",
     "src/templates/data/ads.graphql": "7e1bbbc2f7240dab51417e430973aeca501df1af78ae4622b4ea370a0768e472",
     "src/templates/data/categories.graphql": "da8b1f8692c59a1c8a6ca73239955ed2cd7a1800a769b808d4e0a8fa3c8e285b",
