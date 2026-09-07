@@ -290,20 +290,21 @@
   {% if page.keepReadingKicker %}data-keep-reading-kicker="{{ page.keepReadingKicker | escape }}"{% endif %}
   {% if page.keepReadingTitle %}data-keep-reading-title="{{ page.keepReadingTitle | escape }}"{% endif %}
 >
-  {# Test the complete category relationship so multi-category stories merge
-     every relevant Products collection instead of using only category[0]. #}
+  {# Test the complete category relationship, including parent categories.
+     Beauty takes priority so its products fill every Beauty story sidebar. #}
   {% set categoryData = page.categoryLabels | dump %}
   {% set isPackingGuide = 'Packing Guides' in categoryData %}
   {% set isHomeStory = 'Home And Garden' in categoryData or 'Home and Garden' in categoryData or 'Home & Garden' in categoryData %}
   {% set isWeddingStory = 'Wedding And Honeymoon' in categoryData or 'Wedding and Honeymoon' in categoryData %}
-  {% set hasExclusiveProductMapping = isPackingGuide or isHomeStory or isWeddingStory %}
-  {% set useTravelProducts = isPackingGuide or (not hasExclusiveProductMapping and ('Travel Guides' in categoryData or 'Travel Tips' in categoryData or 'Best Beaches' in categoryData or 'Hotels and Resorts' in categoryData or 'Travel Adventures' in categoryData or 'Los Angeles Life' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData)) %}
-  {% set useBeautyProducts = isPackingGuide or (not hasExclusiveProductMapping and ('Beauty' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData)) %}
-  {% set useStyleProducts = isPackingGuide or (not hasExclusiveProductMapping and ('Style' in categoryData or 'Travel Style' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData)) %}
+  {% set isBeautyStory = 'Beauty' in categoryData %}
+  {% set hasExclusiveProductMapping = isPackingGuide or isHomeStory or isWeddingStory or isBeautyStory %}
+  {% set useTravelProducts = not isBeautyStory and (isPackingGuide or (not hasExclusiveProductMapping and ('Travel Guides' in categoryData or 'Travel Tips' in categoryData or 'Best Beaches' in categoryData or 'Hotels and Resorts' in categoryData or 'Travel Adventures' in categoryData or 'Los Angeles Life' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData))) %}
+  {% set useBeautyProducts = isBeautyStory or isPackingGuide or (not hasExclusiveProductMapping and ('Shopping' in categoryData or 'Social Media' in categoryData)) %}
+  {% set useStyleProducts = not isBeautyStory and (isPackingGuide or (not hasExclusiveProductMapping and ('Style' in categoryData or 'Travel Style' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData))) %}
   {% set usePhotographyProducts = not hasExclusiveProductMapping and ('Photography' in categoryData or 'Films' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData) %}
   {% set useFitnessProducts = not hasExclusiveProductMapping and ('Health and Fitness' in categoryData or 'Health & Fitness' in categoryData) %}
-  {% set useHomeProducts = isHomeStory %}
-  {% set useWeddingProducts = isWeddingStory %}
+  {% set useHomeProducts = not isBeautyStory and isHomeStory %}
+  {% set useWeddingProducts = not isBeautyStory and isWeddingStory %}
   {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts or useFitnessProducts or useHomeProducts or useWeddingProducts %}
   {% if page.shopEditItems.length or hasCategoryProducts or blogShopFallback.travelEssentialsItems.length %}
   <div data-story-shop-items hidden>

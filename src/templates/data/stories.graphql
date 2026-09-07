@@ -40,7 +40,10 @@ query($images: TSImagesConfig) {
       }
       keepReadingKicker
       keepReadingTitle
-      categoryLabels: category { title }
+      categoryLabels: category {
+        title
+        parentCategory { title }
+      }
       category {
         title
         parentCategory { title }
