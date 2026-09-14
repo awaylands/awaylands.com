@@ -2425,6 +2425,18 @@ body.body--story {
     max-width: 115.5rem;
     margin-left: 9.5rem;
   }
+
+  .story-article__body > .story-gallery--portrait-pair,
+  .story-article__body > .story-gallery--medium-pair,
+  .story-article__body > .story-gallery--small-grid,
+  .story-article__body > .story-gallery--portrait-pair + figure,
+  .story-article__body > .story-gallery--medium-pair + figure,
+  .story-article__body > .story-gallery--small-grid + figure {
+    width: 115.5rem;
+    max-width: 115.5rem;
+    margin-right: 0;
+    margin-left: 9.5rem;
+  }
 }
 
 @media (min-width: 1760px) {

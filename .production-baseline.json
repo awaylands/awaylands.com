@@ -16,8 +16,8 @@
       "hash": "72020d29ab366fd05b9501eabaed4221b5c82fbccbda451c1b1d53b829d5cdc4"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.c66da2021545707b44bb693915261f4c.css",
-      "hash": "637edadfaa4e200d204472b6819b33d7e93f60c27621dead13331dc339bef723"
+      "path": "stylesheets/main.74b5c14f888ba2b76cf81c7956c0f84c.css",
+      "hash": "4ce641f366c8a92bf8627abcbb9fb65659246aa41c6ba3080bed3ef968807f33"
     }
   },
   "sourceFiles": {
@@ -149,7 +149,7 @@
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
     "src/stylesheets/pages/_landing.scss": "36ceb3dc78ac6a60eca9c0acb2ca55bb164596ca9bad3f0456a75bc05f184b13",
     "src/stylesheets/pages/_still.scss": "492fcd4e33c9823a12576a785decc82d09bc4cbe2c23bd40cf5f6f5bffdf45c3",
-    "src/stylesheets/pages/_story.scss": "6e0f59537142cf300aff54b37b55c39717d95d57d554d927f65aa46bce90ac21",
+    "src/stylesheets/pages/_story.scss": "ba73c310c30f3e2e065d27a1854855302211824e9cec4d30bc0ee41f83ac4091",
     "src/templates/data/about.graphql": "9a8fbd058a95c2a75313c7adbafc108e255ddd876280583e1ca8cbb426a3f03a",
     "src/templates/data/ads.graphql": "7e1bbbc2f7240dab51417e430973aeca501df1af78ae4622b4ea370a0768e472",
     "src/templates/data/categories.graphql": "da8b1f8692c59a1c8a6ca73239955ed2cd7a1800a769b808d4e0a8fa3c8e285b",
