@@ -342,12 +342,12 @@ body.body--story {
   max-width: 112rem;
   min-height: 46rem;
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
 }
 
 .story-cover--no-image .story-cover__eyebrow,
 .story-cover--no-image .story-cover__meta {
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .story-rule {
