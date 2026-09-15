@@ -2154,48 +2154,83 @@ function prepareAdvancedStoryPreview(el) {
   positionAdvancedMobileRail(storyPage);
 }
 
+function storyTableRows(value, requestedColumns) {
+  const normalizedValue = String(value || '').trim();
+  let parsed = null;
+
+  try {
+    parsed = JSON.parse(normalizedValue);
+  } catch (error) {
+    parsed = null;
+  }
+
+  let structuredRows = null;
+
+  if (Array.isArray(parsed)) {
+    structuredRows = parsed;
+  } else if (parsed && Array.isArray(parsed.rows)) {
+    structuredRows = parsed.rows;
+  }
+
+  if (structuredRows) {
+    return structuredRows
+      .filter(row => Array.isArray(row))
+      .map(row => row.map(cell => String(cell || '').replace(/\s+/g, ' ').trim()))
+      .filter(row => row.some(Boolean));
+  }
+
+  const columnCount = Math.max(1, requestedColumns || 3);
+  const values = normalizedValue
+    .split(/\r?\n|\t/)
+    .map(cell => cell.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  const rows = [];
+
+  for (let index = 0; index < values.length; index += columnCount) {
+    rows.push(values.slice(index, index + columnCount));
+  }
+
+  return rows;
+}
+
 function buildPastedStoryTables(el) {
   const sources = el.querySelectorAll('[data-story-table-paste]');
 
   Array.prototype.forEach.call(sources, source => {
     const table = source.parentNode.querySelector('[data-story-table-target]');
-    const requestedColumns = parseInt(source.getAttribute('data-columns'), 10);
-    const columnCount = Math.max(1, requestedColumns || 3);
-    const values = (source.textContent || '')
-      .split(/\r?\n|\t/)
-      .map(value => value.replace(/\s+/g, ' ').trim())
-      .filter(Boolean);
+    const requestedColumns = Math.max(1, parseInt(source.getAttribute('data-columns'), 10) || 3);
+    const rows = storyTableRows(source.textContent, requestedColumns);
+    const columnCount = rows.reduce((maximum, row) => Math.max(maximum, row.length), requestedColumns);
 
-    if (!table || values.length < columnCount) {
+    if (!table || !rows.length) {
       return;
     }
 
     const head = document.createElement('thead');
     const headingRow = document.createElement('tr');
 
-    values.slice(0, columnCount).forEach(value => {
+    for (let column = 0; column < columnCount; column += 1) {
       const heading = document.createElement('th');
       heading.setAttribute('scope', 'col');
-      heading.textContent = value;
+      heading.textContent = rows[0][column] || '';
       headingRow.appendChild(heading);
-    });
+    }
 
     head.appendChild(headingRow);
 
     const body = document.createElement('tbody');
-    const cells = values.slice(columnCount);
 
-    for (let index = 0; index < cells.length; index += columnCount) {
+    rows.slice(1).forEach(values => {
       const row = document.createElement('tr');
 
       for (let column = 0; column < columnCount; column += 1) {
         const cell = document.createElement('td');
-        cell.textContent = cells[index + column] || '';
+        cell.textContent = values[column] || '';
         row.appendChild(cell);
       }
 
       body.appendChild(row);
-    }
+    });
 
     table.innerHTML = '';
     table.appendChild(head);

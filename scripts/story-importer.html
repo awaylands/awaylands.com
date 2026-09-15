@@ -161,6 +161,7 @@
         const detectedTitle = firstHeading ? firstHeading.textContent.trim() : '';
         const text = sourceDocument.body.textContent || '';
         const images = Array.from(sourceDocument.querySelectorAll('img'));
+        const tables = sourceDocument.querySelectorAll('table').length;
         const dataCharacters = images.reduce((total, image) => total + (/^data:image/i.test(image.src) ? image.src.length : 0), 0);
 
         title.value = detectedTitle || title.value;
@@ -172,7 +173,7 @@
         paste.innerHTML = sourceDocument.body.innerHTML;
         paste.classList.add('is-ready');
         create.disabled = !title.value;
-        setStatus(`${images.length} image${images.length === 1 ? '' : 's'} will be compressed and uploaded when you create the post.`);
+        setStatus(`${images.length} image${images.length === 1 ? '' : 's'} will be compressed and uploaded. ${tables} table${tables === 1 ? '' : 's'} will be created automatically.`);
       }
 
       paste.addEventListener('paste', event => {
@@ -329,7 +330,7 @@
           flushContent(false);
           contentBlocks.push({
             _contentTypeName: 'TableBlock',
-            pastedText: rows.map(row => row.join('\t')).join('\n'),
+            pastedText: JSON.stringify(rows),
             columnCount: Math.max.apply(null, rows.map(row => row.length))
           });
         }
@@ -381,7 +382,8 @@
           if (tag === 'h1' && !skippedTitle) { skippedTitle = true; return; }
           if (/^h[1-6]$/.test(tag)) { addTextBlock(element, `header-${['one','two','three','four','five','six'][Number(tag.slice(1)) - 1]}`, 0); return; }
           if (tag === 'p' || tag === 'div') {
-            const hasDirectBlocks = Array.from(element.children).some(child => /^(H[1-6]|P|UL|OL|DIV)$/.test(child.tagName));
+            const hasDirectBlocks = Boolean(element.querySelector('table')) ||
+              Array.from(element.children).some(child => /^(H[1-6]|P|UL|OL|DIV|TABLE)$/.test(child.tagName));
             if (!hasDirectBlocks) { addTextBlock(element, 'unstyled', 0); return; }
           }
           if (tag === 'ul' || tag === 'ol') {

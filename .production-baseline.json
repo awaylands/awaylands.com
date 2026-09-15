@@ -12,8 +12,8 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.aac7055fa9d7dd93d2e8.js",
-      "hash": "72020d29ab366fd05b9501eabaed4221b5c82fbccbda451c1b1d53b829d5cdc4"
+      "path": "javascripts/main.b2b3ef46490671a77ee4.js",
+      "hash": "7bf83ddafe398536f63714f8c458e8bc4a0e50d652413af5bc341ead6fc58caa"
     },
     "stylesheets/main.css": {
       "path": "stylesheets/main.43cb5a68add8b103b66b5c2e3191f9ac.css",
@@ -39,7 +39,7 @@
     "scripts/story-editor-server.js": "86f44eece239b1f10dbd2b0591d446a99916d38b68c297e6277935ca16bff67b",
     "scripts/story-editor.html": "4ce206b4a7b7eb9bbc4e2482363792d1ba89e224baee0c6a72274c12a37ff4ae",
     "scripts/story-importer-server.js": "b12846072e8c7aa293c83ffd4c46588e83e3817ec917db9aaa515622d637c49b",
-    "scripts/story-importer.html": "acae0967046e3484e5cdc35422d5095d5a1fa5ca456ff476b98a36638577fec5",
+    "scripts/story-importer.html": "05c593605428b1c8bb5d44e67f854c60398b7c97b8a7144e99dcd3e8c97b4b90",
     "scripts/story-preview-server.js": "2b46f4049ac4c0226e44ea225b4fa3f66256c416da0a0e9863da1cdc6e61adb5",
     "scripts/verify-production-baseline.js": "dfd5844e28dfcd70f7e399cc0b647d4a0bf69f08eeeb7bd0a3f2efdc118b6c7b",
     "src/images/arrow-left.png": "600b78654c7c0c301c26fe14eba108880417efc270a690298fcb184b650e8d38",
@@ -78,7 +78,7 @@
     "src/javascripts/directives/gallery.js": "a04aed930ed597050c78001c0f8b78cd249630c458352bad8206d9cc79647d74",
     "src/javascripts/directives/imageloaded.js": "dd1ae7a025f507c6939c704c58db40020e041508a364fcf2f7ad2fe812aa5b5d",
     "src/javascripts/directives/slides.js": "acdade07f3ab4cc92f85833b8f613c17b2968746389bca0a07ff8ef44d3ede42",
-    "src/javascripts/directives/story.js": "7b1a45265645faeeb10ddcb41bc358b9019214457ef8a2f0fe72eec22dc9e956",
+    "src/javascripts/directives/story.js": "6c247b5976179eacf59b1e213c74113664e73aac5a4b3c0d838763953f1696e5",
     "src/javascripts/luminous/Lightbox.js": "ee6264aa4526246f563d0809abca7e4bb97318422ce3228199bf2df021b950a8",
     "src/javascripts/luminous/Luminous.js": "e7c6e96b7b829fda5d18ce99668f8c45b33734410b32ec0bcb734cab6d4d0f1b",
     "src/javascripts/luminous/LuminousGallery.js": "c8ca258e473396e00300716c5f32fb421c840214c4754d684b2016f2abb1d8b4",
