@@ -12,8 +12,8 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.b2b3ef46490671a77ee4.js",
-      "hash": "7bf83ddafe398536f63714f8c458e8bc4a0e50d652413af5bc341ead6fc58caa"
+      "path": "javascripts/main.346bd68d13ecd36ae8dc.js",
+      "hash": "76ed0570c516915de02175ecda4545648232ebfdb23eb96df5699a4ad1a112f5"
     },
     "stylesheets/main.css": {
       "path": "stylesheets/main.5b349fcd93d169e2717d97255e97b69b.css",
@@ -78,7 +78,7 @@
     "src/javascripts/directives/gallery.js": "a04aed930ed597050c78001c0f8b78cd249630c458352bad8206d9cc79647d74",
     "src/javascripts/directives/imageloaded.js": "dd1ae7a025f507c6939c704c58db40020e041508a364fcf2f7ad2fe812aa5b5d",
     "src/javascripts/directives/slides.js": "acdade07f3ab4cc92f85833b8f613c17b2968746389bca0a07ff8ef44d3ede42",
-    "src/javascripts/directives/story.js": "6c247b5976179eacf59b1e213c74113664e73aac5a4b3c0d838763953f1696e5",
+    "src/javascripts/directives/story.js": "4442992845a6fc09e60b874e2f464daadff795ce69ab3f67b6ffccdec4ac9899",
     "src/javascripts/luminous/Lightbox.js": "ee6264aa4526246f563d0809abca7e4bb97318422ce3228199bf2df021b950a8",
     "src/javascripts/luminous/Luminous.js": "e7c6e96b7b829fda5d18ce99668f8c45b33734410b32ec0bcb734cab6d4d0f1b",
     "src/javascripts/luminous/LuminousGallery.js": "c8ca258e473396e00300716c5f32fb421c840214c4754d684b2016f2abb1d8b4",
@@ -173,11 +173,11 @@
     "src/templates/data/still.graphql": "3dc347c6ce5289d6fd5e796986e4f9dfdb433b5311e84da677123afa16f97561",
     "src/templates/data/stories.graphql": "1bb95cd3387ce3b93cecc5f811f1e5c32db9e7fc2ce587b661ba69e68fa99614",
     "src/templates/data/story-slugs.graphql": "bee4722a24ec3e3c8ff6645cb9ea627d0a4df21276c0a1ec4923b2ed16056fa3",
-    "src/templates/data/story-titles.graphql": "99820c484c097f994de995f4696f69c43e4ddeb6a733baa0a6ae37569b996dc1",
+    "src/templates/data/story-titles.graphql": "a1bd06b78ddf34bb2c7c9e525d55a112c905228193d05a430ccfc7a358435aba",
     "src/templates/data/story.graphql": "e27a7b593355a1db7fb56bda457e6201839d068bb17eb9cf8029119ef433b9dc",
     "src/templates/feeds/search.json": "c17d710605f4f3a24b9644bca823817e9bd50cf7550d6826c506c9e577f04be6",
     "src/templates/feeds/sitemap.xml": "4cca10a71a555338fa2ceca7dff9c38504f4177ec666e9c4ed4c5dfbf16e6e6d",
-    "src/templates/feeds/story-titles.json": "688bf0ef1608d82c7e9fcdfe1b4e616c29376c88f04763e02d3ed711ec865851",
+    "src/templates/feeds/story-titles.json": "ade3a02903b90dc44e70370ad4e9b9498450513cc2cf22191fbef5a839bbdfd2",
     "src/templates/layouts/default.html": "5cbb46ee065d7013c617938998103aae4e3d1a0f4e02ad03ea7db19fcef4bf96",
     "src/templates/layouts/landing.html": "c45056dce846c2eb9e2eafcf4f669ff59f177c9acff5e660807dff5dcccb8a1b",
     "src/templates/macros/image-url.html": "ae07dbfa17878801e8bb7e7800f6ccaa7a2943cfc142f628d4cb08cafa27cecc",

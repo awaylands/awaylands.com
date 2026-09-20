@@ -1781,6 +1781,7 @@ function fillRelatedStoryCandidates(storyPage) {
     storyPage.getAttribute('data-story-categories'),
     storyPage.getAttribute('data-story-category')
   );
+  const currentPrimaryCategory = normalizedTags(storyPage.getAttribute('data-story-category'))[0] || '';
   const currentLocations = normalizedTags(
     storyPage.getAttribute('data-story-locations'),
     storyPage.getAttribute('data-story-location')
@@ -1849,7 +1850,7 @@ function fillRelatedStoryCandidates(storyPage) {
       return response.json();
     })
     .then(stories => {
-      const selectedStories = stories
+      const candidateStories = stories
         .filter(story => (
           story &&
           story.status !== 'disabled' &&
@@ -1860,16 +1861,21 @@ function fillRelatedStoryCandidates(storyPage) {
           story.image &&
           relatedPriority(story) <= 6
         ))
+        .filter(story => {
+          const url = String(story.url || '').replace(/\/$/, '').toLowerCase();
+          return url !== currentPath && !manualUrls[url];
+        });
+      const exactCategoryStories = candidateStories.filter(story => (
+        currentPrimaryCategory &&
+        String(story.category || '').trim().toLowerCase() === currentPrimaryCategory
+      ));
+      const selectedStories = (exactCategoryStories.length >= remainingSlots ? exactCategoryStories : candidateStories)
         .sort((first, second) => {
           const priorityDifference = relatedPriority(first) - relatedPriority(second);
           const topicDifference = relatedPriority(first) === 1 && relatedPriority(second) === 1 ?
             locationTopicPriority(first) - locationTopicPriority(second) :
             0;
           return priorityDifference || topicDifference || new Date(second.enabledAt) - new Date(first.enabledAt);
-        })
-        .filter(story => {
-          const url = String(story.url || '').replace(/\/$/, '').toLowerCase();
-          return url !== currentPath && !manualUrls[url];
         })
         .slice(0, remainingSlots);
 
