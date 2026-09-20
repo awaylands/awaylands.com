@@ -12,8 +12,8 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.346bd68d13ecd36ae8dc.js",
-      "hash": "76ed0570c516915de02175ecda4545648232ebfdb23eb96df5699a4ad1a112f5"
+      "path": "javascripts/main.aa9545ba1dea9fea9d7f.js",
+      "hash": "e2841a5b97ad51b570f1f80a10389609b065c52706f6748b5cf5f9173d646c21"
     },
     "stylesheets/main.css": {
       "path": "stylesheets/main.5b349fcd93d169e2717d97255e97b69b.css",
@@ -78,7 +78,7 @@
     "src/javascripts/directives/gallery.js": "a04aed930ed597050c78001c0f8b78cd249630c458352bad8206d9cc79647d74",
     "src/javascripts/directives/imageloaded.js": "dd1ae7a025f507c6939c704c58db40020e041508a364fcf2f7ad2fe812aa5b5d",
     "src/javascripts/directives/slides.js": "acdade07f3ab4cc92f85833b8f613c17b2968746389bca0a07ff8ef44d3ede42",
-    "src/javascripts/directives/story.js": "4442992845a6fc09e60b874e2f464daadff795ce69ab3f67b6ffccdec4ac9899",
+    "src/javascripts/directives/story.js": "00969d2a0cd046113309fb4fe7ce0393a62b0d1802111da6a73df395195ceff8",
     "src/javascripts/luminous/Lightbox.js": "ee6264aa4526246f563d0809abca7e4bb97318422ce3228199bf2df021b950a8",
     "src/javascripts/luminous/Luminous.js": "e7c6e96b7b829fda5d18ce99668f8c45b33734410b32ec0bcb734cab6d4d0f1b",
     "src/javascripts/luminous/LuminousGallery.js": "c8ca258e473396e00300716c5f32fb421c840214c4754d684b2016f2abb1d8b4",

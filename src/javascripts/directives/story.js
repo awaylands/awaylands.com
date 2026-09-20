@@ -1754,7 +1754,16 @@ function fillRelatedStoryCandidates(storyPage) {
   }
 
   const currentPath = window.location.pathname.replace(/\/$/, '').toLowerCase();
-  const manualItems = Array.prototype.slice.call(list.querySelectorAll('[data-related-manual="true"]'));
+  const currentPrimaryCategory = String(storyPage.getAttribute('data-story-category') || '')
+    .split('|')[0]
+    .trim()
+    .toLowerCase();
+  const manualItems = Array.prototype.slice.call(list.querySelectorAll('[data-related-manual="true"]'))
+    .filter(item => {
+      const category = item.querySelector('.related-stories__category');
+      const itemCategory = category ? String(category.textContent || '').trim().toLowerCase() : '';
+      return !currentPrimaryCategory || itemCategory === currentPrimaryCategory;
+    });
   const manualUrls = manualItems.reduce((urls, item) => {
     const link = item.querySelector('a[href]');
     const url = link && String(link.getAttribute('href') || '').replace(/\/$/, '').toLowerCase();
@@ -1781,7 +1790,6 @@ function fillRelatedStoryCandidates(storyPage) {
     storyPage.getAttribute('data-story-categories'),
     storyPage.getAttribute('data-story-category')
   );
-  const currentPrimaryCategory = normalizedTags(storyPage.getAttribute('data-story-category'))[0] || '';
   const currentLocations = normalizedTags(
     storyPage.getAttribute('data-story-locations'),
     storyPage.getAttribute('data-story-location')
