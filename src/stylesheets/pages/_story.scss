@@ -604,6 +604,11 @@ body.body--story {
   font-family: 'Still EB Garamond', Georgia, serif;
 }
 
+.story-rail__pick-embed :where(.product-name, .product-title) {
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
+  font-weight: 300;
+}
+
 .story-rail__pick-name:hover,
 .story-rail__pick-name:focus {
   color: var(--story-orange);

@@ -354,9 +354,9 @@
 .film-card__caption h2 {
   margin: 0;
   color: var(--film-ink);
-  font-family: 'Still EB Garamond', Georgia, serif;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
   font-size: clamp(1.7rem, 1.7vw, 2.5rem);
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0;
   line-height: 1.12;
 }
@@ -513,9 +513,9 @@
 .film-player__details h2 {
   margin: 0;
   color: #e8e3d9;
-  font-family: 'Still EB Garamond', Georgia, serif;
+  font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
   font-size: clamp(2rem, 2.5vw, 3.8rem);
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0;
   line-height: 1;
 }

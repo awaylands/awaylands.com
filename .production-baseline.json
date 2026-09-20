@@ -16,8 +16,8 @@
       "hash": "7bf83ddafe398536f63714f8c458e8bc4a0e50d652413af5bc341ead6fc58caa"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.0792e05025b187d7e0d4b14362f3a80e.css",
-      "hash": "8f747d8eea80ff93723c359f2a30de05f54e5df291ee2fc0352efb48b635aeeb"
+      "path": "stylesheets/main.5b349fcd93d169e2717d97255e97b69b.css",
+      "hash": "695ed9bca27963e47fa33e78b3e7d762d8f54c00261b68bc4ed6ce343d1d7d45"
     }
   },
   "sourceFiles": {
@@ -139,17 +139,17 @@
     "src/stylesheets/mixins/_responsive-embed.scss": "317f0bc6d3fb6479f227853be2bc7f8a99203bcdddd7146f72d64dee62104c51",
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
-    "src/stylesheets/pages/_blog.scss": "8af9f75fe279632ca298ef7bb4bdf38ff31c4422f9bf0e28476a3e64809b3fd5",
-    "src/stylesheets/pages/_category-redesign-final.scss": "3005c9116621af09e8b6d6c1070551bb082c199ee5c5230567e3cd56412b9072",
+    "src/stylesheets/pages/_blog.scss": "46941b58890135e435812a094e12a795b429687870a504b62827442894977be8",
+    "src/stylesheets/pages/_category-redesign-final.scss": "88acefde88ef1a233bee6ed10efef06dfde489d7f74dc4579c39ec873ff35b92",
     "src/stylesheets/pages/_destination-detail.scss": "95a8dfba598571b26b868fd2073b820e9e705d9ba7948304fb052beb94bbe538",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
-    "src/stylesheets/pages/_destinations.scss": "7aa87187de874d7191aedc2a4463101b9398b00d85b4dbb28ad52365654f440e",
+    "src/stylesheets/pages/_destinations.scss": "778d6b0b2c57020b2be729d5b51124a745f1d37d4d25dc6de8a58999978c1c41",
     "src/stylesheets/pages/_editorial-menu.scss": "e5317100f1685255bc5d106ad743bf624965860f32717d3b0bdd8a04827a7437",
-    "src/stylesheets/pages/_film-portfolio.scss": "b0b344b7ee05dd7d1a98add6ad4b3e5824d3270da1485fb373f0ada78d595990",
+    "src/stylesheets/pages/_film-portfolio.scss": "dea2946d99723e2ed878374710f1d8ec172f79af9a152578edcd8ad50d466ead",
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
     "src/stylesheets/pages/_landing.scss": "36ceb3dc78ac6a60eca9c0acb2ca55bb164596ca9bad3f0456a75bc05f184b13",
     "src/stylesheets/pages/_still.scss": "492fcd4e33c9823a12576a785decc82d09bc4cbe2c23bd40cf5f6f5bffdf45c3",
-    "src/stylesheets/pages/_story.scss": "bca58216e265e0e394a771f3f6d20b29cc3a7c403c14374211c3f70d2018af56",
+    "src/stylesheets/pages/_story.scss": "8f2c04465f203ebcdbf022ba16e8fdfd3d6e23cf95eae0038a0b7eb74061aca5",
     "src/templates/data/about.graphql": "9a8fbd058a95c2a75313c7adbafc108e255ddd876280583e1ca8cbb426a3f03a",
     "src/templates/data/ads.graphql": "7e1bbbc2f7240dab51417e430973aeca501df1af78ae4622b4ea370a0768e472",
     "src/templates/data/categories.graphql": "da8b1f8692c59a1c8a6ca73239955ed2cd7a1800a769b808d4e0a8fa3c8e285b",
@@ -191,7 +191,7 @@
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
     "src/templates/pages/film-category.html": "35c07fb5e46a201e61947ffc5e48efb17655e4b32d98e9601b5f6832d2883651",
     "src/templates/pages/film.html": "7acee87765b21a103780ffe4862ccf193670ff64010e37eefd3545ed62eeda62",
-    "src/templates/pages/firsthand-travel-options.html": "776b0834026bf141594f4dede24aa3e2897a55fbe1763e088eec011037cb1c00",
+    "src/templates/pages/firsthand-travel-options.html": "62bac6e616fa6fcf6e4dca206df6dadaa0a4eaa88856ed4d740538fe2f2cdc91",
     "src/templates/pages/homepage.html": "8515953aa9e23d3927a191482bb5a51f0f3cfaa1496dcaf9cc110a3bd8a43434",
     "src/templates/pages/legacy-category.html": "7f9271e578afe7771a4db40f31db94f84547e19b9b3a5cc873b98d5e5eb6a07d",
     "src/templates/pages/legacy-story.html": "42a8d4ebd740bae483607514ab67a8bbe0c2c1d979b4c597d7ec63c4dbc40727",
