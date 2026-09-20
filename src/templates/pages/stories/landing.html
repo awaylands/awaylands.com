@@ -101,7 +101,7 @@
   {% endmacro %}
 
   {% macro storyMeta(story, fallback) %}
-    <span class="bm-kicker">{% if story.category.length %}{{ story.category[0].title }}{% else %}{{ fallback }}{% endif %}</span>
+    <span class="bm-kicker">{% if story.category.length %}{{ story.category[0].title }}{% elif story.mainCategory.length %}{{ story.mainCategory[0].title }}{% else %}{{ fallback }}{% endif %}</span>
   {% endmacro %}
 
   {% macro compactStory(story, number) %}

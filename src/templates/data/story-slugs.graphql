@@ -41,6 +41,23 @@ query($images: TSImagesConfig) {
       }
       keepReadingKicker
       keepReadingTitle
+      mainCategoryLabels: mainCategory { title }
+      mainCategory {
+        title
+        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+          items {
+            _contentTypeName
+            _status
+            _enabledAt
+            isImportant
+            title
+            slug
+            category { title }
+            social { title }
+            tout { image { path } }
+          }
+        }
+      }
       categoryLabels: category {
         title
         parentCategory { title }
