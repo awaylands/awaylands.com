@@ -311,7 +311,7 @@
   </nav>
 
   <header class="category-magazine-hero">
-    {% if page.heroImage and not isSubcategory %}
+    {% if page.heroImage %}
     <div class="category-magazine-hero__image">
       <img
         src="{{ page.heroImage.path | image({w: 2400, auto: 'compress,format'}) }}"
