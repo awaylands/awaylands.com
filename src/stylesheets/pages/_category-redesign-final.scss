@@ -5331,3 +5331,22 @@ body.body--category-hub .category-subcategory-nav__trigger > strong {
     font-size: clamp(2rem, 5.5vw, 2.6rem);
   }
 }
+
+/* Recommended Reading cards: give the headlines more presence while removing
+ * the unused height from the white caption bar on every category page. */
+body.body--category-hub .category-shortlist .category-shortlist-card__copy {
+  min-height: 0;
+  padding: 0.5rem 1.2rem 0.7rem;
+  align-content: center;
+}
+
+body.body--category-hub .category-shortlist .category-shortlist-card__copy strong {
+  font-size: 2.6rem;
+  line-height: 1;
+}
+
+@media (max-width: 700px) {
+  body.body--category-hub .category-shortlist .category-shortlist-card__copy strong {
+    font-size: clamp(2.4rem, 6.2vw, 3rem);
+  }
+}
