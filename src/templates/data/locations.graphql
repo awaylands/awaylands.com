@@ -30,6 +30,7 @@ query DestinationDetailPages($images: TSImagesConfig) {
       destinationFeaturedStories {
         _id _contentTypeName _enabledAt isImportant title slug
         category { title }
+        mainCategory { title }
         tout { image { path } dek }
       }
       destinationFeaturedOneImage { path }
@@ -40,12 +41,14 @@ query DestinationDetailPages($images: TSImagesConfig) {
       destinationMostRequestedStories {
         _id _contentTypeName _enabledAt isImportant title slug
         category { title }
+        mainCategory { title }
         tout { image { path } dek }
       }
       destinationFeaturedGuideLabel
       destinationFeatureStory {
         _id _contentTypeName _enabledAt isImportant title slug
         category { title }
+        mainCategory { title }
         tout { image { path } dek }
       }
       destinationFeatureStoryImage { path }
@@ -53,6 +56,7 @@ query DestinationDetailPages($images: TSImagesConfig) {
       destinationGuideStories {
         _id _contentTypeName _enabledAt isImportant title slug
         category { title }
+        mainCategory { title }
         tout { image { path } dek }
       }
       continentSet(size: 1, onlyEnabled: true) {
@@ -82,6 +86,7 @@ query DestinationDetailPages($images: TSImagesConfig) {
           title
           slug
           category { title }
+          mainCategory { title }
           tout { image { path } dek }
           contentHtml(images: $images)
           extraContentBlocks { contentHtml(images: $images) }
@@ -128,6 +133,7 @@ query DestinationDetailPages($images: TSImagesConfig) {
           title
           slug
           category { title }
+          mainCategory { title }
           tout { image { path } dek }
         }
       }
@@ -140,6 +146,7 @@ query DestinationDetailPages($images: TSImagesConfig) {
           title
           slug
           category { title }
+          mainCategory { title }
           tout { image { path } dek }
         }
       }

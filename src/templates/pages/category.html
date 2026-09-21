@@ -715,7 +715,7 @@
         <a href="{{ storyUrl(story) }}">
           <span class="category-story-card__image">{{ storyImage(story, '(min-width: 1200px) 25vw, (min-width: 700px) 33vw, 50vw', false) }}</span>
           <span class="category-story-card__copy">
-            {% if isSubcategory %}<small>{{ page.title }}</small>{% elif story.category.length %}<small>{{ story.category[0].title }}</small>{% endif %}
+            {% if isSubcategory %}<small>{{ page.title }}</small>{% elif story.category.length %}<small>{{ story.category[0].title }}</small>{% elif story.mainCategory.length %}<small>{{ story.mainCategory[0].title }}</small>{% endif %}
             <h3>{{ story.title }}</h3>
           </span>
         </a>

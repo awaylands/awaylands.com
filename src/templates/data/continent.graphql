@@ -26,6 +26,7 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
       destinationFeaturedStories {
         _id _contentTypeName _enabledAt isImportant title slug
         category { title }
+        mainCategory { title }
         tout { image { path } dek }
       }
       destinationFeaturedOneImage { path }
@@ -34,6 +35,7 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
       destinationFeatureStory {
         _id _contentTypeName _enabledAt isImportant title slug
         category { title }
+        mainCategory { title }
         tout { image { path } dek }
       }
       destinationFeatureStoryImage { path }
@@ -41,6 +43,7 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
       destinationGuideStories {
         _id _contentTypeName _enabledAt isImportant title slug
         category { title }
+        mainCategory { title }
         tout { image { path } dek }
       }
       continentMostRequestedDestination {
@@ -50,6 +53,7 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
           items {
             _id _contentTypeName _enabledAt isImportant title slug
             category { title }
+            mainCategory { title }
             tout { image { path } dek }
           }
         }
@@ -59,6 +63,7 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
       continentMostRequestedStories {
         _id _contentTypeName _enabledAt isImportant title slug
         category { title }
+        mainCategory { title }
         tout { image { path } dek }
       }
       locations {
@@ -77,11 +82,13 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
         destinationFeaturedStories {
           _id _contentTypeName _enabledAt isImportant title slug
           category { title }
+          mainCategory { title }
           tout { image { path } dek }
         }
         destinationFeatureStory {
           _id _contentTypeName _enabledAt isImportant title slug
           category { title }
+          mainCategory { title }
           tout { image { path } dek }
         }
         destinationRelatedDestinations { _id _contentTypeName title image { path } }
@@ -95,6 +102,7 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
             title
             slug
             category { title }
+            mainCategory { title }
             tout { image { path } dek }
             contentHtml(images: $images)
             extraContentBlocks { contentHtml(images: $images) }
@@ -149,6 +157,7 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
           title
           slug
           category { title }
+          mainCategory { title }
           tout { image { path } dek }
           contentHtml(images: $images)
           extraContentBlocks { contentHtml(images: $images) }
