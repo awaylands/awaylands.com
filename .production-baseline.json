@@ -16,8 +16,8 @@
       "hash": "4ae1ef4e920d93021dcab96d6ce623c2d00b683dc0f721d0210b017e403e8bb0"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.e6b4d852a0a3236db159c5011d3758ab.css",
-      "hash": "c9ff249e05ff6d2e2eea91f995704f59e8dde38cbca47e2f828b1bcfb664f7ea"
+      "path": "stylesheets/main.6cbb08cb3431bc0d77bf886d98d70301.css",
+      "hash": "94792171bc52011e2e68994a1d63f5f0c534c81c9edea7029da280fefa40d761"
     }
   },
   "sourceFiles": {
@@ -140,11 +140,11 @@
     "src/stylesheets/mixins/_responsive-embed.scss": "317f0bc6d3fb6479f227853be2bc7f8a99203bcdddd7146f72d64dee62104c51",
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
-    "src/stylesheets/pages/_blog.scss": "46941b58890135e435812a094e12a795b429687870a504b62827442894977be8",
-    "src/stylesheets/pages/_category-redesign-final.scss": "8dd89e1fa41cdf1b485ca71429f04a97b6cd2d6822a0cf66129f2de7ba305e61",
+    "src/stylesheets/pages/_blog.scss": "01d898b8e058868e67e7518a9263d2b6344d3194abc04f2679761396bf1e951c",
+    "src/stylesheets/pages/_category-redesign-final.scss": "4c4d269387be1c5d2ebef874a55600376f568baca68fbe9061938b0a341f6d61",
     "src/stylesheets/pages/_destination-detail.scss": "6ca556578ea70b7f112e70b62c61512f761ff9dbb1d8a3922c3de14aff52c5b6",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
-    "src/stylesheets/pages/_destinations.scss": "778d6b0b2c57020b2be729d5b51124a745f1d37d4d25dc6de8a58999978c1c41",
+    "src/stylesheets/pages/_destinations.scss": "7a858f0421df074943f234a06c28ef1ec90555dea5fbc829b90ad13fa7b21676",
     "src/stylesheets/pages/_editorial-menu.scss": "e5317100f1685255bc5d106ad743bf624965860f32717d3b0bdd8a04827a7437",
     "src/stylesheets/pages/_film-portfolio.scss": "dea2946d99723e2ed878374710f1d8ec172f79af9a152578edcd8ad50d466ead",
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
