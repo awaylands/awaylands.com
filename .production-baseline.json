@@ -33,7 +33,7 @@
     "scripts/generate-category-route-aliases.js": "e5e92ad173ddc1f919f411d1f0a66f096b1af52825a67f190587fc3567656ec9",
     "scripts/generate-destination-route-aliases.js": "feb40b5a3ac285a13e078669de841f93d8a0ee547b2d9d4d44cfaafaac530531",
     "scripts/localize-google-doc-images.js": "edeea87c04efae35a40c8bfa4987c156a6d342802bc1dedf8a2aab3f319be070",
-    "scripts/migrate-native-main-categories.js": "4e5f78509131a128d41378879985a55d8e7ccfc38ce029f4474f1a0c72e7b7c1",
+    "scripts/migrate-native-main-categories.js": "4eb6328e9629c03fa7205e48812b250856870a881ec0a2ff3de4fae8ee083a77",
     "scripts/restore-category-card-content.js": "9c77646eaae8e763dc536c522860ffef04ada4cbe93534427f47d649875ad70b",
     "scripts/sanitize-story-links.js": "cac32836e4b24239d0237c46186e8dbba3f20c631ed52d424c836d53050afa3e",
     "scripts/still-grid-organizer.js": "916bd3134975c289fe8e777d0b75c92d459eaffce88a74898199cdb5446e3e10",

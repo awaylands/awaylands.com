@@ -64,8 +64,13 @@ async function inventory() {
         mainCategoryTag { _id title }
       }
     }
+    getStoryList(size: 1, onlyEnabled: false) { total }
   }`);
-  const storyPages = await Promise.all([0, 250, 500, 750, 1000].map(from => request(`query NativeMainCategoryStories {
+  const storyOffsets = Array.from(
+    {length: Math.ceil((data.getStoryList.total || 0) / 250)},
+    (_, index) => index * 250
+  );
+  const storyPages = await Promise.all(storyOffsets.map(from => request(`query NativeMainCategoryStories {
     getStoryList(size: 250, from: ${from}, onlyEnabled: false) {
       items {
         _id title
@@ -91,10 +96,14 @@ async function updateCategory(id, mainCategoryId) {
   }`, {input: {_id: id, mainCategoryTag: relation(mainCategoryId)}});
 }
 
-async function updateStory(id, mainCategoryIds) {
-  await request(`mutation TagStoryWithNativeMainCategory($input: UpdateStoryInput!) {
+async function updateStory(id, mainCategoryIds, categoryIds) {
+  await request(`mutation NormalizeStoryCategories($input: UpdateStoryInput!) {
     updateStory(input: $input) { result { _id title } }
-  }`, {input: {_id: id, mainCategory: mainCategoryIds.map(relation)}});
+  }`, {input: {
+    _id: id,
+    mainCategory: mainCategoryIds.map(relation),
+    category: categoryIds.map(relation)
+  }});
 }
 
 (async () => {
@@ -118,16 +127,28 @@ async function updateStory(id, mainCategoryIds) {
 
   const storyChanges = [];
   for (const story of data.stories) {
-    const desiredTitles = [];
+    const desiredTitles = (story.mainCategory || []).map(category => category.title);
+    const desiredCategoryIds = [];
+    const removedMainCategories = [];
     for (const category of story.category || []) {
-      const title = category.parentCategory && category.parentCategory.title !== category.title
-        ? category.parentCategory.title
-        : category.title;
+      const isSubcategory = category.parentCategory && category.parentCategory.title !== category.title;
+      const title = isSubcategory ? category.parentCategory.title : category.title;
       if (mainTitles.includes(title) && !desiredTitles.includes(title)) desiredTitles.push(title);
+      if (!isSubcategory && mainTitles.includes(category.title)) {
+        removedMainCategories.push(category.title);
+      } else {
+        desiredCategoryIds.push(category._id);
+      }
     }
     const desiredIds = desiredTitles.map(title => tagsByTitle.get(title)).filter(Boolean).map(tag => tag._id).sort();
     const currentIds = (story.mainCategory || []).map(tag => tag._id).sort();
-    if (JSON.stringify(desiredIds) !== JSON.stringify(currentIds)) storyChanges.push({story, desiredIds, desiredTitles});
+    const currentCategoryIds = (story.category || []).map(category => category._id).sort();
+    desiredCategoryIds.sort();
+    const mainCategoriesChanged = JSON.stringify(desiredIds) !== JSON.stringify(currentIds);
+    const subcategoriesChanged = JSON.stringify(desiredCategoryIds) !== JSON.stringify(currentCategoryIds);
+    if (mainCategoriesChanged || subcategoriesChanged) {
+      storyChanges.push({story, desiredIds, desiredTitles, desiredCategoryIds, removedMainCategories});
+    }
   }
 
   console.log(JSON.stringify({
@@ -135,7 +156,12 @@ async function updateStory(id, mainCategoryIds) {
     missingMainCategories: missing,
     categoryPageConnections: categoryConnections.map(item => item.title),
     storyUpdates: storyChanges.length,
-    storySamples: storyChanges.slice(0, 12).map(change => ({title: change.story.title, categories: change.desiredTitles}))
+    duplicateMainCategoryReferences: storyChanges.reduce((total, change) => total + change.removedMainCategories.length, 0),
+    storySamples: storyChanges.slice(0, 12).map(change => ({
+      title: change.story.title,
+      categories: change.desiredTitles,
+      removedFromSubcategories: change.removedMainCategories
+    }))
   }, null, 2));
 
   if (!apply) return;
@@ -149,7 +175,7 @@ async function updateStory(id, mainCategoryIds) {
   for (let index = 0; index < storyChanges.length; index += 1) {
     const change = storyChanges[index];
     try {
-      await updateStory(change.story._id, change.desiredIds);
+      await updateStory(change.story._id, change.desiredIds, change.desiredCategoryIds);
       updatedStories += 1;
     } catch (error) {
       failedStories.push({
