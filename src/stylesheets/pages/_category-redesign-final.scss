@@ -5283,3 +5283,36 @@ body.body--category-hub .category-latest--compact .category-story-card__copy h3 
     font-size: clamp(1.9rem, 5vw, 2.5rem);
   }
 }
+
+/* Hotels collection cards use one uninterrupted image column and a full-width
+ * title bar. This must remain after the legacy Hotels footer overrides. */
+body.body--category-hub .category-hub[data-category='hotels'] .category-destination-tile {
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto auto;
+}
+
+body.body--category-hub .category-hub[data-category='hotels'] .category-destination-tile > span {
+  grid-column: 1;
+  grid-row: 1;
+  width: 100%;
+}
+
+body.body--category-hub .category-hub[data-category='hotels'] .category-destination-tile > strong {
+  grid-column: 1;
+  grid-row: 2;
+  width: 100%;
+  min-height: 0;
+  padding: 1.4rem 1.4rem 1.7rem;
+}
+
+body.body--category-hub .category-hub[data-category='hotels'] .category-destination-tile > i {
+  position: static;
+  z-index: 3;
+  grid-column: 1;
+  grid-row: 1;
+  align-self: end;
+  justify-self: end;
+  margin: 0 1.4rem 1.4rem;
+  padding: 0;
+  background: transparent;
+}

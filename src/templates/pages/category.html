@@ -502,7 +502,16 @@
     <div class="category-destinations__grid">
       {% for card in page.destinationCards %}
       {% set cardStory = card.post or page.destinationStories[loop.index0] or sortedStories[loop.index0] or heroStory %}
-      <a class="category-destination-tile" href="{{ card.linkUrl or storyUrl(cardStory) }}">
+      {% set cardUrl = card.linkUrl or storyUrl(cardStory) %}
+      {% if card.post %}{% set cardUrl = storyUrl(card.post) %}{% endif %}
+      {% set matchingCardStories = [] %}
+      {% for candidateStory in sortedStories %}
+        {% if card.title and candidateStory.title and card.title | lower == candidateStory.title | lower %}
+          {% set ignored = matchingCardStories.push(candidateStory) %}
+        {% endif %}
+      {% endfor %}
+      {% if matchingCardStories.length %}{% set cardUrl = storyUrl(matchingCardStories[0]) %}{% endif %}
+      <a class="category-destination-tile" href="{{ cardUrl }}">
         <span>{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 1000px) 25vw, 50vw", false) }}{% endif %}</span>
         <strong>{{ card.title or cardStory.title }}</strong>
         {% if card.description %}<p>{{ card.description }}</p>{% endif %}

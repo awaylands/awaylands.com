@@ -16,8 +16,8 @@
       "hash": "e2841a5b97ad51b570f1f80a10389609b065c52706f6748b5cf5f9173d646c21"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.5b349fcd93d169e2717d97255e97b69b.css",
-      "hash": "695ed9bca27963e47fa33e78b3e7d762d8f54c00261b68bc4ed6ce343d1d7d45"
+      "path": "stylesheets/main.f8807787c242b29ef46e590577359d66.css",
+      "hash": "a828fc438484d516af2ed58bccf74ec1976e0649d2df97be3cae2e243b608c1a"
     }
   },
   "sourceFiles": {
@@ -141,7 +141,7 @@
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
     "src/stylesheets/pages/_blog.scss": "46941b58890135e435812a094e12a795b429687870a504b62827442894977be8",
-    "src/stylesheets/pages/_category-redesign-final.scss": "88acefde88ef1a233bee6ed10efef06dfde489d7f74dc4579c39ec873ff35b92",
+    "src/stylesheets/pages/_category-redesign-final.scss": "1fc94a63ff541abb6a2b0c62d01842f7ef4d0d811cb4e20c58684cb4d32635f7",
     "src/stylesheets/pages/_destination-detail.scss": "95a8dfba598571b26b868fd2073b820e9e705d9ba7948304fb052beb94bbe538",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
     "src/stylesheets/pages/_destinations.scss": "778d6b0b2c57020b2be729d5b51124a745f1d37d4d25dc6de8a58999978c1c41",
@@ -186,7 +186,7 @@
     "src/templates/pages/about.html": "371a95b6d4c84dfb503dacba1eb515e82f87768419f6fffca25d8b1859e932be",
     "src/templates/pages/ads.txt": "144818e8b13f096efc084fc3acc8a386df2ae55c89d99250d7161f5638483dbf",
     "src/templates/pages/category-archive.html": "f15e437ccc5292783b52991bec9671562a84d130045ad8f1cae5db421e5b5718",
-    "src/templates/pages/category.html": "ea819bc05b20c9631f89ea8aea67dcbd7cf178962ef024f328210c393b439efb",
+    "src/templates/pages/category.html": "446a18ec063e5831a0a87f561d1b92f8a280f33246372a5a06d8b825080a9e6c",
     "src/templates/pages/continent.html": "2187568195ff512e481863f7638136411d1c0be8918de9fa258a9fbbd3190042",
     "src/templates/pages/destination-hub-mockup.html": "287618e7fc8bd172d7f4371bd9ccfb7eb3f710d3b4e82cf9faf57d966c452940",
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
