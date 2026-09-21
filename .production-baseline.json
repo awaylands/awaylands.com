@@ -16,8 +16,8 @@
       "hash": "4ae1ef4e920d93021dcab96d6ce623c2d00b683dc0f721d0210b017e403e8bb0"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.8b7dcaea8432bd62d5ac558d4a43d18e.css",
-      "hash": "309db0519a4e1d7a56f40a3aa8451cec294e5ab7121d33eeaf0502c4b278039d"
+      "path": "stylesheets/main.b6e6eb7c557fad786b4675c6befd59d3.css",
+      "hash": "a2abbef5c6acaacc3885cf49d9bc07c253e70cb97d866771bc7239f28812ad86"
     }
   },
   "sourceFiles": {
@@ -142,7 +142,7 @@
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
     "src/stylesheets/pages/_blog.scss": "46941b58890135e435812a094e12a795b429687870a504b62827442894977be8",
     "src/stylesheets/pages/_category-redesign-final.scss": "2dfc71f5b7172e6cc9db13d5741a144858c95d33d136be6882dc572fb383ae35",
-    "src/stylesheets/pages/_destination-detail.scss": "95a8dfba598571b26b868fd2073b820e9e705d9ba7948304fb052beb94bbe538",
+    "src/stylesheets/pages/_destination-detail.scss": "6ca556578ea70b7f112e70b62c61512f761ff9dbb1d8a3922c3de14aff52c5b6",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
     "src/stylesheets/pages/_destinations.scss": "778d6b0b2c57020b2be729d5b51124a745f1d37d4d25dc6de8a58999978c1c41",
     "src/stylesheets/pages/_editorial-menu.scss": "e5317100f1685255bc5d106ad743bf624965860f32717d3b0bdd8a04827a7437",
