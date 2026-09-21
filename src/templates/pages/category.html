@@ -645,18 +645,21 @@
     </div>
   </aside>{% endif %}
 
-  {% if hasIndexSection %}<section class="category-index" aria-labelledby="category-index-title">
+  {% if hasIndexSection %}<section class="category-index" aria-labelledby="category-index-title" data-category-index>
     <header class="category-module-heading">
       <p>{{ indexLabel }}</p>
       <h2 id="category-index-title">{{ indexTitle }}</h2>
       <span>{{ indexDescription }}</span>
     </header>
-    <ol>
+    <ol id="category-index-list">
       {% for card in page.indexCards %}
       {% set cardStory = card.post or indexStories[loop.index0] or heroStory %}
-        <li><a href="{{ card.linkUrl or storyUrl(cardStory) }}"><span>{{ loop.index }}</span><strong>{{ card.title or cardStory.title }}</strong><i aria-hidden="true">⟶</i></a></li>
+        <li{% if loop.index > 12 %} data-category-index-extra hidden{% endif %}><a href="{{ card.linkUrl or storyUrl(cardStory) }}"><span>{{ loop.index }}</span><strong>{{ card.title or cardStory.title }}</strong><i aria-hidden="true">⟶</i></a></li>
       {% endfor %}
     </ol>
+    {% if page.indexCards.length > 12 %}
+    <button class="category-index__all" type="button" data-category-index-toggle aria-controls="category-index-list" aria-expanded="false"><span data-category-index-label>See More</span><i aria-hidden="true">↓</i></button>
+    {% endif %}
   </section>{% endif %}
 
   {% if not hasGuideSection and hasBrowseSection %}

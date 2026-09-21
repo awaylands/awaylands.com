@@ -275,6 +275,26 @@ const initCategoryArchivePagination = () => {
   addLink('Next', currentPage + 1, { disabled: currentPage === totalPages });
 };
 
+const initCategoryIndexes = () => {
+  document.querySelectorAll('[data-category-index]').forEach(index => {
+    const button = index.querySelector('[data-category-index-toggle]');
+    const label = index.querySelector('[data-category-index-label]');
+    const extraItems = Array.from(index.querySelectorAll('[data-category-index-extra]'));
+    if (!button || !label || !extraItems.length) {
+      return;
+    }
+
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') === 'true';
+      extraItems.forEach(item => {
+        item.hidden = expanded;
+      });
+      button.setAttribute('aria-expanded', String(!expanded));
+      label.textContent = expanded ? 'See More' : 'See Less';
+    });
+  });
+};
+
 import Imageloaded from './directives/imageloaded';
 import Slides from './directives/slides';
 import Gallery from './directives/gallery';
@@ -298,6 +318,7 @@ export default new Vue({
     initCategorySubcategories();
     initCategoryNavPreview();
     initCategoryArchivePagination();
+    initCategoryIndexes();
   },
   methods: {},
   components: {

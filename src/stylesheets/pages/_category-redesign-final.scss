@@ -5443,3 +5443,37 @@ body.body--category-hub .category-latest--compact .category-story-card__copy h3 
     font-size: clamp(2.3rem, 6.2vw, 3rem);
   }
 }
+
+/* Keep category indexes compact until the reader asks to see the full list. */
+body.body--category-hub button.category-index__all {
+  display: inline-flex;
+  gap: 0.9rem;
+  align-items: center;
+  margin: 2.8rem 0 0;
+  border: 0;
+  border-bottom: 0.2rem solid var(--category-coral);
+  padding: 0 0 0.6rem;
+  background: transparent;
+  color: var(--category-teal);
+  cursor: pointer;
+  font: 700 1.15rem/1.2 Montserrat, Helvetica, sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+body.body--category-hub button.category-index__all i {
+  color: var(--category-coral);
+  font-size: 1.5em;
+  font-style: normal;
+  line-height: 0.8;
+  transition: transform 180ms ease;
+}
+
+body.body--category-hub button.category-index__all[aria-expanded='true'] i {
+  transform: rotate(180deg);
+}
+
+body.body--category-hub button.category-index__all:hover,
+body.body--category-hub button.category-index__all:focus {
+  color: var(--category-coral);
+}

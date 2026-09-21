@@ -12,12 +12,12 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.aa9545ba1dea9fea9d7f.js",
-      "hash": "e2841a5b97ad51b570f1f80a10389609b065c52706f6748b5cf5f9173d646c21"
+      "path": "javascripts/main.07b4ec1fb9cfe6cf9193.js",
+      "hash": "a204f7df1654b8ba573866a6cd97ee48465fc349ddf1e4cff3a3e02fb59f4cfb"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.15d2c41fa4c13cd9ea30039e7113ad74.css",
-      "hash": "46f991e82878c5f815f9e687a70beaa7e84f42202dd0f69e39ffbfd5ccfa7f42"
+      "path": "stylesheets/main.0bcb6f07276eb75d376aae63be96cd0f.css",
+      "hash": "f70be489b0f49a1da74b4e7a1cad094b62de694aba2c3b9b20baa0461ab21117"
     }
   },
   "sourceFiles": {
@@ -87,7 +87,7 @@
     "src/javascripts/luminous/injectBaseStylesheet.js": "52b1cf416ca7d4e6ab29737059334ab30aefa808d8739a52fa5695f28fc43d17",
     "src/javascripts/luminous/util/dom.js": "0c1545328ee0061596595a1748fbf62985181d7b453a109a44b2f421755bb5b2",
     "src/javascripts/luminous/util/throwIfMissing.js": "1991b2d284f52e9974a540d77f1450a36b4563cc08f86216b717e7326b779d4b",
-    "src/javascripts/main.js": "855a07eb32621e849fef4677153128f107e0caf7d622443ea3e719bea1e6de5f",
+    "src/javascripts/main.js": "76974f18355cb2c44bc565ec2f21a8ce678d172445c7327352a81daec5bf524f",
     "src/javascripts/utils/add-class.js": "16c9b41d13b355dabbeeb9b98dcc90c92de144f594fa0f7847829ef3fe191238",
     "src/javascripts/utils/config.js": "28d3e07fd31459bdbeaaf4cbe46510dfa894adeaaf7a9f92dfc1c6644c3cc607",
     "src/javascripts/utils/format.js": "f01fad4b6006d4dd863402f2485e97294fd7d4c59bb3072a548bd33a95007814",
@@ -141,7 +141,7 @@
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
     "src/stylesheets/pages/_blog.scss": "46941b58890135e435812a094e12a795b429687870a504b62827442894977be8",
-    "src/stylesheets/pages/_category-redesign-final.scss": "6e45739ef6bcb59980efd5ca241870b3d25ee24b2eb499c8b204a750ff64ae19",
+    "src/stylesheets/pages/_category-redesign-final.scss": "358900df17f7460ea0aa17c363ffdc8378ccf3c6269e6c361c818ee4e78684fb",
     "src/stylesheets/pages/_destination-detail.scss": "95a8dfba598571b26b868fd2073b820e9e705d9ba7948304fb052beb94bbe538",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
     "src/stylesheets/pages/_destinations.scss": "778d6b0b2c57020b2be729d5b51124a745f1d37d4d25dc6de8a58999978c1c41",
@@ -186,7 +186,7 @@
     "src/templates/pages/about.html": "371a95b6d4c84dfb503dacba1eb515e82f87768419f6fffca25d8b1859e932be",
     "src/templates/pages/ads.txt": "144818e8b13f096efc084fc3acc8a386df2ae55c89d99250d7161f5638483dbf",
     "src/templates/pages/category-archive.html": "f15e437ccc5292783b52991bec9671562a84d130045ad8f1cae5db421e5b5718",
-    "src/templates/pages/category.html": "446a18ec063e5831a0a87f561d1b92f8a280f33246372a5a06d8b825080a9e6c",
+    "src/templates/pages/category.html": "79f07434dd4eb30092655ac59f261894ddd2cb0570ccfac01c6e71927051c4da",
     "src/templates/pages/continent.html": "2187568195ff512e481863f7638136411d1c0be8918de9fa258a9fbbd3190042",
     "src/templates/pages/destination-hub-mockup.html": "287618e7fc8bd172d7f4371bd9ccfb7eb3f710d3b4e82cf9faf57d966c452940",
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
