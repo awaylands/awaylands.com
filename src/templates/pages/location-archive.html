@@ -18,7 +18,7 @@
         <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">
           {% if story and story.tout and story.tout.image and story.tout.image.path %}<img src="{{ story.tout.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="{{ story.title or 'Travel guide' }}" loading="lazy">{% endif %}
         </a>
-        <div class="destination-guide-card__copy"><p class="destination-detail__eyebrow">{{ label }}</p><h2><a href="{{ storyUrl(story) }}">{{ story.title or "Travel guide" }}</a></h2>{% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}</div>
+        <div class="destination-guide-card__copy"><p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% else %}{{ label }}{% endif %}</p><h2><a href="{{ storyUrl(story) }}">{{ story.title or "Travel guide" }}</a></h2>{% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}</div>
       </article>
 {% endmacro %}
 {% block body_class %}body body--destination-archive{% endblock %}

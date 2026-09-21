@@ -12,12 +12,12 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.07b4ec1fb9cfe6cf9193.js",
-      "hash": "a204f7df1654b8ba573866a6cd97ee48465fc349ddf1e4cff3a3e02fb59f4cfb"
+      "path": "javascripts/main.e9a6f87e9ca75109995d.js",
+      "hash": "4ae1ef4e920d93021dcab96d6ce623c2d00b683dc0f721d0210b017e403e8bb0"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.0bcb6f07276eb75d376aae63be96cd0f.css",
-      "hash": "f70be489b0f49a1da74b4e7a1cad094b62de694aba2c3b9b20baa0461ab21117"
+      "path": "stylesheets/main.8b7dcaea8432bd62d5ac558d4a43d18e.css",
+      "hash": "309db0519a4e1d7a56f40a3aa8451cec294e5ab7121d33eeaf0502c4b278039d"
     }
   },
   "sourceFiles": {
@@ -87,7 +87,7 @@
     "src/javascripts/luminous/injectBaseStylesheet.js": "52b1cf416ca7d4e6ab29737059334ab30aefa808d8739a52fa5695f28fc43d17",
     "src/javascripts/luminous/util/dom.js": "0c1545328ee0061596595a1748fbf62985181d7b453a109a44b2f421755bb5b2",
     "src/javascripts/luminous/util/throwIfMissing.js": "1991b2d284f52e9974a540d77f1450a36b4563cc08f86216b717e7326b779d4b",
-    "src/javascripts/main.js": "76974f18355cb2c44bc565ec2f21a8ce678d172445c7327352a81daec5bf524f",
+    "src/javascripts/main.js": "0ec3031d5adbf9c330f5fb932ae4bacf31f99578de6d98d0cd086bc902c8c75e",
     "src/javascripts/utils/add-class.js": "16c9b41d13b355dabbeeb9b98dcc90c92de144f594fa0f7847829ef3fe191238",
     "src/javascripts/utils/config.js": "28d3e07fd31459bdbeaaf4cbe46510dfa894adeaaf7a9f92dfc1c6644c3cc607",
     "src/javascripts/utils/format.js": "f01fad4b6006d4dd863402f2485e97294fd7d4c59bb3072a548bd33a95007814",
@@ -141,7 +141,7 @@
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
     "src/stylesheets/pages/_blog.scss": "46941b58890135e435812a094e12a795b429687870a504b62827442894977be8",
-    "src/stylesheets/pages/_category-redesign-final.scss": "358900df17f7460ea0aa17c363ffdc8378ccf3c6269e6c361c818ee4e78684fb",
+    "src/stylesheets/pages/_category-redesign-final.scss": "2dfc71f5b7172e6cc9db13d5741a144858c95d33d136be6882dc572fb383ae35",
     "src/stylesheets/pages/_destination-detail.scss": "95a8dfba598571b26b868fd2073b820e9e705d9ba7948304fb052beb94bbe538",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
     "src/stylesheets/pages/_destinations.scss": "778d6b0b2c57020b2be729d5b51124a745f1d37d4d25dc6de8a58999978c1c41",
@@ -186,7 +186,7 @@
     "src/templates/pages/about.html": "371a95b6d4c84dfb503dacba1eb515e82f87768419f6fffca25d8b1859e932be",
     "src/templates/pages/ads.txt": "144818e8b13f096efc084fc3acc8a386df2ae55c89d99250d7161f5638483dbf",
     "src/templates/pages/category-archive.html": "f15e437ccc5292783b52991bec9671562a84d130045ad8f1cae5db421e5b5718",
-    "src/templates/pages/category.html": "79f07434dd4eb30092655ac59f261894ddd2cb0570ccfac01c6e71927051c4da",
+    "src/templates/pages/category.html": "f791c2288a03ba0cd9d3a9d80a6619374ca4653ea8928114f8b90806e0aac726",
     "src/templates/pages/continent.html": "2187568195ff512e481863f7638136411d1c0be8918de9fa258a9fbbd3190042",
     "src/templates/pages/destination-hub-mockup.html": "287618e7fc8bd172d7f4371bd9ccfb7eb3f710d3b4e82cf9faf57d966c452940",
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
@@ -196,7 +196,7 @@
     "src/templates/pages/homepage.html": "8515953aa9e23d3927a191482bb5a51f0f3cfaa1496dcaf9cc110a3bd8a43434",
     "src/templates/pages/legacy-category.html": "7f9271e578afe7771a4db40f31db94f84547e19b9b3a5cc873b98d5e5eb6a07d",
     "src/templates/pages/legacy-story.html": "42a8d4ebd740bae483607514ab67a8bbe0c2c1d979b4c597d7ec63c4dbc40727",
-    "src/templates/pages/location-archive.html": "b9dfe4f49a88f9859e53498a2c9f626a45710fb81311298cda14eaa1cc50412f",
+    "src/templates/pages/location-archive.html": "3c1097b48e1a2093b50e0a57c8bfd7ed17987736c6b172714536784126103018",
     "src/templates/pages/location.html": "a3be2c1990202cf6834dcc427d90e9722302119f546105de3d957b2be5ead6b9",
     "src/templates/pages/privacy.html": "b9b902d2a588d3bb6ea50dc4c1b62738b0d356fb92203c452c58cafac0bbe89b",
     "src/templates/pages/search.html": "1bd3d4db82c6e692722d58f78ef3028b0b6ba7f7cda017bd401cc9956814934b",

@@ -290,7 +290,7 @@ const initCategoryIndexes = () => {
         item.hidden = expanded;
       });
       button.setAttribute('aria-expanded', String(!expanded));
-      label.textContent = expanded ? 'See More' : 'See Less';
+      label.textContent = expanded ? 'See the Full Index' : 'See Less';
     });
   });
 };

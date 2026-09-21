@@ -5446,10 +5446,11 @@ body.body--category-hub .category-latest--compact .category-story-card__copy h3 
 
 /* Keep category indexes compact until the reader asks to see the full list. */
 body.body--category-hub button.category-index__all {
-  display: inline-flex;
+  display: flex;
   gap: 0.9rem;
   align-items: center;
-  margin: 2.8rem 0 0;
+  width: fit-content;
+  margin: 2.8rem auto 0;
   border: 0;
   border-bottom: 0.2rem solid var(--category-coral);
   padding: 0 0 0.6rem;
