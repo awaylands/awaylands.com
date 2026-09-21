@@ -1,6 +1,6 @@
 {
   "name": "Away Lands verified production baseline",
-  "baselineDate": "2026-08-27",
+  "baselineDate": "2026-09-21",
   "baselineCommit": "8460db5038eacea2e1e2454bb67ebefce96079f6",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
@@ -16,8 +16,8 @@
       "hash": "4ae1ef4e920d93021dcab96d6ce623c2d00b683dc0f721d0210b017e403e8bb0"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.b6e6eb7c557fad786b4675c6befd59d3.css",
-      "hash": "a2abbef5c6acaacc3885cf49d9bc07c253e70cb97d866771bc7239f28812ad86"
+      "path": "stylesheets/main.e6b4d852a0a3236db159c5011d3758ab.css",
+      "hash": "c9ff249e05ff6d2e2eea91f995704f59e8dde38cbca47e2f828b1bcfb664f7ea"
     }
   },
   "sourceFiles": {
@@ -141,7 +141,7 @@
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
     "src/stylesheets/pages/_blog.scss": "46941b58890135e435812a094e12a795b429687870a504b62827442894977be8",
-    "src/stylesheets/pages/_category-redesign-final.scss": "2dfc71f5b7172e6cc9db13d5741a144858c95d33d136be6882dc572fb383ae35",
+    "src/stylesheets/pages/_category-redesign-final.scss": "8dd89e1fa41cdf1b485ca71429f04a97b6cd2d6822a0cf66129f2de7ba305e61",
     "src/stylesheets/pages/_destination-detail.scss": "6ca556578ea70b7f112e70b62c61512f761ff9dbb1d8a3922c3de14aff52c5b6",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
     "src/stylesheets/pages/_destinations.scss": "778d6b0b2c57020b2be729d5b51124a745f1d37d4d25dc6de8a58999978c1c41",
@@ -186,7 +186,7 @@
     "src/templates/pages/about.html": "371a95b6d4c84dfb503dacba1eb515e82f87768419f6fffca25d8b1859e932be",
     "src/templates/pages/ads.txt": "144818e8b13f096efc084fc3acc8a386df2ae55c89d99250d7161f5638483dbf",
     "src/templates/pages/category-archive.html": "794ffc060ce7e22de1b4fa37f44496cc20f1597ff4f602ccba9dae75ab680243",
-    "src/templates/pages/category.html": "06c6bd19335c6e5c0226db51ae8f16e9e0842725f6cd8a3efa55ee8f993fff26",
+    "src/templates/pages/category.html": "da1118b7ad562413dbc003cd3a1662a8b715f18544f022e59c4692b58dbeacff",
     "src/templates/pages/continent.html": "2187568195ff512e481863f7638136411d1c0be8918de9fa258a9fbbd3190042",
     "src/templates/pages/destination-hub-mockup.html": "287618e7fc8bd172d7f4371bd9ccfb7eb3f710d3b4e82cf9faf57d966c452940",
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
