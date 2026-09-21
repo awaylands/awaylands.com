@@ -5386,3 +5386,60 @@ body.body--category-hub .category-hub[data-category='packing-guides'] .category-
     font-size: clamp(2.6rem, 7vw, 3.2rem);
   }
 }
+
+/* Category post-title scale
+ * Keep module headings unchanged and give the stories inside each module a
+ * consistent, readable hierarchy across every main category page. */
+body.body--category-hub .category-clusters h3 {
+  font-size: clamp(2.8rem, 2.15vw, 3.5rem);
+  line-height: 1.06;
+}
+
+body.body--category-hub .category-updated small {
+  bottom: 8.4rem;
+}
+
+body.body--category-hub .category-updated strong {
+  max-height: 7.2rem;
+  font-size: clamp(2.5rem, 2vw, 3.1rem);
+  line-height: 1.06;
+}
+
+body.body--category-hub .category-index li a {
+  min-height: 7rem;
+  padding: 1.1rem 1.3rem;
+}
+
+body.body--category-hub .category-index li strong {
+  font-size: clamp(1.8rem, 1.3vw, 2.2rem);
+  line-height: 1.12;
+}
+
+body.body--category-hub .category-latest--compact .category-story-card__copy h3 {
+  font-size: clamp(2.35rem, 1.75vw, 3rem);
+  line-height: 1.05;
+}
+
+@media (max-width: 700px) {
+  body.body--category-hub .category-clusters h3 {
+    font-size: clamp(2.6rem, 7vw, 3.3rem);
+  }
+
+  body.body--category-hub .category-updated small,
+  body.body--category-hub .category-updated strong {
+    position: static;
+    max-height: none;
+  }
+
+  body.body--category-hub .category-updated strong {
+    font-size: clamp(2.7rem, 7.2vw, 3.5rem);
+  }
+
+  body.body--category-hub .category-index li strong {
+    font-size: clamp(1.8rem, 4.8vw, 2.3rem);
+  }
+
+  body.body--category-hub .category-latest--compact .category-story-card__copy h3 {
+    font-size: clamp(2.3rem, 6.2vw, 3rem);
+  }
+}
