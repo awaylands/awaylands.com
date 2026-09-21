@@ -214,6 +214,7 @@ function generateSite() {
     run(node, [takeShape, 'build', '--file', '.tsg-production-build.yml']);
     clearDirectory(path.join(root, 'build'));
     copyTree(generatedPath, path.join(root, 'build'));
+    copyTree(path.join(staticPath, 'assets'), path.join(root, 'build/assets'));
     run(node, [path.join(root, 'scripts/generate-destination-route-aliases.js')]);
     run(node, [path.join(root, 'scripts/generate-category-route-aliases.js')]);
   } finally {
