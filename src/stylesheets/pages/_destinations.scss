@@ -4629,3 +4629,13 @@
     font-size: clamp(3.8rem, 13vw, 5.4rem);
   }
 }
+
+/* Let destination labels wrap instead of clipping at narrow widths. */
+.d3-postcard__stamp span,
+.d3-ending-panel__box h2 {
+  max-height: none;
+  overflow: visible;
+  overflow-wrap: break-word;
+  text-overflow: clip;
+  white-space: normal;
+}

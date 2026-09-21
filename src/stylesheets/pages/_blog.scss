@@ -5657,3 +5657,31 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
     width: 100%;
   }
 }
+
+/* Keep user-facing headlines and preview copy readable at every width. */
+.body--blog-magazine .bm-hero__rail .bm-compact-story__copy strong,
+.homepage-blog-magazine .bm-hero__rail .bm-compact-story__copy strong,
+.bm-feature__copy h2,
+.search-result__title {
+  display: block;
+  max-height: none;
+  overflow: visible;
+  -webkit-box-orient: initial;
+  -webkit-line-clamp: unset;
+  white-space: normal;
+}
+
+.blog-archive .bm-editor-card__dek,
+.bm-editor-card__dek {
+  display: block;
+  max-height: none;
+  overflow: visible;
+  -webkit-box-orient: initial;
+  -webkit-line-clamp: unset;
+}
+
+.bm-itineraries__heading h2 {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  white-space: normal;
+}

@@ -5508,3 +5508,50 @@ body.body--category-hub .category-subcategory-nav__grid--count-6 > .category-sub
     aspect-ratio: 1 / 1;
   }
 }
+
+/* Keep every subcategory title inside the viewport without changing its
+ * approved responsive font-size scale. Long titles can wrap as needed. */
+body.body--subcategory .category-magazine-hero__copy {
+  box-sizing: border-box;
+  left: 50%;
+  width: min(180rem, calc(100% - clamp(3.2rem, 6vw, 10rem)));
+  max-width: calc(100vw - 3.2rem);
+  transform: translate(-50%, -58px);
+}
+
+body.body--subcategory .category-magazine-hero h1 {
+  width: 100%;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  overflow: visible;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  white-space: normal;
+}
+
+@media (max-width: 700px) {
+  body.body--subcategory .category-magazine-hero__copy {
+    width: calc(100% - 3.2rem);
+    max-width: calc(100vw - 3.2rem);
+  }
+}
+
+/* Do not crop user-facing category headings or card titles. */
+body.body--category-hub .category-magazine-hero h1,
+body.body--category-hub .category-shop .bm-products__intro h2 {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+body.body--category-hub .category-updated strong,
+body.body--category-hub .category-index li strong,
+body.body--category-hub .category-destination-tile strong,
+body.body--category-hub .category-hub[data-category='hotels'] .category-destination-tile strong {
+  display: block;
+  max-height: none;
+  overflow: visible;
+  -webkit-box-orient: initial;
+  -webkit-line-clamp: unset;
+}
