@@ -381,7 +381,7 @@
       <a href="{{ guideLinkUrl }}">{{ guideLinkText }}</a>
     </header>
     <p class="category-subcategory-nav__description">Choose a category below to explore every guide, story, and recommendation in our curated collections</p>
-    <div class="category-subcategory-nav__grid">
+    <div class="category-subcategory-nav__grid category-subcategory-nav__grid--count-{{ page.guideCards.length }}" data-guide-count="{{ page.guideCards.length }}">
       {% for card in page.guideCards %}
       {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
       {% set isPhotoDestinationCard = page.title == "Photography" and card.linkUrl == "/category/travel-guides/best-photo-spots/" %}
