@@ -1,13 +1,11 @@
 const path = require('path');
-const webpack = require('webpack');
-const vue = require('vue-loader');
-const Extract = require('extract-text-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const {VueLoaderPlugin} = require('vue-loader');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 const isProd = process.env.NODE_ENV === 'production';
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
+  mode: isProd ? 'production' : 'development',
   devtool: isProd ? false : 'source-map',
   entry: {
     'javascripts/main': './src/javascripts/main.js',
@@ -15,7 +13,8 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'build/assets'),
-    filename: isProd ? '[name].[chunkhash].js' : '[name].js',
+    filename: isProd ? '[name].[contenthash].js' : '[name].js',
+    publicPath: '/assets/'
   },
   module: {
     rules: [
@@ -26,35 +25,35 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        loader:  Extract.extract({
-          fallbackLoader: 'style-loader',
-          loader: [
-            'css-loader',
-            'postcss-loader',
-            'sass-loader'
-          ]
-        })
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
+        use: [
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: {
+                filter: url => !url.startsWith('/assets/')
+              }
+            }
+          },
+          'postcss-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
       },
       {
-        test: /\.html$/,
-        loader: 'html'
-      },
-      {
-        test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/,
-        loader: "file-loader?name=[path][name].[hash:base64:5].[ext]"
+        test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff2?$|\.ttf$|\.wav$|\.mp3$/,
+        type: 'asset/resource',
+        generator: {
+          filename: '[path][name].[contenthash:5][ext]'
+        }
       },
       {
         test: /\.ya?ml$/,
         use: {
-          loader: 'yaml-import-loader'
+          loader: 'yaml-loader'
         }
       }
     ]
@@ -64,32 +63,14 @@ module.exports = {
       vue$: 'vue/dist/vue.esm.js'
     },
     modules: ['node_modules', 'src'],
-    extensions: ['.js', '.json']
+    extensions: ['.js', '.json', '.vue']
   },
   plugins: [
-    new ManifestPlugin(),
-    new Extract(isProd ? '[name].[contenthash].css' : '[name].css'),
-    new ImageminPlugin({
-      disable: process.env.NODE_ENV !== 'production', // Disable during development
-    }),
-    new FaviconsWebpackPlugin({
-      logo: './src/images/default-favicon.png',
-      emitStats: true,
-      prefix: '/shortcut-[hash:base64:5]/',
-      statsFilename: 'favicon-mainfest.json',
-      persistentCache: true,
-      icons: {
-        android: true,
-        appleIcon: true,
-        favicons: true,
-        firefox: false,
-        appleStartup: false,
-        coast: false,
-        opengraph: false,
-        twitter: false,
-        yandex: false,
-        windows: false
-      }
-    })
-  ]
+    new VueLoaderPlugin(),
+    new WebpackManifestPlugin({fileName: 'manifest.json', publicPath: ''}),
+    new MiniCssExtractPlugin({filename: isProd ? '[name].[contenthash].css' : '[name].css'})
+  ],
+  performance: {
+    hints: false
+  }
 };

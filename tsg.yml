@@ -5,7 +5,6 @@ buildPath: build
 context:
   site: data/site.graphql
   assets: ../../build/assets/manifest.json
-  favicon: ../../build/assets/favicon-mainfest.json
 
 images: &images
   default:

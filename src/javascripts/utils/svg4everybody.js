@@ -50,15 +50,15 @@ function loadreadystatechange(xhr) {
         let target = xhr._cachedTarget[item.id];
 
       // ensure the cached target
-      if (!target) {
-        target = xhr._cachedTarget[item.id] = cachedDocument.getElementById(item.id);
-      }
+        if (!target) {
+          target = xhr._cachedTarget[item.id] = cachedDocument.getElementById(item.id);
+        }
 
       // embed the target into the svg
-      embed(item.svg, target);
+        embed(item.svg, target);
 
-      return target;
-    });
+        return target;
+      });
     }
   };
 

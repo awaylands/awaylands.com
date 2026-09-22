@@ -10,7 +10,9 @@ import initDestinations3Postcards from './components/destinations3-postcards';
 import initFilmGallery from './components/film-gallery';
 
 const enableDragScrolling = track => {
-  if (!track || track.dataset.dragScrolling === 'true') return;
+  if (!track || track.dataset.dragScrolling === 'true') {
+    return;
+  }
 
   let pointerId = null;
   let startX = 0;
@@ -21,8 +23,12 @@ const enableDragScrolling = track => {
   track.addEventListener('pointerdown', event => {
     // Touchscreens get smoother momentum from the browser's native overflow
     // scrolling. Pointer dragging is retained for mouse and pen input.
-    if (event.pointerType === 'touch') return;
-    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    if (event.pointerType === 'touch') {
+      return;
+    }
+    if (event.pointerType === 'mouse' && event.button !== 0) {
+      return;
+    }
     pointerId = event.pointerId;
     startX = event.clientX;
     startScrollLeft = track.scrollLeft;
@@ -31,19 +37,31 @@ const enableDragScrolling = track => {
     track.setPointerCapture(pointerId);
   });
   track.addEventListener('pointermove', event => {
-    if (pointerId !== event.pointerId) return;
+    if (pointerId !== event.pointerId) {
+      return;
+    }
     const distance = event.clientX - startX;
 
-    if (Math.abs(distance) > 5) dragged = true;
+    if (Math.abs(distance) > 5) {
+      dragged = true;
+    }
     track.scrollLeft = startScrollLeft - distance;
-    if (dragged) event.preventDefault();
+    if (dragged) {
+      event.preventDefault();
+    }
   });
   const finishDrag = event => {
-    if (pointerId !== event.pointerId) return;
-    if (track.hasPointerCapture(pointerId)) track.releasePointerCapture(pointerId);
+    if (pointerId !== event.pointerId) {
+      return;
+    }
+    if (track.hasPointerCapture(pointerId)) {
+      track.releasePointerCapture(pointerId);
+    }
     pointerId = null;
     track.classList.remove('is-dragging');
-    if (dragged) track.dataset.suppressClickUntil = String(Date.now() + 350);
+    if (dragged) {
+      track.dataset.suppressClickUntil = String(Date.now() + 350);
+    }
   };
   track.addEventListener('pointerup', finishDrag);
   track.addEventListener('pointercancel', finishDrag);
@@ -60,10 +78,14 @@ const initBlogDragCarousels = () => {
 };
 
 const enableInfiniteCarousel = (track, cardSelector) => {
-  if (!track || track.dataset.infiniteCarousel === 'true') return;
+  if (!track || track.dataset.infiniteCarousel === 'true') {
+    return;
+  }
   const originals = Array.prototype.slice.call(track.querySelectorAll(cardSelector));
 
-  if (originals.length < 2) return;
+  if (originals.length < 2) {
+    return;
+  }
 
   let setWidth = 0;
   let normalizing = false;
@@ -83,7 +105,9 @@ const enableInfiniteCarousel = (track, cardSelector) => {
     setWidth = originals.reduce((width, card) => (
       width + card.getBoundingClientRect().width + gap
     ), 0);
-    if (!setWidth) return;
+    if (!setWidth) {
+      return;
+    }
 
     const before = document.createDocumentFragment();
     const after = document.createDocumentFragment();
@@ -106,21 +130,25 @@ const enableInfiniteCarousel = (track, cardSelector) => {
     setInstantScroll(setWidth);
   };
   const normalizePosition = () => {
-    if (normalizing || !setWidth) return;
+    if (normalizing || !setWidth) {
+      return;
+    }
     if (track.scrollLeft < setWidth * 0.5 || track.scrollLeft > setWidth * 1.5) {
       normalizing = true;
-      const destination = track.scrollLeft < setWidth * 0.5
-        ? track.scrollLeft + setWidth
-        : track.scrollLeft - setWidth;
+      const destination = track.scrollLeft < setWidth * 0.5 ?
+        track.scrollLeft + setWidth :
+        track.scrollLeft - setWidth;
 
       setInstantScroll(destination);
-      window.requestAnimationFrame(() => { normalizing = false; });
+      window.requestAnimationFrame(() => {
+        normalizing = false;
+      });
     }
   };
 
   track.dataset.infiniteCarousel = 'true';
   buildCopies();
-  track.addEventListener('scroll', normalizePosition, { passive: true });
+  track.addEventListener('scroll', normalizePosition, {passive: true});
   window.addEventListener('resize', () => {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(buildCopies, 180);
@@ -135,65 +163,89 @@ const initBlogInfiniteCarousels = () => {
 const initBlogItineraryCarousel = () => {
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-itinerary-direction]');
-    if (!button) return;
+    if (!button) {
+      return;
+    }
     const section = button.closest('.bm-itineraries');
     const track = section && section.querySelector('.bm-itineraries__grid');
     const card = track && track.querySelector('.bm-itinerary-card');
-    if (!track || !card) return;
+    if (!track || !card) {
+      return;
+    }
     const direction = button.dataset.itineraryDirection === 'previous' ? -1 : 1;
     const step = card.getBoundingClientRect().width + 16;
-    track.scrollBy({ left: direction * step, behavior: 'smooth' });
+    track.scrollBy({left: direction * step, behavior: 'smooth'});
   });
 };
 
 const initBlogProductCarousel = () => {
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-product-direction]');
-    if (!button) return;
+    if (!button) {
+      return;
+    }
     const section = button.closest('.bm-products');
     const track = section && section.querySelector('.bm-products__track');
     const card = track && track.querySelector('.bm-product');
-    if (!track || !card) return;
+    if (!track || !card) {
+      return;
+    }
     const direction = button.dataset.productDirection === 'previous' ? -1 : 1;
     const step = card.getBoundingClientRect().width + 8;
-    track.scrollBy({ left: direction * step, behavior: 'smooth' });
+    track.scrollBy({left: direction * step, behavior: 'smooth'});
   });
 };
 
 const initCategorySubcategories = () => {
   const navigation = document.querySelector('.category-subcategory-nav');
-  if (!navigation) return;
+  if (!navigation) {
+    return;
+  }
 
   const triggers = Array.from(navigation.querySelectorAll('[data-subcategory-trigger]'));
   const panels = Array.from(navigation.querySelectorAll('[data-subcategory-panel]'));
-  if (!triggers.length || !panels.length) return;
+  if (!triggers.length || !panels.length) {
+    return;
+  }
 
   navigation.addEventListener('click', event => {
     const trigger = event.target.closest('[data-subcategory-trigger]');
-    if (!trigger) return;
+    if (!trigger) {
+      return;
+    }
     event.preventDefault();
 
     const wasExpanded = trigger.getAttribute('aria-expanded') === 'true';
     triggers.forEach(item => item.setAttribute('aria-expanded', 'false'));
-    panels.forEach(panel => { panel.hidden = true; });
+    panels.forEach(panel => {
+      panel.hidden = true;
+    });
 
-    if (wasExpanded) return;
+    if (wasExpanded) {
+      return;
+    }
 
     const panel = navigation.querySelector(`#${trigger.dataset.subcategoryPanel}`);
-    if (!panel) return;
+    if (!panel) {
+      return;
+    }
     trigger.setAttribute('aria-expanded', 'true');
     panel.hidden = false;
-    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    panel.scrollIntoView({behavior: 'smooth', block: 'start'});
   });
 };
 
 const initCategoryNavPreview = () => {
   const preview = document.querySelector('[data-category-nav-preview]');
-  if (!preview) return;
+  if (!preview) {
+    return;
+  }
 
   preview.addEventListener('click', event => {
     const button = event.target.closest('[data-category-nav-select]');
-    if (!button) return;
+    if (!button) {
+      return;
+    }
     const selected = button.dataset.categoryNavSelect;
 
     preview.querySelectorAll('[data-category-nav-select]').forEach(item => {
@@ -207,15 +259,21 @@ const initCategoryNavPreview = () => {
   });
 
   preview.addEventListener('change', event => {
-    if (!event.target.matches('[data-category-nav-option="3"] select')) return;
-    if (event.target.value) window.location.href = event.target.value;
+    if (!event.target.matches('[data-category-nav-option="3"] select')) {
+      return;
+    }
+    if (event.target.value) {
+      window.location.href = event.target.value;
+    }
   });
 };
 
 const initCategoryArchivePagination = () => {
   const listing = document.querySelector('[data-category-archive-page-size]');
   const navigation = document.querySelector('[data-category-archive-pagination]');
-  if (!listing || !navigation) return;
+  if (!listing || !navigation) {
+    return;
+  }
 
   const cards = Array.from(listing.querySelectorAll('[data-category-archive-card]'));
   const pageSize = Number(listing.dataset.categoryArchivePageSize) || 12;
@@ -237,8 +295,11 @@ const initCategoryArchivePagination = () => {
 
   const pageHref = page => {
     const nextParameters = new URLSearchParams(window.location.search);
-    if (page === 1) nextParameters.delete('archive-page');
-    else nextParameters.set('archive-page', page);
+    if (page === 1) {
+      nextParameters.delete('archive-page');
+    } else {
+      nextParameters.set('archive-page', page);
+    }
     const query = nextParameters.toString();
     return `${window.location.pathname}${query ? `?${query}` : ''}#all-stories`;
   };
@@ -246,16 +307,20 @@ const initCategoryArchivePagination = () => {
   const addLink = (label, page, options = {}) => {
     const link = document.createElement(options.disabled ? 'span' : 'a');
     link.textContent = label;
-    if (!options.disabled) link.href = pageHref(page);
+    if (!options.disabled) {
+      link.href = pageHref(page);
+    }
     if (options.current) {
       link.className = 'is-current';
       link.setAttribute('aria-current', 'page');
     }
-    if (options.disabled) link.className = 'is-disabled';
+    if (options.disabled) {
+      link.className = 'is-disabled';
+    }
     navigation.appendChild(link);
   };
 
-  addLink('Previous', currentPage - 1, { disabled: currentPage === 1 });
+  addLink('Previous', currentPage - 1, {disabled: currentPage === 1});
 
   const visiblePages = [1, currentPage - 1, currentPage, currentPage + 1, totalPages]
     .filter(page => page >= 1 && page <= totalPages)
@@ -269,10 +334,10 @@ const initCategoryArchivePagination = () => {
       separator.textContent = '…';
       navigation.appendChild(separator);
     }
-    addLink(String(page), page, { current: page === currentPage });
+    addLink(String(page), page, {current: page === currentPage});
   });
 
-  addLink('Next', currentPage + 1, { disabled: currentPage === totalPages });
+  addLink('Next', currentPage + 1, {disabled: currentPage === totalPages});
 };
 
 const initCategoryIndexes = () => {
@@ -301,6 +366,28 @@ import Gallery from './directives/gallery';
 import Story from './directives/story';
 
 Vue.config.productionTip = false;
+
+const makeDocumentIdsUnique = () => {
+  const seen = {};
+
+  Array.from(document.querySelectorAll('[id]')).forEach(element => {
+    const original = element.id;
+    const count = seen[original] || 0;
+    seen[original] = count + 1;
+
+    if (count) {
+      element.id = `${original}-duplicate-${count}`;
+    }
+  });
+};
+
+makeDocumentIdsUnique();
+
+// RewardStyle scripts have already run while the document was parsed. Removing
+// their nodes keeps Vue from compiling them as template content.
+Array.prototype.forEach.call(document.querySelectorAll('.shopthepost-widget script'), script => {
+  script.parentNode.removeChild(script);
+});
 
 export const eventBus = new Vue();
 

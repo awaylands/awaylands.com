@@ -12,22 +12,22 @@ export default function () {
   let id;
 
   return new Promise(resolve => {
-      function check(e) {
-    polycheck = use.getBoundingClientRect().width != 0;
+    function check(e) {
+      polycheck = use.getBoundingClientRect().width !== 0;
 
-    if (polycheck) {
-      return resolve(true);
+      if (polycheck) {
+        return resolve(true);
+      }
+
+      if (e || !--retries) {
+        body.removeChild(svg);
+        clearInterval(id);
+        return resolve(false);
+      }
     }
 
-    if (e || !--retries) {
-      body.removeChild(svg);
-      clearInterval(id);
-      return resolve(false);
-    }
-  }
-
-  try {
-    const url = URL.createObjectURL(
+    try {
+      const url = URL.createObjectURL(
       new Blob([
         '<svg xmlns="http://www.w3.org/2000/svg">' +
         '<rect width="1" height="1" id="x"/>' +
@@ -35,20 +35,20 @@ export default function () {
       ], {type: 'image/svg+xml'})
     );
 
-    body = document.body;
-    body.insertAdjacentHTML('beforeend',
+      body = document.body;
+      body.insertAdjacentHTML('beforeend',
       '<svg style="position:absolute;visibility:hidden">' +
       '<use xlink:href="' + url + '#x"/>' +
       '</svg>'
     );
 
-    svg = body.lastChild;
-    use = svg.firstChild;
-    id = setInterval(check, 50);
+      svg = body.lastChild;
+      use = svg.firstChild;
+      id = setInterval(check, 50);
 
-    use.addEventListener('load', check);
-  } catch (e) {
-    resolve(false);
-  }
-});
+      use.addEventListener('load', check);
+    } catch (e) {
+      resolve(false);
+    }
+  });
 }

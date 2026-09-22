@@ -4,7 +4,7 @@ let plugins = [
   require('postcss-custom-media'),
   require('postcss-media-minmax'),
   require('autoprefixer')({
-    browsers: '> 5%'
+    overrideBrowserslist: '> 0.5%, last 2 versions, not dead'
   }),
   require('lost')
 ];

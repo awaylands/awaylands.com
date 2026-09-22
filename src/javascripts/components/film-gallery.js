@@ -1,5 +1,7 @@
 const getEmbedUrl = source => {
-  if (!source) return null;
+  if (!source) {
+    return null;
+  }
 
   const youtubeMatch = source.match(/(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/)|youtu\.be\/)([A-Za-z0-9_-]{6,})/i);
   if (youtubeMatch) {
@@ -16,7 +18,9 @@ const getEmbedUrl = source => {
 
 const initFilmGallery = () => {
   const gallery = document.querySelector('[data-film-gallery]');
-  if (!gallery || gallery.dataset.filmGalleryReady === 'true') return;
+  if (!gallery || gallery.dataset.filmGalleryReady === 'true') {
+    return;
+  }
 
   const modal = gallery.querySelector('[data-film-modal]');
   const stage = gallery.querySelector('[data-film-stage]');
@@ -42,18 +46,24 @@ const initFilmGallery = () => {
   });
 
   const closePlayer = () => {
-    if (!modal || !modal.classList.contains('is-open')) return;
+    if (!modal || !modal.classList.contains('is-open')) {
+      return;
+    }
     modal.classList.remove('is-open');
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('has-film-player');
     stage.innerHTML = '';
-    if (returnFocus) returnFocus.focus();
+    if (returnFocus) {
+      returnFocus.focus();
+    }
   };
 
   gallery.querySelectorAll('[data-film-open]').forEach(link => {
     link.addEventListener('click', event => {
       const embedUrl = getEmbedUrl(link.href);
-      if (!embedUrl || !modal || !stage) return;
+      if (!embedUrl || !modal || !stage) {
+        return;
+      }
 
       event.preventDefault();
       returnFocus = link;
@@ -76,9 +86,13 @@ const initFilmGallery = () => {
     });
   });
 
-  if (closeButton) closeButton.addEventListener('click', closePlayer);
+  if (closeButton) {
+    closeButton.addEventListener('click', closePlayer);
+  }
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') closePlayer();
+    if (event.key === 'Escape') {
+      closePlayer();
+    }
   });
 };
 

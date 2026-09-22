@@ -1033,9 +1033,9 @@ function normalizeStorySpacing(el) {
     const nextIsImage = next && (next.tagName === 'FIGURE' || next.classList.contains('story-gallery'));
     const nextRemovesSpacing = nextIsImage && next.classList.contains('spacing-none');
 
-    child.classList.toggle('story-image-followed-by-image', !!(childIsImage && nextIsImage && !nextRemovesSpacing));
-    child.classList.toggle('story-content-followed-by-image', !!(!childIsImage && nextIsImage && !nextRemovesSpacing));
-    child.classList.toggle('story-content-followed-by-no-spacing-image', !!(!childIsImage && nextIsImage && nextRemovesSpacing));
+    child.classList.toggle('story-image-followed-by-image', Boolean(childIsImage && nextIsImage && !nextRemovesSpacing));
+    child.classList.toggle('story-content-followed-by-image', Boolean(!childIsImage && nextIsImage && !nextRemovesSpacing));
+    child.classList.toggle('story-content-followed-by-no-spacing-image', Boolean(!childIsImage && nextIsImage && nextRemovesSpacing));
   });
 }
 
@@ -1233,24 +1233,24 @@ function insertStoryShopEmbed(container, sourceHtml) {
     if (tag === 'a') {
       const href = safeStoryShopUrl(node.getAttribute('href'));
 
-      if (!href) {
-        node.removeAttribute('href');
-      } else {
+      if (href) {
         node.href = href;
         node.target = '_blank';
         node.rel = 'sponsored nofollow noopener';
+      } else {
+        node.removeAttribute('href');
       }
     }
 
     if (tag === 'img') {
       const src = safeStoryShopUrl(node.getAttribute('src'));
 
-      if (!src) {
-        node.parentNode.removeChild(node);
-      } else {
+      if (src) {
         node.src = src;
         node.loading = 'lazy';
         node.decoding = 'async';
+      } else {
+        node.parentNode.removeChild(node);
       }
     }
 
@@ -1564,19 +1564,51 @@ function mergedStoryPickCandidates(el, storyPage, isStyleEdit) {
   return picks;
 }
 
-function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
-  const article = storyPage.querySelector('.story-article');
+function firstStoryOverviewParagraph(el) {
   const paragraphs = el.querySelectorAll('p');
-  const overviewHeadings = storySectionHeadings(el);
-  let source = null;
 
   for (let index = 0; index < paragraphs.length; index += 1) {
     if ((paragraphs[index].textContent || '').trim().length > 100) {
-      source = paragraphs[index];
-      break;
+      return paragraphs[index];
     }
   }
 
+  return null;
+}
+
+function appendStoryOverviewLinks(links, overviewHeadings, storyPage) {
+  for (let index = 0; index < 3; index += 1) {
+    const itemNumber = index + 1;
+    const selectedSection = (storyPage.getAttribute(`data-at-a-glance-item-${itemNumber}-section`) || '').trim();
+    const hasSelectedSection = /^\d+$/.test(selectedSection);
+    const selectedIndex = hasSelectedSection ? parseInt(selectedSection, 10) - 1 : index;
+    const heading = overviewHeadings[selectedIndex];
+    const manualTitle = (storyPage.getAttribute(`data-at-a-glance-item-${itemNumber}-title`) || '').trim();
+    const manualLink = (storyPage.getAttribute(`data-at-a-glance-item-${itemNumber}-link`) || '').trim();
+    const headingTitle = heading ? storyTocTitle(heading.textContent) : '';
+    const headingLink = heading ? `#${heading.id}` : '';
+    const itemTitle = hasSelectedSection ? headingTitle : (manualTitle || headingTitle);
+    const itemLink = hasSelectedSection ? headingLink : (manualLink || headingLink);
+
+    if (itemTitle && itemLink) {
+      const item = document.createElement('li');
+      const link = document.createElement('a');
+      const number = document.createElement('span');
+
+      number.textContent = `0${itemNumber}`;
+      link.href = itemLink;
+      link.appendChild(number);
+      link.appendChild(document.createTextNode(itemTitle));
+      item.appendChild(link);
+      links.appendChild(item);
+    }
+  }
+}
+
+function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
+  const article = storyPage.querySelector('.story-article');
+  const source = firstStoryOverviewParagraph(el);
+  const overviewHeadings = storySectionHeadings(el);
   const manualSummary = (storyPage.getAttribute('data-at-a-glance-summary') || '').trim();
 
   if (!article || (!source && !manualSummary)) {
@@ -1602,33 +1634,7 @@ function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
   summary.textContent = manualSummary || conciseStoryExcerpt(source.textContent);
   links.className = 'story-overview__links';
 
-  for (let index = 0; index < 3; index += 1) {
-    const selectedSection = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-section`) || '').trim();
-    const hasSelectedSection = /^\d+$/.test(selectedSection);
-    const selectedIndex = hasSelectedSection ? parseInt(selectedSection, 10) - 1 : index;
-    const heading = overviewHeadings[selectedIndex];
-    const manualTitle = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-title`) || '').trim();
-    const manualLink = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-link`) || '').trim();
-    const headingTitle = heading ? storyTocTitle(heading.textContent) : '';
-    const headingLink = heading ? `#${heading.id}` : '';
-    const itemTitle = hasSelectedSection ? headingTitle : (manualTitle || headingTitle);
-    const itemLink = hasSelectedSection ? headingLink : (manualLink || headingLink);
-
-    if (!itemTitle || !itemLink) {
-      continue;
-    }
-
-    const item = document.createElement('li');
-    const link = document.createElement('a');
-    const number = document.createElement('span');
-
-    number.textContent = `0${index + 1}`;
-    link.href = itemLink;
-    link.appendChild(number);
-    link.appendChild(document.createTextNode(itemTitle));
-    item.appendChild(link);
-    links.appendChild(item);
-  }
+  appendStoryOverviewLinks(links, overviewHeadings, storyPage);
 
   overview.appendChild(kicker);
   overview.appendChild(title);
@@ -1637,26 +1643,6 @@ function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
     overview.appendChild(links);
   }
   article.insertBefore(overview, el);
-}
-
-function cleanSidebarStoryTitle(sourceTitle) {
-  const manualTitle = (sourceTitle.getAttribute('data-sidebar-title') || '').trim();
-
-  if (manualTitle) {
-    return manualTitle;
-  }
-
-  let title = (sourceTitle.textContent || '').trim().replace(/\s*\([^)]*\)\s*$/, '');
-
-  if (title.length > 64 && title.indexOf(' - ') !== -1) {
-    title = title.split(' - ')[0].trim();
-  }
-
-  if (title.length > 64 && title.indexOf(':') !== -1) {
-    title = title.split(':')[0].trim();
-  }
-
-  return title;
 }
 
 function shouldUseAdvancedStory(el, storyPage) {
@@ -2349,9 +2335,9 @@ export default {
   bind(el) {
     prepareStory(el);
 
-    new ImagesLoaded(el, () => {
+    el.imagesLoaded = new ImagesLoaded(el, () => {
       alignPairedMediumFigures(el);
-      new LuminousGallery(lightboxStoryImages(el), galleryOpts, opts);
+      el.luminousGallery = new LuminousGallery(lightboxStoryImages(el), galleryOpts, opts);
     });
   },
   inserted(el) {

@@ -14,13 +14,13 @@ const galleryOpts = {
 export default {
   name: 'gallery',
   bind(el) {
-    new ImagesLoaded(el, () => {
-      new Shuffle(el, {
+    el.imagesLoaded = new ImagesLoaded(el, () => {
+      el.shuffle = new Shuffle(el, {
         itemSelector: '.masonry__item',
         sizer: '.masonry__sizer'
       });
 
-      new LuminousGallery(el.querySelectorAll('.still'), galleryOpts, opts);
+      el.luminousGallery = new LuminousGallery(el.querySelectorAll('.still'), galleryOpts, opts);
     });
   }
 };

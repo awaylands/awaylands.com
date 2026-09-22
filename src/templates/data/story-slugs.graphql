@@ -107,9 +107,9 @@ query($images: TSImagesConfig) {
           }
         }
       }
-      contentHtml(images: $images)
+      contentHtml(images: $images, headerIdPrefix: "story-main-")
       extraContentBlocks {
-        contentHtml(images: $images)
+        contentHtml(images: $images, headerIdPrefix: "story-extra-")
       }
       extraHtmlBlocks {
         html
@@ -119,33 +119,33 @@ query($images: TSImagesConfig) {
         columnCount
       }
       mainHtmlBlock1
-      mainContentBlock1Html(images: $images)
+      mainContentBlock1Html(images: $images, headerIdPrefix: "story-main-1-")
       additionalMainBlocks {
         mainHtmlBlock2
-        mainContentBlock2Html(images: $images)
+        mainContentBlock2Html(images: $images, headerIdPrefix: "story-grouped-2-")
         mainHtmlBlock3
-        mainContentBlock3Html(images: $images)
+        mainContentBlock3Html(images: $images, headerIdPrefix: "story-grouped-3-")
         mainHtmlBlock4
-        mainContentBlock4Html(images: $images)
+        mainContentBlock4Html(images: $images, headerIdPrefix: "story-grouped-4-")
         mainHtmlBlock5
-        mainContentBlock5Html(images: $images)
+        mainContentBlock5Html(images: $images, headerIdPrefix: "story-grouped-5-")
         mainHtmlBlock6
-        mainContentBlock6Html(images: $images)
+        mainContentBlock6Html(images: $images, headerIdPrefix: "story-grouped-6-")
       }
       mainHtmlBlock2
-      mainContentBlock2Html(images: $images)
+      mainContentBlock2Html(images: $images, headerIdPrefix: "story-legacy-2-")
       mainHtmlBlock3
-      mainContentBlock3Html(images: $images)
+      mainContentBlock3Html(images: $images, headerIdPrefix: "story-legacy-3-")
       mainHtmlBlock4
-      mainContentBlock4Html(images: $images)
+      mainContentBlock4Html(images: $images, headerIdPrefix: "story-legacy-4-")
       mainHtmlBlock5
-      mainContentBlock5Html(images: $images)
+      mainContentBlock5Html(images: $images, headerIdPrefix: "story-legacy-5-")
       mainHtmlBlock6
-      mainContentBlock6Html(images: $images)
+      mainContentBlock6Html(images: $images, headerIdPrefix: "story-legacy-6-")
       contentBlocks {
         __typename
         ... on ContentBlock {
-          contentHtml(images: $images)
+          contentHtml(images: $images, headerIdPrefix: "story-structured-")
         }
         ... on HtmlBlock {
           html

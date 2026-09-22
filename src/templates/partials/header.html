@@ -91,7 +91,7 @@
             </li>
 
             <li>
-              <a href="{{ social.pinterestUrl }}" target="_blank" rel="noopener noreferrer">{% include "vectors/pinterest.svg" %}</a>
+              <a href="{{ social.pinterestUrl | replace('http://', 'https://') }}" target="_blank" rel="noopener noreferrer">{% include "vectors/pinterest.svg" %}</a>
             </li>
           </ul>
 

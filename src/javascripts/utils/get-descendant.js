@@ -1,16 +1,15 @@
 const getDescendant = function (element, className) {
   const children = element.childNodes;
 
-  for (var i = 0; i < children.length; i++) {
-    if (children[i].className &&
-      children[i].className.split(' ').indexOf(className) >= 0)
-    {
-      return children[i];
+  for (let index = 0; index < children.length; index += 1) {
+    if (children[index].className &&
+      children[index].className.split(' ').indexOf(className) >= 0) {
+      return children[index];
     }
   }
 
-  for (var i = 0; i < children.length; i++) {
-    var match = getDescendant(children[i], className);
+  for (let index = 0; index < children.length; index += 1) {
+    const match = getDescendant(children[index], className);
     if (match !== null) {
       return match;
     }

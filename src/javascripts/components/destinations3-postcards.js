@@ -1,6 +1,8 @@
 export default function initDestinations3Postcards() {
   const root = document.querySelector('[data-d3-postcards]');
-  if (!root || root.dataset.d3Ready === 'true') return;
+  if (!root || root.dataset.d3Ready === 'true') {
+    return;
+  }
 
   const cards = Array.prototype.slice.call(root.querySelectorAll('[data-d3-card]'));
   const prev = root.querySelector('[data-d3-prev]');
@@ -28,25 +30,27 @@ export default function initDestinations3Postcards() {
   }
 
   function move(direction) {
-    if (!cards.length) return;
+    if (!cards.length) {
+      return;
+    }
 
-    active = direction === 'next'
-      ? (active + 1) % cards.length
-      : (active - 1 + cards.length) % cards.length;
+    active = direction === 'next' ?
+      (active + 1) % cards.length :
+      (active - 1 + cards.length) % cards.length;
 
     updateCards();
     schedule();
   }
 
   if (prev) {
-    prev.addEventListener('click', (event) => {
+    prev.addEventListener('click', event => {
       event.preventDefault();
       move('prev');
     });
   }
 
   if (next) {
-    next.addEventListener('click', (event) => {
+    next.addEventListener('click', event => {
       event.preventDefault();
       move('next');
     });

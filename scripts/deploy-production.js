@@ -17,6 +17,15 @@ function run(command, args) {
   childProcess.execFileSync(command, args, { cwd: root, stdio: 'inherit' });
 }
 
+function runNpm(args) {
+  const npmCli = process.env.npm_execpath;
+  if (npmCli && fs.existsSync(npmCli)) {
+    run(node, [npmCli].concat(args));
+    return;
+  }
+  run('npm', args);
+}
+
 function fail(message) {
   throw new Error(`Deployment stopped: ${message}`);
 }
@@ -217,6 +226,7 @@ function generateSite() {
     copyTree(path.join(staticPath, 'assets'), path.join(root, 'build/assets'));
     run(node, [path.join(root, 'scripts/generate-destination-route-aliases.js')]);
     run(node, [path.join(root, 'scripts/generate-category-route-aliases.js')]);
+    run(node, [path.join(root, 'scripts/normalize-generated-html.js')]);
   } finally {
     if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
     removeTree(generatedPath);
@@ -225,13 +235,17 @@ function generateSite() {
 }
 
 async function main() {
-  run('npm', ['run', 'build']);
+  runNpm(['run', 'build']);
   const builtAssets = getManifestAssets();
   generateSite();
   const assets = getManifestAssets();
   if (assets.css !== builtAssets.css || assets.js !== builtAssets.js) fail('site generation changed the compiled manifest.');
   normalizeGeneratedAssets(assets);
   verifyGeneratedHtml(assets);
+  if (process.argv.includes('--generate-only')) {
+    process.stdout.write('Production-equivalent site generated and verified locally.\n');
+    return;
+  }
   run(node, [path.join(root, 'scripts/verify-production-baseline.js')]);
   run(node, [takeShape, 'deploy', '--file', 'tsg.yml']);
   await verifyLive(assets);
