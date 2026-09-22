@@ -1339,7 +1339,7 @@
           "mainCategory": {
             "widget": "relationship",
             "title": "Category",
-            "instructions": "Choose the main category or categories for this post."
+            "instructions": "Choose every main category for this post. If a subcategory is selected, also select its parent category here so Story searches find the post in both."
           }
         },
         "order": [
@@ -7698,7 +7698,7 @@
                 "@ref": "local:TSRelationship"
               }
             },
-            "title": "Category",
+            "title": "Sub Category",
             "@backreference": {
               "enabled": true
             },

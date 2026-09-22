@@ -70,10 +70,11 @@ inner.shapes.MainCategory = {
 inner.forms.Story.default.properties.mainCategory = {
   widget: 'relationship',
   title: 'Category',
-  instructions: 'Choose the main category or categories for this post.'
+  instructions: 'Choose every main category for this post. If a subcategory is selected, also select its parent category here so Story searches find the post in both.'
 };
 inner.forms.Story.default.properties.category.title = 'Sub Category';
 inner.forms.Story.default.properties.category.instructions = 'Choose any specific subcategories for this post.';
+inner.shapes.Story.schema.properties.category.title = 'Sub Category';
 inner.forms.Story.default.order = inner.forms.Story.default.order.filter(field => field !== 'mainCategory');
 inner.forms.Story.default.order.splice(inner.forms.Story.default.order.indexOf('category'), 0, 'mainCategory');
 inner.shapes.Story.schema.properties.mainCategory = Object.assign(

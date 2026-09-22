@@ -3,10 +3,10 @@
   "environment": "production",
   "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
   "created": "2017-03-15T23:43:16.289Z",
-  "schemaHash": "7ab1d547bc6b4624be3f5106d023a69f949b850260b1f35d3ad47d46b557c0d4",
-  "updated": "2026-08-05T00:32:13.763Z",
-  "version": 249,
-  "versionAt": "2026-08-05T00:32:13.763Z",
+  "schemaHash": "6436bb4fff907933614fefe0629d6703ec5100190346fb960b9f263d7ee4a1b0",
+  "updated": "2026-09-22T01:32:40.437Z",
+  "version": 253,
+  "versionAt": "2026-09-22T01:32:40.437Z",
   "versionBy": "2ebbde81-64ae-42d6-85de-cf26286a4780",
   "schema": {
     "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
@@ -1349,7 +1349,7 @@
             "mainCategory": {
               "widget": "relationship",
               "title": "Category",
-              "instructions": "Choose the main category or categories for this post."
+              "instructions": "Choose every main category for this post. If a subcategory is selected, also select its parent category here so Story searches find the post in both."
             }
           },
           "order": [
@@ -7708,7 +7708,7 @@
                   "@ref": "local:TSRelationship"
                 }
               },
-              "title": "Category",
+              "title": "Sub Category",
               "@backreference": {
                 "enabled": true
               },
