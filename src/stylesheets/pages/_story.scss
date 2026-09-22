@@ -1812,6 +1812,7 @@ body.body--story {
 .body--story .related-stories__list li + * {
   display: block;
   width: auto;
+  max-width: none;
   margin: 0;
 }
 
