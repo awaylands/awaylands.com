@@ -1,7 +1,7 @@
 {
   "name": "Away Lands verified production baseline",
   "baselineDate": "2026-09-21",
-  "baselineCommit": "773da9554130b21c2bce79398ce36d191b7c330d",
+  "baselineCommit": "cb290b7fabda468619d56e77f29f0571c794d262",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
@@ -192,7 +192,7 @@
     "src/templates/pages/about.html": "be1a9b12edb122dc69bf9af81e13894765cc198e328eaf9a140ab7f71e6c5d32",
     "src/templates/pages/ads.txt": "144818e8b13f096efc084fc3acc8a386df2ae55c89d99250d7161f5638483dbf",
     "src/templates/pages/category-archive.html": "8522f7cf50939dc6a578b68fbbb97d7e70537842ca7714ada15cba173b65467f",
-    "src/templates/pages/category.html": "cc81ec036c19b93b71f91f398595bb0253a0cd70da2e990fb7c091d0becac06b",
+    "src/templates/pages/category.html": "ae52c19f85e0115743fbb3a80569ae829fe8723a4d527c8122f05da3d424f14c",
     "src/templates/pages/continent.html": "2187568195ff512e481863f7638136411d1c0be8918de9fa258a9fbbd3190042",
     "src/templates/pages/destination-hub-mockup.html": "287618e7fc8bd172d7f4371bd9ccfb7eb3f710d3b4e82cf9faf57d966c452940",
     "src/templates/pages/destinations.html": "52015571079c67030fa3d00e5a6c17a0953c2e09c43f02859c50550ae233bee5",
