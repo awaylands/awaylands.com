@@ -1262,7 +1262,7 @@
           },
           "category": {
             "widget": "relationship",
-            "title": "Category",
+            "title": "Sub-Category",
             "instructions": "Choose the parent category and every specific subcategory for this post. This keeps Story list searches complete at both category levels."
           },
           "location": {
@@ -7705,7 +7705,7 @@
                 "@ref": "local:TSRelationship"
               }
             },
-            "title": "Category",
+            "title": "Sub-Category",
             "@backreference": {
               "enabled": true
             },

@@ -3,10 +3,10 @@
   "environment": "production",
   "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
   "created": "2017-03-15T23:43:16.289Z",
-  "schemaHash": "e6231d99e85977eca893c0328ef8876cfc59ea02e83ce16623982a80bb7f3cf9",
-  "updated": "2026-09-22T05:22:15.148Z",
-  "version": 255,
-  "versionAt": "2026-09-22T05:22:15.148Z",
+  "schemaHash": "ee91228b44c2fc4c98baacfb2ef080f4d5619bc58709ce23d05e7a7881f64125",
+  "updated": "2026-09-22T16:40:12.886Z",
+  "version": 256,
+  "versionAt": "2026-09-22T16:40:12.886Z",
   "versionBy": "2ebbde81-64ae-42d6-85de-cf26286a4780",
   "schema": {
     "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
@@ -1272,7 +1272,7 @@
             },
             "category": {
               "widget": "relationship",
-              "title": "Category",
+              "title": "Sub-Category",
               "instructions": "Choose the parent category and every specific subcategory for this post. This keeps Story list searches complete at both category levels."
             },
             "location": {
@@ -7715,7 +7715,7 @@
                   "@ref": "local:TSRelationship"
                 }
               },
-              "title": "Category",
+              "title": "Sub-Category",
               "@backreference": {
                 "enabled": true
               },
