@@ -109,6 +109,9 @@ async function updateStory(id, mainCategoryIds, categoryIds) {
 (async () => {
   const data = await inventory();
   const tagsByTitle = new Map(data.getMainCategoryList.items.map(item => [item.title, item]));
+  const categoryRecordsByTitle = new Map(data.getCategoryList.items
+    .filter(category => mainTitles.includes(category.title) && (!category.parentCategory || category.parentCategory.title === category.title))
+    .map(category => [category.title, category]));
   const missing = mainTitles.filter(title => !tagsByTitle.has(title));
 
   if (apply) {
@@ -129,15 +132,22 @@ async function updateStory(id, mainCategoryIds, categoryIds) {
   for (const story of data.stories) {
     const desiredTitles = (story.mainCategory || []).map(category => category.title);
     const desiredCategoryIds = [];
-    const removedMainCategories = [];
+    const restoredMainCategories = [];
     for (const category of story.category || []) {
       const isSubcategory = category.parentCategory && category.parentCategory.title !== category.title;
       const title = isSubcategory ? category.parentCategory.title : category.title;
       if (mainTitles.includes(title) && !desiredTitles.includes(title)) desiredTitles.push(title);
       if (!isSubcategory && mainTitles.includes(category.title)) {
-        removedMainCategories.push(category.title);
+        if (!desiredCategoryIds.includes(category._id)) desiredCategoryIds.push(category._id);
       } else {
-        desiredCategoryIds.push(category._id);
+        if (!desiredCategoryIds.includes(category._id)) desiredCategoryIds.push(category._id);
+      }
+    }
+    for (const title of desiredTitles) {
+      const categoryRecord = categoryRecordsByTitle.get(title);
+      if (categoryRecord && !desiredCategoryIds.includes(categoryRecord._id)) {
+        desiredCategoryIds.push(categoryRecord._id);
+        restoredMainCategories.push(title);
       }
     }
     const desiredIds = desiredTitles.map(title => tagsByTitle.get(title)).filter(Boolean).map(tag => tag._id).sort();
@@ -147,7 +157,7 @@ async function updateStory(id, mainCategoryIds, categoryIds) {
     const mainCategoriesChanged = JSON.stringify(desiredIds) !== JSON.stringify(currentIds);
     const subcategoriesChanged = JSON.stringify(desiredCategoryIds) !== JSON.stringify(currentCategoryIds);
     if (mainCategoriesChanged || subcategoriesChanged) {
-      storyChanges.push({story, desiredIds, desiredTitles, desiredCategoryIds, removedMainCategories});
+      storyChanges.push({story, desiredIds, desiredTitles, desiredCategoryIds, restoredMainCategories});
     }
   }
 
@@ -156,11 +166,11 @@ async function updateStory(id, mainCategoryIds, categoryIds) {
     missingMainCategories: missing,
     categoryPageConnections: categoryConnections.map(item => item.title),
     storyUpdates: storyChanges.length,
-    duplicateMainCategoryReferences: storyChanges.reduce((total, change) => total + change.removedMainCategories.length, 0),
+    restoredMainCategoryReferences: storyChanges.reduce((total, change) => total + change.restoredMainCategories.length, 0),
     storySamples: storyChanges.slice(0, 12).map(change => ({
       title: change.story.title,
       categories: change.desiredTitles,
-      removedFromSubcategories: change.removedMainCategories
+      restoredForEditorSearch: change.restoredMainCategories
     }))
   }, null, 2));
 

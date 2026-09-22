@@ -3,10 +3,10 @@
   "environment": "production",
   "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
   "created": "2017-03-15T23:43:16.289Z",
-  "schemaHash": "6436bb4fff907933614fefe0629d6703ec5100190346fb960b9f263d7ee4a1b0",
-  "updated": "2026-09-22T01:32:40.437Z",
-  "version": 253,
-  "versionAt": "2026-09-22T01:32:40.437Z",
+  "schemaHash": "959153042da11a51ee95bcd033549dcf76d404e2c5c82a75d2bbd009c6287797",
+  "updated": "2026-09-22T01:57:05.843Z",
+  "version": 254,
+  "versionAt": "2026-09-22T01:57:05.843Z",
   "versionBy": "2ebbde81-64ae-42d6-85de-cf26286a4780",
   "schema": {
     "projectId": "decc50a7-e43f-4c99-b5e9-cc327d2e1b93",
@@ -1272,8 +1272,8 @@
             },
             "category": {
               "widget": "relationship",
-              "title": "Sub Category",
-              "instructions": "Choose any specific subcategories for this post."
+              "title": "Category",
+              "instructions": "Choose the parent category and every specific subcategory for this post. This keeps Story list searches complete at both category levels."
             },
             "location": {
               "widget": "relationship"
@@ -1348,8 +1348,8 @@
             },
             "mainCategory": {
               "widget": "relationship",
-              "title": "Category",
-              "instructions": "Choose every main category for this post. If a subcategory is selected, also select its parent category here so Story searches find the post in both."
+              "title": "Main Category",
+              "instructions": "Choose every main category for this post."
             }
           },
           "order": [
@@ -7708,7 +7708,7 @@
                   "@ref": "local:TSRelationship"
                 }
               },
-              "title": "Sub Category",
+              "title": "Category",
               "@backreference": {
                 "enabled": true
               },
@@ -8025,7 +8025,7 @@
               "title": "Additional Content / HTML Blocks"
             },
             "mainCategory": {
-              "title": "Category",
+              "title": "Main Category",
               "type": "array",
               "items": {
                 "@ref": "local:MainCategory"

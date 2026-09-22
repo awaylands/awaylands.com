@@ -1262,8 +1262,8 @@
           },
           "category": {
             "widget": "relationship",
-            "title": "Sub Category",
-            "instructions": "Choose any specific subcategories for this post."
+            "title": "Category",
+            "instructions": "Choose the parent category and every specific subcategory for this post. This keeps Story list searches complete at both category levels."
           },
           "location": {
             "widget": "relationship"
@@ -1338,8 +1338,8 @@
           },
           "mainCategory": {
             "widget": "relationship",
-            "title": "Category",
-            "instructions": "Choose every main category for this post. If a subcategory is selected, also select its parent category here so Story searches find the post in both."
+            "title": "Main Category",
+            "instructions": "Choose every main category for this post."
           }
         },
         "order": [
@@ -7698,7 +7698,7 @@
                 "@ref": "local:TSRelationship"
               }
             },
-            "title": "Sub Category",
+            "title": "Category",
             "@backreference": {
               "enabled": true
             },
@@ -8015,7 +8015,7 @@
             "title": "Additional Content / HTML Blocks"
           },
           "mainCategory": {
-            "title": "Category",
+            "title": "Main Category",
             "type": "array",
             "items": {
               "@ref": "local:MainCategory"
