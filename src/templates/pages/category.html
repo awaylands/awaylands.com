@@ -108,6 +108,12 @@
 {% set subcategoryFeaturedStories = [] %}
 {% set subcategoryFeaturedIds = [] %}
 {% if isSubcategory %}
+  {% for curatedStory in page.featuredStories %}
+    {% if curatedStory and curatedStory._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 %}
+      {% set ignored = subcategoryFeaturedStories.push(curatedStory) %}
+      {% set ignored = subcategoryFeaturedIds.push(curatedStory._id) %}
+    {% endif %}
+  {% endfor %}
   {% for parentGuideCard in page.parentCategory.guideCards %}
     {% if parentGuideCard.title | lower == page.title | lower %}
       {% for curatedCard in parentGuideCard.cards %}

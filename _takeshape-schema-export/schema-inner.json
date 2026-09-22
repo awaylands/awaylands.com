@@ -1690,6 +1690,12 @@
             "widget": "relationship",
             "title": "Hero - Fallback Post"
           },
+          "featuredStories": {
+            "widget": "relationship",
+            "title": "FEATURED - Large Start Here Posts",
+            "instructions": "Subcategory pages only. Choose and order the two posts shown as the large Start Here cards directly below the header.",
+            "collapseByDefault": false
+          },
           "featuredLabel": {
             "widget": "singleLineText",
             "title": "Recommended Reading - Kicker"
@@ -1997,6 +2003,7 @@
           "pageHeadline",
           "heroImage",
           "heroStory",
+          "featuredStories",
           "introText",
           "introLinkText",
           "introLinkUrl",
@@ -8606,10 +8613,10 @@
             "@mapping": "shapedb:Category.CategoryFeaturedDescriptionV2"
           },
           "featuredStories": {
-            "title": "Featured Posts",
-            "description": "Optional. Add and order the featured posts.",
+            "title": "FEATURED - Large Start Here Posts",
+            "description": "Subcategory pages only. Choose and order the two posts shown as the large Start Here cards directly below the header.",
             "type": "array",
-            "maxItems": 12,
+            "maxItems": 2,
             "items": {
               "@ref": "local:Story"
             },
