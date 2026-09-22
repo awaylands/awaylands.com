@@ -49,7 +49,7 @@
       <span class="category-shortlist-card__copy">
         {% if filterable %}<small data-subcategory-card-label>Collection</small>{% endif %}
         <strong>{{ story.title }}</strong>
-        <i>Read the story <span aria-hidden="true">⟶</span></i>
+        <i aria-hidden="true"><span>⟶</span></i>
       </span>
     </a>
   </article>
@@ -443,7 +443,7 @@
               <small>{{ guideCard.eyebrow or card.title }}</small>
               <strong>{{ guideCard.title or guidePost.title }}</strong>
               {% if guideCard.description %}<p>{{ guideCard.description }}</p>{% endif %}
-              <i>{{ guideCard.linkText or "Read the story" }} <span aria-hidden="true">⟶</span></i>
+              <i aria-hidden="true"><span>⟶</span></i>
             </span>
           </a>
         </article>
@@ -472,7 +472,7 @@
       <article class="category-shortlist-card category-shortlist-card--{{ loop.index }}">
         <a href="{{ configuredCardUrl(card, cardStory) }}">
           <span class="category-shortlist-card__image">{% if card.image %}<img src="{{ card.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 1000px) 45vw, 100vw", false) }}{% endif %}</span>
-          <span class="category-shortlist-card__copy">{% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<strong>{{ card.title or cardStory.title }}</strong>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i>{{ card.linkText or "Read the story" }} <span aria-hidden="true">⟶</span></i></span>
+          <span class="category-shortlist-card__copy">{% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<strong>{{ card.title or cardStory.title }}</strong>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i aria-hidden="true"><span>⟶</span></i></span>
         </a>
       </article>
       {% endfor %}
@@ -488,7 +488,7 @@
         {% if page.focusedHeroLabel %}<small>{{ page.focusedHeroLabel }}</small>{% endif %}
         {% if page.focusedHeroTitle or featureHeroStory.title %}<strong id="category-featured-story-title">{{ page.focusedHeroTitle or featureHeroStory.title }}</strong>{% endif %}
         {% if page.focusedHeroDescription or featureHeroStory.tout.dek %}<span class="category-beauty-hero__description">{{ page.focusedHeroDescription or featureHeroStory.tout.dek }}</span>{% endif %}
-        {% if page.focusedHeroLinkText or featureHeroStory %}<i>{{ page.focusedHeroLinkText or "Read the Story" }} <span aria-hidden="true">⟶</span></i>{% endif %}
+        {% if page.focusedHeroLinkText or featureHeroStory %}<i aria-hidden="true"><span>⟶</span></i>{% endif %}
       </span>
     </a>
   </section>
@@ -515,7 +515,7 @@
         <span>{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 1000px) 25vw, 50vw", false) }}{% endif %}</span>
         <strong>{{ card.title or cardStory.title }}</strong>
         {% if card.description %}<p>{{ card.description }}</p>{% endif %}
-        <i>{% if page.title == "Travel Guides" %}EXPLORE MORE <span aria-hidden="true">⟶</span>{% else %}{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} <span aria-hidden="true">⟶</span>{% endif %}</i>
+        <i aria-hidden="true"><span>⟶</span></i>
       </a>
       {% endfor %}
     </div>
@@ -575,7 +575,7 @@
           {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}
           <h3>{{ card.title or cardStory.title }}</h3>
           {% if card.description %}<p>{{ card.description }}</p>{% endif %}
-          <i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} <span aria-hidden="true">⟶</span></i>
+          <i aria-hidden="true"><span>⟶</span></i>
         </a>
       </article>
       {% endfor %}
@@ -674,7 +674,7 @@
       {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
       <a class="category-browse__panel category-browse__panel--visual" href="{{ configuredCardUrl(card, cardStory) }}">
         <span class="category-browse__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 30vw, 90vw", false) }}{% endif %}</span>
-        {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<h3>{{ card.title or cardStory.title }}</h3>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i>{% if card.linkText and card.linkText != "View story" %}{{ card.linkText }}{% else %}Read the Story{% endif %} <span aria-hidden="true">⟶</span></i>
+        {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<h3>{{ card.title or cardStory.title }}</h3>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i aria-hidden="true"><span>⟶</span></i>
       </a>
       {% endfor %}
     </div>
