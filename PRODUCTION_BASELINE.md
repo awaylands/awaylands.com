@@ -11,9 +11,9 @@ Verified baseline:
 
 - Date: 2026-09-21
 - Branch: `production-baseline`
-- Source commit: `468b2522e63115011396efc4fce0ceaf939f92c6`
-- JavaScript: `main.d87a59b5b81038c3226a.js`
-- Stylesheet: `main.96004df84e84ca57d95d.css`
+- Source commit: `773da9554130b21c2bce79398ce36d191b7c330d`
+- JavaScript: `main.54409b56f890e94886c0.js`
+- Stylesheet: `main.cbf15781b62a284dad14.css`
 - TakeShape schema: version `249`
 
 ## Safe publishing workflow

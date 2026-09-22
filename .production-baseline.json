@@ -1,7 +1,7 @@
 {
   "name": "Away Lands verified production baseline",
   "baselineDate": "2026-09-21",
-  "baselineCommit": "468b2522e63115011396efc4fce0ceaf939f92c6",
+  "baselineCommit": "773da9554130b21c2bce79398ce36d191b7c330d",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
@@ -16,8 +16,8 @@
       "hash": "66f57ec88758cc2b47279355cb5fa59c87a9c71d0b7d79c611a550da35fc05f3"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.96004df84e84ca57d95d.css",
-      "hash": "1cd0d6088946935e14b8ec7bb8a4f4da7567040bc9ae83ca72706ae8fa26c7bc"
+      "path": "stylesheets/main.cbf15781b62a284dad14.css",
+      "hash": "49d09eb6383de6d2c74104a53250eb6c182e42747c213eb8528ba91ec5faa061"
     }
   },
   "sourceFiles": {
@@ -156,7 +156,7 @@
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
     "src/stylesheets/pages/_landing.scss": "36ceb3dc78ac6a60eca9c0acb2ca55bb164596ca9bad3f0456a75bc05f184b13",
     "src/stylesheets/pages/_still.scss": "492fcd4e33c9823a12576a785decc82d09bc4cbe2c23bd40cf5f6f5bffdf45c3",
-    "src/stylesheets/pages/_story.scss": "5ec6de07813cdf21fb1a981d26d81fec9d97e44caf216601c846f191c9749a0e",
+    "src/stylesheets/pages/_story.scss": "e5f4615ecbf99ef31b786a35958cb33f7f514a7bb67d108eaa023fc5b23b80c7",
     "src/templates/data/about.graphql": "9a8fbd058a95c2a75313c7adbafc108e255ddd876280583e1ca8cbb426a3f03a",
     "src/templates/data/ads.graphql": "7e1bbbc2f7240dab51417e430973aeca501df1af78ae4622b4ea370a0768e472",
     "src/templates/data/categories.graphql": "da8b1f8692c59a1c8a6ca73239955ed2cd7a1800a769b808d4e0a8fa3c8e285b",
