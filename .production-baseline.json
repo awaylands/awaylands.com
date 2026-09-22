@@ -16,8 +16,8 @@
       "hash": "4ae1ef4e920d93021dcab96d6ce623c2d00b683dc0f721d0210b017e403e8bb0"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.bc00d5ff47ac446c533275b602f74e06.css",
-      "hash": "4abd21208edcfd08dcf651bed210141207ac5c03eff5b39647674bf4aad31759"
+      "path": "stylesheets/main.43fd178742f6ffd4971075b70a91cc9e.css",
+      "hash": "a85bee72d8af7b84848a21d434e4ac005db67472ed6d68751c3c6793bedb439f"
     }
   },
   "sourceFiles": {
@@ -141,7 +141,7 @@
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
     "src/stylesheets/pages/_blog.scss": "01d898b8e058868e67e7518a9263d2b6344d3194abc04f2679761396bf1e951c",
-    "src/stylesheets/pages/_category-redesign-final.scss": "8dd434215388940dd9eba29c5f0dfd826c6b950f7acbef86cf64789c5fdf763e",
+    "src/stylesheets/pages/_category-redesign-final.scss": "0d95248fd6e677cf017de4114d6bccc9557ddfe31fb59c7a01c69438eb771a60",
     "src/stylesheets/pages/_destination-detail.scss": "6ca556578ea70b7f112e70b62c61512f761ff9dbb1d8a3922c3de14aff52c5b6",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
     "src/stylesheets/pages/_destinations.scss": "7a858f0421df074943f234a06c28ef1ec90555dea5fbc829b90ad13fa7b21676",
