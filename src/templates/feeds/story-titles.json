@@ -3,6 +3,9 @@
 {% set comma = joiner(",") %}
 {% for stories in titlePages %}
   {% for story in stories %}
+  {% set categoryTitles = [] %}
+  {% for category in story.mainCategory %}{% if category.title not in categoryTitles %}{% set ignored = categoryTitles.push(category.title) %}{% endif %}{% endfor %}
+  {% for category in story.category %}{% if category.title not in categoryTitles %}{% set ignored = categoryTitles.push(category.title) %}{% endif %}{% endfor %}
   {{ comma() }}{
     "title": {{ story.title | dump | safe }},
     "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %},
@@ -13,7 +16,7 @@
     "category": {% if story.category.length %}{{ story.category[0].title | dump | safe }}{% elif story.mainCategory.length %}{{ story.mainCategory[0].title | dump | safe }}{% else %}"Away Lands"{% endif %},
     "location": {% if story.location.length %}{{ story.location[0].title | dump | safe }}{% else %}""{% endif %},
     "continent": {% if story.continent.length %}{{ story.continent[0].name | dump | safe }}{% else %}""{% endif %},
-    "categories": [{% set categoryComma = joiner(",") %}{% for category in story.mainCategory %}{{ categoryComma() }}{{ category.title | dump | safe }}{% endfor %}{% for category in story.category %}{{ categoryComma() }}{{ category.title | dump | safe }}{% endfor %}],
+    "categories": [{% for category in categoryTitles %}{% if not loop.first %},{% endif %}{{ category | dump | safe }}{% endfor %}],
     "locations": [{% for location in story.location %}{% if not loop.first %},{% endif %}{{ location.title | dump | safe }}{% endfor %}],
     "continents": [{% for continent in story.continent %}{% if not loop.first %},{% endif %}{{ continent.name | dump | safe }}{% endfor %}],
     "socialTitle": {% if story.social.title %}{{ story.social.title | dump | safe }}{% else %}""{% endif %},

@@ -295,4 +295,29 @@ generatedHtml.forEach(file => {
   }
 });
 
+const categoryRoot = path.join(root, 'build/category');
+const categoryArchives = generatedHtml.filter(file =>
+  file.startsWith(`${categoryRoot}${path.sep}`) && file.endsWith(`${path.sep}archive${path.sep}index.html`)
+);
+categoryArchives.forEach(file => {
+  const archiveHtml = fs.readFileSync(file, 'utf8');
+  if (/<meta[^>]+http-equiv=["']refresh["']/i.test(archiveHtml)) return;
+  const landingFile = path.join(path.dirname(path.dirname(file)), 'index.html');
+  if (!fs.existsSync(landingFile)) fail(`category archive has no matching landing page: ${path.relative(root, file)}.`);
+  const landingHtml = fs.readFileSync(landingFile, 'utf8');
+  const landingMatch = landingHtml.match(/"numberOfItems"\s*:\s*(\d+)/);
+  const archiveMatch = archiveHtml.match(/destination-archive__post-count">(\d+) Posts/);
+  if (!landingMatch || !archiveMatch) fail(`category story totals are missing: ${path.relative(root, file)}.`);
+  const landingTotal = Number(landingMatch[1]);
+  const archiveTotal = Number(archiveMatch[1]);
+  const archiveCards = (archiveHtml.match(/data-category-archive-card/g) || []).length;
+  if (landingTotal !== archiveTotal || archiveTotal !== archiveCards) {
+    fail(`category archive coverage mismatch for ${path.relative(root, file)}: landing ${landingTotal}, archive ${archiveTotal}, cards ${archiveCards}.`);
+  }
+  const relativeParts = path.relative(categoryRoot, file).split(path.sep);
+  if (relativeParts.length === 3 && archiveTotal === 0) {
+    fail(`main category archive is empty: ${path.relative(root, file)}.`);
+  }
+});
+
 process.stdout.write(`Production baseline verified for ${baseline.siteName}.\n`);

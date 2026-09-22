@@ -16,12 +16,16 @@
 {% for stories in storyPages %}
 {% set lastPage = loop.last %}
 {% for story in stories %}
+  {% set searchCategories = [] %}
+  {% for category in story.mainCategory %}{% if category.title not in searchCategories %}{% set ignored = searchCategories.push(category.title) %}{% endif %}{% endfor %}
+  {% for category in story.category %}{% if category.title not in searchCategories %}{% set ignored = searchCategories.push(category.title) %}{% endif %}{% endfor %}
   {
     "title": {{ story.title | dump | safe }},
     "url": {% if story.slug %}{{ (story | route('storySlug')) | dump | safe }}{% else %}{{ (story | route('story')) | dump | safe }}{% endif %},
     "date": {{ (story._enabledAt | date("MMMM D, YYYY")) | dump | safe }},
     "isImportant": {% if story.isImportant == true %}true{% else %}false{% endif %},
     "category": {% if story.category.length %}{{ story.category[0].title | dump | safe }}{% else %}""{% endif %},
+    "categories": [{% for category in searchCategories %}{% if not loop.first %},{% endif %}{{ category | dump | safe }}{% endfor %}],
     "location": {% if story.location.length %}{{ story.location[0].title | dump | safe }}{% else %}""{% endif %},
     "dek": {% if story.tout.dek %}{{ story.tout.dek | dump | safe }}{% elif story.social.description %}{{ story.social.description | dump | safe }}{% else %}""{% endif %},
     "image": {% if story.tout.image.path %}{{ (story.tout.image.path | image({w: 900, auto: 'compress,format'})) | dump | safe }}{% else %}""{% endif %},

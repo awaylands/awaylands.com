@@ -28,6 +28,9 @@ fragment SearchStoryFields on Story {
       category {
         title
       }
+      mainCategory {
+        title
+      }
       location {
         title
       }

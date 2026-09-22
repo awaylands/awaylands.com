@@ -27,6 +27,7 @@ function textFromStory(story) {
   return normalize([
     story.title,
     story.category,
+    (story.categories || []).join(' '),
     story.location,
     story.dek,
     story.content,
@@ -59,6 +60,7 @@ function createSearchFields(story) {
     {label: 'description', text: story.dek || ''},
     {label: 'location', text: story.location || ''},
     {label: 'category', text: story.category || ''},
+    {label: 'category', text: (story.categories || []).join(' ')},
     {label: 'post', text: plainText(story.content)},
     {label: 'post', text: plainText((story.mainBlocks || []).join(' '))},
     {label: 'post', text: plainText((story.blocks || []).join(' '))},
@@ -99,6 +101,7 @@ function createSnippet(story, terms) {
 function scoreStory(story, terms) {
   const title = normalize(story.title);
   const category = normalize(story.category);
+  const categories = normalize((story.categories || []).join(' '));
   const location = normalize(story.location);
   const dek = normalize(story.dek);
   const text = story.searchText;
@@ -113,7 +116,7 @@ function scoreStory(story, terms) {
       score += 8;
     }
 
-    if (category.indexOf(term) !== -1) {
+    if (category.indexOf(term) !== -1 || categories.indexOf(term) !== -1) {
       score += 6;
     }
 

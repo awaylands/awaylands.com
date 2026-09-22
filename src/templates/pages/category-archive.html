@@ -3,17 +3,33 @@
 {% set categoryTitle = page.title or "Category" %}
 {% set isSubcategory = page.parentCategory and page.parentCategory.title != page.title %}
 {% set archivePosts = [] %}
+{% set archivePostIds = [] %}
 {% if page.storySet %}
   {% for story in page.storySet.items %}
     {% if not isSubcategory %}
-      {% set ignored = archivePosts.push(story) %}
+      {% if story._id not in archivePostIds %}
+        {% set ignored = archivePosts.push(story) %}
+        {% set ignored = archivePostIds.push(story._id) %}
+      {% endif %}
     {% else %}
       {% for storyCategory in story.category %}
-        {% if storyCategory._id == page._id %}{% set ignored = archivePosts.push(story) %}{% endif %}
+        {% if storyCategory._id == page._id and story._id not in archivePostIds %}
+          {% set ignored = archivePosts.push(story) %}
+          {% set ignored = archivePostIds.push(story._id) %}
+        {% endif %}
       {% endfor %}
     {% endif %}
   {% endfor %}
 {% endif %}
+{% if not isSubcategory and page.mainCategoryTag %}
+  {% for story in page.mainCategoryTag.storySet.items %}
+    {% if story._id not in archivePostIds %}
+      {% set ignored = archivePosts.push(story) %}
+      {% set ignored = archivePostIds.push(story._id) %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+{% set archivePosts = archivePosts | sort(true, true, "_enabledAt") %}
 {% set archiveTotal = archivePosts.length %}
 {% set mainCategories = [] %}
 {% for category in categoryNavigation.items %}
