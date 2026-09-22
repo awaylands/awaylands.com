@@ -6,8 +6,8 @@
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
   "schema": {
-    "version": 254,
-    "hash": "959153042da11a51ee95bcd033549dcf76d404e2c5c82a75d2bbd009c6287797"
+    "version": 255,
+    "hash": "e6231d99e85977eca893c0328ef8876cfc59ea02e83ce16623982a80bb7f3cf9"
   },
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
