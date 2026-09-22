@@ -5585,10 +5585,10 @@ body.body--category-hub .category-subcategory-nav__description {
   white-space: normal;
 }
 
-body.body--category-hub .category-subcategory-nav__trigger > strong {
+body.body--category-hub .category-subcategory-nav__grid > a.category-subcategory-nav__trigger > strong {
   overflow: visible;
   overflow-wrap: break-word;
-  font-size: clamp(2.8rem, 1.9vw, 3.6rem);
+  font-size: clamp(26px, 1.9vw, 36px);
   text-wrap: balance;
   white-space: normal;
 }
@@ -5631,8 +5631,8 @@ body.body--category-hub .category-subcategory-nav__trigger > strong {
 }
 
 @media (max-width: 700px) {
-  body.body--category-hub .category-subcategory-nav__trigger > strong {
-    font-size: clamp(2.8rem, 7vw, 3.4rem);
+  body.body--category-hub .category-subcategory-nav__grid > a.category-subcategory-nav__trigger > strong {
+    font-size: clamp(26px, 7vw, 34px);
     line-height: 1;
   }
 
