@@ -1,13 +1,13 @@
 {
   "name": "Away Lands verified production baseline",
   "baselineDate": "2026-09-22",
-  "baselineCommit": "9bdb77c1624d93d886645c77e5ff5ad96eff11db",
+  "baselineCommit": "f25998549f75fcdbeb47e78b61afb1de2646ed62",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
   "siteName": "www.awaylands.com",
   "schema": {
-    "version": 255,
-    "hash": "e6231d99e85977eca893c0328ef8876cfc59ea02e83ce16623982a80bb7f3cf9"
+    "version": 256,
+    "hash": "ee91228b44c2fc4c98baacfb2ef080f4d5619bc58709ce23d05e7a7881f64125"
   },
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
@@ -23,8 +23,8 @@
   "sourceFiles": {
     ".babelrc": "4769833828c022475298a2ca3fd2d386f2d3e7ab8fff595986504b55c9b63294",
     ".stylelintrc": "328fae0d0ff9c37bb2a8302c7e95ed42571d70ea35d64ea6a30291a5641be7b4",
-    "_takeshape-schema-export/schema-inner.json": "9ec0223550d3217ae110acdccb68b76de5aa9f6b2cf34bc79242929bb59184a5",
-    "_takeshape-schema-export/schema.json": "197ce94aaa3a33080ff28c8924393feb31d37aea8e2a94974770769734b90323",
+    "_takeshape-schema-export/schema-inner.json": "a9849146509fadc4273d0d787e9196881e5d083d34f6bcaf6bb4e3441fdd0523",
+    "_takeshape-schema-export/schema.json": "a0678cf9f0ef5426c115a3594a04e4cbf9e7bdec22fe339d9aa2ca4ca2eb2206",
     "eslint.config.cjs": "ac394bc3739e8715cf89b5a87c116206eded52e9085810d363a42feabc19fdf1",
     "package-lock.json": "2ab308c7868e5f396804c7fdd9568cf00de8542994fc52e8fe4ef70e6dd27a5c",
     "package.json": "6bc1f0102ca216d01fb631dec283cfd2ff657fe3aae4668b5f2373fa35fc55fe",
