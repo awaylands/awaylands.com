@@ -9,12 +9,12 @@ drift.
 
 Verified baseline:
 
-- Date: 2026-07-22
+- Date: 2026-09-21
 - Branch: `production-baseline`
-- Source commit: `0b4e6700f447e2315872372ca3ceee4502907991`
-- JavaScript: `main.91618a6ec51b6585278d.js`
-- Stylesheet: `main.861bc19b5b0eb8f5e968aa0e52d93cbf.css`
-- TakeShape schema: version `212`
+- Source commit: `fc9be3ee3ee6b9cc2ebefbcc2d8fec7122f5fc3d`
+- JavaScript: `main.d87a59b5b81038c3226a.js`
+- Stylesheet: `main.96004df84e84ca57d95d.css`
+- TakeShape schema: version `249`
 
 ## Safe publishing workflow
 
@@ -38,7 +38,7 @@ remain first in the 300px desktop sidebar. The BTF target must remain last.
 Run `npm run verify:production` before every publish. A failed Mediavine check
 is a release blocker.
 
-The legacy Webpack build is not byte-reproducible with the current installed dependency tree. Build and test source changes in the development checkout. Only copy reviewed assets into this production worktree, then record their filenames and SHA-256 hashes after live visual verification.
+The modern Webpack build is reproducible from the locked dependency tree. Build and test source changes in the development checkout, then record reviewed filenames and SHA-256 hashes after visual verification.
 
 Older versions and the mixed work in progress state are archived under:
 
