@@ -9,11 +9,11 @@ drift.
 
 Verified baseline:
 
-- Date: 2026-09-21
+- Date: 2026-09-22
 - Branch: `production-baseline`
-- Source commit: `78f7df3b2550deca33fcba05427efb6478a6e52b`
+- Source commit: `9bdb77c1624d93d886645c77e5ff5ad96eff11db`
 - JavaScript: `main.54409b56f890e94886c0.js`
-- Stylesheet: `main.c3f8e6c26badb704c848.css`
+- Stylesheet: `main.0ed79920b64565fa5ac0.css`
 - TakeShape schema: version `255`
 
 ## Safe publishing workflow
