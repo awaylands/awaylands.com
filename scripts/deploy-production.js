@@ -213,16 +213,19 @@ function generateSite() {
   const configPath = path.join(root, '.tsg-production-build.yml');
   const generatedPath = path.join(root, '.deploy-generated');
   const staticPath = path.join(root, '.deploy-static');
+  const assetBackupPath = path.join(root, '.deploy-assets');
   const config = fs.readFileSync(path.join(root, 'tsg.yml'), 'utf8')
     .replace(/^buildPath:\s*build\s*$/m, 'buildPath: .deploy-generated')
     .replace(/^staticPath:\s*build\s*$/m, 'staticPath: .deploy-static');
   fs.writeFileSync(configPath, config);
   try {
+    removeTree(assetBackupPath);
+    copyTree(path.join(root, 'build/assets'), assetBackupPath);
     copyTree(path.join(root, 'build/assets'), path.join(staticPath, 'assets'));
     run(node, [takeShape, 'build', '--file', '.tsg-production-build.yml']);
     clearDirectory(path.join(root, 'build'));
     copyTree(generatedPath, path.join(root, 'build'));
-    copyTree(path.join(staticPath, 'assets'), path.join(root, 'build/assets'));
+    copyTree(assetBackupPath, path.join(root, 'build/assets'));
     run(node, [path.join(root, 'scripts/generate-destination-route-aliases.js')]);
     run(node, [path.join(root, 'scripts/generate-category-route-aliases.js')]);
     run(node, [path.join(root, 'scripts/normalize-generated-html.js')]);
@@ -230,6 +233,7 @@ function generateSite() {
     if (fs.existsSync(configPath)) fs.unlinkSync(configPath);
     removeTree(generatedPath);
     removeTree(staticPath);
+    removeTree(assetBackupPath);
   }
 }
 
