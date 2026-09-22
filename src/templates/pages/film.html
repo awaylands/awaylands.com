@@ -3,6 +3,8 @@
 {% block mediavine_head %}{% endblock %}
 
 {% block body_class %}body--landing has-no-hero gallery-page{% endblock %}
+{% block extra_head %}<link rel="canonical" href="https://www.awaylands.com{{ currentPath }}"><meta property="og:url" content="https://www.awaylands.com{{ currentPath }}">{% endblock %}
+{% block page_heading %}<h1 class="u-visually-hidden">Film Portfolio</h1>{% endblock %}
 
 {% block extra_head %}
   <link rel="canonical" href="https://www.awaylands.com{{ currentPath }}">

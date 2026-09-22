@@ -369,12 +369,10 @@ Vue.config.productionTip = false;
 
 const makeDocumentIdsUnique = () => {
   const seen = {};
-
   Array.from(document.querySelectorAll('[id]')).forEach(element => {
     const original = element.id;
     const count = seen[original] || 0;
     seen[original] = count + 1;
-
     if (count) {
       element.id = `${original}-duplicate-${count}`;
     }

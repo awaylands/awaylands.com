@@ -80,10 +80,6 @@ routes:
     template: pages/destinations.html
     context: data/destinations.graphql
 
-  destinationHubMockup:
-    path: /destination-hub-mockup/
-    template: pages/destination-hub-mockup.html
-
   about:
     path: /about
     template: pages/about.html

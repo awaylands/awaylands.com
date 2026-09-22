@@ -1259,6 +1259,7 @@
 
 .pd-header-postcard[data-stack-offset='0'] {
   --stack-z: 8;
+
   opacity: 1;
   pointer-events: auto;
   transform: translateX(0) scale(1);
@@ -1266,21 +1267,25 @@
 
 .pd-header-postcard[data-stack-offset='1'] {
   --stack-z: 4;
+
   transform: translateX(4rem) scale(0.985);
 }
 
 .pd-header-postcard[data-stack-offset='2'] {
   --stack-z: 3;
+
   transform: translateX(-4rem) scale(0.985);
 }
 
 .pd-header-postcard[data-stack-offset='3'] {
   --stack-z: 2;
+
   transform: translateX(-4rem) scale(0.985);
 }
 
 .pd-header-postcard[data-stack-offset='4'] {
   --stack-z: 1;
+
   transform: translateX(-4rem) scale(0.985);
 }
 

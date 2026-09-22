@@ -2,7 +2,14 @@ const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const axios = require('axios');
-const {getImageUrl} = require('takeshape-routing');
+
+function getImageUrl(imagePath, query = {}) {
+  const encodedPath = imagePath.split('/').map(encodeURIComponent).join('/');
+  const parameters = new URLSearchParams(query);
+  const suffix = parameters.toString() ? `?${parameters}` : '';
+
+  return `https://images.takeshape.io/${encodedPath}${suffix}`;
+}
 
 const PORT = process.env.PORT || 5055;
 const HOST = '127.0.0.1';

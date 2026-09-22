@@ -113,7 +113,7 @@ function optimizedTakeShapeImageUrl(src, width) {
     url.searchParams.set('w', width);
 
     return url.toString();
-  } catch (error) {
+  } catch {
     return src;
   }
 }
@@ -121,7 +121,7 @@ function optimizedTakeShapeImageUrl(src, width) {
 function safelyDecodeImageName(value) {
   try {
     return decodeURIComponent(value);
-  } catch (error) {
+  } catch {
     return value;
   }
 }
@@ -1042,7 +1042,7 @@ function normalizeStorySpacing(el) {
 function normalizedImagePath(src) {
   try {
     return new URL(src, window.location.href).pathname.replace(/\/$/, '');
-  } catch (error) {
+  } catch {
     return src.split('?')[0];
   }
 }
@@ -1199,7 +1199,7 @@ function safeStoryShopUrl(value) {
     const url = new URL(source, window.location.origin);
 
     return /^(https?:)$/.test(url.protocol) ? url.href : '';
-  } catch (error) {
+  } catch {
     return '';
   }
 }
@@ -1207,7 +1207,7 @@ function safeStoryShopUrl(value) {
 function isAllowedStoryShopHost(value) {
   try {
     return SHOP_EMBED_HOST_PATTERN.test(new URL(value, window.location.origin).hostname);
-  } catch (error) {
+  } catch {
     return false;
   }
 }
@@ -1564,7 +1564,7 @@ function mergedStoryPickCandidates(el, storyPage, isStyleEdit) {
   return picks;
 }
 
-function firstStoryOverviewParagraph(el) {
+function firstStorySummaryParagraph(el) {
   const paragraphs = el.querySelectorAll('p');
 
   for (let index = 0; index < paragraphs.length; index += 1) {
@@ -1576,39 +1576,39 @@ function firstStoryOverviewParagraph(el) {
   return null;
 }
 
-function appendStoryOverviewLinks(links, overviewHeadings, storyPage) {
-  for (let index = 0; index < 3; index += 1) {
-    const itemNumber = index + 1;
-    const selectedSection = (storyPage.getAttribute(`data-at-a-glance-item-${itemNumber}-section`) || '').trim();
-    const hasSelectedSection = /^\d+$/.test(selectedSection);
-    const selectedIndex = hasSelectedSection ? parseInt(selectedSection, 10) - 1 : index;
-    const heading = overviewHeadings[selectedIndex];
-    const manualTitle = (storyPage.getAttribute(`data-at-a-glance-item-${itemNumber}-title`) || '').trim();
-    const manualLink = (storyPage.getAttribute(`data-at-a-glance-item-${itemNumber}-link`) || '').trim();
-    const headingTitle = heading ? storyTocTitle(heading.textContent) : '';
-    const headingLink = heading ? `#${heading.id}` : '';
-    const itemTitle = hasSelectedSection ? headingTitle : (manualTitle || headingTitle);
-    const itemLink = hasSelectedSection ? headingLink : (manualLink || headingLink);
+function storyOverviewLink(storyPage, overviewHeadings, index) {
+  const selectedSection = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-section`) || '').trim();
+  const hasSelectedSection = /^\d+$/.test(selectedSection);
+  const selectedIndex = hasSelectedSection ? parseInt(selectedSection, 10) - 1 : index;
+  const heading = overviewHeadings[selectedIndex];
+  const manualTitle = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-title`) || '').trim();
+  const manualLink = (storyPage.getAttribute(`data-at-a-glance-item-${index + 1}-link`) || '').trim();
+  const headingTitle = heading ? storyTocTitle(heading.textContent) : '';
+  const headingLink = heading ? `#${heading.id}` : '';
+  const itemTitle = hasSelectedSection ? headingTitle : (manualTitle || headingTitle);
+  const itemLink = hasSelectedSection ? headingLink : (manualLink || headingLink);
 
-    if (itemTitle && itemLink) {
-      const item = document.createElement('li');
-      const link = document.createElement('a');
-      const number = document.createElement('span');
-
-      number.textContent = `0${itemNumber}`;
-      link.href = itemLink;
-      link.appendChild(number);
-      link.appendChild(document.createTextNode(itemTitle));
-      item.appendChild(link);
-      links.appendChild(item);
-    }
+  if (!itemTitle || !itemLink) {
+    return null;
   }
+
+  const item = document.createElement('li');
+  const link = document.createElement('a');
+  const number = document.createElement('span');
+
+  number.textContent = `0${index + 1}`;
+  link.href = itemLink;
+  link.appendChild(number);
+  link.appendChild(document.createTextNode(itemTitle));
+  item.appendChild(link);
+  return item;
 }
 
 function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
   const article = storyPage.querySelector('.story-article');
-  const source = firstStoryOverviewParagraph(el);
   const overviewHeadings = storySectionHeadings(el);
+  const source = firstStorySummaryParagraph(el);
+
   const manualSummary = (storyPage.getAttribute('data-at-a-glance-summary') || '').trim();
 
   if (!article || (!source && !manualSummary)) {
@@ -1634,7 +1634,12 @@ function buildAdvancedStoryOverview(el, storyPage, isStyleEdit) {
   summary.textContent = manualSummary || conciseStoryExcerpt(source.textContent);
   links.className = 'story-overview__links';
 
-  appendStoryOverviewLinks(links, overviewHeadings, storyPage);
+  for (let index = 0; index < 3; index += 1) {
+    const item = storyOverviewLink(storyPage, overviewHeadings, index);
+    if (item) {
+      links.appendChild(item);
+    }
+  }
 
   overview.appendChild(kicker);
   overview.appendChild(title);
@@ -2160,7 +2165,7 @@ function storyTableRows(value, requestedColumns) {
 
   try {
     parsed = JSON.parse(normalizedValue);
-  } catch (error) {
+  } catch {
     parsed = null;
   }
 
@@ -2335,9 +2340,9 @@ export default {
   bind(el) {
     prepareStory(el);
 
-    el.imagesLoaded = new ImagesLoaded(el, () => {
+    el.storyImagesLoaded = new ImagesLoaded(el, () => {
       alignPairedMediumFigures(el);
-      el.luminousGallery = new LuminousGallery(lightboxStoryImages(el), galleryOpts, opts);
+      el.storyLuminousGallery = new LuminousGallery(lightboxStoryImages(el), galleryOpts, opts);
     });
   },
   inserted(el) {

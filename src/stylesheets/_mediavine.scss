@@ -1,57 +1,60 @@
 /*mediavine sidebar fix*/
 @media only screen and (min-width: 900px){
-    .body--story .content__section:nth-child(2) {
+  .body--story .content__section:nth-child(2) {
     max-width:calc(100% - 300px)!important;
-    }
-    .body--story .content__section:nth-child(1) {
+  }
+  .body--story .content__section:nth-child(1) {
     min-width:300px!important;
-    }
-    }
+  }
+}
+
     
-    @media only screen and (min-width: 900px){
-    .body--story .landing__section:nth-child(2) {
+@media only screen and (min-width: 900px){
+  .body--story .landing__section:nth-child(2) {
     max-width:calc(100% - 300px)!important;
-    }
-    .body--story .landing__section:nth-child(1) {
+  }
+  .body--story .landing__section:nth-child(1) {
     min-width:300px!important;
-    }
-    }
+  }
+}
+
     
-    @media only screen and (max-width: 359px) {
-    .content__inner{
+@media only screen and (max-width: 359px) {
+  .content__inner{
     padding-left:10px!important;
     padding-right:10px!important;
-    }
-    }
-    /*end mediavine sidebar fix*/
+  }
+}
+
+/*end mediavine sidebar fix*/
 
 .story-layout > .story-mediavine-sidebar {
-    display: none;
+  display: none;
 }
 
 @media only screen and (min-width: 900px) {
-    .story-layout {
-        grid-template-columns: minmax(0, 1fr) 300px;
-        gap: clamp(3rem, 5vw, 8rem);
-    }
+  .story-layout {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: clamp(3rem, 5vw, 8rem);
+  }
 
-    .story-layout > .story-mediavine-sidebar {
-        display: block;
-        position: relative;
-        grid-column: 2;
-        grid-row: 1;
-        width: 300px;
-        min-width: 300px;
-    }
+  .story-layout > .story-mediavine-sidebar {
+    display: block;
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    width: 300px;
+    min-width: 300px;
+  }
 
-    .story-layout > .story-article {
-        grid-column: 1;
-        grid-row: 1;
-        width: 100%;
-        max-width: 100%;
-    }
+  .story-layout > .story-article {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: 100%;
+  }
 
-    .story-mediavine-sidebar > .story-toc {
-        margin: 0;
-    }
+  .story-mediavine-sidebar > .story-toc {
+    margin: 0;
+  }
 }

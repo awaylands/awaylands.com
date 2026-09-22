@@ -218,8 +218,12 @@ const protectedSourcePatterns = [
   'scripts/**',
   'static/assets/fonts/**',
   '_takeshape-schema-export/**',
+  '.babelrc',
+  '.stylelintrc',
+  'eslint.config.cjs',
   'package.json',
   'package-lock.json',
+  'postcss.config.js',
   'tsg.yml',
   'webpack.config.js'
 ];

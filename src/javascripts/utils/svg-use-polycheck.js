@@ -47,7 +47,7 @@ export default function () {
       id = setInterval(check, 50);
 
       use.addEventListener('load', check);
-    } catch (e) {
+    } catch {
       resolve(false);
     }
   });

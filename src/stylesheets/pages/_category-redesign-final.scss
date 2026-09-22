@@ -2484,6 +2484,7 @@ body.body--category-hub .category-destination-tile i {
     border-right: 0;
   }
 }
+
 /* Responsive cascade lock */
 @media (max-width: 1180px) and (min-width: 701px) {
   body.body--category-hub .category-hub__topics > div {
@@ -5488,6 +5489,7 @@ body.body--category-hub .category-subcategory-nav__grid--count-5 > .category-sub
 body.body--category-hub .category-subcategory-nav__grid--count-6 > .category-subcategory-nav__trigger:nth-child(5),
 body.body--category-hub .category-subcategory-nav__grid--count-6 > .category-subcategory-nav__trigger:nth-child(6) {
   grid-column: span 2;
+  height: auto;
   aspect-ratio: 2 / 1;
 }
 

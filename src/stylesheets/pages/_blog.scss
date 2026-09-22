@@ -1600,7 +1600,6 @@
   overflow-x: auto;
   padding-top: clamp(5.3rem, 7.7vw, 11.3rem);
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
@@ -3000,6 +2999,7 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   &--compact {
     .blog-card__image {
       @include ratio-box(72%);
+
       margin-bottom: 1.8rem;
     }
 
@@ -3327,6 +3327,7 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
   --category-deep-blue: #0e4855;
   --category-red: #d84a3a;
   --category-paper: #f4efe6;
+
   max-width: 160rem;
   margin: 0 auto;
   padding: clamp(3rem, 5vw, 7rem) clamp(1.8rem, 4vw, 6rem) 8rem;

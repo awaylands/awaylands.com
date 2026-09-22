@@ -11,19 +11,18 @@ const node = configuredNode && fs.existsSync(configuredNode)
   ? configuredNode
   : (fs.existsSync(bundledNode) ? bundledNode : process.execPath);
 const takeShape = path.join(root, 'node_modules/@takeshape/cli/dist/index.cjs');
+const npmCli = process.env.npm_execpath || '/usr/local/lib/node_modules/npm/bin/npm-cli.js';
 const manifestPath = path.join(root, 'build/assets/manifest.json');
 
 function run(command, args) {
-  childProcess.execFileSync(command, args, { cwd: root, stdio: 'inherit' });
-}
-
-function runNpm(args) {
-  const npmCli = process.env.npm_execpath;
-  if (npmCli && fs.existsSync(npmCli)) {
-    run(node, [npmCli].concat(args));
-    return;
-  }
-  run('npm', args);
+  childProcess.execFileSync(command, args, {
+    cwd: root,
+    stdio: 'inherit',
+    env: {
+      ...process.env,
+      PATH: `${path.dirname(node)}:${process.env.PATH || ''}`
+    }
+  });
 }
 
 function fail(message) {
@@ -235,7 +234,7 @@ function generateSite() {
 }
 
 async function main() {
-  runNpm(['run', 'build']);
+  run(node, [npmCli, 'run', 'build']);
   const builtAssets = getManifestAssets();
   generateSite();
   const assets = getManifestAssets();

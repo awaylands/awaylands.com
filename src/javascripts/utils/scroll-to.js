@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 // easing functions http://goo.gl/5HLl8
 Math.easeInOutQuad = function (t, b, c, d) {
   t /= d / 2;
@@ -32,7 +30,7 @@ const requestAnimFrame = (function () {
 })();
 
 const scrollTo = function (to, callback, duration) {
-  // because it"s so fucking difficult to detect the scrolling element, just move them all
+  // Move every browser-specific scrolling element for broad compatibility.
   const move = function (amount) {
     document.documentElement.scrollTop = amount;
     document.body.parentNode.scrollTop = amount;
@@ -76,5 +74,3 @@ const scrollTo = function (to, callback, duration) {
 };
 
 export default scrollTo;
-
-/* eslint-enable */

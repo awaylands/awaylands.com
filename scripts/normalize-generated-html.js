@@ -30,5 +30,4 @@ walk(buildRoot).forEach(file => {
     changed += 1;
   }
 });
-
 process.stdout.write(`Normalized duplicate IDs in ${changed} generated pages.\n`);

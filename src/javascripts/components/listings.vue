@@ -48,10 +48,7 @@
   import {apiEndpoint, bearerToken} from '../utils/config';
   import {buildSrcset} from '../utils/format';
 
-  import {getImageUrl, route as createRoute} from 'takeshape-routing';
-  import config from '../../../tsg.yml';
-
-  const route = createRoute(config);
+  import {getImageUrl, storyPath} from '../utils/routing';
 
   export default {
     name: 'listings',
@@ -162,7 +159,7 @@
             const stories = res.data.getStoryList;
 
             for (const story of stories.items) {
-              story.path = story.slug ? route('storySlug', story) : route(story._contentTypeName, story);
+              story.path = storyPath(story);
               if (story.tout && story.tout.image) {
                 story.image = getImageUrl(story.tout.image.path);
                 story.imageSrcset = buildSrcset(story.image, ['600','900','1200','1600'])

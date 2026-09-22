@@ -1,11 +1,24 @@
 {
-  "extends": "stylelint-config-standard",
+  "customSyntax": "postcss-scss",
+  "plugins": ["stylelint-scss"],
   "rules": {
-    "color-hex-length": null,
-    "selector-pseudo-element-colon-notation": "single",
-    "no-invalid-double-slash-comments": null,
-    "function-name-case": null,
-    "unit-no-unknown": null,
-    "property-no-unknown": null
+    "color-no-invalid-hex": true,
+    "comment-no-empty": true,
+    "declaration-block-no-duplicate-custom-properties": true,
+    "declaration-block-no-duplicate-properties": [true, {
+      "ignore": ["consecutive-duplicates-with-different-values"]
+    }],
+    "font-family-no-duplicate-names": true,
+    "function-calc-no-unspaced-operator": true,
+    "function-linear-gradient-no-nonstandard-direction": true,
+    "keyframe-block-no-duplicate-selectors": true,
+    "property-no-unknown": true,
+    "scss/at-rule-no-unknown": [true, {
+      "ignoreAtRules": ["lost"]
+    }],
+    "selector-pseudo-class-no-unknown": true,
+    "selector-pseudo-element-no-unknown": true,
+    "string-no-newline": true,
+    "unit-no-unknown": true
   }
 }

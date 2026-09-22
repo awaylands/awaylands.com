@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const {VueLoaderPlugin} = require('vue-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
@@ -36,7 +37,14 @@ module.exports = {
             }
           },
           'postcss-loader',
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                silenceDeprecations: ['import', 'global-builtin']
+              }
+            }
+          }
         ]
       },
       {
@@ -60,13 +68,18 @@ module.exports = {
   },
   resolve: {
     alias: {
-      vue$: 'vue/dist/vue.esm.js'
+      vue$: '@vue/compat/dist/vue.esm-bundler.js'
     },
     modules: ['node_modules', 'src'],
     extensions: ['.js', '.json', '.vue']
   },
   plugins: [
     new VueLoaderPlugin(),
+    new webpack.DefinePlugin({
+      __VUE_OPTIONS_API__: JSON.stringify(true),
+      __VUE_PROD_DEVTOOLS__: JSON.stringify(false),
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: JSON.stringify(false)
+    }),
     new WebpackManifestPlugin({fileName: 'manifest.json', publicPath: ''}),
     new MiniCssExtractPlugin({filename: isProd ? '[name].[contenthash].css' : '[name].css'})
   ],

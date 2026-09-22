@@ -1306,6 +1306,7 @@ body.body--destination-detail:not(.gallery-page) {
 
 .destination-spotlight {
   --destination-spotlight-gutter: clamp(2.4rem, 3vw, 5rem);
+
   aspect-ratio: 20 / 9;
   background: var(--destination-ink);
   min-height: 0;
@@ -1391,7 +1392,6 @@ body.body--destination-detail:not(.gallery-page) {
     linear-gradient(90deg, rgba(7, 18, 21, 0.78), rgba(7, 18, 21, 0.18) 68%, transparent),
     linear-gradient(0deg, rgba(7, 18, 21, 0.58), transparent 50%);
   content: "";
-  inset: 0;
   pointer-events: none;
   position: absolute;
   inset: 4%;

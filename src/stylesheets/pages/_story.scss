@@ -1395,7 +1395,7 @@ body.body--story {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-  .story-gallery--products[data-count='4'] {
+.story-gallery--products[data-count='4'] {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -1874,7 +1874,6 @@ body.body--story {
   padding: clamp(1.8rem, 1.9vw, 2.4rem);
   position: absolute;
   right: 0;
-  transform: none;
   transition: none;
   opacity: 1 !important;
   visibility: visible !important;
