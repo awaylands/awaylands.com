@@ -2855,7 +2855,7 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
         opacity: 0;
         visibility: hidden;
         will-change: opacity, visibility, transform;
-        transition: opacity 0.2s $ease-in-out-quart, visiblity 0s 0.2s, transform 0.2s $ease-in-out-quart;
+        transition: opacity 0.2s $ease-in-out-quart, visibility 0s 0.2s, transform 0.2s $ease-in-out-quart;
       }
     }
   }
