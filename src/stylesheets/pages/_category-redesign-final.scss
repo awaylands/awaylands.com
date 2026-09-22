@@ -5530,10 +5530,27 @@ body.body--subcategory .category-magazine-hero h1 {
   white-space: normal;
 }
 
+@media (max-width: 1000px) {
+  body.body--category-hub .category-magazine-hero__copy {
+    width: calc(100% - 2.4rem);
+    max-width: calc(100vw - 2.4rem);
+  }
+
+  body.body--category-hub .category-magazine-hero h1 {
+    font-size: clamp(5.2rem, 8.4vw, 8.4rem);
+    line-height: 1.04;
+  }
+}
+
 @media (max-width: 700px) {
-  body.body--subcategory .category-magazine-hero__copy {
-    width: calc(100% - 3.2rem);
-    max-width: calc(100vw - 3.2rem);
+  body.body--category-hub .category-magazine-hero__copy {
+    width: calc(100% - 1.6rem);
+    max-width: calc(100vw - 1.6rem);
+  }
+
+  body.body--category-hub .category-magazine-hero h1 {
+    font-size: clamp(5rem, 16.5vw, 7.25rem);
+    line-height: 1.05;
   }
 }
 
