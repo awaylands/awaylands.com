@@ -197,6 +197,9 @@ query($images: TSImagesConfig) {
         category {
           title
         }
+        mainCategory {
+          title
+        }
         social {
           title
         }
