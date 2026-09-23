@@ -12,8 +12,8 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.399d42e777f46008cd5d.js",
-      "hash": "b00947a5433894e52c339f83937f44e322dad89564d4354493d6d74b2b18c06b"
+      "path": "javascripts/main.d5062e182cf1412cd897.js",
+      "hash": "69f00f07ed21069cebe5e94344ce24b87a32322594d5ace1390840c8ac5f2d0a"
     },
     "stylesheets/main.css": {
       "path": "stylesheets/main.c4ccd83f81b9fd42d8e2.css",
@@ -85,7 +85,7 @@
     "src/javascripts/directives/gallery.js": "28a05c27a332cc94300fcb4895e15298ca2a8b7caf67a10ac46437fe101faa1f",
     "src/javascripts/directives/imageloaded.js": "dd1ae7a025f507c6939c704c58db40020e041508a364fcf2f7ad2fe812aa5b5d",
     "src/javascripts/directives/slides.js": "acdade07f3ab4cc92f85833b8f613c17b2968746389bca0a07ff8ef44d3ede42",
-    "src/javascripts/directives/story.js": "9f3ccf947ab9ac2943384797a77e9a8d8148e327d5cbabc8e175ae5531fb6e00",
+    "src/javascripts/directives/story.js": "4e833ba32c68d7b35e9827e102acfdbacb9b0e648488772c7646bddb4310225e",
     "src/javascripts/luminous/Lightbox.js": "ee6264aa4526246f563d0809abca7e4bb97318422ce3228199bf2df021b950a8",
     "src/javascripts/luminous/Luminous.js": "e7c6e96b7b829fda5d18ce99668f8c45b33734410b32ec0bcb734cab6d4d0f1b",
     "src/javascripts/luminous/LuminousGallery.js": "c8ca258e473396e00300716c5f32fb421c840214c4754d684b2016f2abb1d8b4",
@@ -185,7 +185,7 @@
     "src/templates/data/story.graphql": "fb9a287c2df27c59b2826797168ae424dbbcd2131b0d3c4c98b5038b858d9fee",
     "src/templates/feeds/search.json": "8e26fc6a1f7c166c7b8e909a1d89ae99659c28a4bc80d16ab934ead5f412816c",
     "src/templates/feeds/sitemap.xml": "4cca10a71a555338fa2ceca7dff9c38504f4177ec666e9c4ed4c5dfbf16e6e6d",
-    "src/templates/feeds/story-titles.json": "baadad7fac6b85416d2c5612893394e7af3b4ce0828e9972760c5bb9e757aa15",
+    "src/templates/feeds/story-titles.json": "23fd6606d26f862bf32c6d75cc7690cdf13ed0d10d940468fe74f1d44f60627c",
     "src/templates/layouts/default.html": "03e5d144ef88f5e8b44a237c0dc264dd9569828633dddd0b3ec9c1e590734aa1",
     "src/templates/layouts/landing.html": "2da7368fe2dc14cfabbc47d04b399053fd6c06537bf3e493e714d65602ab0088",
     "src/templates/macros/image-url.html": "ae07dbfa17878801e8bb7e7800f6ccaa7a2943cfc142f628d4cb08cafa27cecc",
@@ -209,7 +209,7 @@
     "src/templates/pages/search.html": "2699c6a5be0024b50d25fedbabd93e078e9ab09c4296a48b6394c3c6c5d69cb5",
     "src/templates/pages/still-category.html": "36b1d3bf5304b30e5a9a5650daf450f0d4c0c79af02f02945a65b06498c07eaa",
     "src/templates/pages/still.html": "6bd0b7423523b7876a6f2d44ba3ba520506d7e7cf6cfc5488511b2863e87da8b",
-    "src/templates/pages/stories/detail.html": "dcab5845f2471a232785bf9caefbd9153c14c24d00310f8265bb836e1bea13f7",
+    "src/templates/pages/stories/detail.html": "1d8ff784dc1fd08f64fe9cc5d1502f9e2cb2f73d32ae7008447335f9a26bd884",
     "src/templates/pages/stories/landing.html": "f5646a322a99e0edee158e5462c86db9d94db35487fd044e641541b0b654b18a",
     "src/templates/partials/blog-story-dedupe.html": "499f8c98a7317ec0c65183000b24771c398d6b29818dbb07ec099b7d66cfe33d",
     "src/templates/partials/footer.html": "09b1ae68112872bc254e3b861be60abd15028fca6ad8a9a3b76fc1d2aa90a076",

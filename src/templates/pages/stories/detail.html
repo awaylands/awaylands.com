@@ -277,6 +277,8 @@
   data-story-category="{% if primaryCategory %}{{ primaryCategory.title | escape }}{% endif %}"
   data-story-location="{% if page.location.length %}{{ page.location[0].title | escape }}{% endif %}"
   data-story-continent="{% if page.continent.length %}{{ page.continent[0].name | escape }}{% endif %}"
+  data-story-main-categories="{% for category in page.mainCategory %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}"
+  data-story-subcategories="{% for category in page.category %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}"
   data-story-categories="{% for category in page.mainCategory %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}{% if page.mainCategory.length and page.category.length %}|{% endif %}{% for category in page.category %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}"
   data-story-locations="{% for location in page.location %}{% if not loop.first %}|{% endif %}{{ location.title | escape }}{% endfor %}"
   data-story-continents="{% for continent in page.continent %}{% if not loop.first %}|{% endif %}{{ continent.name | escape }}{% endfor %}"

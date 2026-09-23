@@ -1705,10 +1705,11 @@ function finalizeRelatedStories(storyPage) {
     const firstIsManual = first.getAttribute('data-related-manual') === 'true';
     const secondIsManual = second.getAttribute('data-related-manual') === 'true';
     const manualDifference = Number(secondIsManual) - Number(firstIsManual);
-    const importantDifference = Number(second.getAttribute('data-related-important') === 'true') -
-      Number(first.getAttribute('data-related-important') === 'true');
+    const firstPriority = Number(first.getAttribute('data-related-priority')) || 99;
+    const secondPriority = Number(second.getAttribute('data-related-priority')) || 99;
+    const priorityDifference = firstPriority - secondPriority;
     const originalOrder = items.indexOf(first) - items.indexOf(second);
-    return manualDifference || (firstIsManual && secondIsManual ? originalOrder : importantDifference || originalOrder);
+    return manualDifference || (firstIsManual && secondIsManual ? originalOrder : priorityDifference || originalOrder);
   });
   items.forEach(item => list.appendChild(item));
 
@@ -1745,10 +1746,6 @@ function fillRelatedStoryCandidates(storyPage) {
   }
 
   const currentPath = window.location.pathname.replace(/\/$/, '').toLowerCase();
-  const currentPrimaryCategory = String(storyPage.getAttribute('data-story-category') || '')
-    .split('|')[0]
-    .trim()
-    .toLowerCase();
   const manualItems = Array.prototype.slice.call(list.querySelectorAll('[data-related-manual="true"]'));
   const manualUrls = manualItems.reduce((urls, item) => {
     const link = item.querySelector('a[href]');
@@ -1772,8 +1769,9 @@ function fillRelatedStoryCandidates(storyPage) {
     .split('|')
     .map(tag => tag.trim().toLowerCase())
     .filter(Boolean);
-  const currentCategories = normalizedTags(
-    storyPage.getAttribute('data-story-categories'),
+  const currentMainCategories = normalizedTags(storyPage.getAttribute('data-story-main-categories'));
+  const currentSubcategories = normalizedTags(
+    storyPage.getAttribute('data-story-subcategories'),
     storyPage.getAttribute('data-story-category')
   );
   const currentLocations = normalizedTags(
@@ -1793,47 +1791,37 @@ function fillRelatedStoryCandidates(storyPage) {
   const sharesTag = (currentTags, storyTagList) => currentTags.some(tag => storyTagList.indexOf(tag) !== -1);
 
   const relatedPriority = story => {
-    const sameCategory = sharesTag(currentCategories, storyTags(story, 'categories', 'category'));
+    const sameSubcategory = sharesTag(currentSubcategories, storyTags(story, 'subcategories', 'category'));
     const sameLocation = sharesTag(currentLocations, storyTags(story, 'locations', 'location'));
+    const sameMainCategory = sharesTag(currentMainCategories, storyTags(story, 'mainCategories'));
     const sameContinent = sharesTag(currentContinents, storyTags(story, 'continents', 'continent'));
+    const isImportant = story.isImportant === true;
 
-    if (story.isImportant === true && sameLocation) {
+    if (isImportant && sameSubcategory) {
       return 1;
     }
-    if (story.isImportant === true && sameCategory) {
+    if (isImportant && sameLocation) {
       return 2;
     }
-    if (story.isImportant === true && sameContinent) {
+    if (isImportant && sameMainCategory) {
       return 3;
     }
-    if (sameLocation) {
+    if (isImportant && sameContinent) {
       return 4;
     }
-    if (sameContinent) {
+    if (!isImportant && sameSubcategory) {
       return 5;
     }
-    if (sameCategory) {
+    if (!isImportant && sameLocation) {
       return 6;
     }
-    return 7;
-  };
-
-  const locationTopicPriority = story => {
-    const title = String(story.title || '').toLowerCase();
-    const category = storyTags(story, 'categories', 'category').join(' ');
-    if (/pack(?:ing)?|what to (?:pack|wear)|outfit|wardrobe/.test(`${title} ${category}`)) {
-      return 0;
+    if (!isImportant && sameContinent) {
+      return 7;
     }
-    if (/travel guide|complete guide|guide to|itinerary|things to do|where to stay/.test(title)) {
-      return 1;
+    if (!isImportant && sameMainCategory) {
+      return 8;
     }
-    if (/beach/.test(`${title} ${category}`)) {
-      return 2;
-    }
-    if (/travel guide/.test(category)) {
-      return 1;
-    }
-    return 3;
+    return 9;
   };
 
   storyPage._relatedStoryFallbackPromise = fetch('/story-titles.json')
@@ -1853,23 +1841,16 @@ function fillRelatedStoryCandidates(storyPage) {
           story.title &&
           story.url &&
           story.image &&
-          relatedPriority(story) <= 6
+          relatedPriority(story) <= 8
         ))
         .filter(story => {
           const url = String(story.url || '').replace(/\/$/, '').toLowerCase();
           return url !== currentPath && !manualUrls[url];
         });
-      const exactCategoryStories = candidateStories.filter(story => (
-        currentPrimaryCategory &&
-        String(story.category || '').trim().toLowerCase() === currentPrimaryCategory
-      ));
-      const selectedStories = (exactCategoryStories.length >= remainingSlots ? exactCategoryStories : candidateStories)
+      const selectedStories = candidateStories
         .sort((first, second) => {
           const priorityDifference = relatedPriority(first) - relatedPriority(second);
-          const topicDifference = relatedPriority(first) === 1 && relatedPriority(second) === 1 ?
-            locationTopicPriority(first) - locationTopicPriority(second) :
-            0;
-          return priorityDifference || topicDifference || new Date(second.enabledAt) - new Date(first.enabledAt);
+          return priorityDifference || new Date(second.enabledAt) - new Date(first.enabledAt);
         })
         .slice(0, remainingSlots);
 
@@ -1893,6 +1874,7 @@ function fillRelatedStoryCandidates(storyPage) {
 
         item.setAttribute('data-related-important', story.isImportant === true ? 'true' : 'false');
         item.setAttribute('data-related-manual', 'false');
+        item.setAttribute('data-related-priority', String(relatedPriority(story)));
         link.href = url;
         media.className = 'related-stories__image';
         image.src = story.image;
