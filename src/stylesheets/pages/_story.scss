@@ -1816,7 +1816,7 @@ body.body--story {
   margin: 0;
 }
 
-.body--story .related-stories__list li:nth-child(n+7) {
+.body--story .related-stories__list li:nth-child(n+10) {
   display: none;
 }
 
@@ -1831,7 +1831,7 @@ body.body--story {
 }
 
 .body--story .related-stories__list a:after {
-  background: linear-gradient(180deg, rgba(22, 110, 120, 0.03) 20%, rgba(14, 72, 85, 0.465) 100%);
+  background: linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.9) 100%);
   content: '';
   inset: 0;
   pointer-events: none;
@@ -1872,7 +1872,7 @@ body.body--story {
   inset: 0;
   justify-content: flex-end;
   left: 0;
-  padding: clamp(1.8rem, 1.9vw, 2.4rem);
+  padding: clamp(1.4rem, 1.5vw, 2rem) clamp(1.19rem, 1.275vw, 1.7rem) clamp(1.19rem, 1.275vw, 1.7rem);
   position: absolute;
   right: 0;
   transition: none;
@@ -1885,7 +1885,7 @@ body.body--story {
 .body--story .related-stories__category,
 .body--story .related-stories__meta {
   font-family: Montserrat, Helvetica, sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 0.15em;
   line-height: 1.33;
@@ -1893,21 +1893,23 @@ body.body--story {
 }
 
 .body--story .related-stories__category {
-  margin: 0 0 1.2rem;
+  color: #fff;
+  margin: 0 0 1.84rem;
 }
 
 .body--story .related-stories__meta {
-  margin: 1.4rem 0 0;
+  color: #fff;
+  margin: 0.92rem 0 0;
   text-transform: uppercase;
 }
 
 .body--story .related-stories__title {
   color: #fff;
   font-family: 'Still ITC Garamond Light Condensed', 'Still EB Garamond', Georgia, serif;
-  font-size: clamp(1.9rem, 1.8vw, 2.5rem);
-  font-weight: 600;
+  font-size: clamp(2.1rem, 2.1vw, 3.3rem);
+  font-weight: 500;
   letter-spacing: 0.01em;
-  line-height: 1.08;
+  line-height: 0.9;
   margin: 0;
   text-align: left;
   text-transform: none;
@@ -1931,7 +1933,9 @@ body.body--story {
 .body--story .related-stories__list a:hover:after,
 .body--story .related-stories__list a:focus:after,
 .body--story .related-stories__list a:active:after {
-  background: linear-gradient(180deg, rgba(22, 110, 120, 0) 0%, rgba(14, 72, 85, 0) 100%) !important;
+  background:
+    linear-gradient(90deg, rgba(177, 56, 44, 0.25) 0%, rgba(216, 74, 58, 0.03) 52%, rgba(216, 74, 58, 0) 100%),
+    linear-gradient(180deg, transparent 50%, rgba(0, 0, 0, 0.9) 100%) !important;
 }
 
 @media (max-width: 899px) {
@@ -2666,7 +2670,7 @@ body.body--story {
   }
 
   .body--story .related-stories__title {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 }
 
@@ -2676,6 +2680,6 @@ body.body--story {
   }
 
   .body--story .related-stories__title {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 }

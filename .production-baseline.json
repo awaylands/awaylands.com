@@ -1,6 +1,6 @@
 {
   "name": "Away Lands verified production baseline",
-  "baselineDate": "2026-09-22",
+  "baselineDate": "2026-09-23",
   "baselineCommit": "f25998549f75fcdbeb47e78b61afb1de2646ed62",
   "branch": "production-baseline",
   "siteId": "140c1641-564a-40a9-b13d-85eaec815d1d",
@@ -12,12 +12,12 @@
   "minimumGeneratedPages": 1500,
   "compiledAssets": {
     "javascripts/main.js": {
-      "path": "javascripts/main.54409b56f890e94886c0.js",
-      "hash": "66f57ec88758cc2b47279355cb5fa59c87a9c71d0b7d79c611a550da35fc05f3"
+      "path": "javascripts/main.8bb4d17d25d9cb78e464.js",
+      "hash": "0aff3c2164bb68f0c6a9f067f1aa0442490117569d31c6c9be1cf9c64f8179d8"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.0ed79920b64565fa5ac0.css",
-      "hash": "aa84d83712d3217a70771a77cf80973e7f42a923258bc5d46fad5a4c7a161d4b"
+      "path": "stylesheets/main.c4ccd83f81b9fd42d8e2.css",
+      "hash": "0dbfc043eebeaa2c34d4ae32aa35bec9dbf27952780ce6dfedbf6728d21b2eed"
     }
   },
   "sourceFiles": {
@@ -85,7 +85,7 @@
     "src/javascripts/directives/gallery.js": "28a05c27a332cc94300fcb4895e15298ca2a8b7caf67a10ac46437fe101faa1f",
     "src/javascripts/directives/imageloaded.js": "dd1ae7a025f507c6939c704c58db40020e041508a364fcf2f7ad2fe812aa5b5d",
     "src/javascripts/directives/slides.js": "acdade07f3ab4cc92f85833b8f613c17b2968746389bca0a07ff8ef44d3ede42",
-    "src/javascripts/directives/story.js": "e060c85fed377070c9549fea2ac5721bb69a40c439f64a101121557393f4fc11",
+    "src/javascripts/directives/story.js": "a7db010e41e0151a0b7b79fd666ed79e5ec24604fb34bde9fec6908ec07ab408",
     "src/javascripts/luminous/Lightbox.js": "ee6264aa4526246f563d0809abca7e4bb97318422ce3228199bf2df021b950a8",
     "src/javascripts/luminous/Luminous.js": "e7c6e96b7b829fda5d18ce99668f8c45b33734410b32ec0bcb734cab6d4d0f1b",
     "src/javascripts/luminous/LuminousGallery.js": "c8ca258e473396e00300716c5f32fb421c840214c4754d684b2016f2abb1d8b4",
@@ -147,7 +147,7 @@
     "src/stylesheets/mixins/_responsive-embed.scss": "317f0bc6d3fb6479f227853be2bc7f8a99203bcdddd7146f72d64dee62104c51",
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
-    "src/stylesheets/pages/_blog.scss": "c29fc9d4d016e006bda0010382f3507c01035528c491a413da69499d1a0aa965",
+    "src/stylesheets/pages/_blog.scss": "c6a649d61b8e6c6c4f664e05d602bcfc7b5299b2ae314c3818cd49e6732a7881",
     "src/stylesheets/pages/_category-redesign-final.scss": "853d28617d4cde6fe74ece40f64bd4e005481ee6b9a8e6e4868f91978fa9ae1f",
     "src/stylesheets/pages/_destination-detail.scss": "43476cab30303cf45deb1e56a228cd34fb74815a6e0967fb402f58a1fec04e75",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
@@ -157,7 +157,7 @@
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
     "src/stylesheets/pages/_landing.scss": "36ceb3dc78ac6a60eca9c0acb2ca55bb164596ca9bad3f0456a75bc05f184b13",
     "src/stylesheets/pages/_still.scss": "492fcd4e33c9823a12576a785decc82d09bc4cbe2c23bd40cf5f6f5bffdf45c3",
-    "src/stylesheets/pages/_story.scss": "e5f4615ecbf99ef31b786a35958cb33f7f514a7bb67d108eaa023fc5b23b80c7",
+    "src/stylesheets/pages/_story.scss": "0113186d58417e5b9aed91df5ef7d51abdf0a327f35540543c683b97b9dc882a",
     "src/templates/data/about.graphql": "9a8fbd058a95c2a75313c7adbafc108e255ddd876280583e1ca8cbb426a3f03a",
     "src/templates/data/ads.graphql": "7e1bbbc2f7240dab51417e430973aeca501df1af78ae4622b4ea370a0768e472",
     "src/templates/data/categories.graphql": "da8b1f8692c59a1c8a6ca73239955ed2cd7a1800a769b808d4e0a8fa3c8e285b",
@@ -179,10 +179,10 @@
     "src/templates/data/still-categories.graphql": "804940cc66fa244e43bf1b92b2bd027b0fadc9fac544448d84e889a20797616c",
     "src/templates/data/still-category.graphql": "b020d1c2e62bb7da450a95f2ec4102c5e5f1df09ee9a9bd4ccdb713d522bc894",
     "src/templates/data/still.graphql": "3dc347c6ce5289d6fd5e796986e4f9dfdb433b5311e84da677123afa16f97561",
-    "src/templates/data/stories.graphql": "fb4d2328efe1a80a6839a24577b1a9aef80b0647dc99da24cfa90b63a3812c4b",
+    "src/templates/data/stories.graphql": "c6fa28063fa956347017eae64b2aaab5d2adf49344a2743371a413dd971e9023",
     "src/templates/data/story-slugs.graphql": "2c44c64e1758714e89e63a739540ccc5d708e189b8ae63e6472328087b47ae12",
     "src/templates/data/story-titles.graphql": "a1bd06b78ddf34bb2c7c9e525d55a112c905228193d05a430ccfc7a358435aba",
-    "src/templates/data/story.graphql": "e27a7b593355a1db7fb56bda457e6201839d068bb17eb9cf8029119ef433b9dc",
+    "src/templates/data/story.graphql": "fb9a287c2df27c59b2826797168ae424dbbcd2131b0d3c4c98b5038b858d9fee",
     "src/templates/feeds/search.json": "8e26fc6a1f7c166c7b8e909a1d89ae99659c28a4bc80d16ab934ead5f412816c",
     "src/templates/feeds/sitemap.xml": "4cca10a71a555338fa2ceca7dff9c38504f4177ec666e9c4ed4c5dfbf16e6e6d",
     "src/templates/feeds/story-titles.json": "baadad7fac6b85416d2c5612893394e7af3b4ce0828e9972760c5bb9e757aa15",
@@ -209,7 +209,7 @@
     "src/templates/pages/search.html": "2699c6a5be0024b50d25fedbabd93e078e9ab09c4296a48b6394c3c6c5d69cb5",
     "src/templates/pages/still-category.html": "36b1d3bf5304b30e5a9a5650daf450f0d4c0c79af02f02945a65b06498c07eaa",
     "src/templates/pages/still.html": "6bd0b7423523b7876a6f2d44ba3ba520506d7e7cf6cfc5488511b2863e87da8b",
-    "src/templates/pages/stories/detail.html": "94610a43e6f19c12c8058b2345b6a44ca6293ff5e8cb775940caa332ef794498",
+    "src/templates/pages/stories/detail.html": "dcab5845f2471a232785bf9caefbd9153c14c24d00310f8265bb836e1bea13f7",
     "src/templates/pages/stories/landing.html": "f5646a322a99e0edee158e5462c86db9d94db35487fd044e641541b0b654b18a",
     "src/templates/partials/blog-story-dedupe.html": "499f8c98a7317ec0c65183000b24771c398d6b29818dbb07ec099b7d66cfe33d",
     "src/templates/partials/footer.html": "09b1ae68112872bc254e3b861be60abd15028fca6ad8a9a3b76fc1d2aa90a076",

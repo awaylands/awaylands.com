@@ -48,6 +48,7 @@ query($images: TSImagesConfig) {
             _contentTypeName
             _status
             _enabledAt
+            _updatedAt
             isImportant
             title
             slug
@@ -69,6 +70,7 @@ query($images: TSImagesConfig) {
             _contentTypeName
             _status
             _enabledAt
+            _updatedAt
             isImportant
             title
             slug
@@ -91,6 +93,7 @@ query($images: TSImagesConfig) {
             _contentTypeName
             _status
             _enabledAt
+            _updatedAt
             isImportant
             title
             slug
@@ -113,6 +116,7 @@ query($images: TSImagesConfig) {
             _contentTypeName
             _status
             _enabledAt
+            _updatedAt
             isImportant
             title
             slug
@@ -196,6 +200,7 @@ query($images: TSImagesConfig) {
       relatedStories {
         _status
         _enabledAt
+        _updatedAt
         isImportant
         title
         slug

@@ -5243,9 +5243,9 @@ body.body--blog-magazine.body--blog-archive-page:not(.gallery-page) .page-header
 
   &--auto {
     .related-stories__list {
-      // Keep the automatic footer aligned with the six-story site-wide target.
+      // Keep the automatic footer aligned with the nine-story site-wide target.
       // JavaScript removes duplicate candidates and fills any missing slots.
-      li:nth-child(n+7) {
+      li:nth-child(n+10) {
         display: none;
       }
     }

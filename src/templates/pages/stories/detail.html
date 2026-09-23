@@ -156,7 +156,7 @@
       <div class="related-stories__copy">
         {% if story.category.length %}<p class="related-stories__category">{{ story.category[0].title }}</p>{% endif %}
         <h3 class="related-stories__title"{% if story.social.title %} data-sidebar-title="{{ story.social.title }}"{% endif %}>{{ story.title }}</h3>
-        {% if story._enabledAt %}<p class="related-stories__meta"><time class="related-stories__date" datetime="{{ story._enabledAt }}">{{ story._enabledAt | date("MMMM D, YYYY") }}</time></p>{% endif %}
+        {% if story._updatedAt %}<p class="related-stories__meta"><time class="related-stories__date" datetime="{{ story._updatedAt }}">{{ story._updatedAt | date("MMMM D, YYYY") }}</time></p>{% endif %}
       </div>
     </a>
   </li>
@@ -528,7 +528,7 @@
 
       <div class="story-article__modules">
         {% set hasManualRelatedStories = page.relatedStories.length %}
-        {% set shouldAutofillRelatedStories = page.relatedStories.length < 6 %}
+        {% set shouldAutofillRelatedStories = page.relatedStories.length < 9 %}
         {% set hasAutoRelatedStories = shouldAutofillRelatedStories %}
         {% set hasImportantAutoPosts = importantAutoStories.total > 0 %}
 

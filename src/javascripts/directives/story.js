@@ -1716,7 +1716,7 @@ function finalizeRelatedStories(storyPage) {
     const link = item.querySelector('a[href]');
     const key = link && (link.getAttribute('href') || link.textContent || '').trim().toLowerCase();
 
-    if (!key || used[key] || kept >= 6) {
+    if (!key || used[key] || kept >= 9) {
       item.parentNode.removeChild(item);
       return;
     }
@@ -1763,13 +1763,13 @@ function fillRelatedStoryCandidates(storyPage) {
     }
     return urls;
   }, {});
-  const remainingSlots = Math.max(0, 6 - manualItems.length);
+  const remainingSlots = Math.max(0, 9 - manualItems.length);
 
   if (!remainingSlots) {
     while (list.firstChild) {
       list.removeChild(list.firstChild);
     }
-    manualItems.slice(0, 6).forEach(item => list.appendChild(item));
+    manualItems.slice(0, 9).forEach(item => list.appendChild(item));
     return Promise.resolve();
   }
 
@@ -1854,7 +1854,7 @@ function fillRelatedStoryCandidates(storyPage) {
           story &&
           story.status !== 'disabled' &&
           !/traveling-with-your-dog-essential-health-tips-for-every-pet-parent\/?$/.test(story.url) &&
-          story.enabledAt &&
+          story.updatedAt &&
           story.title &&
           story.url &&
           story.image &&
@@ -1909,8 +1909,8 @@ function fillRelatedStoryCandidates(storyPage) {
         category.textContent = story.category || 'Away Lands';
         meta.className = 'related-stories__meta';
         date.className = 'related-stories__date';
-        date.dateTime = story.enabledAt;
-        date.textContent = new Date(story.enabledAt).toLocaleDateString('en-US', {
+        date.dateTime = story.updatedAt;
+        date.textContent = new Date(story.updatedAt).toLocaleDateString('en-US', {
           month: 'long',
           day: 'numeric',
           year: 'numeric'
