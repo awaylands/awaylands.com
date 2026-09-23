@@ -1749,12 +1749,7 @@ function fillRelatedStoryCandidates(storyPage) {
     .split('|')[0]
     .trim()
     .toLowerCase();
-  const manualItems = Array.prototype.slice.call(list.querySelectorAll('[data-related-manual="true"]'))
-    .filter(item => {
-      const category = item.querySelector('.related-stories__category');
-      const itemCategory = category ? String(category.textContent || '').trim().toLowerCase() : '';
-      return !currentPrimaryCategory || itemCategory === currentPrimaryCategory;
-    });
+  const manualItems = Array.prototype.slice.call(list.querySelectorAll('[data-related-manual="true"]'));
   const manualUrls = manualItems.reduce((urls, item) => {
     const link = item.querySelector('a[href]');
     const url = link && String(link.getAttribute('href') || '').replace(/\/$/, '').toLowerCase();
