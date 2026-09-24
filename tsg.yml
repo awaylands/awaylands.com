@@ -245,5 +245,69 @@ routes:
       data: data/continents.graphql
       itemName: page
 
+  retiredHomeAndGardenHomeUpgradesAndRenovationArchive:
+    path: /category/home-and-garden/home-upgrades-and-renovation/archive
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeAndTravelWithDogsArchive:
+    path: /category/home-and-garden/home-and-travel-with-dogs/archive
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenTravelInspiredHomeArchive:
+    path: /category/home-and-garden/travel-inspired-home/archive
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeUpgradesAndRenovation:
+    path: /category/home-and-garden/home-upgrades-and-renovation
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenPlantsAndGardenArchive:
+    path: /category/home-and-garden/plants-and-garden/archive
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeAndTravelWithDogs:
+    path: /category/home-and-garden/home-and-travel-with-dogs
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeOrganizationArchive:
+    path: /category/home-and-garden/home-organization/archive
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenOutdoorLivingArchive:
+    path: /category/home-and-garden/outdoor-living/archive
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenTravelInspiredHome:
+    path: /category/home-and-garden/travel-inspired-home
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeComfortArchive:
+    path: /category/home-and-garden/home-comfort/archive
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenPlantsAndGarden:
+    path: /category/home-and-garden/plants-and-garden
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeOrganization:
+    path: /category/home-and-garden/home-organization
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeDiyArchive:
+    path: /category/home-and-garden/home-diy/archive
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenOutdoorLiving:
+    path: /category/home-and-garden/outdoor-living
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeComfort:
+    path: /category/home-and-garden/home-comfort
+    template: pages/home-category-redirect.html
+
+  retiredHomeAndGardenHomeDiy:
+    path: /category/home-and-garden/home-diy
+    template: pages/home-category-redirect.html
+
 deploy:
   - ${buildPath}

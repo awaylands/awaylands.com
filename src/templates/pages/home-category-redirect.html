@@ -1,0 +1,31 @@
+{% set redirects = {
+  "/category/home-and-garden/home-upgrades-and-renovation/archive": "/category/home-and-garden/home-improvement-diy/archive/",
+  "/category/home-and-garden/home-and-travel-with-dogs/archive": "/category/features/pets-pet-travel/archive/",
+  "/category/home-and-garden/travel-inspired-home/archive": "/category/home-and-garden/home-design-decor/archive/",
+  "/category/home-and-garden/home-upgrades-and-renovation": "/category/home-and-garden/home-improvement-diy/",
+  "/category/home-and-garden/plants-and-garden/archive": "/category/home-and-garden/plants-garden/archive/",
+  "/category/home-and-garden/home-and-travel-with-dogs": "/category/features/pets-pet-travel/",
+  "/category/home-and-garden/home-organization/archive": "/category/home-and-garden/home-living/archive/",
+  "/category/home-and-garden/outdoor-living/archive": "/category/home-and-garden/plants-garden/archive/",
+  "/category/home-and-garden/travel-inspired-home": "/category/home-and-garden/home-design-decor/",
+  "/category/home-and-garden/home-comfort/archive": "/category/home-and-garden/home-living/archive/",
+  "/category/home-and-garden/plants-and-garden": "/category/home-and-garden/plants-garden/",
+  "/category/home-and-garden/home-organization": "/category/home-and-garden/home-living/",
+  "/category/home-and-garden/home-diy/archive": "/category/home-and-garden/home-improvement-diy/archive/",
+  "/category/home-and-garden/outdoor-living": "/category/home-and-garden/plants-garden/",
+  "/category/home-and-garden/home-comfort": "/category/home-and-garden/home-living/",
+  "/category/home-and-garden/home-diy": "/category/home-and-garden/home-improvement-diy/"
+} %}
+{% set destination = redirects[currentPath] or "/category/home-and-garden/" %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, follow">
+  <meta http-equiv="refresh" content="0;url={{ destination }}">
+  <link rel="canonical" href="https://www.awaylands.com{{ destination }}">
+  <title>Category moved | Away Lands</title>
+  <script>window.location.replace({{ destination | dump | safe }});</script>
+</head>
+<body><p>This category has moved. <a href="{{ destination }}">Continue to the updated category</a>.</p></body>
+</html>

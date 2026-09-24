@@ -34,7 +34,7 @@
     "scripts/copy-static-assets.js": "7fd93fc98bd0a5bb7ca7de5f78d825c9afe63c726751cef9257194969152e3d9",
     "scripts/deploy-production.js": "168ee428826ddedf680017ed59033cc65cb3e271d69d8bd94522d0293df0fce8",
     "scripts/fill-story-slugs.js": "61a93c493cd05854fd6ad2406d1d8b929df0affd1a50c38bd114ab364607b633",
-    "scripts/generate-category-route-aliases.js": "d228ab5b51b1087b3b1516d29b0b4d205449596c4c274c44c71d1b2be1d32074",
+    "scripts/generate-category-route-aliases.js": "e5e92ad173ddc1f919f411d1f0a66f096b1af52825a67f190587fc3567656ec9",
     "scripts/generate-destination-route-aliases.js": "feb40b5a3ac285a13e078669de841f93d8a0ee547b2d9d4d44cfaafaac530531",
     "scripts/localize-google-doc-images.js": "edeea87c04efae35a40c8bfa4987c156a6d342802bc1dedf8a2aab3f319be070",
     "scripts/migrate-native-main-categories.js": "580e1236048df6477ebbd2f758d0db27cc0f2eac8a1ed786adc86fc5157a8495",
@@ -250,7 +250,8 @@
     "static/assets/fonts/still-preview/refined-society.otf": "7a758c9ebf0d5af6ffd674972812ee8086da3dc7cd082b69f6e54b637b1279a1",
     "static/assets/fonts/still-preview/vigro.otf": "c8e8d4ad122e28384fa4d671417954be53fdcaf9d3386efe02d1586fccfd4b7b",
     "static/assets/fonts/still-preview/voyage.otf": "02c122a9667e07e456e5b1b247e8cad82dc4f20a11932aaf483b14dad5a32acc",
-    "tsg.yml": "ebe0ac2553da188c6efe734085e07bc79ad2ed381e1e04c2adfe5a5d549aa040",
-    "webpack.config.js": "b3c56b8f42ce44a4bdffc76307488615a864a858e9d4889de3d7315067e83148"
+    "tsg.yml": "b938307e85789bef63e9a9f440b50a32fcc1d830cfdb29ccf2fe32eab44714cc",
+    "webpack.config.js": "b3c56b8f42ce44a4bdffc76307488615a864a858e9d4889de3d7315067e83148",
+    "src/templates/pages/home-category-redirect.html": "342b5c1b69666448c124f4c3fcb23778ea6081e401c8c864487833d6a96a3348"
   }
 }
