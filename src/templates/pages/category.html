@@ -392,6 +392,10 @@
       {% for card in page.guideCards %}
       {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
       {% set isPhotoDestinationCard = page.title == "Photography" and card.linkUrl == "/category/travel-guides/best-photo-spots/" %}
+      {% set isFullWidthGuide = page.guideCards.length == 5 and loop.index == 5 %}
+      {% set isHalfWidthGuide = page.guideCards.length == 6 and loop.index >= 5 %}
+      {% set guideImageSizes = "(min-width: 901px) 25vw, 50vw" %}
+      {% if isFullWidthGuide %}{% set guideImageSizes = "100vw" %}{% elif isHalfWidthGuide %}{% set guideImageSizes = "50vw" %}{% endif %}
       {% if card.cards and card.cards.length and card.cards[0].post %}
         {% set cardStory = card.cards[0].post %}
       {% endif %}
@@ -408,6 +412,24 @@
             {% for guideCard in card.cards %}
               {% if guideCard.image %}<img src="{{ guideCard.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(guideCard.post, "(min-width: 900px) 25vw, 50vw", false) }}{% endif %}
             {% endfor %}
+          {% elif isFullWidthGuide or isHalfWidthGuide %}
+            {% set guideImage = card.image or cardStory.tout.image or cardStory.tout.secondaryImage %}
+            {% if guideImage %}
+            <img
+              src="{{ guideImage.path | image({w: 1600, auto: 'compress,format'}) }}"
+              srcset="{{ guideImage.path | image({w: 480, auto: 'compress,format'}) }} 480w,
+                {{ guideImage.path | image({w: 800, auto: 'compress,format'}) }} 800w,
+                {{ guideImage.path | image({w: 1200, auto: 'compress,format'}) }} 1200w,
+                {{ guideImage.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
+                {{ guideImage.path | image({w: 2400, auto: 'compress,format'}) }} 2400w,
+                {{ guideImage.path | image({w: 2880, auto: 'compress,format'}) }} 2880w,
+                {{ guideImage.path | image({w: 3840, auto: 'compress,format'}) }} 3840w"
+              sizes="{{ guideImageSizes }}"
+              alt="{% if not card.image %}{{ cardStory.title | escape }}{% endif %}"
+              loading="lazy"
+              decoding="async"
+            >
+            {% endif %}
           {% elif card.image %}
             <img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
           {% else %}
