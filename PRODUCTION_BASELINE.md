@@ -2,18 +2,18 @@
 
 This directory is the only approved source for publishing `www.awaylands.com`.
 
-The live deploy inputs are `src/templates/` and `static/`. The `build/`
-folder is generated output for local previews; it is not the direct live
-deployment source. Production verification blocks if these folder assignments
-drift.
+The live deploy inputs are `src/templates/` and the verified `build/` folder.
+The guarded deployment command rebuilds the assets and pages before upload.
+The `static/` folder supplies source assets to that build. Production verification
+blocks if these folder assignments drift.
 
 Verified baseline:
 
-- Date: 2026-09-22
+- Date: 2026-09-24
 - Branch: `production-baseline`
-- Source commit: `f25998549f75fcdbeb47e78b61afb1de2646ed62`
-- JavaScript: `main.54409b56f890e94886c0.js`
-- Stylesheet: `main.0ed79920b64565fa5ac0.css`
+- Guard ancestry commit: `f25998549f75fcdbeb47e78b61afb1de2646ed62`
+- JavaScript: `main.d5062e182cf1412cd897.js`
+- Stylesheet: `main.c4ccd83f81b9fd42d8e2.css`
 - TakeShape schema: version `256`
 
 ## Safe publishing workflow
@@ -43,3 +43,7 @@ The modern Webpack build is reproducible from the locked dependency tree. Build 
 Older versions and the mixed work in progress state are archived under:
 
 `/Users/amyseder/Documents/Codex/Away Lands Archives/2026-07-22-baseline-cleanup`
+
+Current Home category migration source: `3f63eca`. Recovery snapshots and CMS exports
+are archived privately at https://github.com/awaylands/awaylands-backups.
+The development Film redesign remains unpublished.
