@@ -107,13 +107,21 @@
 {% set updatedStories = exactCategoryStories | sort(true, true, "_updatedAt") %}
 {% set subcategoryFeaturedStories = [] %}
 {% set subcategoryFeaturedIds = [] %}
+{% set preservesMergedSelections = page.title in ["Home Design & Decor", "Home Improvement & DIY", "Home Living", "Plants & Garden", "Pets & Pet Travel"] %}
 {% if isSubcategory %}
   {% for curatedStory in page.featuredStories %}
-    {% if curatedStory and curatedStory._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 %}
+    {% if curatedStory and curatedStory._id not in subcategoryFeaturedIds and (subcategoryFeaturedStories.length < 2 or preservesMergedSelections) %}
       {% set ignored = subcategoryFeaturedStories.push(curatedStory) %}
       {% set ignored = subcategoryFeaturedIds.push(curatedStory._id) %}
     {% endif %}
   {% endfor %}
+  {% if preservesMergedSelections %}{% for curatedCard in page.featuredCards %}
+    {% set curatedStory = curatedCard.post %}
+    {% if curatedStory and curatedStory._id in exactCategoryStoryIds and curatedStory._id not in subcategoryFeaturedIds %}
+      {% set ignored = subcategoryFeaturedStories.push(curatedStory) %}
+      {% set ignored = subcategoryFeaturedIds.push(curatedStory._id) %}
+    {% endif %}
+  {% endfor %}{% endif %}
   {% for parentGuideCard in page.parentCategory.guideCards %}
     {% if parentGuideCard.title | lower == page.title | lower %}
       {% for curatedCard in parentGuideCard.cards %}

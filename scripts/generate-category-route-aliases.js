@@ -8,6 +8,22 @@ const buildRoot = buildRootArgument
   : path.join(projectRoot, 'build');
 
 const aliases = [
+  {"from":"/category/home-and-garden/home-upgrades-and-renovation/archive/","to":"/category/home-and-garden/home-improvement-diy/archive/"},
+  {"from":"/category/home-and-garden/home-and-travel-with-dogs/archive/","to":"/category/features/pets-pet-travel/archive/"},
+  {"from":"/category/home-and-garden/travel-inspired-home/archive/","to":"/category/home-and-garden/home-design-decor/archive/"},
+  {"from":"/category/home-and-garden/home-upgrades-and-renovation/","to":"/category/home-and-garden/home-improvement-diy/"},
+  {"from":"/category/home-and-garden/plants-and-garden/archive/","to":"/category/home-and-garden/plants-garden/archive/"},
+  {"from":"/category/home-and-garden/home-and-travel-with-dogs/","to":"/category/features/pets-pet-travel/"},
+  {"from":"/category/home-and-garden/home-organization/archive/","to":"/category/home-and-garden/home-living/archive/"},
+  {"from":"/category/home-and-garden/outdoor-living/archive/","to":"/category/home-and-garden/plants-garden/archive/"},
+  {"from":"/category/home-and-garden/travel-inspired-home/","to":"/category/home-and-garden/home-design-decor/"},
+  {"from":"/category/home-and-garden/home-comfort/archive/","to":"/category/home-and-garden/home-living/archive/"},
+  {"from":"/category/home-and-garden/plants-and-garden/","to":"/category/home-and-garden/plants-garden/"},
+  {"from":"/category/home-and-garden/home-organization/","to":"/category/home-and-garden/home-living/"},
+  {"from":"/category/home-and-garden/home-diy/archive/","to":"/category/home-and-garden/home-improvement-diy/archive/"},
+  {"from":"/category/home-and-garden/outdoor-living/","to":"/category/home-and-garden/plants-garden/"},
+  {"from":"/category/home-and-garden/home-comfort/","to":"/category/home-and-garden/home-living/"},
+  {"from":"/category/home-and-garden/home-diy/","to":"/category/home-and-garden/home-improvement-diy/"},
   {
     from: '/category/wellness/sleep-and-jet-lag/',
     to: '/category/wellness/sleep-jet-lag/'
@@ -32,6 +48,7 @@ function redirectPage(destinationUrl) {
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex, follow">
   <meta http-equiv="refresh" content="0;url=${escapedUrl}">
   <link rel="canonical" href="https://www.awaylands.com${escapedUrl}">
   <title>Redirecting…</title>
