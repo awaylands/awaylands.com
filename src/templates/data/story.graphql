@@ -42,9 +42,7 @@ query {
           social {
             title
           }
-          category {
-            title
-          }
+          category { title parentCategory { title } }
           location {
             title
           }
@@ -70,7 +68,7 @@ query {
           isImportant
           title
           slug
-          category { title }
+          category { title parentCategory { title } }
           tout {
             image {
               path
@@ -99,7 +97,7 @@ query {
       title
       slug
       social { title }
-      category { title }
+      category { title parentCategory { title } }
       tout { image { path } }
     }
   }
@@ -111,7 +109,7 @@ query {
       title
       slug
       social { title }
-      category { title }
+      category { title parentCategory { title } }
       tout { image { path } }
     }
   }
@@ -124,7 +122,7 @@ query {
       title
       slug
       social { title description }
-      category { title }
+      category { title parentCategory { title } }
       tout { image { path } dek }
     }
   }
@@ -137,7 +135,7 @@ query {
       title
       slug
       social { title description }
-      category { title }
+      category { title parentCategory { title } }
       tout { image { path } dek }
     }
   }
@@ -150,7 +148,7 @@ query {
       title
       slug
       social { title description }
-      category { title }
+      category { title parentCategory { title } }
       tout { image { path } dek }
     }
   }
@@ -163,7 +161,7 @@ query {
       title
       slug
       social { title description }
-      category { title }
+      category { title parentCategory { title } }
       tout { image { path } dek }
     }
   }
@@ -192,9 +190,7 @@ query {
       _enabledAt
       title
       slug
-      category {
-        title
-      }
+      category { title parentCategory { title } }
       tout {
         image {
           path
@@ -211,11 +207,11 @@ query {
     heroImageOverride { path }
     heroImageFocus
     supportingStories {
-      _contentTypeName title slug category { title }
+      _contentTypeName title slug category { title parentCategory { title } }
       tout { image { path } dek }
     }
     editorsPicks {
-      _contentTypeName title slug category { title }
+      _contentTypeName title slug category { title parentCategory { title } }
       tout { image { path } dek }
     }
     travelEssentialsBackgroundImage { path }
@@ -253,11 +249,11 @@ query {
     revolveSectionLinkUrl
     revolveSectionEmbedHtml
     featuredItineraries {
-      _contentTypeName title slug category { title }
+      _contentTypeName title slug category { title parentCategory { title } }
       tout { image { path } dek }
     }
     leftFullBleedStory {
-      _contentTypeName title slug category { title }
+      _contentTypeName title slug category { title parentCategory { title } }
       tout { image { path } dek }
     }
     leftFullBleedImageOverride { path }
@@ -265,7 +261,7 @@ query {
     leftFullBleedMobileImageOverride { path }
     leftFullBleedMobileImageFocus
     rightFullBleedStory {
-      _contentTypeName title slug category { title }
+      _contentTypeName title slug category { title parentCategory { title } }
       tout { image { path } dek }
     }
     rightFullBleedImageOverride { path }
@@ -273,7 +269,7 @@ query {
     rightFullBleedMobileImageOverride { path }
     rightFullBleedMobileImageFocus
     latestStories {
-      _contentTypeName title slug category { title }
+      _contentTypeName title slug category { title parentCategory { title } }
       tout { image { path } dek }
     }
     categories {

@@ -101,7 +101,13 @@
   {% endmacro %}
 
   {% macro storyMeta(story, fallback) %}
-    <span class="bm-kicker">{% if story.category.length %}{{ story.category[0].title }}{% elif story.mainCategory.length %}{{ story.mainCategory[0].title }}{% else %}{{ fallback }}{% endif %}</span>
+    {% set subcategories = [] %}
+    {% for category in story.category %}
+      {% if category.parentCategory and category.parentCategory.title != category.title %}
+        {% set ignored = subcategories.push(category) %}
+      {% endif %}
+    {% endfor %}
+    <span class="bm-kicker">{% if subcategories.length %}{{ subcategories[0].title }}{% elif story.category.length %}{{ story.category[0].title }}{% elif story.mainCategory.length %}{{ story.mainCategory[0].title }}{% else %}{{ fallback }}{% endif %}</span>
   {% endmacro %}
 
   {% macro compactStory(story, number) %}

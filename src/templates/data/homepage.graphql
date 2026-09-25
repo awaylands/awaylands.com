@@ -38,9 +38,7 @@ query {
       _enabledAt
       title
       slug
-      category {
-        title
-      }
+      category { title parentCategory { title } }
       tout {
         image {
           path
@@ -51,8 +49,8 @@ query {
     }
     heroImageOverride { path }
     heroImageFocus
-    supportingStories { _contentTypeName title slug category { title } tout { image { path } dek } }
-    editorsPicks { _contentTypeName title slug category { title } tout { image { path } dek } }
+    supportingStories { _contentTypeName title slug category { title parentCategory { title } } tout { image { path } dek } }
+    editorsPicks { _contentTypeName title slug category { title parentCategory { title } } tout { image { path } dek } }
     travelEssentialsBackgroundImage { path }
     travelEssentialsBackgroundFocus
     travelEssentialsLabel
@@ -95,18 +93,18 @@ query {
     revolveSectionTitle
     revolveSectionLinkUrl
     revolveSectionEmbedHtml
-    featuredItineraries { _contentTypeName title slug category { title } tout { image { path } dek } }
-    leftFullBleedStory { _contentTypeName title slug category { title } tout { image { path } dek } }
+    featuredItineraries { _contentTypeName title slug category { title parentCategory { title } } tout { image { path } dek } }
+    leftFullBleedStory { _contentTypeName title slug category { title parentCategory { title } } tout { image { path } dek } }
     leftFullBleedImageOverride { path }
     leftFullBleedImageFocus
     leftFullBleedMobileImageOverride { path }
     leftFullBleedMobileImageFocus
-    rightFullBleedStory { _contentTypeName title slug category { title } tout { image { path } dek } }
+    rightFullBleedStory { _contentTypeName title slug category { title parentCategory { title } } tout { image { path } dek } }
     rightFullBleedImageOverride { path }
     rightFullBleedImageFocus
     rightFullBleedMobileImageOverride { path }
     rightFullBleedMobileImageFocus
-    latestStories { _contentTypeName title slug category { title } tout { image { path } dek } }
+    latestStories { _contentTypeName title slug category { title parentCategory { title } } tout { image { path } dek } }
   }
 
   stories: getStoryList(size: 32, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
@@ -120,9 +118,7 @@ query {
         }
         dek
       }
-      category {
-        title
-      }
+      category { title parentCategory { title } }
     }
   }
 }
