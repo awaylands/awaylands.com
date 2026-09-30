@@ -16,8 +16,8 @@
       "hash": "69f00f07ed21069cebe5e94344ce24b87a32322594d5ace1390840c8ac5f2d0a"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.c4ccd83f81b9fd42d8e2.css",
-      "hash": "0dbfc043eebeaa2c34d4ae32aa35bec9dbf27952780ce6dfedbf6728d21b2eed"
+      "path": "stylesheets/main.a569562f293f77053a38.css",
+      "hash": "eb4361826300b107c6a8c2d54fcee5f128784e2dfd0b796dd38e07a8c483512a"
     }
   },
   "sourceFiles": {
@@ -147,7 +147,7 @@
     "src/stylesheets/mixins/_responsive-embed.scss": "317f0bc6d3fb6479f227853be2bc7f8a99203bcdddd7146f72d64dee62104c51",
     "src/stylesheets/pages/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "src/stylesheets/pages/_about.scss": "e2a51f29b8159e2ac75af4cd277390e9a98b0e110bbbd7d8b91aaa7750c6f791",
-    "src/stylesheets/pages/_blog.scss": "c6a649d61b8e6c6c4f664e05d602bcfc7b5299b2ae314c3818cd49e6732a7881",
+    "src/stylesheets/pages/_blog.scss": "1659344f6dd3fb19cdbe259bd925948fc00a88bd53a85981351bfa30ca883836",
     "src/stylesheets/pages/_category-redesign-final.scss": "853d28617d4cde6fe74ece40f64bd4e005481ee6b9a8e6e4868f91978fa9ae1f",
     "src/stylesheets/pages/_destination-detail.scss": "43476cab30303cf45deb1e56a228cd34fb74815a6e0967fb402f58a1fec04e75",
     "src/stylesheets/pages/_destination-hub.scss": "f3414876358d6be18b3e11ec2b4acf1bec67b51138961aa703b408e759537b8b",
