@@ -32,7 +32,7 @@ async function graphql(query, variables = {}, admin = false) {
   const c = config();
   const token = admin ? JSON.parse(fs.readFileSync(path.join(os.homedir(), '.takeshaperc'))).accessToken : c.linkedApiKey.apiKey;
   const headers = {'Content-Type': 'application/json', ...(token.split('.').length === 3 ? {'X-TakeShape-Token': token} : {Authorization: `Bearer ${token}`})};
-  const response = await fetch(`${c.endpoint}${admin ? '/admin-graphql' : `/project/${PROJECT}/production/graphql`}`, {method: 'POST', headers, body: JSON.stringify({query, variables}), signal: AbortSignal.timeout(90000)});
+  const response = await fetch(`${c.endpoint}${admin === true ? '/admin-graphql' : `/project/${PROJECT}/production/graphql`}`, {method: 'POST', headers, body: JSON.stringify({query, variables}), signal: AbortSignal.timeout(90000)});
   if (!response.ok) throw new Error(`TakeShape returned HTTP ${response.status}.`);
   const data = await response.json();
   if (data.errors?.length) throw new Error(data.errors.map(e => e.message).join('; '));
@@ -96,7 +96,7 @@ async function inspect(id) {
   return {id, title: story.title, url: SITE + url, updatedAt: story._updatedAt, ...classify(story, oldTitle, oldSearch)};
 }
 async function storage() {
-  const data = await graphql(`query($id:ID!){getTSStaticSite(_id:$id){destination idKey secretKey baseUrl}}`, {id: SITE_ID});
+  const data = await graphql(`query($id:ID!){getTSStaticSite(_id:$id){destination idKey secretKey baseUrl}}`, {id: SITE_ID}, 'account');
   const site = data.getTSStaticSite;
   if (site?.destination !== 'www.awaylands.com' || site.baseUrl !== SITE || !site.idKey || !site.secretKey) throw new Error('The existing hosting credentials are unavailable. No files were published.');
   return {client: new S3Client({region: 'us-east-1', followRegionRedirects: true, credentials: {accessKeyId: site.idKey, secretAccessKey: site.secretKey}}), bucket: site.destination};

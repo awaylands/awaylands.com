@@ -253,7 +253,7 @@
     "tsg.yml": "b938307e85789bef63e9a9f440b50a32fcc1d830cfdb29ccf2fe32eab44714cc",
     "webpack.config.js": "b3c56b8f42ce44a4bdffc76307488615a864a858e9d4889de3d7315067e83148",
     "src/templates/pages/home-category-redirect.html": "342b5c1b69666448c124f4c3fcb23778ea6081e401c8c864487833d6a96a3348",
-    "scripts/publish-post.js": "45ceaa6a526b085e6655743ea85980dae855ea22b4d478497d23b7115dcfffc0",
+    "scripts/publish-post.js": "dd69b6450934204a0f588159b89a3b0435611165a82a04aa6a6afe387036ecdc",
     "scripts/post-publisher-server.js": "dcc8ff67c96befbe546d709818cdeb93bc1a4570e83671bd5999ea26ec456ab2",
     "scripts/post-publisher.html": "291e3dc3f9ee7b20262160eb87d37f52569e5d6be84159fcda2fa82aa46bb95a",
     "scripts/post-publisher.js": "16211f9f62efecfec828563b6a4dc3d6c49468b33b9bb16e6918cd905dfa1573",
