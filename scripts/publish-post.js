@@ -93,13 +93,23 @@ async function inspect(id) {
   const url = storyPath(story);
   const oldTitle = titles.find(x => normalizeUrl(x.url) === normalizeUrl(url));
   const oldSearch = search.find(x => x.type !== 'category' && normalizeUrl(x.url) === normalizeUrl(url));
-  return {id, title: story.title, url: SITE + url, updatedAt: story._updatedAt, ...classify(story, oldTitle, oldSearch)};
+  return {id, title: story.title, url: SITE + url, updatedAt: story._updatedAt, ...classify(story, oldTitle, oldSearch), hostingReady: hostingReady()};
+}
+function hostingReady() {
+  return Boolean(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY || fs.existsSync(path.join(os.homedir(), '.aws/credentials')) || process.env.AWS_PROFILE && fs.existsSync(path.join(os.homedir(), '.aws/config')));
 }
 async function storage() {
-  const data = await graphql(`query($id:ID!){getTSStaticSite(_id:$id){destination idKey secretKey baseUrl}}`, {id: SITE_ID}, 'account');
-  const site = data.getTSStaticSite;
-  if (site?.destination !== 'www.awaylands.com' || site.baseUrl !== SITE || !site.idKey || !site.secretKey) throw new Error('The existing hosting credentials are unavailable. No files were published.');
-  return {client: new S3Client({region: 'us-east-1', followRegionRedirects: true, credentials: {accessKeyId: site.idKey, secretAccessKey: site.secretKey}}), bucket: site.destination};
+  config();
+  if (!hostingReady()) throw new Error('Connect this Mac to the existing AWS hosting account before quick publishing. Publish Site still works through TakeShape.');
+  return {client: new S3Client({region: process.env.AWS_REGION || 'us-east-1', followRegionRedirects: true}), bucket: 'www.awaylands.com'};
+}
+async function getPublicObject(key) {
+  const url = key.endsWith('/index.html') ? key.slice(0, -10) : key;
+  const response = await fetch(`${SITE}/${url}?postpreview=${Date.now()}`, {signal: AbortSignal.timeout(30000)});
+  if (response.status === 404) return null;
+  if (!response.ok) throw new Error(`Could not read published ${key}.`);
+  const bytes = Buffer.from(await response.arrayBuffer());
+  return {bytes, raw:bytes, etag:response.headers.get('etag'), contentType:response.headers.get('content-type')};
 }
 async function getObject(store, key) {
   try {
@@ -219,9 +229,9 @@ async function publishStory(id, options = {}) {
     const story = await storyMeta(id);
     if (options.expectedUpdatedAt && story._updatedAt !== options.expectedUpdatedAt) throw new Error('The saved post changed after this preview. Check it again before publishing.');
     const url = storyPath(story);
-    store = await storage();
+    if (!options.dryRun) store = await storage();
     const keys = [url.slice(1) + 'index.html', 'search.json', 'story-titles.json', 'sitemap.xml', ...legacyKeys(url)];
-    const objects = await Promise.all(keys.map(key => getObject(store, key)));
+    const objects = await Promise.all(keys.map(key => options.dryRun ? getPublicObject(key) : getObject(store, key)));
     if (objects.some(x => !x)) throw new Error('This post or its public indexes are missing. Use Publish Site for the first publication.');
     const searches = JSON.parse(objects[1].bytes); const titles = JSON.parse(objects[2].bytes);
     const oldTitle = titles.find(x => normalizeUrl(x.url) === normalizeUrl(url));
@@ -285,4 +295,4 @@ async function publishStory(id, options = {}) {
   }
 }
 
-module.exports = {inspect, publishStory, singleStoryQuery, classify, storyPath, mergeIndex, sitemapUpdate, validateStory, uuid};
+module.exports = {inspect, publishStory, singleStoryQuery, classify, storyPath, mergeIndex, sitemapUpdate, validateStory, uuid, hostingReady};

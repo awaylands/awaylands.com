@@ -10,8 +10,14 @@ New posts and changes to listing metadata use the existing full-site publication
 
 All uploads run through `npm run deploy -- --post STORY_ID`, use the approved production checkout and run the production baseline verifier. Test with `--dry-run` appended. The dry run generates and validates output, reads existing hosting objects, and writes no remote objects.
 
-The service binds only to 127.0.0.1:5058. It rejects unexpected Host and Origin headers, requires a per-process token and JSON for write requests, and accepts only saved production Story IDs. Hosting credentials remain in the local Node process. No credential or publishing permission is added to the Chrome extension.
+The service binds only to 127.0.0.1:5058. It rejects unexpected Host and Origin headers, requires a per-process token and JSON for write requests, and accepts only saved production Story IDs. TakeShape redacts its stored AWS secret. Quick publishing therefore uses the standard AWS SDK credential chain on this Mac (AWS_ACCESS_KEY_ID/AWS_SECRET_ACCESS_KEY, ~/.aws/credentials, or a configured AWS_PROFILE). Hosting credentials remain in the local Node process. No credential or publishing permission is added to the Chrome extension.
 
 Conditional hosting writes detect concurrent object changes. Backups and results are retained privately under `.post-publisher/`. Partial upload failures restore previous objects conditionally; if another publisher changed a file, recovery stops rather than overwrite that work. A public-cache delay is reported as uploaded, not verified live. Do not start a TakeShape full-site publish while a local quick publish is running.
 
 The fast publisher never uploads templates or changes the source bundle stored by TakeShape. Later full publishes continue to use CMS content and the normal approved templates.
+
+## Hosting connection required
+
+The current Mac has no AWS profile or credential. No single-page upload can run until the hosting owner connects the existing AWS account. The local dry run can still validate the generated post against publicly available files, and the regular full-site deployment remains available through TakeShape.
+
+The hosting owner should configure an existing authorized profile for bucket `www.awaylands.com`, or a narrowly scoped publisher identity. Required actions are `s3:GetObject`, `s3:GetObjectAcl`, `s3:PutObject`, and `s3:PutObjectAcl` on the story objects and `search.json`, `story-titles.json`, and `sitemap.xml`. No bucket creation, deletion, IAM administration, or CloudFront changes are needed. Do not put credentials in the extension, Git, or chat. Test with the dry-run command first, then verify a live publish after connecting.
