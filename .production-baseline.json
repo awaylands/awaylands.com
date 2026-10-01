@@ -254,9 +254,9 @@
     "webpack.config.js": "b3c56b8f42ce44a4bdffc76307488615a864a858e9d4889de3d7315067e83148",
     "src/templates/pages/home-category-redirect.html": "342b5c1b69666448c124f4c3fcb23778ea6081e401c8c864487833d6a96a3348",
     "scripts/publish-post.js": "afb08d082383c5c1b465aa9a95591a38d9b7f762b8f099de056b90fc0493d4ac",
-    "scripts/post-publisher-server.js": "dcc8ff67c96befbe546d709818cdeb93bc1a4570e83671bd5999ea26ec456ab2",
+    "scripts/post-publisher-server.js": "b074b58e85f8c4a0b87ea379921ca068194bd515338c04b7f3aa3a38703f214d",
     "scripts/post-publisher.html": "98036438af4544e7c6ddcf7c6887c8db8a81a24901bcec322fc2fc786aa3c79b",
-    "scripts/post-publisher.js": "17c5c5645fe14a62149da75147250d81c787e69450b00c3c3d092dfac0b460c1",
+    "scripts/post-publisher.js": "cd5293ae2b47dc6bf5f22f8d0c203de458d89936b6f6ee14ffb0533cd82b8f56",
     "scripts/post-publisher.css": "dcb8d36cd334005d58374aaabb2c8136b4933eadb28d931b96e04bb522642c34",
     "scripts/POST-PUBLISHER.md": "c36c505db51b5ae2b420e07bafa5679f1a2fcba45b9df2455cb6551034944024",
     "scripts/tests/post-publisher.test.js": "8ab8e235375f031967a86bc1c14507039a93c68864f80cd64afa1e12a55eef58"

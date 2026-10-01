@@ -74,6 +74,7 @@ function createServer() {
         if (!uuid(data.id) || !['post','site'].includes(data.mode) || !plan || Date.now()-plan.checkedAt>5*60*1000) return reply(res,409,{error:'Check the saved post again before publishing.'});
         const fresh=await inspect(data.id);
         if (fresh.updatedAt!==plan.updatedAt || data.mode==='post' && fresh.mode!=='post') return reply(res,409,{error:'The saved post changed. Check it again to update the publishing options.'});
+        if (data.mode==='post' && !fresh.hostingReady) return reply(res,409,{error:'The hosting connection must be configured before quick publishing.'});
         return reply(res,202,startPublish(data.id,data.mode));
       }
       reply(res,404,{error:'Not found.'});
