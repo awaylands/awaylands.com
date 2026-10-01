@@ -238,6 +238,13 @@ function generateSite() {
 }
 
 async function main() {
+  const postIndex = process.argv.indexOf('--post');
+  if (postIndex !== -1) {
+    const {publishStory} = require('./publish-post');
+    const result = await publishStory(process.argv[postIndex + 1], {dryRun: process.argv.includes('--dry-run')});
+    process.stdout.write(JSON.stringify(result) + '\n');
+    return;
+  }
   run(node, [npmCli, 'run', 'build']);
   const builtAssets = getManifestAssets();
   generateSite();
