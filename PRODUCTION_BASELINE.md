@@ -75,3 +75,7 @@ after standalone control tags. Preserve literal HTML, inline spacing, script
 contents, and CMS body HTML when changing these controls. Do not enable the
 built-in HTML minifier: comparison against the current content found markup
 and structured-data changes.
+
+The search feed stores plain text for article bodies and blocks, using the same
+normalization as `plainText` in the browser search component. Keep those rules
+aligned so scoring and snippets remain identical. Display metadata stays intact.

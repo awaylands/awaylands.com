@@ -199,7 +199,7 @@
     "src/templates/data/story-title-redirects.graphql": "f54889f7ac23382fb719f31d86bac53d1e3198443cd933af961b398182194181",
     "src/templates/data/story-titles.graphql": "a1bd06b78ddf34bb2c7c9e525d55a112c905228193d05a430ccfc7a358435aba",
     "src/templates/data/story.graphql": "4c4d1e5bc2a6a7021ae2ce8c5aa582bf7c5971aba255b0545b3da14b41b1253b",
-    "src/templates/feeds/search.json": "8e26fc6a1f7c166c7b8e909a1d89ae99659c28a4bc80d16ab934ead5f412816c",
+    "src/templates/feeds/search.json": "44e669d507f20477aa158d5f46f6d4cb4c543e940c8fcd968b4be48ed9d75557",
     "src/templates/feeds/sitemap.xml": "4cca10a71a555338fa2ceca7dff9c38504f4177ec666e9c4ed4c5dfbf16e6e6d",
     "src/templates/feeds/story-titles.json": "23fd6606d26f862bf32c6d75cc7690cdf13ed0d10d940468fe74f1d44f60627c",
     "src/templates/layouts/default.html": "03e5d144ef88f5e8b44a237c0dc264dd9569828633dddd0b3ec9c1e590734aa1",

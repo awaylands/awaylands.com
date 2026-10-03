@@ -1,3 +1,7 @@
+{# Match the browser search plainText function while omitting unused HTML. #}
+{% macro searchTextJson(value) -%}
+  {{- (value or "") | replace(r/<[^>]*>/g, " ") | replace(r/&[^;\s]+;/g, " ") | replace(r/\s+/g, " ") | trim | dump | safe -}}
+{%- endmacro %}
       [
 {% for category in categories.items %}
   {% if category.title != "* Most Popular Posts *" %}
@@ -29,52 +33,52 @@
     "location": {% if story.location.length %}{{ story.location[0].title | dump | safe }}{% else %}""{% endif %},
     "dek": {% if story.tout.dek %}{{ story.tout.dek | dump | safe }}{% elif story.social.description %}{{ story.social.description | dump | safe }}{% else %}""{% endif %},
     "image": {% if story.tout.image.path %}{{ (story.tout.image.path | image({w: 900, auto: 'compress,format'})) | dump | safe }}{% else %}""{% endif %},
-    "content": {{ story.contentHtml | dump | safe }},
+    "content": {{ searchTextJson(story.contentHtml) }},
     "mainBlocks": [
-      {% if story.mainHtmlBlock1 %}{{ story.mainHtmlBlock1 | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainContentBlock1Html %}{{ story.mainContentBlock1Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock2 %}{{ story.additionalMainBlocks.mainHtmlBlock2 | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock2Html %}{{ story.additionalMainBlocks.mainContentBlock2Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock3 %}{{ story.additionalMainBlocks.mainHtmlBlock3 | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock3Html %}{{ story.additionalMainBlocks.mainContentBlock3Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock4 %}{{ story.additionalMainBlocks.mainHtmlBlock4 | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock4Html %}{{ story.additionalMainBlocks.mainContentBlock4Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock5 %}{{ story.additionalMainBlocks.mainHtmlBlock5 | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock5Html %}{{ story.additionalMainBlocks.mainContentBlock5Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock6 %}{{ story.additionalMainBlocks.mainHtmlBlock6 | dump | safe }}{% else %}""{% endif %},
-      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock6Html %}{{ story.additionalMainBlocks.mainContentBlock6Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainHtmlBlock2 %}{{ story.mainHtmlBlock2 | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainContentBlock2Html %}{{ story.mainContentBlock2Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainHtmlBlock3 %}{{ story.mainHtmlBlock3 | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainContentBlock3Html %}{{ story.mainContentBlock3Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainHtmlBlock4 %}{{ story.mainHtmlBlock4 | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainContentBlock4Html %}{{ story.mainContentBlock4Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainHtmlBlock5 %}{{ story.mainHtmlBlock5 | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainContentBlock5Html %}{{ story.mainContentBlock5Html | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainHtmlBlock6 %}{{ story.mainHtmlBlock6 | dump | safe }}{% else %}""{% endif %},
-      {% if story.mainContentBlock6Html %}{{ story.mainContentBlock6Html | dump | safe }}{% else %}""{% endif %}
+      {% if story.mainHtmlBlock1 %}{{ searchTextJson(story.mainHtmlBlock1) }}{% else %}""{% endif %},
+      {% if story.mainContentBlock1Html %}{{ searchTextJson(story.mainContentBlock1Html) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock2 %}{{ searchTextJson(story.additionalMainBlocks.mainHtmlBlock2) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock2Html %}{{ searchTextJson(story.additionalMainBlocks.mainContentBlock2Html) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock3 %}{{ searchTextJson(story.additionalMainBlocks.mainHtmlBlock3) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock3Html %}{{ searchTextJson(story.additionalMainBlocks.mainContentBlock3Html) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock4 %}{{ searchTextJson(story.additionalMainBlocks.mainHtmlBlock4) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock4Html %}{{ searchTextJson(story.additionalMainBlocks.mainContentBlock4Html) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock5 %}{{ searchTextJson(story.additionalMainBlocks.mainHtmlBlock5) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock5Html %}{{ searchTextJson(story.additionalMainBlocks.mainContentBlock5Html) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainHtmlBlock6 %}{{ searchTextJson(story.additionalMainBlocks.mainHtmlBlock6) }}{% else %}""{% endif %},
+      {% if story.additionalMainBlocks and story.additionalMainBlocks.mainContentBlock6Html %}{{ searchTextJson(story.additionalMainBlocks.mainContentBlock6Html) }}{% else %}""{% endif %},
+      {% if story.mainHtmlBlock2 %}{{ searchTextJson(story.mainHtmlBlock2) }}{% else %}""{% endif %},
+      {% if story.mainContentBlock2Html %}{{ searchTextJson(story.mainContentBlock2Html) }}{% else %}""{% endif %},
+      {% if story.mainHtmlBlock3 %}{{ searchTextJson(story.mainHtmlBlock3) }}{% else %}""{% endif %},
+      {% if story.mainContentBlock3Html %}{{ searchTextJson(story.mainContentBlock3Html) }}{% else %}""{% endif %},
+      {% if story.mainHtmlBlock4 %}{{ searchTextJson(story.mainHtmlBlock4) }}{% else %}""{% endif %},
+      {% if story.mainContentBlock4Html %}{{ searchTextJson(story.mainContentBlock4Html) }}{% else %}""{% endif %},
+      {% if story.mainHtmlBlock5 %}{{ searchTextJson(story.mainHtmlBlock5) }}{% else %}""{% endif %},
+      {% if story.mainContentBlock5Html %}{{ searchTextJson(story.mainContentBlock5Html) }}{% else %}""{% endif %},
+      {% if story.mainHtmlBlock6 %}{{ searchTextJson(story.mainHtmlBlock6) }}{% else %}""{% endif %},
+      {% if story.mainContentBlock6Html %}{{ searchTextJson(story.mainContentBlock6Html) }}{% else %}""{% endif %}
     ],
     "blocks": [
       {% for block in story.contentBlocks %}
         {% if block.__typename == "ContentBlock" %}
-          {{ block.contentHtml | dump | safe }}
+          {{ searchTextJson(block.contentHtml) }}
         {% elif block.__typename == "HtmlBlock" %}
-          {{ block.html | dump | safe }}
+          {{ searchTextJson(block.html) }}
         {% elif block.__typename == "TableBlock" %}
-          {{ (block.pastedText or "") | dump | safe }}
+          {{ searchTextJson((block.pastedText or "")) }}
         {% else %}
           ""
         {% endif %}{% if not loop.last %},{% endif %}
       {% endfor %}
     ],
     "extraContentBlocks": [
-      {% for block in story.extraContentBlocks %}{{ block.contentHtml | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
+      {% for block in story.extraContentBlocks %}{{ searchTextJson(block.contentHtml) }}{% if not loop.last %},{% endif %}{% endfor %}
     ],
     "extraHtmlBlocks": [
-      {% for block in story.extraHtmlBlocks %}{{ block.html | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
+      {% for block in story.extraHtmlBlocks %}{{ searchTextJson(block.html) }}{% if not loop.last %},{% endif %}{% endfor %}
     ],
     "extraTableBlocks": [
-      {% for block in story.extraTableBlocks %}{{ block.pastedText | dump | safe }}{% if not loop.last %},{% endif %}{% endfor %}
+      {% for block in story.extraTableBlocks %}{{ searchTextJson(block.pastedText) }}{% if not loop.last %},{% endif %}{% endfor %}
     ]
   }{% if not loop.last or not lastPage %},{% endif %}
 {% endfor %}
