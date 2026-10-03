@@ -553,7 +553,11 @@
             {% endfor %}
 
             {% if page.location.length %}
-              {% for story in page.location[0].storySet.items %}
+              {% set relatedCandidates = [] %}
+              {% for relatedGroup in relatedLocations.items %}
+                {% if relatedGroup._id == page.location[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
+              {% endfor %}
+              {% for story in relatedCandidates %}
               {% if story.title != page.title %}
                 {{ renderRelatedStory(story) }}
               {% endif %}
@@ -561,13 +565,21 @@
             {% endif %}
 
             {% if page.category.length %}
-              {% for story in page.category[0].storySet.items %}
+              {% set relatedCandidates = [] %}
+              {% for relatedGroup in relatedCategories.items %}
+                {% if relatedGroup._id == page.category[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
+              {% endfor %}
+              {% for story in relatedCandidates %}
               {% if story.title != page.title %}
                 {{ renderRelatedStory(story) }}
               {% endif %}
               {% endfor %}
             {% elif page.mainCategory.length %}
-              {% for story in page.mainCategory[0].storySet.items %}
+              {% set relatedCandidates = [] %}
+              {% for relatedGroup in relatedMainCategories.items %}
+                {% if relatedGroup._id == page.mainCategory[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
+              {% endfor %}
+              {% for story in relatedCandidates %}
               {% if story.title != page.title %}
                 {{ renderRelatedStory(story) }}
               {% endif %}
@@ -575,7 +587,11 @@
             {% endif %}
 
             {% if page.continent.length %}
-              {% for story in page.continent[0].storySet.items %}
+              {% set relatedCandidates = [] %}
+              {% for relatedGroup in relatedContinents.items %}
+                {% if relatedGroup._id == page.continent[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
+              {% endfor %}
+              {% for story in relatedCandidates %}
               {% if story.title != page.title %}{{ renderRelatedStory(story) }}{% endif %}
               {% endfor %}
             {% endif %}

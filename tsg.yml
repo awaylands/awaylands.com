@@ -1,10 +1,11 @@
 templatePath: src/templates
-staticPath: build
+staticPath: publish-static
 buildPath: build
 
 context:
   site: data/site.graphql
-  assets: ../../build/assets/manifest.json
+  assets: ../../publish-static/assets/manifest.json
+  publishingRelease: "2026-10-03-publishing-v1"
 
 images: &images
   default:
@@ -70,7 +71,7 @@ routes:
   storySlug:
     path: /story/:slug
     template: pages/stories/detail.html
-    context: data/story.graphql
+    context: data/story-slug-context.graphql
     paginate:
       data: data/story-slugs.graphql
       itemName: page
@@ -226,7 +227,7 @@ routes:
     template: pages/location-archive.html
     context: data/location.graphql
     paginate:
-      data: data/locations.graphql
+      data: data/location-archives.graphql
       itemName: page
 
   continent:
@@ -242,7 +243,7 @@ routes:
     template: pages/location-archive.html
     context: data/continent.graphql
     paginate:
-      data: data/continents.graphql
+      data: data/continent-archives.graphql
       itemName: page
 
   retiredHomeAndGardenHomeUpgradesAndRenovationArchive:

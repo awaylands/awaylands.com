@@ -43,69 +43,21 @@ query($images: TSImagesConfig) {
       keepReadingTitle
       mainCategoryLabels: mainCategory { title }
       mainCategory {
+        _id
         title
-        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
-          items {
-            _contentTypeName
-            _status
-            _enabledAt
-            isImportant
-            title
-            slug
-            category { title }
-            social { title }
-            tout { image { path } }
-          }
-        }
       }
       categoryLabels: category {
         title
         parentCategory { title }
       }
       category {
+        _id
         title
         parentCategory { title }
-        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
-          items {
-            _contentTypeName
-            _status
-            _enabledAt
-            isImportant
-            title
-            slug
-            category { title }
-            social {
-              title
-            }
-            tout {
-              image {
-                path
-              }
-            }
-          }
-        }
       }
       location {
+        _id
         title
-        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
-          items {
-            _contentTypeName
-            _status
-            _enabledAt
-            isImportant
-            title
-            slug
-            category { title }
-            social {
-              title
-            }
-            tout {
-              image {
-                path
-              }
-            }
-          }
-        }
       }
       contentHtml(images: $images, headerIdPrefix: "story-main-")
       extraContentBlocks {

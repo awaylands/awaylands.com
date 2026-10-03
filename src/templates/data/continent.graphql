@@ -1,4 +1,4 @@
-query ContinentDestinationDetailContext($images: TSImagesConfig) {
+query ContinentDestinationDetailContext {
   continents: getContinentList(size: 50, onlyEnabled: true) {
     items {
       _id
@@ -104,40 +104,6 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
             category { title }
             mainCategory { title }
             tout { image { path } dek }
-            contentHtml(images: $images)
-            extraContentBlocks { contentHtml(images: $images) }
-            extraHtmlBlocks { html }
-            mainHtmlBlock1
-            mainContentBlock1Html(images: $images)
-            additionalMainBlocks {
-              mainHtmlBlock2
-              mainContentBlock2Html(images: $images)
-              mainHtmlBlock3
-              mainContentBlock3Html(images: $images)
-              mainHtmlBlock4
-              mainContentBlock4Html(images: $images)
-              mainHtmlBlock5
-              mainContentBlock5Html(images: $images)
-              mainHtmlBlock6
-              mainContentBlock6Html(images: $images)
-            }
-            mainHtmlBlock2
-            mainContentBlock2Html(images: $images)
-            mainHtmlBlock3
-            mainContentBlock3Html(images: $images)
-            mainHtmlBlock4
-            mainContentBlock4Html(images: $images)
-            mainHtmlBlock5
-            mainContentBlock5Html(images: $images)
-            mainHtmlBlock6
-            mainContentBlock6Html(images: $images)
-            contentBlocks {
-              __typename
-              ... on ContentBlock { contentHtml(images: $images) }
-              ... on HtmlBlock { html }
-              ... on StoryImageBlock { image { path } }
-              ... on StoryGalleryBlock { images { image { path } } }
-            }
           }
         }
         guideStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}) {
@@ -159,40 +125,6 @@ query ContinentDestinationDetailContext($images: TSImagesConfig) {
           category { title }
           mainCategory { title }
           tout { image { path } dek }
-          contentHtml(images: $images)
-          extraContentBlocks { contentHtml(images: $images) }
-          extraHtmlBlocks { html }
-          mainHtmlBlock1
-          mainContentBlock1Html(images: $images)
-          additionalMainBlocks {
-            mainHtmlBlock2
-            mainContentBlock2Html(images: $images)
-            mainHtmlBlock3
-            mainContentBlock3Html(images: $images)
-            mainHtmlBlock4
-            mainContentBlock4Html(images: $images)
-            mainHtmlBlock5
-            mainContentBlock5Html(images: $images)
-            mainHtmlBlock6
-            mainContentBlock6Html(images: $images)
-          }
-          mainHtmlBlock2
-          mainContentBlock2Html(images: $images)
-          mainHtmlBlock3
-          mainContentBlock3Html(images: $images)
-          mainHtmlBlock4
-          mainContentBlock4Html(images: $images)
-          mainHtmlBlock5
-          mainContentBlock5Html(images: $images)
-          mainHtmlBlock6
-          mainContentBlock6Html(images: $images)
-          contentBlocks {
-            __typename
-            ... on ContentBlock { contentHtml(images: $images) }
-            ... on HtmlBlock { html }
-            ... on StoryImageBlock { image { path } }
-            ... on StoryGalleryBlock { images { image { path } } }
-          }
         }
       }
       guideStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}) {

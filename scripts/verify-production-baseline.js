@@ -74,12 +74,30 @@ const siteConfig = fs.readFileSync(siteConfigPath, 'utf8');
 if (!/^templatePath:\s*src\/templates\s*$/m.test(siteConfig)) {
   fail('the deploy template input must be src/templates.');
 }
-if (!/^staticPath:\s*build\s*$/m.test(siteConfig)) {
-  fail('the deploy asset input must be build.');
+if (!/^staticPath:\s*publish-static\s*$/m.test(siteConfig)) {
+  fail('the deploy asset input must be publish-static.');
 }
 if (!/^buildPath:\s*build\s*$/m.test(siteConfig)) {
   fail('the generated build output must be build.');
 }
+
+const publishInput = path.join(root, 'publish-static');
+if (!fs.existsSync(path.join(publishInput, 'assets/manifest.json'))) {
+  fail('the publishing input is missing. Run the production generator first.');
+}
+(function verifyInput(directory) {
+  fs.readdirSync(directory, {withFileTypes:true}).forEach(entry => {
+    const file = path.join(directory, entry.name);
+    if (entry.isDirectory()) return verifyInput(file);
+    const relative = path.relative(publishInput, file);
+    if (relative.startsWith('assets' + path.sep)) {
+      const generated = path.join(root, 'build', relative);
+      if (!fs.existsSync(generated) || sha256(path.relative(root, file)) !== sha256(path.relative(root, generated))) fail(`Publishing asset is stale: ${relative}.`);
+      return;
+    }
+    if (!file.endsWith('.html') || !/<meta[^>]+http-equiv=["']refresh["']/i.test(fs.readFileSync(file,'utf8'))) fail(`Generated page must not be packaged as static input: ${relative}.`);
+  });
+}(publishInput));
 
 if (!fs.existsSync(path.join(root, 'build'))) {
   fail('the generated build output is missing. Run the site generator before deploying.');

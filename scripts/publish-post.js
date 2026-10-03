@@ -192,6 +192,7 @@ async function generate(id, story, job) {
   const cfg = yaml.load(read('tsg.yml'));
   const originalRoutes = cfg.routes;
   cfg.staticPath = 'empty'; cfg.buildPath = 'generated';
+  cfg.context.assets = '../../build/assets/manifest.json';
   privateDirectory(path.join(job, 'empty'));
   // Keep routing definitions for template links without rendering other routes.
   cfg.routes = Object.fromEntries(Object.entries(originalRoutes).map(([name, route]) => [name, {path: route.path, paginate: {property: '__unused'}}]));

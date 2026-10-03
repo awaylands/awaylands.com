@@ -1,7 +1,9 @@
 const childProcess = require('child_process');
 const crypto = require('crypto');
 const fs = require('fs');
-const https = require('https');
+const {preparePublishInput} = require('./prepare-publish-input');
+const yaml = require('js-yaml');
+const {sourceFingerprint, recordBuild, verifyBuild} = require('./verified-build');
 const path = require('path');
 
 const root = path.resolve(__dirname, '..');
@@ -120,21 +122,21 @@ function normalizeGeneratedAssets(assets) {
   });
 }
 
-function fetch(url) {
-  return new Promise((resolve, reject) => {
-    const request = https.get(url, {
-      headers: {
-        'accept-encoding': 'identity',
-        'user-agent': 'awaylands-production-verifier'
-      }
-    }, response => {
-      let body = '';
-      response.setEncoding('utf8');
-      response.on('data', chunk => { body += chunk; });
-      response.on('end', () => resolve({ status: response.statusCode, body }));
-    }).on('error', reject);
-    request.setTimeout(20000, () => request.destroy(new Error(`Timed out fetching ${url}`)));
+async function fetch(url) {
+  const response = await globalThis.fetch(url, {
+    headers: {'user-agent':'awaylands-production-verifier'},
+    signal: AbortSignal.timeout(20000)
   });
+  return {status:response.status, body:await response.text()};
+}
+
+async function parallelChecks(items, check) {
+  let next = 0;
+  const results = await Promise.allSettled(Array.from({length: Math.min(4, items.length)}, async () => {
+    while (next < items.length) await check(items[next++]);
+  }));
+  const failure = results.find(result => result.status === 'rejected');
+  if (failure) throw failure.reason;
 }
 
 async function verifyLiveOnce(assets) {
@@ -149,15 +151,26 @@ async function verifyLiveOnce(assets) {
     '/continent/asia/',
     '/destinations/greece/archive/',
     '/film/',
-    '/still/'
+    '/still/',
+    '/story/how-to-stay-healthy-while-traveling-12-easy-habits-that-work-on-the-road/'
   ];
   const expectedCss = `/assets/${assets.css}`;
   const expectedJs = `/assets/${assets.js}`;
   const localCssHash = sha256(path.join(root, 'build/assets', assets.css));
   const localJsHash = sha256(path.join(root, 'build/assets', assets.js));
-  for (const page of pages) {
+  const release = yaml.load(fs.readFileSync(path.join(root, 'tsg.yml'), 'utf8')).context.publishingRelease;
+  await parallelChecks(pages, async page => {
     const result = await fetch(`https://www.awaylands.com${page}?${cacheBust}`);
     if (result.status !== 200) fail(`${page} returned HTTP ${result.status}.`);
+    if (!result.body.includes(`name="awaylands-publishing-release" content="${release}"`)) fail(`${page} has not received publishing release ${release}.`);
+    const adCount = (result.body.match(/scripts\.mediavine\.com\/tags\/away-lands\.js/g) || []).length;
+    if (/^\/(film|still)\//.test(page) && adCount !== 0) fail(`Advertising must not load on ${page}.`);
+    if (page.startsWith('/story/')) {
+      if (adCount !== 1) fail('Story advertising wrapper is missing or duplicated.');
+      for (const marker of ['story-article__body','story-mediavine-sidebar-atf','story-mediavine-sidebar-btf','content_selector','sidebar_atf_selector','sidebar_btf_selector']) {
+        if (!result.body.includes(marker)) fail(`Live story is missing ${marker}.`);
+      }
+    }
     const matches = result.body.match(/\/assets\/stylesheets\/main\.[^"'\s?]+\.css(?:\?[^"'\s]*)?/g) || [];
     if (!matches.includes(expectedCss)) {
       const found = matches[0] || 'no stylesheet';
@@ -168,7 +181,7 @@ async function verifyLiveOnce(assets) {
       const found = jsMatches[0] || 'no JavaScript bundle';
       fail(`${page} serves ${found}; expected ${expectedJs}.`);
     }
-  }
+  });
   const css = await fetch(`https://www.awaylands.com${expectedCss}?${cacheBust}`);
   if (css.status !== 200) fail(`${expectedCss} returned HTTP ${css.status}.`);
   const liveCssHash = crypto.createHash('sha256').update(css.body).digest('hex');
@@ -189,7 +202,7 @@ function wait(milliseconds) {
 }
 
 async function verifyLive(assets) {
-  const maximumAttempts = 20;
+  const maximumAttempts = 18;
   let lastError;
 
   for (let attempt = 1; attempt <= maximumAttempts; attempt += 1) {
@@ -201,8 +214,8 @@ async function verifyLive(assets) {
       if (attempt === maximumAttempts) {
         break;
       }
-      process.stdout.write(`Live verification attempt ${attempt} is waiting for origin publication.\n`);
-      await wait(15000);
+      process.stdout.write(`Live verification attempt ${attempt}: ${error.message}\n`);
+      await wait(5000);
     }
   }
 
@@ -216,7 +229,7 @@ function generateSite() {
   const assetBackupPath = path.join(root, '.deploy-assets');
   const config = fs.readFileSync(path.join(root, 'tsg.yml'), 'utf8')
     .replace(/^buildPath:\s*build\s*$/m, 'buildPath: .deploy-generated')
-    .replace(/^staticPath:\s*build\s*$/m, 'staticPath: .deploy-static');
+    .replace(/^staticPath:\s*publish-static\s*$/m, 'staticPath: .deploy-static');
   fs.writeFileSync(configPath, config);
   try {
     removeTree(assetBackupPath);
@@ -245,20 +258,35 @@ async function main() {
     process.stdout.write(JSON.stringify(result) + '\n');
     return;
   }
-  run(node, [npmCli, 'run', 'build']);
-  const builtAssets = getManifestAssets();
-  generateSite();
-  const assets = getManifestAssets();
-  if (assets.css !== builtAssets.css || assets.js !== builtAssets.js) fail('site generation changed the compiled manifest.');
-  normalizeGeneratedAssets(assets);
-  verifyGeneratedHtml(assets);
+  let assets;
+  if (process.argv.includes('--publish-verified')) {
+    verifyBuild(root);
+    assets = getManifestAssets();
+    verifyGeneratedHtml(assets);
+    preparePublishInput();
+    process.stdout.write('Reusing the unchanged, verified production build.\n');
+  } else {
+    const source = sourceFingerprint(root);
+    run(node, [npmCli, 'run', 'build']);
+    const builtAssets = getManifestAssets();
+    preparePublishInput(false);
+    generateSite();
+    assets = getManifestAssets();
+    if (assets.css !== builtAssets.css || assets.js !== builtAssets.js) fail('site generation changed the compiled manifest.');
+    normalizeGeneratedAssets(assets);
+    verifyGeneratedHtml(assets);
+    preparePublishInput();
+    recordBuild(root, source);
+  }
   if (process.argv.includes('--generate-only')) {
     process.stdout.write('Production-equivalent site generated and verified locally.\n');
     return;
   }
   run(node, [path.join(root, 'scripts/verify-production-baseline.js')]);
+  const started = Date.now();
   run(node, [takeShape, 'deploy', '--file', 'tsg.yml']);
   await verifyLive(assets);
+  process.stdout.write(`Upload and live verification completed in ${((Date.now()-started)/1000).toFixed(1)} seconds.\n`);
 }
 
 main().catch(error => {

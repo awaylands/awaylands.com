@@ -49,3 +49,9 @@ takeshape-project.graphql
 /.migration-backups/
 
 /.post-publisher/
+
+/publish-static/
+/.tsg-production-build.yml
+/.deploy-generated/
+/.deploy-static/
+/.deploy-assets/

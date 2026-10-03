@@ -294,7 +294,6 @@ query {
     _contentTypeName
     _status
     _enabledAt
-    _updatedAt
     isImportant
     title
     slug
@@ -320,7 +319,6 @@ query {
     _contentTypeName
     _status
     _enabledAt
-    _updatedAt
     isImportant
     title
     slug
@@ -346,7 +344,6 @@ query {
     _contentTypeName
     _status
     _enabledAt
-    _updatedAt
     isImportant
     title
     slug
@@ -372,7 +369,6 @@ query {
     _contentTypeName
     _status
     _enabledAt
-    _updatedAt
     isImportant
     title
     slug
