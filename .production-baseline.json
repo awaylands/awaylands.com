@@ -32,7 +32,7 @@
     "scripts/add-native-main-categories.js": "1a6980ba150763742b77edb35bde57f636ae116fc37c4a61d6908d638b1fc910",
     "scripts/backfill-editor-content.js": "f50f96b614b0b84885c0ae9fca00a935e0a92b0f7a0cd328d99897a95b4992f0",
     "scripts/copy-static-assets.js": "7fd93fc98bd0a5bb7ca7de5f78d825c9afe63c726751cef9257194969152e3d9",
-    "scripts/deploy-production.js": "a6f5f9a606476ee64ae4ca68586183f86f7e281124f9b1d941a148cd62e1fd1a",
+    "scripts/deploy-production.js": "334f8fccf9cb98f123b6e3429ad193fc2b0f3d4d7a13f69cc6f0f03d3027e9f1",
     "scripts/fill-story-slugs.js": "61a93c493cd05854fd6ad2406d1d8b929df0affd1a50c38bd114ab364607b633",
     "scripts/generate-category-route-aliases.js": "e5e92ad173ddc1f919f411d1f0a66f096b1af52825a67f190587fc3567656ec9",
     "scripts/generate-destination-route-aliases.js": "feb40b5a3ac285a13e078669de841f93d8a0ee547b2d9d4d44cfaafaac530531",

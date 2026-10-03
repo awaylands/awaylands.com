@@ -202,7 +202,7 @@ function wait(milliseconds) {
 }
 
 async function verifyLive(assets) {
-  const maximumAttempts = 18;
+  const maximumAttempts = 60;
   let lastError;
 
   for (let attempt = 1; attempt <= maximumAttempts; attempt += 1) {
@@ -251,6 +251,10 @@ function generateSite() {
 }
 
 async function main() {
+  if (process.argv.includes('--verify-live')) {
+    await verifyLive(getManifestAssets());
+    return;
+  }
   const postIndex = process.argv.indexOf('--post');
   if (postIndex !== -1) {
     const {publishStory} = require('./publish-post');
