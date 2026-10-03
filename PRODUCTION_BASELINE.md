@@ -34,6 +34,15 @@ Verified baseline:
 
 `npm run deploy` refuses to run from another branch, a commit outside the verified baseline history, a dirty worktree, the wrong TakeShape target, an exposed credential file, a stale backend schema snapshot, changed protected files, or compiled assets whose filenames or contents differ from the verified live files.
 
+## Article addresses
+
+Articles with a saved slug render once through `storySlug`. The `story` route
+only renders published posts without slugs. The later `storyTitleRedirect` route
+keeps title-based links working; canonical article routes must stay before it so
+a redirect cannot replace an article at the same path. Generated title redirects
+are excluded from static input so future CMS title/slug edits cannot leave stale
+redirects ahead of freshly rendered pages.
+
 ## Mediavine protection reminder
 
 Do not move, rename, duplicate, remove, defer, or restyle the Mediavine wrapper,

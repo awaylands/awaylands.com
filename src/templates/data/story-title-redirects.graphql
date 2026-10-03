@@ -1,0 +1,1 @@
+query { getStoryList(onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) { items { title slug } total } }

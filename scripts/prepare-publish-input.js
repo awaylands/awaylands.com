@@ -22,6 +22,8 @@ function preparePublishInput(includeRedirects = true) {
       if (!file.endsWith('.html') || file.startsWith(path.join(build, 'assets') + path.sep)) continue;
       const html = fs.readFileSync(file, 'utf8');
       if (!/<meta[^>]+http-equiv=["']refresh["']/i.test(html)) continue;
+      // These redirects are rebuilt from current CMS addresses on every publish.
+      if (html.includes('name="awaylands-generated-story-redirect"')) continue;
       const destination = path.join(staging, path.relative(build, file));
       fs.mkdirSync(path.dirname(destination), {recursive:true});
       fs.copyFileSync(file, destination);

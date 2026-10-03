@@ -1,8 +1,7 @@
 query($images: TSImagesConfig) {
-  getStoryList(where: {slug: {regexp: ".+"}}) {
+  getStoryList(onlyEnabled: true, where: {_status: {eq: "enabled"}, NOT: {slug: {regexp: ".+"}}}, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
-      _status
       _enabledAt
       _updatedAt
       title
@@ -59,7 +58,10 @@ query($images: TSImagesConfig) {
         _id
         title
       }
-      continent { _id name }
+      continent {
+        _id
+        name
+      }
       contentHtml(images: $images, headerIdPrefix: "story-main-")
       extraContentBlocks {
         contentHtml(images: $images, headerIdPrefix: "story-extra-")
@@ -108,12 +110,7 @@ query($images: TSImagesConfig) {
           columnCount
         }
         ... on StoryImageBlock {
-          image {
-            path
-            filename
-            title
-            description
-          }
+          image { path }
           size
           alignment
           cropPosition
@@ -129,12 +126,7 @@ query($images: TSImagesConfig) {
           size
           label
           images {
-            image {
-              path
-              filename
-              title
-              description
-            }
+            image { path }
             linkUrl
             caption
             altText
@@ -143,8 +135,8 @@ query($images: TSImagesConfig) {
       }
       relatedStories {
         _status
-        _updatedAt
         _enabledAt
+        _updatedAt
         isImportant
         title
         slug

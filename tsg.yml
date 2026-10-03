@@ -5,7 +5,7 @@ buildPath: build
 context:
   site: data/site.graphql
   assets: ../../publish-static/assets/manifest.json
-  publishingRelease: "2026-10-03-publishing-v2"
+  publishingRelease: "2026-10-03-publishing-v3"
 
 images: &images
   default:
@@ -61,7 +61,7 @@ routes:
     template: pages/stories/detail.html
     context: data/article.graphql
     paginate:
-      data: data/stories.graphql
+      data: data/stories-without-slugs.graphql
       itemName: page
 
   blogPages:
@@ -77,9 +77,16 @@ routes:
   storySlug:
     path: /story/:slug
     template: pages/stories/detail.html
-    context: data/story-slug-context.graphql
+    context: data/article.graphql
     paginate:
       data: data/story-slugs.graphql
+      itemName: page
+
+  storyTitleRedirect:
+    path: /story/:title
+    template: pages/stories/title-redirect.html
+    paginate:
+      data: data/story-title-redirects.graphql
       itemName: page
 
   destinations:

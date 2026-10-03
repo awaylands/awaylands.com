@@ -2,6 +2,10 @@
 
 {% from "macros/image.html" import image %}
 
+{# Preserve the metadata previously shown at each article's canonical address. #}
+{% set titleIsCanonical = not page.slug or (page | route('story')) == (page | route('storySlug')) %}
+{% set storyContinents = page.continent if titleIsCanonical else [] %}
+
 {% macro categoryUrl(category) %}{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}{% endmacro %}
 {% macro mainCategoryUrl(category) %}/category/{{ category.title | lower | replace(' ', '-') }}/{% endmacro %}
 
@@ -94,9 +98,9 @@
     {% if not imageCropPosition %}{% set imageCropPosition = "center" %}{% endif %}
     {% set imageAlt = block.altText %}
     {% if not imageAlt %}{% set imageAlt = block.caption %}{% endif %}
-    {% if not imageAlt %}{% set imageAlt = block.image.description %}{% endif %}
-    {% if not imageAlt %}{% set imageAlt = block.image.title %}{% endif %}
-    {% if not imageAlt %}{% set imageAlt = filenameAlt(block.image.filename, page.title) %}{% endif %}
+    {% if not imageAlt and not titleIsCanonical %}{% set imageAlt = block.image.description %}{% endif %}
+    {% if not imageAlt and not titleIsCanonical %}{% set imageAlt = block.image.title %}{% endif %}
+    {% if not imageAlt %}{% set imageAlt = filenameAlt(block.image.filename if not titleIsCanonical else "", page.title) %}{% endif %}
 
     <figure class="story-image-block {{ imageSize }} align-{{ imageAlignment }} crop-{{ imageCropPosition }} spacing-{{ imageSpacing }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
       {% if block.linkUrl %}
@@ -123,8 +127,8 @@
         {% if galleryImage.image %}
         <figure class="story-gallery__item">
           {% if galleryImage.linkUrl %}<a href="{{ galleryImage.linkUrl | trim }}" target="_blank" rel="noopener">{% endif %}
-            {% set galleryAlt = galleryImage.altText or galleryImage.caption or galleryImage.image.description or galleryImage.image.title %}
-            {% if not galleryAlt %}{% set galleryAlt = filenameAlt(galleryImage.image.filename, page.title) %}{% endif %}
+            {% set galleryAlt = galleryImage.altText or galleryImage.caption or (galleryImage.image.description if not titleIsCanonical else "") or (galleryImage.image.title if not titleIsCanonical else "") %}
+            {% if not galleryAlt %}{% set galleryAlt = filenameAlt(galleryImage.image.filename if not titleIsCanonical else "", page.title) %}{% endif %}
             {{ image(galleryImage.image.path, [480, 800, 1200], ["(min-width: 900px) 50vw", "100vw"], "", galleryAlt) }}
           {% if galleryImage.linkUrl %}</a>{% endif %}
           {% if galleryImage.caption %}<figcaption>{{ galleryImage.caption }}</figcaption>{% endif %}
@@ -137,7 +141,7 @@
 
 {# Match the browser's nine-card fallback without rendering discarded cards. #}
 {% set relatedStoryPaths = [] %}
-{% macro renderRelatedStory(story, isManual) %}
+{% macro renderRelatedStory(story, isManual, keepUpdatedDate) %}
   {% if story.slug %}
     {% set relatedStoryPath = story | route('storySlug') %}
   {% else %}
@@ -164,7 +168,7 @@
           <p class="related-stories__category">{{ story.mainCategory[0].title }}</p>
         {% endif %}
         <h3 class="related-stories__title"{% if story.social.title %} data-sidebar-title="{{ story.social.title }}"{% endif %}>{{ story.title }}</h3>
-        {% if story._updatedAt %}<p class="related-stories__meta"><time class="related-stories__date" datetime="{{ story._updatedAt }}">{{ story._updatedAt | date("MMMM D, YYYY") }}</time></p>{% endif %}
+        {% if (titleIsCanonical or keepUpdatedDate) and story._updatedAt %}<p class="related-stories__meta"><time class="related-stories__date" datetime="{{ story._updatedAt }}">{{ story._updatedAt | date("MMMM D, YYYY") }}</time></p>{% endif %}
       </div>
     </a>
   </li>
@@ -284,12 +288,12 @@
   data-page-layout="{{ pageLayout }}"
   data-story-category="{% if primaryCategory %}{{ primaryCategory.title | escape }}{% endif %}"
   data-story-location="{% if page.location.length %}{{ page.location[0].title | escape }}{% endif %}"
-  data-story-continent="{% if page.continent.length %}{{ page.continent[0].name | escape }}{% endif %}"
+  data-story-continent="{% if storyContinents.length %}{{ storyContinents[0].name | escape }}{% endif %}"
   data-story-main-categories="{% for category in page.mainCategory %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}"
   data-story-subcategories="{% for category in page.category %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}"
   data-story-categories="{% for category in page.mainCategory %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}{% if page.mainCategory.length and page.category.length %}|{% endif %}{% for category in page.category %}{% if not loop.first %}|{% endif %}{{ category.title | escape }}{% endfor %}"
   data-story-locations="{% for location in page.location %}{% if not loop.first %}|{% endif %}{{ location.title | escape }}{% endfor %}"
-  data-story-continents="{% for continent in page.continent %}{% if not loop.first %}|{% endif %}{{ continent.name | escape }}{% endfor %}"
+  data-story-continents="{% for continent in storyContinents %}{% if not loop.first %}|{% endif %}{{ continent.name | escape }}{% endfor %}"
   {% if page.atAGlance and page.atAGlance.kicker %}data-at-a-glance-kicker="{{ page.atAGlance.kicker | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.title %}data-at-a-glance-title="{{ page.atAGlance.title | escape }}"{% endif %}
   {% if page.atAGlance and page.atAGlance.summary %}data-at-a-glance-summary="{{ page.atAGlance.summary | escape }}"{% endif %}
@@ -380,7 +384,7 @@
           {% endif %}
         </div>
 
-        {% if page.category.length or page.mainCategory.length or page.location.length or page.continent.length %}
+        {% if page.category.length or page.mainCategory.length or page.location.length or storyContinents.length %}
         <nav class="story-cover__see-more" aria-label="See more Away Lands guides">
           <span>See more in</span>
           {% if not page.category.length %}
@@ -402,7 +406,7 @@
             {% endif %}
           {% endfor %}
           {% if page.location.length %}<a href="{{ page.location[0] | route('location') }}">{{ page.location[0].title }}</a>{% endif %}
-          {% if page.continent.length %}<a href="{{ page.continent[0] | route('continent') }}">{{ page.continent[0].name }}</a>{% endif %}
+          {% if storyContinents.length %}<a href="{{ storyContinents[0] | route('continent') }}">{{ storyContinents[0].name }}</a>{% endif %}
         </nav>
         {% endif %}
         </div>
@@ -590,10 +594,10 @@
               {% endfor %}
             {% endif %}
 
-            {% if page.continent.length %}
+            {% if storyContinents.length %}
               {% set relatedCandidates = [] %}
               {% for relatedGroup in relatedContinents.items %}
-                {% if relatedGroup._id == page.continent[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
+                {% if relatedGroup._id == storyContinents[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
               {% endfor %}
               {% for story in relatedCandidates %}
               {% if story.title != page.title %}{{ renderRelatedStory(story) }}{% endif %}
@@ -605,7 +609,7 @@
                above remains the automatic source. #}
             {% for story in fallbackAutoStories.items %}
               {% if story.title != page.title %}
-                {{ renderRelatedStory(story) }}
+                {{ renderRelatedStory(story, false, true) }}
               {% endif %}
             {% endfor %}
 

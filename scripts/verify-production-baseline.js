@@ -168,6 +168,16 @@ const storyPages = fs.readdirSync(storyBuildRoot)
   .filter(file => fs.existsSync(file));
 storyPages.forEach(file => {
   const html = fs.readFileSync(file, 'utf8');
+  if (html.includes('name="awaylands-generated-story-redirect"')) {
+    const canonical = html.match(/<link rel="canonical" href="https:\/\/www\.awaylands\.com(\/story\/[^"?#]+)"/);
+    if (!canonical) fail(`story redirect has no local canonical target: ${path.relative(root, file)}.`);
+    const target = path.join(root, 'build', canonical[1], 'index.html');
+    if (target === file || !fs.existsSync(target) || !/<div class="story-article__body"/.test(fs.readFileSync(target, 'utf8'))) {
+      fail(`story redirect must lead directly to a published article: ${path.relative(root, file)}.`);
+    }
+    const staged = path.join(publishInput, path.relative(path.join(root, 'build'), file));
+    if (fs.existsSync(staged)) fail(`dynamic story redirect must not be frozen in static input: ${path.relative(root, file)}.`);
+  }
   if (!/<div class="story-article__body"/.test(html)) {
     return;
   }
