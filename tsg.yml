@@ -5,7 +5,7 @@ buildPath: build
 context:
   site: data/site.graphql
   assets: ../../publish-static/assets/manifest.json
-  publishingRelease: "2026-10-03-publishing-v1"
+  publishingRelease: "2026-10-03-publishing-v2"
 
 images: &images
   default:
@@ -59,14 +59,20 @@ routes:
   story:
     path: /story/:title
     template: pages/stories/detail.html
+    context: data/article.graphql
+    paginate:
+      data: data/stories.graphql
+      itemName: page
+
+  blogPages:
+    path: /blog/
     context: data/story.graphql
     paginate:
       pageSize: 12
       firstPage: /blog/
       path: /blog/page-:num
       template: pages/stories/landing.html
-      data: data/stories.graphql
-      itemName: page
+      data: data/blog-pages.graphql
 
   storySlug:
     path: /story/:slug

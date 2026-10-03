@@ -161,6 +161,7 @@
           _contentTypeName
           _status
           _enabledAt
+          _updatedAt
           isImportant
           title
           slug
@@ -192,6 +193,7 @@
           _contentTypeName
           _status
           _enabledAt
+          _updatedAt
           isImportant
           title
           slug
@@ -223,6 +225,7 @@
           _contentTypeName
           _status
           _enabledAt
+          _updatedAt
           isImportant
           title
           slug
@@ -254,6 +257,7 @@
           _contentTypeName
           _status
           _enabledAt
+          _updatedAt
           isImportant
           title
           slug

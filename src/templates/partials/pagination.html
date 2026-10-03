@@ -10,7 +10,7 @@
   {% set thirdLast = pagination.totalPages - 2 %}
   {% set secondLast = pagination.totalPages - 1 %}
 
-  {% set paginationRoute = items[0]._contentTypeName + '.paginate' %}
+  {% set paginationRoute = 'blogPages.paginate' if items[0]._contentTypeName == 'story' else items[0]._contentTypeName + '.paginate' %}
 
   <ul class="pagination">
     <li><a {% if pagination.currentPage == 1 %}class="is-disabled" {% else %}href="/blog" {% endif %}>{% include

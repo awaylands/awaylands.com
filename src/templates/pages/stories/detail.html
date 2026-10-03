@@ -135,6 +135,8 @@
   {% endif %}
 {% endmacro %}
 
+{# Match the browser's nine-card fallback without rendering discarded cards. #}
+{% set relatedStoryPaths = [] %}
 {% macro renderRelatedStory(story, isManual) %}
   {% if story.slug %}
     {% set relatedStoryPath = story | route('storySlug') %}
@@ -144,7 +146,9 @@
   {% if story._status != "disabled"
     and story.slug != "traveling-with-your-dog-essential-health-tips-for-every-pet-parent"
     and story.title != "Traveling with Your Dog: Essential Health Tips for Every Pet Parent"
-    and relatedStoryPath != "/story/traveling-with-your-dog-essential-health-tips-for-every-pet-parent" %}
+    and relatedStoryPath != "/story/traveling-with-your-dog-essential-health-tips-for-every-pet-parent"
+    and (isManual or (relatedStoryPaths.length < 9 and relatedStoryPath not in relatedStoryPaths)) %}
+  {% if relatedStoryPath not in relatedStoryPaths %}{% set ignored = relatedStoryPaths.push(relatedStoryPath) %}{% endif %}
   <li
     data-related-important="{% if story.isImportant == true %}true{% else %}false{% endif %}"
     data-related-manual="{% if isManual %}true{% else %}false{% endif %}"

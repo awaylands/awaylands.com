@@ -179,7 +179,7 @@ function runBuild(job, configFile) {
 async function generate(id, story, job) {
   const [page, context] = await Promise.all([
     graphql(singleStoryQuery(read('src/templates/data/stories.graphql'), id)),
-    graphql(read('src/templates/data/story.graphql'))
+    graphql(read('src/templates/data/article.graphql'))
   ]);
   const search = await graphql(singleStoryQuery(read('src/templates/data/search.graphql'), id, 'story'));
   const titles = await graphql(singleStoryQuery(read('src/templates/data/story-titles.graphql'), id, 'story'));

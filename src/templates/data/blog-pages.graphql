@@ -1,0 +1,49 @@
+{
+  getStoryList(onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
+    items {
+      _contentTypeName
+      _enabledAt
+      _updatedAt
+      title
+      slug
+      isImportant
+      shopEditItems {
+        image {
+          path
+        }
+        title
+        productUrl
+        productEmbedHtml
+      }
+      mainCategory {
+        _id
+        title
+      }
+      category {
+        _id
+        title
+        parentCategory {
+          title
+        }
+      }
+      tout {
+        image {
+          path
+        }
+        caption
+        secondaryImage {
+          path
+        }
+        dek
+      }
+      social {
+        title
+        description
+        image {
+          path
+        }
+      }
+    }
+    total
+  }
+}
