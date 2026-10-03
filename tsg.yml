@@ -4,8 +4,10 @@ buildPath: build
 
 context:
   site: data/site.graphql
+  # Render each feed once alongside paginated pages, avoiding a separate API wait.
+  publishPages: data/publish-pages.json
   assets: ../../publish-static/assets/manifest.json
-  publishingRelease: "2026-10-03-publishing-v3"
+  publishingRelease: "2026-10-03-publishing-v4"
 
 images: &images
   default:
@@ -26,16 +28,22 @@ routes:
     path: /sitemap.xml
     template: feeds/sitemap.xml
     context: data/sitemap.graphql
+    paginate:
+      property: publishPages
 
   searchData:
     path: /search.json
     template: feeds/search.json
     context: data/search.graphql
+    paginate:
+      property: publishPages
 
   storyTitles:
     path: /story-titles.json
     template: feeds/story-titles.json
     context: data/story-titles.graphql
+    paginate:
+      property: publishPages
 
   search:
     path: /search/
@@ -158,7 +166,7 @@ routes:
     context: data/category.graphql
     paginate:
       data:
-        query: data/categories.graphql
+        query: data/category-archives.graphql
         variables:
           where:
             _id:
@@ -171,7 +179,7 @@ routes:
     context: data/category.graphql
     paginate:
       data:
-        query: data/categories.graphql
+        query: data/category-archives.graphql
         variables:
           where:
             NOT:
@@ -238,7 +246,6 @@ routes:
   locationArchive:
     path: /destinations/:title/archive
     template: pages/location-archive.html
-    context: data/location.graphql
     paginate:
       data: data/location-archives.graphql
       itemName: page
@@ -254,7 +261,6 @@ routes:
   continentArchive:
     path: /continent/:name/archive
     template: pages/location-archive.html
-    context: data/continent.graphql
     paginate:
       data: data/continent-archives.graphql
       itemName: page

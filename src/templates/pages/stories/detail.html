@@ -1,45 +1,45 @@
-{% extends "layouts/default.html" %}
+{% extends "layouts/default.html" -%}
 
-{% from "macros/image.html" import image %}
+{% from "macros/image.html" import image -%}
 
 {# Preserve the metadata previously shown at each article's canonical address. #}
-{% set titleIsCanonical = not page.slug or (page | route('story')) == (page | route('storySlug')) %}
-{% set storyContinents = page.continent if titleIsCanonical else [] %}
+{% set titleIsCanonical = not page.slug or (page | route('story')) == (page | route('storySlug')) -%}
+{% set storyContinents = page.continent if titleIsCanonical else [] -%}
 
 {% macro categoryUrl(category) %}{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}{% endmacro %}
 {% macro mainCategoryUrl(category) %}/category/{{ category.title | lower | replace(' ', '-') }}/{% endmacro %}
 
-{% set primaryCategory = false %}
-{% set primaryCategoryIsNative = false %}
-{% if page.category.length %}
-  {% set primaryCategory = page.category[0] %}
-{% elif page.mainCategory.length %}
-  {% set primaryCategory = page.mainCategory[0] %}
-  {% set primaryCategoryIsNative = true %}
-{% endif %}
+{% set primaryCategory = false -%}
+{% set primaryCategoryIsNative = false -%}
+{% if page.category.length -%}
+  {% set primaryCategory = page.category[0] -%}
+{% elif page.mainCategory.length -%}
+  {% set primaryCategory = page.mainCategory[0] -%}
+  {% set primaryCategoryIsNative = true -%}
+{% endif -%}
 
-{% set storyType = page.postType %}
-{% if not storyType or storyType == "auto" %}
-  {% set storyType = "standard" %}
-  {% if page.title == "When Should Your Child Get Their First Phone?" %}
-    {% set storyType = "quick-answer" %}
-  {% elif page.title == "What to Wear in the South of France - 30+ Outfit Ideas for Provence and French Riviera Summer Style" %}
-    {% set storyType = "style-shopping" %}
-  {% endif %}
-{% endif %}
+{% set storyType = page.postType -%}
+{% if not storyType or storyType == "auto" -%}
+  {% set storyType = "standard" -%}
+  {% if page.title == "When Should Your Child Get Their First Phone?" -%}
+    {% set storyType = "quick-answer" -%}
+  {% elif page.title == "What to Wear in the South of France - 30+ Outfit Ideas for Provence and French Riviera Summer Style" -%}
+    {% set storyType = "style-shopping" -%}
+  {% endif -%}
+{% endif -%}
 
-{% set pageLayout = page.pageLayout %}
+{% set pageLayout = page.pageLayout -%}
 {% if not pageLayout %}{% set pageLayout = "auto" %}{% endif %}
 
-{% set storyLabel = "Journal" %}
-{% if storyType == "style-shopping" %}
-  {% set storyLabel = "The Edit" %}
-{% elif storyType == "quick-answer" %}
-  {% set storyLabel = "Quick Guide" %}
-{% endif %}
+{% set storyLabel = "Journal" -%}
+{% if storyType == "style-shopping" -%}
+  {% set storyLabel = "The Edit" -%}
+{% elif storyType == "quick-answer" -%}
+  {% set storyLabel = "Quick Guide" -%}
+{% endif -%}
 
-{% set storyPublishedDate = page._enabledAt %}
-{% set storyModifiedDate = page._enabledAt %}
+{% set storyPublishedDate = page._enabledAt -%}
+{% set storyModifiedDate = page._enabledAt -%}
 {% if page._updatedAt %}{% set storyModifiedDate = page._updatedAt %}{% endif %}
 
 {% macro filenameAlt(filename, fallback) -%}
@@ -73,80 +73,80 @@
   {%- else -%}
     {{- fallback -}}
   {%- endif -%}
-{%- endmacro %}
+{%- endmacro -%}
 
-{% macro renderTableBlock(block) %}
-  {% if block.pastedText %}
+{% macro renderTableBlock(block) -%}
+  {% if block.pastedText -%}
     <div class="story-table">
       <div class="story-table__scroller">
         <pre data-story-table-paste data-columns="{{ block.columnCount or 3 }}" hidden>{{ block.pastedText }}</pre>
         <table class="story-table__table" data-story-table-target></table>
       </div>
     </div>
-  {% endif %}
-{% endmacro %}
+  {% endif -%}
+{% endmacro -%}
 
-{% macro renderStoryImageBlock(block) %}
-  {% if block.image %}
-    {% set imageSize = block.size %}
+{% macro renderStoryImageBlock(block) -%}
+  {% if block.image -%}
+    {% set imageSize = block.size -%}
     {% if not imageSize %}{% set imageSize = "auto" %}{% endif %}
-    {% set imageAlignment = block.alignment %}
+    {% set imageAlignment = block.alignment -%}
     {% if not imageAlignment or imageAlignment == "auto" %}{% set imageAlignment = "none" %}{% endif %}
-    {% set imageSpacing = block.spacing %}
+    {% set imageSpacing = block.spacing -%}
     {% if not imageSpacing %}{% set imageSpacing = "standard" %}{% endif %}
-    {% set imageCropPosition = block.cropPosition %}
+    {% set imageCropPosition = block.cropPosition -%}
     {% if not imageCropPosition %}{% set imageCropPosition = "center" %}{% endif %}
-    {% set imageAlt = block.altText %}
+    {% set imageAlt = block.altText -%}
     {% if not imageAlt %}{% set imageAlt = block.caption %}{% endif %}
     {% if not imageAlt and not titleIsCanonical %}{% set imageAlt = block.image.description %}{% endif %}
     {% if not imageAlt and not titleIsCanonical %}{% set imageAlt = block.image.title %}{% endif %}
     {% if not imageAlt %}{% set imageAlt = filenameAlt(block.image.filename if not titleIsCanonical else "", page.title) %}{% endif %}
 
     <figure class="story-image-block {{ imageSize }} align-{{ imageAlignment }} crop-{{ imageCropPosition }} spacing-{{ imageSpacing }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
-      {% if block.linkUrl %}
+      {% if block.linkUrl -%}
       <a href="{{ block.linkUrl | trim }}"{% if block.linkTarget != "same-tab" %} target="_blank" rel="noopener"{% endif %}>
-      {% endif %}
+      {% endif -%}
         {{ image(block.image.path, [480, 800, 1200, 1600, 2000], ["(min-width: 1200px) 1160px", "(min-width: 700px) 88vw", "100vw"], "", imageAlt) }}
-      {% if block.linkUrl %}
+      {% if block.linkUrl -%}
       </a>
-      {% endif %}
+      {% endif -%}
       {% if block.caption %}<figcaption>{{ block.caption }}</figcaption>{% endif %}
     </figure>
-  {% endif %}
-{% endmacro %}
+  {% endif -%}
+{% endmacro -%}
 
-{% macro renderStoryGalleryBlock(block) %}
-  {% if block.images.length %}
-    {% set galleryLayout = block.layout %}
+{% macro renderStoryGalleryBlock(block) -%}
+  {% if block.images.length -%}
+    {% set galleryLayout = block.layout -%}
     {% if not galleryLayout %}{% set galleryLayout = "auto" %}{% endif %}
-    {% set gallerySize = block.size %}
+    {% set gallerySize = block.size -%}
     {% if not gallerySize %}{% set gallerySize = "wide" %}{% endif %}
 
     <div class="story-gallery story-gallery--structured story-gallery--{{ galleryLayout }} story-gallery--size-{{ gallerySize }}" data-count="{{ block.images.length }}"{% if block.label %} data-editor-label="{{ block.label }}"{% endif %}>
-      {% for galleryImage in block.images %}
-        {% if galleryImage.image %}
+      {% for galleryImage in block.images -%}
+        {% if galleryImage.image -%}
         <figure class="story-gallery__item">
           {% if galleryImage.linkUrl %}<a href="{{ galleryImage.linkUrl | trim }}" target="_blank" rel="noopener">{% endif %}
-            {% set galleryAlt = galleryImage.altText or galleryImage.caption or (galleryImage.image.description if not titleIsCanonical else "") or (galleryImage.image.title if not titleIsCanonical else "") %}
+            {% set galleryAlt = galleryImage.altText or galleryImage.caption or (galleryImage.image.description if not titleIsCanonical else "") or (galleryImage.image.title if not titleIsCanonical else "") -%}
             {% if not galleryAlt %}{% set galleryAlt = filenameAlt(galleryImage.image.filename if not titleIsCanonical else "", page.title) %}{% endif %}
             {{ image(galleryImage.image.path, [480, 800, 1200], ["(min-width: 900px) 50vw", "100vw"], "", galleryAlt) }}
           {% if galleryImage.linkUrl %}</a>{% endif %}
           {% if galleryImage.caption %}<figcaption>{{ galleryImage.caption }}</figcaption>{% endif %}
         </figure>
-        {% endif %}
-      {% endfor %}
+        {% endif -%}
+      {% endfor -%}
     </div>
-  {% endif %}
-{% endmacro %}
+  {% endif -%}
+{% endmacro -%}
 
 {# Match the browser's nine-card fallback without rendering discarded cards. #}
-{% set relatedStoryPaths = [] %}
-{% macro renderRelatedStory(story, isManual, keepUpdatedDate) %}
-  {% if story.slug %}
-    {% set relatedStoryPath = story | route('storySlug') %}
-  {% else %}
-    {% set relatedStoryPath = story | route('story') %}
-  {% endif %}
+{% set relatedStoryPaths = [] -%}
+{% macro renderRelatedStory(story, isManual, keepUpdatedDate) -%}
+  {% if story.slug -%}
+    {% set relatedStoryPath = story | route('storySlug') -%}
+  {% else -%}
+    {% set relatedStoryPath = story | route('story') -%}
+  {% endif -%}
   {% if story._status != "disabled"
     and story.slug != "traveling-with-your-dog-essential-health-tips-for-every-pet-parent"
     and story.title != "Traveling with Your Dog: Essential Health Tips for Every Pet Parent"
@@ -162,37 +162,37 @@
         {{ image(story.tout.image.path, [480, 720, 960], ["(min-width: 900px) 30vw", "100vw"], "", story.title) }}
       </div>
       <div class="related-stories__copy">
-        {% if story.category.length %}
+        {% if story.category.length -%}
           <p class="related-stories__category">{{ story.category[0].title }}</p>
-        {% elif story.mainCategory.length %}
+        {% elif story.mainCategory.length -%}
           <p class="related-stories__category">{{ story.mainCategory[0].title }}</p>
-        {% endif %}
+        {% endif -%}
         <h3 class="related-stories__title"{% if story.social.title %} data-sidebar-title="{{ story.social.title }}"{% endif %}>{{ story.title }}</h3>
         {% if (titleIsCanonical or keepUpdatedDate) and story._updatedAt %}<p class="related-stories__meta"><time class="related-stories__date" datetime="{{ story._updatedAt }}">{{ story._updatedAt | date("MMMM D, YYYY") }}</time></p>{% endif %}
       </div>
     </a>
   </li>
-  {% endif %}
-{% endmacro %}
+  {% endif -%}
+{% endmacro -%}
 
 {% block body_class %}body--story has-no-hero has-editorial-menu story-type--{{ storyType }}{% endblock %}
 
-{% block extra_head %}
-  {% if page._status == "disabled" %}
+{% block extra_head -%}
+  {% if page._status == "disabled" -%}
   <meta name="robots" content="noindex, nofollow">
   <meta http-equiv="refresh" content="0; url=/blog/">
   <link rel="canonical" href="https://www.awaylands.com/blog/">
   <script>window.location.replace('/blog/');</script>
-  {% else %}
-  {% if page.slug %}
-    {% set storyCanonical = page | route('storySlug') %}
-  {% else %}
-    {% set storyCanonical = page | route('story') %}
-  {% endif %}
-  {% set storyCanonical = storyCanonical + '/' %}
-  {% set storyDescription = page.tout.dek %}
+  {% else -%}
+  {% if page.slug -%}
+    {% set storyCanonical = page | route('storySlug') -%}
+  {% else -%}
+    {% set storyCanonical = page | route('story') -%}
+  {% endif -%}
+  {% set storyCanonical = storyCanonical + '/' -%}
+  {% set storyDescription = page.tout.dek -%}
   {% if page.social.description %}{% set storyDescription = page.social.description %}{% endif %}
-  {% set storyModified = page._enabledAt %}
+  {% set storyModified = page._enabledAt -%}
   {% if page._updatedAt %}{% set storyModified = page._updatedAt %}{% endif %}
 
   <link rel="canonical" href="https://www.awaylands.com{{ storyCanonical }}">
@@ -271,16 +271,16 @@
     ]
   }
   </script>
-  {% endif %}
-{% endblock %}
+  {% endif -%}
+{% endblock -%}
 
-{% block content %}
-{% if page._status == "disabled" %}
+{% block content -%}
+{% if page._status == "disabled" -%}
   <section class="container" style="padding: 12rem 1.5rem; text-align: center;">
     <h1>This story is not published.</h1>
     <p><a href="/blog/">Return to the Away Lands Blog</a></p>
   </section>
-{% else %}
+{% else -%}
 <article
   class="story-page story-page--{{ storyType }}"
   data-story-page
@@ -316,25 +316,25 @@
 >
   {# Test the complete category relationship, including parent categories.
      Beauty takes priority so its products fill every Beauty story sidebar. #}
-  {% set categoryData = (page.categoryLabels | dump) + (page.mainCategoryLabels | dump) %}
-  {% set isPackingGuide = 'Packing Guides' in categoryData %}
-  {% set isHomeStory = 'Home And Garden' in categoryData or 'Home and Garden' in categoryData or 'Home & Garden' in categoryData %}
-  {% set isWeddingStory = 'Wedding And Honeymoon' in categoryData or 'Wedding and Honeymoon' in categoryData %}
-  {% set isBeautyStory = 'Beauty' in categoryData %}
-  {% set isPhotographyStory = 'Photography' in categoryData %}
-  {% set hasExclusiveProductMapping = isPackingGuide or isHomeStory or isWeddingStory or isBeautyStory %}
-  {% set useTravelProducts = not isBeautyStory and (isPackingGuide or (not hasExclusiveProductMapping and ('Travel Guides' in categoryData or 'Travel Tips' in categoryData or 'Best Beaches' in categoryData or 'Hotels and Resorts' in categoryData or 'Travel Adventures' in categoryData or 'Los Angeles Life' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData))) %}
-  {% set useBeautyProducts = isBeautyStory or isPackingGuide or (not hasExclusiveProductMapping and ('Shopping' in categoryData or 'Social Media' in categoryData)) %}
-  {% set useStyleProducts = not isBeautyStory and (isPackingGuide or (not hasExclusiveProductMapping and ('Style' in categoryData or 'Travel Style' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData))) %}
-  {% set usePhotographyProducts = isPhotographyStory or (not hasExclusiveProductMapping and ('Films' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData)) %}
-  {% set useFitnessProducts = not hasExclusiveProductMapping and ('Health and Fitness' in categoryData or 'Health & Fitness' in categoryData) %}
-  {% set useHomeProducts = not isBeautyStory and isHomeStory %}
-  {% set useWeddingProducts = not isBeautyStory and isWeddingStory %}
-  {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts or useFitnessProducts or useHomeProducts or useWeddingProducts %}
-  {% if page.shopEditItems.length or hasCategoryProducts or blogShopFallback.travelEssentialsItems.length %}
+  {% set categoryData = (page.categoryLabels | dump) + (page.mainCategoryLabels | dump) -%}
+  {% set isPackingGuide = 'Packing Guides' in categoryData -%}
+  {% set isHomeStory = 'Home And Garden' in categoryData or 'Home and Garden' in categoryData or 'Home & Garden' in categoryData -%}
+  {% set isWeddingStory = 'Wedding And Honeymoon' in categoryData or 'Wedding and Honeymoon' in categoryData -%}
+  {% set isBeautyStory = 'Beauty' in categoryData -%}
+  {% set isPhotographyStory = 'Photography' in categoryData -%}
+  {% set hasExclusiveProductMapping = isPackingGuide or isHomeStory or isWeddingStory or isBeautyStory -%}
+  {% set useTravelProducts = not isBeautyStory and (isPackingGuide or (not hasExclusiveProductMapping and ('Travel Guides' in categoryData or 'Travel Tips' in categoryData or 'Best Beaches' in categoryData or 'Hotels and Resorts' in categoryData or 'Travel Adventures' in categoryData or 'Los Angeles Life' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData))) -%}
+  {% set useBeautyProducts = isBeautyStory or isPackingGuide or (not hasExclusiveProductMapping and ('Shopping' in categoryData or 'Social Media' in categoryData)) -%}
+  {% set useStyleProducts = not isBeautyStory and (isPackingGuide or (not hasExclusiveProductMapping and ('Style' in categoryData or 'Travel Style' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData))) -%}
+  {% set usePhotographyProducts = isPhotographyStory or (not hasExclusiveProductMapping and ('Films' in categoryData or 'Instagram Guides' in categoryData or 'Shopping' in categoryData or 'Social Media' in categoryData)) -%}
+  {% set useFitnessProducts = not hasExclusiveProductMapping and ('Health and Fitness' in categoryData or 'Health & Fitness' in categoryData) -%}
+  {% set useHomeProducts = not isBeautyStory and isHomeStory -%}
+  {% set useWeddingProducts = not isBeautyStory and isWeddingStory -%}
+  {% set hasCategoryProducts = useTravelProducts or useBeautyProducts or useStyleProducts or usePhotographyProducts or useFitnessProducts or useHomeProducts or useWeddingProducts -%}
+  {% if page.shopEditItems.length or hasCategoryProducts or blogShopFallback.travelEssentialsItems.length -%}
   <div data-story-shop-items hidden>
-    {% macro shopItem(item, isAutomatic) %}
-    {% if item.productEmbedHtml or (item.productUrl and item.title) %}
+    {% macro shopItem(item, isAutomatic) -%}
+    {% if item.productEmbedHtml or (item.productUrl and item.title) -%}
       <span
         data-story-shop-item
         {% if isAutomatic %}data-category-product data-travel-essential-fallback{% endif %}
@@ -343,11 +343,11 @@
         {% if item.productEmbedHtml %}data-embed-html="{{ item.productEmbedHtml | escape }}"{% endif %}
         {% if item.image %}data-image="{{ item.image.path | image({auto: 'compress,format', w: 480}) | escape }}"{% endif %}
       ></span>
-    {% endif %}
-    {% endmacro %}
-    {% if page.shopEditItems.length %}
+    {% endif -%}
+    {% endmacro -%}
+    {% if page.shopEditItems.length -%}
       {% for item in page.shopEditItems %}{{ shopItem(item, false) }}{% endfor %}
-    {% elif hasCategoryProducts %}
+    {% elif hasCategoryProducts -%}
       {% if useTravelProducts %}{% for item in products.travel %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
       {% if useBeautyProducts %}{% for item in products.beauty %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
       {% if useStyleProducts %}{% for item in products.style %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
@@ -355,11 +355,11 @@
       {% if useFitnessProducts %}{% for item in products.fitness %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
       {% if useHomeProducts %}{% for item in products.home %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
       {% if useWeddingProducts %}{% for item in products.wedding %}{{ shopItem(item, true) }}{% endfor %}{% endif %}
-    {% else %}
+    {% else -%}
       {% for item in blogShopFallback.travelEssentialsItems %}{{ shopItem(item, true) }}{% endfor %}
-    {% endif %}
+    {% endif -%}
   </div>
-  {% endif %}
+  {% endif -%}
   <header class="story-cover{% if not page.tout.image %} story-cover--no-image{% endif %}">
     <div class="story-cover__copy">
       <div class="story-cover__eyebrow">
@@ -372,49 +372,49 @@
         <h1 class="story-cover__title">{{ page.title }}</h1>
 
         <div class="story-cover__details">
-        {% if page.tout.dek %}
+        {% if page.tout.dek -%}
         <p class="story-cover__dek">{{ page.tout.dek }}</p>
-        {% endif %}
+        {% endif -%}
 
         <div class="story-cover__meta">
           <span>By <a href="/about">Amy Seder</a></span>
           <time datetime="{{ storyPublishedDate }}">Published {{ storyPublishedDate | date("MMMM D, YYYY") }}</time>
-          {% if storyModifiedDate and storyModifiedDate != storyPublishedDate %}
+          {% if storyModifiedDate and storyModifiedDate != storyPublishedDate -%}
           <time class="story-cover__updated" datetime="{{ storyModifiedDate }}">Updated {{ storyModifiedDate | date("MMMM D, YYYY") }}</time>
-          {% endif %}
+          {% endif -%}
         </div>
 
-        {% if page.category.length or page.mainCategory.length or page.location.length or storyContinents.length %}
+        {% if page.category.length or page.mainCategory.length or page.location.length or storyContinents.length -%}
         <nav class="story-cover__see-more" aria-label="See more Away Lands guides">
           <span>See more in</span>
-          {% if not page.category.length %}
+          {% if not page.category.length -%}
             {% for category in page.mainCategory %}<a href="{{ mainCategoryUrl(category) }}">{{ category.title }}</a>{% endfor %}
-          {% endif %}
-          {% for category in page.category %}
-            {% set previousCategory = false %}
-            {% set nextCategory = false %}
+          {% endif -%}
+          {% for category in page.category -%}
+            {% set previousCategory = false -%}
+            {% set nextCategory = false -%}
             {% if not loop.first %}{% set previousCategory = page.category[loop.index0 - 1] %}{% endif %}
             {% if not loop.last %}{% set nextCategory = page.category[loop.index] %}{% endif %}
-            {% set categoryIsAdjacentParent = false %}
+            {% set categoryIsAdjacentParent = false -%}
             {% if previousCategory and previousCategory.parentCategory and previousCategory.parentCategory.title == category.title %}{% set categoryIsAdjacentParent = true %}{% endif %}
             {% if nextCategory and nextCategory.parentCategory and nextCategory.parentCategory.title == category.title %}{% set categoryIsAdjacentParent = true %}{% endif %}
-            {% if category.parentCategory and category.parentCategory.title != category.title %}
+            {% if category.parentCategory and category.parentCategory.title != category.title -%}
               <a href="{{ category.parentCategory | route('category') }}">{{ category.parentCategory.title }}</a>
               <a href="{{ categoryUrl(category) }}">{{ category.title }}</a>
-            {% elif not categoryIsAdjacentParent %}
+            {% elif not categoryIsAdjacentParent -%}
               <a href="{{ categoryUrl(category) }}">{{ category.title }}</a>
-            {% endif %}
-          {% endfor %}
+            {% endif -%}
+          {% endfor -%}
           {% if page.location.length %}<a href="{{ page.location[0] | route('location') }}">{{ page.location[0].title }}</a>{% endif %}
           {% if storyContinents.length %}<a href="{{ storyContinents[0] | route('continent') }}">{{ storyContinents[0].name }}</a>{% endif %}
         </nav>
-        {% endif %}
+        {% endif -%}
         </div>
       </div>
 
     </div>
 
-    {% if page.tout.image %}
+    {% if page.tout.image -%}
     <figure class="story-cover__media">
       <picture>
         <source
@@ -447,13 +447,13 @@
           data-story-hero
         >
       </picture>
-      {% if page.tout.caption %}
+      {% if page.tout.caption -%}
       <figcaption><span>{{ page.tout.caption }}</span></figcaption>
-      {% elif page.location.length %}
+      {% elif page.location.length -%}
       <figcaption><span>{{ page.location[0].title }}</span></figcaption>
-      {% endif %}
+      {% endif -%}
     </figure>
-    {% endif %}
+    {% endif -%}
   </header>
 
   <div class="story-rule" aria-hidden="true">
@@ -475,18 +475,18 @@
     </div>
 
     <div class="story-article">
-      {% if storyType == "quick-answer" %}
+      {% if storyType == "quick-answer" -%}
       <section class="story-quick-answer" data-quick-answer hidden>
         <p class="story-kicker">The short answer</p>
         <p class="story-quick-answer__text" data-quick-answer-text></p>
       </section>
-      {% endif %}
+      {% endif -%}
 
       <div class="story-article__body" data-story-body v-story>
         {{ page.contentHtml | safe }}
         {% if page.mainHtmlBlock1 %}{{ page.mainHtmlBlock1 | safe }}{% endif %}
         {% if page.mainContentBlock1Html %}{{ page.mainContentBlock1Html | safe }}{% endif %}
-        {% if page.additionalMainBlocks %}
+        {% if page.additionalMainBlocks -%}
           {% if page.additionalMainBlocks.mainHtmlBlock2 %}{{ page.additionalMainBlocks.mainHtmlBlock2 | safe }}{% endif %}
           {% if page.additionalMainBlocks.mainContentBlock2Html %}{{ page.additionalMainBlocks.mainContentBlock2Html | safe }}{% endif %}
           {% if page.additionalMainBlocks.mainHtmlBlock3 %}{{ page.additionalMainBlocks.mainHtmlBlock3 | safe }}{% endif %}
@@ -497,7 +497,7 @@
           {% if page.additionalMainBlocks.mainContentBlock5Html %}{{ page.additionalMainBlocks.mainContentBlock5Html | safe }}{% endif %}
           {% if page.additionalMainBlocks.mainHtmlBlock6 %}{{ page.additionalMainBlocks.mainHtmlBlock6 | safe }}{% endif %}
           {% if page.additionalMainBlocks.mainContentBlock6Html %}{{ page.additionalMainBlocks.mainContentBlock6Html | safe }}{% endif %}
-        {% endif %}
+        {% endif -%}
         {% if page.mainHtmlBlock2 %}{{ page.mainHtmlBlock2 | safe }}{% endif %}
         {% if page.mainContentBlock2Html %}{{ page.mainContentBlock2Html | safe }}{% endif %}
         {% if page.mainHtmlBlock3 %}{{ page.mainHtmlBlock3 | safe }}{% endif %}
@@ -508,28 +508,28 @@
         {% if page.mainContentBlock5Html %}{{ page.mainContentBlock5Html | safe }}{% endif %}
         {% if page.mainHtmlBlock6 %}{{ page.mainHtmlBlock6 | safe }}{% endif %}
         {% if page.mainContentBlock6Html %}{{ page.mainContentBlock6Html | safe }}{% endif %}
-        {% for block in page.contentBlocks %}
-          {% if block.__typename == "ContentBlock" %}
+        {% for block in page.contentBlocks -%}
+          {% if block.__typename == "ContentBlock" -%}
             {{ block.contentHtml | safe }}
-          {% elif block.__typename == "HtmlBlock" %}
+          {% elif block.__typename == "HtmlBlock" -%}
             {{ block.html | safe }}
-          {% elif block.__typename == "TableBlock" %}
+          {% elif block.__typename == "TableBlock" -%}
             {{ renderTableBlock(block) }}
-          {% elif block.__typename == "StoryImageBlock" %}
+          {% elif block.__typename == "StoryImageBlock" -%}
             {{ renderStoryImageBlock(block) }}
-          {% elif block.__typename == "StoryGalleryBlock" %}
+          {% elif block.__typename == "StoryGalleryBlock" -%}
             {{ renderStoryGalleryBlock(block) }}
-          {% endif %}
-        {% endfor %}
-        {% for block in page.extraContentBlocks %}
+          {% endif -%}
+        {% endfor -%}
+        {% for block in page.extraContentBlocks -%}
           {% if block.contentHtml %}{{ block.contentHtml | safe }}{% endif %}
-        {% endfor %}
-        {% for block in page.extraHtmlBlocks %}
+        {% endfor -%}
+        {% for block in page.extraHtmlBlocks -%}
           {% if block.html %}{{ block.html | safe }}{% endif %}
-        {% endfor %}
-        {% for block in page.extraTableBlocks %}
+        {% endfor -%}
+        {% for block in page.extraTableBlocks -%}
           {{ renderTableBlock(block) }}
-        {% endfor %}
+        {% endfor -%}
       </div>
 
       <footer class="story-article__footer">
@@ -541,87 +541,87 @@
   </div>
 
       <div class="story-article__modules">
-        {% set hasManualRelatedStories = page.relatedStories.length %}
-        {% set shouldAutofillRelatedStories = page.relatedStories.length < 9 %}
-        {% set hasAutoRelatedStories = shouldAutofillRelatedStories %}
-        {% set hasImportantAutoPosts = importantAutoStories.total > 0 %}
+        {% set hasManualRelatedStories = page.relatedStories.length -%}
+        {% set shouldAutofillRelatedStories = page.relatedStories.length < 9 -%}
+        {% set hasAutoRelatedStories = shouldAutofillRelatedStories -%}
+        {% set hasImportantAutoPosts = importantAutoStories.total > 0 -%}
 
-        {% if hasManualRelatedStories or shouldAutofillRelatedStories %}
+        {% if hasManualRelatedStories or shouldAutofillRelatedStories -%}
         <section class="related-stories{% if hasAutoRelatedStories %} related-stories--auto{% endif %}">
           <h2 class="related-stories__heading">Read more</h2>
 
           <ul class="related-stories__list">
-            {% for story in page.relatedStories %}
+            {% for story in page.relatedStories -%}
             {% if story._status != "disabled"
               and story.slug != "traveling-with-your-dog-essential-health-tips-for-every-pet-parent"
               and story.title != "Traveling with Your Dog: Essential Health Tips for Every Pet Parent"
               and story.title != page.title %}
               {{ renderRelatedStory(story, true) }}
-            {% endif %}
-            {% endfor %}
+            {% endif -%}
+            {% endfor -%}
 
-            {% if page.location.length %}
-              {% set relatedCandidates = [] %}
-              {% for relatedGroup in relatedLocations.items %}
+            {% if page.location.length -%}
+              {% set relatedCandidates = [] -%}
+              {% for relatedGroup in relatedLocations.items -%}
                 {% if relatedGroup._id == page.location[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
-              {% endfor %}
-              {% for story in relatedCandidates %}
-              {% if story.title != page.title %}
+              {% endfor -%}
+              {% for story in relatedCandidates -%}
+              {% if story.title != page.title -%}
                 {{ renderRelatedStory(story) }}
-              {% endif %}
-              {% endfor %}
-            {% endif %}
+              {% endif -%}
+              {% endfor -%}
+            {% endif -%}
 
-            {% if page.category.length %}
-              {% set relatedCandidates = [] %}
-              {% for relatedGroup in relatedCategories.items %}
+            {% if page.category.length -%}
+              {% set relatedCandidates = [] -%}
+              {% for relatedGroup in relatedCategories.items -%}
                 {% if relatedGroup._id == page.category[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
-              {% endfor %}
-              {% for story in relatedCandidates %}
-              {% if story.title != page.title %}
+              {% endfor -%}
+              {% for story in relatedCandidates -%}
+              {% if story.title != page.title -%}
                 {{ renderRelatedStory(story) }}
-              {% endif %}
-              {% endfor %}
-            {% elif page.mainCategory.length %}
-              {% set relatedCandidates = [] %}
-              {% for relatedGroup in relatedMainCategories.items %}
+              {% endif -%}
+              {% endfor -%}
+            {% elif page.mainCategory.length -%}
+              {% set relatedCandidates = [] -%}
+              {% for relatedGroup in relatedMainCategories.items -%}
                 {% if relatedGroup._id == page.mainCategory[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
-              {% endfor %}
-              {% for story in relatedCandidates %}
-              {% if story.title != page.title %}
+              {% endfor -%}
+              {% for story in relatedCandidates -%}
+              {% if story.title != page.title -%}
                 {{ renderRelatedStory(story) }}
-              {% endif %}
-              {% endfor %}
-            {% endif %}
+              {% endif -%}
+              {% endfor -%}
+            {% endif -%}
 
-            {% if storyContinents.length %}
-              {% set relatedCandidates = [] %}
-              {% for relatedGroup in relatedContinents.items %}
+            {% if storyContinents.length -%}
+              {% set relatedCandidates = [] -%}
+              {% for relatedGroup in relatedContinents.items -%}
                 {% if relatedGroup._id == storyContinents[0]._id %}{% set relatedCandidates = relatedGroup.storySet.items %}{% endif %}
-              {% endfor %}
-              {% for story in relatedCandidates %}
+              {% endfor -%}
+              {% for story in relatedCandidates -%}
               {% if story.title != page.title %}{{ renderRelatedStory(story) }}{% endif %}
-              {% endfor %}
-            {% endif %}
+              {% endfor -%}
+            {% endif -%}
 
             {# Once posts are checked Important, use that complete curated set as
                the universal fallback. Until then the Most Popular collection
                above remains the automatic source. #}
-            {% for story in fallbackAutoStories.items %}
-              {% if story.title != page.title %}
+            {% for story in fallbackAutoStories.items -%}
+              {% if story.title != page.title -%}
                 {{ renderRelatedStory(story, false, true) }}
-              {% endif %}
-            {% endfor %}
+              {% endif -%}
+            {% endfor -%}
 
           </ul>
         </section>
-        {% endif %}
+        {% endif -%}
       </div>
 </article>
-{% endif %}
-{% endblock %}
+{% endif -%}
+{% endblock -%}
 
-{% block extra_scripts %}
+{% block extra_scripts -%}
 <script>
   (function () {
     function filenameAlt(src) {
@@ -651,4 +651,4 @@
     }
   }());
 </script>
-{% endblock %}
+{% endblock -%}

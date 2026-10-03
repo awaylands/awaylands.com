@@ -61,3 +61,17 @@ Older versions and the mixed work in progress state are archived under:
 Current Home category migration source: `3f63eca`. Recovery snapshots and CMS exports
 are archived privately at https://github.com/awaylands/awaylands-backups.
 The development Film redesign remains unpublished.
+
+## Publishing data and template whitespace
+
+The sitemap, search index, and title index use the singleton `publishPages` array
+so TakeShape starts their queries alongside article and destination routes.
+Keep that array at exactly one item so each feed is rendered once. These feeds
+still read current CMS data on every publish.
+
+Archive queries omit category feature data and unused destination contexts.
+The header, article, category, and destination templates trim the whitespace
+after standalone control tags. Preserve literal HTML, inline spacing, script
+contents, and CMS body HTML when changing these controls. Do not enable the
+built-in HTML minifier: comparison against the current content found markup
+and structured-data changes.

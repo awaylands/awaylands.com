@@ -1,0 +1,79 @@
+# Archive cards need only these fields; full category-page features are omitted.
+query ($where: TSWhereCategoryInput) {
+  getCategoryList(where: $where) {
+    items {
+      _id
+      _contentTypeName
+      title
+      parentCategory {
+        _id
+        title
+      }
+      mainCategoryTag {
+        title
+        storySet(
+          size: 250
+          onlyEnabled: true
+          sort: [{field: "_enabledAt", order: "desc"}]
+        ) {
+          total
+          items {
+            _id
+            _enabledAt
+            title
+            slug
+            tout {
+              image {
+                path
+              }
+              dek
+            }
+            category {
+              _id
+              title
+            }
+            mainCategory {
+              _id
+              title
+            }
+          }
+        }
+      }
+      storySet(
+        size: 250
+        onlyEnabled: true
+        sort: [{field: "_enabledAt", order: "desc"}]
+      ) {
+        total
+        items {
+          _id
+          _enabledAt
+          title
+          slug
+          tout {
+            image {
+              path
+            }
+            dek
+          }
+          category {
+            _id
+            title
+          }
+          mainCategory {
+            _id
+            title
+          }
+        }
+      }
+      social {
+        title
+        description
+        image {
+          path
+        }
+      }
+    }
+    total
+  }
+}

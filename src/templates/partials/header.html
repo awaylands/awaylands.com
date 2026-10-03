@@ -1,6 +1,6 @@
-{% set social = site.navigation.social %}
-{% set mobileBlogCategories = ["Travel Guides", "Packing Guides", "Photography", "Travel Style", "Beauty", "Wedding And Honeymoon"] %}
-{% set mobileContinents = ["Europe", "North America", "South America", "Asia", "Oceania", "Africa", "Middle East"] %}
+{% set social = site.navigation.social -%}
+{% set mobileBlogCategories = ["Travel Guides", "Packing Guides", "Photography", "Travel Style", "Beauty", "Wedding And Honeymoon"] -%}
+{% set mobileContinents = ["Europe", "North America", "South America", "Asia", "Oceania", "Africa", "Middle East"] -%}
 
 <pageheader inline-template>
   <div>
@@ -16,8 +16,8 @@
 
           <nav class="page-nav">
             <ul class="page-nav__list">
-              {% for link in site.navigation.links %}
-              {% set linkName = link.text | lower %}
+              {% for link in site.navigation.links -%}
+              {% set linkName = link.text | lower -%}
               <li>
                 <a href="{{ link.url }}"
                    {% if linkName == "shop" or link.externalLink %}target="_blank" rel="noopener"{% endif %}
@@ -26,39 +26,39 @@
                   {{ link.text }}
                 </a>
 
-                {% if link.children.length %}
+                {% if link.children.length -%}
                 <div class="dropdown">
                   <ul class="dropdown__list">
-                    {% for child in link.children %}
+                    {% for child in link.children -%}
                       <li>
                         <a href="{% if child._contentTypeName == 'category' and child.parentCategory and child.parentCategory.title != child.title %}{{ child | route('subcategory') }}{% else %}{{ child | route(child._contentTypeName) }}{% endif %}"
                            {% if child._contentTypeName === "continent" and child.locations.length %}class="dropdown__link--has-children" aria-haspopup="true"{% endif %}
                         >
-                          {% if child.title %}
+                          {% if child.title -%}
                             {{ child.title | replace('Posts *', 'Posts *') }}
-                          {% elif child.name %}
+                          {% elif child.name -%}
                             {{ child.name }}
-                          {% endif %}
+                          {% endif -%}
                         </a>
 
-                        {% if child._contentTypeName === "continent" and child.locations.length %}
+                        {% if child._contentTypeName === "continent" and child.locations.length -%}
                         <div class="subdropdown">
                           <ul class="subdropdown__list">
-                            {% for location in child.locations %}
+                            {% for location in child.locations -%}
                             <li>
                               <a href="{{ location | route('location') }}">{{ location.title }}</a>
                             </li>
-                            {% endfor %}
+                            {% endfor -%}
                           </ul>
                         </div>
-                        {% endif %}
+                        {% endif -%}
                       </li>
-                    {% endfor %}
+                    {% endfor -%}
                   </ul>
                 </div>
-                {% endif %}
+                {% endif -%}
               </li>
-              {% endfor %}
+              {% endfor -%}
 
               <li><a href="#footer" @click="contactScroll">Contact</a></li>
               <li class="page-nav__search">
@@ -137,72 +137,72 @@
           <div class="mobile-nav__group">
             <p class="mobile-nav__eyebrow">Explore</p>
             <ul class="mobile-nav__list">
-              {% for item in site.navigation.links %}
-                {% set itemName = item.text | lower %}
-                {% if itemName == "blog" or itemName == "destinations" %}
+              {% for item in site.navigation.links -%}
+                {% set itemName = item.text | lower -%}
+                {% if itemName == "blog" or itemName == "destinations" -%}
                 <li class="mobile-nav__item">
                   <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank" rel="noopener"{% endif %}>{{ item.text | replace('Posts *', 'Posts *') }}</a>
-                  {% if itemName == "blog" %}
+                  {% if itemName == "blog" -%}
                   <ul class="mobile-nav__sublist" aria-label="Popular blog categories">
-                    {% for categoryTitle in mobileBlogCategories %}
-                      {% for child in item.children %}
-                        {% if child.title == categoryTitle %}
+                    {% for categoryTitle in mobileBlogCategories -%}
+                      {% for child in item.children -%}
+                        {% if child.title == categoryTitle -%}
                         <li><a class="mobile-nav__sublink" href="{% if child.parentCategory and child.parentCategory.title != child.title %}{{ child | route('subcategory') }}{% else %}{{ child | route(child._contentTypeName) }}{% endif %}">{{ child.title }}</a></li>
-                        {% endif %}
-                      {% endfor %}
-                    {% endfor %}
+                        {% endif -%}
+                      {% endfor -%}
+                    {% endfor -%}
                   </ul>
-                  {% elif itemName == "destinations" %}
+                  {% elif itemName == "destinations" -%}
                   <ul class="mobile-nav__sublist" aria-label="Destination continents">
-                    {% for continentName in mobileContinents %}
-                      {% for child in item.children %}
-                        {% if child.name == continentName %}
+                    {% for continentName in mobileContinents -%}
+                      {% for child in item.children -%}
+                        {% if child.name == continentName -%}
                         <li><a class="mobile-nav__sublink" href="{{ child | route(child._contentTypeName) }}">{{ child.name }}</a></li>
-                        {% endif %}
-                      {% endfor %}
-                    {% endfor %}
+                        {% endif -%}
+                      {% endfor -%}
+                    {% endfor -%}
                   </ul>
-                  {% endif %}
+                  {% endif -%}
                 </li>
-                {% endif %}
-              {% endfor %}
+                {% endif -%}
+              {% endfor -%}
             </ul>
           </div>
 
           <div class="mobile-nav__group">
             <p class="mobile-nav__eyebrow">Our work</p>
             <ul class="mobile-nav__list">
-              {% for item in site.navigation.links %}
-                {% set itemName = item.text | lower %}
-                {% if itemName == "film" or itemName == "still" %}
+              {% for item in site.navigation.links -%}
+                {% set itemName = item.text | lower -%}
+                {% if itemName == "film" or itemName == "still" -%}
                 <li class="mobile-nav__item">
                   <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank" rel="noopener"{% endif %}>{{ item.text | replace('Posts *', 'Posts *') }}</a>
                 </li>
-                {% endif %}
-              {% endfor %}
+                {% endif -%}
+              {% endfor -%}
             </ul>
           </div>
 
           <ul class="mobile-nav__list mobile-nav__list--primary">
-            {% for item in site.navigation.links %}
-              {% set itemName = item.text | lower %}
-              {% if itemName == "shop" %}
+            {% for item in site.navigation.links -%}
+              {% set itemName = item.text | lower -%}
+              {% if itemName == "shop" -%}
               <li class="mobile-nav__item">
                 <a href="{{ item.url }}" class="mobile-nav__link mobile-nav__link--shop" target="_blank" rel="noopener">{{ item.text | replace('Posts *', 'Posts *') }}</a>
               </li>
-              {% endif %}
-            {% endfor %}
+              {% endif -%}
+            {% endfor -%}
           </ul>
 
           <ul class="mobile-nav__list mobile-nav__list--secondary">
-            {% for item in site.navigation.links %}
-              {% set itemName = item.text | lower %}
-              {% if itemName == "about" %}
+            {% for item in site.navigation.links -%}
+              {% set itemName = item.text | lower -%}
+              {% if itemName == "about" -%}
               <li class="mobile-nav__item">
                 <a href="{{ item.url }}" class="mobile-nav__link" {% if item.externalLink %}target="_blank" rel="noopener"{% endif %}>{{ item.text | replace('Posts *', 'Posts *') }}</a>
               </li>
-              {% endif %}
-            {% endfor %}
+              {% endif -%}
+            {% endfor -%}
             <li class="mobile-nav__item">
               <a href="#footer" class="mobile-nav__link" @click="contactScroll">Contact</a>
             </li>

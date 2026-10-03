@@ -1,13 +1,13 @@
-{% extends "layouts/default.html" %}
+{% extends "layouts/default.html" -%}
 
 {% macro storyUrl(story) %}{% if story.slug %}{{ story | route('storySlug') }}{% else %}{{ story | route('story') }}{% endif %}{% endmacro %}
 {% macro configuredCardUrl(card, story) %}{% if card.post %}{{ storyUrl(card.post) }}{% else %}{{ card.linkUrl or storyUrl(story) }}{% endif %}{% endmacro %}
 {% macro categoryUrl(category) %}{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategory') }}{% else %}{{ category | route('category') }}{% endif %}{% endmacro %}
 {% macro categoryArchiveUrl(category) %}{% if category.parentCategory and category.parentCategory.title != category.title %}{{ category | route('subcategoryArchive') }}{% else %}{{ category | route('categoryArchive') }}{% endif %}{% endmacro %}
 
-{% macro storyImage(story, sizes, eager) %}
-  {% set image = story.tout.image or story.tout.secondaryImage %}
-  {% if image %}
+{% macro storyImage(story, sizes, eager) -%}
+  {% set image = story.tout.image or story.tout.secondaryImage -%}
+  {% if image -%}
   <img
     src="{{ image.path | image({w: 960, auto: 'compress,format'}) }}"
     srcset="{{ image.path | image({w: 480, auto: 'compress,format'}) }} 480w,
@@ -22,10 +22,10 @@
     decoding="async"
     {% if eager %}fetchpriority="high"{% endif %}
   >
-  {% endif %}
-{% endmacro %}
+  {% endif -%}
+{% endmacro -%}
 
-{% macro featureCard(story, label, modifier) %}
+{% macro featureCard(story, label, modifier) -%}
   <article class="category-feature-card {{ modifier }}">
     <a href="{{ storyUrl(story) }}">
       <span class="category-feature-card__image">
@@ -38,9 +38,9 @@
       </span>
     </a>
   </article>
-{% endmacro %}
+{% endmacro -%}
 
-{% macro shortlistCard(story, modifier, filterable) %}
+{% macro shortlistCard(story, modifier, filterable) -%}
   <article class="category-shortlist-card {{ modifier }}"{% if filterable %} data-subcategory-story="{{ story.title | lower | escape }}" hidden{% endif %}>
     <a href="{{ storyUrl(story) }}">
       <span class="category-shortlist-card__image">
@@ -53,18 +53,18 @@
       </span>
     </a>
   </article>
-{% endmacro %}
+{% endmacro -%}
 
-{% macro destinationTile(title, slug, story) %}
+{% macro destinationTile(title, slug, story) -%}
   <a class="category-destination-tile" href="/destinations/{{ slug }}/">
     <span>{{ storyImage(story, "(min-width: 1000px) 25vw, 50vw", false) }}</span>
     <strong>{{ title }}</strong>
     <i>View guides <span aria-hidden="true">⟶</span></i>
   </a>
-{% endmacro %}
+{% endmacro -%}
 
-{% macro productCard(product) %}
-  {% if product.productUrl %}
+{% macro productCard(product) -%}
+  {% if product.productUrl -%}
   <a class="bm-product" href="{{ product.productUrl }}" target="_blank" rel="sponsored noopener">
     <span class="bm-product__image">{% if product.image %}<img src="{{ product.image.path | image({w: 520, h: 650, fit: 'contain', auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% endif %}</span>
     <span class="bm-product__copy">
@@ -72,206 +72,206 @@
       {% if product.description %}<p>{{ product.description }}</p>{% endif %}
     </span>
   </a>
-  {% endif %}
-{% endmacro %}
+  {% endif -%}
+{% endmacro -%}
 
 
-{% set isSubcategory = page.parentCategory and page.parentCategory.title != page.title %}
-{% set exactCategoryStories = [] %}
-{% set exactCategoryStoryIds = [] %}
-{% for story in page.storySet.items %}
-  {% if not isSubcategory %}
-    {% if story._id not in exactCategoryStoryIds %}
-      {% set ignored = exactCategoryStories.push(story) %}
-      {% set ignored = exactCategoryStoryIds.push(story._id) %}
-    {% endif %}
-  {% else %}
-    {% for storyCategory in story.category %}
-      {% if storyCategory._id == page._id and story._id not in exactCategoryStoryIds %}
-        {% set ignored = exactCategoryStories.push(story) %}
-        {% set ignored = exactCategoryStoryIds.push(story._id) %}
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-{% endfor %}
-{% if not isSubcategory and page.mainCategoryTag %}
-  {% for story in page.mainCategoryTag.storySet.items %}
-    {% if story._id not in exactCategoryStoryIds %}
-      {% set ignored = exactCategoryStories.push(story) %}
-      {% set ignored = exactCategoryStoryIds.push(story._id) %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
-{% set sortedStories = exactCategoryStories | sort(true, true, "_enabledAt") %}
-{% set categoryStoryTotal = sortedStories.length %}
-{% set updatedStories = exactCategoryStories | sort(true, true, "_updatedAt") %}
-{% set subcategoryFeaturedStories = [] %}
-{% set subcategoryFeaturedIds = [] %}
-{% set preservesMergedSelections = page.title in ["Home Design & Decor", "Home Improvement & DIY", "Home Living", "Plants & Garden", "Pets & Pet Travel"] %}
-{% if isSubcategory %}
-  {% for curatedStory in page.featuredStories %}
-    {% if curatedStory and curatedStory._id not in subcategoryFeaturedIds and (subcategoryFeaturedStories.length < 2 or preservesMergedSelections) %}
-      {% set ignored = subcategoryFeaturedStories.push(curatedStory) %}
-      {% set ignored = subcategoryFeaturedIds.push(curatedStory._id) %}
-    {% endif %}
-  {% endfor %}
+{% set isSubcategory = page.parentCategory and page.parentCategory.title != page.title -%}
+{% set exactCategoryStories = [] -%}
+{% set exactCategoryStoryIds = [] -%}
+{% for story in page.storySet.items -%}
+  {% if not isSubcategory -%}
+    {% if story._id not in exactCategoryStoryIds -%}
+      {% set ignored = exactCategoryStories.push(story) -%}
+      {% set ignored = exactCategoryStoryIds.push(story._id) -%}
+    {% endif -%}
+  {% else -%}
+    {% for storyCategory in story.category -%}
+      {% if storyCategory._id == page._id and story._id not in exactCategoryStoryIds -%}
+        {% set ignored = exactCategoryStories.push(story) -%}
+        {% set ignored = exactCategoryStoryIds.push(story._id) -%}
+      {% endif -%}
+    {% endfor -%}
+  {% endif -%}
+{% endfor -%}
+{% if not isSubcategory and page.mainCategoryTag -%}
+  {% for story in page.mainCategoryTag.storySet.items -%}
+    {% if story._id not in exactCategoryStoryIds -%}
+      {% set ignored = exactCategoryStories.push(story) -%}
+      {% set ignored = exactCategoryStoryIds.push(story._id) -%}
+    {% endif -%}
+  {% endfor -%}
+{% endif -%}
+{% set sortedStories = exactCategoryStories | sort(true, true, "_enabledAt") -%}
+{% set categoryStoryTotal = sortedStories.length -%}
+{% set updatedStories = exactCategoryStories | sort(true, true, "_updatedAt") -%}
+{% set subcategoryFeaturedStories = [] -%}
+{% set subcategoryFeaturedIds = [] -%}
+{% set preservesMergedSelections = page.title in ["Home Design & Decor", "Home Improvement & DIY", "Home Living", "Plants & Garden", "Pets & Pet Travel"] -%}
+{% if isSubcategory -%}
+  {% for curatedStory in page.featuredStories -%}
+    {% if curatedStory and curatedStory._id not in subcategoryFeaturedIds and (subcategoryFeaturedStories.length < 2 or preservesMergedSelections) -%}
+      {% set ignored = subcategoryFeaturedStories.push(curatedStory) -%}
+      {% set ignored = subcategoryFeaturedIds.push(curatedStory._id) -%}
+    {% endif -%}
+  {% endfor -%}
   {% if preservesMergedSelections %}{% for curatedCard in page.featuredCards %}
-    {% set curatedStory = curatedCard.post %}
-    {% if curatedStory and curatedStory._id in exactCategoryStoryIds and curatedStory._id not in subcategoryFeaturedIds %}
-      {% set ignored = subcategoryFeaturedStories.push(curatedStory) %}
-      {% set ignored = subcategoryFeaturedIds.push(curatedStory._id) %}
-    {% endif %}
+    {% set curatedStory = curatedCard.post -%}
+    {% if curatedStory and curatedStory._id in exactCategoryStoryIds and curatedStory._id not in subcategoryFeaturedIds -%}
+      {% set ignored = subcategoryFeaturedStories.push(curatedStory) -%}
+      {% set ignored = subcategoryFeaturedIds.push(curatedStory._id) -%}
+    {% endif -%}
   {% endfor %}{% endif %}
-  {% for parentGuideCard in page.parentCategory.guideCards %}
-    {% if parentGuideCard.title | lower == page.title | lower %}
-      {% for curatedCard in parentGuideCard.cards %}
-        {% set curatedStory = curatedCard.post %}
-        {% for story in sortedStories %}
-          {% if curatedStory and story._id == curatedStory._id and story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 %}
-            {% set ignored = subcategoryFeaturedStories.push(story) %}
-            {% set ignored = subcategoryFeaturedIds.push(story._id) %}
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-      {% set legacyFeaturedStories = [parentGuideCard.post, parentGuideCard.post2, parentGuideCard.post3, parentGuideCard.post4] %}
-      {% for curatedStory in legacyFeaturedStories %}
-        {% for story in sortedStories %}
-          {% if curatedStory and story._id == curatedStory._id and story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 %}
-            {% set ignored = subcategoryFeaturedStories.push(story) %}
-            {% set ignored = subcategoryFeaturedIds.push(story._id) %}
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-    {% endif %}
-  {% endfor %}
-  {% for story in sortedStories %}
-    {% if story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 %}
-      {% set ignored = subcategoryFeaturedStories.push(story) %}
-      {% set ignored = subcategoryFeaturedIds.push(story._id) %}
-    {% endif %}
-  {% endfor %}
-{% endif %}
-{% set subcategoryGridStories = sortedStories %}
-{% if page.updatedStories.length %}
-  {% set updatedStories = page.updatedStories %}
-{% endif %}
-{% set indexStories = sortedStories %}
-{% if page.indexStories.length %}
-  {% set indexStories = page.indexStories %}
-{% endif %}
-{% set categoryTopic = page.title | lower %}
-{% set categoryHeadline = page.title if isSubcategory else page.title + " Stories Worth Saving" %}
-{% set categoryDescription = page.introText or page.social.description %}
-{% set pageLabel = page.pageLabel or "Away Lands Journal" %}
-{% set featuredLabel = "Explore Essentials" %}
-{% set featuredTitle = "Recommended Reading" %}
-{% set featuredDescription = page.featuredDescription or "A compact edit of the guides and stories to open first." %}
-{% set destinationsLabel = page.destinationsLabel or "Reader favorites" %}
-{% set destinationsTitle = page.destinationsTitle or "Most Popular Destinations" %}
-{% set destinationsDescription = page.destinationsDescription or "Start with the destinations readers return to most." %}
-{% if page.title == "Travel Guides" %}
-  {% set destinationsTitle = "Most Popular Destinations" %}
-{% endif %}
-{% set mapLabel = page.mapLabel or "Plan by place" %}
-{% set mapTitle = page.mapTitle or "Find Your Next Escape" %}
-{% set mapDescription = page.mapDescription or "Open a region to explore destination guides, beaches, hotels, itineraries, and practical details." %}
-{% set clustersLabel = page.clustersLabel or "More to discover" %}
-{% set clustersTitle = page.clustersTitle or "Travel Guide Collections" %}
-{% set clustersDescription = page.clustersDescription or "Focused paths into Away Lands destination and planning coverage." %}
-{% set updatedLabel = page.updatedLabel or "Freshly updated" %}
-{% set updatedTitle = page.updatedTitle or "Recently Updated" %}
-{% set updatedDescription = page.updatedDescription or "Guides with newly reviewed recommendations and planning details." %}
-{% set expertiseLabel = page.expertiseLabel or "Firsthand since 2016" %}
-{% set expertiseTitle = page.expertiseTitle or "Traveled, Photographed, And Written From Experience" %}
-{% set expertiseDescription = page.expertiseDescription or "Away Lands has published travel guides from more than 60 countries since 2016. Every guide is shaped by firsthand travel, original photography, and practical planning experience." %}
-{% set expertiseStat1Value = page.expertiseStat1Value or "60+" %}
-{% set expertiseStat1Label = page.expertiseStat1Label or "Countries visited" %}
-{% set expertiseStat2Value = page.expertiseStat2Value or "10" %}
-{% set expertiseStat2Label = page.expertiseStat2Label or "Years of full-time travel" %}
-{% set expertiseStat3Value = page.expertiseStat3Value or "100%" %}
-{% set expertiseStat3Label = page.expertiseStat3Label or "Original perspective" %}
-{% set expertiseLink1Text = page.expertiseLink1Text or "Meet Amy & Brandon" %}
-{% set expertiseLink1Url = page.expertiseLink1Url or "/about/" %}
-{% set expertiseLink2Text = page.expertiseLink2Text or "View photography" %}
-{% set expertiseLink2Url = page.expertiseLink2Url or "/still/" %}
-{% set indexLabel = page.indexLabel or "Browse the archive" %}
-{% set indexTitle = page.indexTitle or "Travel Guides Index" %}
-{% set indexDescription = page.indexDescription or "The latest 24 guides, with every major collection linked above." %}
-{% set browseLabel = page.browseLabel or "Find exactly what you need" %}
-{% set browseTitle = page.browseTitle or ("Browse " + page.title) %}
-{% set relatedLabel = page.relatedLabel or "Keep exploring" %}
-{% set relatedTitle = page.relatedTitle or "Related Collections" %}
-{% set guideLabel = page.guideLabel or "Explore Essentials" %}
-{% set guideTitle = page.guideTitle or "Choose A Guide" %}
-{% set guideLinkText = page.guideLinkText or "View all" %}
-{% set guideLinkUrl = page.guideLinkUrl or currentPath %}
-{% set shopLabel = page.shopLabel or "Travel essentials" %}
-{% set shopTitle = page.shopTitle or "The Items Always in My Carry-On" %}
-{% set shopDescription = page.shopDescription %}
-{% if page.title == "Travel Guides" and shopDescription == "Useful products and considered recommendations for travel guides." %}
-  {% set shopDescription = "The travel essentials I pack, use, and recommend trip after trip." %}
-{% endif %}
-{% set shopLinkText = page.shopLinkText or "View recommendations" %}
-{% set shopLinkUrl = page.shopLinkUrl or "/category/packing-guides/travel-essentials/" %}
-{% set subcategoryParent = page.parentCategory.title or page.title %}
-{% set categoryProducts = products.travel %}
-{% set secondaryProducts = [] %}
-{% set tertiaryProducts = [] %}
-{% if subcategoryParent == "Photography" %}
-  {% set categoryProducts = products.photography %}
-{% elif subcategoryParent == "Beauty" %}
-  {% set categoryProducts = products.beauty %}
-{% elif subcategoryParent == "Wellness" %}
-  {% set categoryProducts = products.fitness %}
-{% elif subcategoryParent == "Home And Garden" %}
-  {% set categoryProducts = products.home %}
-{% elif subcategoryParent == "Wedding And Honeymoon" %}
-  {% set categoryProducts = products.wedding %}
-{% elif subcategoryParent == "Packing Guides" %}
-  {% set categoryProducts = products.travel %}
-  {% set secondaryProducts = products.style %}
-  {% set tertiaryProducts = products.beauty %}
-{% elif subcategoryParent == "Travel Style" %}
-  {% set categoryProducts = products.style %}
-{% endif %}
+  {% for parentGuideCard in page.parentCategory.guideCards -%}
+    {% if parentGuideCard.title | lower == page.title | lower -%}
+      {% for curatedCard in parentGuideCard.cards -%}
+        {% set curatedStory = curatedCard.post -%}
+        {% for story in sortedStories -%}
+          {% if curatedStory and story._id == curatedStory._id and story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 -%}
+            {% set ignored = subcategoryFeaturedStories.push(story) -%}
+            {% set ignored = subcategoryFeaturedIds.push(story._id) -%}
+          {% endif -%}
+        {% endfor -%}
+      {% endfor -%}
+      {% set legacyFeaturedStories = [parentGuideCard.post, parentGuideCard.post2, parentGuideCard.post3, parentGuideCard.post4] -%}
+      {% for curatedStory in legacyFeaturedStories -%}
+        {% for story in sortedStories -%}
+          {% if curatedStory and story._id == curatedStory._id and story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 -%}
+            {% set ignored = subcategoryFeaturedStories.push(story) -%}
+            {% set ignored = subcategoryFeaturedIds.push(story._id) -%}
+          {% endif -%}
+        {% endfor -%}
+      {% endfor -%}
+    {% endif -%}
+  {% endfor -%}
+  {% for story in sortedStories -%}
+    {% if story._id not in subcategoryFeaturedIds and subcategoryFeaturedStories.length < 2 -%}
+      {% set ignored = subcategoryFeaturedStories.push(story) -%}
+      {% set ignored = subcategoryFeaturedIds.push(story._id) -%}
+    {% endif -%}
+  {% endfor -%}
+{% endif -%}
+{% set subcategoryGridStories = sortedStories -%}
+{% if page.updatedStories.length -%}
+  {% set updatedStories = page.updatedStories -%}
+{% endif -%}
+{% set indexStories = sortedStories -%}
+{% if page.indexStories.length -%}
+  {% set indexStories = page.indexStories -%}
+{% endif -%}
+{% set categoryTopic = page.title | lower -%}
+{% set categoryHeadline = page.title if isSubcategory else page.title + " Stories Worth Saving" -%}
+{% set categoryDescription = page.introText or page.social.description -%}
+{% set pageLabel = page.pageLabel or "Away Lands Journal" -%}
+{% set featuredLabel = "Explore Essentials" -%}
+{% set featuredTitle = "Recommended Reading" -%}
+{% set featuredDescription = page.featuredDescription or "A compact edit of the guides and stories to open first." -%}
+{% set destinationsLabel = page.destinationsLabel or "Reader favorites" -%}
+{% set destinationsTitle = page.destinationsTitle or "Most Popular Destinations" -%}
+{% set destinationsDescription = page.destinationsDescription or "Start with the destinations readers return to most." -%}
+{% if page.title == "Travel Guides" -%}
+  {% set destinationsTitle = "Most Popular Destinations" -%}
+{% endif -%}
+{% set mapLabel = page.mapLabel or "Plan by place" -%}
+{% set mapTitle = page.mapTitle or "Find Your Next Escape" -%}
+{% set mapDescription = page.mapDescription or "Open a region to explore destination guides, beaches, hotels, itineraries, and practical details." -%}
+{% set clustersLabel = page.clustersLabel or "More to discover" -%}
+{% set clustersTitle = page.clustersTitle or "Travel Guide Collections" -%}
+{% set clustersDescription = page.clustersDescription or "Focused paths into Away Lands destination and planning coverage." -%}
+{% set updatedLabel = page.updatedLabel or "Freshly updated" -%}
+{% set updatedTitle = page.updatedTitle or "Recently Updated" -%}
+{% set updatedDescription = page.updatedDescription or "Guides with newly reviewed recommendations and planning details." -%}
+{% set expertiseLabel = page.expertiseLabel or "Firsthand since 2016" -%}
+{% set expertiseTitle = page.expertiseTitle or "Traveled, Photographed, And Written From Experience" -%}
+{% set expertiseDescription = page.expertiseDescription or "Away Lands has published travel guides from more than 60 countries since 2016. Every guide is shaped by firsthand travel, original photography, and practical planning experience." -%}
+{% set expertiseStat1Value = page.expertiseStat1Value or "60+" -%}
+{% set expertiseStat1Label = page.expertiseStat1Label or "Countries visited" -%}
+{% set expertiseStat2Value = page.expertiseStat2Value or "10" -%}
+{% set expertiseStat2Label = page.expertiseStat2Label or "Years of full-time travel" -%}
+{% set expertiseStat3Value = page.expertiseStat3Value or "100%" -%}
+{% set expertiseStat3Label = page.expertiseStat3Label or "Original perspective" -%}
+{% set expertiseLink1Text = page.expertiseLink1Text or "Meet Amy & Brandon" -%}
+{% set expertiseLink1Url = page.expertiseLink1Url or "/about/" -%}
+{% set expertiseLink2Text = page.expertiseLink2Text or "View photography" -%}
+{% set expertiseLink2Url = page.expertiseLink2Url or "/still/" -%}
+{% set indexLabel = page.indexLabel or "Browse the archive" -%}
+{% set indexTitle = page.indexTitle or "Travel Guides Index" -%}
+{% set indexDescription = page.indexDescription or "The latest 24 guides, with every major collection linked above." -%}
+{% set browseLabel = page.browseLabel or "Find exactly what you need" -%}
+{% set browseTitle = page.browseTitle or ("Browse " + page.title) -%}
+{% set relatedLabel = page.relatedLabel or "Keep exploring" -%}
+{% set relatedTitle = page.relatedTitle or "Related Collections" -%}
+{% set guideLabel = page.guideLabel or "Explore Essentials" -%}
+{% set guideTitle = page.guideTitle or "Choose A Guide" -%}
+{% set guideLinkText = page.guideLinkText or "View all" -%}
+{% set guideLinkUrl = page.guideLinkUrl or currentPath -%}
+{% set shopLabel = page.shopLabel or "Travel essentials" -%}
+{% set shopTitle = page.shopTitle or "The Items Always in My Carry-On" -%}
+{% set shopDescription = page.shopDescription -%}
+{% if page.title == "Travel Guides" and shopDescription == "Useful products and considered recommendations for travel guides." -%}
+  {% set shopDescription = "The travel essentials I pack, use, and recommend trip after trip." -%}
+{% endif -%}
+{% set shopLinkText = page.shopLinkText or "View recommendations" -%}
+{% set shopLinkUrl = page.shopLinkUrl or "/category/packing-guides/travel-essentials/" -%}
+{% set subcategoryParent = page.parentCategory.title or page.title -%}
+{% set categoryProducts = products.travel -%}
+{% set secondaryProducts = [] -%}
+{% set tertiaryProducts = [] -%}
+{% if subcategoryParent == "Photography" -%}
+  {% set categoryProducts = products.photography -%}
+{% elif subcategoryParent == "Beauty" -%}
+  {% set categoryProducts = products.beauty -%}
+{% elif subcategoryParent == "Wellness" -%}
+  {% set categoryProducts = products.fitness -%}
+{% elif subcategoryParent == "Home And Garden" -%}
+  {% set categoryProducts = products.home -%}
+{% elif subcategoryParent == "Wedding And Honeymoon" -%}
+  {% set categoryProducts = products.wedding -%}
+{% elif subcategoryParent == "Packing Guides" -%}
+  {% set categoryProducts = products.travel -%}
+  {% set secondaryProducts = products.style -%}
+  {% set tertiaryProducts = products.beauty -%}
+{% elif subcategoryParent == "Travel Style" -%}
+  {% set categoryProducts = products.style -%}
+{% endif -%}
 
 {# Optional category modules disappear when their editable content is empty. #}
-{% set hasGuideSection = page.guideCards.length %}
-{% set hasFeaturedSection = page.featuredCards.length or page.featuredStories.length or page.featuredBackgroundImage %}
-{% set hasBeautyFeature = page.focusedHeroPost or page.focusedHeroImage or page.focusedHeroLabel or page.focusedHeroTitle or page.focusedHeroDescription or page.focusedHeroLinkText or page.focusedHeroLinkUrl or page.destinationCards.length %}
-{% set hasDestinationSection = page.destinationCards.length or page.destinationStories.length or page.destinationsLabel or page.destinationsTitle or page.destinationsDescription %}
-{% set hasMapSection = page.mapImage or page.mapLabel or page.mapTitle or page.mapDescription %}
-{% set hasClusterSection = page.collectionCards.length or page.clusterStories.length or page.collection1Name or page.collection2Name or page.collection3Name or page.collection4Name or page.clustersLabel or page.clustersTitle or page.clustersDescription %}
-{% set hasShopSection = page.shopImage or page.shopCards.length or page.shopLabel or page.shopTitle or page.shopDescription or page.shopLinkText or page.shopLinkUrl %}
-{% set hasUpdatedSection = page.updatedCards.length or page.updatedStories.length or page.updatedBackgroundImage or page.updatedLabel or page.updatedTitle or page.updatedDescription %}
-{% set hasExpertiseSection = page.expertiseImage or page.expertiseLabel or page.expertiseTitle or page.expertiseDescription or page.expertiseStat1Value or page.expertiseStat2Value or page.expertiseStat3Value or page.expertiseLink1Text or page.expertiseLink2Text %}
-{% set hasIndexSection = page.indexCards.length or page.indexStories.length or page.indexLabel or page.indexTitle or page.indexDescription %}
-{% set hasBrowseSection = page.browseCards.length or page.browseLabel or page.browseTitle %}
-{% set hasRelatedSection = page.relatedCards.length or page.relatedLabel or page.relatedTitle %}
-{% set featureHeroStory = page.focusedHeroPost or heroStory %}
-{% set hasFeatureHero = page.focusedHeroPost or page.focusedHeroImage or page.focusedHeroLabel or page.focusedHeroTitle or page.focusedHeroDescription or page.focusedHeroLinkText or page.focusedHeroLinkUrl %}
+{% set hasGuideSection = page.guideCards.length -%}
+{% set hasFeaturedSection = page.featuredCards.length or page.featuredStories.length or page.featuredBackgroundImage -%}
+{% set hasBeautyFeature = page.focusedHeroPost or page.focusedHeroImage or page.focusedHeroLabel or page.focusedHeroTitle or page.focusedHeroDescription or page.focusedHeroLinkText or page.focusedHeroLinkUrl or page.destinationCards.length -%}
+{% set hasDestinationSection = page.destinationCards.length or page.destinationStories.length or page.destinationsLabel or page.destinationsTitle or page.destinationsDescription -%}
+{% set hasMapSection = page.mapImage or page.mapLabel or page.mapTitle or page.mapDescription -%}
+{% set hasClusterSection = page.collectionCards.length or page.clusterStories.length or page.collection1Name or page.collection2Name or page.collection3Name or page.collection4Name or page.clustersLabel or page.clustersTitle or page.clustersDescription -%}
+{% set hasShopSection = page.shopImage or page.shopCards.length or page.shopLabel or page.shopTitle or page.shopDescription or page.shopLinkText or page.shopLinkUrl -%}
+{% set hasUpdatedSection = page.updatedCards.length or page.updatedStories.length or page.updatedBackgroundImage or page.updatedLabel or page.updatedTitle or page.updatedDescription -%}
+{% set hasExpertiseSection = page.expertiseImage or page.expertiseLabel or page.expertiseTitle or page.expertiseDescription or page.expertiseStat1Value or page.expertiseStat2Value or page.expertiseStat3Value or page.expertiseLink1Text or page.expertiseLink2Text -%}
+{% set hasIndexSection = page.indexCards.length or page.indexStories.length or page.indexLabel or page.indexTitle or page.indexDescription -%}
+{% set hasBrowseSection = page.browseCards.length or page.browseLabel or page.browseTitle -%}
+{% set hasRelatedSection = page.relatedCards.length or page.relatedLabel or page.relatedTitle -%}
+{% set featureHeroStory = page.focusedHeroPost or heroStory -%}
+{% set hasFeatureHero = page.focusedHeroPost or page.focusedHeroImage or page.focusedHeroLabel or page.focusedHeroTitle or page.focusedHeroDescription or page.focusedHeroLinkText or page.focusedHeroLinkUrl -%}
 
-{% if page.pageHeadline and not isSubcategory %}
-  {% set categoryHeadline = page.pageHeadline %}
-{% endif %}
+{% if page.pageHeadline and not isSubcategory -%}
+  {% set categoryHeadline = page.pageHeadline -%}
+{% endif -%}
 
-{% if not categoryDescription %}
-  {% set categoryDescription = "Firsthand " + categoryTopic + " guides, practical details, and thoughtful recommendations from more than a decade of travel." %}
-{% endif %}
+{% if not categoryDescription -%}
+  {% set categoryDescription = "Firsthand " + categoryTopic + " guides, practical details, and thoughtful recommendations from more than a decade of travel." -%}
+{% endif -%}
 
-{% if isSubcategory %}
-  {% set heroStory = sortedStories[0] %}
-{% elif page.heroStory %}
-  {% set heroStory = page.heroStory %}
-{% elif page.featuredStories.length %}
-  {% set heroStory = page.featuredStories[0] %}
-{% else %}
-  {% set heroStory = sortedStories[0] %}
-{% endif %}
+{% if isSubcategory -%}
+  {% set heroStory = sortedStories[0] -%}
+{% elif page.heroStory -%}
+  {% set heroStory = page.heroStory -%}
+{% elif page.featuredStories.length -%}
+  {% set heroStory = page.featuredStories[0] -%}
+{% else -%}
+  {% set heroStory = sortedStories[0] -%}
+{% endif -%}
 
 {% block body_class %}body--blog-category body--category-hub{% if isSubcategory %} body--subcategory{% endif %} has-editorial-menu{% endblock %}
 
-{% block extra_head %}
+{% block extra_head -%}
   <link rel="canonical" href="https://www.awaylands.com{{ currentPath }}">
   <meta property="og:url" content="https://www.awaylands.com{{ currentPath }}">
   <meta property="og:type" content="website">
@@ -314,9 +314,9 @@
     ]
   }
   </script>
-{% endblock %}
+{% endblock -%}
 
-{% block content %}
+{% block content -%}
 <div class="category-hub" id="category-page-top" data-category="{{ page.title | lower | replace(' ', '-') }}">
   <nav class="category-hub__breadcrumbs" aria-label="Breadcrumb">
     <a href="/">Home</a><span aria-hidden="true">/</span>
@@ -326,7 +326,7 @@
   </nav>
 
   <header class="category-magazine-hero">
-    {% if page.heroImage %}
+    {% if page.heroImage -%}
     <div class="category-magazine-hero__image">
       <img
         src="{{ page.heroImage.path | image({w: 2400, auto: 'compress,format'}) }}"
@@ -342,11 +342,11 @@
         fetchpriority="high"
       >
     </div>
-    {% elif heroStory %}
+    {% elif heroStory -%}
     <div class="category-magazine-hero__image">
       {{ storyImage(heroStory, "100vw", true) }}
     </div>
-    {% endif %}
+    {% endif -%}
     <div class="category-magazine-hero__copy">
       <p class="category-kicker">{% if isSubcategory %}<a href="{{ page.parentCategory | route('category') }}">{{ page.parentCategory.title }}</a>{% else %}{{ pageLabel }}{% endif %}</p>
       <h1>{{ categoryHeadline }}</h1>
@@ -356,11 +356,11 @@
   <nav class="category-hub__topics" aria-label="Browse blog categories">
     <span>{{ page.title }}</span>
     <div>
-      {% for category in blog.categories %}
-      {% if category.title != "* Most Popular Posts *" and category.title != "Features" and category.title != page.title %}
+      {% for category in blog.categories -%}
+      {% if category.title != "* Most Popular Posts *" and category.title != "Features" and category.title != page.title -%}
       <a href="{{ categoryUrl(category) }}#category-page-top">{{ category.title }}</a>
-      {% endif %}
-      {% endfor %}
+      {% endif -%}
+      {% endfor -%}
     </div>
   </nav>
 
@@ -374,21 +374,21 @@
     </div>
   </section>
 
-  {% if isSubcategory and subcategoryFeaturedStories.length %}
+  {% if isSubcategory and subcategoryFeaturedStories.length -%}
   <section class="subcategory-featured" aria-labelledby="subcategory-featured-title">
     <header class="category-module-heading">
       <p>Featured</p>
       <h2 id="subcategory-featured-title">Start Here</h2>
     </header>
     <div class="subcategory-featured__grid">
-      {% for story in subcategoryFeaturedStories %}
+      {% for story in subcategoryFeaturedStories -%}
         {{ featureCard(story, page.title, "subcategory-featured__card") }}
-      {% endfor %}
+      {% endfor -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if not isSubcategory %}
+  {% if not isSubcategory -%}
   {% if hasGuideSection %}<nav class="category-subcategory-nav" id="category-subcategories" aria-label="Browse {{ subcategoryParent }}">
     <header>
       <span>{{ guideLabel }}</span>
@@ -397,16 +397,16 @@
     </header>
     <p class="category-subcategory-nav__description">Choose a category below to explore every guide, story, and recommendation in our curated collections</p>
     <div class="category-subcategory-nav__grid category-subcategory-nav__grid--count-{{ page.guideCards.length }}" data-guide-count="{{ page.guideCards.length }}">
-      {% for card in page.guideCards %}
-      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
-      {% set isPhotoDestinationCard = page.title == "Photography" and card.linkUrl == "/category/travel-guides/best-photo-spots/" %}
-      {% set isFullWidthGuide = page.guideCards.length == 5 and loop.index == 5 %}
-      {% set isHalfWidthGuide = page.guideCards.length == 6 and loop.index >= 5 %}
-      {% set guideImageSizes = "(min-width: 901px) 25vw, 50vw" %}
+      {% for card in page.guideCards -%}
+      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory -%}
+      {% set isPhotoDestinationCard = page.title == "Photography" and card.linkUrl == "/category/travel-guides/best-photo-spots/" -%}
+      {% set isFullWidthGuide = page.guideCards.length == 5 and loop.index == 5 -%}
+      {% set isHalfWidthGuide = page.guideCards.length == 6 and loop.index >= 5 -%}
+      {% set guideImageSizes = "(min-width: 901px) 25vw, 50vw" -%}
       {% if isFullWidthGuide %}{% set guideImageSizes = "100vw" %}{% elif isHalfWidthGuide %}{% set guideImageSizes = "50vw" %}{% endif %}
-      {% if card.cards and card.cards.length and card.cards[0].post %}
-        {% set cardStory = card.cards[0].post %}
-      {% endif %}
+      {% if card.cards and card.cards.length and card.cards[0].post -%}
+        {% set cardStory = card.cards[0].post -%}
+      {% endif -%}
       <a
         class="category-subcategory-nav__trigger{% if isPhotoDestinationCard %} category-subcategory-nav__trigger--photo-destinations{% endif %}"
         href="{{ configuredCardUrl(card, cardStory) }}"
@@ -416,13 +416,13 @@
         aria-expanded="false"
       >
         <span class="category-subcategory-nav__trigger-image{% if isPhotoDestinationCard %} category-subcategory-nav__trigger-image--photo-destinations{% endif %}">
-          {% if isPhotoDestinationCard %}
-            {% for guideCard in card.cards %}
+          {% if isPhotoDestinationCard -%}
+            {% for guideCard in card.cards -%}
               {% if guideCard.image %}<img src="{{ guideCard.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(guideCard.post, "(min-width: 900px) 25vw, 50vw", false) }}{% endif %}
-            {% endfor %}
-          {% elif isFullWidthGuide or isHalfWidthGuide %}
-            {% set guideImage = card.image or cardStory.tout.image or cardStory.tout.secondaryImage %}
-            {% if guideImage %}
+            {% endfor -%}
+          {% elif isFullWidthGuide or isHalfWidthGuide -%}
+            {% set guideImage = card.image or cardStory.tout.image or cardStory.tout.secondaryImage -%}
+            {% if guideImage -%}
             <img
               src="{{ guideImage.path | image({w: 1600, auto: 'compress,format'}) }}"
               srcset="{{ guideImage.path | image({w: 480, auto: 'compress,format'}) }} 480w,
@@ -437,20 +437,20 @@
               loading="lazy"
               decoding="async"
             >
-            {% endif %}
-          {% elif card.image %}
+            {% endif -%}
+          {% elif card.image -%}
             <img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
-          {% else %}
+          {% else -%}
             {{ storyImage(cardStory, "(min-width: 900px) 25vw, 90vw", false) }}
-          {% endif %}
+          {% endif -%}
         </span>
         <strong>{{ card.title or cardStory.title }}</strong>
         <i><span>View four guides</span><b aria-hidden="true">↓</b></i>
       </a>
-      {% endfor %}
+      {% endfor -%}
     </div>
 
-    {% for card in page.guideCards %}
+    {% for card in page.guideCards -%}
     <section
       class="category-subcategory-nav__results{% if card.cards.length == 2 %} category-subcategory-nav__results--two-posts{% endif %}"
       id="category-subcategory-panel-{{ loop.index }}"
@@ -463,17 +463,17 @@
         <a href="{{ card.linkUrl }}">{{ card.linkText or "View the full collection" }} <span aria-hidden="true">⟶</span></a>
       </header>
       <div class="category-subcategory-nav__posts">
-        {% for guideCard in card.cards %}
-        {% set guidePost = guideCard.post %}
-        {% if guidePost or guideCard.linkUrl %}
+        {% for guideCard in card.cards -%}
+        {% set guidePost = guideCard.post -%}
+        {% if guidePost or guideCard.linkUrl -%}
         <article class="category-shortlist-card">
           <a href="{{ guideCard.linkUrl or storyUrl(guidePost) }}">
             <span class="category-shortlist-card__image">
-              {% if guideCard.image %}
+              {% if guideCard.image -%}
               <img src="{{ guideCard.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
-              {% else %}
+              {% else -%}
               {{ storyImage(guidePost, "(min-width: 900px) 45vw, 100vw", false) }}
-              {% endif %}
+              {% endif -%}
             </span>
             <span class="category-shortlist-card__copy">
               <small>{{ guideCard.eyebrow or card.title }}</small>
@@ -483,17 +483,17 @@
             </span>
           </a>
         </article>
-        {% endif %}
-        {% endfor %}
+        {% endif -%}
+        {% endfor -%}
       </div>
     </section>
-    {% endfor %}
+    {% endfor -%}
   </nav>{% endif %}
 
-  {% if hasFeaturedSection %}
+  {% if hasFeaturedSection -%}
   <section class="category-shortlist" aria-labelledby="category-featured-title">
     <div class="category-shortlist__background" aria-hidden="true">
-      {% set featuredBackground = page.featuredCards[0] %}
+      {% set featuredBackground = page.featuredCards[0] -%}
       {% if page.featuredBackgroundImage %}<img src="{{ page.featuredBackgroundImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% elif featuredBackground.image %}<img src="{{ featuredBackground.image.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featuredBackground.post or page.featuredStories[0] or sortedStories[4] or heroStory, "100vw", false) }}{% endif %}
     </div>
     <header class="category-module-heading">
@@ -503,20 +503,20 @@
     </header>
 
     <div class="category-shortlist__grid">
-      {% for card in page.featuredCards %}
-      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
+      {% for card in page.featuredCards -%}
+      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory -%}
       <article class="category-shortlist-card category-shortlist-card--{{ loop.index }}">
         <a href="{{ configuredCardUrl(card, cardStory) }}">
           <span class="category-shortlist-card__image">{% if card.image %}<img src="{{ card.image.path | image({w: 1200, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 1000px) 45vw, 100vw", false) }}{% endif %}</span>
           <span class="category-shortlist-card__copy">{% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<strong>{{ card.title or cardStory.title }}</strong>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i aria-hidden="true"><span>⟶</span></i></span>
         </a>
       </article>
-      {% endfor %}
+      {% endfor -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if hasFeatureHero %}
+  {% if hasFeatureHero -%}
   <section class="category-beauty-hero category-featured-story" aria-labelledby="category-featured-story-title">
     <a href="{{ page.focusedHeroLinkUrl or storyUrl(featureHeroStory) }}">
       <span class="category-beauty-hero__image">{% if page.focusedHeroImage %}<img src="{{ page.focusedHeroImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(featureHeroStory, "100vw", false) }}{% endif %}</span>
@@ -528,8 +528,8 @@
       </span>
     </a>
   </section>
-  {% endif %}
-  {% if hasDestinationSection %}
+  {% endif -%}
+  {% if hasDestinationSection -%}
   <section class="category-destinations" aria-labelledby="category-destinations-title">
     <header class="category-module-heading">
       <p>{{ destinationsLabel }}</p>
@@ -537,15 +537,15 @@
       <span>{{ destinationsDescription }}</span>
     </header>
     <div class="category-destinations__grid">
-      {% for card in page.destinationCards %}
-      {% set cardStory = card.post or page.destinationStories[loop.index0] or sortedStories[loop.index0] or heroStory %}
-      {% set cardUrl = configuredCardUrl(card, cardStory) %}
-      {% set matchingCardStories = [] %}
-      {% for candidateStory in sortedStories %}
-        {% if card.title and candidateStory.title and card.title | lower == candidateStory.title | lower %}
-          {% set ignored = matchingCardStories.push(candidateStory) %}
-        {% endif %}
-      {% endfor %}
+      {% for card in page.destinationCards -%}
+      {% set cardStory = card.post or page.destinationStories[loop.index0] or sortedStories[loop.index0] or heroStory -%}
+      {% set cardUrl = configuredCardUrl(card, cardStory) -%}
+      {% set matchingCardStories = [] -%}
+      {% for candidateStory in sortedStories -%}
+        {% if card.title and candidateStory.title and card.title | lower == candidateStory.title | lower -%}
+          {% set ignored = matchingCardStories.push(candidateStory) -%}
+        {% endif -%}
+      {% endfor -%}
       {% if matchingCardStories.length %}{% set cardUrl = storyUrl(matchingCardStories[0]) %}{% endif %}
       <a class="category-destination-tile" href="{{ cardUrl }}">
         <span>{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 1000px) 25vw, 50vw", false) }}{% endif %}</span>
@@ -553,19 +553,19 @@
         {% if card.description %}<p>{{ card.description }}</p>{% endif %}
         <i aria-hidden="true"><span>⟶</span></i>
       </a>
-      {% endfor %}
+      {% endfor -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if page.title != "Beauty" and page.title != "Wellness" and page.title != "Home And Garden" and hasMapSection %}
+  {% if page.title != "Beauty" and page.title != "Wellness" and page.title != "Home And Garden" and hasMapSection -%}
   <section class="category-map" id="category-map" aria-label="Interactive destination map">
     <div class="category-map__background" aria-hidden="true">
-      {% if page.mapImage %}
+      {% if page.mapImage -%}
       <img src="{{ page.mapImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">
-      {% else %}
+      {% else -%}
       {{ storyImage(sortedStories[9] or heroStory, "100vw", false) }}
-      {% endif %}
+      {% endif -%}
     </div>
     <div class="category-map__intro">
       <p>{{ mapLabel }}</p>
@@ -574,28 +574,28 @@
     </div>
     <div class="d3-world-map">
       <img src="/assets/images/destinations3-world-map.png" alt="" loading="lazy" decoding="async">
-      {% for continent in continents.items %}
-        {% if continent.name == "North America" %}
+      {% for continent in continents.items -%}
+        {% if continent.name == "North America" -%}
         <a class="d3-map-pin d3-map-pin--north-america{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">North America <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
-        {% elif continent.name == "South America" %}
+        {% elif continent.name == "South America" -%}
         <a class="d3-map-pin d3-map-pin--south-america{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">South America <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
-        {% elif continent.name == "Europe" %}
+        {% elif continent.name == "Europe" -%}
         <a class="d3-map-pin d3-map-pin--europe{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Europe <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
-        {% elif continent.name == "Africa" %}
+        {% elif continent.name == "Africa" -%}
         <a class="d3-map-pin d3-map-pin--africa{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Africa <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
-        {% elif continent.name == "Asia" %}
+        {% elif continent.name == "Asia" -%}
         <a class="d3-map-pin d3-map-pin--asia{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Asia <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
-        {% elif continent.name == "Middle East" %}
+        {% elif continent.name == "Middle East" -%}
         <a class="d3-map-pin d3-map-pin--middle-east{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Middle East <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
-        {% elif continent.name == "Oceania" %}
+        {% elif continent.name == "Oceania" -%}
         <a class="d3-map-pin d3-map-pin--oceania{% if continent.locations.length > 7 %} d3-map-pin--long{% endif %}" href="{{ continent | route('continent') }}/#"><span class="d3-map-pin__main">Oceania <small>{{ continent.locations.length }}</small></span><span class="d3-map-pin__locations">{% for location in continent.locations %}<span>{{ location.title }}</span>{% endfor %}</span></a>
-        {% endif %}
-      {% endfor %}
+        {% endif -%}
+      {% endfor -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if hasClusterSection %}
+  {% if hasClusterSection -%}
   <section class="category-clusters" aria-labelledby="category-clusters-title">
     <header class="category-module-heading">
       <p>{{ clustersLabel }}</p>
@@ -603,8 +603,8 @@
       <span>{{ clustersDescription }}</span>
     </header>
     <div class="category-clusters__grid">
-      {% for card in page.collectionCards %}
-      {% set cardStory = card.post or page.clusterStories[loop.index0] or sortedStories[loop.index0] or heroStory %}
+      {% for card in page.collectionCards -%}
+      {% set cardStory = card.post or page.clusterStories[loop.index0] or sortedStories[loop.index0] or heroStory -%}
       <article>
         <a href="{{ configuredCardUrl(card, cardStory) }}">
           <span class="category-clusters__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 24vw, 100vw", false) }}{% endif %}</span>
@@ -614,10 +614,10 @@
           <i aria-hidden="true"><span>⟶</span></i>
         </a>
       </article>
-      {% endfor %}
+      {% endfor -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
   {% if hasShopSection %}<section class="bm-section bm-products category-shop" aria-labelledby="category-shop-title">
     <div class="bm-products__background">{% if page.shopImage %}<img src="{{ page.shopImage.path | image({w: 2880, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(page.shopCards[0].post or sortedStories[12] or heroStory, "100vw", false) }}{% endif %}</div>
@@ -628,15 +628,15 @@
       <a href="{{ shopLinkUrl }}">{{ shopLinkText }} <i>⟶</i></a>
     </div>
     <div class="bm-products__track">
-      {% for product in categoryProducts %}
+      {% for product in categoryProducts -%}
         {{ productCard(product) }}
-      {% endfor %}
-      {% for product in secondaryProducts %}
+      {% endfor -%}
+      {% for product in secondaryProducts -%}
         {{ productCard(product) }}
-      {% endfor %}
-      {% for product in tertiaryProducts %}
+      {% endfor -%}
+      {% for product in tertiaryProducts -%}
         {{ productCard(product) }}
-      {% endfor %}
+      {% endfor -%}
     </div>
     <div class="bm-products__controls" aria-label="Shopping carousel controls">
       <button class="bm-products__control" type="button" data-product-direction="previous" aria-label="Previous products">⟵</button>
@@ -652,8 +652,8 @@
       <span>{{ updatedDescription }}</span>
     </header>
     <div class="category-updated__grid">
-      {% for card in page.updatedCards %}
-        {% set cardStory = card.post or updatedStories[loop.index0] or heroStory %}
+      {% for card in page.updatedCards -%}
+        {% set cardStory = card.post or updatedStories[loop.index0] or heroStory -%}
         <article>
           <a href="{{ configuredCardUrl(card, cardStory) }}">
             <span>{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 25vw, 100vw", false) }}{% endif %}</span>
@@ -662,7 +662,7 @@
             {% if card.description %}<p>{{ card.description }}</p>{% endif %}
           </a>
         </article>
-      {% endfor %}
+      {% endfor -%}
     </div>
   </section>{% endif %}
 
@@ -688,17 +688,17 @@
       <span>{{ indexDescription }}</span>
     </header>
     <ol id="category-index-list">
-      {% for card in page.indexCards %}
-      {% set cardStory = card.post or indexStories[loop.index0] or heroStory %}
+      {% for card in page.indexCards -%}
+      {% set cardStory = card.post or indexStories[loop.index0] or heroStory -%}
         <li{% if loop.index > 12 %} data-category-index-extra hidden{% endif %}><a href="{{ configuredCardUrl(card, cardStory) }}"><span>{{ loop.index }}</span><strong>{{ card.title or cardStory.title }}</strong><i aria-hidden="true">⟶</i></a></li>
-      {% endfor %}
+      {% endfor -%}
     </ol>
-    {% if page.indexCards.length > 12 %}
+    {% if page.indexCards.length > 12 -%}
     <button class="category-index__all" type="button" data-category-index-toggle aria-controls="category-index-list" aria-expanded="false"><span data-category-index-label>See the Full Index</span><i aria-hidden="true">↓</i></button>
-    {% endif %}
+    {% endif -%}
   </section>{% endif %}
 
-  {% if not hasGuideSection and hasBrowseSection %}
+  {% if not hasGuideSection and hasBrowseSection -%}
   <section class="category-browse" id="category-browse" aria-labelledby="category-browse-title">
     <header class="category-module-heading category-module-heading--centered">
       <p>{{ browseLabel }}</p>
@@ -706,16 +706,16 @@
     </header>
 
     <div class="category-browse__grid">
-      {% for card in page.browseCards %}
-      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory %}
+      {% for card in page.browseCards -%}
+      {% set cardStory = card.post or sortedStories[loop.index0] or heroStory -%}
       <a class="category-browse__panel category-browse__panel--visual" href="{{ configuredCardUrl(card, cardStory) }}">
         <span class="category-browse__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 30vw, 90vw", false) }}{% endif %}</span>
         {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<h3>{{ card.title or cardStory.title }}</h3>{% if card.description %}<p>{{ card.description }}</p>{% endif %}<i aria-hidden="true"><span>⟶</span></i>
       </a>
-      {% endfor %}
+      {% endfor -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
   {% if hasRelatedSection %}<aside class="category-related" aria-labelledby="category-related-title">
     <div>
@@ -723,19 +723,19 @@
       <h2 id="category-related-title">{{ relatedTitle }}</h2>
     </div>
     <nav class="category-related__tiles" aria-label="Related blog categories">
-      {% for card in page.relatedCards %}
-      {% if loop.index <= 4 %}
-        {% set cardStory = card.post or sortedStories[loop.index + 9] or heroStory %}
+      {% for card in page.relatedCards -%}
+      {% if loop.index <= 4 -%}
+        {% set cardStory = card.post or sortedStories[loop.index + 9] or heroStory -%}
         <a href="{{ configuredCardUrl(card, cardStory) }}">
           <span class="category-related__image">{% if card.image %}<img src="{{ card.image.path | image({w: 900, auto: 'compress,format'}) }}" alt="" loading="lazy" decoding="async">{% else %}{{ storyImage(cardStory, "(min-width: 900px) 24vw, 50vw", false) }}{% endif %}</span>
           {% if card.eyebrow %}<small>{{ card.eyebrow }}</small>{% endif %}<strong>{{ card.title or cardStory.title }}</strong>{% if card.description %}<p>{{ card.description }}</p>{% endif %}
           <i>{{ card.linkText or "View category" }} <span aria-hidden="true">⟶</span></i>
         </a>
-      {% endif %}
-      {% endfor %}
+      {% endif -%}
+      {% endfor -%}
     </nav>
   </aside>{% endif %}
-  {% endif %}
+  {% endif -%}
 
   <section class="category-latest {% if isSubcategory %}category-latest--subcategory-large{% else %}category-latest--compact{% endif %}" aria-labelledby="category-latest-title">
     <header class="category-module-heading">
@@ -743,10 +743,10 @@
       <h2 id="category-latest-title">{% if isSubcategory %}More {{ page.title }} Stories{% else %}Latest Stories{% endif %}</h2>
     </header>
     <div class="category-latest__grid">
-      {% set latestStories = subcategoryGridStories if isSubcategory else sortedStories %}
-      {% set latestLimit = 12 %}
-      {% for story in latestStories %}
-      {% if loop.index <= latestLimit %}
+      {% set latestStories = subcategoryGridStories if isSubcategory else sortedStories -%}
+      {% set latestLimit = 12 -%}
+      {% for story in latestStories -%}
+      {% if loop.index <= latestLimit -%}
       <article class="category-story-card">
         <a href="{{ storyUrl(story) }}">
           <span class="category-story-card__image">{{ storyImage(story, '(min-width: 1200px) 25vw, (min-width: 700px) 33vw, 50vw', false) }}</span>
@@ -756,8 +756,8 @@
           </span>
         </a>
       </article>
-      {% endif %}
-      {% endfor %}
+      {% endif -%}
+      {% endfor -%}
     </div>
     <div class="category-latest__archive-link">
       <a href="{{ categoryArchiveUrl(page) }}">View All {{ categoryStoryTotal }} Posts <span aria-hidden="true">›</span></a>
@@ -765,4 +765,4 @@
   </section>
 
 </div>
-{% endblock %}
+{% endblock -%}

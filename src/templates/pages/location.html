@@ -1,14 +1,14 @@
-{% extends "layouts/default.html" %}
-{% set destinationTitle = page.title or page.name or "" %}
-{% include "data/destination-facts.html" %}
-{% set isContinentPage = page._contentTypeName == "continent" or page._contentTypeName == "Continent" or page.locations or page.continentGeographyCards or page.continentSeasonCards %}
+{% extends "layouts/default.html" -%}
+{% set destinationTitle = page.title or page.name or "" -%}
+{% include "data/destination-facts.html" -%}
+{% set isContinentPage = page._contentTypeName == "continent" or page._contentTypeName == "Continent" or page.locations or page.continentGeographyCards or page.continentSeasonCards -%}
 {# Resolve the editorial defaults by iterating the authored fact map. The
    template runtime does not reliably support dynamic object-key lookup. #}
-{% set automaticFacts = {} %}
-{% for factTitle, factValues in destinationAutofill %}
+{% set automaticFacts = {} -%}
+{% for factTitle, factValues in destinationAutofill -%}
   {% if factTitle == destinationTitle %}{% set automaticFacts = factValues %}{% endif %}
-{% endfor %}
-{% set automaticBlurb = "" %}
+{% endfor -%}
+{% set automaticBlurb = "" -%}
 {% if destinationTitle == "Monaco" %}{% set automaticFacts = {"blurb":"This compact French Riviera principality pairs Belle Époque architecture, Mediterranean views, and glamorous Monte Carlo with surprisingly accessible free and budget-friendly experiences.","bestTime":"Apr - Jun and Sep - Oct bring mild Riviera weather. Jul - Aug is hottest; Nov - Mar is cooler and wetter.","timeZone":"Central European Time|UTC+1 · UTC+2 in summer","currency":"Euro (EUR)","languages":"French","englishNote":"English proficiency varies; tourist areas usually offer the most support.","paired":[{"title":"Italy","url":"/destinations/italy"},{"title":"France","url":"/destinations/france"},{"title":"Austria","url":"/destinations/austria"}],"related":[{"title":"France","url":"/destinations/france"},{"title":"Italy","url":"/destinations/italy"},{"title":"Greece","url":"/destinations/greece"},{"title":"Spain","url":"/destinations/spain"},{"title":"England","url":"/destinations/england"},{"title":"Croatia","url":"/destinations/croatia"}]} %}{% endif %}
 {% if destinationTitle == "New Zealand" %}{% set automaticFacts = {"blurb":"New Zealand spans the North and South Islands, with dramatic coastlines, alpine landscapes, and rewarding self-drive routes. Our guides cover first-time road trips and Waiheke Island wineries, beaches, and scenic stops.","bestTime":"Dec - Mar is warmest for beaches and hikes; Jun - Aug is ski season. Spring and autumn bring changeable weather.","timeZone":"Multiple time zones|UTC+12 to UTC+13:45, depending on region and season","currency":"New Zealand dollar (NZD)","languages":"English, Māori, New Zealand Sign Language","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"Australia","url":"/destinations/australia"}],"related":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"Australia","url":"/destinations/australia"}]} %}{% endif %}
 {% if destinationTitle == "Australia" %}{% set automaticFacts = {"blurb":"Australia rewards repeat trips with subtropical Brisbane, underrated New South Wales road trips, far-reaching coastlines, and romantic escapes suited to couples and honeymoon travel.","bestTime":"Sep - Nov and Mar - May suit many regions. The tropical north is driest May - Oct; southern summer runs Dec - Feb.","timeZone":"Multiple time zones|UTC offsets vary by region","currency":"Australian dollar (AUD)","languages":"English","englishNote":"English is widely spoken nationwide.","paired":[{"title":"New Zealand","url":"/destinations/new-zealand"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"}],"related":[{"title":"Hawaii","url":"/destinations/hawaii"},{"title":"French Polynesia","url":"/destinations/french-polynesia"},{"title":"Fiji","url":"/destinations/fiji"},{"title":"Cook Islands","url":"/destinations/cook-islands"},{"title":"New Zealand","url":"/destinations/new-zealand"}]} %}{% endif %}
@@ -134,82 +134,82 @@
 {% if destinationTitle == "Belize" %}{% set automaticBlurb = "Belize brings together the world’s second-largest barrier reef, Caribbean cayes, rainforest, and Maya sites. Our coverage includes wildlife, honeymoon travel, and the private-island experience at Cayo Espanto." %}{% endif %}
 {% if destinationTitle == "United States" %}{% set automaticBlurb = "The United States spans desert road trips, mountain parks, beach towns, and culture-rich cities. Our guides cover New York, New Orleans, Miami, Las Vegas, Alaska, the Southwest, and routes across the country." %}{% endif %}
 {% if destinationTitle == "India" %}{% set automaticFacts = {"blurb":"India’s scale and cultural variety reward focused regional trips. Our guides move from Old and New Delhi photo spots to Mumbai hotels and a wedding in the Himalayan foothills of Dehradun.","bestTime":"Oct - Mar is cooler and drier across much of India. Jun - Sep is monsoon season; Himalayan trekking is best Apr - Jun and Sep - Oct.","timeZone":"India Standard Time|UTC+5:30","currency":"Indian rupee (INR)","languages":"English, Hindi, Tamil","englishNote":"English is widely spoken nationwide.","paired":[{"title":"Sri Lanka"},{"title":"Maldives"},{"title":"Thailand"}],"related":[]} %}{% endif %}
-{% set destinationStories = page.storySet.items if page.storySet else [] %}
-{% set destinationGuideSectionStories = (page.destinationGuideStories or []) if isContinentPage else destinationStories %}
-{% set destinationGuideVisibleCount = 12 if destinationGuideSectionStories.length > 12 else destinationGuideSectionStories.length %}
-{% set directPostCount = page.storySet.total if page.storySet else destinationStories.length %}
-{% set countryPostCount = 0 %}
-{% set countryGuideCount = 0 %}
-{% set countryOriginalPhotoCount = 0 %}
-{% if isContinentPage %}
-  {% for destination in (page.locations or []) %}
-    {% set countryPostCount = countryPostCount + (destination.storySet.total if destination.storySet else 0) %}
-    {% set countryGuideCount = countryGuideCount + (destination.guideStories.total if destination.guideStories else 0) %}
-    {% set countryOriginalPhotoCount = countryOriginalPhotoCount + (destination.originalPhotoStories.total if destination.originalPhotoStories else 0) %}
-  {% endfor %}
-{% endif %}
-{% set postCount = directPostCount + countryPostCount %}
-{% set guideCount = (page.guideStories.total if page.guideStories else 0) + countryGuideCount %}
-{% set importantStories = page.importantStories.items if page.importantStories else [] %}
-{% set preferredStories = page.preferredStories.items if page.preferredStories else [] %}
-{% set franceFeaturedOne = franceOutfit if destinationTitle == "France" else null %}
-{% set franceFeaturedTwo = franceBeaches if destinationTitle == "France" else null %}
-{% set franceSpotlight = franceFeature if destinationTitle == "France" else null %}
-{% set destinationFeaturedStories = page.destinationFeaturedStories or [] %}
-{% set featuredOneImageOverride = page.destinationFeaturedOneImage %}
-{% set featuredTwoImageOverride = page.destinationFeaturedTwoImage %}
-{% set featureStoryImageOverride = page.destinationFeatureStoryImage %}
-{% set featuredOne = destinationFeaturedStories[0] %}
-{% set featuredTwo = destinationFeaturedStories[1] %}
-{% set featureStory = page.destinationFeatureStory %}
-{% set destinationBlurb = page.destinationBlurb %}
-{% set destinationBestTime = page.destinationBestTime %}
-{% set destinationTimeZone = page.destinationTimeZone %}
-{% set destinationCurrency = page.destinationCurrency %}
-{% set destinationLanguages = page.destinationLanguages %}
-{% set destinationEnglishNote = page.destinationEnglishNote %}
-{% set automaticPaired = [] %}
-{% set automaticRelated = [] %}
-{% set pairedDestinations = page.destinationBestPairedWith or [] %}
-{% set destinationContinent = page if isContinentPage else (page.continentSet.items[0] if page.continentSet and page.continentSet.items else {}) %}
+{% set destinationStories = page.storySet.items if page.storySet else [] -%}
+{% set destinationGuideSectionStories = (page.destinationGuideStories or []) if isContinentPage else destinationStories -%}
+{% set destinationGuideVisibleCount = 12 if destinationGuideSectionStories.length > 12 else destinationGuideSectionStories.length -%}
+{% set directPostCount = page.storySet.total if page.storySet else destinationStories.length -%}
+{% set countryPostCount = 0 -%}
+{% set countryGuideCount = 0 -%}
+{% set countryOriginalPhotoCount = 0 -%}
+{% if isContinentPage -%}
+  {% for destination in (page.locations or []) -%}
+    {% set countryPostCount = countryPostCount + (destination.storySet.total if destination.storySet else 0) -%}
+    {% set countryGuideCount = countryGuideCount + (destination.guideStories.total if destination.guideStories else 0) -%}
+    {% set countryOriginalPhotoCount = countryOriginalPhotoCount + (destination.originalPhotoStories.total if destination.originalPhotoStories else 0) -%}
+  {% endfor -%}
+{% endif -%}
+{% set postCount = directPostCount + countryPostCount -%}
+{% set guideCount = (page.guideStories.total if page.guideStories else 0) + countryGuideCount -%}
+{% set importantStories = page.importantStories.items if page.importantStories else [] -%}
+{% set preferredStories = page.preferredStories.items if page.preferredStories else [] -%}
+{% set franceFeaturedOne = franceOutfit if destinationTitle == "France" else null -%}
+{% set franceFeaturedTwo = franceBeaches if destinationTitle == "France" else null -%}
+{% set franceSpotlight = franceFeature if destinationTitle == "France" else null -%}
+{% set destinationFeaturedStories = page.destinationFeaturedStories or [] -%}
+{% set featuredOneImageOverride = page.destinationFeaturedOneImage -%}
+{% set featuredTwoImageOverride = page.destinationFeaturedTwoImage -%}
+{% set featureStoryImageOverride = page.destinationFeatureStoryImage -%}
+{% set featuredOne = destinationFeaturedStories[0] -%}
+{% set featuredTwo = destinationFeaturedStories[1] -%}
+{% set featureStory = page.destinationFeatureStory -%}
+{% set destinationBlurb = page.destinationBlurb -%}
+{% set destinationBestTime = page.destinationBestTime -%}
+{% set destinationTimeZone = page.destinationTimeZone -%}
+{% set destinationCurrency = page.destinationCurrency -%}
+{% set destinationLanguages = page.destinationLanguages -%}
+{% set destinationEnglishNote = page.destinationEnglishNote -%}
+{% set automaticPaired = [] -%}
+{% set automaticRelated = [] -%}
+{% set pairedDestinations = page.destinationBestPairedWith or [] -%}
+{% set destinationContinent = page if isContinentPage else (page.continentSet.items[0] if page.continentSet and page.continentSet.items else {}) -%}
 
-{% set continentMostRequestedDestination = {} %}
-{% set continentMostRequestedDestinationTitle = "" %}
-{% set continentMostRequestedStories = [] %}
-{% set continentMostRequestedTitle = "" %}
-{% set continentMostRequestedDescription = "" %}
-{% if isContinentPage %}
-  {% set continentMostRequestedDestination = page.continentMostRequestedDestination or {} %}
-  {% set continentMostRequestedDestinationTitle = continentMostRequestedDestination.title or "" %}
-  {% set continentMostRequestedStories = page.continentMostRequestedStories or [] %}
-  {% set continentMostRequestedTitle = page.continentMostRequestedTitle or "" %}
-  {% set continentMostRequestedDescription = page.continentMostRequestedDescription or "" %}
-{% endif %}
+{% set continentMostRequestedDestination = {} -%}
+{% set continentMostRequestedDestinationTitle = "" -%}
+{% set continentMostRequestedStories = [] -%}
+{% set continentMostRequestedTitle = "" -%}
+{% set continentMostRequestedDescription = "" -%}
+{% if isContinentPage -%}
+  {% set continentMostRequestedDestination = page.continentMostRequestedDestination or {} -%}
+  {% set continentMostRequestedDestinationTitle = continentMostRequestedDestination.title or "" -%}
+  {% set continentMostRequestedStories = page.continentMostRequestedStories or [] -%}
+  {% set continentMostRequestedTitle = page.continentMostRequestedTitle or "" -%}
+  {% set continentMostRequestedDescription = page.continentMostRequestedDescription or "" -%}
+{% endif -%}
 
-{% set continentName = destinationContinent.name or "More Destinations" %}
-{% set exploreGroupName = continentName %}
-{% set specialExploreTitles = [] %}
-{% if destinationTitle == "Hawaii" %}
-  {% set exploreGroupName = "the Pacific" %}
-  {% set specialExploreTitles = ["California", "Mexico", "French Polynesia", "Cook Islands", "Fiji", "New Zealand"] %}
-{% elif continentName == "South America" %}
-  {% set exploreGroupName = "South and Central America" %}
-  {% set specialExploreTitles = ["Argentina", "Uruguay", "Panama", "Costa Rica", "Belize", "Mexico"] %}
-{% elif continentName == "Africa" %}
-  {% set exploreGroupName = "Africa and the Middle East" %}
-  {% set specialExploreTitles = ["Ethiopia", "Morocco", "South Africa", "Maldives", "Oman", "United Arab Emirates"] %}
-{% elif continentName == "Middle East" %}
-  {% set exploreGroupName = "Middle East and Africa" %}
-  {% set specialExploreTitles = ["Oman", "United Arab Emirates", "Ethiopia", "Morocco", "South Africa"] %}
-{% endif %}
-{% set destinationHero = page.destinationHeroImage or page.image or (page.social.image if page.social else null) %}
-{% if destinationTitle == "France" and not page.destinationHeroImage %}
-  {% set destinationHeroPath = "/assets/images/france-lavender-optimized.jpg" %}
-{% elif destinationHero and destinationHero.path %}
-  {% set destinationHeroPath = destinationHero.path %}
-{% elif featuredOne and featuredOne.tout and featuredOne.tout.image and featuredOne.tout.image.path %}
-  {% set destinationHeroPath = featuredOne.tout.image.path %}
-{% endif %}
+{% set continentName = destinationContinent.name or "More Destinations" -%}
+{% set exploreGroupName = continentName -%}
+{% set specialExploreTitles = [] -%}
+{% if destinationTitle == "Hawaii" -%}
+  {% set exploreGroupName = "the Pacific" -%}
+  {% set specialExploreTitles = ["California", "Mexico", "French Polynesia", "Cook Islands", "Fiji", "New Zealand"] -%}
+{% elif continentName == "South America" -%}
+  {% set exploreGroupName = "South and Central America" -%}
+  {% set specialExploreTitles = ["Argentina", "Uruguay", "Panama", "Costa Rica", "Belize", "Mexico"] -%}
+{% elif continentName == "Africa" -%}
+  {% set exploreGroupName = "Africa and the Middle East" -%}
+  {% set specialExploreTitles = ["Ethiopia", "Morocco", "South Africa", "Maldives", "Oman", "United Arab Emirates"] -%}
+{% elif continentName == "Middle East" -%}
+  {% set exploreGroupName = "Middle East and Africa" -%}
+  {% set specialExploreTitles = ["Oman", "United Arab Emirates", "Ethiopia", "Morocco", "South Africa"] -%}
+{% endif -%}
+{% set destinationHero = page.destinationHeroImage or page.image or (page.social.image if page.social else null) -%}
+{% if destinationTitle == "France" and not page.destinationHeroImage -%}
+  {% set destinationHeroPath = "/assets/images/france-lavender-optimized.jpg" -%}
+{% elif destinationHero and destinationHero.path -%}
+  {% set destinationHeroPath = destinationHero.path -%}
+{% elif featuredOne and featuredOne.tout and featuredOne.tout.image and featuredOne.tout.image.path -%}
+  {% set destinationHeroPath = featuredOne.tout.image.path -%}
+{% endif -%}
 
 {% macro storyUrl(story) %}{% if story and story.slug %}{{ story | route('storySlug') }}{% elif story and story.title %}{{ story | route('story') }}{% else %}#{% endif %}{% endmacro %}
 {% macro locationUrl(location) %}{% if location %}{{ location | route('location') }}{% else %}#{% endif %}{% endmacro %}
@@ -228,7 +228,7 @@
       {%- endif -%}
     {%- endfor -%}
   {%- endif -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 {% macro storyOriginalPhotoMarkers(story) -%}
   {%- if story -%}
@@ -278,31 +278,31 @@
     {%- endif -%}
   {%- endfor -%}
   {%- endif -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 {% macro destinationOriginalPhotoMarkers(stories) -%}
   {%- for story in stories -%}
     {{- storyOriginalPhotoMarkers(story) -}}
   {%- endfor -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 {% macro continentOriginalPhotoMarkers(continent) -%}
   {{- destinationOriginalPhotoMarkers(continent.storySet.items if continent.storySet else []) -}}
   {%- for photoDestination in (continent.locations or []) -%}
     {{- destinationOriginalPhotoMarkers(photoDestination.storySet.items if photoDestination.storySet else []) -}}
   {%- endfor -%}
-{%- endmacro %}
+{%- endmacro -%}
 
 {# Count every editorial image in every post represented on the destination,
    instead of limiting the statistic to posts filed in the Photography category. #}
-{% if isContinentPage %}
-  {% set originalPhotoCount = (continentOriginalPhotoMarkers(page) | trim).length %}
-{% else %}
-  {% set originalPhotoCount = (destinationOriginalPhotoMarkers(destinationStories) | trim).length %}
-{% endif %}
+{% if isContinentPage -%}
+  {% set originalPhotoCount = (continentOriginalPhotoMarkers(page) | trim).length -%}
+{% else -%}
+  {% set originalPhotoCount = (destinationOriginalPhotoMarkers(destinationStories) | trim).length -%}
+{% endif -%}
 
-{% macro storyImage(story, sizes, eager) %}
-  {% if story and story.tout and story.tout.image and story.tout.image.path %}
+{% macro storyImage(story, sizes, eager) -%}
+  {% if story and story.tout and story.tout.image and story.tout.image.path -%}
   <img
     srcset="{{ story.tout.image.path | image({w: 3840, auto: 'compress,format'}) }} 3840w,
             {{ story.tout.image.path | image({w: 2560, auto: 'compress,format'}) }} 2560w,
@@ -316,14 +316,14 @@
     decoding="async"
     {% if eager %}fetchpriority="high"{% endif %}
   >
-  {% endif %}
-{% endmacro %}
+  {% endif -%}
+{% endmacro -%}
 
-{% macro featuredStory(story, reverse, imageOverride) %}
-  {% if story %}
+{% macro featuredStory(story, reverse, imageOverride) -%}
+  {% if story -%}
   <article class="destination-featured-story{% if reverse %} destination-featured-story--reverse{% endif %}">
     <a class="destination-featured-story__image" href="{{ storyUrl(story) }}">
-      {% if imageOverride and imageOverride.path %}
+      {% if imageOverride and imageOverride.path -%}
       <img srcset="{{ imageOverride.path | image({w: 3840, auto: 'compress,format'}) }} 3840w,
                    {{ imageOverride.path | image({w: 2560, auto: 'compress,format'}) }} 2560w,
                    {{ imageOverride.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
@@ -334,9 +334,9 @@
            alt="{{ story.title or '' }}"
            loading="lazy"
            decoding="async">
-      {% else %}
+      {% else -%}
       {{ storyImage(story, "(min-width: 900px) 50vw, 100vw", false) }}
-      {% endif %}
+      {% endif -%}
     </a>
     <div class="destination-featured-story__copy">
       <p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% elif story.mainCategory and story.mainCategory.length %}{{ story.mainCategory[0].title }}{% else %}Travel Guide{% endif %}</p>
@@ -345,54 +345,54 @@
       <a class="destination-detail__text-link" href="{{ storyUrl(story) }}">Read the guide <span aria-hidden="true">→</span></a>
     </div>
   </article>
-  {% endif %}
-{% endmacro %}
+  {% endif -%}
+{% endmacro -%}
 
-{% macro destinationCard(destination) %}
-{% set cardTitle = destination.title or destination.name or destination.destinationName or destination.destinationTitle or destination.country or "Destination" %}
-{% set cardStory = destination.storySet.items[0] if destination.storySet and destination.storySet.items else null %}
-{% set cardStoryImage = cardStory.tout.image if cardStory and cardStory.tout and cardStory.tout.image else null %}
-  {% set cardImage = destination.destinationHeroImage or destination.image or cardStoryImage %}
+{% macro destinationCard(destination) -%}
+{% set cardTitle = destination.title or destination.name or destination.destinationName or destination.destinationTitle or destination.country or "Destination" -%}
+{% set cardStory = destination.storySet.items[0] if destination.storySet and destination.storySet.items else null -%}
+{% set cardStoryImage = cardStory.tout.image if cardStory and cardStory.tout and cardStory.tout.image else null -%}
+  {% set cardImage = destination.destinationHeroImage or destination.image or cardStoryImage -%}
   <a class="destination-nearby-card" href="{{ locationUrl(destination) }}" aria-label="{{ cardTitle }}">
     <span class="destination-nearby-card__image">
-      {% if cardImage and cardImage.path %}
+      {% if cardImage and cardImage.path -%}
       <img src="{{ cardImage.path | image({w: 900, auto: 'compress,format'}) }}" alt="{{ cardTitle }}" loading="lazy" decoding="async">
-      {% endif %}
+      {% endif -%}
     </span>
       <strong>{{ cardTitle }}</strong>
-    {% set destinationPostCount = destination.storySet.total if destination.storySet else 0 %}
+    {% set destinationPostCount = destination.storySet.total if destination.storySet else 0 -%}
     <small>{{ destinationPostCount }} post{% if destinationPostCount != 1 %}s{% endif %}</small>
   </a>
-{% endmacro %}
+{% endmacro -%}
 
-{% macro factIcon(type) %}
+{% macro factIcon(type) -%}
   <span class="destination-fact__icon destination-fact__icon--{{ type }}" aria-hidden="true"><i></i></span>
-{% endmacro %}
+{% endmacro -%}
 
 {% block body_class %}body--destination-detail{% if isContinentPage %} body--continent-detail{% endif %}{% endblock %}
 
-{% block extra_head %}
+{% block extra_head -%}
   <link rel="canonical" href="https://www.awaylands.com{{ currentPath }}">
   <meta property="og:url" content="https://www.awaylands.com{{ currentPath }}">
   <meta property="og:type" content="website">
-{% endblock %}
+{% endblock -%}
 
-{% block content %}
+{% block content -%}
 <article class="destination-detail">
   <header class="destination-hero">
     <div class="destination-hero__media">
-      {% if destinationHeroPath %}
+      {% if destinationHeroPath -%}
       <img src="{% if destinationHeroPath == '/assets/images/france-lavender-optimized.jpg' %}{{ destinationHeroPath }}{% else %}{{ destinationHeroPath | image({w: 2400, auto: 'compress,format'}) }}{% endif %}" alt="{{ destinationTitle }}" loading="eager" decoding="async" fetchpriority="high">
-      {% endif %}
+      {% endif -%}
     </div>
     <div class="destination-hero__shade"></div>
     <div class="destination-hero__copy">
       <nav class="destination-hero__breadcrumbs" aria-label="Breadcrumb">
         <a href="/destinations">Destinations</a>
-        {% if destinationContinent and not isContinentPage %}
+        {% if destinationContinent and not isContinentPage -%}
         <span aria-hidden="true">›</span>
         <a href="{{ continentUrl(destinationContinent) }}">{{ destinationContinent.name }}</a>
-        {% endif %}
+        {% endif -%}
         <span aria-hidden="true">›</span>
         <span>{{ destinationTitle }}</span>
       </nav>
@@ -405,9 +405,9 @@
     </div>
   </header>
 
-  {% set continentGeographyFacts = [] %}
-  {% set continentSeasonFacts = [] %}
-  {% if destinationTitle == "Africa" %}
+  {% set continentGeographyFacts = [] -%}
+  {% set continentSeasonFacts = [] -%}
+  {% if destinationTitle == "Africa" -%}
     {% set continentGeographyFacts = [
       {"title":"Main Regions","value":"North, West, Central, East and Southern Africa"},
       {"title":"Landscapes","value":"Sahara dunes, savannas, rainforests, highlands and rift valleys"},
@@ -422,7 +422,7 @@
       {"title":"East Africa","value":"Jun - Oct and Jan - Feb","note":"Popular safari and trekking periods."},
       {"title":"Southern Africa","value":"May - Sep","note":"Dry-season wildlife viewing in many areas."}
     ] %}
-  {% elif destinationTitle == "Asia" %}
+  {% elif destinationTitle == "Asia" -%}
     {% set continentGeographyFacts = [
       {"title":"Main Regions","value":"East, Southeast, South, Central and West Asia"},
       {"title":"Landscapes","value":"Himalayas, deserts, rainforests, steppes and archipelagos"},
@@ -437,7 +437,7 @@
       {"title":"Central Asia","value":"Apr - Jun and Sep - Oct","note":"Comfortable for cities and overland routes."},
       {"title":"West Asia","value":"Oct - Apr","note":"Typically milder than summer."}
     ] %}
-  {% elif destinationTitle == "Europe" %}
+  {% elif destinationTitle == "Europe" -%}
     {% set continentGeographyFacts = [
       {"title":"Main Regions","value":"Northern, Western, Central, Southern and Eastern Europe"},
       {"title":"Landscapes","value":"Alpine ranges, plains, forests, islands and Mediterranean coasts"},
@@ -452,7 +452,7 @@
       {"title":"Southern Europe","value":"May - Jun and Sep - Oct","note":"Warm coasts with fewer peak-season crowds."},
       {"title":"Eastern Europe","value":"May - Jun and Sep","note":"Mild days across many inland destinations."}
     ] %}
-  {% elif destinationTitle == "Middle East" %}
+  {% elif destinationTitle == "Middle East" -%}
     {% set continentGeographyFacts = [
       {"title":"Main Regions","value":"Arabian Peninsula, Levant, Anatolia, Mesopotamia and Iran"},
       {"title":"Landscapes","value":"Deserts, wadis, mountain ranges, oases and long coastlines"},
@@ -467,7 +467,7 @@
       {"title":"Jordan and Israel","value":"Mar - May and Oct - Nov","note":"Mild windows for desert and cultural travel."},
       {"title":"Oman","value":"Oct - Apr","note":"Cooler for wadis, mountains and the coast."}
     ] %}
-  {% elif destinationTitle == "North America" %}
+  {% elif destinationTitle == "North America" -%}
     {% set continentGeographyFacts = [
       {"title":"Main Regions","value":"Canada, United States, Mexico, Central America and Caribbean"},
       {"title":"Landscapes","value":"Arctic tundra, mountains, deserts, rainforests and islands"},
@@ -482,7 +482,7 @@
       {"title":"Central America","value":"Dec - Apr","note":"Dry season in many Pacific-side destinations."},
       {"title":"Caribbean","value":"Dec - Apr","note":"Drier weather outside hurricane season."}
     ] %}
-  {% elif destinationTitle == "Oceania" %}
+  {% elif destinationTitle == "Oceania" -%}
     {% set continentGeographyFacts = [
       {"title":"Main Regions","value":"Australia, New Zealand, Melanesia, Micronesia and Polynesia"},
       {"title":"Landscapes","value":"Coral islands, deserts, rainforests, volcanoes and alpine peaks"},
@@ -497,7 +497,7 @@
       {"title":"Micronesia","value":"Dec - Apr","note":"Often the drier travel window."},
       {"title":"Polynesia","value":"May - Oct","note":"Generally cooler and less humid."}
     ] %}
-  {% elif destinationTitle == "South America" %}
+  {% elif destinationTitle == "South America" -%}
     {% set continentGeographyFacts = [
       {"title":"Main Regions","value":"Andean states, Amazon basin, Guianas, Brazil and Southern Cone"},
       {"title":"Landscapes","value":"Andes, Amazon rainforest, deserts, wetlands and pampas"},
@@ -512,9 +512,9 @@
       {"title":"Southern Cone","value":"Oct - Apr","note":"Spring through early autumn for city trips."},
       {"title":"Patagonia","value":"Nov - Mar","note":"Longest days and most accessible trails."}
     ] %}
-  {% endif %}
+  {% endif -%}
 
-  {% if isContinentPage and (page.continentGeographyHeading or page.continentGeographyCards or page.continentSeasonsHeading or page.continentSeasonCards) %}
+  {% if isContinentPage and (page.continentGeographyHeading or page.continentGeographyCards or page.continentSeasonsHeading or page.continentSeasonCards) -%}
   <section class="continent-facts-overview" aria-label="{{ destinationTitle }} geography and regional travel seasons">
     <div class="continent-facts-overview__intro">
       <p class="destination-detail__eyebrow">Destinations › {{ destinationTitle }}</p>
@@ -527,16 +527,16 @@
         <h2 id="continent-geography-title">{{ page.continentGeographyHeading or "Regions and Geography" }}</h2>
         <div class="continent-facts-overview__row-scroll">
           <div class="continent-facts-overview__grid">
-            {% for factLine in (page.continentGeographyCards or "").split("\n") %}
-            {% set factParts = factLine.split("|") %}
-            {% if factParts[0] and factParts[1] %}
+            {% for factLine in (page.continentGeographyCards or "").split("\n") -%}
+            {% set factParts = factLine.split("|") -%}
+            {% if factParts[0] and factParts[1] -%}
             <div class="continent-fact-card">
               <span class="continent-fact-card__icon continent-fact-card__icon--{{ loop.index }}" aria-hidden="true"></span>
               <h3>{{ factParts[0] | trim }}</h3>
               <p>{{ factParts[1] | trim }}</p>
             </div>
-            {% endif %}
-            {% endfor %}
+            {% endif -%}
+            {% endfor -%}
           </div>
         </div>
       </section>
@@ -544,95 +544,95 @@
         <h2 id="continent-seasons-title">{{ page.continentSeasonsHeading or "Travel Seasons by Region" }}</h2>
         <div class="continent-facts-overview__row-scroll">
           <div class="continent-facts-overview__grid">
-            {% for factLine in (page.continentSeasonCards or "").split("\n") %}
-            {% set factParts = factLine.split("|") %}
-            {% if factParts[0] and factParts[1] %}
+            {% for factLine in (page.continentSeasonCards or "").split("\n") -%}
+            {% set factParts = factLine.split("|") -%}
+            {% if factParts[0] and factParts[1] -%}
             <div class="continent-fact-card">
               <span class="continent-fact-card__icon continent-fact-card__icon--season" aria-hidden="true"></span>
               <h3>{{ factParts[0] | trim }}</h3>
               <p>{{ factParts[1] | trim }}</p>
               {% if factParts[2] %}<p class="continent-fact-card__note">{{ factParts[2] | trim }}</p>{% endif %}
             </div>
-            {% endif %}
-            {% endfor %}
+            {% endif -%}
+            {% endfor -%}
           </div>
         </div>
       </section>
     </div>
   </section>
-  {% elif page.destinationBlurb or page.destinationBestTime or page.destinationTimeZone or page.destinationCurrency or page.destinationLanguages or page.destinationEnglishNote or (page.destinationBestPairedWith and page.destinationBestPairedWith.length) %}
+  {% elif page.destinationBlurb or page.destinationBestTime or page.destinationTimeZone or page.destinationCurrency or page.destinationLanguages or page.destinationEnglishNote or (page.destinationBestPairedWith and page.destinationBestPairedWith.length) -%}
   <section class="destination-facts" aria-label="About {{ destinationTitle }}">
-    {% if destinationBlurb %}
+    {% if destinationBlurb -%}
     <div class="destination-facts__intro">
       <p>{{ destinationBlurb }}</p>
       <a class="destination-detail__text-link" href="#destination-guides">About {{ destinationTitle }} <span aria-hidden="true">→</span></a>
     </div>
-    {% endif %}
-    {% if destinationBestTime %}
+    {% endif -%}
+    {% if destinationBestTime -%}
     <div class="destination-fact">
       {{ factIcon("calendar") }}
       <h2>Best Time to Visit</h2>
       <p>{{ destinationBestTime }}</p>
     </div>
-    {% endif %}
-    {% if destinationTimeZone %}
+    {% endif -%}
+    {% if destinationTimeZone -%}
     <div class="destination-fact">
       {{ factIcon("clock") }}
       <h2>Time Zone</h2>
-      {% if "|" in destinationTimeZone %}
-      {% set destinationTimeZoneParts = (destinationTimeZone or "").split("|") %}
+      {% if "|" in destinationTimeZone -%}
+      {% set destinationTimeZoneParts = (destinationTimeZone or "").split("|") -%}
       <p class="destination-fact__timezone-name">{{ destinationTimeZoneParts[0] }}</p>
       <p class="destination-fact__timezone-offset">{{ destinationTimeZoneParts[1] }}</p>
-      {% else %}
+      {% else -%}
       <p class="destination-fact__timezone-name">{{ destinationTimeZone }}</p>
-      {% endif %}
+      {% endif -%}
     </div>
-    {% endif %}
-    {% if destinationCurrency %}
+    {% endif -%}
+    {% if destinationCurrency -%}
     <div class="destination-fact">
       {{ factIcon("currency") }}
       <h2>Currency</h2>
       <p>{{ destinationCurrency }}</p>
     </div>
-    {% endif %}
-    {% if destinationLanguages or destinationEnglishNote %}
+    {% endif -%}
+    {% if destinationLanguages or destinationEnglishNote -%}
     <div class="destination-fact">
       {{ factIcon("language") }}
       <h2>Languages</h2>
       {% if destinationLanguages %}<p>{{ destinationLanguages }}</p>{% endif %}
       {% if destinationEnglishNote %}<p class="destination-fact__note">{{ destinationEnglishNote }}</p>{% endif %}
     </div>
-    {% endif %}
-    {% if pairedDestinations.length %}
+    {% endif -%}
+    {% if pairedDestinations.length -%}
     <div class="destination-fact destination-fact--paired">
       {{ factIcon("paired") }}
       <h2>Best Paired With</h2>
       <ul class="destination-fact__paired-list">
-        {% for paired in pairedDestinations %}
+        {% for paired in pairedDestinations -%}
               {% if loop.index <= 3 %}<li><a href="{{ locationUrl(paired) }}">{{ paired.title or paired.name or "" }}</a></li>{% endif %}
-        {% endfor %}
+        {% endfor -%}
       </ul>
     </div>
-    {% endif %}
+    {% endif -%}
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% set continentMapPath = "" %}
+  {% set continentMapPath = "" -%}
   {% if destinationTitle == "North America" %}{% set continentMapPath = "/assets/images/destination-map-north-america.jpg" %}
   {% elif destinationTitle == "Africa" %}{% set continentMapPath = "/assets/images/destination-map-africa.jpg" %}
   {% elif destinationTitle == "Oceania" %}{% set continentMapPath = "/assets/images/destination-map-oceania.jpg" %}
   {% elif destinationTitle == "Asia" %}{% set continentMapPath = "/assets/images/destination-map-asia.jpg" %}
   {% elif destinationTitle == "Europe" %}{% set continentMapPath = "/assets/images/destination-map-europe.jpg" %}
-  {% endif %}
-  {% if isContinentPage and continentMapPath and (page.continentMapHeading or page.continentMapBackgroundImage) %}
-  {% set mapBoxImage = page.continentMapBackgroundImage.path if page.continentMapBackgroundImage and page.continentMapBackgroundImage.path else (page.social.image.path if page.social and page.social.image and page.social.image.path else destinationHeroPath) %}
+  {% endif -%}
+  {% if isContinentPage and continentMapPath and (page.continentMapHeading or page.continentMapBackgroundImage) -%}
+  {% set mapBoxImage = page.continentMapBackgroundImage.path if page.continentMapBackgroundImage and page.continentMapBackgroundImage.path else (page.social.image.path if page.social and page.social.image and page.social.image.path else destinationHeroPath) -%}
   {% if not mapBoxImage and page.destinationFeaturedStories and page.destinationFeaturedStories[0] and page.destinationFeaturedStories[0].tout and page.destinationFeaturedStories[0].tout.image %}{% set mapBoxImage = page.destinationFeaturedStories[0].tout.image.path %}{% endif %}
   {% if not mapBoxImage and destinationStories and destinationStories[0] and destinationStories[0].tout and destinationStories[0].tout.image %}{% set mapBoxImage = destinationStories[0].tout.image.path %}{% endif %}
   {# This runtime scopes assignments inside loops, so use the first populated
      related destination directly instead of trying to set mapBoxImage in a loop. #}
   {% if not mapBoxImage and page.locations and page.locations[0] and page.locations[0].storySet and page.locations[0].storySet.items and page.locations[0].storySet.items[0] and page.locations[0].storySet.items[0].tout and page.locations[0].storySet.items[0].tout.image %}{% set mapBoxImage = page.locations[0].storySet.items[0].tout.image.path %}{% endif %}
   {% if not mapBoxImage %}{% set mapBoxImage = "/assets/images/france-lavender-optimized.jpg" %}{% endif %}
-  {% set mapBoxImageSrc = mapBoxImage if mapBoxImage == "/assets/images/france-lavender-optimized.jpg" else (mapBoxImage | image({w: 2400, auto: 'compress,format'})) %}
+  {% set mapBoxImageSrc = mapBoxImage if mapBoxImage == "/assets/images/france-lavender-optimized.jpg" else (mapBoxImage | image({w: 2400, auto: 'compress,format'})) -%}
   <section class="continent-map continent-map--{{ destinationTitle | lower | replace(" ", "-") }}" style="background-image: url('{{ mapBoxImageSrc }}');" aria-labelledby="continent-map-title">
     <div class="continent-map__heading">
       <p id="continent-map-title">{{ page.continentMapHeading or "Explore the Map" }}</p>
@@ -640,7 +640,7 @@
     <div class="continent-map__canvas">
       <img class="continent-map__background" src="{{ continentMapPath }}" alt="{{ destinationTitle }} destination map" loading="lazy" decoding="async">
       <div class="continent-map__wash" aria-hidden="true"></div>
-      {% for destination in (page.locations or []) %}
+      {% for destination in (page.locations or []) -%}
         {% set mapLeft = "50%" %}{% set mapTop = "50%" %}
         {% if destination.title == "Canada" %}{% set mapLeft = "56%" %}{% set mapTop = "21%" %}
         {% elif destination.title == "United States" %}{% set mapLeft = "53%" %}{% set mapTop = "39%" %}
@@ -698,48 +698,48 @@
         {% elif destination.title == "Albania" %}{% set mapLeft = "69%" %}{% set mapTop = "70%" %}
         {% elif destination.title == "Greece" %}{% set mapLeft = "78%" %}{% set mapTop = "80%" %}
         {% elif destination.title == "Malta" %}{% set mapLeft = "52%" %}{% set mapTop = "83%" %}
-        {% endif %}
+        {% endif -%}
         <a class="continent-map__marker" style="left: {{ mapLeft }}; top: {{ mapTop }}" href="/destinations/{{ destination.title | lower | replace(" ", "-") }}" aria-label="{{ destination.title }} - {{ destination.storySet.total if destination.storySet else 0 }} posts"><span>{{ destination.title }}</span>{% if destination.storySet and destination.storySet.total %}<small>{{ destination.storySet.total }}</small>{% endif %}</a>
-      {% endfor %}
-      {% if destinationTitle == "Asia" %}
-        {% for mapContinent in (continents.items or []) %}
-          {% if mapContinent.name == "Middle East" %}
-            {% for destination in (mapContinent.locations or []) %}
-              {% if destination.title == "United Arab Emirates" %}
+      {% endfor -%}
+      {% if destinationTitle == "Asia" -%}
+        {% for mapContinent in (continents.items or []) -%}
+          {% if mapContinent.name == "Middle East" -%}
+            {% for destination in (mapContinent.locations or []) -%}
+              {% if destination.title == "United Arab Emirates" -%}
                 <a class="continent-map__marker" style="left: 16%; top: 47%" href="/destinations/united-arab-emirates" aria-label="United Arab Emirates - {{ destination.storySet.total if destination.storySet else 0 }} posts"><span>United Arab Emirates</span>{% if destination.storySet and destination.storySet.total %}<small>{{ destination.storySet.total }}</small>{% endif %}</a>
-              {% elif destination.title == "Oman" %}
+              {% elif destination.title == "Oman" -%}
                 <a class="continent-map__marker" style="left: 22%; top: 55%" href="/destinations/oman" aria-label="Oman - {{ destination.storySet.total if destination.storySet else 0 }} posts"><span>Oman</span>{% if destination.storySet and destination.storySet.total %}<small>{{ destination.storySet.total }}</small>{% endif %}</a>
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+              {% endif -%}
+            {% endfor -%}
+          {% endif -%}
+        {% endfor -%}
+      {% endif -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if isContinentPage and destinationContinent and (page.destinationContinueHeading or (page.continentContinueDestinations and page.continentContinueDestinations.length)) %}
+  {% if isContinentPage and destinationContinent and (page.destinationContinueHeading or (page.continentContinueDestinations and page.continentContinueDestinations.length)) -%}
   <section class="destination-nearby" aria-labelledby="destination-nearby-title">
     <header class="destination-band-heading">
       <h2 id="destination-nearby-title">{{ "Explore " + exploreGroupName }}</h2>
         <a href="{{ continentUrl(destinationContinent) }}">View All {{ continentName }} Destinations <span aria-hidden="true">→</span></a>
     </header>
     <div class="destination-nearby__grid">
-      {% set renderedNearbyTitles = "|" %}
-      {% if page.continentContinueDestinations and page.continentContinueDestinations.length %}
-      {% for destination in page.continentContinueDestinations %}
-        {% set destinationMarker = "|" + destination.title + "|" %}
-        {% if destinationMarker not in renderedNearbyTitles %}
+      {% set renderedNearbyTitles = "|" -%}
+      {% if page.continentContinueDestinations and page.continentContinueDestinations.length -%}
+      {% for destination in page.continentContinueDestinations -%}
+        {% set destinationMarker = "|" + destination.title + "|" -%}
+        {% if destinationMarker not in renderedNearbyTitles -%}
           {{ destinationCard(destination) }}
-          {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
-        {% endif %}
-      {% endfor %}
-      {% endif %}
+          {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" -%}
+        {% endif -%}
+      {% endfor -%}
+      {% endif -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if isContinentPage and (page.continentMostRequestedLabel or page.continentMostRequestedDestination or page.continentMostRequestedTitle or page.continentMostRequestedDescription or (page.continentMostRequestedStories and page.continentMostRequestedStories.length)) %}
+  {% if isContinentPage and (page.continentMostRequestedLabel or page.continentMostRequestedDestination or page.continentMostRequestedTitle or page.continentMostRequestedDescription or (page.continentMostRequestedStories and page.continentMostRequestedStories.length)) -%}
   <section class="continent-most-requested" aria-labelledby="continent-most-requested-title">
     <header class="continent-most-requested__heading">
       {% if page.continentMostRequestedLabel %}<p>{{ page.continentMostRequestedLabel }}</p>{% endif %}
@@ -749,8 +749,8 @@
       </div>
     </header>
     <div class="continent-most-requested__grid">
-      {% for requestedStory in continentMostRequestedStories %}
-      {% if loop.index <= 4 %}
+      {% for requestedStory in continentMostRequestedStories -%}
+      {% if loop.index <= 4 -%}
       <article class="continent-most-requested__card">
         <a href="{{ storyUrl(requestedStory) }}">
           <span class="continent-most-requested__image">{{ storyImage(requestedStory, "(min-width: 1000px) 24vw, (min-width: 700px) 48vw, 100vw", false) }}</span>
@@ -760,13 +760,13 @@
           </span>
         </a>
       </article>
-      {% endif %}
-      {% endfor %}
+      {% endif -%}
+      {% endfor -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if page.destinationEditorsPicksHeading or (page.destinationFeaturedStories and page.destinationFeaturedStories.length) or page.destinationFeaturedOneImage or page.destinationFeaturedTwoImage %}
+  {% if page.destinationEditorsPicksHeading or (page.destinationFeaturedStories and page.destinationFeaturedStories.length) or page.destinationFeaturedOneImage or page.destinationFeaturedTwoImage -%}
   <section class="destination-featured" aria-labelledby="destination-featured-title">
     <header class="destination-section-title">
       <h2 id="destination-featured-title">{{ page.destinationEditorsPicksHeading or "Editor’s Picks" }}</h2>
@@ -774,26 +774,26 @@
 {{ featuredStory(featuredOne, false, featuredOneImageOverride) }}
 {{ featuredStory(featuredTwo, true, featuredTwoImageOverride) }}
   </section>
-  {% endif %}
+  {% endif -%}
 
   {# Destination Most Requested is intentionally opt-in. New and existing
      locations keep every field blank, so this block renders nothing until an
      editor adds at least one field or story in TakeShape. #}
-  {% if not isContinentPage and (page.destinationMostRequestedLabel or page.destinationMostRequestedTitle or page.destinationMostRequestedDescription or (page.destinationMostRequestedStories and page.destinationMostRequestedStories.length)) %}
+  {% if not isContinentPage and (page.destinationMostRequestedLabel or page.destinationMostRequestedTitle or page.destinationMostRequestedDescription or (page.destinationMostRequestedStories and page.destinationMostRequestedStories.length)) -%}
   <section class="continent-most-requested destination-most-requested" aria-label="{{ page.destinationMostRequestedLabel or "Most Requested" }}">
     <header class="continent-most-requested__heading">
       <p>{{ page.destinationMostRequestedLabel or "Most Requested" }}</p>
-      {% if page.destinationMostRequestedTitle or page.destinationMostRequestedDescription %}
+      {% if page.destinationMostRequestedTitle or page.destinationMostRequestedDescription -%}
       <div>
         {% if page.destinationMostRequestedTitle %}<h2>{{ page.destinationMostRequestedTitle }}</h2>{% endif %}
         {% if page.destinationMostRequestedDescription %}<span>{{ page.destinationMostRequestedDescription }}</span>{% endif %}
       </div>
-      {% endif %}
+      {% endif -%}
     </header>
-    {% if page.destinationMostRequestedStories and page.destinationMostRequestedStories.length %}
+    {% if page.destinationMostRequestedStories and page.destinationMostRequestedStories.length -%}
     <div class="continent-most-requested__grid">
-      {% for requestedStory in page.destinationMostRequestedStories %}
-      {% if loop.index <= 4 %}
+      {% for requestedStory in page.destinationMostRequestedStories -%}
+      {% if loop.index <= 4 -%}
       <article class="continent-most-requested__card">
         <a href="{{ storyUrl(requestedStory) }}">
           <span class="continent-most-requested__image">{{ storyImage(requestedStory, "(min-width: 1000px) 24vw, (min-width: 700px) 48vw, 100vw", false) }}</span>
@@ -803,35 +803,35 @@
           </span>
         </a>
       </article>
-      {% endif %}
-      {% endfor %}
+      {% endif -%}
+      {% endfor -%}
     </div>
-    {% endif %}
+    {% endif -%}
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if destinationContinent and not isContinentPage and (page.destinationContinueHeading or (page.destinationRelatedDestinations and page.destinationRelatedDestinations.length)) %}
+  {% if destinationContinent and not isContinentPage and (page.destinationContinueHeading or (page.destinationRelatedDestinations and page.destinationRelatedDestinations.length)) -%}
   <section class="destination-nearby" aria-labelledby="destination-nearby-title">
     <header class="destination-band-heading">
       <h2 id="destination-nearby-title">{{ page.destinationContinueHeading or ("Continue Exploring " + exploreGroupName) }}</h2>
       <a href="{{ continentUrl(destinationContinent) }}">View All {{ continentName }} Destinations <span aria-hidden="true">→</span></a>
     </header>
     <div class="destination-nearby__grid">
-      {% set renderedNearbyTitles = "|" %}
-      {% if page.destinationRelatedDestinations and page.destinationRelatedDestinations.length %}
-        {% for destination in page.destinationRelatedDestinations %}
-          {% set destinationMarker = "|" + destination.title + "|" %}
-          {% if destinationMarker not in renderedNearbyTitles %}
+      {% set renderedNearbyTitles = "|" -%}
+      {% if page.destinationRelatedDestinations and page.destinationRelatedDestinations.length -%}
+        {% for destination in page.destinationRelatedDestinations -%}
+          {% set destinationMarker = "|" + destination.title + "|" -%}
+          {% if destinationMarker not in renderedNearbyTitles -%}
             {{ destinationCard(destination) }}
-            {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
+            {% set renderedNearbyTitles = renderedNearbyTitles + destination.title + "|" -%}
+          {% endif -%}
+        {% endfor -%}
+      {% endif -%}
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if page.destinationFeaturedGuideLabel or page.destinationFeatureStory or page.destinationFeatureStoryImage %}
+  {% if page.destinationFeaturedGuideLabel or page.destinationFeatureStory or page.destinationFeatureStoryImage -%}
   <section class="destination-spotlight" aria-label="Featured {{ destinationTitle }} story">
     <div class="destination-spotlight__copy">
       <p class="destination-detail__eyebrow">{{ page.destinationFeaturedGuideLabel or "Featured Guide" }}</p>
@@ -842,7 +842,7 @@
       </div>
     </div>
     <a class="destination-spotlight__image" href="{{ storyUrl(featureStory) }}">
-          {% if featureStoryImageOverride and featureStoryImageOverride.path %}
+          {% if featureStoryImageOverride and featureStoryImageOverride.path -%}
           <img srcset="{{ featureStoryImageOverride.path | image({w: 3840, auto: 'compress,format'}) }} 3840w,
                        {{ featureStoryImageOverride.path | image({w: 2560, auto: 'compress,format'}) }} 2560w,
                        {{ featureStoryImageOverride.path | image({w: 1600, auto: 'compress,format'}) }} 1600w,
@@ -853,35 +853,35 @@
                alt="{{ featureStory.title or '' }}"
                loading="lazy"
                decoding="async">
-          {% else %}
+          {% else -%}
           {{ storyImage(featureStory, "100vw", false) }}
-          {% endif %}
+          {% endif -%}
     </a>
   </section>
-  {% endif %}
+  {% endif -%}
 
-  {% if page.destinationGuidesHeading or destinationGuideSectionStories.length %}
+  {% if page.destinationGuidesHeading or destinationGuideSectionStories.length -%}
   <section class="destination-guides" id="destination-guides" aria-labelledby="destination-guides-title">
     <header class="destination-band-heading">
       <h2 id="destination-guides-title">{{ page.destinationGuidesHeading or (destinationTitle + " Guides") }}</h2>
       <a href="{% if isContinentPage %}{{ continentUrl(page) }}/archive{% else %}{{ locationUrl(page) }}/archive{% endif %}">View All {{ postCount }} Posts <span aria-hidden="true">→</span></a>
     </header>
     <div class="destination-guides__grid">
-      {% if destinationGuideSectionStories.length %}
-      {% for story in destinationGuideSectionStories %}
-        {% if loop.index <= destinationGuideVisibleCount %}
+      {% if destinationGuideSectionStories.length -%}
+      {% for story in destinationGuideSectionStories -%}
+        {% if loop.index <= destinationGuideVisibleCount -%}
         <article class="destination-guide-card">
           <a class="destination-guide-card__image" href="{{ storyUrl(story) }}">{{ storyImage(story, "(min-width: 1100px) 25vw, (min-width: 650px) 50vw, 100vw", false) }}</a>
           <div class="destination-guide-card__copy"><p class="destination-detail__eyebrow">{% if story.category and story.category.length %}{{ story.category[0].title }}{% elif story.mainCategory and story.mainCategory.length %}{{ story.mainCategory[0].title }}{% else %}{{ destinationTitle }}{% endif %}</p><h3><a href="{{ storyUrl(story) }}">{{ story.title or "" }}</a></h3>{% if story.tout and story.tout.dek %}<p>{{ story.tout.dek }}</p>{% endif %}</div>
         </article>
-        {% endif %}
-      {% endfor %}
-      {% endif %}
+        {% endif -%}
+      {% endfor -%}
+      {% endif -%}
     </div>
     <div class="destination-guides__view-all">
       <a href="{% if isContinentPage %}{{ continentUrl(page) }}/archive{% else %}{{ locationUrl(page) }}/archive{% endif %}">View All {{ postCount }} Posts <span aria-hidden="true">→</span></a>
     </div>
   </section>
-  {% endif %}
+  {% endif -%}
 </article>
-{% endblock %}
+{% endblock -%}
