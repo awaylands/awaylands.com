@@ -94,3 +94,21 @@ context supplies only names and story totals for the Middle East map markers on 
 The main destination queries still fetch the current content and calculate current
 photo counts on every publish. Do not restore the unused nested destination data
 to these helper contexts: TakeShape waits for each context before fetching its page data.
+
+## Destination and blog query dependencies
+
+Destination archives request only page identity, social metadata, article cards,
+counts, and navigation. Main destination pages omit obsolete important/preferred
+story lists and old Photography-category counters. The actual editorial photo
+counter still receives every body field it used before and recomputes on each
+publish. Continent photo-only story lists omit unrelated card metadata.
+
+Country pages have no helper context: the former France feature variables are
+assigned but never used by the current template. Continent context remains for
+the Asia map. The old location helper file is retained but no longer queried.
+
+Blog context omits unused recommendation, shopping-fallback, and duplicate
+category candidate lists. Blog pagination requests only the fields used by the
+magazine cards and pagination. Preserve `_contentTypeName`: the pagination
+partial uses it to select the correct route. Preserve `_id` references where
+previously requested for CMS content-usage tracking.

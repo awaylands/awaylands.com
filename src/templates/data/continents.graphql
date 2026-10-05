@@ -47,16 +47,7 @@ query ContinentDestinationDetailPages($images: TSImagesConfig) {
         tout { image { path } dek }
       }
       continentMostRequestedDestination {
-        _id _contentTypeName title destinationBlurb
-        storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
-          total
-          items {
-            _id _contentTypeName _enabledAt isImportant title slug
-            category { title }
-            mainCategory { title }
-            tout { image { path } dek }
-          }
-        }
+        _id _contentTypeName title
       }
       continentMostRequestedTitle
       continentMostRequestedDescription
@@ -69,33 +60,11 @@ query ContinentDestinationDetailPages($images: TSImagesConfig) {
       locations {
         _id _contentTypeName title image { path }
         destinationHeroImage { path }
-        destinationBlurb
-        destinationBestTime
-        destinationTimeZone
-        destinationCurrency
-        destinationLanguages
-        destinationEnglishNote
-        destinationBestPairedWith { _id _contentTypeName title }
-        destinationFeaturedStories {
-          _id _contentTypeName _enabledAt isImportant title slug
-          category { title }
-          mainCategory { title }
-          tout { image { path } dek }
-        }
-        destinationFeatureStory {
-          _id _contentTypeName _enabledAt isImportant title slug
-          category { title }
-          mainCategory { title }
-          tout { image { path } dek }
-        }
-        destinationRelatedDestinations { _id _contentTypeName title image { path } }
         storySet(size: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
           total
           items {
-            _id _contentTypeName _enabledAt isImportant title slug
-            category { title }
-            mainCategory { title }
-            tout { image { path } dek }
+            _id _contentTypeName
+            tout { image { path }  }
             contentHtml(images: $images)
             extraContentBlocks { contentHtml(images: $images) }
             extraHtmlBlocks { html }
@@ -135,17 +104,12 @@ query ContinentDestinationDetailPages($images: TSImagesConfig) {
         guideStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}) {
           total
         }
-        originalPhotoStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {eq: "Photography"}}}) {
-          total
-        }
       }
       storySet(size: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
         total
         items {
-          _id _contentTypeName _enabledAt isImportant title slug
-          category { title }
-          mainCategory { title }
-          tout { image { path } dek }
+          _id _contentTypeName
+          tout { image { path }  }
           contentHtml(images: $images)
           extraContentBlocks { contentHtml(images: $images) }
           extraHtmlBlocks { html }
@@ -182,26 +146,7 @@ query ContinentDestinationDetailPages($images: TSImagesConfig) {
           }
         }
       }
-      importantStories: storySet(size: 10, onlyEnabled: true, where: {isImportant: {eq: true}}, sort: [{field: "_enabledAt", order: "desc"}]) {
-        items {
-          _id _contentTypeName _enabledAt isImportant title slug
-          category { title }
-          mainCategory { title }
-          tout { image { path } dek }
-        }
-      }
-      preferredStories: storySet(size: 20, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}, sort: [{field: "isImportant", order: "desc"}, {field: "_enabledAt", order: "desc"}]) {
-        items {
-          _id _contentTypeName _enabledAt isImportant title slug
-          category { title }
-          mainCategory { title }
-          tout { image { path } dek }
-        }
-      }
       guideStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}) {
-        total
-      }
-      originalPhotoStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {eq: "Photography"}}}) {
         total
       }
     }

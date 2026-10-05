@@ -4,9 +4,6 @@ query DestinationDetailPages {
       _id
       _contentTypeName
       title
-      image {
-        path
-      }
       social {
         title
         description
@@ -14,159 +11,12 @@ query DestinationDetailPages {
           path
         }
       }
-      destinationHeroImage {
-        path
-      }
-      destinationBlurb
-      destinationBestTime
-      destinationTimeZone
-      destinationCurrency
-      destinationLanguages
-      destinationEnglishNote
-      destinationBestPairedWith {
-        _id
-        _contentTypeName
-        title
-      }
-      destinationContinueHeading
-      destinationRelatedDestinations {
-        _id
-        _contentTypeName
-        title
-        image {
-          path
-        }
-        destinationHeroImage {
-          path
-        }
-        storySet(size: 1, onlyEnabled: true) {
-          total
-          items {
-            tout {
-              image {
-                path
-              }
-            }
-          }
-        }
-      }
-      destinationEditorsPicksHeading
-      destinationFeaturedStories {
-        _id
-        _contentTypeName
-        _enabledAt
-        isImportant
-        title
-        slug
-        category {
-          title
-        }
-        mainCategory {
-          title
-        }
-        tout {
-          image {
-            path
-          }
-          dek
-        }
-      }
-      destinationFeaturedOneImage {
-        path
-      }
-      destinationFeaturedTwoImage {
-        path
-      }
-      destinationMostRequestedLabel
-      destinationMostRequestedTitle
-      destinationMostRequestedDescription
-      destinationMostRequestedStories {
-        _id
-        _contentTypeName
-        _enabledAt
-        isImportant
-        title
-        slug
-        category {
-          title
-        }
-        mainCategory {
-          title
-        }
-        tout {
-          image {
-            path
-          }
-          dek
-        }
-      }
-      destinationFeaturedGuideLabel
-      destinationFeatureStory {
-        _id
-        _contentTypeName
-        _enabledAt
-        isImportant
-        title
-        slug
-        category {
-          title
-        }
-        mainCategory {
-          title
-        }
-        tout {
-          image {
-            path
-          }
-          dek
-        }
-      }
-      destinationFeatureStoryImage {
-        path
-      }
-      destinationGuidesHeading
-      destinationGuideStories {
-        _id
-        _contentTypeName
-        _enabledAt
-        isImportant
-        title
-        slug
-        category {
-          title
-        }
-        mainCategory {
-          title
-        }
-        tout {
-          image {
-            path
-          }
-          dek
-        }
-      }
       continentSet(size: 1, onlyEnabled: true) {
         items {
-          _id
-          _contentTypeName
-          name
           locations {
             _id
             _contentTypeName
             title
-            image {
-              path
-            }
-            storySet(size: 1, onlyEnabled: true) {
-              total
-              items {
-                tout {
-                  image {
-                    path
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -179,8 +29,6 @@ query DestinationDetailPages {
         items {
           _id
           _contentTypeName
-          _enabledAt
-          isImportant
           title
           slug
           category {
@@ -196,74 +44,6 @@ query DestinationDetailPages {
             dek
           }
         }
-      }
-      importantStories: storySet(
-        size: 10
-        onlyEnabled: true
-        where: {isImportant: {eq: true}}
-        sort: [{field: "_enabledAt", order: "desc"}]
-      ) {
-        items {
-          _id
-          _contentTypeName
-          _enabledAt
-          isImportant
-          title
-          slug
-          category {
-            title
-          }
-          mainCategory {
-            title
-          }
-          tout {
-            image {
-              path
-            }
-            dek
-          }
-        }
-      }
-      preferredStories: storySet(
-        size: 20
-        onlyEnabled: true
-        where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}
-        sort: [{field: "isImportant", order: "desc"}, {field: "_enabledAt", order: "desc"}]
-      ) {
-        items {
-          _id
-          _contentTypeName
-          _enabledAt
-          isImportant
-          title
-          slug
-          category {
-            title
-          }
-          mainCategory {
-            title
-          }
-          tout {
-            image {
-              path
-            }
-            dek
-          }
-        }
-      }
-      guideStories: storySet(
-        size: 1
-        onlyEnabled: true
-        where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}
-      ) {
-        total
-      }
-      originalPhotoStories: storySet(
-        size: 1
-        onlyEnabled: true
-        where: {category: {title: {eq: "Photography"}}}
-      ) {
-        total
       }
     }
     total

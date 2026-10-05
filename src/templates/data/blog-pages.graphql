@@ -3,18 +3,8 @@
     items {
       _contentTypeName
       _enabledAt
-      _updatedAt
       title
       slug
-      isImportant
-      shopEditItems {
-        image {
-          path
-        }
-        title
-        productUrl
-        productEmbedHtml
-      }
       mainCategory {
         _id
         title
@@ -30,18 +20,7 @@
         image {
           path
         }
-        caption
-        secondaryImage {
-          path
-        }
         dek
-      }
-      social {
-        title
-        description
-        image {
-          path
-        }
       }
     }
     total

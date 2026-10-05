@@ -1,25 +1,9 @@
 query {
   products: getProducts {
-    travel { image { path } title description productUrl productEmbedHtml addToHomepage }
-    style { image { path } title description productUrl productEmbedHtml addToHomepage }
-    photography { image { path } title description productUrl productEmbedHtml addToHomepage }
-    beauty { image { path } title description productUrl productEmbedHtml addToHomepage }
-    fitness { image { path } title description productUrl productEmbedHtml addToHomepage }
-    home { image { path } title description productUrl productEmbedHtml addToHomepage }
-    wedding { image { path } title description productUrl productEmbedHtml addToHomepage }
-  }
-  blogShopFallback: getBlog {
-    travelEssentialsItems {
-          image {
-            path
-            filename
-            title
-            description
-          }
-      title
-      productUrl
-      productEmbedHtml
-    }
+    travel { image { path } title description productUrl  addToHomepage }
+    style { image { path } title description productUrl  addToHomepage }
+    photography { image { path } title description productUrl  addToHomepage }
+    beauty { image { path } title description productUrl  addToHomepage }
   }
   categories: getBlog {
     categories {
@@ -33,19 +17,9 @@ query {
       storySet(size: 6, onlyEnabled: true) {
         items {
           _contentTypeName
-          _status
-          _enabledAt
-          _updatedAt
-          isImportant
           title
           slug
-          social {
-            title
-          }
           category { title parentCategory { title } }
-          location {
-            title
-          }
           tout {
             image {
               path
@@ -54,74 +28,13 @@ query {
           }
         }
       }
-    }
-  }
-  featuredCategoryCandidates: getCategoryList {
-    items {
-      title
-      storySet(size: 12, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
-        items {
-          _contentTypeName
-          _status
-          _enabledAt
-          _updatedAt
-          isImportant
-          title
-          slug
-          category { title parentCategory { title } }
-          tout {
-            image {
-              path
-              filename
-              title
-              description
-            }
-            dek
-          }
-        }
-      }
-    }
-  }
-  importantAutoStories: getStoryList(
-    size: 100,
-    where: {isImportant: {eq: true}},
-    sort: [{field: "_enabledAt", order: "desc"}]
-  ) {
-    total
-    items {
-      _contentTypeName
-      _status
-      _enabledAt
-      _updatedAt
-      isImportant
-      title
-      slug
-      social { title }
-      category { title parentCategory { title } }
-      tout { image { path } }
-    }
-  }
-  fallbackAutoStories: getStoryList(size: 100, sort: [{field: "_enabledAt", order: "desc"}]) {
-    items {
-      _status
-      _enabledAt
-      _updatedAt
-      title
-      slug
-      social { title }
-      category { title parentCategory { title } }
-      tout { image { path } }
     }
   }
   archiveStories1: getStoryList(size: 250, from: 0, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
-      _status
-      _enabledAt
-      isImportant
       title
       slug
-      social { title description }
       category { title parentCategory { title } }
       tout { image { path } dek }
     }
@@ -129,12 +42,8 @@ query {
   archiveStories2: getStoryList(size: 250, from: 250, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
-      _status
-      _enabledAt
-      isImportant
       title
       slug
-      social { title description }
       category { title parentCategory { title } }
       tout { image { path } dek }
     }
@@ -142,12 +51,8 @@ query {
   archiveStories3: getStoryList(size: 250, from: 500, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
-      _status
-      _enabledAt
-      isImportant
       title
       slug
-      social { title description }
       category { title parentCategory { title } }
       tout { image { path } dek }
     }
@@ -155,31 +60,10 @@ query {
   archiveStories4: getStoryList(size: 250, from: 750, onlyEnabled: true, sort: [{field: "_enabledAt", order: "desc"}]) {
     items {
       _contentTypeName
-      _status
-      _enabledAt
-      isImportant
       title
       slug
-      social { title description }
       category { title parentCategory { title } }
       tout { image { path } dek }
-    }
-  }
-  shoppingStories: getStoryList(
-    size: 8,
-    where: {shopEditItems: {productUrl: {regexp: ".+"}}},
-    sort: [{field: "_enabledAt", order: "desc"}]
-  ) {
-    items {
-      _contentTypeName
-      title
-      slug
-      shopEditItems {
-        image { path }
-        title
-        productUrl
-        productEmbedHtml
-      }
     }
   }
   page: getBlog {

@@ -53,12 +53,6 @@ query DestinationDetailPages($images: TSImagesConfig) {
       }
       destinationFeatureStoryImage { path }
       destinationGuidesHeading
-      destinationGuideStories {
-        _id _contentTypeName _enabledAt isImportant title slug
-        category { title }
-        mainCategory { title }
-        tout { image { path } dek }
-      }
       continentSet(size: 1, onlyEnabled: true) {
         items {
           _id
@@ -124,36 +118,7 @@ query DestinationDetailPages($images: TSImagesConfig) {
           }
         }
       }
-      importantStories: storySet(size: 10, onlyEnabled: true, where: {isImportant: {eq: true}}, sort: [{field: "_enabledAt", order: "desc"}]) {
-        items {
-          _id
-          _contentTypeName
-          _enabledAt
-          isImportant
-          title
-          slug
-          category { title }
-          mainCategory { title }
-          tout { image { path } dek }
-        }
-      }
-      preferredStories: storySet(size: 20, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}, sort: [{field: "isImportant", order: "desc"}, {field: "_enabledAt", order: "desc"}]) {
-        items {
-          _id
-          _contentTypeName
-          _enabledAt
-          isImportant
-          title
-          slug
-          category { title }
-          mainCategory { title }
-          tout { image { path } dek }
-        }
-      }
       guideStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {in: ["Best Beaches", "Travel Guides", "Packing Guides"]}}}) {
-        total
-      }
-      originalPhotoStories: storySet(size: 1, onlyEnabled: true, where: {category: {title: {eq: "Photography"}}}) {
         total
       }
     }

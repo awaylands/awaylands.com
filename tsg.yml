@@ -7,7 +7,7 @@ context:
   # Render each feed once alongside paginated pages, avoiding a separate API wait.
   publishPages: data/publish-pages.json
   assets: ../../publish-static/assets/manifest.json
-  publishingRelease: "2026-10-05-publishing-v5"
+  publishingRelease: "2026-10-05-publishing-v6"
 
 images: &images
   default:
@@ -287,7 +287,6 @@ routes:
   location:
     path: /destinations/:title
     template: pages/location.html
-    context: data/location.graphql
     paginate:
       data: data/locations.graphql
       itemName: page
