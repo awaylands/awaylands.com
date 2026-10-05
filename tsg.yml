@@ -7,7 +7,7 @@ context:
   # Render each feed once alongside paginated pages, avoiding a separate API wait.
   publishPages: data/publish-pages.json
   assets: ../../publish-static/assets/manifest.json
-  publishingRelease: "2026-10-03-publishing-v4"
+  publishingRelease: "2026-10-05-publishing-v5"
 
 images: &images
   default:
@@ -82,12 +82,61 @@ routes:
       template: pages/stories/landing.html
       data: data/blog-pages.graphql
 
+  # Disjoint groups fetch article batches concurrently. Keep all groups before redirects.
+  # The final group includes every remaining nonempty slug, including Unicode.
   storySlug:
     path: /story/:slug
     template: pages/stories/detail.html
     context: data/article.graphql
     paginate:
-      data: data/story-slugs.graphql
+      data:
+        query: data/story-slugs.graphql
+        variables:
+          where:
+            slug:
+              regexp: '[0-9a-fA-F].*'
+      itemName: page
+
+  storySlugGroup2:
+    path: /story/:slug
+    template: pages/stories/detail.html
+    context: data/article.graphql
+    paginate:
+      data:
+        query: data/story-slugs.graphql
+        variables:
+          where:
+            slug:
+              regexp: '[g-mG-M].*'
+      itemName: page
+
+  storySlugGroup3:
+    path: /story/:slug
+    template: pages/stories/detail.html
+    context: data/article.graphql
+    paginate:
+      data:
+        query: data/story-slugs.graphql
+        variables:
+          where:
+            slug:
+              regexp: '[n-sN-S].*'
+      itemName: page
+
+  storySlugGroup4:
+    path: /story/:slug
+    template: pages/stories/detail.html
+    context: data/article.graphql
+    paginate:
+      data:
+        query: data/story-slugs.graphql
+        variables:
+          where:
+            slug:
+              regexp: .+
+            NOT:
+              slug:
+                regexp: '[0-9a-sA-S].*'
       itemName: page
 
   storyTitleRedirect:

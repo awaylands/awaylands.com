@@ -79,3 +79,18 @@ and structured-data changes.
 The search feed stores plain text for article bodies and blocks, using the same
 normalization as `plainText` in the browser search component. Keep those rules
 aligned so scoring and snippets remain identical. Display metadata stays intact.
+
+## Concurrent article queries and destination contexts
+
+Canonical story rendering is split into four disjoint slug groups. Each group
+uses normal TakeShape pagination, so there is no fixed post limit. Preserve
+`storySlug` for URL filters and keep all four groups before `storyTitleRedirect`
+so canonical articles take precedence. The last group must retain every nonempty
+slug outside the first three groups, including Unicode and unusual punctuation.
+All groups use the same query and article template.
+
+Country-page context contains only the three France feature stories. Continent-page
+context supplies only names and story totals for the Middle East map markers on Asia.
+The main destination queries still fetch the current content and calculate current
+photo counts on every publish. Do not restore the unused nested destination data
+to these helper contexts: TakeShape waits for each context before fetching its page data.

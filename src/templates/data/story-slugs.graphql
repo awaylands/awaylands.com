@@ -1,5 +1,5 @@
-query($images: TSImagesConfig) {
-  getStoryList(where: {slug: {regexp: ".+"}}) {
+query($images: TSImagesConfig, $where: TSWhereStoryInput = {slug: {regexp: ".+"}}) {
+  getStoryList(where: $where) {
     items {
       _contentTypeName
       _status
