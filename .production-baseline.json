@@ -16,8 +16,8 @@
       "hash": "69f00f07ed21069cebe5e94344ce24b87a32322594d5ace1390840c8ac5f2d0a"
     },
     "stylesheets/main.css": {
-      "path": "stylesheets/main.a569562f293f77053a38.css",
-      "hash": "eb4361826300b107c6a8c2d54fcee5f128784e2dfd0b796dd38e07a8c483512a"
+      "path": "stylesheets/main.616a462aa928ee811e60.css",
+      "hash": "301b4da452a2a9676e5118a48de10d8c55a370a8560304ea5fecf18b64806b39"
     }
   },
   "sourceFiles": {
@@ -166,7 +166,7 @@
     "src/stylesheets/pages/_homepage.scss": "61913c87e6f907e9569111228e6544fdc00936c714c8b4af67e14b8e259681ee",
     "src/stylesheets/pages/_landing.scss": "36ceb3dc78ac6a60eca9c0acb2ca55bb164596ca9bad3f0456a75bc05f184b13",
     "src/stylesheets/pages/_still.scss": "492fcd4e33c9823a12576a785decc82d09bc4cbe2c23bd40cf5f6f5bffdf45c3",
-    "src/stylesheets/pages/_story.scss": "0113186d58417e5b9aed91df5ef7d51abdf0a327f35540543c683b97b9dc882a",
+    "src/stylesheets/pages/_story.scss": "5088fd9f01a3f5d7f602ef4f172e645d8e8bd3b20d8a1cfb786aa2c09876c941",
     "src/templates/data/about.graphql": "9a8fbd058a95c2a75313c7adbafc108e255ddd876280583e1ca8cbb426a3f03a",
     "src/templates/data/ads.graphql": "7e1bbbc2f7240dab51417e430973aeca501df1af78ae4622b4ea370a0768e472",
     "src/templates/data/article.graphql": "e4261b70411707ce20445d793e83fd405dfef301225463ab846f886e8bb0e4f0",
@@ -268,7 +268,7 @@
     "static/assets/fonts/still-preview/refined-society.otf": "7a758c9ebf0d5af6ffd674972812ee8086da3dc7cd082b69f6e54b637b1279a1",
     "static/assets/fonts/still-preview/vigro.otf": "c8e8d4ad122e28384fa4d671417954be53fdcaf9d3386efe02d1586fccfd4b7b",
     "static/assets/fonts/still-preview/voyage.otf": "02c122a9667e07e456e5b1b247e8cad82dc4f20a11932aaf483b14dad5a32acc",
-    "tsg.yml": "d1b5cc09bf0e2a6b71b2d4ad62274ba1f457a15a50c5dcf025c806ce9696c742",
+    "tsg.yml": "25bb81469a0c003ccdbeed843b10279ce397fa2470749dc72fcdbeb0eff12b97",
     "webpack.config.js": "b3c56b8f42ce44a4bdffc76307488615a864a858e9d4889de3d7315067e83148",
     "src/templates/data/category-archives.graphql": "0a9f08585dc855e236f7bb9149d0cf58978a45b914094ddfbdc69ceeac3ea6ec",
     "src/templates/data/publish-pages.json": "501de836b88be0a82b9af264bee8fa768a66abb5ac670b802bf7f696171b0e96"

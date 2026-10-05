@@ -17,7 +17,7 @@ Verified baseline:
 - Branch: `production-baseline`
 - Guard ancestry commit: `f25998549f75fcdbeb47e78b61afb1de2646ed62`
 - JavaScript: `main.d5062e182cf1412cd897.js`
-- Stylesheet: `main.c4ccd83f81b9fd42d8e2.css`
+- Stylesheet: `main.616a462aa928ee811e60.css`
 - TakeShape schema: version `256`
 
 ## Safe publishing workflow
@@ -112,3 +112,9 @@ category candidate lists. Blog pagination requests only the fields used by the
 magazine cards and pagination. Preserve `_contentTypeName`: the pagination
 partial uses it to select the correct route. Preserve `_id` references where
 previously requested for CMS content-usage tracking.
+
+## Article italics
+
+Article content restores italic styling for `em` and `i` elements after the
+global CSS reset. Preserve this rule for italic links and either link/emphasis
+nesting order. It does not change unmarked links or their existing bold weight.

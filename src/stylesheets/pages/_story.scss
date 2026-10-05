@@ -888,6 +888,11 @@ body.body--story {
   font-weight: 700;
 }
 
+.story-article__body em,
+.story-article__body i {
+  font-style: italic;
+}
+
 .story-article__body > p.story-line-break {
   min-height: 0.55em;
   margin-bottom: 0.55rem;
