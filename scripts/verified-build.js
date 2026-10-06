@@ -17,7 +17,7 @@ function fingerprint(root, entries, exclude = '') {
   entries.forEach(add);
   return hash.digest('hex');
 }
-const sourceEntries = ['tsg.yml','package.json','package-lock.json','webpack.config.js','postcss.config.js','.babelrc','src','scripts','static/assets/fonts'];
+const sourceEntries = ['.npmrc','.nvmrc','.node-version','tsg.yml','package.json','package-lock.json','webpack.config.js','postcss.config.js','.babelrc','src','scripts','static/assets/fonts'];
 const proofFile = 'build/.verified-publish-build.json';
 const sourceFingerprint = root => fingerprint(root, sourceEntries);
 function outputFingerprint(root) { return fingerprint(root, ['build'], proofFile); }

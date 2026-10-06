@@ -21,7 +21,6 @@ graphql.config.json
 .idea
 .githubtoken
 .jekyll-metadata
-.idea
 
 /vendor
 /build
@@ -55,3 +54,10 @@ takeshape-project.graphql
 /.deploy-generated/
 /.deploy-static/
 /.deploy-assets/
+
+# Local credentials, recovery files and temporary exports
+.env
+.env.*
+!.env.example
+*.bundle
+/backups/**/*.zip

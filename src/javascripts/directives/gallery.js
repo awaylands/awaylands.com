@@ -1,6 +1,6 @@
 import {LuminousGallery} from '../luminous';
 
-const Shuffle = require('shufflejs');
+import Shuffle from 'shufflejs';
 const ImagesLoaded = require('imagesloaded');
 
 const opts = {

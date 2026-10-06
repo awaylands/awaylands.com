@@ -17,7 +17,6 @@ const PROJECT = 'decc50a7-e43f-4c99-b5e9-cc327d2e1b93';
 const SITE_ID = '140c1641-564a-40a9-b13d-85eaec815d1d';
 const NODE = '/Users/amyseder/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node';
 const uuid = value => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value || '');
-const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 const read = file => fs.readFileSync(path.join(ROOT, file), 'utf8');
 const manifest = () => JSON.parse(read('build/assets/manifest.json'));
 
@@ -269,7 +268,7 @@ async function publishStory(id, options = {}) {
         const result = await store.client.send(new PutObjectCommand({Bucket: store.bucket, Key: keys[i], Body: payloads[i], ACL: objects[i].publicRead ? 'public-read' : undefined, ContentType: objects[i].contentType || (keys[i].endsWith('.json') ? 'application/json' : 'text/html; charset=utf-8'), CacheControl: 'public, max-age=0, must-revalidate', IfMatch: objects[i].etag}));
         uploaded.push({i, etag: result.ETag});
       }
-    } catch (error) {
+    } catch {
       const rollbackFailures = [];
       for (const {i, etag} of uploaded.reverse()) {
         try { await store.client.send(new PutObjectCommand({Bucket: store.bucket, Key: keys[i], Body: objects[i].raw, ACL: objects[i].publicRead ? 'public-read' : undefined, ContentType: objects[i].contentType, ContentEncoding: objects[i].encoding, CacheControl: objects[i].cacheControl, IfMatch: etag})); } catch { rollbackFailures.push(keys[i]); }

@@ -32,7 +32,7 @@ function readJson(request) {
     });
     request.on('end', () => {
       try { resolve(JSON.parse(Buffer.concat(chunks).toString('utf8') || '{}')); }
-      catch (error) { reject(new Error('Invalid request data.')); }
+      catch { reject(new Error('Invalid request data.')); }
     });
     request.on('error', reject);
   });
@@ -57,7 +57,7 @@ function requestJson(url, body) {
         const text = Buffer.concat(chunks).toString('utf8');
         if (response.statusCode < 200 || response.statusCode >= 300) return reject(new Error(`TakeShape returned HTTP ${response.statusCode}.`));
         try { resolve(JSON.parse(text)); }
-        catch (error) { reject(new Error('TakeShape returned invalid data.')); }
+        catch { reject(new Error('TakeShape returned invalid data.')); }
       });
     });
     request.on('error', reject);

@@ -42,7 +42,7 @@ try {
     cwd: root,
     stdio: 'ignore'
   });
-} catch (error) {
+} catch {
   fail(`the current commit does not descend from verified baseline ${baseline.baselineCommit}.`);
 }
 
@@ -239,6 +239,10 @@ Object.keys(baseline.sourceFiles).forEach(file => {
 });
 
 const protectedSourcePatterns = [
+  '.npmrc',
+  '.nvmrc',
+  '.node-version',
+  '.github/workflows/**',
   'src/templates/**',
   'src/stylesheets/**',
   'src/javascripts/**',

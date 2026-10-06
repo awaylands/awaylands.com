@@ -49,7 +49,7 @@ function parseDestinationFacts() {
   const match = source.match(/\{% set destinationAutofill = (\{[\s\S]*?\}) %\}/);
   if (!match) throw new Error('Could not locate destinationAutofill data.');
   // This repository-owned template literal contains data only.
-  return Function(`"use strict"; return (${match[1]});`)(); // eslint-disable-line no-new-func
+  return Function(`"use strict"; return (${match[1]});`)();
 }
 
 function parseContinentFacts() {
@@ -57,8 +57,8 @@ function parseContinentFacts() {
   const result = {};
   const blockPattern = /\{% (?:if|elif) destinationTitle == "([^"]+)" %\}\s*\{% set continentGeographyFacts = (\[[\s\S]*?\]) %\}[\s\S]*?\{% set continentSeasonFacts = (\[[\s\S]*?\]) %\}/g;
   for (const match of source.matchAll(blockPattern)) {
-    const geography = Function(`"use strict"; return (${match[2]});`)(); // eslint-disable-line no-new-func
-    const seasons = Function(`"use strict"; return (${match[3]});`)(); // eslint-disable-line no-new-func
+    const geography = Function(`"use strict"; return (${match[2]});`)();
+    const seasons = Function(`"use strict"; return (${match[3]});`)();
     result[match[1]] = {
       geography: geography.map((item) => `${item.title}|${item.value}`).join('\n'),
       seasons: seasons.map((item) => `${item.title}|${item.value}|${item.note || ''}`).join('\n')

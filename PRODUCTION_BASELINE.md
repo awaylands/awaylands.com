@@ -16,8 +16,8 @@ Verified baseline:
 - Date: 2026-09-24
 - Branch: `production-baseline`
 - Guard ancestry commit: `f25998549f75fcdbeb47e78b61afb1de2646ed62`
-- JavaScript: `main.d5062e182cf1412cd897.js`
-- Stylesheet: `main.616a462aa928ee811e60.css`
+- JavaScript: `main.30b5b4e1d40c6c1e66d4.js`
+- Stylesheet: `main.272722d5b564feaa496f.css`
 - TakeShape schema: version `256`
 
 ## Safe publishing workflow
@@ -89,8 +89,8 @@ so canonical articles take precedence. The last group must retain every nonempty
 slug outside the first three groups, including Unicode and unusual punctuation.
 All groups use the same query and article template.
 
-Country-page context contains only the three France feature stories. Continent-page
-context supplies only names and story totals for the Middle East map markers on Asia.
+Country pages have no helper context. Continent-page context supplies only names
+and story totals for the Middle East map markers on Asia.
 The main destination queries still fetch the current content and calculate current
 photo counts on every publish. Do not restore the unused nested destination data
 to these helper contexts: TakeShape waits for each context before fetching its page data.
@@ -118,3 +118,11 @@ previously requested for CMS content-usage tracking.
 Article content restores italic styling for `em` and `i` elements after the
 global CSS reset. Preserve this rule for italic links and either link/emphasis
 nesting order. It does not change unmarked links or their existing bold weight.
+
+## Maintained toolchain and styles
+
+Use the Node and npm versions in the project version files and package metadata.
+Run `npm ci`, `npm run check`, and `npm run build` before promoting changes.
+The category stylesheet is `pages/_categories.scss`; its import stays at the end
+of `_blog.scss`. Exact repeated declaration blocks are rejected by the stylesheet
+structure check. See `docs/maintenance-2026-10-06.md` for the dependency audit.

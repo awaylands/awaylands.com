@@ -43,7 +43,7 @@ function requestJson(url, options, body) {
 
         try {
           resolve(JSON.parse(text));
-        } catch (error) {
+        } catch {
           reject(new Error(`TakeShape returned invalid JSON: ${text.slice(0, 500)}`));
         }
       });
@@ -105,7 +105,7 @@ function isAllowedGoogleImageUrl(value) {
     const target = new URL(String(value || ''));
 
     return target.protocol === 'https:' && /(^|\.)(googleusercontent\.com|docs\.google\.com)$/i.test(target.hostname);
-  } catch (error) {
+  } catch {
     return false;
   }
 }
@@ -199,7 +199,7 @@ function readJson(request) {
     request.on('end', () => {
       try {
         resolve(JSON.parse(Buffer.concat(chunks).toString('utf8')));
-      } catch (error) {
+      } catch {
         reject(new Error('The importer received invalid data.'));
       }
     });
